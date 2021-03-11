@@ -1,7 +1,6 @@
 const { Router } = require('express');
-const { LoginService, status200 } = require('../services')
-
 const rescue = require('express-rescue');
+const { LoginService, status200 } = require('../services');
 
 const LoginRouter = new Router();
 
