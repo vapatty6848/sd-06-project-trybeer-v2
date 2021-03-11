@@ -279,7 +279,7 @@ Haverá um arquivo no caminho: `sd-06-trybeer/cypress/plugins/index.js`. Neste a
 
 **Faça essas configurações também para as variáveis de ambiente usadas nesses arquivos:**
 
-`sd-0x-cookmaster/config/config.js`
+`sd-06-trybeer/config/config.js`
 
 ```
 module.exports = {
