@@ -147,7 +147,7 @@ Para que seu projeto seja corretamente avaliado, siga as orientações a seguir:
 
 ### Data de Entrega
 
-Data de entrega para avaliação final do projeto: `DD/MM/YYYY - 14:00h`.
+Data de entrega para avaliação final do projeto: `31/03/2021 - 14:00h`.
 
 # Instruções para entregar seu projeto
 
