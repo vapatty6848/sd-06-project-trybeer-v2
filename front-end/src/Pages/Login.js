@@ -1,74 +1,73 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react';
+import propTypes from 'prop-types';
 import Context from '../Context/Context';
+import loginFetch from '../services/LoginService';
 
 export default function Login({ history }) {
-  const [valid, setValid] = useState(true);
+  const [valid, setValid] = useState(false);
   const { email, setEmail } = useContext(Context);
-  const [pass, setPass] = useState('');
+  const [password, setPass] = useState('');
 
-  const validadeLogin = () => {
-    const emailInput = document.getElementById('input-email');
-    const password = document.getElementById('input-password');
-    const regex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
-    const six = 6;
-    if (regex.test(emailInput.value) === true && password.value.length > six) {
-      setValid(false);
-    } else {
-      setValid(true);
+  async function handleClick(type) {
+    const token = await loginFetch(email, password);
+    console.log(token);
+    if (type === 'client') {
+      history.push('/products');
+      localStorage.setItem('user', JSON.stringify({ email }));
     }
-  };
+    if (type === 'register') history.push('/register');
+    setValid(false);
+  }
 
-  const handleEmail = ({ target }) => {
-    setEmail(target.value);
-    const emailStorage = { email };
-    localStorage.setItem('user', JSON.stringify(emailStorage));
-    validadeLogin();
-  };
-
-  const handlePass = ({ target }) => {
-    setPass(target.value);
-    validadeLogin();
-  };
-
-  const handleClick = (e) => {
-    e.preventDefault();
-    
-  };
+  useEffect(() => {
+    const seven = /.{7,}/;
+    const reg = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
+    setValid(reg.test(email) && seven.test(password));
+  }, [email, password]);
 
   return (
     <div className="">
       <h1 className="">Trybeer Sixteen</h1>
-      <label htmlFor="input-email">
         <input
           type="email"
-          id="input-email"
           data-testid="email-input"
-          onChange={ handleEmail }
+          onChange={ ({target}) => setEmail(target.value) }
           value={ email }
           className="form-control"
           placeholder="Email"
         />
-      </label>
-      <label htmlFor="input-password">
         <input
           type="password"
-          id="input-password"
           data-testid="password-input"
-          onChange={ handlePass }
-          value={ pass }
+          onChange={ ({target}) => setPass(target.value) }
+          value={ password }
           className="form-control"
           placeholder="Password"
         />
-      </label>
       <button
-        disabled={ valid }
+        disabled={ !valid }
         type="submit"
-        data-testid="login-submit-btn"
-        onClick={ handleClick }
+        data-testid="signin-btn"
+        onClick={ () => handleClick('client') }
         className="btn btn-warning text-dark"
       >
         Entrar
       </button>
+      <button
+        type="button"
+        data-testid="no-account-btn"
+        onClick={ () => handleClick('register') }
+        className=""
+      >
+        Ainda não tenho conta
+      </button>
     </div>
   );
 }
+
+Login.defaultProps = {
+  history: '/login',
+};
+Login.propTypes = {
+  history: propTypes.shape(),
+};
