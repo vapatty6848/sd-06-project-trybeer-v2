@@ -1,10 +1,10 @@
 const connection = require('./Connection');
 
-const getAll = async () => {
-  const [users] = await connection.execute('SELECT * FROM users');
-  return users;
+const getByEmail = async (userEmail) => {
+  const [[email]] = await connection.execute('SELECT * FROM users WHERE email = ?', [userEmail]);
+  return email;
 };
 
 module.exports = {
-  getAll,
+  getByEmail,
 };

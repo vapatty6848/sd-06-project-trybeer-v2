@@ -1,7 +1,7 @@
-const login = require('../models/Login');
+const { Login } = require('../models');
 
-const getAll = async () => login.getAll();
+const getByEmail = async (userEmail) => Login.getByEmail(userEmail);
 
 module.exports = {
-  getAll,
+  getByEmail,
 };
