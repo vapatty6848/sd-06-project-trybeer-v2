@@ -28,22 +28,22 @@ export default function Login({ history }) {
   return (
     <div className="">
       <h1 className="">Trybeer Sixteen</h1>
-        <input
-          type="email"
-          data-testid="email-input"
-          onChange={ ({target}) => setEmail(target.value) }
-          value={ email }
-          className="form-control"
-          placeholder="Email"
-        />
-        <input
-          type="password"
-          data-testid="password-input"
-          onChange={ ({target}) => setPass(target.value) }
-          value={ password }
-          className="form-control"
-          placeholder="Password"
-        />
+      <input
+        type="email"
+        data-testid="email-input"
+        onChange={ ({ target }) => setEmail(target.value) }
+        value={ email }
+        className="form-control"
+        placeholder="Email"
+      />
+      <input
+        type="password"
+        data-testid="password-input"
+        onChange={ ({ target }) => setPass(target.value) }
+        value={ password }
+        className="form-control"
+        placeholder="Password"
+      />
       <button
         disabled={ !valid }
         type="submit"
