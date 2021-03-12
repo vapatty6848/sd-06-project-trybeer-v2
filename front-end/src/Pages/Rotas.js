@@ -6,8 +6,8 @@ export default function Rotas() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path='/login' component={ Login } />
+        <Route path="/login" component={ Login } />
       </Switch>
     </BrowserRouter>
-  )
-};
+  );
+}

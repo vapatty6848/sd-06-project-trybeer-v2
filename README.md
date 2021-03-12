@@ -155,7 +155,7 @@ Data de entrega para avaliação final do projeto: `31/03/2021 - 14:00h`.
 
 1. Clone o repositório
 
-- `git clone https://github.com/betrybe/sd-06-trybeer.git`.
+- `git clone https://github.com/tryber/sd-06-trybeer.git`.
 - Entre na pasta do repositório que você acabou de clonar:
   - `cd sd-06-trybeer`
 
@@ -388,6 +388,8 @@ Esta tela possui o nome `Login` no protótipo.
 - Todos os elementos da tela devem respeitar os atributos descritos no protótipo;
 
 - A rota da tela deve ser `/login`;
+
+- A rota `/` da aplicação deve redirecionar para a rota `/login`;
 
 - A pessoa deve conseguir escrever seu email no input de email;
 
