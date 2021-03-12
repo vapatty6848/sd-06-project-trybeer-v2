@@ -36,8 +36,8 @@ export default function Login({ history }) {
   };
 
   return (
-    <div className=" container-sm d-flex flex-column login align-items-center">
-      <h1 className="mb-3 text-warning font-weight-bold">Trybeer Sixteen</h1>
+    <div className="">
+      <h1 className="">Trybeer Sixteen</h1>
       <label htmlFor="input-email">
         <input
           type="email"
