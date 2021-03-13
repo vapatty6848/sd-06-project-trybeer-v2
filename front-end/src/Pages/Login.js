@@ -28,8 +28,7 @@ export default function Login({ history }) {
     } else if (decode && decode.role === 'administrator') {
       history.push('/admin/orders');
     } else {
-      // eslint-disable-next-line no-alert
-      return window.alert(decode);
+      return console.log(decode);
     }
     setValid(false);
   }
