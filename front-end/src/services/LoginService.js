@@ -1,5 +1,7 @@
+const jwt = require('jsonwebtoken');
+
 const loginFetch = async (email, password) => {
-  const userResponse = await fetch('http://localhost:3001/login', {
+  const jsonWebToken = await fetch('http://localhost:3001/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -8,7 +10,11 @@ const loginFetch = async (email, password) => {
   })
     .then((resp) => resp.json())
     .catch((error) => console.log(error.message));
-  return userResponse;
+  const decode = jwt.decode(jsonWebToken.token);
+  return {
+    jsonWebToken,
+    decode,
+  };
 };
 
 export default loginFetch;

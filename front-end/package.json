@@ -9,6 +9,8 @@
     "axios": "0.19.2",
     "eslint-config-trybe-frontend": "1.2.0",
     "jquery": "1.9.1",
+    "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^3.1.2",
     "prop-types": "^15.7.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
