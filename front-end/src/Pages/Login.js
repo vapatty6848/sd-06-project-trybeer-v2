@@ -4,18 +4,33 @@ import propTypes from 'prop-types';
 import Context from '../Context/Context';
 import loginFetch from '../services/LoginService';
 
+const jwt = require('jsonwebtoken');
+
 export default function Login({ history }) {
   const [valid, setValid] = useState(false);
   const { email, setEmail } = useContext(Context);
   const [password, setPass] = useState('');
 
-  async function handleClick() {
-    const { jsonWebToken, decode } = await loginFetch(email, password);
-    console.log(decode);
-    if (decode.role === 'client') {
-      history.push('/products');
+  async function decoder() {
+    const jsonWebToken = await loginFetch(email, password);
+    if (jsonWebToken.message !== 'Email ou senha inválidos') {
       localStorage.setItem('token', JSON.stringify(jsonWebToken.token));
-    } else if (decode.role === 'administrator') history.push('/admin/orders');
+      const decode = jwt.decode(jsonWebToken.token);
+      return decode;
+    }
+    return jsonWebToken.message;
+  }
+
+  async function handleClick() {
+    const decode = await decoder();
+    if (decode && decode.role === 'client') {
+      history.push('/products');
+    } else if (decode && decode.role === 'administrator') {
+      history.push('/admin/orders');
+    } else {
+      // eslint-disable-next-line no-alert
+      return window.alert(decode);
+    }
     setValid(false);
   }
 

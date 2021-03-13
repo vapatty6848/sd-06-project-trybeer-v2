@@ -1,7 +1,7 @@
 // const validateToken = require('../auth/validateToken');
 const { Login } = require('../models');
 
-const errorMsg = (status, mess) => ({ status, message: { message: mess } });
+const errorMsg = (status, mess) => ({ statusCode: status, message: { message: mess } });
 
 const LoginValidation = async (req, _res, next) => {
   const { email, password } = req.body;
