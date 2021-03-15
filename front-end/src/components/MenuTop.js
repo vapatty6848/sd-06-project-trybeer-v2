@@ -17,10 +17,10 @@ export default function MenuTop() {
         >
           <span className="navbar-toggler-icon" />
         </button>
-        <h2 data-testid="top-title">Trybeer</h2>
+        <h2 data-testid="top-title">TryBeer</h2>
       </nav>
 
-      <div className="collapse" id="navbarToggleExternalContent">
+      <aside className="collapse list-unstyled side-menu-container" id="navbarToggleExternalContent">
         <div className="bg-dark p-4">
           <ul className="nav flex-column">
             <Link
@@ -53,7 +53,7 @@ export default function MenuTop() {
             </Link>
           </ul>
         </div>
-      </div>
+      </aside>
     </div>
   );
 }
