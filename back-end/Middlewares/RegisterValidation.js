@@ -8,7 +8,7 @@ const RegisterValidation = async (req, _res, next) => {
   const userExists = await Login.getByEmail(email);
 
   if (userExists && email === userExists.email) {
-    return next(errorMsg(403, 'Email já cadastrado'));
+    return next(errorMsg(403, 'E-mail already in database.'));
   }
 
   req.infoUser = userExists;

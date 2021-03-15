@@ -21,12 +21,12 @@ function Register({ history }) {
 
   async function handlePage() {
     const newUser = await registerFetch(name, email, password, role);
-    console.log(newUser);
     if (newUser.message !== 'Email já cadastrado' && role === 'client') {
       history.push('/products');
     } else if (newUser.message !== 'Email já cadastrado' && role === 'administrator') {
       history.push('/admin/orders');
     } else {
+      console.log(newUser.message);
       history.push('/register');
     }
   }
@@ -47,7 +47,7 @@ function Register({ history }) {
           data-testid="signup-name"
           onChange={ ({ target }) => setName(target.value) }
           className="form-control"
-          placeholder="Digite um nome de 12 ou mais caracteres"
+          placeholder="12 ou mais caracteres"
         />
       </label>
       <label htmlFor="signup-email">
@@ -94,8 +94,12 @@ function Register({ history }) {
   );
 }
 
+Register.defaultProps = {
+  history: '/register',
+};
+
 Register.propTypes = {
-  history: propTypes.shape.isRequired,
+  history: propTypes.shape,
 };
 
 export default Register;
