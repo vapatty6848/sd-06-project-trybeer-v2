@@ -1,24 +1,38 @@
 import React, { useState, useContext, useEffect } from 'react';
 import propTypes from 'prop-types';
 import Context from '../Context/Context';
+import registerFetch from '../services/RegisterService';
 
 function Register({ history }) {
-  const { email, setEmail, name, setName, setRole } = useContext(Context);
+  const { email, setEmail, name, setName, role, setRole } = useContext(Context);
   const [password, setPassword] = useState('');
   const [valid, setValid] = useState(false);
-  const [checkbox, setCheckbox] = useState(false);
+  const [isChecked, setIsChecked] = useState(true);
 
   async function handleRole(value) {
-    if (value === false) setRole('client');
-    if (value === true) setRole('administrator');
+    if (value === false) {
+      setIsChecked(true);
+      setRole('client');
+    } else if (value === true) {
+      setIsChecked(false);
+      setRole('administrator');
+    }
+  }
+
+  async function handlePage() {
+    const newUser = await registerFetch(name, email, password, role);
+    console.log(newUser);
+    if (newUser.message !== 'Email já cadastrado' && role === 'client') {
+      history.push('/products');
+    } else if (newUser.message !== 'Email já cadastrado' && role === 'administrator') {
+      history.push('/admin/orders');
+    } else {
+      history.push('/register');
+    }
   }
 
   useEffect(() => {
-    setCheckbox(false);
-  }, []);
-
-  useEffect(() => {
-    const twelve = /^[a-zA-Z]{12}/; // precisa de um regex aqui
+    const twelve = /[^()[\]{}*&^%$#@!0-9]+.{11,30}[a-zA-Z]$/;
     const seven = /.{6,}/;
     const reg = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
     setValid(reg.test(email) && seven.test(password) && twelve.test(name));
@@ -61,8 +75,9 @@ function Register({ history }) {
         <input
           type="checkbox"
           data-testid="signup-seller"
-          value={ checkbox }
-          onClick={ ({ target }) => handleRole(target.value) }
+          id="signup-seller"
+          checked={ !isChecked }
+          onChange={ ({ target }) => handleRole(target.checked) }
           className="form-control"
         />
       </label>
@@ -70,7 +85,7 @@ function Register({ history }) {
         disabled={ !valid }
         type="submit"
         data-testid="signup-btn"
-        onClick={ () => history.push('/login') }
+        onClick={ () => handlePage() }
         className="btn btn-warning text-dark"
       >
         Cadastrar
