@@ -1,18 +1,29 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import MenuTop from '../components/MenuTop';
 import Context from '../Context/Context';
+import profileFetch from '../services/ProfileService';
 
 export default function Profile() {
+  const [valid, setValid] = useState(true);
   const { name, setName, email } = useContext(Context);
   function handleClick() {
-
+    profileFetch(name, email);
+  }
+  function handleChange({ target }) {
+    setName(target.value);
+    setValid(false);
   }
   return (
     <div>
       <MenuTop title="Meu perfil" />
-      <input data-testid="profile-name-input" value={ name } />
-      <input data-testid="profile-email-input" value={ email } />
+      <input
+        data-testid="profile-name-input"
+        value={ name }
+        onChange={ (target) => { handleChange(target); } }
+      />
+      <input data-testid="profile-email-input" readOnly value={ email } />
       <button
+        disabled={ valid }
         type="button"
         data-testid="profile-save-btn"
         onClick={ handleClick }
