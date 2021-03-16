@@ -6,6 +6,8 @@ function Provider({ children }) {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [role, setRole] = useState('client');
+  const [isFetching, setIsFetching] = useState(true);
+  const [allProducts, setAllProducts] = useState([]);
 
   const contextValue = {
     email,
@@ -14,6 +16,10 @@ function Provider({ children }) {
     setName,
     role,
     setRole,
+    isFetching,
+    setIsFetching,
+    allProducts,
+    setAllProducts,
   };
 
   return (
