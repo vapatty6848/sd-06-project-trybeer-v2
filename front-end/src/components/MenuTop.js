@@ -20,7 +20,10 @@ function MenuTop({ title }) {
         </button>
         <h2 className="navbar-text" data-testid="top-title">{title}</h2>
       </nav>
-      <nav id="navbarToggleExternalContent" className="row collapse">
+      <nav
+        id="navbarToggleExternalContent"
+        className="row collapse side-menu-container"
+      >
         <div className="col-2 navbar-dark bg-dark">
           <div
             className="nav flex-column nav-tab"
@@ -29,7 +32,7 @@ function MenuTop({ title }) {
           >
             <Link
               data-testid="side-menu-item-products"
-              className="nav-link active"
+              className="nav-link active mt-5"
               to="/products"
               role="tab"
             >
@@ -37,7 +40,7 @@ function MenuTop({ title }) {
             </Link>
             <Link
               data-testid="side-menu-item-my-orders"
-              className="nav-link"
+              className="nav-link mt-3"
               to="/orders"
               role="tab"
             >
@@ -45,7 +48,7 @@ function MenuTop({ title }) {
             </Link>
             <Link
               data-testid="side-menu-item-my-profile"
-              className="nav-link"
+              className="nav-link mt-3"
               to="/profile"
               role="tab"
             >
@@ -53,7 +56,7 @@ function MenuTop({ title }) {
             </Link>
             <Link
               data-testid="side-menu-item-logout"
-              className="nav-link disabled"
+              className="nav-link disabled my-5"
               to="/login"
               role="tab"
             >
