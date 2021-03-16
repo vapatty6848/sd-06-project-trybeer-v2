@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const { LoginController, RegisterController } = require('./controllers');
+const { LoginController, RegisterController, ProfileController } = require('./controllers');
 const { error } = require('./services');
 require('dotenv').config();
 
@@ -14,6 +14,7 @@ const PORT = process.env.PORT || 3001;
 
 app.use('/login', LoginController);
 app.use('/register', RegisterController);
+app.use('/profile', ProfileController);
 
 app.use(error);
 app.listen(PORT, () => console.log(`rodando na porta ${PORT}`));

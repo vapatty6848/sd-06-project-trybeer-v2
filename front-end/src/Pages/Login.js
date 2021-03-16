@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 
 export default function Login({ history }) {
   const [valid, setValid] = useState(false);
-  const { email, setEmail } = useContext(Context);
+  const { email, setEmail, setName } = useContext(Context);
   const [password, setPass] = useState('');
 
   async function decoder() {
@@ -16,6 +16,7 @@ export default function Login({ history }) {
     if (jsonWebToken.message !== 'Email ou senha inválidos') {
       localStorage.setItem('token', JSON.stringify(jsonWebToken.token));
       const decode = jwt.decode(jsonWebToken.token);
+      setName(decode.name);
       return decode;
     }
     return jsonWebToken.message;
@@ -69,7 +70,7 @@ export default function Login({ history }) {
         onClick={ () => handleClick() }
         className="btn btn-warning text-dark"
       >
-        ENTRAR
+        Entrar
       </button>
       <Link to="/register" data-testid="no-account-btn">Ainda não tenho conta</Link>
     </div>
