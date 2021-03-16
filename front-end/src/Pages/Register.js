@@ -8,6 +8,8 @@ function Register({ history }) {
   const [password, setPassword] = useState('');
   const [valid, setValid] = useState(false);
   const [isChecked, setIsChecked] = useState(true);
+  const [msg, setMsg] = useState('');
+  const emailExistMsg = 'E-mail already in database.';
 
   async function handleRole(value) {
     if (value === false) {
@@ -21,12 +23,13 @@ function Register({ history }) {
 
   async function handlePage() {
     const newUser = await registerFetch(name, email, password, role);
-    if (newUser.message !== 'Email já cadastrado' && role === 'client') {
+
+    setMsg(newUser.message);
+    if (newUser.message !== emailExistMsg && role === 'client') {
       history.push('/products');
-    } else if (newUser.message !== 'Email já cadastrado' && role === 'administrator') {
+    } else if (newUser.message !== emailExistMsg && role === 'administrator') {
       history.push('/admin/orders');
     } else {
-      console.log(newUser.message);
       history.push('/register');
     }
   }
@@ -47,7 +50,7 @@ function Register({ history }) {
           data-testid="signup-name"
           onChange={ ({ target }) => setName(target.value) }
           className="form-control"
-          placeholder="12 ou mais caracteres"
+          placeholder="Digite um nome"
         />
       </label>
       <label htmlFor="signup-email">
@@ -90,6 +93,7 @@ function Register({ history }) {
       >
         Cadastrar
       </button>
+      {msg === emailExistMsg ? <span>{msg}</span> : null}
     </div>
   );
 }

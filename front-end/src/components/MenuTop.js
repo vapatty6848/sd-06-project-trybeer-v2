@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 
 function MenuTop({ title }) {
   return (
-    <div className="pos-f-t">
+    <div id="content">
       <nav className="navbar navbar-dark bg-dark">
         <button
-          className="navbar-toggler"
+          className="btn btn-sm btn-outline-secondary"
           type="button"
           data-toggle="collapse"
           data-target="#navbarToggleExternalContent"
@@ -18,16 +18,20 @@ function MenuTop({ title }) {
         >
           <span className="navbar-toggler-icon" />
         </button>
-        <h2 data-testid="top-title">{title}</h2>
+        <h2 className="navbar-text" data-testid="top-title">{title}</h2>
       </nav>
-
-      <aside className="collapse side-menu-container" id="navbarToggleExternalContent">
-        <div className="bg-dark p-4">
-          <ul className="nav flex-column">
+      <nav id="navbarToggleExternalContent" className="row collapse">
+        <div className="col-2 navbar-dark bg-dark">
+          <div
+            className="nav flex-column nav-tab"
+            role="tablist"
+            aria-orientation="vertical"
+          >
             <Link
               data-testid="side-menu-item-products"
               className="nav-link active"
               to="/products"
+              role="tab"
             >
               Produtos
             </Link>
@@ -35,6 +39,7 @@ function MenuTop({ title }) {
               data-testid="side-menu-item-my-orders"
               className="nav-link"
               to="/orders"
+              role="tab"
             >
               Meus Pedidos
             </Link>
@@ -42,6 +47,7 @@ function MenuTop({ title }) {
               data-testid="side-menu-item-my-profile"
               className="nav-link"
               to="/profile"
+              role="tab"
             >
               Meu Perfil
             </Link>
@@ -49,12 +55,13 @@ function MenuTop({ title }) {
               data-testid="side-menu-item-logout"
               className="nav-link disabled"
               to="/login"
+              role="tab"
             >
               Sair
             </Link>
-          </ul>
+          </div>
         </div>
-      </aside>
+      </nav>
     </div>
   );
 }
