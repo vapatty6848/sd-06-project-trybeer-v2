@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-export default function MenuTop({title}) {
+function MenuTop({ title }) {
   return (
     <div className="pos-f-t">
       <nav className="navbar navbar-dark bg-dark">
@@ -57,3 +58,9 @@ export default function MenuTop({title}) {
     </div>
   );
 }
+
+MenuTop.propTypes = {
+  title: PropTypes.string.isRequired,
+};
+
+export default MenuTop;
