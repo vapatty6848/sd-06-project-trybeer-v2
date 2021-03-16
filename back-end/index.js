@@ -1,7 +1,12 @@
+const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const { LoginController, RegisterController, ProfileController, ProductController } = require('./controllers');
+const { LoginController,
+  RegisterController,
+  ProfileController,
+  ProductController,
+} = require('./controllers');
 const { error } = require('./services');
 require('dotenv').config();
 
@@ -16,6 +21,7 @@ app.use('/login', LoginController);
 app.use('/register', RegisterController);
 app.use('/profile', ProfileController);
 app.use('/products', ProductController);
+app.use('/images', express.static(path.join(__dirname, '/images')));
 
 app.use(error);
 app.listen(PORT, () => console.log(`rodando na porta ${PORT}`));

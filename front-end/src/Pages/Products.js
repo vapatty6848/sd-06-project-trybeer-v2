@@ -11,8 +11,7 @@ export default function Products() {
     const products = await productsFetch();
     setIsFetching(true);
     setAllProducts(products);
-    console.log(products);
-    console.log(allProducts[0].url_image);
+    console.log(allProducts);
     setIsFetching(false);
   }
 
@@ -28,7 +27,7 @@ export default function Products() {
         {isFetching
           ? <h2>Loading</h2>
           : allProducts.map((product, index) => (
-            index > 0 ? <ProductCard
+            <ProductCard
               indexId={ index }
               key={ index }
               price={ product.price }
@@ -36,7 +35,6 @@ export default function Products() {
               qtd="5"
               img={ product.url_image }
             />
-              : null
           ))}
       </div>
     </div>

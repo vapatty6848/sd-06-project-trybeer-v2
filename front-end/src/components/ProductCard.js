@@ -7,7 +7,7 @@ function ProductCard({ indexId, price, qtd, name, img }) {
       <p data-testid={ `${indexId}-product-price` }>{price}</p>
       <img
         data-testid={ `${indexId}-product-img` }
-        src={ img.replace(/^["'](.+(?=["']$))["']$/, '$1') }
+        src={ img }
         alt="Product cover"
       />
       <p data-testid={ `${indexId}-product-name` }>{name}</p>
