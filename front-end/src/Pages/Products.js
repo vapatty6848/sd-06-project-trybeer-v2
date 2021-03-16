@@ -4,7 +4,7 @@ import MenuTop from '../components/MenuTop';
 export default function Products() {
   return (
     <div>
-      <MenuTop />
+      <MenuTop title="TryBeer" />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function MenuTop() {
+export default function MenuTop({title}) {
   return (
     <div className="pos-f-t">
       <nav className="navbar navbar-dark bg-dark">
@@ -17,10 +17,10 @@ export default function MenuTop() {
         >
           <span className="navbar-toggler-icon" />
         </button>
-        <h2 data-testid="top-title">TryBeer</h2>
+        <h2 data-testid="top-title">{title}</h2>
       </nav>
 
-      <aside className="collapse list-unstyled side-menu-container" id="navbarToggleExternalContent">
+      <aside className="collapse side-menu-container" id="navbarToggleExternalContent">
         <div className="bg-dark p-4">
           <ul className="nav flex-column">
             <Link

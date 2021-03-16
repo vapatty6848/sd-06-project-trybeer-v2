@@ -7,8 +7,8 @@ const createToken = require('../auth/createToken');
 const LoginRouter = new Router();
 
 LoginRouter.post('/', LoginValidation.LoginValidation, rescue(async (req, res) => {
-  const { email, id, role } = req.infoUser;
-  const createdToken = createToken({ email, id, role });
+  const { email, id, role, name } = req.infoUser;
+  const createdToken = createToken({ email, id, role, name });
   return res.status(status200).json({ token: createdToken });
 }));
 
