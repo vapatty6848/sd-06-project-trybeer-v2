@@ -5,9 +5,11 @@ import profileFetch from '../services/ProfileService';
 
 export default function Profile() {
   const [valid, setValid] = useState(true);
+  const [message, setMessage] = useState('');
   const { name, setName, email } = useContext(Context);
   function handleClick() {
     profileFetch(name, email);
+    setMessage('Atualização concluída com sucesso');
   }
   function handleChange({ target }) {
     setName(target.value);
@@ -30,6 +32,7 @@ export default function Profile() {
       >
         Salvar
       </button>
+      {message ? <span>{message}</span> : null}
     </div>
   );
 }

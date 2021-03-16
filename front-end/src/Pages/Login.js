@@ -70,7 +70,7 @@ export default function Login({ history }) {
         onClick={ () => handleClick() }
         className="btn btn-warning text-dark"
       >
-        ENTRAR
+        Entrar
       </button>
       <Link to="/register" data-testid="no-account-btn">Ainda não tenho conta</Link>
     </div>
