@@ -23,14 +23,13 @@ function Register({ history }) {
 
   async function handlePage() {
     const newUser = await registerFetch(name, email, password, role);
-
     setMsg(newUser.message);
     if (newUser.message !== emailExistMsg && role === 'client') {
       history.push('/products');
     } else if (newUser.message !== emailExistMsg && role === 'administrator') {
       history.push('/admin/orders');
     } else {
-      history.push('/register');
+      console.log(newUser);
     }
   }
 
@@ -42,59 +41,81 @@ function Register({ history }) {
   }, [email, password, name]);
 
   return (
-    <div>
-      <label htmlFor="signup-name">
-        Nome
-        <input
-          type="text"
-          data-testid="signup-name"
-          onChange={ ({ target }) => setName(target.value) }
-          className="form-control"
-          placeholder="Digite um nome"
-        />
-      </label>
-      <label htmlFor="signup-email">
-        Email
-        <input
-          type="email"
-          data-testid="signup-email"
-          onChange={ ({ target }) => setEmail(target.value) }
-          className="form-control"
-          placeholder="Digite um email"
-        />
-      </label>
-      <label htmlFor="signup-password">
-        Senha
-        <input
-          type="password"
-          data-testid="signup-password"
-          onChange={ ({ target }) => setPassword(target.value) }
-          className="form-control"
-          placeholder="Digite uma senha"
-        />
-      </label>
-      <label htmlFor="signup-seller">
-        Quero vender
-        <input
-          type="checkbox"
-          data-testid="signup-seller"
-          id="signup-seller"
-          checked={ !isChecked }
-          onChange={ ({ target }) => handleRole(target.checked) }
-          className="form-control"
-        />
-      </label>
-      <button
-        disabled={ !valid }
-        type="submit"
-        data-testid="signup-btn"
-        onClick={ () => handlePage() }
-        className="btn btn-warning text-dark"
-      >
-        Cadastrar
-      </button>
+    <form className="needs-validation">
+      <div className="col-md-5 mb-3">
+        <label htmlFor="signup-name">
+          Nome
+          <input
+            type="text"
+            data-testid="signup-name"
+            id="signup-name"
+            onChange={ ({ target }) => setName(target.value) }
+            className="form-control"
+            placeholder="Digite um nome"
+          />
+          <small id="signup-name" className="form-text text-muted">
+            O nome deve ter no mínimo 12 caracteres.
+          </small>
+        </label>
+      </div>
+      <div className="col-md-5 mb-3">
+        <label htmlFor="signup-email">
+          Email
+          <input
+            type="email"
+            data-testid="signup-email"
+            id="signup-email"
+            onChange={ ({ target }) => setEmail(target.value) }
+            className="form-control"
+            placeholder="Digite um email"
+          />
+          <small id="signup-email" className="form-text text-muted">
+            O email não deve conter caracteres especiais.
+          </small>
+        </label>
+      </div>
+      <div className="col-md-5 mb-3">
+        <label htmlFor="signup-password">
+          Senha
+          <input
+            type="password"
+            data-testid="signup-password"
+            id="signup-password"
+            onChange={ ({ target }) => setPassword(target.value) }
+            className="form-control"
+            placeholder="Digite uma senha"
+          />
+          <small id="signup-password" className="form-text text-muted">
+            A senha deve ter no mínimo 6 caracteres.
+          </small>
+        </label>
+      </div>
+      <div className="form-group form-check ml-4 mb-5">
+        <label htmlFor="signup-seller" className="form-check-label">
+          <input
+            type="checkbox"
+            data-testid="signup-seller"
+            id="signup-seller"
+            checked={ !isChecked }
+            onChange={ ({ target }) => handleRole(target.checked) }
+            className="form-check-input"
+          />
+          Quero vender
+        </label>
+      </div>
+      <div className="form-check">
+        <button
+          disabled={ !valid }
+          type="button"
+          data-testid="signup-btn"
+          onClick={ () => handlePage() }
+          className={ !valid ? 'btn btn-light' : 'btn btn-success' }
+        >
+          Cadastrar
+        </button>
+      </div>
       {msg === emailExistMsg ? <span>{msg}</span> : null}
-    </div>
+    </form>
   );
 }
 

@@ -29,7 +29,7 @@ export default function Login({ history }) {
     } else if (decode && decode.role === 'administrator') {
       history.push('/admin/orders');
     } else {
-      return console.log(decode);
+      console.log(decode);
     }
     setValid(false);
   }
@@ -41,38 +41,56 @@ export default function Login({ history }) {
   }, [email, password]);
 
   return (
-    <div className="">
+    <div>
       <h1 className="">Trybeer Sixteen</h1>
-      <label htmlFor="email-input">
-        Email
-        <input
-          type="email"
-          data-testid="email-input"
-          onChange={ ({ target }) => setEmail(target.value) }
-          className="form-control"
-          placeholder="Email"
-        />
-      </label>
-      <label htmlFor="password-input">
-        Senha
-        <input
-          type="password"
-          data-testid="password-input"
-          onChange={ ({ target }) => setPass(target.value) }
-          className="form-control"
-          placeholder="Password"
-        />
-      </label>
-      <button
-        disabled={ !valid }
-        type="submit"
-        data-testid="signin-btn"
-        onClick={ () => handleClick() }
-        className="btn btn-warning text-dark"
-      >
-        Entrar
-      </button>
-      <Link to="/register" data-testid="no-account-btn">Ainda não tenho conta</Link>
+      <form className="needs-validation">
+        <div className="col-md-5 mb-3">
+          <label htmlFor="email-input">
+            Email
+            <input
+              type="email"
+              data-testid="email-input"
+              id="email-input"
+              onChange={ ({ target }) => setEmail(target.value) }
+              className="form-control"
+              placeholder="Email"
+            />
+          </label>
+        </div>
+        <div className="col-md-5 mb-3">
+          <label htmlFor="password-input">
+            Senha
+            <input
+              type="password"
+              data-testid="password-input"
+              id="password-input"
+              onChange={ ({ target }) => setPass(target.value) }
+              className="form-control"
+              placeholder="Senha"
+            />
+          </label>
+        </div>
+        <div className="form-check">
+          <button
+            disabled={ !valid }
+            type="button"
+            data-testid="signin-btn"
+            onClick={ () => handleClick() }
+            className={ !valid ? 'btn btn-light' : 'btn btn-success' }
+          >
+            Entrar
+          </button>
+        </div>
+        <div className="form-check">
+          <Link
+            to="/register"
+            data-testid="no-account-btn"
+            className="btn btn-info mt-4"
+          >
+            Ainda não tenho conta
+          </Link>
+        </div>
+      </form>
     </div>
   );
 }
@@ -80,6 +98,7 @@ export default function Login({ history }) {
 Login.defaultProps = {
   history: '/login',
 };
+
 Login.propTypes = {
   history: propTypes.shape(),
 };
