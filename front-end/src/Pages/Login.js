@@ -26,12 +26,13 @@ export default function Login({ history }) {
     const decode = await decoder();
     if (decode && decode.role === 'client') {
       history.push('/products');
+      setValid(false);
     } else if (decode && decode.role === 'administrator') {
       history.push('/admin/orders');
+      setValid(false);
     } else {
       console.log(decode);
     }
-    setValid(false);
   }
 
   useEffect(() => {
