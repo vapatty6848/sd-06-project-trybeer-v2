@@ -6,6 +6,13 @@ function ProductCard({ indexId, id, price, name, img }) {
   const [quantity, setQuantity] = useState(0);
   const { cart, updateProduct } = useContext(Context);
 
+  useEffect(() => {
+    const findItemById = cart.find((item) => item.id === id);
+    if (findItemById !== undefined) {
+      setQuantity(findItemById.qtd);
+    }
+  }, [cart, id]);
+
   function increaseQtd() {
     const value = quantity + 1;
     setQuantity(value);
@@ -19,13 +26,6 @@ function ProductCard({ indexId, id, price, name, img }) {
       updateProduct(id, price, name, value);
     }
   }
-
-  useEffect(() => {
-    const findItemById = cart.find((item) => item.id === id);
-    if (findItemById !== undefined) {
-      setQuantity(findItemById.qtd);
-    }
-  }, [cart, id]);
 
   return (
     <div
@@ -70,7 +70,7 @@ function ProductCard({ indexId, id, price, name, img }) {
 ProductCard.propTypes = {
   indexId: propTypes.number.isRequired,
   price: propTypes.string.isRequired,
-  id: propTypes.string.isRequired,
+  id: propTypes.number.isRequired,
   name: propTypes.string.isRequired,
   img: propTypes.string.isRequired,
 };

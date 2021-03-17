@@ -19,22 +19,18 @@ function Provider({ children }) {
     setIsFetching(false);
   }
 
-  function removeProduct(id) {
-    const currentLocal = JSON.parse(localStorage.getItem('Cart'));
-    const getById = cart.filter((item) => item.id === id);
-    if (getById.qtd === 0) {
-      currentLocal.splice(getById, 1);
-      localStorage.setItem('Cart', JSON.stringify(currentLocal));
-      setCart(currentLocal);
-    }
-  }
-
   async function updateProduct(id, price, nome, qtd) {
-    const obj = { id, price, nome, qtd };
-    const cartItems = cart.filter((item) => item.id !== id);
-    const newItem = [...cartItems, obj];
-    setCart(newItem);
-    localStorage.setItem('Cart', JSON.stringify(newItem));
+    const clickedProduct = { id, price, nome, qtd };
+    const cartProducts = cart.filter((item) => item.id !== id);
+    if (clickedProduct.qtd > 0) {
+      const newProducts = [...cartProducts, clickedProduct];
+      setCart(newProducts);
+      localStorage.setItem('Cart', JSON.stringify(newProducts));
+    } else if (clickedProduct.qtd === 0) {
+      const updatedProducts = cart.filter((item) => item.id !== id);
+      setCart(updatedProducts);
+      localStorage.setItem('Cart', JSON.stringify(updatedProducts));
+    }
   }
 
   useEffect(() => {
