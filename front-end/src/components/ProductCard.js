@@ -70,7 +70,7 @@ function ProductCard({ indexId, id, price, name, img }) {
 ProductCard.propTypes = {
   indexId: propTypes.number.isRequired,
   price: propTypes.string.isRequired,
-  id: propTypes.string.isRequired,
+  id: propTypes.number.isRequired,
   name: propTypes.string.isRequired,
   img: propTypes.string.isRequired,
 };

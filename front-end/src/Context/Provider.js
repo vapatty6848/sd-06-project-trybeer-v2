@@ -13,28 +13,32 @@ function Provider({ children }) {
   const [quantity, setQuantity] = useState(0);
   const [cart, setCart] = useState([]);
 
+  const currentLocal = JSON.parse(localStorage.getItem('Cart'));
+
   async function getAllProducts() {
     const products = await productsFetch();
     setAllProducts(products);
     setIsFetching(false);
   }
 
-  function removeProduct(id) {
-    const currentLocal = JSON.parse(localStorage.getItem('Cart'));
-    const getById = cart.filter((item) => item.id === id);
-    if (getById.qtd === 0) {
-      currentLocal.splice(getById, 1);
-      localStorage.setItem('Cart', JSON.stringify(currentLocal));
-      setCart(currentLocal);
-    }
-  }
-
   async function updateProduct(id, price, nome, qtd) {
-    const obj = { id, price, nome, qtd };
-    const cartItems = cart.filter((item) => item.id !== id);
-    const newItem = [...cartItems, obj];
-    setCart(newItem);
-    localStorage.setItem('Cart', JSON.stringify(newItem));
+    const newProduct = { id, price, nome, qtd };
+    setCart(currentLocal);
+    const productId = cart.find((item) => item.id === id);
+    const productsCart = cart.filter((item) => item.id !== id);
+    if (productId === null || productId.qtd > 0) {
+      const newItem = [...productsCart, newProduct];
+      setCart(newItem);
+      localStorage.setItem('Cart', JSON.stringify(newItem));
+    } else if (productId.qtd === 0) {
+      localStorage.setItem('Cart', JSON.stringify(productsCart));
+      setCart(productsCart);
+    }
+
+    // const cartItems = cart.filter((item) => item.id !== id);
+    // const newItem = [...cartItems, newProduct];
+    // setCart(newItem);
+    // localStorage.setItem('Cart', JSON.stringify(newItem));
   }
 
   useEffect(() => {
