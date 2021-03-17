@@ -4,13 +4,12 @@ import MenuTop from '../components/MenuTop';
 import ProductCard from '../components/ProductCard';
 
 export default function Products() {
-  const { isFetching, setIsFetching, allProducts, getAllProducts } = useContext(Context);
+  const { isFetching, allProducts, getAllProducts } = useContext(Context);
 
   useEffect(() => {
-    setIsFetching(true);
+    // setIsFetching(true);
     getAllProducts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  });
 
   return (
     <div>
@@ -24,8 +23,8 @@ export default function Products() {
               key={ index }
               price={ product.price }
               name={ product.name }
-              qtd="5"
               img={ product.url_image }
+              id={ product.id }
             />
           ))}
       </div>

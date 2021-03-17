@@ -124,7 +124,7 @@ Register.defaultProps = {
 };
 
 Register.propTypes = {
-  history: propTypes.shape,
+  history: propTypes.shape(),
 };
 
 export default Register;

@@ -25,11 +25,11 @@ export default function Login({ history }) {
   async function handleClick() {
     const decode = await decoder();
     if (decode && decode.role === 'client') {
+      setValid(false);
       history.push('/products');
-      setValid(false);
     } else if (decode && decode.role === 'administrator') {
-      history.push('/admin/orders');
       setValid(false);
+      history.push('/admin/orders');
     } else {
       console.log(decode);
     }

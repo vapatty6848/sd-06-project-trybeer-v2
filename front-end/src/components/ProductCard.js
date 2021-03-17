@@ -1,7 +1,32 @@
-import React from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import propTypes from 'prop-types';
+import Context from '../Context/Context';
 
-function ProductCard({ indexId, price, qtd, name, img }) {
+function ProductCard({ indexId, id, price, name, img }) {
+  const [quantity, setQuantity] = useState(0);
+  const { cart, updateProduct } = useContext(Context);
+
+  function increaseQtd() {
+    const value = quantity + 1;
+    setQuantity(value);
+    updateProduct(id, price, name, value);
+  }
+
+  function decreaseQtd() {
+    if (quantity > 0) {
+      const value = quantity - 1;
+      setQuantity(value);
+      updateProduct(id, price, name, value);
+    }
+  }
+
+  useEffect(() => {
+    const findItemById = cart.find((item) => item.id === id);
+    if (findItemById !== undefined) {
+      setQuantity(findItemById.qtd);
+    }
+  }, [cart, id]);
+
   return (
     <div
       data-testid={ `${indexId}-product-card` }
@@ -24,14 +49,16 @@ function ProductCard({ indexId, price, qtd, name, img }) {
           type="button"
           data-testid={ `${indexId}-product-minus` }
           className="btn btn-danger"
+          onClick={ () => decreaseQtd() }
         >
           -
         </button>
-        <p data-testid={ `${indexId}-product-qtd` }>{qtd}</p>
+        <p data-testid={ `${indexId}-product-qtd` }>{quantity}</p>
         <button
           type="button"
           data-testid={ `${indexId}-product-plus` }
           className="btn btn-primary"
+          onClick={ () => increaseQtd() }
         >
           +
         </button>
@@ -43,7 +70,7 @@ function ProductCard({ indexId, price, qtd, name, img }) {
 ProductCard.propTypes = {
   indexId: propTypes.number.isRequired,
   price: propTypes.string.isRequired,
-  qtd: propTypes.string.isRequired,
+  id: propTypes.string.isRequired,
   name: propTypes.string.isRequired,
   img: propTypes.string.isRequired,
 };
