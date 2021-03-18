@@ -5,6 +5,7 @@ import Register from './Register';
 import Products from './Products';
 import Profile from './Profile';
 import Orders from './Orders';
+import Checkout from './Checkout';
 
 export default function Rotas() {
   return (
@@ -16,6 +17,7 @@ export default function Rotas() {
         <Route path="/admin/orders" component={ Orders } />
         <Route path="/products" component={ Products } />
         <Route path="/profile" component={ Profile } />
+        <Route path="/checkout" component={ Checkout } />
       </Switch>
     </BrowserRouter>
   );

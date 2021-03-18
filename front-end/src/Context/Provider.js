@@ -9,19 +9,22 @@ function Provider({ children }) {
   const [password, setPass] = useState('');
   const [name, setName] = useState('');
   const [role, setRole] = useState('client');
-  const [TokenInvalido, setTokenInvalido] = useState(false);
+  const [tokenInvalid, setTokenInvalid] = useState(false);
   const [isFetching, setIsFetching] = useState(true);
   const [allProducts, setAllProducts] = useState([]);
   const [quantity, setQuantity] = useState(0);
   const [cart, setCart] = useState([]);
+  const [number, setNumber] = useState('');
+  const [street, setStreet] = useState('');
+  const [totalPrice, setTotalPrice] = useState(0);
 
   async function getAllProducts() {
     const products = await productsFetch();
     if (products.message) {
-      setTokenInvalido(true);
+      setTokenInvalid(true);
       setIsFetching(true);
     } else {
-      setTokenInvalido(false);
+      setTokenInvalid(false);
       setAllProducts(products);
       setIsFetching(false);
     }
@@ -40,7 +43,6 @@ function Provider({ children }) {
       localStorage.setItem('Cart', JSON.stringify(updatedProducts));
     }
   }
-
   useEffect(() => {
     const localStgCart = JSON.parse(localStorage.getItem('Cart'));
     if (localStgCart) {
@@ -67,8 +69,14 @@ function Provider({ children }) {
     updateProduct,
     cart,
     setCart,
-    TokenInvalido,
-    setTokenInvalido,
+    tokenInvalid,
+    setTokenInvalid,
+    street,
+    setStreet,
+    number,
+    setNumber,
+    totalPrice,
+    setTotalPrice,
   };
 
   return (

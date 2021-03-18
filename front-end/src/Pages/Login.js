@@ -77,7 +77,7 @@ export default function Login({ history }) {
             onClick={ () => handleClick() }
             className={ !valid ? 'btn btn-light' : 'btn btn-success' }
           >
-            ENTRAR
+            Entrar
           </button>
         </div>
         <div className="form-check">

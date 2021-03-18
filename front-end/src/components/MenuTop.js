@@ -61,6 +61,7 @@ function MenuTop({ title }) {
               className="dropdown-item disabled mt-4"
               to="/login"
               role="tab"
+              onClick={ () => localStorage.clear() }
             >
               Sair
             </Link>

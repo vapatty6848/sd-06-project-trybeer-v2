@@ -1,18 +1,35 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import Context from '../Context/Context';
 import MenuTop from '../components/MenuTop';
 import ProductCard from '../components/ProductCard';
+import { sumTotal } from '../services/TotalPrice';
 
 export default function Products({ history }) {
-  const { isFetching, allProducts, getAllProducts, TokenInvalido } = useContext(Context);
+  const {
+    cart,
+    isFetching,
+    allProducts,
+    getAllProducts,
+    tokenInvalid,
+    setTotalPrice,
+  } = useContext(Context);
+  const [disable, setDisable] = useState(true);
+
+  const totalSum = sumTotal(cart.map((element) => element.price));
 
   useEffect(() => {
     getAllProducts();
-    if (TokenInvalido) {
+    if (tokenInvalid) {
       history.push('/');
     }
   });
+
+  useEffect(() => {
+    setTotalPrice(totalSum);
+    if (totalSum > 0) return setDisable(false);
+    if (totalSum === '0,00') return setDisable(true);
+  }, [totalSum]);
 
   return (
     <div>
@@ -30,6 +47,15 @@ export default function Products({ history }) {
               id={ product.id }
             />
           ))}
+      </div>
+      <div>
+        <button
+          onClick={ () => history.push('/checkout') }
+          type="button"
+          disabled={ disable }
+        >
+          {`Ver Carrinho R$ ${totalSum}`}
+        </button>
       </div>
     </div>
   );

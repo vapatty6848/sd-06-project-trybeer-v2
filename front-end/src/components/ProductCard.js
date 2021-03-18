@@ -16,16 +16,16 @@ function ProductCard({ indexId, id, price, name, img }) {
   }, [cart, id]);
 
   function increaseQtd() {
-    const value = quantity + 1;
-    setQuantity(value);
-    updateProduct(id, price, name, value);
+    const qtd = quantity + 1;
+    setQuantity(qtd);
+    updateProduct(id, price, name, qtd);
   }
 
   function decreaseQtd() {
     if (quantity > 0) {
-      const value = quantity - 1;
-      setQuantity(value);
-      updateProduct(id, price, name, value);
+      const qtd = quantity - 1;
+      setQuantity(qtd);
+      updateProduct(id, price, name, qtd);
     }
   }
 
