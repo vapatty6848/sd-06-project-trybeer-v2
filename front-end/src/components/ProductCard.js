@@ -6,6 +6,8 @@ function ProductCard({ indexId, id, price, name, img }) {
   const [quantity, setQuantity] = useState(0);
   const { cart, updateProduct } = useContext(Context);
 
+  const changedPrice = price.replace('.', ',');
+
   useEffect(() => {
     const findItemById = cart.find((item) => item.id === id);
     if (findItemById !== undefined) {
@@ -33,7 +35,7 @@ function ProductCard({ indexId, id, price, name, img }) {
       className="card p-4 flex-fill w-25 p-3"
     >
       <div className="card-header">
-        <p data-testid={ `${indexId}-product-price` }>{price}</p>
+        <p data-testid={ `${indexId}-product-price` }>{`R$ ${changedPrice}`}</p>
       </div>
       <img
         data-testid={ `${indexId}-product-img` }

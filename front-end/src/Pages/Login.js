@@ -25,13 +25,9 @@ export default function Login({ history }) {
   async function handleClick() {
     const decode = await decoder();
     if (decode && decode.role === 'client') {
-      setValid(false);
       history.push('/products');
     } else if (decode && decode.role === 'administrator') {
-      setValid(false);
       history.push('/admin/orders');
-    } else {
-      console.log(decode);
     }
   }
 
@@ -79,7 +75,7 @@ export default function Login({ history }) {
             onClick={ () => handleClick() }
             className={ !valid ? 'btn btn-light' : 'btn btn-success' }
           >
-            Entrar
+            ENTRAR
           </button>
         </div>
         <div className="form-check">

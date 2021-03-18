@@ -15,7 +15,7 @@ const app = express();
 app.use(cors());
 
 app.use(bodyParser.json());
-const PORT = process.env.PORT || 3001;
+const PORT = 3001;
 
 app.use('/login', LoginController);
 app.use('/register', RegisterController);

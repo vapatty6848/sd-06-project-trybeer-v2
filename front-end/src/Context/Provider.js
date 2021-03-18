@@ -15,8 +15,12 @@ function Provider({ children }) {
 
   async function getAllProducts() {
     const products = await productsFetch();
-    setAllProducts(products);
-    setIsFetching(false);
+    if (products) {
+      setAllProducts(products);
+      setIsFetching(false);
+    } else {
+      setIsFetching(true);
+    }
   }
 
   async function updateProduct(id, price, nome, qtd) {

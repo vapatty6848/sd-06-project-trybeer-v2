@@ -7,7 +7,6 @@ export default function Products() {
   const { isFetching, allProducts, getAllProducts } = useContext(Context);
 
   useEffect(() => {
-    // setIsFetching(true);
     getAllProducts();
   });
 
