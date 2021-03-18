@@ -7,14 +7,17 @@ export default function Profile() {
   const [valid, setValid] = useState(true);
   const [message, setMessage] = useState('');
   const { name, setName, email } = useContext(Context);
+
   function handleClick() {
     profileFetch(name, email);
     setMessage('Atualização concluída com sucesso');
   }
+
   function handleChange({ target }) {
     setName(target.value);
     setValid(false);
   }
+
   return (
     <div>
       <MenuTop title="Meu perfil" />

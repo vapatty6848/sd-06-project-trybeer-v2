@@ -8,13 +8,12 @@ const jwt = require('jsonwebtoken');
 
 export default function Login({ history }) {
   const [valid, setValid] = useState(false);
-  const { email, setEmail, setName } = useContext(Context);
-  const [password, setPass] = useState('');
+  const { email, setEmail, setName, password, setPass } = useContext(Context);
 
   async function decoder() {
     const jsonWebToken = await loginFetch(email, password);
     if (jsonWebToken.message !== 'Email ou senha inválidos') {
-      localStorage.setItem('token', JSON.stringify(jsonWebToken.token));
+      localStorage.setItem('token', jsonWebToken.token);
       const decode = jwt.decode(jsonWebToken.token);
       setName(decode.name);
       return decode;
@@ -24,9 +23,12 @@ export default function Login({ history }) {
 
   async function handleClick() {
     const decode = await decoder();
+    console.log(decode);
     if (decode && decode.role === 'client') {
+      setValid(false);
       history.push('/products');
     } else if (decode && decode.role === 'administrator') {
+      setValid(false);
       history.push('/admin/orders');
     }
   }

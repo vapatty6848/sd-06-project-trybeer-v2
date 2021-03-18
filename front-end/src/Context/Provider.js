@@ -6,8 +6,10 @@ import productsFetch from '../services/ProductsService';
 
 function Provider({ children }) {
   const [email, setEmail] = useState('');
+  const [password, setPass] = useState('');
   const [name, setName] = useState('');
   const [role, setRole] = useState('client');
+  const [TokenInvalido, setTokenInvalido] = useState(false);
   const [isFetching, setIsFetching] = useState(true);
   const [allProducts, setAllProducts] = useState([]);
   const [quantity, setQuantity] = useState(0);
@@ -15,11 +17,13 @@ function Provider({ children }) {
 
   async function getAllProducts() {
     const products = await productsFetch();
-    if (products) {
+    if (products.message) {
+      setTokenInvalido(true);
+      setIsFetching(true);
+    } else {
+      setTokenInvalido(false);
       setAllProducts(products);
       setIsFetching(false);
-    } else {
-      setIsFetching(true);
     }
   }
 
@@ -47,6 +51,8 @@ function Provider({ children }) {
   const contextValue = {
     email,
     setEmail,
+    password,
+    setPass,
     name,
     setName,
     role,
@@ -61,6 +67,8 @@ function Provider({ children }) {
     updateProduct,
     cart,
     setCart,
+    TokenInvalido,
+    setTokenInvalido,
   };
 
   return (

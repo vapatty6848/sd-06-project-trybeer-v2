@@ -1,13 +1,17 @@
 import React, { useContext, useEffect } from 'react';
+import propTypes from 'prop-types';
 import Context from '../Context/Context';
 import MenuTop from '../components/MenuTop';
 import ProductCard from '../components/ProductCard';
 
-export default function Products() {
-  const { isFetching, allProducts, getAllProducts } = useContext(Context);
+export default function Products({ history }) {
+  const { isFetching, allProducts, getAllProducts, TokenInvalido } = useContext(Context);
 
   useEffect(() => {
     getAllProducts();
+    if (TokenInvalido) {
+      history.push('/');
+    }
   });
 
   return (
@@ -30,3 +34,11 @@ export default function Products() {
     </div>
   );
 }
+
+Products.defaultProps = {
+  history: '/products',
+};
+
+Products.propTypes = {
+  history: propTypes.shape(),
+};
