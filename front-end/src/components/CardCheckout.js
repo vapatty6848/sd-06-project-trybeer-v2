@@ -21,7 +21,9 @@ function CardCheckout({ indexId, price, name, qtd, onClick }) {
         <p data-testid={ `${indexId}-product-name` }>{name}</p>
         <p data-testid={ `${indexId}-product-qtd-input` }>{qtd}</p>
         <p data-testid={ `${indexId}-product-unit-price` }>{`(R$ ${changedPrice} un)`}</p>
-        <p data-testid={ `${indexId}-product-total-value` }>{totalPrice}</p>
+        <p data-testid={ `${indexId}-product-total-value` }>
+          {totalPrice.toFixed(2).replace('.', ',')}
+        </p>
         <button
           data-testid={ `${indexId}-removal-button` }
           type="button"

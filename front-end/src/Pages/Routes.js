@@ -7,7 +7,7 @@ import Profile from './Profile';
 import Orders from './Orders';
 import Checkout from './Checkout';
 
-export default function Rotas() {
+export default function Routes() {
   return (
     <BrowserRouter>
       <Switch>

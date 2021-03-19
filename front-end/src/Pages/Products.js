@@ -52,7 +52,7 @@ export default function Products({ history }) {
           data-testid="checkout-bottom-btn"
         >
           <p data-testid="checkout-bottom-btn-value">
-            {`Ver Carrinho R$ ${totalSum.toFixed(2)}`}
+            {`Ver Carrinho R$ ${totalSum.toFixed(2).replace('.', ',')}`}
           </p>
         </button>
       </div>

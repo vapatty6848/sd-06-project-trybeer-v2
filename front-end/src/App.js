@@ -1,11 +1,11 @@
 import React from 'react';
 import Provider from './Context/Provider';
-import Rotas from './Pages/Rotas';
+import Routes from './Pages/Routes';
 
 function App() {
   return (
     <Provider>
-      <Rotas />
+      <Routes />
     </Provider>
   );
 }

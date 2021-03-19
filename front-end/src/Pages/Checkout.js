@@ -38,7 +38,11 @@ function Checkout() {
         {isFetching ? (
           <h2>Loading</h2>
         ) : handleCart()}
-        <h4 data-testid="order-total-value">{`Total R$ ${totalValue.toFixed(2)}`}</h4>
+        <h4
+          data-testid="order-total-value"
+        >
+          {`Total R$ ${totalValue.toFixed(2).replace('.', ',')}`}
+        </h4>
       </div>
       <div>
         <h3>Endereço</h3>
