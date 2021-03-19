@@ -49,8 +49,11 @@ export default function Products({ history }) {
           onClick={ () => history.push('/checkout') }
           type="button"
           disabled={ disable }
+          data-testid="checkout-bottom-btn"
         >
-          {`Ver Carrinho R$ ${totalSum.toFixed(2)}`}
+          <p data-testid="checkout-bottom-btn-value">
+            {`Ver Carrinho R$ ${totalSum.toFixed(2)}`}
+          </p>
         </button>
       </div>
     </div>
