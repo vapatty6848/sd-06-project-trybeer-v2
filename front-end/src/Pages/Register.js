@@ -4,8 +4,8 @@ import Context from '../Context/Context';
 import registerFetch from '../services/RegisterService';
 
 function Register({ history }) {
-  const { email, setEmail, name, setName, role, setRole } = useContext(Context);
-  const [password, setPassword] = useState('');
+  const { email, setEmail, name, setName,
+    role, setRole, handleClick, password, setPassword } = useContext(Context);
   const [valid, setValid] = useState(false);
   const [isChecked, setIsChecked] = useState(true);
   const [msg, setMsg] = useState('');
@@ -25,9 +25,11 @@ function Register({ history }) {
     const newUser = await registerFetch(name, email, password, role);
     setMsg(newUser.message);
     if (newUser.message !== emailExistMsg && role === 'client') {
-      history.push('/products');
+      await handleClick(history);
+      // history.push('/products');
     } else if (newUser.message !== emailExistMsg && role === 'administrator') {
-      history.push('/admin/orders');
+      await handleClick(history);
+      // history.push('/admin/orders');
     } else {
       console.log(newUser);
     }

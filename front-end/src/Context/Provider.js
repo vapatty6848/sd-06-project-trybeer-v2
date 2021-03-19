@@ -3,10 +3,13 @@ import propTypes from 'prop-types';
 import Context from './Context';
 
 import productsFetch from '../services/ProductsService';
+import loginFetch from '../services/LoginService';
+
+const jwt = require('jsonwebtoken');
 
 function Provider({ children }) {
   const [email, setEmail] = useState('');
-  const [password, setPass] = useState('');
+  const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [role, setRole] = useState('client');
   const [tokenInvalid, setTokenInvalid] = useState(false);
@@ -18,6 +21,26 @@ function Provider({ children }) {
   const [street, setStreet] = useState('');
   const [totalValue, setTotalValue] = useState(0);
   const [sucessmsg, setSucessmsg] = useState(false);
+
+  async function decoder() {
+    const jsonWebToken = await loginFetch(email, password);
+    if (jsonWebToken.message !== 'Email ou senha inválidos') {
+      localStorage.setItem('token', jsonWebToken.token);
+      const decode = jwt.decode(jsonWebToken.token);
+      setName(decode.name);
+      return decode;
+    }
+    return jsonWebToken.message;
+  }
+
+  async function handleClick(history) {
+    const decode = await decoder();
+    if (decode && decode.role === 'client') {
+      history.push('/products');
+    } else if (decode && decode.role === 'administrator') {
+      history.push('/admin/orders');
+    }
+  }
 
   async function getAllProducts() {
     const products = await productsFetch();
@@ -62,7 +85,7 @@ function Provider({ children }) {
     email,
     setEmail,
     password,
-    setPass,
+    setPassword,
     name,
     setName,
     role,
@@ -88,6 +111,7 @@ function Provider({ children }) {
     handleDeleteClick,
     sucessmsg,
     setSucessmsg,
+    handleClick,
   };
 
   return (

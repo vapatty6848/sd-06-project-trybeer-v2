@@ -23,7 +23,6 @@ export default function Login({ history }) {
 
   async function handleClick() {
     const decode = await decoder();
-    console.log(decode);
     if (decode && decode.role === 'client') {
       setValid(false);
       history.push('/products');
