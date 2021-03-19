@@ -1,18 +1,11 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import CardCheckout from '../components/CardCheckout';
 import MenuTop from '../components/MenuTop';
 import Context from '../Context/Context';
 
-function Checkout({ history }) {
-  const {
-    cart,
-    isFetching,
-    street,
-    setStreet,
-    number,
-    setNumber,
-    tokenInvalid,
-    totalValue,
+function Checkout() {
+  const { cart, isFetching, setStreet, totalValue, setNumber,
+    // street, number, tokenInvalid,
   } = useContext(Context);
 
   // useEffect(() => {
@@ -21,6 +14,22 @@ function Checkout({ history }) {
   //   }
   // });
 
+  function handleCart() {
+    if (cart.length === 0) {
+      return <h4>Não há produtos no carrinho</h4>;
+    }
+    return cart.map((product, index) => (
+      <CardCheckout
+        indexId={ index }
+        price={ product.price }
+        name={ product.nome }
+        qtd={ product.qtd }
+        key={ index }
+        onClick={ () => console.log(product) }
+      />
+    ));
+  }
+
   return (
     <div>
       <MenuTop title="Finalizar Pedido" />
@@ -28,19 +37,8 @@ function Checkout({ history }) {
         <h3>Produtos</h3>
         {isFetching ? (
           <h2>Loading</h2>
-        ) : (
-          cart.map((product, index) => (
-            <CardCheckout
-              indexId={ index }
-              price={ product.price }
-              name={ product.nome }
-              qtd={ product.qtd }
-              key={ index }
-              onClick={ () => console.log(product) }
-            />
-          ))
-        )}
-        <h4 data-testid="order-total-value">{`Total R$ ${totalValue}`}</h4>
+        ) : handleCart()}
+        <h4 data-testid="order-total-value">{`Total R$ ${totalValue.toFixed(2)}`}</h4>
       </div>
       <div>
         <h3>Endereço</h3>
@@ -74,8 +72,5 @@ function Checkout({ history }) {
     </div>
   );
 }
-
-// verifyElementVisible('[data-testid="order-total-value"]');
-// verifyElementVisible('[data-testid="checkout-finish-btn"]');
 
 export default Checkout;

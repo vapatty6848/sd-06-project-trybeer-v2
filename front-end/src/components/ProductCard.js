@@ -27,8 +27,7 @@ function ProductCard({ indexId, id, price, name, img }) {
     const qtd = quantity + 1;
     const totalPrice = calculatePrice(qtd);
     setQuantity(qtd);
-    console.log(totalPrice);
-    updateProduct(id, price, name, qtd, totalPrice);
+    updateProduct({ id, price, nome: name, qtd, totalPrice });
   }
 
   function decreaseQtd() {
@@ -36,7 +35,7 @@ function ProductCard({ indexId, id, price, name, img }) {
       const qtd = quantity - 1;
       const totalPrice = calculatePrice(qtd);
       setQuantity(qtd);
-      updateProduct(id, price, name, qtd, totalPrice);
+      updateProduct({ id, price, nome: name, qtd, totalPrice });
     }
   }
 

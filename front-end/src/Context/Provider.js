@@ -30,7 +30,7 @@ function Provider({ children }) {
     }
   }
 
-  async function updateProduct(id, price, nome, qtd, totalPrice) {
+  async function updateProduct({ id, price, nome, qtd, totalPrice }) {
     const clickedProduct = { id, price, nome, qtd, totalPrice };
     const cartProducts = cart.filter((item) => item.id !== id);
     if (clickedProduct.qtd > 0) {
