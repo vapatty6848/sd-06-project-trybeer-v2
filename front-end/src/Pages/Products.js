@@ -7,7 +7,7 @@ import sumTotal from '../services/TotalPrice';
 
 export default function Products({ history }) {
   const { cart, isFetching, allProducts,
-    getAllProducts, tokenInvalid, setTotalValue } = useContext(Context);
+    getAllProducts, setTotalValue } = useContext(Context);
   const [disable, setDisable] = useState(true);
 
   const allPrices = cart.map((element) => element.totalPrice);
@@ -15,7 +15,8 @@ export default function Products({ history }) {
 
   useEffect(() => {
     getAllProducts();
-    if (tokenInvalid) {
+    const token = localStorage.getItem('token');
+    if (!token) {
       history.push('/');
     }
     // eslint-disable-next-line

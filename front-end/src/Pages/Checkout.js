@@ -7,7 +7,7 @@ import sumTotal from '../services/TotalPrice';
 
 function Checkout({ history }) {
   const { cart, isFetching, setIsFetching, setStreet, totalValue, setNumber,
-    handleDeleteClick, street, number, tokenInvalid, sucessmsg, setSucessmsg,
+    handleDeleteClick, street, number, sucessmsg, setSucessmsg,
     setTotalValue, setCart,
   } = useContext(Context);
   const [isDisabled, setIsDisabled] = useState(true);
@@ -15,6 +15,14 @@ function Checkout({ history }) {
 
   const allPrices = cart.map((element) => element.totalPrice);
   const totalSum = sumTotal(allPrices);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      history.push('/');
+    }
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     setTotalValue(totalSum);
@@ -48,9 +56,6 @@ function Checkout({ history }) {
   }
 
   useEffect(() => {
-    if (tokenInvalid) {
-      history.push('/');
-    }
     if (cart.length > 0) {
       setIsFetching(false);
     } else {
