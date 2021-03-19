@@ -3,13 +3,23 @@ import propTypes from 'prop-types';
 import CardCheckout from '../components/CardCheckout';
 import MenuTop from '../components/MenuTop';
 import Context from '../Context/Context';
+import sumTotal from '../services/TotalPrice';
 
 function Checkout({ history }) {
   const { cart, isFetching, setIsFetching, setStreet, totalValue, setNumber,
     handleDeleteClick, street, number, tokenInvalid, sucessmsg, setSucessmsg,
+    setTotalValue, setCart,
   } = useContext(Context);
   const [isDisabled, setIsDisabled] = useState(true);
   const time = 3000;
+
+  const allPrices = cart.map((element) => element.totalPrice);
+  const totalSum = sumTotal(allPrices);
+
+  useEffect(() => {
+    setTotalValue(totalSum);
+    // eslint-disable-next-line
+  }, [totalSum]);
 
   function handleCart() {
     if (cart.length === 0) {
@@ -29,8 +39,10 @@ function Checkout({ history }) {
 
   function handleCheckoutFinish() {
     setSucessmsg(true);
+    setCart([]);
     localStorage.removeItem('Cart');
     setTimeout(() => {
+      setSucessmsg(false);
       history.push('/products');
     }, time);
   }
