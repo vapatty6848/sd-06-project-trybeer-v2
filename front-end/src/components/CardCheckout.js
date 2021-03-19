@@ -16,13 +16,13 @@ function CardCheckout({ indexId, price, name, qtd, onClick }) {
   }, [price, qtd]);
 
   return (
-    <div>
-      <div>
+    <div className="border border-secondary rounded my-3">
+      <div className="d-flex flex-sm-row justify-content-sm-between align-self-center">
         <p data-testid={ `${indexId}-product-name` }>{name}</p>
         <p data-testid={ `${indexId}-product-qtd-input` }>{qtd}</p>
         <p data-testid={ `${indexId}-product-unit-price` }>{`(R$ ${changedPrice} un)`}</p>
         <p data-testid={ `${indexId}-product-total-value` }>
-          {totalPrice.toFixed(2).replace('.', ',')}
+          {`R$ ${totalPrice.toFixed(2).replace('.', ',')}`}
         </p>
         <button
           data-testid={ `${indexId}-removal-button` }
