@@ -16,7 +16,7 @@ function Provider({ children }) {
   const [cart, setCart] = useState([]);
   const [number, setNumber] = useState('');
   const [street, setStreet] = useState('');
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalValue, setTotalValue] = useState(0);
 
   async function getAllProducts() {
     const products = await productsFetch();
@@ -30,8 +30,8 @@ function Provider({ children }) {
     }
   }
 
-  async function updateProduct(id, price, nome, qtd) {
-    const clickedProduct = { id, price, nome, qtd };
+  async function updateProduct(id, price, nome, qtd, totalPrice) {
+    const clickedProduct = { id, price, nome, qtd, totalPrice };
     const cartProducts = cart.filter((item) => item.id !== id);
     if (clickedProduct.qtd > 0) {
       const newProducts = [...cartProducts, clickedProduct];
@@ -75,8 +75,8 @@ function Provider({ children }) {
     setStreet,
     number,
     setNumber,
-    totalPrice,
-    setTotalPrice,
+    totalValue,
+    setTotalValue,
   };
 
   return (

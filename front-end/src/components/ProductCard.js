@@ -4,6 +4,7 @@ import Context from '../Context/Context';
 
 function ProductCard({ indexId, id, price, name, img }) {
   const [quantity, setQuantity] = useState(0);
+  const [totalValue, setTotalValue] = useState(0);
   const { cart, updateProduct } = useContext(Context);
 
   const changedPrice = price.replace('.', ',');
@@ -12,20 +13,30 @@ function ProductCard({ indexId, id, price, name, img }) {
     const findItemById = cart.find((item) => item.id === id);
     if (findItemById !== undefined) {
       setQuantity(findItemById.qtd);
+      setTotalValue(findItemById.totalPrice);
     }
-  }, [cart, id]);
+  }, [cart, id, totalValue]);
+
+  function calculatePrice(quantitie) {
+    const preco = parseFloat(price).toFixed(2);
+    const total = quantitie * preco;
+    return total;
+  }
 
   function increaseQtd() {
     const qtd = quantity + 1;
+    const totalPrice = calculatePrice(qtd);
     setQuantity(qtd);
-    updateProduct(id, price, name, qtd);
+    console.log(totalPrice);
+    updateProduct(id, price, name, qtd, totalPrice);
   }
 
   function decreaseQtd() {
     if (quantity > 0) {
       const qtd = quantity - 1;
+      const totalPrice = calculatePrice(qtd);
       setQuantity(qtd);
-      updateProduct(id, price, name, qtd);
+      updateProduct(id, price, name, qtd, totalPrice);
     }
   }
 

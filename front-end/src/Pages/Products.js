@@ -3,20 +3,15 @@ import propTypes from 'prop-types';
 import Context from '../Context/Context';
 import MenuTop from '../components/MenuTop';
 import ProductCard from '../components/ProductCard';
-import { sumTotal } from '../services/TotalPrice';
+import sumTotal from '../services/TotalPrice';
 
 export default function Products({ history }) {
-  const {
-    cart,
-    isFetching,
-    allProducts,
-    getAllProducts,
-    tokenInvalid,
-    setTotalPrice,
-  } = useContext(Context);
+  const { cart, isFetching, allProducts,
+    getAllProducts, tokenInvalid, setTotalValue } = useContext(Context);
   const [disable, setDisable] = useState(true);
 
-  const totalSum = sumTotal(cart.map((element) => element.price));
+  const allPrices = cart.map((element) => element.totalPrice);
+  const totalSum = sumTotal(allPrices);
 
   useEffect(() => {
     getAllProducts();
@@ -26,9 +21,10 @@ export default function Products({ history }) {
   });
 
   useEffect(() => {
-    setTotalPrice(totalSum);
+    setTotalValue(totalSum);
     if (totalSum > 0) return setDisable(false);
-    if (totalSum === '0,00') return setDisable(true);
+    if (totalSum === 0) return setDisable(true);
+    // eslint-disable-next-line
   }, [totalSum]);
 
   return (
@@ -54,7 +50,7 @@ export default function Products({ history }) {
           type="button"
           disabled={ disable }
         >
-          {`Ver Carrinho R$ ${totalSum}`}
+          {`Ver Carrinho R$ ${totalSum.toFixed(2)}`}
         </button>
       </div>
     </div>

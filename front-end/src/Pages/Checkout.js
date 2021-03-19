@@ -11,7 +11,8 @@ function Checkout({ history }) {
     setStreet,
     number,
     setNumber,
-    tokenInvalid
+    tokenInvalid,
+    totalValue,
   } = useContext(Context);
 
   // useEffect(() => {
@@ -24,11 +25,11 @@ function Checkout({ history }) {
     <div>
       <MenuTop title="Finalizar Pedido" />
       <div>
+        <h3>Produtos</h3>
         {isFetching ? (
           <h2>Loading</h2>
         ) : (
-          <h3>Produtos</h3>
-          && cart.map((product, index) => (
+          cart.map((product, index) => (
             <CardCheckout
               indexId={ index }
               price={ product.price }
@@ -39,6 +40,7 @@ function Checkout({ history }) {
             />
           ))
         )}
+        <h4 data-testid="order-total-value">{`Total R$ ${totalValue}`}</h4>
       </div>
       <div>
         <h3>Endereço</h3>
@@ -60,6 +62,14 @@ function Checkout({ history }) {
             data-testid="checkout-house-number-input"
           />
         </label>
+      </div>
+      <div>
+        <button
+          data-testid="checkout-finish-btn"
+          type="button"
+        >
+          Finalizar Pedido
+        </button>
       </div>
     </div>
   );
