@@ -1,5 +1,5 @@
 const logout = () => (
-  localStorage.removeItem('user')
+  localStorage.removeItem()
 );
 
 const setUser = (user) => {
@@ -7,10 +7,10 @@ const setUser = (user) => {
 };
 
 const clearStorage = () => {
-  localStorage.setItem('cart', JSON.stringify([]));
+  localStorage.setItem('Cart', JSON.stringify([]));
 };
 
-const updateCartQtd = (updateCartProduct) => {
+const updateCart = (updateCartProduct) => {
   localStorage.setItem('Cart', JSON.stringify(updateCartProduct));
 };
 
@@ -33,7 +33,7 @@ module.exports = {
   logout,
   setUser,
   clearStorage,
-  updateCartQtd,
+  updateCart,
   getCartProducts,
   getStorageToken,
 };

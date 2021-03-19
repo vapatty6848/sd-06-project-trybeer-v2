@@ -1,18 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import propTypes from 'prop-types';
 import CardCheckout from '../components/CardCheckout';
 import MenuTop from '../components/MenuTop';
 import Context from '../Context/Context';
 
-function Checkout() {
-  const { cart, isFetching, setStreet, totalValue, setNumber,
-    // street, number, tokenInvalid,
+function Checkout({ history }) {
+  const { cart, isFetching, setIsFetching, setStreet, totalValue, setNumber,
+    handleDeleteClick, street, number, tokenInvalid, sucessmsg, setSucessmsg,
   } = useContext(Context);
-
-  // useEffect(() => {
-  //   if (tokenInvalid) {
-  //     history.push('/');
-  //   }
-  // });
+  const [isDisabled, setIsDisabled] = useState(true);
+  const time = 3000;
 
   function handleCart() {
     if (cart.length === 0) {
@@ -25,10 +22,38 @@ function Checkout() {
         name={ product.nome }
         qtd={ product.qtd }
         key={ index }
-        onClick={ () => console.log(product) }
+        onClick={ () => handleDeleteClick(product) }
       />
     ));
   }
+
+  function handleCheckoutFinish() {
+    setSucessmsg(true);
+    localStorage.removeItem('Cart');
+    setTimeout(() => {
+      history.push('/products');
+    }, time);
+  }
+
+  useEffect(() => {
+    if (tokenInvalid) {
+      history.push('/');
+    }
+    if (cart.length > 0) {
+      setIsFetching(false);
+    } else {
+      handleCart();
+    }
+    // eslint-disable-next-line
+  }, [cart]);
+
+  useEffect(() => {
+    if (cart.length > 0 && street && number) {
+      setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
+    }
+  }, [cart, street, number]);
 
   return (
     <div>
@@ -69,12 +94,23 @@ function Checkout() {
         <button
           data-testid="checkout-finish-btn"
           type="button"
+          disabled={ isDisabled }
+          onClick={ () => handleCheckoutFinish() }
         >
           Finalizar Pedido
         </button>
+        {sucessmsg ? <p>Compra realizada com sucesso! </p> : null}
       </div>
     </div>
   );
 }
+
+Checkout.defaultProps = {
+  history: '/checkout',
+};
+
+Checkout.propTypes = {
+  history: propTypes.shape(),
+};
 
 export default Checkout;

@@ -17,6 +17,7 @@ function Provider({ children }) {
   const [number, setNumber] = useState('');
   const [street, setStreet] = useState('');
   const [totalValue, setTotalValue] = useState(0);
+  const [sucessmsg, setSucessmsg] = useState(false);
 
   async function getAllProducts() {
     const products = await productsFetch();
@@ -43,6 +44,13 @@ function Provider({ children }) {
       localStorage.setItem('Cart', JSON.stringify(updatedProducts));
     }
   }
+
+  function handleDeleteClick(selectedProduct) {
+    const cartProducts = cart.filter((item) => item.id !== selectedProduct.id);
+    setCart(cartProducts);
+    localStorage.setItem('Cart', JSON.stringify(cartProducts));
+  }
+
   useEffect(() => {
     const localStgCart = JSON.parse(localStorage.getItem('Cart'));
     if (localStgCart) {
@@ -77,6 +85,9 @@ function Provider({ children }) {
     setNumber,
     totalValue,
     setTotalValue,
+    handleDeleteClick,
+    sucessmsg,
+    setSucessmsg,
   };
 
   return (
