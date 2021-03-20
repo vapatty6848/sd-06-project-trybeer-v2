@@ -19,7 +19,8 @@ function CardCheckout({ indexId, price, name, qtd, onClick }) {
     <div className="d-flex flex-sm-column justify-content-sm-between mx-5">
       <div className="border border-bottom rounded my-3 shadow-sm btn-group">
         <div
-          className="d-flex flex-fill flex-sm-row justify-content-sm-between m-2 btn-group mr-2"
+          className="d-flex flex-fill flex-sm-row
+          justify-content-sm-between m-2 btn-group mr-2"
         >
           <p data-testid={ `${indexId}-product-name` }>{name}</p>
           <p data-testid={ `${indexId}-product-qtd-input` }>{qtd}</p>
