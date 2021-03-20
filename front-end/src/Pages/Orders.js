@@ -1,5 +1,5 @@
 import React from 'react';
-import MenuTop from '../components/MenuTop';
+import { MenuTop } from '../components';
 
 function Orders() {
   return (

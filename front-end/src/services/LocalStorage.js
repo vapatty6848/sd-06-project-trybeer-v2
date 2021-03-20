@@ -1,24 +1,20 @@
-const logout = () => (
-  localStorage.removeItem()
-);
+const logout = () => localStorage.clear();
 
-const setUser = (user) => {
-  localStorage.setItem('token', JSON.stringify(user));
+const setToken = (token) => {
+  localStorage.setItem('token', token);
 };
 
-const clearStorage = () => {
+const clearCart = () => {
   localStorage.setItem('Cart', JSON.stringify([]));
 };
 
-const updateCart = (updateCartProduct) => {
-  localStorage.setItem('Cart', JSON.stringify(updateCartProduct));
+const updateCart = (updatedCartProduct) => {
+  localStorage.setItem('Cart', JSON.stringify(updatedCartProduct));
 };
 
 const getCartProducts = () => {
   const cartProducts = JSON.parse(localStorage.getItem('Cart'));
-  if (cartProducts) return cartProducts;
-  localStorage.setItem('Cart', JSON.stringify([]));
-  return [];
+  return cartProducts;
 };
 
 const getStorageToken = () => {
@@ -31,8 +27,8 @@ const getStorageToken = () => {
 
 module.exports = {
   logout,
-  setUser,
-  clearStorage,
+  setToken,
+  clearCart,
   updateCart,
   getCartProducts,
   getStorageToken,

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
-import MenuTop from '../components/MenuTop';
 import Context from '../Context/Context';
-import profileFetch from '../services/ProfileService';
+import { ApiService } from '../services';
+import { MenuTop } from '../components';
 
 export default function Profile() {
   const [valid, setValid] = useState(true);
@@ -9,7 +9,7 @@ export default function Profile() {
   const { name, setName, email } = useContext(Context);
 
   function handleClick() {
-    profileFetch(name, email);
+    ApiService.editName(name, email);
     setMessage('Atualização concluída com sucesso');
   }
 

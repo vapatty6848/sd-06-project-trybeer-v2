@@ -1,9 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import Context from '../Context/Context';
-import MenuTop from '../components/MenuTop';
-import ProductCard from '../components/ProductCard';
-import sumTotal from '../services/TotalPrice';
+import { TotalPrice } from '../services';
+import { MenuTop, ProductCard } from '../components';
 
 export default function Products({ history }) {
   const { cart, isFetching, allProducts,
@@ -11,7 +10,7 @@ export default function Products({ history }) {
   const [disable, setDisable] = useState(true);
 
   const allPrices = cart.map((element) => element.totalPrice);
-  const totalSum = sumTotal(allPrices);
+  const totalSum = TotalPrice(allPrices);
 
   useEffect(() => {
     getAllProducts();

@@ -2,30 +2,30 @@ import React, { useState, useEffect } from 'react';
 import propTypes from 'prop-types';
 import Context from './Context';
 
-import productsFetch from '../services/ProductsService';
-import loginFetch from '../services/LoginService';
+import { ApiService, LocalStorage } from '../services';
 
 const jwt = require('jsonwebtoken');
 
 function Provider({ children }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  const [role, setRole] = useState('client');
-  const [tokenInvalid, setTokenInvalid] = useState(false);
-  const [isFetching, setIsFetching] = useState(true);
-  const [allProducts, setAllProducts] = useState([]);
-  const [quantity, setQuantity] = useState(0);
-  const [cart, setCart] = useState([]);
+  const [email, setEmail] = useState('');
   const [number, setNumber] = useState('');
   const [street, setStreet] = useState('');
-  const [totalValue, setTotalValue] = useState(0);
+  const [password, setPassword] = useState('');
+  const [role, setRole] = useState('client');
+  const [cart, setCart] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
+  const [valid, setValid] = useState(false);
   const [sucessmsg, setSucessmsg] = useState(false);
+  const [isFetching, setIsFetching] = useState(true);
+  const [tokenInvalid, setTokenInvalid] = useState(false);
+  const [quantity, setQuantity] = useState(0);
+  const [totalValue, setTotalValue] = useState(0);
 
   async function decoder() {
-    const jsonWebToken = await loginFetch(email, password);
+    const jsonWebToken = await ApiService.login(email, password);
     if (jsonWebToken.message !== 'Email ou senha inválidos') {
-      localStorage.setItem('token', jsonWebToken.token);
+      LocalStorage.setToken(jsonWebToken.token);
       const decode = jwt.decode(jsonWebToken.token);
       setName(decode.name);
       return decode;
@@ -36,14 +36,16 @@ function Provider({ children }) {
   async function handleClick(history) {
     const decode = await decoder();
     if (decode && decode.role === 'client') {
+      setValid(false);
       history.push('/products');
     } else if (decode && decode.role === 'administrator') {
+      setValid(false);
       history.push('/admin/orders');
     }
   }
 
   async function getAllProducts() {
-    const products = await productsFetch();
+    const products = await ApiService.getProducts();
     if (products.message) {
       setTokenInvalid(true);
       setIsFetching(true);
@@ -60,22 +62,22 @@ function Provider({ children }) {
     if (clickedProduct.qtd > 0) {
       const newProducts = [...cartProducts, clickedProduct];
       setCart(newProducts);
-      localStorage.setItem('Cart', JSON.stringify(newProducts));
+      LocalStorage.updateCart(newProducts);
     } else if (clickedProduct.qtd === 0) {
       const updatedProducts = cart.filter((item) => item.id !== id);
       setCart(updatedProducts);
-      localStorage.setItem('Cart', JSON.stringify(updatedProducts));
+      LocalStorage.updateCart(updatedProducts);
     }
   }
 
   function handleDeleteClick(selectedProduct) {
     const cartProducts = cart.filter((item) => item.id !== selectedProduct.id);
     setCart(cartProducts);
-    localStorage.setItem('Cart', JSON.stringify(cartProducts));
+    LocalStorage.updateCart(cartProducts);
   }
 
   useEffect(() => {
-    const localStgCart = JSON.parse(localStorage.getItem('Cart'));
+    const localStgCart = LocalStorage.getCartProducts();
     if (localStgCart) {
       setCart(localStgCart);
     }
@@ -94,10 +96,8 @@ function Provider({ children }) {
     setIsFetching,
     allProducts,
     setAllProducts,
-    getAllProducts,
     quantity,
     setQuantity,
-    updateProduct,
     cart,
     setCart,
     tokenInvalid,
@@ -108,10 +108,14 @@ function Provider({ children }) {
     setNumber,
     totalValue,
     setTotalValue,
-    handleDeleteClick,
     sucessmsg,
     setSucessmsg,
+    valid,
+    setValid,
     handleClick,
+    updateProduct,
+    getAllProducts,
+    handleDeleteClick,
   };
 
   return (

@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import propTypes from 'prop-types';
 import Context from '../Context/Context';
-import registerFetch from '../services/RegisterService';
+import { ApiService } from '../services';
 
 function Register({ history }) {
   const { email, setEmail, name, setName,
@@ -22,14 +22,12 @@ function Register({ history }) {
   }
 
   async function handlePage() {
-    const newUser = await registerFetch(name, email, password, role);
+    const newUser = await ApiService.register(name, email, password, role);
     setMsg(newUser.message);
     if (newUser.message !== emailExistMsg && role === 'client') {
       await handleClick(history);
-      // history.push('/products');
     } else if (newUser.message !== emailExistMsg && role === 'administrator') {
       await handleClick(history);
-      // history.push('/admin/orders');
     } else {
       console.log(newUser);
     }

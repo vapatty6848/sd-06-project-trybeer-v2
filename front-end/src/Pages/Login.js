@@ -2,35 +2,10 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import Context from '../Context/Context';
-import loginFetch from '../services/LoginService';
-
-const jwt = require('jsonwebtoken');
 
 export default function Login({ history }) {
   const [valid, setValid] = useState(false);
-  const { email, setEmail, setName, password, setPassword } = useContext(Context);
-
-  async function decoder() {
-    const jsonWebToken = await loginFetch(email, password);
-    if (jsonWebToken.message !== 'Email ou senha inválidos') {
-      localStorage.setItem('token', jsonWebToken.token);
-      const decode = jwt.decode(jsonWebToken.token);
-      setName(decode.name);
-      return decode;
-    }
-    return jsonWebToken.message;
-  }
-
-  async function handleClick() {
-    const decode = await decoder();
-    if (decode && decode.role === 'client') {
-      setValid(false);
-      history.push('/products');
-    } else if (decode && decode.role === 'administrator') {
-      setValid(false);
-      history.push('/admin/orders');
-    }
-  }
+  const { email, setEmail, password, setPassword, handleClick } = useContext(Context);
 
   useEffect(() => {
     const seven = /.{6,}/;
@@ -73,7 +48,7 @@ export default function Login({ history }) {
             disabled={ !valid }
             type="button"
             data-testid="signin-btn"
-            onClick={ () => handleClick() }
+            onClick={ () => handleClick(history) }
             className={ !valid ? 'btn btn-light' : 'btn btn-success' }
           >
             Entrar

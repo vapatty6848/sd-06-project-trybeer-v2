@@ -1,9 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
-import CardCheckout from '../components/CardCheckout';
-import MenuTop from '../components/MenuTop';
 import Context from '../Context/Context';
-import sumTotal from '../services/TotalPrice';
+import { TotalPrice } from '../services';
+import { MenuTop, CardCheckout } from '../components';
 
 function Checkout({ history }) {
   const { cart, isFetching, setIsFetching, setStreet, totalValue, setNumber,
@@ -14,7 +13,7 @@ function Checkout({ history }) {
   const time = 3000;
 
   const allPrices = cart.map((element) => element.totalPrice);
-  const totalSum = sumTotal(allPrices);
+  const totalSum = TotalPrice(allPrices);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
