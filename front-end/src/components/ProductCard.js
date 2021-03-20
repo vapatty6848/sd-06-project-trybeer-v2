@@ -42,9 +42,9 @@ function ProductCard({ indexId, id, price, name, img }) {
   return (
     <div
       data-testid={ `${indexId}-product-card` }
-      className="card p-4 flex-fill w-25 p-3"
+      className="card flex-fill w-25 p-3"
     >
-      <div className="card-header">
+      <div className="card-header font-weight-bold text-monospace">
         <p data-testid={ `${indexId}-product-price` }>{`R$ ${changedPrice}`}</p>
       </div>
       <img
@@ -56,7 +56,7 @@ function ProductCard({ indexId, id, price, name, img }) {
       <div className="card-body d-flex">
         <p data-testid={ `${indexId}-product-name` } className="align-self-end">{name}</p>
       </div>
-      <div className="card-footer d-inline-flex justify-content-around">
+      <div className="card-footer d-inline-flex justify-content-around rounded-bottom">
         <button
           type="button"
           data-testid={ `${indexId}-product-minus` }
@@ -65,7 +65,12 @@ function ProductCard({ indexId, id, price, name, img }) {
         >
           -
         </button>
-        <p data-testid={ `${indexId}-product-qtd` }>{quantity}</p>
+        <p
+          data-testid={ `${indexId}-product-qtd` }
+          className="font-weight-bold text-monospace"
+        >
+          {quantity}
+        </p>
         <button
           type="button"
           data-testid={ `${indexId}-product-plus` }

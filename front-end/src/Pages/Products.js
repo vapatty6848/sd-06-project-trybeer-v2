@@ -5,7 +5,7 @@ import { TotalPrice } from '../services';
 import { MenuTop, ProductCard } from '../components';
 
 export default function Products({ history }) {
-  const { cart, isFetching, allProducts,
+  const { cart, isFetching, allProducts, validateToken,
     getAllProducts, setTotalValue } = useContext(Context);
   const [disable, setDisable] = useState(true);
 
@@ -14,10 +14,7 @@ export default function Products({ history }) {
 
   useEffect(() => {
     getAllProducts();
-    const token = localStorage.getItem('token');
-    if (!token) {
-      history.push('/');
-    }
+    validateToken(history);
     // eslint-disable-next-line
   }, []);
 
@@ -31,7 +28,7 @@ export default function Products({ history }) {
   return (
     <div>
       <MenuTop title="TryBeer" />
-      <div className="d-flex justify-content-sm-around flex-sm-wrap">
+      <div className="d-flex justify-content-sm-around flex-sm-wrap mb-5">
         {isFetching
           ? <h2>Loading</h2>
           : allProducts.map((product, index) => (
@@ -45,14 +42,18 @@ export default function Products({ history }) {
             />
           ))}
       </div>
-      <div>
+      <div className="w-50 p-1 fixed-bottom text-center mx-auto">
         <button
           onClick={ () => history.push('/checkout') }
           type="button"
           disabled={ disable }
           data-testid="checkout-bottom-btn"
+          className="w-100 p-1 border-0 text-light bg-success rounded"
         >
-          <p data-testid="checkout-bottom-btn-value">
+          <p
+            data-testid="checkout-bottom-btn-value"
+            className="font-weight-bold text-monospace my-1"
+          >
             {`Ver Carrinho R$ ${totalSum.toFixed(2).replace('.', ',')}`}
           </p>
         </button>

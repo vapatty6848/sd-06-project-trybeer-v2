@@ -6,7 +6,7 @@ import { MenuTop, CardCheckout } from '../components';
 
 function Checkout({ history }) {
   const { cart, isFetching, setIsFetching, setStreet, totalValue, setNumber,
-    handleDeleteClick, street, number, sucessmsg, setSucessmsg,
+    handleDeleteClick, street, number, sucessmsg, setSucessmsg, validateToken,
     setTotalValue, setCart,
   } = useContext(Context);
   const [isDisabled, setIsDisabled] = useState(true);
@@ -16,10 +16,7 @@ function Checkout({ history }) {
   const totalSum = TotalPrice(allPrices);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      history.push('/');
-    }
+    validateToken(history);
     // eslint-disable-next-line
   }, []);
 

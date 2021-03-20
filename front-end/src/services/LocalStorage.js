@@ -4,6 +4,11 @@ const setToken = (token) => {
   localStorage.setItem('token', token);
 };
 
+const getToken = () => {
+  const token = localStorage.getItem('token');
+  return token;
+};
+
 const clearCart = () => {
   localStorage.setItem('Cart', JSON.stringify([]));
 };
@@ -17,19 +22,11 @@ const getCartProducts = () => {
   return cartProducts;
 };
 
-const getStorageToken = () => {
-  const authorization = JSON.parse(localStorage.getItem('token'));
-  if (authorization) {
-    return authorization.token;
-  }
-  return false;
-};
-
 module.exports = {
   logout,
   setToken,
+  getToken,
   clearCart,
   updateCart,
   getCartProducts,
-  getStorageToken,
 };

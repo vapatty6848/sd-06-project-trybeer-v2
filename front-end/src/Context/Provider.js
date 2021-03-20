@@ -76,6 +76,13 @@ function Provider({ children }) {
     LocalStorage.updateCart(cartProducts);
   }
 
+  function validateToken(history) {
+    const token = LocalStorage.getToken();
+    if (!token) {
+      history.push('/');
+    }
+  }
+
   useEffect(() => {
     const localStgCart = LocalStorage.getCartProducts();
     if (localStgCart) {
@@ -114,6 +121,7 @@ function Provider({ children }) {
     setValid,
     handleClick,
     updateProduct,
+    validateToken,
     getAllProducts,
     handleDeleteClick,
   };

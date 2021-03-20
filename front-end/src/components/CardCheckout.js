@@ -16,18 +16,23 @@ function CardCheckout({ indexId, price, name, qtd, onClick }) {
   }, [price, qtd]);
 
   return (
-    <div className="border border-secondary rounded my-3">
-      <div className="d-flex flex-sm-row justify-content-sm-between align-self-center">
-        <p data-testid={ `${indexId}-product-name` }>{name}</p>
-        <p data-testid={ `${indexId}-product-qtd-input` }>{qtd}</p>
-        <p data-testid={ `${indexId}-product-unit-price` }>{`(R$ ${changedPrice} un)`}</p>
-        <p data-testid={ `${indexId}-product-total-value` }>
-          {`R$ ${totalPrice.toFixed(2).replace('.', ',')}`}
-        </p>
+    <div className="d-flex flex-sm-column justify-content-sm-between mx-5">
+      <div className="border border-bottom rounded my-3 shadow-sm btn-group">
+        <div className="d-flex flex-fill flex-sm-row justify-content-sm-between m-2 btn-group mr-2">
+          <p data-testid={ `${indexId}-product-name` }>{name}</p>
+          <p data-testid={ `${indexId}-product-qtd-input` }>{qtd}</p>
+          <p data-testid={ `${indexId}-product-unit-price` }>
+            {`(R$ ${changedPrice} un)`}
+          </p>
+          <p data-testid={ `${indexId}-product-total-value` }>
+            {`R$ ${totalPrice.toFixed(2).replace('.', ',')}`}
+          </p>
+        </div>
         <button
           data-testid={ `${indexId}-removal-button` }
           type="button"
           onClick={ onClick }
+          className="btn btn-danger"
         >
           X
         </button>
