@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 
 export default function Login({ history }) {
   const [valid, setValid] = useState(false);
-  const { email, setEmail, setName, password, setPass } = useContext(Context);
+  const { email, setEmail, setName, password, setPassword } = useContext(Context);
 
   async function decoder() {
     const jsonWebToken = await loginFetch(email, password);
@@ -62,7 +62,7 @@ export default function Login({ history }) {
               type="password"
               data-testid="password-input"
               id="password-input"
-              onChange={ ({ target }) => setPass(target.value) }
+              onChange={ ({ target }) => setPassword(target.value) }
               className="form-control"
               placeholder="Senha"
             />
