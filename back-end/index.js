@@ -6,6 +6,7 @@ const { LoginController,
   RegisterController,
   ProfileController,
   ProductController,
+  OrdersController,
 } = require('./controllers');
 const { error } = require('./services');
 require('dotenv').config();
@@ -21,6 +22,7 @@ app.use('/login', LoginController);
 app.use('/register', RegisterController);
 app.use('/profile', ProfileController);
 app.use('/products', ProductController);
+app.use('/orders', OrdersController);
 app.use('/images', express.static(path.join(__dirname, '/images')));
 
 app.use(error);
