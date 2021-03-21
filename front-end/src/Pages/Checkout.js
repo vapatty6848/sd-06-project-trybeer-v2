@@ -6,11 +6,10 @@ import { MenuTop, CardCheckout } from '../components';
 
 function Checkout({ history }) {
   const { cart, isFetching, setIsFetching, setStreet, totalValue, setNumber,
-    handleDeleteClick, street, number, sucessmsg, setSucessmsg, validateToken,
-    setTotalValue, setCart,
+    handleDeleteClick, street, number, sucessmsg, validateToken,
+    setTotalValue, handleCheckoutFinish,
   } = useContext(Context);
   const [isDisabled, setIsDisabled] = useState(true);
-  const time = 3000;
 
   const allPrices = cart.map((element) => element.totalPrice);
   const totalSum = TotalPrice(allPrices);
@@ -39,16 +38,6 @@ function Checkout({ history }) {
         onClick={ () => handleDeleteClick(product) }
       />
     ));
-  }
-
-  function handleCheckoutFinish() {
-    setSucessmsg(true);
-    setCart([]);
-    localStorage.removeItem('Cart');
-    setTimeout(() => {
-      setSucessmsg(false);
-      history.push('/products');
-    }, time);
   }
 
   useEffect(() => {
@@ -87,7 +76,7 @@ function Checkout({ history }) {
         <label htmlFor="rua">
           Rua:
           <input
-            onChange={ ({ target }) => setNumber(target.value) }
+            onChange={ ({ target }) => setStreet(target.value) }
             id="rua"
             type="text"
             data-testid="checkout-street-input"
@@ -96,7 +85,7 @@ function Checkout({ history }) {
         <label htmlFor="numero">
           Número da casa:
           <input
-            onChange={ ({ target }) => setStreet(target.value) }
+            onChange={ ({ target }) => setNumber(target.value) }
             id="numero"
             type="number"
             data-testid="checkout-house-number-input"
@@ -108,7 +97,7 @@ function Checkout({ history }) {
           data-testid="checkout-finish-btn"
           type="button"
           disabled={ isDisabled }
-          onClick={ () => handleCheckoutFinish() }
+          onClick={ () => handleCheckoutFinish(history) }
         >
           Finalizar Pedido
         </button>

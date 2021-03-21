@@ -53,4 +53,17 @@ const register = async (name, email, password, role) => {
   return newUser;
 };
 
-export default { login, getProducts, editName, register };
+const registerOrder = async (order) => {
+  const newOrder = await fetch(`${baseURL}orders/register`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': contentType,
+    },
+    body: JSON.stringify(order),
+  })
+    .then((resp) => resp.json())
+    .catch((error) => console.log(error));
+  return newOrder;
+};
+
+export default { login, getProducts, editName, register, registerOrder };

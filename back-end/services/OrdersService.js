@@ -1,12 +1,11 @@
-const { Orders } = require('../models');
+const { Order } = require('../models');
 
-const registerOrder = async (pedido) => Orders.registerOrder(pedido);
+const registerOrder = async (pedido) => Order.registerOrder(pedido);
 
-const registerEachProduct = async (saleId, products) => {
-  Orders.registerEachProduct(saleId, products);
-};
+const registerEachProduct = async (saleId, products) => Order
+  .registerEachProduct(saleId, products);
 
-const getOrders = async (userId) => Orders.getOrders(userId);
+const getOrders = async (userId) => Order.getOrders(userId);
 
 module.exports = {
   registerOrder,

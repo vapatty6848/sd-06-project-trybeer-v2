@@ -1,17 +1,20 @@
 const { Router } = require('express');
 const rescue = require('express-rescue');
 const { status200 } = require('../services');
-const validateToken = require('../auth/validateToken');
+const { SalesValidation } = require('../Middlewares');
 const { OrdersService } = require('../services');
 
 const OrdersRouter = new Router();
 
-OrdersRouter.post('/', validateToken, rescue(async (req, res) => {
-  const { id } = req.user;
-  const { totalValue, street, number, saleDate, status } = req.body;
-  OrdersService.registerOrder(id, totalValue, street, number, saleDate, status);
-  // OrdersService.registerEachProduct(saleId, cart);
-  return res.status(status200).json('Sucesso');
+OrdersRouter.post('/', SalesValidation.SalesValidation, rescue(async (req, res) => {
+  const { id, totalValue, street, number, date, status, cart } = req.order;
+  const sale = { id, totalValue, street, number, date, status };
+  const newOrder = await OrdersService.registerOrder(sale);
+    
+  const { insertId } = newOrder;
+
+  await OrdersService.registerEachProduct(insertId, cart);
+  return res.status(status200).json('Pedido registrado com sucesso!');
 }));
 
 module.exports = OrdersRouter;

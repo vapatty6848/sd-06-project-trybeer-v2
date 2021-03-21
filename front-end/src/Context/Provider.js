@@ -76,6 +76,25 @@ function Provider({ children }) {
     LocalStorage.updateCart(cartProducts);
   }
 
+  async function handleCheckoutFinish(history) {
+    const time = 3000;
+    const decode = await decoder();
+    const userEmail = decode.email;
+    const order = { userEmail, totalValue, street, number, cart };
+    const newOrder = await ApiService.registerOrder(order);
+    if (newOrder === 'Pedido registrado com sucesso!') {
+      setSucessmsg(true);
+      setCart([]);
+      localStorage.removeItem('Cart');
+      setTimeout(() => {
+        setSucessmsg(false);
+        history.push('/products');
+      }, time);
+    } else {
+      console.log('Alguma coisa deu errado, tente novamente mais tarde!');
+    }
+  }
+
   function validateToken(history) {
     const token = LocalStorage.getToken();
     if (!token) {
@@ -124,6 +143,7 @@ function Provider({ children }) {
     validateToken,
     getAllProducts,
     handleDeleteClick,
+    handleCheckoutFinish,
   };
 
   return (
