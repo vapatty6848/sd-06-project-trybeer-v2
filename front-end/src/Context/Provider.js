@@ -21,6 +21,7 @@ function Provider({ children }) {
   const [tokenInvalid, setTokenInvalid] = useState(false);
   const [quantity, setQuantity] = useState(0);
   const [totalValue, setTotalValue] = useState(0);
+  const [allOrders, setAllOrders] = useState([]);
 
   async function decoder() {
     const jsonWebToken = await ApiService.login(email, password);
@@ -52,6 +53,19 @@ function Provider({ children }) {
     } else {
       setTokenInvalid(false);
       setAllProducts(products);
+      setIsFetching(false);
+    }
+  }
+
+  async function getAllOrders() {
+    const orders = await ApiService.getOrders();
+    console.log('provider', orders);
+    if (orders.length === 0) {
+      setTokenInvalid(true);
+      setIsFetching(true);
+    } else {
+      setTokenInvalid(false);
+      setAllOrders(orders);
       setIsFetching(false);
     }
   }
@@ -144,6 +158,9 @@ function Provider({ children }) {
     getAllProducts,
     handleDeleteClick,
     handleCheckoutFinish,
+    getAllOrders,
+    allOrders,
+    setAllOrders,
   };
 
   return (

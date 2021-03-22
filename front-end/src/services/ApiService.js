@@ -54,7 +54,7 @@ const register = async (name, email, password, role) => {
 };
 
 const registerOrder = async (order) => {
-  const newOrder = await fetch(`${baseURL}orders/register`, {
+  const newOrder = await fetch(`${baseURL}saleregister`, {
     method: 'POST',
     headers: {
       'Content-Type': contentType,
@@ -66,4 +66,17 @@ const registerOrder = async (order) => {
   return newOrder;
 };
 
-export default { login, getProducts, editName, register, registerOrder };
+const getOrders = async () => {
+  const orders = await fetch(`${baseURL}orders`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': contentType,
+      Authorization: localStorage.getItem('token'),
+    },
+  })
+    .then((resp) => resp.json())
+    .catch((error) => console.log(error));
+  return orders;
+};
+
+export default { login, getProducts, editName, register, registerOrder, getOrders };

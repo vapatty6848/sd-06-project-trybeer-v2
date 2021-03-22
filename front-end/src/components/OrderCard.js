@@ -38,8 +38,7 @@ OrderCard.propTypes = {
   indexId: propTypes.number.isRequired,
   orderId: propTypes.number.isRequired,
   date: propTypes.string.isRequired,
-  totalValue: propTypes.number.isRequired,
-  // onClick: propTypes.func.isRequired,
+  totalValue: propTypes.string.isRequired,
 };
 
 export default OrderCard;

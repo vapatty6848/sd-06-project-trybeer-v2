@@ -6,6 +6,7 @@ import Products from './Products';
 import Profile from './Profile';
 import OrdersClient from './OrdersClient';
 import Checkout from './Checkout';
+import OrderDetail from './OrderDetail';
 
 export default function Routes() {
   return (
@@ -18,6 +19,7 @@ export default function Routes() {
         <Route path="/products" component={ Products } />
         <Route path="/profile" component={ Profile } />
         <Route path="/checkout" component={ Checkout } />
+        <Route path="/orders/:id" component={ OrderDetail } />
       </Switch>
     </BrowserRouter>
   );
