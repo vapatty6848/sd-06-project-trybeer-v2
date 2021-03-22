@@ -23,7 +23,7 @@ app.use('/register', RegisterController);
 app.use('/profile', ProfileController);
 app.use('/products', ProductController);
 app.use('/orders', OrdersController);
-app.use('/orders/register', OrdersController);
+app.use('/sale/register', OrdersController);
 app.use('/images', express.static(path.join(__dirname, '/images')));
 
 app.use(error);

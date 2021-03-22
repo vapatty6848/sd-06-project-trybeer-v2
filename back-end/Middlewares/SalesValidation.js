@@ -11,7 +11,6 @@ const SalesValidation = async (req, _res, next) => {
   if (!id) return next(errorMsg(404, 'Usuário não encontrado'));
   
   const order = { id, totalValue, street, number, date, status, cart };
-  // console.log(order, 'Aqui é da validação');
   req.order = order;
   
   next();

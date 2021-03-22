@@ -6,7 +6,7 @@ import { MenuTop } from '../components';
 import OrderCard from '../components/OrderCard';
 
 function OrdersClient({ history }) {
-  const { getAllOrders, allOrders, validateToken, isFetching } = useContext(Context);
+  const { getAllOrders, allOrders, isFetching, validateToken } = useContext(Context);
 
   useEffect(() => {
     getAllOrders();

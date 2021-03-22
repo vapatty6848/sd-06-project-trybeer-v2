@@ -19,8 +19,8 @@ OrdersRouter.post('/', SalesValidation.SalesValidation, rescue(async (req, res) 
 }));
 
 OrdersRouter.get('/', validateToken, rescue(async (req, res) => {
-  const { id } = req.user;
-  const orders = await OrdersService.getOrders(id);
+  const { email } = req.user;
+  const orders = await OrdersService.getOrders(email);
   return res.status(status200).json(orders);
 }));
 

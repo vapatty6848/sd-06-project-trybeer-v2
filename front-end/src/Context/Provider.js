@@ -92,8 +92,9 @@ function Provider({ children }) {
 
   async function handleCheckoutFinish(history) {
     const time = 3000;
-    const decode = await decoder();
-    const userEmail = decode.email;
+    const decode = LocalStorage.getToken();
+    const decodificado = jwt.decode(decode);
+    const userEmail = decodificado.email;
     const order = { userEmail, totalValue, street, number, cart };
     const newOrder = await ApiService.registerOrder(order);
     if (newOrder === 'Pedido registrado com sucesso!') {

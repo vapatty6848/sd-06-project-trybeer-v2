@@ -108,23 +108,10 @@ function Checkout({ history }) {
           onClick={ () => handleCheckoutFinish(history) }
           className={ isDisabled ? 'btn btn-light' : 'btn btn-success' }
         >
-          <p
-            data-testid="checkout-bottom-btn-value"
-            className="font-weight-bold text-monospace my-1"
-          >
-            Finalizar Pedido
-          </p>
+          Finalizar Pedido
         </button>
-        {sucessmsg
-          ? (
-            <p
-              className="w-50 p-1 text-center mx-auto mb-3"
-            >
-              Compra realizada com sucesso!
-            </p>
-          )
-          : null}
       </div>
+      {sucessmsg ? <p>Compra realizada com sucesso!</p> : null}
     </div>
   );
 }

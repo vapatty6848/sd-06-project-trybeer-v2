@@ -54,10 +54,11 @@ const register = async (name, email, password, role) => {
 };
 
 const registerOrder = async (order) => {
-  const newOrder = await fetch(`${baseURL}saleregister`, {
+  const newOrder = await fetch(`${baseURL}sale/register`, {
     method: 'POST',
     headers: {
       'Content-Type': contentType,
+      Authorization: localStorage.getItem('token'),
     },
     body: JSON.stringify(order),
   })
@@ -67,7 +68,7 @@ const registerOrder = async (order) => {
 };
 
 const getOrders = async () => {
-  const orders = await fetch(`${baseURL}orders`, {
+  const orders = await fetch(`${baseURL}sale/register`, {
     method: 'GET',
     headers: {
       'Content-Type': contentType,
