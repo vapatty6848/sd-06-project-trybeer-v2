@@ -3,6 +3,7 @@ const rescue = require('express-rescue');
 const { status200 } = require('../services');
 const { SalesValidation } = require('../Middlewares');
 const { OrdersService } = require('../services');
+const validateToken = require('../auth/validateToken');
 
 const OrdersRouter = new Router();
 
@@ -15,6 +16,12 @@ OrdersRouter.post('/', SalesValidation.SalesValidation, rescue(async (req, res) 
 
   await OrdersService.registerEachProduct(insertId, cart);
   return res.status(status200).json('Pedido registrado com sucesso!');
+}));
+
+OrdersRouter.get('/', validateToken, rescue(async (req, res) => {
+  const { id } = req.user;
+  const orders = await OrdersService.getOrders(id);
+  return res.status(status200).json(orders);
 }));
 
 module.exports = OrdersRouter;

@@ -22,20 +22,17 @@ const registerEachProduct = async (saleId, products) => {
 };
 
 const getOrders = async (userId) => {
-  const [[orders]] = await connection.execute('SELECT * FROM sales WHERE user_id = ?', [userId]);
-  return orders;
+  const [orders] = await connection.query(
+    `SELECT sales.id AS "saleId", DATE_FORMAT(sales.sale_date,"%d/%m") AS "date",
+    sales.status,
+    sales.total_price AS "totalValue"
+    FROM Trybeer.sales AS sales
+    JOIN Trybeer.sales_products AS infoSales ON sales.id = infoSales.sale_id
+    WHERE sales.id = ?
+    GROUP BY sales.id;`, [userId],
+    );
+return orders;
 };
-
-// SELECT * FROM Trybeer.sales_products;
-
-// -- pedidos por id
-// SELECT sales.id AS "Order Id", DATE_FORMAT(sales.sale_date,"%d/%m/%Y") AS "Date",
-// sales.status,
-// sales.total_price AS "Total Value"
-// FROM Trybeer.sales AS sales
-// JOIN Trybeer.sales_products AS infoSales ON sales.id = infoSales.sale_id
-// WHERE sales.id = 4
-// GROUP BY sales.id;
 
 // -- produtos por id de pedidos
 // SELECT product.name AS "Product Name",
