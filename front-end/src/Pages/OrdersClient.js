@@ -7,6 +7,7 @@ import OrderCard from '../components/OrderCard';
 
 function OrdersClient({ history }) {
   const { getAllOrders, allOrders, validateToken, isFetching } = useContext(Context);
+
   useEffect(() => {
     getAllOrders();
     validateToken(history);
@@ -18,7 +19,7 @@ function OrdersClient({ history }) {
       <MenuTop title="Meus Pedidos" />
       <div>
         {isFetching
-          ? <h2>Loading ...</h2>
+          ? <h2>Loading...</h2>
           : allOrders.map((order, index) => (
             <Link key={ index } to={ `/orders/${order.saleId}` }>
               <OrderCard

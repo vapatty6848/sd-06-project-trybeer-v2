@@ -61,47 +61,69 @@ function Checkout({ history }) {
     <div>
       <MenuTop title="Finalizar Pedido" />
       <div>
-        <h3>Produtos</h3>
+        <h3 className="w-50 p-1 text-center mx-auto mb-3">Produtos</h3>
         {isFetching ? (
-          <h2>Loading</h2>
+          <h2 className="w-50 p-1 text-center mx-auto mb-3">Loading</h2>
         ) : handleCart()}
         <h4
           data-testid="order-total-value"
+          className="w-50 p-1 text-right mx-auto mb-3"
         >
           {`Total R$ ${totalValue.toFixed(2).replace('.', ',')}`}
         </h4>
       </div>
-      <div>
-        <h3>Endereço</h3>
-        <label htmlFor="rua">
-          Rua:
-          <input
-            onChange={ ({ target }) => setStreet(target.value) }
-            id="rua"
-            type="text"
-            data-testid="checkout-street-input"
-          />
-        </label>
-        <label htmlFor="numero">
-          Número da casa:
-          <input
-            onChange={ ({ target }) => setNumber(target.value) }
-            id="numero"
-            type="number"
-            data-testid="checkout-house-number-input"
-          />
-        </label>
+      <div className="my-5">
+        <h3 className="w-50 p-1 text-center mx-auto my-5">Endereço</h3>
+        <form
+          className="form-inline my-5
+        d-flex justify-content-sm-around flex-sm-wrap mb-5"
+        >
+          <label htmlFor="rua" className="mx-4">
+            Rua:
+            <input
+              onChange={ ({ target }) => setStreet(target.value) }
+              id="rua"
+              type="text"
+              data-testid="checkout-street-input"
+              className="form-control ml-2"
+            />
+          </label>
+          <label htmlFor="numero" className="mx-4">
+            Número da casa:
+            <input
+              onChange={ ({ target }) => setNumber(target.value) }
+              id="numero"
+              type="number"
+              data-testid="checkout-house-number-input"
+              className="form-control ml-2"
+            />
+          </label>
+        </form>
       </div>
-      <div>
+      <div className="w-50 p-1 fixed-bottom text-center mx-auto mb-3">
         <button
           data-testid="checkout-finish-btn"
           type="button"
           disabled={ isDisabled }
           onClick={ () => handleCheckoutFinish(history) }
+          className={ isDisabled ? 'btn btn-light' : 'btn btn-success' }
         >
-          Finalizar Pedido
+          <p
+            data-testid="checkout-bottom-btn-value"
+            className="font-weight-bold text-monospace my-1"
+          >
+            Finalizar Pedido
+          </p>
         </button>
-        {sucessmsg ? <p>Compra realizada com sucesso! </p> : null}
+        {sucessmsg
+          ? (
+            <p
+              className="w-50 p-1 text-center mx-auto mb-3"
+            >
+              Compra realizada com sucesso!
+            </p>
+          )
+          : null}
       </div>
     </div>
   );

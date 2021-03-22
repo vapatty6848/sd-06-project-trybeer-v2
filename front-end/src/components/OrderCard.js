@@ -1,18 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
-// import Context from '../Context/Context';
 
 function OrderCard({ indexId, orderId, date, totalValue }) {
-  // const changedPrice = price.replace('.', ',');
-
-  // useEffect(() => {
-  //   const sumPrices = () => {
-  //     const result = Number(price) * Number(qtd);
-  //     setTotalPrice(result);
-  //   };
-  //   sumPrices();
-  // }, [price, qtd]);
-
   return (
     <div
       data-testid={ `${indexId}-order-card-container` }

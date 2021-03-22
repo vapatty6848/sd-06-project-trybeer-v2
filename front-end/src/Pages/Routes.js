@@ -15,11 +15,11 @@ export default function Routes() {
         <Route exact path="/"><Redirect to="/login" /></Route>
         <Route path="/login" component={ Login } />
         <Route path="/register" component={ Register } />
-        <Route path="/orders" component={ OrdersClient } />
+        <Route path="/orders/:id" component={ OrderDetail } />
+        <Route exact path="/orders" component={ OrdersClient } />
         <Route path="/products" component={ Products } />
         <Route path="/profile" component={ Profile } />
         <Route path="/checkout" component={ Checkout } />
-        <Route path="/orders/:id" component={ OrderDetail } />
       </Switch>
     </BrowserRouter>
   );
