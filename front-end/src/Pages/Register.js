@@ -23,6 +23,7 @@ function Register({ history }) {
 
   async function handlePage() {
     const newUser = await ApiService.register(name, email, password, role);
+    console.log(newUser);
     setMsg(newUser.message);
     if (newUser.message !== emailExistMsg && role === 'client') {
       await handleClick(history);

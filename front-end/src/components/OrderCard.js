@@ -4,7 +4,8 @@ import propTypes from 'prop-types';
 
 function OrderCard({ indexId, orderId, date, totalValue }) {
 
-  // const changedPrice = price.replace('.', ',');
+  const changedPrice = price.replace('.', ',');
+  // .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
 
   // useEffect(() => {
   //   const sumPrices = () => {
