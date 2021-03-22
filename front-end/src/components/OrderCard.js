@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import propTypes from 'prop-types';
 // import Context from '../Context/Context';
 
 function OrderCard({ indexId, orderId, date, totalValue }) {
-
-  const changedPrice = price.replace('.', ',');
-  // .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+  // const changedPrice = price.replace('.', ',');
 
   // useEffect(() => {
   //   const sumPrices = () => {

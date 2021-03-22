@@ -1,10 +1,8 @@
-import React, { useContext} from 'react';
-import Context from '../Context/Context';
+import React from 'react';
 import { MenuTop } from '../components';
 import OrderCard from '../components/OrderCard';
 
 function OrdersClient() {
-  const {} = useContext(Context)
   return (
     <div>
       <MenuTop title="Meus Pedidos" />
@@ -14,11 +12,3 @@ function OrdersClient() {
 }
 
 export default OrdersClient;
-
-
-// indexId: propTypes.number.isRequired,
-// orderId: propTypes.number.isRequired,
-// date: propTypes.string.isRequired,
-// totalValue: propTypes.number.isRequired,
-// // onClick: propTypes.func.isRequired,
-// };

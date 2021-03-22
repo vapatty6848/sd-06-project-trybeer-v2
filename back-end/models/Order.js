@@ -1,5 +1,11 @@
 const connection = require('./Connection');
 
+// __________ IMPORTANT __________
+// https://stackoverflow.com/questions/12694051/dapper-connection-query-or-connection-execute
+// If you need to return a value, then use Query().
+// If you need to execute a query that does not return anything,
+// an update for example, then use Execute().
+
 const registerOrder = async (order) => {
   const { id, totalValue, street, number, date, status } = order;
   return connection.query(
