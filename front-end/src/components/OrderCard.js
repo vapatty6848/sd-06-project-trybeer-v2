@@ -2,6 +2,8 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 function OrderCard({ indexId, orderId, date, totalValue }) {
+  const changedPrice = totalValue.replace('.', ',');
+
   return (
     <div
       data-testid={ `${indexId}-order-card-container` }
@@ -15,7 +17,7 @@ function OrderCard({ indexId, orderId, date, totalValue }) {
           <p data-testid={ `${indexId}-order-number` }>{ `Pedido ${orderId}` }</p>
           <p data-testid={ `${indexId}-order-date` }>{date}</p>
           <p data-testid={ `${indexId}-order-total-value` }>
-            {`R$ ${totalValue}`}
+            {`R$ ${changedPrice}`}
           </p>
         </div>
       </div>
