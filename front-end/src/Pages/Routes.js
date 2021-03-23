@@ -14,14 +14,14 @@ export default function Routes() {
     <BrowserRouter>
       <Switch>
         <Route exact path="/"><Redirect to="/login" /></Route>
-        <Route exact path="/admin/orders" component={ OrdersAdmin } />
+        <Route exact path="/login" component={ Login } />
+        <Route exact path="/register" component={ Register } />
+        <Route exact path="/profile" component={ Profile } />
+        <Route exact path="/products" component={ Products } />
+        <Route exact path="/checkout" component={ Checkout } />
         <Route exact path="/orders" component={ OrdersClient } />
-        <Route path="/orders/:id" component={ OrderDetail } />
-        <Route path="/register" component={ Register } />
-        <Route path="/products" component={ Products } />
-        <Route path="/checkout" component={ Checkout } />
-        <Route path="/profile" component={ Profile } />
-        <Route path="/login" component={ Login } />
+        <Route exact path="/orders/:id" component={ OrderDetail } />
+        <Route exact path="/admin/orders" component={ OrdersAdmin } />
       </Switch>
     </BrowserRouter>
   );
