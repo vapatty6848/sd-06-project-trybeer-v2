@@ -35,7 +35,7 @@ function Register({ history }) {
   useEffect(() => {
     setValid(false);
     // eslint-disable-next-line
-    }, []);
+  }, []);
 
   useEffect(() => {
     const twelve = /[^()[\]{}*&^%$#@!0-9]+.{11,30}[a-zA-Z]$/;

@@ -35,6 +35,7 @@ function Provider({ children }) {
 
   async function handleClick(history) {
     const decode = await decoder();
+    setValid(true);
     if (decode && decode.role === 'client') {
       setValid(false);
       history.push('/products');

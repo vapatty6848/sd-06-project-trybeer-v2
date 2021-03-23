@@ -10,7 +10,7 @@ export default function Login({ history }) {
   useEffect(() => {
     setValid(false);
     // eslint-disable-next-line
-    }, []);
+  }, []);
 
   useEffect(() => {
     const seven = /.{6,}/;
