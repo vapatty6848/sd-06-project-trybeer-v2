@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "pm2 start index.js --watch",
+    "start": "node index.js",
     "debug": "nodemon index.js",
     "start:watch": "nodemon index.js",
     "test": "jest",

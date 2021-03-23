@@ -21,6 +21,7 @@ function Provider({ children }) {
   const [quantity, setQuantity] = useState(0);
   const [totalValue, setTotalValue] = useState(0);
   const [allOrders, setAllOrders] = useState([]);
+  const [orderDetails, setOrderDetails] = useState([]);
 
   async function decoder() {
     const jsonWebToken = await ApiService.login(email, password);
@@ -62,6 +63,17 @@ function Provider({ children }) {
       setIsFetching(true);
     } else {
       setAllOrders(orders);
+      setIsFetching(false);
+    }
+  }
+
+  async function getOrderDetail(id) {
+    const orderD = await ApiService.getOrderDetails(id);
+    console.log('fora do if', orderD);
+    if (orderD.length === 0) {
+      setIsFetching(true);
+    } else {
+      setOrderDetails(orderD);
       setIsFetching(false);
     }
   }
@@ -156,6 +168,9 @@ function Provider({ children }) {
     getAllProducts,
     handleDeleteClick,
     handleCheckoutFinish,
+    getOrderDetail,
+    orderDetails,
+    setOrderDetails,
   };
 
   return (

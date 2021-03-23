@@ -6,7 +6,8 @@ import { MenuTop } from '../components';
 import OrderCard from '../components/OrderCard';
 
 function OrdersClient({ history }) {
-  const { getAllOrders, allOrders, isFetching, validateToken } = useContext(Context);
+  const { getAllOrders, allOrders, isFetching,
+    validateToken, setIsFetching } = useContext(Context);
 
   useEffect(() => {
     validateToken(history);
@@ -14,23 +15,39 @@ function OrdersClient({ history }) {
     // eslint-disable-next-line
   }, []);
 
+  function handleOrders() {
+    if (allOrders.length === 0) {
+      return <h2>Não há pedidos!</h2>;
+    }
+    return allOrders.map((order, index) => (
+      <Link key={ index } to={ `/orders/${order.saleId}` }>
+        <OrderCard
+          key={ index }
+          indexId={ index }
+          orderId={ order.saleId }
+          date={ order.date }
+          totalValue={ order.totalValue }
+        />
+      </Link>
+    ));
+  }
+
+  useEffect(() => {
+    if (allOrders.length > 0) {
+      setIsFetching(false);
+    } else {
+      handleOrders();
+    }
+    // eslint-disable-next-line
+  }, [allOrders]);
+
   return (
     <div>
       <MenuTop title="Meus Pedidos" />
       <div>
         {isFetching
           ? <h2>Loading...</h2>
-          : allOrders.map((order, index) => (
-            <Link key={ index } to={ `/orders/${order.saleId}` }>
-              <OrderCard
-                key={ index }
-                indexId={ index }
-                orderId={ order.saleId }
-                date={ order.date }
-                totalValue={ order.totalValue }
-              />
-            </Link>
-          ))}
+          : handleOrders()}
       </div>
     </div>
   );

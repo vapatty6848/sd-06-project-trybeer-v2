@@ -23,13 +23,28 @@ const registerEachProduct = async (saleId, products) => {
 
 const getOrders = async (userEmail) => {
   const [orders] = await connection.query(
-    `SELECT sales.id AS "saleId", DATE_FORMAT(sales.sale_date,"%d/%m") AS "date",
+    `SELECT sales.id AS "saleId", DATE_FORMAT(sales ) AS "date",
     sales.status, sales.total_price AS "totalValue", sales.user_id AS userId
     FROM Trybeer.sales as sales
     JOIN Trybeer.users AS users ON users.id = sales.user_id
     WHERE users.email = ?;`, [userEmail],
     );
 return orders;
+};
+
+const getOrderDetailsByid = async (id) => {
+  const [order] = await connection.query(
+  `SELECT pr.name AS "name",
+  pr.price AS "unitPrice",
+  sp.quantity AS "quantity",
+  DATE_FORMAT(sa.sale_date,"%d/%m") AS "date",
+  sa.total_price AS "totalValue"
+  FROM Trybeer.sales_products AS sp
+  JOIN Trybeer.products AS pr ON pr.id = sp.product_id
+  JOIN Trybeer.sales AS sa on sa.id = sp.sale_id
+  WHERE sp.sale_id = ?;`, [id],
+  );
+  return order;
 };
 
 // -- produtos por id de pedidos
@@ -51,4 +66,5 @@ module.exports = {
   registerOrder,
   getOrders,
   registerEachProduct,
+  getOrderDetailsByid,
 };

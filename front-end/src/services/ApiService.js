@@ -81,4 +81,24 @@ const getOrders = async () => {
   return orders;
 };
 
-export default { login, getProducts, editName, register, registerOrder, getOrders };
+const getOrderDetails = async (id) => {
+  const orders = await fetch(`${baseURL}details/${id}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': contentType,
+      authorization: localStorage.getItem('token'),
+    },
+  })
+    .then((resp) => resp.json())
+    .catch((error) => console.log(error));
+  return orders;
+};
+
+export default {
+  login,
+  getProducts,
+  editName,
+  register,
+  registerOrder,
+  getOrders,
+  getOrderDetails };

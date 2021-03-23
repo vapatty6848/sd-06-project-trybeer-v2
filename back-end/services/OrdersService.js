@@ -7,8 +7,11 @@ const registerEachProduct = async (saleId, products) => Order
 
 const getOrders = async (userEmail) => Order.getOrders(userEmail);
 
+const getOrderDetailsByid = async (id) => Order.getOrderDetailsByid(id);
+
 module.exports = {
   registerOrder,
   registerEachProduct,
   getOrders,
+  getOrderDetailsByid,
 };
