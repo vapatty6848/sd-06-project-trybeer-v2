@@ -16,7 +16,7 @@ export default function Login({ history }) {
   return (
     <div>
       <h1 className="">Trybeer Sixteen</h1>
-      <form className="needs-validation">
+      <form>
         <div className="col-md-5 mb-3">
           <label htmlFor="email-input">
             Email

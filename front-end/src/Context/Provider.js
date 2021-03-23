@@ -47,6 +47,7 @@ function Provider({ children }) {
   async function getAllProducts() {
     const products = await ApiService.getProducts();
     if (products.message) {
+      console.log(products.message);
       setIsFetching(true);
     } else {
       setAllProducts(products);
@@ -135,8 +136,6 @@ function Provider({ children }) {
     setQuantity,
     cart,
     setCart,
-    tokenInvalid,
-    setTokenInvalid,
     street,
     setStreet,
     number,
