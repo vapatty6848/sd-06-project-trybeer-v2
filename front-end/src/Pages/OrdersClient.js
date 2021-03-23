@@ -9,8 +9,8 @@ function OrdersClient({ history }) {
   const { getAllOrders, allOrders, isFetching, validateToken } = useContext(Context);
 
   useEffect(() => {
-    getAllOrders();
     validateToken(history);
+    getAllOrders();
     // eslint-disable-next-line
   }, []);
 

@@ -13,8 +13,8 @@ export default function Products({ history }) {
   const totalSum = TotalPrice(allPrices);
 
   useEffect(() => {
-    getAllProducts();
     validateToken(history);
+    getAllProducts();
     // eslint-disable-next-line
   }, []);
 

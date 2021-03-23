@@ -18,7 +18,6 @@ function Provider({ children }) {
   const [valid, setValid] = useState(false);
   const [sucessmsg, setSucessmsg] = useState(false);
   const [isFetching, setIsFetching] = useState(true);
-  const [tokenInvalid, setTokenInvalid] = useState(false);
   const [quantity, setQuantity] = useState(0);
   const [totalValue, setTotalValue] = useState(0);
   const [allOrders, setAllOrders] = useState([]);
@@ -48,10 +47,8 @@ function Provider({ children }) {
   async function getAllProducts() {
     const products = await ApiService.getProducts();
     if (products.message) {
-      setTokenInvalid(true);
       setIsFetching(true);
     } else {
-      setTokenInvalid(false);
       setAllProducts(products);
       setIsFetching(false);
     }
@@ -59,12 +56,9 @@ function Provider({ children }) {
 
   async function getAllOrders() {
     const orders = await ApiService.getOrders();
-    console.log('provider', orders);
     if (orders.length === 0) {
-      setTokenInvalid(true);
       setIsFetching(true);
     } else {
-      setTokenInvalid(false);
       setAllOrders(orders);
       setIsFetching(false);
     }
@@ -91,7 +85,7 @@ function Provider({ children }) {
   }
 
   async function handleCheckoutFinish(history) {
-    const time = 3000;
+    const timeParaRedirecionar = 2000;
     const decode = LocalStorage.getToken();
     const decodificado = jwt.decode(decode);
     const userEmail = decodificado.email;
@@ -104,13 +98,13 @@ function Provider({ children }) {
       setTimeout(() => {
         setSucessmsg(false);
         history.push('/products');
-      }, time);
+      }, timeParaRedirecionar);
     } else {
       console.log('Alguma coisa deu errado, tente novamente mais tarde!');
     }
   }
 
-  function validateToken(history) {
+  async function validateToken(history) {
     const token = LocalStorage.getToken();
     if (!token) {
       history.push('/');
@@ -153,15 +147,15 @@ function Provider({ children }) {
     setSucessmsg,
     valid,
     setValid,
+    allOrders,
+    setAllOrders,
+    getAllOrders,
     handleClick,
     updateProduct,
     validateToken,
     getAllProducts,
     handleDeleteClick,
     handleCheckoutFinish,
-    getAllOrders,
-    allOrders,
-    setAllOrders,
   };
 
   return (

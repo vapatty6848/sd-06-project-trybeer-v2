@@ -59,11 +59,11 @@ function ProductCard({ indexId, id, price, name, img }) {
       <div className="card-footer d-inline-flex justify-content-around rounded-bottom">
         <button
           type="button"
-          data-testid={ `${indexId}-product-minus` }
-          className="btn btn-danger"
-          onClick={ () => decreaseQtd() }
+          data-testid={ `${indexId}-product-plus` }
+          className="btn btn-primary"
+          onClick={ () => increaseQtd() }
         >
-          -
+          +
         </button>
         <p
           data-testid={ `${indexId}-product-qtd` }
@@ -73,11 +73,11 @@ function ProductCard({ indexId, id, price, name, img }) {
         </p>
         <button
           type="button"
-          data-testid={ `${indexId}-product-plus` }
-          className="btn btn-primary"
-          onClick={ () => increaseQtd() }
+          data-testid={ `${indexId}-product-minus` }
+          className="btn btn-danger"
+          onClick={ () => decreaseQtd() }
         >
-          +
+          -
         </button>
       </div>
     </div>

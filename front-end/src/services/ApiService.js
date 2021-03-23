@@ -1,5 +1,6 @@
 const baseURL = 'http://localhost:3001/';
 const contentType = 'application/json';
+const AuthToken = localStorage.getItem('token');
 
 const login = async (email, password) => {
   const jsonWebToken = await fetch(`${baseURL}login`, {
@@ -19,7 +20,7 @@ const getProducts = async () => {
     method: 'GET',
     headers: {
       'Content-Type': contentType,
-      Authorization: localStorage.getItem('token'),
+      authorization: AuthToken,
     },
   })
     .then((resp) => resp.json())
@@ -58,7 +59,7 @@ const registerOrder = async (order) => {
     method: 'POST',
     headers: {
       'Content-Type': contentType,
-      Authorization: localStorage.getItem('token'),
+      authorization: AuthToken,
     },
     body: JSON.stringify(order),
   })
@@ -68,11 +69,11 @@ const registerOrder = async (order) => {
 };
 
 const getOrders = async () => {
-  const orders = await fetch(`${baseURL}sale/register`, {
+  const orders = await fetch(`${baseURL}orders`, {
     method: 'GET',
     headers: {
       'Content-Type': contentType,
-      Authorization: localStorage.getItem('token'),
+      authorization: AuthToken,
     },
   })
     .then((resp) => resp.json())

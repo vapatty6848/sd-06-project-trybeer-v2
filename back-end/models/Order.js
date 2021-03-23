@@ -40,15 +40,6 @@ return orders;
 // JOIN Trybeer.products AS product ON product.id = infoSales.product_id
 // WHERE infoSales.sale_id = 4;
 
-// -- pedidos por usuario 
-// SELECT sales.id AS "saleId", DATE_FORMAT(sales.sale_date,"%d/%m") AS "date",
-//     sales.status,
-//     sales.total_price AS "totalValue"
-//     FROM Trybeer.sales AS sales
-//     JOIN Trybeer.sales_products AS infoSales ON sales.id = infoSales.sale_id
-//     WHERE sales.id = ?
-//     GROUP BY sales.id;
-
 // -- get para o admin
 // SELECT id, total_price, delivery_address, delivery_number, status
 // FROM Trybeer.sales;
