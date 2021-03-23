@@ -4,9 +4,8 @@ import Context from '../Context/Context';
 import { ApiService } from '../services';
 
 function Register({ history }) {
-  const { email, setEmail, name, setName,
+  const { email, setEmail, name, setName, valid, setValid,
     role, setRole, handleClick, password, setPassword } = useContext(Context);
-  const [valid, setValid] = useState(false);
   const [isChecked, setIsChecked] = useState(true);
   const [msg, setMsg] = useState('');
   const emailExistMsg = 'E-mail already in database.';
@@ -23,7 +22,6 @@ function Register({ history }) {
 
   async function handlePage() {
     const newUser = await ApiService.register(name, email, password, role);
-    console.log(newUser);
     setMsg(newUser.message);
     if (newUser.message !== emailExistMsg && role === 'client') {
       await handleClick(history);
@@ -35,10 +33,16 @@ function Register({ history }) {
   }
 
   useEffect(() => {
+    setValid(false);
+    // eslint-disable-next-line
+    }, []);
+
+  useEffect(() => {
     const twelve = /[^()[\]{}*&^%$#@!0-9]+.{11,30}[a-zA-Z]$/;
     const seven = /.{6,}/;
     const reg = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
     setValid(reg.test(email) && seven.test(password) && twelve.test(name));
+    // eslint-disable-next-line
   }, [email, password, name]);
 
   return (

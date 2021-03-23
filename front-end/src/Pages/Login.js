@@ -1,16 +1,22 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import Context from '../Context/Context';
 
 export default function Login({ history }) {
-  const [valid, setValid] = useState(false);
-  const { email, setEmail, password, setPassword, handleClick } = useContext(Context);
+  const { email, setEmail, password, setPassword,
+    handleClick, valid, setValid } = useContext(Context);
+
+  useEffect(() => {
+    setValid(false);
+    // eslint-disable-next-line
+    }, []);
 
   useEffect(() => {
     const seven = /.{6,}/;
     const reg = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
     setValid(reg.test(email) && seven.test(password));
+    // eslint-disable-next-line
   }, [email, password]);
 
   return (
