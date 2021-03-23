@@ -2,8 +2,14 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 function OrderDetailCard({ indexId, quantity, name, unitPrice }) {
-  const changedPrice = unitPrice.replace('.', ',');
+  // const changedPrice = unitPrice.replace('.', ',');
   // const changedPrice = parseFloat(unitPrice);
+
+  const sumPrices = (price, qtd) => {
+    const result = (parseFloat(price) * parseFloat(qtd)).toFixed(2);
+    const resultString = result.toString();
+    return resultString.replace('.', ',');
+  };
 
   return (
     <div
@@ -18,7 +24,7 @@ function OrderDetailCard({ indexId, quantity, name, unitPrice }) {
           <p data-testid={ `${indexId}-product-qtd` }>{quantity}</p>
           <p data-testid={ `${indexId}-product-name` }>{name}</p>
           <p data-testid={ `${indexId}-product-total-value` }>
-            {`R$ ${changedPrice}`}
+            {`R$ ${sumPrices(unitPrice, quantity)}`}
           </p>
         </div>
       </div>

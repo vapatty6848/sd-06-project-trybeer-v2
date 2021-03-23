@@ -16,8 +16,9 @@ function OrderDetail({ history, match }) {
   return (
     <div>
       <MenuTop title="Detalhes de Pedido" />
-      <h3>{`Pedido ${id}`}</h3>
-      {!isFetching && <h5>{orderDetails[0].date}</h5>}
+      <h3 data-testid="order-number">{`Pedido ${id}`}</h3>
+      {orderDetails.length > 0 && (
+        <h5 data-testid="order-date">{orderDetails[0].date}</h5>)}
       {isFetching
         ? <h2>Loading...</h2>
         : orderDetails.map((detail, index) => (
@@ -29,7 +30,11 @@ function OrderDetail({ history, match }) {
             unitPrice={ detail.unitPrice }
           />
         ))}
-      {!isFetching && <h4>{`Total R$ ${orderDetails[0].totalValue}`}</h4>}
+      {orderDetails.length > 0 && (
+        <h4 data-testid="order-total-value">
+          {`Total R$ ${orderDetails[0].totalValue.replace('.', ',')}`}
+        </h4>
+      )}
     </div>
   );
 }
