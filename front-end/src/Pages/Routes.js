@@ -8,6 +8,8 @@ import OrdersClient from './OrdersClient';
 import OrdersAdmin from './OrdersAdmin';
 import Checkout from './Checkout';
 import OrderDetail from './OrderDetail';
+import AdminHome from './AdminHome';
+import AdminProfile from './AdminProfile';
 
 export default function Routes() {
   return (
@@ -22,6 +24,8 @@ export default function Routes() {
         <Route exact path="/orders/:id" component={ OrderDetail } />
         <Route exact path="/orders" component={ OrdersClient } />
         <Route exact path="/admin/orders" component={ OrdersAdmin } />
+        <Route exact path="/admin/home" component={ AdminHome } />
+        <Route exact path="/admin/profile" component={ AdminProfile } />
       </Switch>
     </BrowserRouter>
   );
