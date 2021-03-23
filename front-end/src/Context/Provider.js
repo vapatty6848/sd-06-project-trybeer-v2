@@ -69,7 +69,6 @@ function Provider({ children }) {
 
   async function getOrderDetail(id) {
     const orderD = await ApiService.getOrderDetails(id);
-    console.log('fora do if', orderD);
     if (orderD.length === 0) {
       setIsFetching(true);
     } else {

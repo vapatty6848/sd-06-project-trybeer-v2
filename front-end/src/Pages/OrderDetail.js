@@ -16,17 +16,20 @@ function OrderDetail({ history, match }) {
   return (
     <div>
       <MenuTop title="Detalhes de Pedido" />
+      <h3>{`Pedido ${id}`}</h3>
+      {!isFetching && <h5>{orderDetails[0].date}</h5>}
       {isFetching
         ? <h2>Loading...</h2>
         : orderDetails.map((detail, index) => (
           <OrderDetailCard
             key={ index }
             indexId={ index }
-            quantity={ orderDetails.quantity }
-            name={ orderDetails.name }
-            unitPrice={ orderDetails.unitPrice }
+            quantity={ detail.quantity }
+            name={ detail.name }
+            unitPrice={ detail.unitPrice }
           />
         ))}
+      {!isFetching && <h4>{`Total R$ ${orderDetails[0].totalValue}`}</h4>}
     </div>
   );
 }

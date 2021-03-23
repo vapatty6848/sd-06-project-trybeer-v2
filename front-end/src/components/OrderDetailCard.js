@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 
 function OrderDetailCard({ indexId, quantity, name, unitPrice }) {
   const changedPrice = unitPrice.replace('.', ',');
+  // const changedPrice = parseFloat(unitPrice);
 
   return (
     <div
@@ -28,7 +29,7 @@ function OrderDetailCard({ indexId, quantity, name, unitPrice }) {
 OrderDetailCard.propTypes = {
   indexId: propTypes.number.isRequired,
   unitPrice: propTypes.string.isRequired,
-  quantity: propTypes.number.isRequired,
+  quantity: propTypes.string.isRequired,
   name: propTypes.string.isRequired,
 };
 export default OrderDetailCard;

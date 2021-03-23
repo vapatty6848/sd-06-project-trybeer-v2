@@ -23,7 +23,7 @@ const registerEachProduct = async (saleId, products) => {
 
 const getOrders = async (userEmail) => {
   const [orders] = await connection.query(
-    `SELECT sales.id AS "saleId", DATE_FORMAT(sales ) AS "date",
+    `SELECT sales.id AS "saleId", DATE_FORMAT(sales.sale_date,"%d/%m") AS "date",
     sales.status, sales.total_price AS "totalValue", sales.user_id AS userId
     FROM Trybeer.sales as sales
     JOIN Trybeer.users AS users ON users.id = sales.user_id

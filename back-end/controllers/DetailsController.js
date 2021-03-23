@@ -8,9 +8,7 @@ const Details = new Router();
 
 Details.get('/:id', validateToken, rescue(async (req, res) => {
   const { id } = req.params;
-  console.log('id', req.params);
   const orderDetails = await OrdersService.getOrderDetailsByid(id);
-  console.log('orderDetails', orderDetails);
   return res.status(status200).json(orderDetails);
 }));
 

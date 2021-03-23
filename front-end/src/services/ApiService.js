@@ -78,6 +78,7 @@ const getOrders = async () => {
   })
     .then((resp) => resp.json())
     .catch((error) => console.log(error));
+  console.log(orders);
   return orders;
 };
 
