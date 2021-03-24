@@ -48,6 +48,7 @@ function AdminOrderDetail({ history, match }) {
         <button
           type="button"
           data-testid="mark-as-delivered-btn"
+          className="btn btn-success"
           onClick={ () => handleStatus(id) }
           hidden={ status }
         >
