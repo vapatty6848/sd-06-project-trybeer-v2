@@ -1,35 +1,35 @@
 import React from 'react';
+import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-// import PropTypes from 'prop-types';
 
-function SideBar() {
+import '../App.css';
+
+function SideBar({ title }) {
   return (
-    <div
-      className="position-relative align-middle text-white bg-dark"
-    >
-      <nav>
-        <h2 data-testid="top-title">TryBeer</h2>
+    <div className="adm-container">
+      <nav className="adm-title">
+        <h2 className="" data-testid="top-title">{title}</h2>
       </nav>
-      <nav>
-        <div>
+      <nav className="admin-side-bar-container">
+        <div className="adm-navbar">
           <Link
             data-testid="side-menu-item-orders"
+            className="adm-link"
             to="/admin/orders"
-            // role="tab"
           >
             Pedidos
           </Link>
           <Link
             data-testid="side-menu-item-profile"
+            className="adm-link"
             to="/admin/profile"
-            // role="tab"
           >
             Perfil
           </Link>
           <Link
             data-testid="side-menu-item-logout"
+            className="adm-link"
             to="/login"
-            role="tab"
             onClick={ () => localStorage.clear() }
           >
             Sair
@@ -40,8 +40,8 @@ function SideBar() {
   );
 }
 
-// SideBar.propTypes = {
-//   title: PropTypes.string.isRequired,
-// };
+SideBar.propTypes = {
+  title: propTypes.string.isRequired,
+};
 
 export default SideBar;

@@ -78,8 +78,20 @@ const getOrders = async () => {
   })
     .then((resp) => resp.json())
     .catch((error) => console.log(error));
-  console.log(orders);
   return orders;
+};
+
+const getSales = async () => {
+  const sales = await fetch(`${baseURL}sales`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': contentType,
+      authorization: localStorage.getItem('token'),
+    },
+  })
+    .then((resp) => resp.json())
+    .catch((error) => console.log(error));
+  return sales;
 };
 
 const getOrderDetails = async (id) => {
@@ -95,6 +107,32 @@ const getOrderDetails = async (id) => {
   return orders;
 };
 
+const getSaleDetails = async (id) => {
+  const salesDetail = await fetch(`${baseURL}adm/detail/${id}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': contentType,
+      authorization: localStorage.getItem('token'),
+    },
+  })
+    .then((resp) => resp.json())
+    .catch((error) => console.log(error));
+  return salesDetail;
+};
+
+const updateStatus = async (id) => {
+  const status = await fetch(`${baseURL}adm/status/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': contentType,
+      authorization: localStorage.getItem('token'),
+    },
+  })
+    .then((resp) => resp.json())
+    .catch((error) => console.log(error));
+  return status;
+};
+
 export default {
   login,
   getProducts,
@@ -102,4 +140,8 @@ export default {
   register,
   registerOrder,
   getOrders,
-  getOrderDetails };
+  getOrderDetails,
+  getSales,
+  getSaleDetails,
+  updateStatus,
+};

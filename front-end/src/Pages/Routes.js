@@ -5,11 +5,11 @@ import Register from './Register';
 import Products from './Products';
 import Profile from './Profile';
 import OrdersClient from './OrdersClient';
-import OrdersAdmin from './OrdersAdmin';
 import Checkout from './Checkout';
 import OrderDetail from './OrderDetail';
-import AdminHome from './AdminHome';
+import AdminOrders from './AdminOrders';
 import AdminProfile from './AdminProfile';
+import AdminOrderDetail from './AdminOrderDetail';
 
 export default function Routes() {
   return (
@@ -23,8 +23,8 @@ export default function Routes() {
         <Route exact path="/checkout" component={ Checkout } />
         <Route exact path="/orders/:id" component={ OrderDetail } />
         <Route exact path="/orders" component={ OrdersClient } />
-        <Route exact path="/admin/orders" component={ OrdersAdmin } />
-        <Route exact path="/admin/home" component={ AdminHome } />
+        <Route exact path="/admin/orders/:id" component={ AdminOrderDetail } />
+        <Route exact path="/admin/orders" component={ AdminOrders } />
         <Route exact path="/admin/profile" component={ AdminProfile } />
       </Switch>
     </BrowserRouter>

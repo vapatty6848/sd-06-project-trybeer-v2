@@ -21,7 +21,10 @@ function Provider({ children }) {
   const [quantity, setQuantity] = useState(0);
   const [totalValue, setTotalValue] = useState(0);
   const [allOrders, setAllOrders] = useState([]);
+  const [allSales, setAllSales] = useState([]);
   const [orderDetails, setOrderDetails] = useState([]);
+  const [saleDetails, setSaleDetails] = useState([]);
+  const [status, setStatus] = useState(false);
 
   async function decoder() {
     const jsonWebToken = await ApiService.login(email, password);
@@ -36,7 +39,6 @@ function Provider({ children }) {
 
   async function handleClick(history) {
     const decode = await decoder();
-    setValid(true);
     if (decode && decode.role === 'client') {
       setValid(false);
       history.push('/products');
@@ -67,12 +69,32 @@ function Provider({ children }) {
     }
   }
 
+  async function getAllSales() {
+    const sales = await ApiService.getSales();
+    if (sales.length === 0) {
+      setIsFetching(true);
+    } else {
+      setAllSales(sales);
+      setIsFetching(false);
+    }
+  }
+
   async function getOrderDetail(id) {
     const orderD = await ApiService.getOrderDetails(id);
     if (orderD.length === 0) {
       setIsFetching(true);
     } else {
       setOrderDetails(orderD);
+      setIsFetching(false);
+    }
+  }
+
+  async function getAdminDetails(id) {
+    const saleDetail = await ApiService.getSaleDetails(id);
+    if (saleDetail.length === 0) {
+      setIsFetching(true);
+    } else {
+      setSaleDetails(saleDetail);
       setIsFetching(false);
     }
   }
@@ -124,10 +146,28 @@ function Provider({ children }) {
     }
   }
 
+  async function handleStatus(id) {
+    const orderStatus = await ApiService.updateStatus(id);
+    if (orderStatus.message === 'Pedido atualizado') {
+      setStatus(true);
+    } else {
+      setStatus(false);
+    }
+  }
+
   useEffect(() => {
     const localStgCart = LocalStorage.getCartProducts();
     if (localStgCart) {
       setCart(localStgCart);
+    }
+  }, []);
+
+  useEffect(() => {
+    const decode = LocalStorage.getToken();
+    if (decode) {
+      const decodificado = jwt.decode(decode);
+      setEmail(decodificado.email);
+      setName(decodificado.name);
     }
   }, []);
 
@@ -170,6 +210,15 @@ function Provider({ children }) {
     getOrderDetail,
     orderDetails,
     setOrderDetails,
+    allSales,
+    setAllSales,
+    getAllSales,
+    getAdminDetails,
+    saleDetails,
+    setSaleDetails,
+    status,
+    setStatus,
+    handleStatus,
   };
 
   return (

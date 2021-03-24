@@ -1,1 +1,46 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+a:visited {
+  color: #0275d8;
+}
+
+a:hover {
+  color: #0275d8;
+  text-decoration: none;
+}
+
+a:active {
+  color: #0275d8;
+}
+
+.adm-container {
+  position: fixed;
+  background-color: #292b2c;
+  color: #f7f7f7;
+  height: 100vh;
+  padding-top: 2vh;
+  padding-left: 2vh;
+  width: 18vw;
+}
+
+.adm-title {
+  margin-bottom: 5vh;
+}
+
+.adm-navbar {
+  display: flex;
+  flex-direction: column;
+  font-size: 4vh;
+}
+
+.adm-link {
+  margin: 10vh 0;
+}
+
+.adm-body {
+  margin-left: 20vw;
+}
