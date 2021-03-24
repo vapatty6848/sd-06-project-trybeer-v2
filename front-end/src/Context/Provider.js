@@ -23,6 +23,7 @@ function Provider({ children }) {
   const [allOrders, setAllOrders] = useState([]);
   const [allSales, setAllSales] = useState([]);
   const [orderDetails, setOrderDetails] = useState([]);
+  const [saleDetails, setSaleDetails] = useState([]);
 
   async function decoder() {
     const jsonWebToken = await ApiService.login(email, password);
@@ -83,6 +84,16 @@ function Provider({ children }) {
       setIsFetching(true);
     } else {
       setOrderDetails(orderD);
+      setIsFetching(false);
+    }
+  }
+
+  async function getAdminDetails(id) {
+    const saleDetail = await ApiService.getSaleDetails(id);
+    if (saleDetail.length === 0) {
+      setIsFetching(true);
+    } else {
+      setSaleDetails(saleDetail);
       setIsFetching(false);
     }
   }
@@ -192,6 +203,9 @@ function Provider({ children }) {
     allSales,
     setAllSales,
     getAllSales,
+    getAdminDetails,
+    saleDetails,
+    setSaleDetails,
   };
 
   return (

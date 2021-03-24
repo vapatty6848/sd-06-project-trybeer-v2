@@ -38,7 +38,8 @@ const getOrderDetailsByid = async (id) => {
   pr.price AS "unitPrice",
   sp.quantity AS "quantity",
   DATE_FORMAT(sa.sale_date,"%d/%m") AS "date",
-  sa.total_price AS "totalValue"
+  sa.total_price AS "totalValue",
+  sa.status
   FROM Trybeer.sales_products AS sp
   JOIN Trybeer.products AS pr ON pr.id = sp.product_id
   JOIN Trybeer.sales AS sa on sa.id = sp.sale_id

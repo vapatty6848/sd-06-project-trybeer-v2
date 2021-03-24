@@ -7,8 +7,14 @@ const validateToken = require('../auth/validateToken');
 const AdminRouter = new Router();
 
 AdminRouter.get('/', validateToken, rescue(async (_req, res) => {
-  const orders = await OrdersService.getSalesForAdmin();
-  return res.status(status200).json(orders);
+  const sales = await OrdersService.getSalesForAdmin();
+  return res.status(status200).json(sales);
+}));
+
+AdminRouter.get('/:id', validateToken, rescue(async (req, res) => {
+  const { id } = req.params;
+  const saleDetails = await OrdersService.getOrderDetailsByid(id);
+  return res.status(status200).json(saleDetails);
 }));
 
 module.exports = AdminRouter;

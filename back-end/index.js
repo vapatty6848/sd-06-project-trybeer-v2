@@ -22,6 +22,7 @@ app.use('/orders', OrdersController);
 app.use('/sale/register', OrdersController);
 app.use('/details', DetailsController);
 
+app.use('/adm/detail', AdminController);
 app.use('/sales', AdminController);
 
 app.use('/images', express.static(path.join(__dirname, '/images')));

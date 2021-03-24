@@ -107,6 +107,20 @@ const getOrderDetails = async (id) => {
   return orders;
 };
 
+const getSaleDetails = async (id) => {
+  const salesDetail = await fetch(`${baseURL}adm/detail/${id}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': contentType,
+      authorization: localStorage.getItem('token'),
+    },
+  })
+    .then((resp) => resp.json())
+    .catch((error) => console.log(error));
+  console.log(salesDetail);
+  return salesDetail;
+};
+
 export default {
   login,
   getProducts,
@@ -116,4 +130,5 @@ export default {
   getOrders,
   getOrderDetails,
   getSales,
+  getSaleDetails,
 };
