@@ -47,6 +47,16 @@ const getOrderDetailsByid = async (id) => {
   return order;
 };
 
+const getSalesForAdmin = async () => {
+  const [orders] = await connection.query(
+    `SELECT id AS "saleId", DATE_FORMAT(sale_date,"%d/%m") AS "date",
+    status, total_price AS "totalValue", user_id AS userId,
+    delivery_address AS "street", delivery_number AS "number"
+    FROM Trybeer.sales;`,
+    );
+return orders;
+};
+
 // -- produtos por id de pedidos
 // SELECT product.name AS "Product Name",
 // infoSales.quantity AS quantity,
@@ -67,4 +77,5 @@ module.exports = {
   getOrders,
   registerEachProduct,
   getOrderDetailsByid,
+  getSalesForAdmin,
 };

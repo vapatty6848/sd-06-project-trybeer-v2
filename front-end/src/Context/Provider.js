@@ -21,6 +21,7 @@ function Provider({ children }) {
   const [quantity, setQuantity] = useState(0);
   const [totalValue, setTotalValue] = useState(0);
   const [allOrders, setAllOrders] = useState([]);
+  const [allSales, setAllSales] = useState([]);
   const [orderDetails, setOrderDetails] = useState([]);
 
   async function decoder() {
@@ -36,7 +37,7 @@ function Provider({ children }) {
 
   async function handleClick(history) {
     const decode = await decoder();
-    setValid(true);
+    // setValid(true);
     if (decode && decode.role === 'client') {
       setValid(false);
       history.push('/products');
@@ -63,6 +64,16 @@ function Provider({ children }) {
       setIsFetching(true);
     } else {
       setAllOrders(orders);
+      setIsFetching(false);
+    }
+  }
+
+  async function getAllSales() {
+    const sales = await ApiService.getSales();
+    if (sales.length === 0) {
+      setIsFetching(true);
+    } else {
+      setAllSales(sales);
       setIsFetching(false);
     }
   }
@@ -179,6 +190,9 @@ function Provider({ children }) {
     getOrderDetail,
     orderDetails,
     setOrderDetails,
+    allSales,
+    setAllSales,
+    getAllSales,
   };
 
   return (

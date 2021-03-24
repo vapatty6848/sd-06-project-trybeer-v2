@@ -7,6 +7,8 @@ const registerEachProduct = async (saleId, products) => Order
 
 const getOrders = async (userEmail) => Order.getOrders(userEmail);
 
+const getSalesForAdmin = async () => Order.getSalesForAdmin();
+
 const getOrderDetailsByid = async (id) => Order.getOrderDetailsByid(id);
 
 module.exports = {
@@ -14,4 +16,5 @@ module.exports = {
   registerEachProduct,
   getOrders,
   getOrderDetailsByid,
+  getSalesForAdmin,
 };

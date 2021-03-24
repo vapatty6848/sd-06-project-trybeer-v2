@@ -2,8 +2,8 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const { LoginController, RegisterController, ProfileController,
-  ProductController, OrdersController, DetailsController } = require('./controllers');
+const { LoginController, RegisterController, ProfileController, ProductController,
+  OrdersController, DetailsController, AdminController } = require('./controllers');
 const { error } = require('./services');
 require('dotenv').config();
 
@@ -18,9 +18,11 @@ app.use('/register', RegisterController);
 
 app.use('/products', ProductController);
 
+app.use('/orders', OrdersController);
 app.use('/sale/register', OrdersController);
 app.use('/details', DetailsController);
-app.use('/orders', OrdersController);
+
+app.use('/sales', AdminController);
 
 app.use('/images', express.static(path.join(__dirname, '/images')));
 

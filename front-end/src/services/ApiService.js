@@ -78,8 +78,20 @@ const getOrders = async () => {
   })
     .then((resp) => resp.json())
     .catch((error) => console.log(error));
-  console.log(orders);
   return orders;
+};
+
+const getSales = async () => {
+  const sales = await fetch(`${baseURL}sales`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': contentType,
+      authorization: localStorage.getItem('token'),
+    },
+  })
+    .then((resp) => resp.json())
+    .catch((error) => console.log(error));
+  return sales;
 };
 
 const getOrderDetails = async (id) => {
@@ -102,4 +114,6 @@ export default {
   register,
   registerOrder,
   getOrders,
-  getOrderDetails };
+  getOrderDetails,
+  getSales,
+};
