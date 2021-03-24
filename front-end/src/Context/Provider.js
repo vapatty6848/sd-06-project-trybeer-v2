@@ -131,6 +131,15 @@ function Provider({ children }) {
     }
   }, []);
 
+  useEffect(() => {
+    const decode = LocalStorage.getToken();
+    if (decode) {
+      const decodificado = jwt.decode(decode);
+      setEmail(decodificado.email);
+      setName(decodificado.name);
+    }
+  }, []);
+
   const contextValue = {
     email,
     setEmail,
