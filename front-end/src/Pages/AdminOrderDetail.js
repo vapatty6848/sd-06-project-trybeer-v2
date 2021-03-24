@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import propTypes from 'prop-types';
 import Context from '../Context/Context';
 import { SideBar, AdminDetailCard } from '../components';
@@ -27,7 +27,9 @@ function AdminOrderDetail({ history, match }) {
         <div>
           <h3 data-testid="order-number">{`Pedido ${id}`}</h3>
           {saleDetails.length > 0 && (
-            <h3 data-testid="order-status">{saleDetails[0].status}</h3>)}
+            <h3 data-testid="order-status">
+              {saleDetails[0].status}
+            </h3>)}
         </div>
         {isFetching
           ? <h2>Loading...</h2>
@@ -48,7 +50,7 @@ function AdminOrderDetail({ history, match }) {
         <button
           type="button"
           data-testid="mark-as-delivered-btn"
-          className="btn btn-success"
+          className="btn btn-outline-primary"
           onClick={ () => handleStatus(id) }
           hidden={ status }
         >
