@@ -117,8 +117,20 @@ const getSaleDetails = async (id) => {
   })
     .then((resp) => resp.json())
     .catch((error) => console.log(error));
-  console.log(salesDetail);
   return salesDetail;
+};
+
+const updateStatus = async (id) => {
+  const status = await fetch(`${baseURL}adm/status/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': contentType,
+      authorization: localStorage.getItem('token'),
+    },
+  })
+    .then((resp) => resp.json())
+    .catch((error) => console.log(error));
+  return status;
 };
 
 export default {
@@ -131,4 +143,5 @@ export default {
   getOrderDetails,
   getSales,
   getSaleDetails,
+  updateStatus,
 };

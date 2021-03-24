@@ -17,4 +17,10 @@ AdminRouter.get('/:id', validateToken, rescue(async (req, res) => {
   return res.status(status200).json(saleDetails);
 }));
 
+AdminRouter.put('/:id', rescue(async (req, res) => {
+  const { id } = req.params;
+  await OrdersService.updateStatus(id);
+  return res.status(status200).json({ message: 'Pedido atualizado' });
+}));
+
 module.exports = AdminRouter;

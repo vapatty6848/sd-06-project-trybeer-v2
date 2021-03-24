@@ -5,7 +5,8 @@ import { SideBar, AdminDetailCard } from '../components';
 import '../App.css';
 
 function AdminOrderDetail({ history, match }) {
-  const { validateToken, isFetching, getAdminDetails, saleDetails } = useContext(Context);
+  const { validateToken, isFetching, getAdminDetails,
+    saleDetails, handleStatus, status } = useContext(Context);
   const { id } = match.params;
 
   useEffect(() => {
@@ -13,6 +14,11 @@ function AdminOrderDetail({ history, match }) {
     getAdminDetails(id);
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    getAdminDetails(id);
+    // eslint-disable-next-line
+  }, [status]);
 
   return (
     <div>
@@ -39,7 +45,12 @@ function AdminOrderDetail({ history, match }) {
             {`Total R$ ${saleDetails[0].totalValue.replace('.', ',')}`}
           </h4>
         )}
-        <button type="button" data-testid="mark-as-delivered-btn">
+        <button
+          type="button"
+          data-testid="mark-as-delivered-btn"
+          onClick={ () => handleStatus(id) }
+          hidden={ status }
+        >
           Marcar como entregue
         </button>
       </div>

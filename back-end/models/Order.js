@@ -58,6 +58,11 @@ const getSalesForAdmin = async () => {
 return orders;
 };
 
+const updateStatus = async (id) => connection.execute(
+  'UPDATE Trybeer.sales SET status = "Entregue" WHERE id = ?;',
+  [id],
+);
+
 // -- produtos por id de pedidos
 // SELECT product.name AS "Product Name",
 // infoSales.quantity AS quantity,
@@ -79,4 +84,5 @@ module.exports = {
   registerEachProduct,
   getOrderDetailsByid,
   getSalesForAdmin,
+  updateStatus,
 };

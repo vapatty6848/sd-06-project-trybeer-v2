@@ -21,7 +21,7 @@ function AdminDetailCard({ indexId, quantity, name, unitPrice }) {
             {`R$ ${sumPrices(unitPrice, quantity)}`}
           </p>
           <span data-testid={ `${indexId}-order-unit-price` }>
-            { `(R$ ${unitPrice})` }
+            { `(R$ ${unitPrice.replace('.', ',')})` }
           </span>
         </div>
       </div>
