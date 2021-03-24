@@ -64,7 +64,7 @@ export default function Login({ history }) {
           <Link
             to="/register"
             data-testid="no-account-btn"
-            className="btn btn-info mt-4"
+            className="btn btn-info text-light mt-4"
           >
             Ainda não tenho conta
           </Link>
