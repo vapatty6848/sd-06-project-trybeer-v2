@@ -24,7 +24,7 @@ function Provider({ children }) {
   const [allSales, setAllSales] = useState([]);
   const [orderDetails, setOrderDetails] = useState([]);
   const [saleDetails, setSaleDetails] = useState([]);
-  const [status, setStatus] = useState('Pendente');
+  const [status, setStatus] = useState(false);
 
   async function decoder() {
     const jsonWebToken = await ApiService.login(email, password);
@@ -149,9 +149,9 @@ function Provider({ children }) {
   async function handleStatus(id) {
     const orderStatus = await ApiService.updateStatus(id);
     if (orderStatus.message === 'Pedido atualizado') {
-      setStatus('Entregue');
+      setStatus(true);
     } else {
-      setStatus('Pendente');
+      setStatus(false);
     }
   }
 
