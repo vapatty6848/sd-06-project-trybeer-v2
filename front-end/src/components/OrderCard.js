@@ -14,8 +14,10 @@ function OrderCard({ indexId, orderId, date, totalValue }) {
           className="d-flex flex-fill flex-sm-row
           justify-content-sm-around m-2 btn-group"
         >
-          <p className="p-content-oc"
-          data-testid={ `${indexId}-order-number` }>
+          <p
+            className="p-content-oc"
+            data-testid={ `${indexId}-order-number` }
+          >
             { `Pedido ${orderId}` }
           </p>
           <p className="p-content-oc" data-testid={ `${indexId}-order-date` }>{date}</p>
