@@ -21,7 +21,7 @@ function OrderDetailCard({ indexId, quantity, name, unitPrice }) {
           className="d-flex flex-fill flex-sm-row
           justify-content-sm-between m-2 btn-group mr-4"
         >
-          <p 
+          <p
             className="p-content-oc ml-3"
             data-testid={ `${indexId}-product-qtd` }
           >
