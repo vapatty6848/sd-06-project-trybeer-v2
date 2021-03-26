@@ -19,11 +19,11 @@ function OrderDetailCard({ indexId, quantity, name, unitPrice }) {
       <div className="border border-bottom rounded my-3 shadow-sm btn-group">
         <div
           className="d-flex flex-fill flex-sm-row
-          justify-content-sm-between m-2 btn-group mr-2"
+          justify-content-sm-between m-2 btn-group mr-4"
         >
-          <p data-testid={ `${indexId}-product-qtd` }>{quantity}</p>
-          <p data-testid={ `${indexId}-product-name` }>{name}</p>
-          <p data-testid={ `${indexId}-product-total-value` }>
+          <p className="p-content-oc ml-3" data-testid={ `${indexId}-product-qtd` }>{quantity}</p>
+          <p className="p-content-oc" data-testid={ `${indexId}-product-name` }>{name}</p>
+          <p className="p-content-oc" data-testid={ `${indexId}-product-total-value` }>
             {`R$ ${sumPrices(unitPrice, quantity)}`}
           </p>
         </div>

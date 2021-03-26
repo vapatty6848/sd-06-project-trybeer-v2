@@ -7,16 +7,16 @@ function OrderCard({ indexId, orderId, date, totalValue }) {
   return (
     <div
       data-testid={ `${indexId}-order-card-container` }
-      className="d-flex flex-sm-column justify-content-sm-between mx-5"
+      className="d-flex flex-sm-column w-100 justify-content-center mt-4"
     >
-      <div className="border border-bottom rounded my-3 shadow-sm btn-group">
+      <div className="border border-bottom w-100 m-4 rounded my-3 shadow-sm btn-group">
         <div
           className="d-flex flex-fill flex-sm-row
-          justify-content-sm-between m-2 btn-group mr-2"
+          justify-content-sm-around m-2 btn-group"
         >
-          <p data-testid={ `${indexId}-order-number` }>{ `Pedido ${orderId}` }</p>
-          <p data-testid={ `${indexId}-order-date` }>{date}</p>
-          <p data-testid={ `${indexId}-order-total-value` }>
+          <p className="p-content-oc" data-testid={ `${indexId}-order-number` }>{ `Pedido ${orderId}` }</p>
+          <p className="p-content-oc" data-testid={ `${indexId}-order-date` }>{date}</p>
+          <p className="p-content-oc" data-testid={ `${indexId}-order-total-value` }>
             {`R$ ${changedPrice}`}
           </p>
         </div>

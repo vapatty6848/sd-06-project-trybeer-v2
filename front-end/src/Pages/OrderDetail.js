@@ -16,25 +16,27 @@ function OrderDetail({ history, match }) {
   return (
     <div>
       <MenuTop title="Detalhes de Pedido" />
-      <h3 data-testid="order-number">{`Pedido ${id}`}</h3>
-      {orderDetails.length > 0 && (
-        <h5 data-testid="order-date">{orderDetails[0].date}</h5>)}
-      {isFetching
-        ? <h2>Loading...</h2>
-        : orderDetails.map((detail, index) => (
-          <OrderDetailCard
-            key={ index }
-            indexId={ index }
-            quantity={ detail.quantity }
-            name={ detail.name }
-            unitPrice={ detail.unitPrice }
-          />
-        ))}
-      {orderDetails.length > 0 && (
-        <h4 data-testid="order-total-value">
-          {`Total R$ ${orderDetails[0].totalValue.replace('.', ',')}`}
-        </h4>
-      )}
+      <div className="text-center mx-auto" >
+        <h3 className="my-3" data-testid="order-number">{`Pedido ${id}`}</h3>
+        {orderDetails.length > 0 && (
+          <h5 data-testid="order-date">{orderDetails[0].date}</h5>)}
+        {isFetching
+          ? <h2>Loading...</h2>
+          : orderDetails.map((detail, index) => (
+            <OrderDetailCard
+              key={ index }
+              indexId={ index }
+              quantity={ detail.quantity }
+              name={ detail.name }
+              unitPrice={ detail.unitPrice }
+            />
+          ))}
+        {orderDetails.length > 0 && (
+          <h4 className="my-3" data-testid="order-total-value">
+            {`Total R$ ${orderDetails[0].totalValue.replace('.', ',')}`}
+          </h4>
+        )}
+      </div>
     </div>
   );
 }
