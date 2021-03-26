@@ -16,7 +16,7 @@ function OrderDetail({ history, match }) {
   return (
     <div>
       <MenuTop title="Detalhes de Pedido" />
-      <div className="text-center mx-auto" >
+      <div className="text-center mx-auto">
         <h3 className="my-3" data-testid="order-number">{`Pedido ${id}`}</h3>
         {orderDetails.length > 0 && (
           <h5 data-testid="order-date">{orderDetails[0].date}</h5>)}
