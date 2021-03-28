@@ -21,7 +21,7 @@ function CardCheckout({ indexId, price, name, qtd, onClick }) {
         <div
           className="d-flex flex-column w-100 p-3 mx-2 mb-0 btn-group mr-2"
         >
-          <p className="p-content" idata-testid={ `${indexId}-product-name` }>{name}</p>
+          <p className="p-content" data-testid={ `${indexId}-product-name` }>{name}</p>
           <p
             className="p-content"
             data-testid={ `${indexId}-product-qtd-input` }
