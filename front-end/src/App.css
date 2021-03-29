@@ -87,6 +87,16 @@ a:active {
   margin-top: 50px;
 }
 
+.orders-links {
+  color: #000000ff;
+}
+
+.sale-card {
+  border: 2px solid #1e140bff;
+  border-radius: 2px;
+  background: #e5ce84ff;
+}
+
 /* 
 CSS HEX
 --black: #000000ff;

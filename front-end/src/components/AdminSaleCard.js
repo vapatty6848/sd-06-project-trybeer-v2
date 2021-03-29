@@ -5,9 +5,9 @@ function AdminSaleCard({ indexId, saleId, street, number, totalValue, status }) 
   const changedPrice = totalValue.replace('.', ',');
 
   return (
-    <div className="d-flex flex-sm-column justify-content-sm-between mx-5">
+    <div className="d-flex flex-sm-column justify-content-sm-between mx-5 orders-links ">
       <h4 data-testid={ `${indexId}-order-number` }>{`Pedido ${saleId}`}</h4>
-      <div className="border border-bottom rounded my-3 shadow-sm btn-group">
+      <div className="border border-bottom rounded my-3 shadow-sm btn-group sale-card">
         <div
           className="d-flex flex-fill flex-sm-row
           justify-content-sm-between m-2 btn-group mr-2"
