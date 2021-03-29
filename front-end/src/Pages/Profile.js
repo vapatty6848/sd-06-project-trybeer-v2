@@ -21,19 +21,19 @@ export default function Profile() {
   return (
     <div>
       <MenuTop title="Meu perfil" />
-      <form>
-        <div className="form-group row">
+      <form className="d-flex flex-column mt-4">
+        <div className="form-group row ml-5">
           <input
             data-testid="profile-name-input"
-            className="col-sm-2 col-form-label ml-3"
+            className="col-sm-2 col-form-label ml-3 w-75"
             value={ name }
             onChange={ (target) => { handleChange(target); } }
           />
         </div>
-        <div className="form-group row">
+        <div className="form-group row ml-5">
           <input
             data-testid="profile-email-input"
-            className="form-control-plaintext ml-3"
+            className="form-control-plaintext ml-3 w-75"
             readOnly
             value={ email }
           />
