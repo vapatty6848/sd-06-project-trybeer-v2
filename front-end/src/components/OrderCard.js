@@ -9,7 +9,10 @@ function OrderCard({ indexId, orderId, date, totalValue }) {
       data-testid={ `${indexId}-order-card-container` }
       className="d-flex flex-sm-column w-100 justify-content-center mt-4"
     >
-      <div className="border border-bottom w-100 m-4 rounded my-3 shadow-sm btn-group">
+      <div
+        className="border border-bottom w-100 m-4 rounded my-3
+          shadow-sm btn-group order-card-main-div"
+      >
         <div
           className="d-flex flex-fill flex-sm-row
           justify-content-sm-around m-2 btn-group"

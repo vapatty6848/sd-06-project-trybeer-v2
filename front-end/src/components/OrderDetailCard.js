@@ -16,7 +16,10 @@ function OrderDetailCard({ indexId, quantity, name, unitPrice }) {
       data-testid={ `${indexId}-order-card-container` }
       className="d-flex flex-sm-column justify-content-sm-between mx-5"
     >
-      <div className="border border-bottom rounded my-3 shadow-sm btn-group">
+      <div
+        className="border border-bottom rounded my-3
+          shadow-sm btn-group order-card-main-div"
+      >
         <div
           className="d-flex flex-fill flex-sm-row
           justify-content-sm-between m-2 btn-group mr-4"

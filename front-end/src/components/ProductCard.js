@@ -42,7 +42,7 @@ function ProductCard({ indexId, id, price, name, img }) {
   return (
     <div
       data-testid={ `${indexId}-product-card` }
-      className="card flex-fill w-25 p-3"
+      className="card flex-fill my-3 product-card-main-div"
     >
       <div className="card-header font-weight-bold text-monospace">
         <p data-testid={ `${indexId}-product-price` }>{`R$ ${changedPrice}`}</p>
@@ -51,18 +51,18 @@ function ProductCard({ indexId, id, price, name, img }) {
         data-testid={ `${indexId}-product-img` }
         src={ img }
         alt="Product cover"
-        className="card-img-top w-100 p-3"
+        className="card-img-top p-4"
       />
       <div className="card-body d-flex">
         <p data-testid={ `${indexId}-product-name` } className="align-self-end">
           {name}
         </p>
       </div>
-      <div className="card-footer d-inline-flex justify-content-around rounded-bottom">
+      <div className="card-footer d-flex justify-content-around rounded-bottom">
         <button
           type="button"
           data-testid={ `${indexId}-product-minus` }
-          className="btn btn-danger"
+          className="btn btn-product"
           onClick={ () => decreaseQtd() }
         >
           -
@@ -76,7 +76,7 @@ function ProductCard({ indexId, id, price, name, img }) {
         <button
           type="button"
           data-testid={ `${indexId}-product-plus` }
-          className="btn btn-primary"
+          className="btn btn-product"
           onClick={ () => increaseQtd() }
         >
           +

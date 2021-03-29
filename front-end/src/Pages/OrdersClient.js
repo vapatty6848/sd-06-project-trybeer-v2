@@ -42,7 +42,7 @@ function OrdersClient({ history }) {
   }, [allOrders]);
 
   return (
-    <div>
+    <div className="orders-main-div">
       <MenuTop title="Meus Pedidos" />
       <div>
         {isFetching

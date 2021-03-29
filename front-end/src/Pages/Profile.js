@@ -19,7 +19,7 @@ export default function Profile() {
   }
 
   return (
-    <div>
+    <div className="profile-main-div">
       <MenuTop title="Meu perfil" />
       <form className="d-flex flex-column mt-4">
         <div className="form-group row ml-5">
@@ -44,7 +44,7 @@ export default function Profile() {
             type="button"
             data-testid="profile-save-btn"
             onClick={ handleClick }
-            className={ valid ? 'btn btn-light' : 'btn btn-primary' }
+            className={ valid ? 'btn btn-light' : 'btn btn-save' }
           >
             Salvar
           </button>

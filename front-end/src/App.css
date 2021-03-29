@@ -19,7 +19,7 @@ a:active {
 
 .adm-container {
   position: fixed;
-  background-color:  #1e140bff;
+  background-color: #623812ff;
   color: #f7f7f7;
   height: 100vh;
   padding-top: 2vh;
@@ -61,21 +61,73 @@ a:active {
   margin-top: 10px;
 }
 
-.button-entregue {
-  background-image: linear-gradient(180deg, #623812ff 30%, #4b290c 80%, #251506 150%);
-    border: none;
-    border-radius: 4px;
-    box-shadow: 1px 2px 3px #b19c89ff;
-    color: #eff7ffff;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    height: 7vh;
-    padding: 0 15px;
-    outline: none;
+.product-card-main-div {
+  width: 55%;
 }
 
-.admin-profile{
+.products-main-div {
+  background: radial-gradient(circle, #e5ce8480 50%, #e5b72280 100%);
+  height: 150%;
+}
+
+.checkout-main-div {
+  background: radial-gradient(circle, #e5ce8480 50%, #e5b72280 100%);
+  height: 168vh;
+}
+
+.cardcheckout-main-div {
+  background: #ffffffff;
+}
+
+.btn-product {
+  background-color: #e5b622ff;
+}
+
+.btn-exclude {
+  background: #623812ff;
+}
+
+.orders-main-div {
+  background: radial-gradient(circle, #e5ce8480 50%, #e5b72280 100%);
+  height: 100vh;
+}
+
+.order-card-main-div {
+  background: #ffffffff;
+}
+
+.profile-main-div {
+  background: radial-gradient(circle, #e5ce8480 50%, #e5b72280 100%);
+  height: 105vh;
+}
+
+.btn-save {
+  background: #623812ff;
+}
+
+.menu-top-nav {
+  background: #623812ff;
+}
+
+.link-color {
+  color: #623812ff;
+}
+
+.button-entregue {
+  background-image: linear-gradient(180deg, #623812ff 30%, #4b290c 80%, #251506 150%);
+  border: none;
+  border-radius: 4px;
+  box-shadow: 1px 2px 3px #b19c89ff;
+  color: #eff7ffff;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  height: 7vh;
+  padding: 0 15px;
+  outline: none;
+}
+
+.admin-profile {
   border: 1px solid #623812ff;
   border-radius: 2px;
   width: 50%;
