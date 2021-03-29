@@ -17,7 +17,7 @@ function CardCheckout({ indexId, price, name, qtd, onClick }) {
 
   return (
     <div className="d-flex mx-5">
-      <div className="border border-bottom w-100 rounded my-3 shadow-sm btn-group">
+      <div className="cardcheckout-main-div border border-bottom w-100 rounded my-3 shadow-sm btn-group">
         <div
           className="d-flex flex-column w-100 p-3 mx-2 mb-0 btn-group mr-2"
         >
@@ -39,7 +39,7 @@ function CardCheckout({ indexId, price, name, qtd, onClick }) {
           data-testid={ `${indexId}-removal-button` }
           type="button"
           onClick={ onClick }
-          className="btn btn-danger"
+          className="btn btn-exclude"
         >
           X
         </button>

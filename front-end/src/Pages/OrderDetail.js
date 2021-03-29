@@ -14,7 +14,7 @@ function OrderDetail({ history, match }) {
   }, []);
 
   return (
-    <div>
+    <div className="orders-main-div">
       <MenuTop title="Detalhes de Pedido" />
       <div className="text-center mx-auto">
         <h3 className="my-3" data-testid="order-number">{`Pedido ${id}`}</h3>

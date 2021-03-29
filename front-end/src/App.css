@@ -19,7 +19,7 @@ a:active {
 
 .adm-container {
   position: fixed;
-  background-color: #292b2c;
+  background-color: #623812ff;
   color: #f7f7f7;
   height: 100vh;
   padding-top: 2vh;
@@ -54,6 +54,58 @@ a:active {
   margin-left: 35px;
   color:#292b2c;
   margin-top: 10px;
+}
+
+.product-card-main-div {
+  width: 55%;
+}
+
+.products-main-div {
+  background: radial-gradient(circle, #e5ce8480 50%, #e5b72280 100%);
+  height: 150%;
+}
+
+.checkout-main-div {
+  background: radial-gradient(circle, #e5ce8480 50%, #e5b72280 100%);
+  height: 168vh;
+}
+
+.cardcheckout-main-div {
+  background: #ffffffff;
+}
+
+.btn-product {
+  background-color: #e5b622ff;
+}
+
+.btn-exclude {
+  background: #623812ff;
+}
+
+.orders-main-div {
+  background: radial-gradient(circle, #e5ce8480 50%, #e5b72280 100%);
+  height: 100vh;
+}
+
+.order-card-main-div {
+  background: #ffffffff;
+}
+
+.profile-main-div {
+  background: radial-gradient(circle, #e5ce8480 50%, #e5b72280 100%);
+  height: 105vh;
+}
+
+.btn-save {
+  background: #623812ff;
+}
+
+.menu-top-nav {
+  background: #623812ff;
+}
+
+.link-color {
+  color: #623812ff;
 }
 
 /* 

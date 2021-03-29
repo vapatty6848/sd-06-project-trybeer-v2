@@ -26,9 +26,11 @@ export default function Products({ history }) {
   }, [totalSum]);
 
   return (
-    <div>
+    <div className="products-main-div">
       <MenuTop title="TryBeer" />
-      <div className="d-flex justify-content-sm-around flex-sm-wrap mb-5">
+      <div className="d-flex flex-column
+        align-items-center flex-sm-wrap mb-5"
+      >
         {isFetching
           ? <h2>Loading</h2>
           : allProducts.map((product, index) => (

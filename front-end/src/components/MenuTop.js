@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 function MenuTop({ title }) {
   return (
     <div id="content">
-      <nav className="navbar navbar-dark bg-dark">
+      <nav className="navbar navbar-dark menu-top-nav">
         <button
           className="btn btn-sm btn-outline-secondary dropdown-toggle"
           id="dropdownMenu2"
@@ -26,7 +26,7 @@ function MenuTop({ title }) {
         id="navbarToggleExternalContent"
         className="row collapse side-menu-container"
       >
-        <div className="col-2 bg-dark" id="dropdownMenu2">
+        <div className="col-2" id="dropdownMenu2">
           <div
             className="dropdown-menu"
             aria-labelledby="dropdownMenu2"

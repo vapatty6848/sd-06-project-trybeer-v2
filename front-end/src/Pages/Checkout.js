@@ -58,7 +58,7 @@ function Checkout({ history }) {
   }, [cart, street, number]);
 
   return (
-    <div>
+    <div className="checkout-main-div">
       <MenuTop title="Finalizar Pedido" />
       <div>
         <h3 className="w-50 p-1 text-center mx-auto mt-2 mb-2">Produtos</h3>
@@ -67,12 +67,12 @@ function Checkout({ history }) {
         ) : handleCart()}
         <h4
           data-testid="order-total-value"
-          className="w-50 p-1 text-right mx-auto mb-3"
+          className=" ml-5 pl-5 mr-0 mb-3"
         >
           {`Total R$ ${totalValue.toFixed(2).replace('.', ',')}`}
         </h4>
       </div>
-      <div className="my-5">
+      <div className="my-5 text-center">
         <h3 className="w-50 p-1 text-center mx-auto my-5">Endereço</h3>
         <form
           className="form-inline my-5 ml-3
