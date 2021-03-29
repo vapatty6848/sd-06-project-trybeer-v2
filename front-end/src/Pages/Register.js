@@ -3,6 +3,8 @@ import propTypes from 'prop-types';
 import Context from '../Context/Context';
 import { ApiService } from '../services';
 
+import '../Register.css';
+
 function Register({ history }) {
   const { email, setEmail, name, setName, valid, setValid,
     role, setRole, handleClick, password, setPassword } = useContext(Context);
@@ -46,81 +48,80 @@ function Register({ history }) {
   }, [email, password, name]);
 
   return (
-    <form className="needs-validation">
-      <div className="col-md-5 mb-3">
-        <label htmlFor="signup-name">
-          Nome
-          <input
-            type="text"
-            data-testid="signup-name"
-            id="signup-name"
-            onChange={ ({ target }) => setName(target.value) }
-            className="form-control"
-            placeholder="Digite um nome"
-          />
-          <small id="signup-name" className="form-text text-muted">
-            O nome deve ter no mínimo 12 caracteres.
-          </small>
-        </label>
-      </div>
-      <div className="col-md-5 mb-3">
-        <label htmlFor="signup-email">
-          Email
-          <input
-            type="email"
-            data-testid="signup-email"
-            id="signup-email"
-            onChange={ ({ target }) => setEmail(target.value) }
-            className="form-control"
-            placeholder="Digite um email"
-          />
-          <small id="signup-email" className="form-text text-muted">
-            O email não deve conter caracteres especiais.
-          </small>
-        </label>
-      </div>
-      <div className="col-md-5 mb-3">
-        <label htmlFor="signup-password">
-          Senha
-          <input
-            type="password"
-            data-testid="signup-password"
-            id="signup-password"
-            onChange={ ({ target }) => setPassword(target.value) }
-            className="form-control"
-            placeholder="Digite uma senha"
-          />
-          <small id="signup-password" className="form-text text-muted">
-            A senha deve ter no mínimo 6 caracteres.
-          </small>
-        </label>
-      </div>
-      <div className="form-group form-check ml-4 mb-5">
-        <label htmlFor="signup-seller" className="form-check-label">
-          <input
-            type="checkbox"
-            data-testid="signup-seller"
-            id="signup-seller"
-            checked={ !isChecked }
-            onChange={ ({ target }) => handleRole(target.checked) }
-            className="form-check-input"
-          />
-          Quero vender
-        </label>
-      </div>
-      <div className="form-check">
-        <button
-          disabled={ !valid }
-          type="button"
-          data-testid="signup-btn"
-          onClick={ () => handlePage() }
-          className={ !valid ? 'btn btn-light' : 'btn btn-success' }
-        >
-          Cadastrar
-        </button>
-      </div>
-      {msg === emailExistMsg ? <span>{msg}</span> : null}
-    </form>
+    <div className="register-container">
+      <form className="register-form">
+        <div className="register-inputs">
+          <label htmlFor="signup-name">
+            Nome
+            <input
+              type="text"
+              data-testid="signup-name"
+              id="signup-name"
+              onChange={ ({ target }) => setName(target.value) }
+              className="register-name"
+              placeholder="Digite um nome"
+            />
+            <small id="signup-name" className="register-description">
+              Deve conter no mínimo 12 caracteres.
+            </small>
+          </label>
+          <label htmlFor="signup-email">
+            Email
+            <input
+              type="email"
+              data-testid="signup-email"
+              id="signup-email"
+              onChange={ ({ target }) => setEmail(target.value) }
+              className="register-email"
+              placeholder="Digite um email"
+            />
+            <small id="signup-email" className="register-description">
+              Não deve conter caracteres especiais.
+            </small>
+          </label>
+          <label htmlFor="signup-password">
+            Senha
+            <input
+              type="password"
+              data-testid="signup-password"
+              id="signup-password"
+              onChange={ ({ target }) => setPassword(target.value) }
+              className="register-pass"
+              placeholder="Digite uma senha"
+            />
+            <small id="signup-password" className="register-description">
+              Deve conter no mínimo 6 caracteres.
+            </small>
+          </label>
+        </div>
+      </form>
+      <section className="register-section-btns">
+        <div className="register-check-container">
+          <label htmlFor="signup-seller" className="register-check-label">
+            <input
+              type="checkbox"
+              data-testid="signup-seller"
+              id="signup-seller"
+              checked={ !isChecked }
+              onChange={ ({ target }) => handleRole(target.checked) }
+            />
+            Quero vender
+          </label>
+        </div>
+        <div className="register-button-container">
+          <button
+            disabled={ !valid }
+            type="button"
+            data-testid="signup-btn"
+            onClick={ () => handlePage() }
+            className="register-button"
+          >
+            Cadastrar
+          </button>
+        </div>
+        {msg === emailExistMsg ? <span className="register-span">{msg}</span> : null}
+      </section>
+    </div>
   );
 }
 
