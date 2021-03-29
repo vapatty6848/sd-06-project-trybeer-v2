@@ -45,6 +45,17 @@ a:active {
   margin-left: 20vw;
 }
 
+.p-content {
+  line-height: 100%;
+  letter-spacing: 0.05em;
+}
+
+.p-content-oc {
+  margin-left: 35px;
+  color:#292b2c;
+  margin-top: 10px;
+}
+
 /* 
 CSS HEX
 --black: #000000ff;

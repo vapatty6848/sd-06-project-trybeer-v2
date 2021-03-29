@@ -61,7 +61,7 @@ function Checkout({ history }) {
     <div>
       <MenuTop title="Finalizar Pedido" />
       <div>
-        <h3 className="w-50 p-1 text-center mx-auto mb-3">Produtos</h3>
+        <h3 className="w-50 p-1 text-center mx-auto mt-2 mb-2">Produtos</h3>
         {isFetching ? (
           <h2 className="w-50 p-1 text-center mx-auto mb-3">Loading</h2>
         ) : handleCart()}
@@ -75,8 +75,8 @@ function Checkout({ history }) {
       <div className="my-5">
         <h3 className="w-50 p-1 text-center mx-auto my-5">Endereço</h3>
         <form
-          className="form-inline my-5
-        d-flex justify-content-sm-around flex-sm-wrap mb-5"
+          className="form-inline my-5 ml-3
+        d-flex justify-content-sm-around flex-sm-wrap mb-5 text-center"
         >
           <label htmlFor="rua" className="mx-4">
             Rua:
@@ -95,7 +95,7 @@ function Checkout({ history }) {
               id="numero"
               type="number"
               data-testid="checkout-house-number-input"
-              className="form-control ml-2"
+              className="form-control ml-2 mb-4"
             />
           </label>
         </form>
