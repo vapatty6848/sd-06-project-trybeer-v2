@@ -29,7 +29,7 @@ export default function Products({ history }) {
     <div className="products-main-div">
       <MenuTop title="TryBeer" />
       <div
-        className="d-flex flex-column align-items-center flex-sm-wrap mb-5"
+        className="d-flex flex-column align-items-center flex-sm-wrap pb-5"
       >
         {isFetching
           ? <h2>Loading</h2>
