@@ -1,0 +1,187 @@
+.register-container {
+  background: radial-gradient(circle, #e5ce8480 50%, #e5b72280 100%);
+  background-size: 100% 100%;
+  box-sizing: border-box;
+}
+
+@media (min-width: 300px) {
+  .register-container {
+    align-items: center;
+    box-sizing: border-box;
+    color: #1e140bff;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  .register-form {
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    margin-top: 4vh;
+  }
+  
+  .register-inputs {
+    align-items: flex-end;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-bottom: 4vh;
+    min-height: 8vh;
+  }
+
+  .register-name, .register-email, .register-pass {
+    background-color: #e5ce84ff;
+    border: none;
+    border-bottom: 1px solid #e5b622ff;
+    border-right: 1px solid #e5b622ff;
+    border-radius: 4px;
+    box-shadow: 1px 2px 3px #b19c89ff;
+    color: #0c0a08ff;
+    font-size: 16px;
+    height: 35px;
+    outline: none;
+    padding: 6px 10px;
+    width: 240px;
+  }
+
+  label {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    margin: 2vh 0;
+  }
+
+  .register-description {
+    display: flex;
+    color: #a08d7b;
+  }
+
+  .register-section-btns {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .register-button-container {
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 230px;
+  }
+  
+  .register-button {
+    background-image: linear-gradient(180deg, #623812ff 30%, #4b290c 80%, #251506 150%);
+    border: none;
+    border-radius: 4px;
+    box-shadow: 1px 2px 3px #b19c89ff;
+    color: #eff7ffff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    height: 40px;
+    outline: none;
+  }
+  
+  .register-button:active {
+    background-image: linear-gradient(180deg, #623812ff 30%, #4b290c 80%, #251506 150%);
+    border: none;
+    box-shadow: none;
+    color: #dae6e7ff;
+    transform: translateY(2px);
+  }
+  
+  .register-button button:disabled,
+  button[disabled] {
+    background-image: linear-gradient(180deg, #7c421080, #4b290c96);
+    border: none;
+    border-radius: 4px;
+    box-shadow: 1px 2px 3px #b19c89ff;
+    color: #4e4e4e;
+    cursor: default;
+    padding: 0;
+  }
+
+  .register-check-container {
+    margin-bottom: 10px;
+    padding: 0;
+    width: 160px;
+  }
+  
+  .register-check-label {
+    align-items: center;
+    color: #1e140bff;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row-reverse;
+    font-size: 18px;
+    font-weight: bold;
+    justify-content: space-around;
+  }
+}
+/* // Small devices (landscape phones, 576px and up) */
+@media (min-width: 540px) {
+  .register-container {
+    flex-direction: row;
+  }
+  
+  .register-inputs {
+    margin-right: 50px;
+  }
+  
+  .register-button {
+    height: 35px;
+  }
+
+  .register-check-container {
+    margin-bottom: 25px;
+  }
+ }
+
+/* // Medium devices (tablets, 768px and up) */
+@media (min-width: 766px) {
+  .register-container {
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .register-inputs {
+    margin-bottom: 0;
+    margin-right: 0;
+  }
+
+  .register-name, .register-email, .register-pass {
+    font-size: 18px;
+    width: 300px;
+  }
+
+  .register-button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 250px;
+  }
+  
+  .register-button {
+    height: 40px;
+  }
+ }
+
+/* // Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1366px) {
+  .register-section-btns {
+    padding-bottom: 5px;
+  }
+
+  .register-span {
+    color: #1e140bff;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 1vh 0;
+  }
+ }
