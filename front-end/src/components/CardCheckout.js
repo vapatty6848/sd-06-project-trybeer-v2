@@ -17,7 +17,10 @@ function CardCheckout({ indexId, price, name, qtd, onClick }) {
 
   return (
     <div className="d-flex mx-5">
-      <div className="cardcheckout-main-div border border-bottom w-100 rounded my-3 shadow-sm btn-group">
+      <div
+        className="cardcheckout-main-div border border-bottom
+          w-100 rounded my-3 shadow-sm btn-group"
+      >
         <div
           className="d-flex flex-column w-100 p-3 mx-2 mb-0 btn-group mr-2"
         >
