@@ -2,7 +2,6 @@ import React, { useEffect, useContext } from 'react';
 import propTypes from 'prop-types';
 import Context from '../Context/Context';
 import { SideBar } from '../components';
-
 import '../App.css';
 
 function AdminProfile({ history }) {
@@ -20,7 +19,7 @@ function AdminProfile({ history }) {
         <div className="form-inline">
           <p
             data-testid="profile-name"
-            className="form-control ml-3 my-2 w-75"
+            className="admin-profile name-admin"
           >
             {`Nome: ${name}`}
           </p>
@@ -28,7 +27,7 @@ function AdminProfile({ history }) {
         <div className="form-inline">
           <p
             data-testid="profile-email"
-            className="form-control ml-3 my-2 w-75"
+            className="admin-profile"
           >
             {`Email: ${email}`}
           </p>

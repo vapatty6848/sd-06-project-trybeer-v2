@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Context from '../Context/Context';
 import { SideBar, AdminSaleCard } from '../components';
+import '../App.css';
 
 function AdminOrders({ history }) {
   const { validateToken, getAllSales,
