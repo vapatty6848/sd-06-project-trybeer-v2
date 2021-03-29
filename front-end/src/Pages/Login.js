@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import Context from '../Context/Context';
 
+import '../Login.css';
+
 export default function Login({ history }) {
   const { email, setEmail, password, setPassword,
     handleClick, valid, setValid } = useContext(Context);
@@ -20,51 +22,48 @@ export default function Login({ history }) {
   }, [email, password]);
 
   return (
-    <div>
-      <h1 className="">Trybeer Sixteen</h1>
-      <form>
-        <div className="col-md-5 mb-3">
-          <label htmlFor="email-input">
+    <div className="login-container">
+      <div className="login-header">
+        <h1 className="login-title">Trybeer</h1>
+        <div className="login-image" />
+      </div>
+      <form className="login-form">
+        <div className="login-inputs">
+          <label className="login-label" htmlFor="email-input">
             Email
             <input
               type="email"
               data-testid="email-input"
               id="email-input"
               onChange={ ({ target }) => setEmail(target.value) }
-              className="form-control"
-              placeholder="Email"
+              className="login-email"
             />
           </label>
-        </div>
-        <div className="col-md-5 mb-3">
-          <label htmlFor="password-input">
+          <label className="login-label" htmlFor="password-input">
             Senha
             <input
               type="password"
               data-testid="password-input"
               id="password-input"
               onChange={ ({ target }) => setPassword(target.value) }
-              className="form-control"
-              placeholder="Senha"
+              className="login-pass"
             />
           </label>
         </div>
-        <div className="form-check">
+        <div className="login-button-container">
           <button
             disabled={ !valid }
             type="button"
             data-testid="signin-btn"
             onClick={ () => handleClick(history) }
-            className={ !valid ? 'btn btn-light' : 'btn btn-success' }
+            className="login-button"
           >
             Entrar
           </button>
-        </div>
-        <div className="form-check">
           <Link
             to="/register"
             data-testid="no-account-btn"
-            className="btn btn-info text-light mt-4"
+            className="login-input-btn"
           >
             Ainda não tenho conta
           </Link>

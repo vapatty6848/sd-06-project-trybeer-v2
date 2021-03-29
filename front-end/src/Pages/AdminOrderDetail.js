@@ -50,7 +50,7 @@ function AdminOrderDetail({ history, match }) {
           data-testid="mark-as-delivered-btn"
           className="btn btn-outline-primary"
           onClick={ () => handleStatus(id) }
-          hidden={ status }
+          hidden={ saleDetails.length > 0 && saleDetails[0].status === 'Entregue' }
         >
           Marcar como entregue
         </button>
