@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Context from '../Context/Context';
 import { SideBar, AdminSaleCard } from '../components';
+import '../App.css';
 
 function AdminOrders({ history }) {
   const { validateToken, getAllSales,
@@ -19,7 +20,7 @@ function AdminOrders({ history }) {
       return <h2>Não há pedidos!</h2>;
     }
     return allSales.map((sale, index) => (
-      <Link key={ index } to={ `/admin/orders/${sale.saleId}` }>
+      <Link key={ index } className="orders-links" to={ `/admin/orders/${sale.saleId}` }>
         <AdminSaleCard
           key={ index }
           indexId={ index }
@@ -44,7 +45,7 @@ function AdminOrders({ history }) {
 
   return (
     <div>
-      <SideBar title="Pedidos" />
+      <SideBar title="Trybeer" />
       <div className="adm-body">
         {isFetching ? <h3>Loading</h3> : handleSales()}
       </div>

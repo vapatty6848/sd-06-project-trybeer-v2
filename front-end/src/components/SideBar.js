@@ -13,22 +13,22 @@ function SideBar({ title }) {
       <nav className="admin-side-bar-container">
         <div className="adm-navbar">
           <Link
-            data-testid="side-menu-item-orders"
-            className="adm-link"
+            data-testid="side-menu-item-orders "
+            className="adm-link text-light"
             to="/admin/orders"
           >
             Pedidos
           </Link>
           <Link
             data-testid="side-menu-item-profile"
-            className="adm-link"
+            className="adm-link text-light"
             to="/admin/profile"
           >
             Perfil
           </Link>
           <Link
             data-testid="side-menu-item-logout"
-            className="adm-link"
+            className="adm-link text-light"
             to="/login"
             onClick={ () => localStorage.clear() }
           >
