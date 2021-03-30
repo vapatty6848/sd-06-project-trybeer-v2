@@ -25,7 +25,7 @@ export default function Profile() {
         <div className="form-group row ml-5">
           <input
             data-testid="profile-name-input"
-            className="col-sm-2 col-form-label ml-3 w-75"
+            className="admin-profile name-admin"
             value={ name }
             onChange={ (target) => { handleChange(target); } }
           />
@@ -38,13 +38,13 @@ export default function Profile() {
             value={ email }
           />
         </div>
-        <div className="form-group btn">
+        <div className="form-group btn d-flex flex-column">
           <button
             disabled={ valid }
             type="button"
             data-testid="profile-save-btn"
             onClick={ handleClick }
-            className={ valid ? 'btn btn-light' : 'btn btn-save' }
+            className="checkout-button"
           >
             Salvar
           </button>

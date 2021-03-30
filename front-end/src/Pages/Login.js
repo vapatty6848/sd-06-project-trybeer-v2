@@ -56,7 +56,7 @@ export default function Login({ history }) {
             type="button"
             data-testid="signin-btn"
             onClick={ () => handleClick(history) }
-            className="login-button"
+            className={ valid && 'login-button' }
           >
             Entrar
           </button>

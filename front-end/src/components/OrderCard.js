@@ -3,16 +3,15 @@ import propTypes from 'prop-types';
 
 function OrderCard({ indexId, orderId, date, totalValue }) {
   const changedPrice = totalValue.replace('.', ',');
+  const yellow = 'w-75 mx-auto my-2 btn-group sale-card';
+  const brown = 'w-75 mx-auto my-2 btn-group brown-card';
 
   return (
     <div
       data-testid={ `${indexId}-order-card-container` }
       className="d-flex flex-sm-column w-100 justify-content-center mt-4"
     >
-      <div
-        className="border border-bottom w-100 m-4 rounded my-3
-          shadow-sm btn-group order-card-main-div"
-      >
+      <div className={ indexId % 2 === 0 ? yellow : brown }>
         <div
           className="d-flex flex-fill flex-sm-row
           justify-content-sm-around m-2 btn-group"

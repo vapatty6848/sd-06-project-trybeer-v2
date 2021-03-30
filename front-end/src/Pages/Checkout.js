@@ -67,16 +67,16 @@ function Checkout({ history }) {
         ) : handleCart()}
         <h4
           data-testid="order-total-value"
-          className=" ml-5 pl-5 mr-0 mb-3"
+          className="order-total-value"
         >
           {`Total R$ ${totalValue.toFixed(2).replace('.', ',')}`}
         </h4>
       </div>
-      <div className="my-5 text-center">
-        <h3 className="w-50 p-1 text-center mx-auto my-5">Endereço</h3>
+      <div className="mt-5 text-center">
+        <h3 className="w-50 p-1 text-center mx-auto">Endereço</h3>
         <form
-          className="form-inline my-5 ml-3
-        d-flex justify-content-sm-around flex-sm-wrap mb-5 text-center"
+          className="form-group ml-3
+        d-flex justify-content-sm-around flex-wrap mb-5 text-center"
         >
           <label htmlFor="rua" className="mx-4">
             Rua:
@@ -106,7 +106,7 @@ function Checkout({ history }) {
           type="button"
           disabled={ isDisabled }
           onClick={ () => handleCheckoutFinish(history) }
-          className={ isDisabled ? 'btn btn-light' : 'btn btn-success' }
+          className="checkout-button"
         >
           Finalizar Pedido
         </button>
