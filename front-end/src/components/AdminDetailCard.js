@@ -7,10 +7,12 @@ function AdminDetailCard({ indexId, quantity, name, unitPrice }) {
     const resultString = result.toString();
     return resultString.replace('.', ',');
   };
+  const yellow = 'my-3 btn-group sale-card';
+  const brown = 'my-3 btn-group brown-card';
 
   return (
     <div className="d-flex flex-sm-column justify-content-sm-between mx-5">
-      <div className="border border-bottom rounded my-3 shadow-sm btn-group">
+      <div className={ indexId % 2 === 0 ? yellow : brown }>
         <div
           className="d-flex flex-fill flex-sm-row
           justify-content-sm-between m-2 btn-group mr-2"

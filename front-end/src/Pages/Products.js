@@ -29,7 +29,7 @@ export default function Products({ history }) {
     <div className="products-main-div">
       <MenuTop title="TryBeer" />
       <div
-        className="d-flex flex-column align-items-center flex-sm-wrap pb-5"
+        className="d-flex flex-column align-items-center flex-sm-wrap pb-5 prod"
       >
         {isFetching
           ? <h2>Loading</h2>
@@ -50,7 +50,7 @@ export default function Products({ history }) {
           type="button"
           disabled={ disable }
           data-testid="checkout-bottom-btn"
-          className="w-100 p-1 border-0 text-light bg-success rounded"
+          className="w-100 p-1 border-0 text-light bg-success rounded my-1"
         >
           <p
             data-testid="checkout-bottom-btn-value"

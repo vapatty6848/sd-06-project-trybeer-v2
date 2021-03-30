@@ -114,7 +114,7 @@ function Register({ history }) {
             type="button"
             data-testid="signup-btn"
             onClick={ () => handlePage() }
-            className="register-button"
+            className={ valid && 'register-button' }
           >
             Cadastrar
           </button>

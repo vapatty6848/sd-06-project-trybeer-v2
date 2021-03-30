@@ -69,7 +69,7 @@ function ProductCard({ indexId, id, price, name, img }) {
         </button>
         <p
           data-testid={ `${indexId}-product-qtd` }
-          className="font-weight-bold text-monospace"
+          className="font-weight-bold text-monospace qtn-card"
         >
           {quantity}
         </p>
