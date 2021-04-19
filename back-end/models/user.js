@@ -7,6 +7,12 @@ const createUser = (sequelize, DataTypes) => {
     role: DataTypes.STRING,
   }, { timestamps: false });
 
+  appUser.associate = (models) => {
+    appUser.hasMany(models.sales,
+      { foreignKey: 'userId', as: 'sales' });
+    return appUser;
+  };
+
   return appUser;
 };
 
