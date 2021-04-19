@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({ path: '/Users/jungle/Trybe/Projetos/sd-06-project-trybeer-v2/.env' });
 
 module.exports = {
   development: {
