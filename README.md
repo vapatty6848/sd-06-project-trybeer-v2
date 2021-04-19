@@ -105,9 +105,9 @@ ___
 ## Antes de começar a desenvolver:
 
 1. Clone o repositório
-  * `git clone https://github.com/betrybe/sd-0x-project-trybeer-v2.git`.
+  * `git clone https://github.com/betrybe/sd-06-project-trybeer-v2.git`.
   * Entre na pasta do repositório que você acabou de clonar:
-    * `cd sd-0x-project-trybeer-v2`
+    * `cd sd-06-project-trybeer-v2`
 
 2. Instale as dependências [**Caso existam**]
   * `npm install`
@@ -119,7 +119,7 @@ ___
     * Exemplo: `git checkout master`
   * Agora crie uma branch à qual você vai submeter os `commits` do seu projeto
     * Você deve criar uma branch no seguinte formato: `nome-de-usuario-nome-do-projeto`
-    * Exemplo: `git checkout -b joaozinho-sd-0x-project-trybeer-v2`
+    * Exemplo: `git checkout -b joaozinho-sd-06-project-trybeer-v2`
 
 4. Adicione as mudanças ao _stage_ do Git e faça um `commit`
   * Verifique que as mudanças ainda não estão no _stage_
@@ -134,16 +134,16 @@ ___
         * `git status` (deve aparecer uma mensagem tipo _nothing to commit_ )
 
 5. Adicione a sua branch com o novo `commit` ao repositório remoto
-  * Usando o exemplo anterior: `git push -u origin joaozinho-sd-0x-project-trybeer-v2`
+  * Usando o exemplo anterior: `git push -u origin joaozinho-sd-06-project-trybeer-v2`
 
 6. Crie um novo `Pull Request` _(PR)_
-  * Vá até a página de _Pull Requests_ do [repositório no GitHub](https://github.com/tryber/sd-0x-project-trybeer-v2/pulls)
+  * Vá até a página de _Pull Requests_ do [repositório no GitHub](https://github.com/tryber/sd-06-project-trybeer-v2/pulls)
   * Clique no botão verde _"New pull request"_
   * Clique na caixa de seleção _"Compare"_ e escolha a sua branch **com atenção**
   * Clique no botão verde _"Create pull request"_
   * Adicione uma descrição para o _Pull Request_ e clique no botão verde _"Create pull request"_
   * **Não se preocupe em preencher mais nada por enquanto!**
-  * Volte até a [página de _Pull Requests_ do repositório](https://github.com/tryber/sd-0x-project-trybeer-v2/pulls) e confira que o seu _Pull Request_ está criado
+  * Volte até a [página de _Pull Requests_ do repositório](https://github.com/tryber/sd-06-project-trybeer-v2/pulls) e confira que o seu _Pull Request_ está criado
 
 ---
 
@@ -242,7 +242,7 @@ Assim o banco e terá alguns dados inseridos.
 
 1 - Passo
 
-Haverá um arquivo no caminho: `sd-0x-project-trybeer-v2/back-end/config/config.js`
+Haverá um arquivo no caminho: `sd-06-project-trybeer-v2/back-end/config/config.js`
 
 ```javascript
 require('dotenv').config();
@@ -279,7 +279,7 @@ module.exports = {
 
 2 - Passo
 
-Haverá um arquivo no caminho: `sd-0x-project-trybeer-v2/cypress/plugins/index.js`. Neste arquivo, na linha 44, Haverá a seguinte comando:
+Haverá um arquivo no caminho: `sd-06-project-trybeer-v2/cypress/plugins/index.js`. Neste arquivo, na linha 44, Haverá a seguinte comando:
 
 `config.env.gitHubUser = process.env.GITHUB_USER;`
 
@@ -287,7 +287,7 @@ OBS: O valor da variável `GITHUB_USER` deverá ser o mesmo nome do seu usuário
 
 3 - Passo
 
-No arquivo `sd-0x-project-trybeer-v2.github/workflows/main.yml` altere a linha 45 para incluir o nome de usuário utilizado no passo anterior.
+No arquivo `sd-06-project-trybeer-v2.github/workflows/main.yml` altere a linha 45 para incluir o nome de usuário utilizado no passo anterior.
 
 antes:
 ```
@@ -340,7 +340,7 @@ E a variável `process.env.DB_NAME` e o nome do banco com exemplo abaixo:
 
 5 - Passo
 
-OBS: Haverá um arquivo de conexão com o mongodb já pronto no caminho `sd-0x-project-trybeer-v2/cypress/plugins/connection.js`, ele é usado para o avaliador, então não se esqueça de adicionar essas variáveis na pasta raiz tambem para poder rodar local.
+OBS: Haverá um arquivo de conexão com o mongodb já pronto no caminho `sd-06-project-trybeer-v2/cypress/plugins/connection.js`, ele é usado para o avaliador, então não se esqueça de adicionar essas variáveis na pasta raiz tambem para poder rodar local.
 
 **Você irá precisar configurar as variáveis globais do MySQL.** Você pode usar esse [Conteúdo de variáveis de ambiente com NodeJS](https://blog.rocketseat.com.br/variaveis-ambiente-nodejs/) como referência.
 
