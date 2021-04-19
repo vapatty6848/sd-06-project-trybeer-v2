@@ -1,8 +1,15 @@
-const userModel = require('../model/userModel');
+// const userModel = require('../model/userModel');
+const { users } = require('../models');
 
-const UNPROCESSABLE_ENTITY = 422;
+// const UNPROCESSABLE_ENTITY = 422;
 
-const findUserByEmailAndPassword = async (email, password) => {
+const findUserByEmailAndPassword = (userEmail, userPassword) => users.findAll({
+  where: {
+    email: userEmail,
+    password: userPassword,
+  },
+});
+/* const findUserByEmailAndPassword = async (email, password) => {
   const userFound = await userModel.findUserByEmail(email);  
 
   if (!userFound || userFound.password !== password) {
@@ -13,18 +20,28 @@ const findUserByEmailAndPassword = async (email, password) => {
     };
   }
   return userFound;
-};
+}; */
 
-const findUserByEmail = async (email) => {
+const findUserByEmail = (userEmail) => users.findAll({
+  where: { email: userEmail },
+});
+/* const findUserByEmail = async (email) => {
   const user = await userModel.findUserByEmail(email);
   return user;
-};
+}; */
 
-const updateUserNameByEmail = async (userEmail, updatedName) => {
+const updateUserNameByEmail = (userEmail, updatedName) => users.update(
+  { name: updatedName },
+  {
+    where: { email: userEmail },
+  },
+);
+/* const updateUserNameByEmail = async (userEmail, updatedName) => {
   await userModel.updateUserNameByEmail(userEmail, updatedName);
-};
+}; */
 
-const createUser = async (name, email, password, role) => {
+const createUser = async (user) => users.create(user);
+/* const createUser = async (name, email, password, role) => {
   const userFound = await userModel.findUserByEmail(email);  
   if (userFound) {
     return {
@@ -34,7 +51,7 @@ const createUser = async (name, email, password, role) => {
     };
   }
   await userModel.createUser(name, email, password, role);
-};
+}; */
 
 module.exports = {
   findUserByEmailAndPassword,
