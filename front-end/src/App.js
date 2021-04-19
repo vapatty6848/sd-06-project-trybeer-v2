@@ -1,30 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter } from 'react-router-dom';
 
-function App() {
+import { ThemeProvider } from 'styled-components';
+import GlobalStyles from './Styles/Global';
+import { useTheme } from './Hooks/theme';
+
+import Routes from './Routes';
+
+const App = () => {
+  const { theme } = useTheme();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={ logo } className="App-logo" alt="logo" />
-        <p>
-          Edit
-          {' '}
-          <code>src/App.js</code>
-          {' '}
-          and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <ThemeProvider theme={ theme }>
+        <GlobalStyles />
+        <Routes />
+      </ThemeProvider>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
