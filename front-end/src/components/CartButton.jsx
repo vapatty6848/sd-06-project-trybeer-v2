@@ -41,7 +41,6 @@ function CartButton() {
       <span data-testid="checkout-bottom-btn-value">{ parseCurrency(totalPrice) }</span>
     </button>
   );
-
 }
 
 export default CartButton;
