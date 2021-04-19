@@ -4,6 +4,8 @@ const cors = require('cors');
 require('dotenv/config');
 // const path = require('path');
 
+const { salesProducts } = require('./database/models');
+
 // const { 
 //   UserRoute,
 //   LoginRoute,
@@ -18,6 +20,13 @@ const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
+app.post('/login', async (req, res) => {
+  const { body } = req;
+
+  const user = await salesProducts.create(body);
+
+  return res.status(201).json(user);
+});
 // app.use('/login', LoginRoute);
 // app.use('/user', UserRoute);
 // app.use('/products', ProductsRoute);
