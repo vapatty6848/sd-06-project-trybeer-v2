@@ -67,19 +67,19 @@ export default function AdminOrdersDetail({ match: { params: { id } } }) {
           {sale && sale.status === 'pendente' && (
             <div>
               <button
-            type="button"
-            data-testid="mark-as-prepared-btn"
-            onClick={ _____ }
-          >
-            Preparar pedido
-          </button>
-            <button
-              type="button"
-              data-testid="mark-as-delivered-btn"
-              onClick={ fullfilOrder }
-            >
-              Marcar como entregue
-            </button>
+                type="button"
+                data-testid="mark-as-prepared-btn"
+                onClick={ _____ }
+              >
+                Preparar pedido
+              </button>
+              <button
+                type="button"
+                data-testid="mark-as-delivered-btn"
+                onClick={ fullfilOrder }
+              >
+                Marcar como entregue
+              </button>
             </div>
           )}
         </>
