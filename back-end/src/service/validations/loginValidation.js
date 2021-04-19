@@ -14,8 +14,6 @@ const loginValidation = async ({ email, password }) => {
     where: { email },
   });
 
-  console.log(result);
-
   if (result) {
     const { password: storagePassword } = result;
     if (storagePassword === password) return result;
