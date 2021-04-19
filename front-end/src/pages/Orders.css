@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.order-card-container {
+  width: 33%;
+  border: 1px solid white;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-id-date {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 3%;
+}
+
+.card-total{
+  padding-top: 5%;
+  padding-left: 5%;
+}
