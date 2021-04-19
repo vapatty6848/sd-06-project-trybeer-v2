@@ -1,20 +1,20 @@
-const connection = require('./connection');
+const createUsers = (sequelize, DataTypes) => {
+  const Users = sequelize.define('users', {
+    id: { primaryKey: true, type: DataTypes.INTEGER },
+    name: DataTypes.STRING,
+    email: DataTypes.STRING,
+    password: DataTypes.STRING,
+    role: DataTypes.STRING,
+  }, {
+    timestamps: false,
+  });
 
-const findUserByEmail = async (email) => {
-  const [[user]] = await connection.execute(
-    'SELECT * FROM users WHERE email=?', [email],
-  );
-  return user;
+  Users.associate = (models) => {
+    Users.hasMany(models.salesModel,
+      { foreignKey: 'id', as: 'user' });
+  };
+
+  return Users;
 };
 
-const createUser = async (name, email, password, role) => {
-  await connection.execute(
-    'INSERT INTO users (name, email, password, role) VALUES (?,?,?,?)',
-    [name, email, password, role],
-  );
-};
-
-module.exports = {
-  findUserByEmail,
-  createUser,
-};
+module.exports = createUsers;
