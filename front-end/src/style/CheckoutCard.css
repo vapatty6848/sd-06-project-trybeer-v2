@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+.checkout_card {
+  align-items: center;
+  align-content: center;
+  background-color: #ffffff;
+  border-bottom: 1px solid #205527;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  margin: auto;
+  margin-top: 10px;
+  width: 350px;
+}
+
+.checkout_card table {
+  align-items: center;
+  align-content: center;
+  background-color: #ffffff;
+  border-bottom: 1px solid #205527;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  margin: auto;
+  margin-top: 10px;
+  width: 470px;
+}
+
+.checkout_card p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 12pt !important;
+  font-weight: 500;
+  margin: 1px;
+  text-align: center;
+  padding: 5px;
+}
+
+.checkout_card button {
+  background-color: #ff4000;
+  border: none;
+  border-radius: 5px;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16pt;
+  font-weight: 900;
+}
+
+.checkout_card button:hover {
+  background-color: #ff6e3d;
+  cursor: pointer;
+}
+
+@media screen and ( min-width: 800px ) {
+  .checkout_card {
+    width: 700px;
+  }
+}

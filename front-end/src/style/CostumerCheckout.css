@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+.costumer_checkout {
+  align-items: center;
+  align-content: center;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  margin: auto;
+  margin-bottom: 50px;
+  width: 100%;
+}
+
+.costumer_checkout h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 20pt;
+  font-weight: 900;
+}
+
+.costumer_checkout_product {
+  align-items: center;
+  align-content: center;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.costumer_checkout_product p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14pt;
+  font-weight: 900;
+}
+
+.costumer_checkout_total {
+  align-items: center;
+  align-content: center;
+  background-color: #ffffff;
+  border: 5px double #205527;
+  border-radius: 25px 0px;
+  display: flex;
+  flex-flow: row wrap;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16pt;
+  font-weight: 900;
+  justify-content: center;
+  margin: 15px;
+  width: 250px !important;
+}
+
+.costumer_checkout_total p {
+  margin-left: 10px;
+}
+
+.costumer_checkout_address {
+  align-items: center;
+  align-content: center;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.costumer_checkout_address p {
+  background-color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16pt;
+  font-weight: 900;
+  padding: 5px;
+}
+
+.costumer_checkout_address label {
+  background-color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14pt;
+  font-weight: 900;
+  margin: auto;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.costumer_checkout_address input {
+  border: 2px solid #205527;
+  border-radius: 5px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14pt;
+  height: 30px;
+  margin: auto;
+  text-align: center;
+  width: 300px;
+}
+
+.costumer_checkout_address input:focus {
+  border: 3px solid #205527;
+  outline: none !important;
+}
+
+.costumer_checkout_address button {
+  background-color: #205527;
+  border: none;
+  border-radius: 5px;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16pt;
+  font-weight: 700;
+  height: 40px;
+  margin-top: 15px;
+  width: 305px;
+}
+
+.costumer_checkout_address  button:hover {
+  background-color: #008200;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.costumer_checkout_address form button:disabled {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+.costumer_checkout_address span {
+  background-color: #ffffff;
+  color: #ff0000;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16pt;
+  font-weight: 900;
+  margin-top: 15px;
+  padding: 10px;
+  text-align: center;
+}

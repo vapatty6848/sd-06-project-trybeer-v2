@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+.admin_orders_details_list {
+  align-items: center !important;
+  align-content: center !important;
+  display: flex !important;
+  flex-flow: row nowrap !important;
+  justify-content: space-between !important;
+  margin: auto;
+  width: 100%;
+}
+
+.admin_orders_details_list table {
+  align-items: center !important;
+  align-content: center !important;
+  background-color: #ffffff !important;
+  border-bottom: 1px solid #205527;
+  display: flex !important;
+  flex-flow: row nowrap !important;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14pt !important;
+  font-weight: 900;
+  justify-content: space-between !important;
+  margin: 1px;
+  text-align: center;
+  padding: 5px;
+}

@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+.ordersDetails {
+  align-items: center;
+  align-content: center;
+  background-color: #ffffff;
+  border-bottom: 1px solid #205527;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  margin: auto;
+  margin-top: 10px;
+  padding: 5px 15px;
+  width: 350px;
+}
+
+.ordersDetails p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14pt !important;
+  font-weight: 900;
+  margin: 1px;
+  text-align: center;
+  padding: 5px;
+}
+
+a:link {
+  color: #000000;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #000000;
+}
+
+.orderCards_title {
+  align-items: center;
+  align-content: center;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  margin: 20px 10px -20px 10px;
+  width: 100%;
+}
+
+.orderCards_title h4 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 18pt;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.orderCards_title p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14pt;
+  text-decoration: none;
+}
+
+.orderCards_price h4 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 18pt;
+  font-weight: 900;
+  text-decoration: none;
+}
