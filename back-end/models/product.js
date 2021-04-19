@@ -2,7 +2,7 @@ const createProduct = (sequelize, DataTypes) => {
   const Product = sequelize.define('product', {
     name: DataTypes.STRING,
     price: DataTypes.DECIMAL(4, 2),
-    url_image: DataTypes.STRING,
+    urlImage: DataTypes.STRING,
   });
 
   Product.associate = (models) => {
