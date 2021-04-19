@@ -1,0 +1,48 @@
+.admin-container {
+  color: #004370;
+  display: flex;
+  flex-flow: column;
+  height: 100vh;
+}
+
+.admin-container-detail {
+  margin-left: 15%;
+}
+
+.admin-container-detail h1 {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.admin-orders-list {
+  display: flex;
+  flex-flow: row wrap;
+  margin-left: 15%;
+  width: 85%;
+}
+
+.admin-order-details {
+  border: 2px solid #047575;
+  border-radius: 50px;
+  box-shadow:  10px 10px 16px #071a1a, 
+              -1px -1px 1px #111d1d;
+  margin: auto;
+  padding: 20px;
+  width: 30%;
+}
+
+.mark-as-delivered-btn {
+  background-color: rgb(0, 117, 117);
+  color: white;
+  font-size: larger;
+  margin: 40px auto;
+  padding: 10px;
+}
+
+.admin-container h1 {
+  margin-left: 15%;
+}
+
+.admin-container-detail h1 {
+  margin-left: 0;
+}
