@@ -1,4 +1,5 @@
-models/index.js
+# models/index.js
+models
 seeders
 migrations
 tests
