@@ -1,0 +1,47 @@
+.container-adm {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: red;
+}
+
+.title-adm {
+  display: flex;
+  height: 15%;
+  width: 100%;
+  color: white;
+  justify-content: center;
+  align-items: center;
+}
+
+.title-adm h1 {
+  font-size: 300%;
+}
+
+.admin-side-bar-container {
+  height: 85vh;
+}
+
+.main-link-adm {
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.link-first-adm {
+  align-items: flex-start;
+  height: 90vh;
+}
+
+.link-second-adm {
+  align-items: flex-end;
+}
+
+.link-first-adm .btn-danger{
+  font-size: 140%;
+}
+
+.link-second-adm .btn-danger{
+  font-size:140%;
+}
+

@@ -1,0 +1,38 @@
+.form-checkout {
+  width: 100%;
+}
+
+.form-group {
+  width: 80%;
+  margin: auto;
+}
+
+.form-group input, label {
+  width: 100%;
+}
+
+.form-button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.form-group button {
+  margin: auto;
+}
+
+.product {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin: 10px 5%;
+  font-size: 20px;
+}
+
+.total-price {
+  display: flex;
+  width: 90%;
+  justify-content: flex-end;
+  font-size: 27px;
+}

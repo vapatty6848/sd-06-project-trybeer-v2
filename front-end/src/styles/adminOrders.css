@@ -1,0 +1,44 @@
+.main-container-adm {
+  display: flex;
+  height: 100vh;
+}
+
+.menu-top-adm {
+  width: 18%;
+}
+
+.page-body-adm {
+  width: 82%;
+}
+
+.page-title-adm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 15%;
+}
+
+.page-title-adm  h1 {
+  font-size: 50px;
+}
+
+.main-page-adm {
+  height: 85%;
+}
+
+.cada-venda-adm {
+  width: 90%;
+  margin: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.125);
+  border-radius: 5%;
+  height: 60px;
+  display: flex;
+}
+
+.venda-adm {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  align-items: center;
+  color: black;
+}

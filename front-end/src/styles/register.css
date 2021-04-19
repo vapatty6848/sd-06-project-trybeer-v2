@@ -1,0 +1,38 @@
+.check-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0;
+  font-size: 20px;
+}
+
+.check-button input[type=checkbox] {
+  margin: 10px;
+  -webkit-transform: scale(2);
+  transform: scale(2);
+  padding: 10px;
+}
+
+.button-register {
+  display: flex;
+  justify-content: center;
+}
+
+.button-register .btn-danger {
+  font-size: 25px;
+}
+
+.form-register {
+  font-size: 25px;
+}
+
+.title-register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+.title-register h1{
+  font-size: 50px;
+}

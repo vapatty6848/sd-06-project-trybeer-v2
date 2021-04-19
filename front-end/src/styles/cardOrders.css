@@ -1,0 +1,32 @@
+a:link {
+  text-decoration:none;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+}
+
+.main-container {
+  width: 100%;
+}
+
+.cada-compra {
+  width: 90%;
+  margin: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.125);
+  border-radius: 5%;
+  height: 60px;
+  display: flex;
+}
+
+.compra {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  align-items: center;
+}
+
+.compra h4 {
+  margin: 0;
+}

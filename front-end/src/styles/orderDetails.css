@@ -1,0 +1,5 @@
+.en-title{
+  display: flex;
+  justify-content: space-evenly;
+  margin: 30px;
+}
