@@ -105,7 +105,7 @@ ___
 ## Antes de começar a desenvolver:
 
 1. Clone o repositório
-  * `git clone https://github.com/betrybe/sd-06-project-trybeer-v2.git`.
+  * `git clone https://github.com/tryber/sd-06-project-trybeer-v2.git`.
   * Entre na pasta do repositório que você acabou de clonar:
     * `cd sd-06-project-trybeer-v2`
 
