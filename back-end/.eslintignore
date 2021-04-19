@@ -1,2 +1,2 @@
-models/index.js
+src/database/models/index.js
 seeders
