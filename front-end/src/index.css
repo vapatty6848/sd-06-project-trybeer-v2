@@ -1,13 +1,711 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/*desktop*/
+@media screen and (min-width: 800px) {
+  body {
+    margin: 0 auto;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: rgb(244, 245, 247);
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+  
+  .login-title {
+    text-align: center;
+    padding-bottom: 3vh;;
+  }
+  
+  .login-container {
+    margin: 0 auto;
+    max-width: 400px;
+    display: flex;
+    width: 100%;
+    margin-top:25vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    align-content:center;
+  }
+  
+  .btn-login {
+    width: 50vh;
+  
+  }
+  
+  .imput-login {
+    width: 50vh;
+  }
+  
+  .form-check-input {
+    margin-right: 8px;
+    margin-top: 5px;;
+    padding: 8px;
+  
+  }
+  
+  .product-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    color: white;
+  }
+  
+  .card-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 70%;
+    height: 100%;
+    /* padding: 15vh 30vh 20vh 30vh; */
+    margin: 10% 10%;
+  }
+  
+  .card {
+    width: 220px;
+    height: 350px;
+    margin: 15px 15px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+    color: black;
+    padding: 15px 11px 11px 11px;
+    text-align: center;
+  }
+
+  .button-value-card {
+    display: flex;
+  }
+  
+  .top-bar {
+    height: 100px;
+    display: flex;
+    position: fixed;
+    padding-top: 2.5vh;
+    width: 100%;
+    justify-content: flex-start;
+    background-color: #157347;
+    color: white;
+    z-index: 5;
+  }
+
+  .bars-button {
+    width: 44px;
+    height: 50px;
+    margin-left: 2vh;
+    border-style: none;
+    padding: 22px;
+    background-image: url("./bars-solid.svg");
+  }
+
+  .align-center {
+    padding-top: 20px;
+    text-align: center;
+  }
+
+  .admin-side-bar-container {
+    color: white;
+    position: fixed;
+    width: 30vh;
+    height: 100%;
+    left: 0px;
+    background-color: rgb(30, 49, 36);
+    z-index: 3;
+    border-right: #157347 1px;
+    border-right-style: solid;
+  }
+  
+  .side-menu-container {
+    position: fixed;
+    margin-top: 100px;
+    width: 30vh;
+    height: 100%;
+    left: 0px;
+    background-color: rgb(224, 224, 224);
+    z-index: 3;
+    border-right: #157347 1px;
+    border-right-style: solid;
+  }
+  
+  .checkout-btn-bottom {
+    position: fixed;
+    font-size: 3vh;
+    width: 100%;
+    bottom: 0px;
+    background-color: #157347;
+    color: white;
+    z-index: 1;
+  }
+  
+  .checkout-price{
+    font-size: 5vh;
+  }
+  
+  .checkout-container {
+    display: flex;
+    flex-direction: column;
+    width: 80vh;
+    padding-top: 130px;
+    margin: auto;
+  }
+
+  .orders-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80vh;
+    padding-top: 130px;
+    margin: auto;
+  }
+
+  .checkout-card {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 5vh;
+    width: 95%;
+    margin: 15px 15px;
+    color: black;
+    padding: 14px 11px 0px 11px;
+    text-align: center;
+    border: 1px solid black;
+  }
+
+  .product-name {
+    width: 25%;
+  }
+
+  .salecard-card {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    color: black;
+    padding: 20px 20px 0px 20px;
+    border: 3px solid black;
+    font-size: 1.5em;
+    margin: 15px;
+  }
+  
+  .admin-orders-main {
+    margin-left: 20%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .order-card {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    color: black;
+    padding: 20px 20px 0px 20px;
+    border: 3px solid black;
+    font-size: 1.5em;
+  }
+
+  .order-done {
+    color: green;
+  }
+
+  .order-notdone {
+    color: red;
+  }
+
+  .order-side-info {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .order-head-info {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .order-head-info p {
+    font-size: 2em;
+  }
+
+  .product-card-sale {
+    display: flex;
+    justify-content: space-between;
+    border: 3px solid black;
+    margin: 10px;
+  }
+
+  .product-card-sale p {
+    margin: 10px;
+    font-size: 1.5em;
+  }
+
+  .checkout-container {
+    display: flex;
+    flex-direction: column;
+    width: 80vh;
+    padding-top: 130px;
+    margin: auto;
+  }
+
+  .order-details-card-admin {
+    width: 50%;
+    padding-top: 30px;
+  }
+
+  .order-details-card-admin-2 {
+    margin-left: 40vh;
+    width: 50%;
+    padding-top: 30px;
+  }
+
+  .total-checkout {
+    text-align: right;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 2em;
+  }
+
+  .product-name-size {
+    height: 20%;
+    vertical-align: middle;
+  }
+
+  .margin-top-big {
+    margin-top: 40px;
+  }
+
+  .bold-font {
+    font-weight: bold;
+  }
+
+  .order-number {
+    text-align: left;
+    font-size: 20px;
+    margin-left: 15px;
+    font-weight: bold;
+  }
+
+  .order-details-title {
+    display: flex;
+  }
+
+  .order-date {
+    text-align: left;
+    font-size: 15px;
+    font-weight: bold;
+  }
+  
+  .checkout-form {
+    width: 95%;
+    margin: auto;
+  }
+
+  .checkout-form input {
+    margin: 10px;
+  }
+
+  .street-input {
+    width: 350px;
+    margin-right:20px;
+  }
+
+  .profile-container {
+    padding-top: 140px;
+    justify-content: space-around;
+    margin: auto;
+    width: 80vh;
+    display: flex;
+    flex-direction: column ;
+  }
+
+  .width-full {
+    width: 100%;
+  }
+
+  .margin-top {
+    margin-top: 20px;;
+  }
+
+  .burger {
+    width: 44px;
+    height: 50px;
+    margin-right: 40%;
+    margin-left: 2vh;
+    border-style: none;
+    padding: 22px;
+    background-image: url("./bars-solid.svg");
+  }
+
+  .finish-checkout-btn{
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  .remove-btn {
+    background-color: #157347;
+    color: white;
+    height: 100%;
+  }
+
+  .width-med {
+    width: 25vh;
+  }
+  
+  .margin-med {
+    margin: 4vh 1vh 1vh 2vh;
+  }
+  
+  .align-bot {
+    position: fixed;
+    bottom: 3vh;
+  }
+  
+  .btn-card {
+    width: 44px;
+    height: 40px;
+    font-size: 30px;
+    line-height: 20px;
+  }
+  
+  .price-card {
+    font-size: 22px;
+    font-weight: bold;
+    padding: -0px 35px;
+    height: 30px;
+    line-height: 30px;
+  }
+  
+  .quantity-card {
+    font-size: 22px;
+    margin: 0px 18px;
+    line-height: 40px;
+  }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+/*celular - mobile*/
+@media screen and (max-width: 800px) {
+  body {
+    margin: 0 auto;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: rgb(244, 245, 247);
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+  
+  .login-title {
+    text-align: center;
+    padding-bottom: 3vh;;
+  }
+  
+  .login-container {
+    margin: 0 auto;
+    max-width: 400px;
+    display: flex;
+    width: 100%;
+    margin-top:25vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    align-content:center;
+  }
+  
+  .btn-login {
+    width: 50vh;
+  
+  }
+  
+  .imput-login {
+    width: 50vh;
+  }
+  
+  .form-check-input {
+    margin-right: 8px;
+    margin-top: 5px;;
+    padding: 8px;
+  
+  }
+  
+  .product-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    color: white;
+  }
+  
+  .card-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 390px;
+    height: 100vh;
+    padding: 15vh 0.5vh 20vh 0.5vh;
+  
+  }
+  
+  .card {
+    width: 180px;
+    height: 45vh;
+    margin: 5px 5px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    color: black;
+    padding: 10px 15px 0px 15px;
+    text-align: center;
+  }
+  
+  .top-bar {
+    height: 100px;
+    display: flex;
+    position: fixed;
+    padding-top: 2.5vh;
+    width: 100%;
+    justify-content: flex-start;
+    background-color: #157347;
+    color: white;
+    z-index: 5;
+  }
+
+  .bars-button {
+    width: 44px;
+    height: 50px;
+    margin-left: 2vh;
+    border-style: none;
+    padding: 22px;
+    background-image: url("./bars-solid.svg");
+  }
+
+  .align-center {
+    padding-top: 20px;
+    text-align: center;
+  }
+
+  .admin-side-bar-container {
+    color: white;
+    position: fixed;
+    width: 30vh;
+    height: 100%;
+    left: 0px;
+    background-color: rgb(30, 49, 36);
+    z-index: 3;
+    border-right: #157347 1px;
+    border-right-style: solid;
+  }
+  
+  .side-menu-container {
+    position: fixed;
+    margin-top: 100px;
+    width: 40vh;
+    height: 100%;
+    left: 0px;
+    background-color: rgb(224, 224, 224);
+    z-index: 3;
+    border-right: #157347 1px;
+    border-right-style: solid;
+  }
+  
+  .checkout-btn-bottom {
+    position: fixed;
+    font-size: 3vh;
+    width: 100%;
+    bottom: 0px;
+    background-color: #157347;
+    color: white;
+    z-index: 1;
+  }
+  
+  .checkout-price{
+    font-size: 5vh;
+  }
+  
+  .checkout-container {
+    display: flex;
+    flex-direction: column;
+    width: 80vh;
+    padding-top: 130px;
+    margin: auto;
+  }
+
+  .orders-container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 130px;
+    margin: auto;
+  }
+
+  .checkout-card {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 5vh;
+    width: 95%;
+    margin: 15px 15px;
+    display: flex;
+    color: black;
+    padding: 14px 11px 0px 11px;
+    text-align: center;
+    border: 1px solid black;
+  }
+
+  .salecard-card {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    margin-left: 1vh;
+    width: 355px;
+    margin-bottom: 15px;
+    color: black;
+    padding: 14px 11px 0px 11px;
+    text-align: center;
+    border: 1px solid black;
+  }
+  
+  .order-card {
+    margin-left: 20%;
+    min-width: 40%;
+    width: 60%;
+    margin-bottom: 15px;
+    color: black;
+    padding: 14px 11px 0px 11px;
+    text-align: center;
+    border: 1px solid black;
+  }
+
+  .checkout-container {
+    display: flex;
+    flex-direction: column;
+    width: 80vh;
+    padding-top: 130px;
+    margin: auto;
+  }
+
+  .order-details-card-admin{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    padding-top: 30px;
+    margin: auto;
+  }
+
+  .total-checkout {
+    text-align: right;
+    width: 95%;
+    font-weight: bold;
+  }
+
+  .margin-top-big {
+    margin-top: 40px;
+  }
+
+  .bold-font {
+    font-weight: bold;
+  }
+
+  .order-number {
+    text-align: left;
+    font-size: 20px;
+    margin-top: -10px;
+    font-weight: bold;
+  }
+
+  .order-date {
+    text-align: left;
+    font-size: 15px;
+    font-weight: bold;
+  }
+  
+  .checkout-form {
+    width: 95%;
+    margin: auto;
+  }
+
+  .street-input {
+    width: 350px;
+    margin-right:20px;
+  }
+
+  .profile-container {
+    padding-top: 140px;
+    justify-content: space-around;
+    margin: auto;
+    width: 300px;
+    display: flex;
+    flex-direction: column ;
+  }
+
+  .width-full {
+    width: 100%;
+  }
+
+  .margin-top {
+    margin-top: 20px;;
+  }
+
+  .burger {
+    width: 44px;
+    height: 50px;
+    margin-right: 40%;
+    margin-left: 2vh;
+    border-style: none;
+    padding: 22px;
+    background-image: url("./bars-solid.svg");
+  }
+
+  .finish-checkout-btn{
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  .remove-btn {
+    background-color: #157347;
+    color: white;
+    height: 100%;
+  }
+
+  .width-med {
+    width: 35vh;
+  }
+  
+  .margin-med {
+    margin: 4vh 1vh 1vh 2vh;
+  }
+  
+  .align-bot {
+    position: fixed;
+    bottom: 5vh;
+  }
+  
+  .btn-card {
+    width: 44px;
+    height: 40px;
+    font-size: 30px;
+    line-height: 20px;
+  }
+  
+  .price-card {
+    font-size: 22px;
+    font-weight: bold;
+    padding: -0px 35px;
+    height: 30px;
+    line-height: 30px;
+  }
+  
+  .quantity-card {
+    font-size: 22px;
+    margin: 0px 18px;
+    line-height: 40px;
+  }
+
 }

@@ -1,29 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Switch, Route } from 'react-router-dom';
+import Provider from './context/Provider';
+import Login from './pages/Login';
+import Register from './pages/Register';
 import './App.css';
+import ClientProfile from './pages/ClientProfile';
+import Products from './pages/Products';
+import Orders from './pages/Orders';
+import Checkout from './pages/Checkout';
+import AdminOrders from './pages/AdminOrders';
+import AdminProfile from './pages/AdminProfile';
+import ProductDetails from './pages/ProductDetails';
+import OrderDetails from './pages/OrderDetails';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={ logo } className="App-logo" alt="logo" />
-        <p>
-          Edit
-          {' '}
-          <code>src/App.js</code>
-          {' '}
-          and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider>
+      <Switch>
+        <Route exact path="/" component={ Login } />
+        <Route exact path="/login" component={ Login } />
+        <Route exact path="/register" component={ Register } />
+        <Route exact path="/profile" component={ ClientProfile } />
+        <Route exact path="/products" component={ Products } />
+        <Route exact path="/checkout" component={ Checkout } />
+        <Route exact path="/orders" component={ Orders } />
+        <Route exact path="/admin/orders" component={ AdminOrders } />
+        <Route exact path="/admin/orders/:id" component={ OrderDetails } />
+        <Route exact path="/admin/profile" component={ AdminProfile } />
+        <Route exact path="/orders/:id" component={ ProductDetails } />
+      </Switch>
+    </Provider>
   );
 }
 
