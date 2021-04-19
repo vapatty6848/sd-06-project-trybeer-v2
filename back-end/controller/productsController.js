@@ -1,10 +1,10 @@
 const { Router } = require('express');
-const { getAllProducts } = require('../models/productsModel');
+const models = require('../models');
 
 const productsRouter = new Router();
 
-productsRouter.get('/', async (req, res) => {
-  const allProducts = await getAllProducts();
+productsRouter.get('/', async (_req, res) => {
+  const allProducts = await models.products.findAll();
 
   res.status(200).json(allProducts);
 });

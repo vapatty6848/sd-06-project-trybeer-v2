@@ -1,15 +1,10 @@
 const { Router } = require('express');
-const {
-  getAllSales,
-  createSale,
-  createSaleProduct,
-  getOrder,
-  updateOrder } = require('../models/salesModel');
+const models = require('../models');
 
 const salesRouter = new Router();
 
-salesRouter.get('/', async (req, res) => {
-  const allSales = await getAllSales();
+salesRouter.get('/', async (_req, res) => {
+  const allSales = await models.sales.findAll();
 
   res.status(200).json(allSales);
 });
@@ -18,12 +13,13 @@ salesRouter.post('/', async (req, res) => {
   const { userId, totalPrice, deliveryAddress, deliveryNumber } = req.body;
   
   const obj = {
-    userId,
-    totalPrice,
-    deliveryAddress,
-    deliveryNumber,
+    user_id: userId,
+    total_price: totalPrice,
+    delivery_address: deliveryAddress,
+    delivery_number: deliveryNumber,
   };
-  const [{ insertId }] = await createSale(obj);
+  const sales = await models.sales.create(obj);
+  const insertId = sales.id;
 
   return res.status(201).json(insertId);
 });
@@ -32,19 +28,34 @@ salesRouter.post('/:id', async (req, res) => {
   const { saleId, productId, quantity } = req.body;
   
   const obj = {
-    saleId,
-    productId,
+    sale_id: saleId,
+    product_id: productId,
     quantity,
   };
-  await createSaleProduct(obj);
+  await models.sales_products.create(obj);
 
   return res.status(201).json(obj);
 });
 
 salesRouter.get('/:id', async (req, res) => {
+  const fullSale = [];
   const { id } = req.params;
-  const order = await getOrder(id);
-  res.status(200).send(order);
+  const orders = await models.sales_products.findAll({ where: { sale_id: id } });
+  const sale = await models.sales.findOne({ where: { id } });
+  orders.forEach(async (order, index) => {
+    const product = await models.products.findOne({ where: { id: order.product_id } });
+    const productDetails = {
+        Status: sale.status,
+        idVenda: sale.id,
+        product: product.name,
+        price: product.price,
+        total: sale.total_price,
+        saleDate: sale.sale_date,
+        quantidade: order.quantity,
+      };
+    fullSale.push(productDetails);
+    if (index === orders.length - 1) res.status(200).send(fullSale);
+  });
 });
 
 salesRouter.put('/:id', async (req, res) => {

@@ -16,12 +16,6 @@ const usersRouter = require('./controller/usersController');
 const productsRouter = require('./controller/productsController');
 const salesRouter = require('./controller/salesController');
 
-// app.use((req, res, next) => {
-//   console.log(req.path);
-//   console.log(res.path);
-//   next();
-// });
-
 app.use(express.static(`${__dirname}/images`));
 
 app.use(cors(corsOptions));

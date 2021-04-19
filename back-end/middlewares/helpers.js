@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { findUserByEmail } = require('../models/usersModel');
+const { findUserByEmail } = require('../models.old/usersModel');
 
 const SECRET = 'grupo15';
 
