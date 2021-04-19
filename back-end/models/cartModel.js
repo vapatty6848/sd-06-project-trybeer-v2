@@ -1,5 +1,6 @@
 const connection = require('./connection');
 
+// refatoração do moel, cuidado com o _!!!!!!!!!!
 const addSale = async (sale) => {
   const { userId, total, street, number, data, status } = sale;
   const response = await connection.execute(
