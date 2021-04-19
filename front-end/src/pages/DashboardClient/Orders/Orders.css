@@ -1,0 +1,26 @@
+.orders {
+  width: 90%;
+  text-decoration: none;
+  color: black;
+  background-color: transparent;
+  display: inline-block;
+  border: 1px solid black;
+  border-radius: 2px;
+  padding: 15px 20px;
+  margin: 10px;
+  -webkit-box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.05); 
+  box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.05);
+}
+
+.orders:hover {
+  transform: scale(1.02);
+  transition: .2s;
+  -webkit-box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.1); 
+  box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.1);
+} 
+
+.date-order {
+  margin-top: -1%;
+  margin-bottom: 3%;
+  padding-top: 0;
+}

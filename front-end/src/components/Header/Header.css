@@ -1,0 +1,21 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100vw;
+  background-color: black;
+  color: white;
+  border: 7px groove gray;
+  padding: 0.5rem;
+}
+
+.menu-btn {
+  background: linear-gradient(black, gray, white, gray, black);
+  height: 3.5rem;
+  width: 3.5rem;
+  border: none;
+}
+
+.title {
+  margin: auto;
+}
