@@ -1,0 +1,56 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.nav-main {
+  /* width: 100%; */
+  /* height: 60px; */
+  /* background-color: #fff; */
+  display: flexbox;
+  flex-wrap:nowrap;
+  /* z-index: 1000; */
+}
+
+.title-burguer-div {
+  display: flex;
+}
+
+.btn-toggle-nav {
+  width: 8%;
+  height: 40px;
+  background-color: #5fd450;
+  background-image: url(../../icons/hamburguer-icon.png);
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: center;
+  cursor: pointer;
+  /* border: 3px solid black; */
+  /* position: relative; */
+}
+
+.page-title {
+  /* position: absolute; */
+  width: 91%;
+  text-align: center;
+  /* border: 1px solid black; */
+  height: 40px;
+}
+
+.aside-menu-on {
+  background-color: grey;
+  position: absolute;
+  width: 40%;
+  height: 60%;
+  margin-top: 40px;
+  z-index: 1000;
+}
+.aside-menu-off {
+  display: none;
+  visibility: hidden;
+}
+
+.admin-side-bar-container {
+  display: flex;
+  flex-direction: column;
+  border: black solid 2px;
+}
