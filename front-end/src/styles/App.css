@@ -2,6 +2,34 @@
   text-align: center;
 }
 
+button {
+  background-color: snow;
+  border-radius: 3px;
+  border: none;
+  margin: 2px 4px;
+  padding: 4px 12px;
+}
+
+button:hover {
+  background-color: lightgray;
+}
+
+
+button.alert {
+  background-color: brown;
+  color: snow;
+}
+
+button.green {
+  background-color: olivedrab;
+  color: snow;
+}
+
+button:disabled {
+  background-color: lightgray;
+  color: grey;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

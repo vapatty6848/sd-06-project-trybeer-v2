@@ -1,29 +1,37 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+  Switch,
+  Route,
+  BrowserRouter,
+  Redirect,
+} from 'react-router-dom';
+
+import { NotFound, Login, Register, Profile, AdminProfile,
+  Products, Checkout, OrderDetails, Error, Orders } from './pages';
+
+import './styles/App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={ logo } className="App-logo" alt="logo" />
-        <p>
-          Edit
-          {' '}
-          <code>src/App.js</code>
-          {' '}
-          and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/login" component={ Login } />
+        <Route path="/register" component={ Register } />
+        <Route path="/products" component={ Products } />
+        <Route path="/checkout" component={ Checkout } />
+        <Route path="/profile" component={ Profile } />
+        <Route path="/orders/:id" component={ OrderDetails } />
+        <Route path="/orders" component={ Orders } />
+        <Route path="/admin/orders/:id" component={ OrderDetails } />
+        <Route path="/admin/orders" component={ Orders } />
+        <Route path="/admin/profile" component={ AdminProfile } />
+        <Route exact path="/">
+          <Redirect to="/login" />
+        </Route>
+        <Route path="/error" component={ Error } />
+        <Route component={ NotFound } />
+      </Switch>
+    </BrowserRouter>
   );
 }
 
