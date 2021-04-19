@@ -1,14 +1,14 @@
 const Users = (sequelize, DataTypes) => {
   const users = sequelize.define('users', {
-    id: DataTypes.INTEGER,
+    // id: DataTypes.INTEGER,
     name: DataTypes.STRING,
     email: DataTypes.STRING,
-    password: DataTypes.INTEGER,
+    password: DataTypes.STRING,
     role: DataTypes.STRING,
   }, { timestamps: false });
 
   users.associate = (models) => {
-    users.hasMany(models.Sales,
+    users.hasMany(models.sales,
       { foreignKey: 'userId', as: 'user' });
   };
 

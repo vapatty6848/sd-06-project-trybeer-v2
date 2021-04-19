@@ -23,7 +23,6 @@ module.exports = {
       },
       deliveryAddress: {
         type: Sequelize.STRING,
-        unique: true,
         allowNull: false,
       },
       deliveryNumber: {
@@ -32,6 +31,7 @@ module.exports = {
       },
       saleDate: {
         type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
         allowNull: false,
       },
       status: {
