@@ -65,6 +65,14 @@ export default function AdminOrdersDetail({ match: { params: { id } } }) {
             </h2>
           </div>
           {sale && sale.status === 'pendente' && (
+            <div>
+              <button
+            type="button"
+            data-testid="mark-as-prepared-btn"
+            onClick={ _____ }
+          >
+            Preparar pedido
+          </button>
             <button
               type="button"
               data-testid="mark-as-delivered-btn"
@@ -72,6 +80,7 @@ export default function AdminOrdersDetail({ match: { params: { id } } }) {
             >
               Marcar como entregue
             </button>
+            </div>
           )}
         </>
       )}
