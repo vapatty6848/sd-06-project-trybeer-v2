@@ -1,5 +1,4 @@
 const express = require('express');
-const { Router } = require('express');
 const { salesProducts, sale, product } = require('./models');
 
 const app = express();
