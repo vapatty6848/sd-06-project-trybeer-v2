@@ -5,6 +5,14 @@ const createUsers = (sequelize, Datatypes) => {
     password: Datatypes.STRING,
     role: Datatypes.STRING,
   });
+  
+  User.associate = (models) => {
+    User.hasMany(models.sales, {
+      foreignKey: 'userId',
+      as: 'sale',
+    });
+  };
+  
   return User;
 };
 
