@@ -1,28 +1,38 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import {
+  Login,
+  Orders,
+  Profile,
+  Register,
+  Products,
+  Checkout,
+  DetailsOrder,
+  DetailsOrderAdm,
+  ProfileAdm,
+  OrdersAdm,
+} from './pages/index';
+import Provider from './hooks/Provider';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={ logo } className="App-logo" alt="logo" />
-        <p>
-          Edit
-          {' '}
-          <code>src/App.js</code>
-          {' '}
-          and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Provider>
+        <Switch>
+          <Route path="/login" component={ Login } />
+          <Route path="/register" component={ Register } />
+          <Route path="/orders/:orderId" component={ DetailsOrder } />
+          <Route exact path="/orders" component={ Orders } />
+          <Route path="/products" component={ Products } />
+          <Route path="/profile" component={ Profile } />
+          <Route path="/checkout" component={ Checkout } />
+          <Route path="/admin/orders/:id" component={ DetailsOrderAdm } />
+          <Route exact path="/admin/orders" component={ OrdersAdm } />
+          <Route path="/admin/profile" component={ ProfileAdm } />
+          <Redirect from="/" to="/login" />
+        </Switch>
+      </Provider>
     </div>
   );
 }
