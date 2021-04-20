@@ -5,7 +5,9 @@ const createUser = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     password: DataTypes.STRING,
     role: DataTypes.STRING,
-  }, { timestamps: false });
+  }, { 
+    timestamps: false,
+    scopes: { userWithoutPassword: { attributes: { exclude: ['password'] } } } });
 
   appUser.associate = (models) => {
     appUser.hasMany(models.sales,

@@ -5,21 +5,24 @@ const createProductsSales = (sequelize, DataTypes) => {
     quantity: DataTypes.DECIMAL,
   }, { timestamps: false });
 
-  order.associate = (models) => {
-    order.belongsToMany(models.sales, {
-      as: 'sales', through: 'sales', foreignKey: 'saleId', otherKey: 'id',
+  order.associate = (models) => { 
+    models.products.belongsToMany(models.sales, {
+      as: 'sales', foreignKey: 'product_id', otherKey: 'sale_id', through: order,
     });
-    order.belongsToMany(models.products, {
-      as: 'products', through: 'products', foreignKey: 'productId', otherKey: 'id',
-  });
+    models.sales.belongsToMany(models.products, {
+      as: 'products',
+      foreignKey: 'sale_id',
+      otherKey: 'product_id',
+      through: order,
+    });
   };
 
-/*   order.associate = (models) => {
+  /* order.associate = (models) => {
     order.belongsToMany(models.products, {
         as: 'products', through: 'products', foreignKey: 'productId', otherKey: 'id',
     });
   };
- */
+  */
   return order;
 };
 

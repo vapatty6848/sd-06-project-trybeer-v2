@@ -6,12 +6,6 @@ const createProducts = (sequelize, DataTypes) => {
     urlImage: DataTypes.STRING,
   }, { timestamps: false });
 
-  product.associate = (models) => {
-    product.belongsToMany(models.sales_products,
-      { foreignKey: 'productId', as: 'product' });
-      return product;
-  };
-
   return product;
 };
 

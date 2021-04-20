@@ -1,10 +1,17 @@
-const ordersModel = require('../model/ordersModel');
+const { sales, sales_products } = require('../models');
 
-const createOrders = async (userId, objOrder) => ordersModel.createOrders(userId, objOrder);
+// const ordersModel = require('../model/ordersModel');
+
+const createOrders = async (sale) => sales.create(sale);
 
 const getOrders = async (userId) => {
-  const sales = ordersModel.getOrders(userId);
-  return sales;
+  // const sales = ordersModel.getOrders(userId);
+  // return sales;
+  sales.findAll({
+    where: {
+      userId,
+    },
+  });
 };
 
 const getLastSaleId = async () => {
