@@ -8,7 +8,7 @@ const ButtonDelivered = (props) => {
       id="deliver-button"
       type="button"
       className="p-4 bg-green-300 hover:bg-gray-500"
-      data-testid= {testid}
+      data-testid={ testid }
       onClick={ () => handleClick() }
     >
       {' '}
@@ -22,4 +22,6 @@ export default ButtonDelivered;
 
 ButtonDelivered.propTypes = {
   handleClick: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
+  testid: PropTypes.string.isRequired,
 };

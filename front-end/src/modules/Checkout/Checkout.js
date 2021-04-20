@@ -4,25 +4,29 @@ import api from '../../axios/api';
 import ContextBeer from '../../context/ContextBeer';
 import TopBar from '../../design-components/TopBar';
 import ProductsList from './components/ProductsList';
-import LabeledInput from '../../design-components/LabeledInput';
 import Button from '../../design-components/Button';
+import Inputs from './components/Inputs';
 
+// eslint-disable-next-line max-lines-per-function
 function Checkout() {
-  const {
-    sale,
-    getUser,
-    initiateSale,
-    total,
-  } = useContext(ContextBeer);
-
+  const { sale, getUser } = useContext(ContextBeer);
   const history = useHistory();
-  // const successTimer = 150;
   const products = sale.filter((product) => product.quantity !== 0);
-
-  const [deliveryAddress, setDeliveryAddress] = useState('');
-  const [deliveryNumber, setDeliveryNumber] = useState('');
   const [buttonDisable, setButtonDisable] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [success] = useState(false);
+  const handleSubmit = () => {
+    const bodyObj = {
+      products,
+      total: parseFloat(total),
+      deliveryAddress,
+      deliveryNumber,
+    };
+    api
+      .post('/sales', bodyObj)
+      .catch((err) => console.log(err.message));
+    setSuccess(true);
+    initiateSale();
+  };
 
   useEffect(() => {
     const user = getUser();
@@ -34,26 +38,7 @@ function Checkout() {
       || deliveryAddress === ''
       || deliveryNumber === '') setButtonDisable(true);
     else setButtonDisable(false);
-  }, [sale, deliveryAddress, deliveryNumber]);
-
-  const handleSubmit = () => {
-    const bodyObj = {
-      products,
-      total: parseFloat(total),
-      deliveryAddress,
-      deliveryNumber,
-    };
-
-    api
-      .post('/sales', bodyObj)
-      .catch((err) => console.log(err.message));
-
-    setSuccess(true);
-    // setTimeout(() => {
-      initiateSale();
-      // history.push('/products');
-    // }, successTimer);
-  };
+  }, [sale]);
 
   return (
     <div>
@@ -63,22 +48,7 @@ function Checkout() {
         items-center"
       >
         <ProductsList products={ products } />
-        <div className="w-full space-y-12">
-          <LabeledInput
-            value={ deliveryAddress }
-            type="text"
-            onChange={ setDeliveryAddress }
-            label="Rua"
-            testId="checkout-street-input"
-          />
-          <LabeledInput
-            value={ deliveryNumber }
-            type="text"
-            onChange={ setDeliveryNumber }
-            label="Número da casa"
-            testId="checkout-house-number-input"
-          />
-        </div>
+        <Inputs />
         <div
           className={ `absolute inset-auto z-100 flex items-center p-12 justify-center
           w-64 h-32 text-xl font-bold bg-green-300 text-green-600 rounded-lg
