@@ -60,7 +60,7 @@ function AdminOrdersDetails(props) {
                     </button>
                   )
                   : null }
-                { orders[0].status === 'Pendente' || orders[0].status === 'Preparando'
+                { orders[0].status !== 'Entregue'
                   ? (
                     <button
                       className="buttonEntregar"
