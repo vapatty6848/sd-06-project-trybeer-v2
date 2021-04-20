@@ -12,8 +12,6 @@ function OrderCard({ order, index }) {
     status,
   } = order;
 
-  console.log(totalPrice)
-
   const totalValue = `R$ ${totalPrice.toString().replace('.', ',')}`;
   const date = new Date(createdAt);
   const magicNumber = 9;
