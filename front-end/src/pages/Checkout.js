@@ -82,6 +82,7 @@ function Checkout() {
     localStorage.removeItem('totalCart');
     registerSale();
   };
+  const removetrue = true;
 
   return (
     <div>
@@ -98,7 +99,7 @@ function Checkout() {
               price={ item.price }
               unitPriceID="product-unit-price"
               qtdID="product-qtd-input"
-              removeButton={ true }
+              removeButton={ removetrue }
             />))}
         </div>
         <p
@@ -112,7 +113,7 @@ function Checkout() {
           <label htmlFor="street">
             Rua:
             <input
-            className="street-input"
+              className="street-input"
               data-testid="checkout-street-input"
               type="text"
               name="street"
@@ -129,7 +130,7 @@ function Checkout() {
             />
           </label>
           <button
-          className="btn btn-success finish-checkout-btn"
+            className="btn btn-success finish-checkout-btn"
             disabled={ disabled }
             type="button"
             data-testid="checkout-finish-btn"

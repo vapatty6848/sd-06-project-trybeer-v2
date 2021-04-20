@@ -16,6 +16,7 @@ function OrderDetails({ match }) {
   const getOrders = async () => {
     const result = await getSaleByID(id);
     setOrders(result);
+    console.log(result);
     setOrderStatus(result[0].Status);
     setTotalValue(result[0].total.replace('.', ','));
     if (result[0].Status !== 'Entregue') {
@@ -43,7 +44,10 @@ function OrderDetails({ match }) {
           <p className="order-number" data-testid="order-number">{ `Pedido ${id} -` }</p>
           <p
             data-testid="order-status"
-            className={ `order-number ${orderStatus === 'Entregue' ? 'order-done' : 'order-notdone'}` }
+            className={
+              `order-number ${orderStatus === 'Entregue'
+                ? 'order-done' : 'order-notdone'}`
+            }
           >
             { orderStatus }
           </p>
@@ -59,7 +63,12 @@ function OrderDetails({ match }) {
             qtdID="product-qtd"
             removeButton={ false }
           />)) }
-        <p className="total-checkout" data-testid="order-total-value">{`Total: R$ ${totalValue}`}</p>
+        <p
+          className="total-checkout"
+          data-testid="order-total-value"
+        >
+          {`Total: R$ ${totalValue}`}
+        </p>
         {!orderDone && (
           <Button
             className="btn btn-success"

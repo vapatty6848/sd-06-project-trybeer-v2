@@ -1,10 +1,10 @@
 const salesModel = (sequelize, DataTypes) => {
   const sales = sequelize.define('sales', {
-    user_id: { type: DataTypes.INTEGER, foreignKey: true },
-    total_price: DataTypes.STRING,
-    delivery_address: DataTypes.STRING,
-    delivery_number: DataTypes.STRING,
-    sale_date: DataTypes.DATE,
+    userId: { type: DataTypes.INTEGER, foreignKey: true },
+    totalPrice: DataTypes.STRING,
+    deliveryAddress: DataTypes.STRING,
+    deliveryNumber: DataTypes.STRING,
+    saleDate: DataTypes.DATE,
     status: DataTypes.STRING,
   },
   {

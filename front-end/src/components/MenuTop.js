@@ -11,6 +11,7 @@ function MenuTop(props) {
       <nav className="top-bar">
         <img
           onClick={ () => (showSideBar ? setShowSideBar(false) : setShowSideBar(true)) }
+          alt="show/hide"
           aria-hidden="true"
           className="burger"
           data-testid="top-hamburguer"

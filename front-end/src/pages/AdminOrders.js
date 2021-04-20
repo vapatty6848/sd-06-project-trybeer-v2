@@ -20,17 +20,16 @@ function AdminOrders() {
       <MenuAdmin />
       <h1 className="align-center"> Meus Pedidos</h1>
       <div className="admin-orders-main">
-        {orders.map((order, index) => ( 
-          <div className="order-details-card-admin">
-          <OrderCard
-            key={ index }
-            index={ index }
-            saleId={ order.id }
-            street={ order.delivery_address }
-            streetNR={ order.delivery_number }
-            totalValue={ order.total_price }
-            status={ order.status }
-          />
+        {orders.map((order, index) => (
+          <div key={ index } className="order-details-card-admin">
+            <OrderCard
+              index={ index }
+              saleId={ order.id }
+              street={ order.deliveryAddress }
+              streetNR={ order.deliveryNumber }
+              totalValue={ order.totalPrice }
+              status={ order.status }
+            />
           </div>
         ))}
       </div>

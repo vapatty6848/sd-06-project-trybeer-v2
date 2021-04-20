@@ -54,7 +54,7 @@ function Products() {
             key={ index }
             index={ index }
             name={ product.name }
-            urlImage={ product.url_image }
+            urlImage={ product.urlImage }
             price={ product.price }
           />)) }
       </div>

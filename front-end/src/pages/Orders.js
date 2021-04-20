@@ -31,15 +31,15 @@ function Orders() {
     <div>
       <MenuTop title="Meus Pedidos" />
       <div className="orders-container">
-      {sales.map((sale, index) => (
-        <SaleCard
-          key={ index }
-          index={ index }
-          saleNumber={ sale.id }
-          date={ sale.sale_date }
-          value={ sale.total_price }
-        />
-      ))}
+        {sales.map((sale, index) => (
+          <SaleCard
+            key={ index }
+            index={ index }
+            saleNumber={ sale.id }
+            date={ sale.saleDate }
+            value={ sale.totalPrice }
+          />
+        ))}
       </div>
     </div>
   );

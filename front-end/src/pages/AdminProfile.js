@@ -27,11 +27,11 @@ function AdminProfile() {
     <div>
       <MenuAdmin />
       <div className="align-center">
-      <h1>Perfil</h1>
-      <h4 className="margin-top-big">
-      <p data-testid="profile-name">{`Nome: ${name}`}</p>
-      <p data-testid="profile-email">{`Email: ${email}`}</p>
-      </h4>
+        <h1>Perfil</h1>
+        <h4 className="margin-top-big">
+          <p data-testid="profile-name">{`Nome: ${name}`}</p>
+          <p data-testid="profile-email">{`Email: ${email}`}</p>
+        </h4>
       </div>
     </div>
   );

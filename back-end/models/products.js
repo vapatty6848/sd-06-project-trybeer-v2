@@ -3,7 +3,7 @@ const productsModel = (sequelize, DataTypes) => {
     id: { type: DataTypes.INTEGER, primaryKey: true },
     name: DataTypes.STRING,
     price: DataTypes.STRING,
-    url_image: DataTypes.STRING,
+    urlImage: DataTypes.STRING,
   },
   {
     timestamps: false,

@@ -13,7 +13,12 @@ function OrderCard(props) {
         onClick={ () => history.push(`/admin/orders/${saleId}`) }
         aria-hidden="true"
       >
-        <p className="bold-font" data-testid={ `${index}-order-number` }>{ `Pedido ${saleId}` }</p>
+        <p
+          className="bold-font"
+          data-testid={ `${index}-order-number` }
+        >
+          { `Pedido ${saleId}` }
+        </p>
         <p data-testid={ `${index}-order-address` }>{ `${street}, ${streetNR}` }</p>
         <div className="order-side-info">
           <p
@@ -22,8 +27,10 @@ function OrderCard(props) {
           >
             { `R$ ${totalValue.replace('.', ',')}` }
           </p>
-          <p 
-            className={ status === 'Entregue' ? 'bold-font order-done' : 'bold-font order-notdone' }
+          <p
+            className={
+              status === 'Entregue' ? 'bold-font order-done' : 'bold-font order-notdone'
+            }
             data-testid={ `${index}-order-status` }
           >
             { status }

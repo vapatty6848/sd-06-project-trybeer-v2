@@ -1,6 +1,6 @@
-import { getToken } from '../services/usersServices';
+import { getToken } from './usersServices';
 
-export const checkUserRedirect = async (history) => {
+export default checkUserRedirect = async (history) => {
   const storageUser = JSON.parse(localStorage.getItem('user'));
   if (storageUser) {
     const user = await getToken(storageUser.token);
