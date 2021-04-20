@@ -6,7 +6,9 @@ import { FiMail, FiLock } from 'react-icons/fi';
 import { loginUser, registerNewUser } from '../../Services/Apis';
 
 import Input from '../../Components/Input';
-import Button from '../../Components/Button';
+import button from './button';
+
+import S from './styles';
 
 const handleSubmit = async (event,
   { name, email, password, isChecked, setEmailAlreadyExists }) => {
@@ -26,20 +28,7 @@ const handleSubmit = async (event,
   }
 };
 
-const button = (isDisabled) => (
-  <Button
-    type="submit"
-    heigth="40px"
-    color="green"
-    fontSize="20px"
-    disabled={ isDisabled }
-    dataTestid="signup-btn"
-  >
-    Cadastrar
-  </Button>
-);
-
-const form = (params) => {
+export default function form(params) {
   const { name, setEmail,
     setPassword, isDisabled, email, password, setName,
     isChecked, setIsChecked, emailAlreadyExists, setEmailAlreadyExists,
@@ -89,4 +78,4 @@ const form = (params) => {
       {button(isDisabled)}
     </S.Form>
   );
-};
+}

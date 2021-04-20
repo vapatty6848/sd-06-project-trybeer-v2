@@ -1,9 +1,9 @@
 import React from 'react';
 
+import { FiMail, FiLock } from 'react-icons/fi';
 import Input from '../../Components/Input';
 import Button from '../../Components/Button';
 
-import { FiMail, FiLock } from 'react-icons/fi';
 import { loginUser } from '../../Services/Apis';
 
 const saveLocalStorage = (res) => {
@@ -67,4 +67,4 @@ export default function form(params) {
       </Button>
     </form>
   );
-};
+}

@@ -5,8 +5,8 @@ import { FiMail } from 'react-icons/fi';
 
 import { updateUser } from '../../Services/Apis';
 
-import Button from '../../Components/Button';
 import Input from '../../Components/Input';
+import button from './button';
 
 const handleSubmit = async (event, { name, email }, token, setUpdateMessage) => {
   event.preventDefault();
@@ -19,18 +19,6 @@ const handleSubmit = async (event, { name, email }, token, setUpdateMessage) => 
   setUpdateMessage(true);
 };
 
-const button = (isDisabled) => (
-  <Button
-    type="submit"
-    heigth="40px"
-    color="green"
-    fontSize="20px"
-    disabled={ isDisabled }
-    dataTestid="profile-save-btn"
-  >
-    Salvar
-  </Button>
-);
 
 export default function form([
   name,
@@ -71,4 +59,4 @@ export default function form([
       {(updateMessage) ? <p>Atualização concluída com sucesso</p> : null}
     </form>
   );
-};
+}

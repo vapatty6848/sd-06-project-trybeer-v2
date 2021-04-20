@@ -1,3 +1,9 @@
+import React from 'react';
+
+import Input from '../../Components/Button';
+
+import S from './styles';
+
 export default function form(params) {
   const {
     valueTotal,
@@ -50,4 +56,4 @@ export default function form(params) {
       )}
     </S.ContainerMain>
   );
-};
+}
