@@ -10,7 +10,7 @@ import './Orders.css';
 function Orders() {
   const user = JSON.parse(localStorage.getItem('user'));
   const history = useHistory();
-  const { clientOrders, setOrders } = useContext(TrybeerContext);
+  const { orders, setOrders } = useContext(TrybeerContext);
 
   useEffect(() => {
     if (!user) return history.push('/login');
@@ -30,7 +30,7 @@ function Orders() {
   return (
     <div>
       <TopBar title="Meus Pedidos" />
-      { clientOrders.map((order, index) => (
+      { orders.map((order, index) => (
         <div key={ index }>
           <button
             className="divPedidos"
@@ -42,6 +42,7 @@ function Orders() {
               id={ order.id }
               date={ order.sale_date }
               total={ order.total_price }
+              status={ order.status }
             />
           </button>
         </div>
