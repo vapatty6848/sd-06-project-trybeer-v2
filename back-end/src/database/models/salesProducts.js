@@ -1,3 +1,6 @@
+const { sales } = require('./sales');
+const { products } = require('./products');
+
 module.exports = (sequelize, DataTypes) => {
   const salesProducts = sequelize.define('salesProducts', {
     saleId: DataTypes.INTEGER,
@@ -10,12 +13,12 @@ module.exports = (sequelize, DataTypes) => {
   salesProducts.removeAttribute('id');
 
   salesProducts.associate = (models) => {
-    salesProducts.belongsTo(models.sales, {
-      foreignKey: 'saleId', as: 'sales',
+    models.salesProducts.belongsToMany(models.sales, {
+      as: 'sales', through: 'sales', foreignKey: 'saleId', otherKey: 'id',
     });
 
-    salesProducts.belongsTo(models.products, {
-      foreignKey: 'productId', as: 'product',
+    models.salesProducts.belongsToMany(models.products, {
+      as: 'product', through: 'products', foreignKey: 'productId', otherKey: 'id',
     });
   };
   return salesProducts;

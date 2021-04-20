@@ -12,7 +12,7 @@ const ProductCard = ({ product, index, plusItemCart, minusItemCart, handleQuanti
         alt={ `Cerveja ${product.name}` }
         data-testid={ `${index}-product-img` }
         className="cardImage"
-        src={ product.url_image }
+        src={ product.urlImage }
       />
     </div>
     <div>
