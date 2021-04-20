@@ -1,13 +1,14 @@
 const connection = require('../../database/mongodb/connection');
+
 const collection = 'conversations';
 
-const findOne = (property, value) => connection
+const findOne = (property, value) => connection()
   .then((db) => db.collection(collection))
-  .then((collection) => collection.findOne({ where: { [property]: value } }));
+  .then((table) => table.findOne({ [property]: value }));
 
-const create = (id) => connection
+const create = (id) => connection()
   .then((db) => db.collection(collection))
-  .then((collection) => collection.create({ userId: id, messages: [] }));
+  .then((table) => table.insertOne({ userId: id, messages: [], createdAt: new Date() }));
 
 module.exports = {
   findOne,
