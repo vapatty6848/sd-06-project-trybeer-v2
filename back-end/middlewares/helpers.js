@@ -9,7 +9,7 @@ const validateToken = async (req, res, next) => {
   }
   try {
     const decoded = jwt.verify(req.headers.authorization, SECRET);
-    const user = await models.user.findOne({ where: { email: decoded.data.email }});
+    const user = await models.user.findOne({ where: { email: decoded.data.email } });
 
     if (!user) return res.status(401).json({ message: 'Usuatio não logado' });
 
