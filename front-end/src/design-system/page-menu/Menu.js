@@ -28,6 +28,12 @@ function Menu(props) {
       nameSpec: 'Meu perfil',
       testId: 'side-menu-item-my-profile',
     },
+    {
+      to: '/chat',
+      name: 'Conversar com a loja',
+      nameSpec: 'Conversar com a loja',
+      testId: 'side-menu-chat',
+    },
   ];
 
   const linksAdmin = [
