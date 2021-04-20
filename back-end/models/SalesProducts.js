@@ -1,9 +1,7 @@
 const SalesProducts = (sequelize, DataTypes) => {
   const salesProducts = sequelize.define('salesProducts', {
     quantity: DataTypes.STRING,
-  },
-  { timestamps: false });
-  
+  }, { timestamps: false });
   salesProducts.associate = (models) => {
     models.products.belongsToMany(models.sales, {
       as: 'sales',
@@ -18,7 +16,6 @@ const SalesProducts = (sequelize, DataTypes) => {
       otherKey: 'productId',
     });
   };
-
   return salesProducts;
 };
 
