@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { findByEmail } = require('../model/User');
+const { User } = require('../models/');
 const { UNAUTHORIZED } = require('../schema/statusSchema');
 
 const SECRET = 'senhaSuperSecreta.com';
@@ -11,8 +11,8 @@ const verifyLogin = async (req, res, next) => {
 
   jwt.verify(authorization, SECRET, async (err, decoded) => {
     if (err) return res.status(UNAUTHORIZED).json({ message: 'failed to auth token' });
-    const { email } = decoded.data[0];
-    const login = await findByEmail(email);
+    const { email } = decoded.data;
+    const login = await User.findOne({ where: { email } });
     if (!login) return res.status(UNAUTHORIZED).json({ message: 'user not registered' });
   });
 
