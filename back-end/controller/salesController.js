@@ -68,7 +68,7 @@ salesRouter.get('/:id', async (req, res) => {
 
 salesRouter.put('/:id', async (req, res) => {
   const { id } = req.params;
-  const status = 'Entregue';
+  const { status } = req.body;
 
   await models.sales.update(
     { status },

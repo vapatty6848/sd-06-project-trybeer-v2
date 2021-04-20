@@ -10,6 +10,7 @@ function OrderDetails({ match }) {
   const [orderDone, setOrderDone] = useState(false);
   const [orderStatus, setOrderStatus] = useState('');
   const [totalValue, setTotalValue] = useState(0);
+  const [isPrepared, setIsPrepared] = useState(false);
 
   const { id } = match.params;
 
@@ -30,10 +31,12 @@ function OrderDetails({ match }) {
     getOrders();
   }, []);
 
-  const handleClick = async () => {
-    setOrderDone(true);
-    setOrderStatus('Entregue');
-    await updateOrderById(id);
+  const handleClick = async (status) => {
+    setOrderStatus(status);
+    if (status === 'Entregue') setOrderDone(true);
+    if (status === 'Preparando') setIsPrepared(true);
+
+    await updateOrderById(id, status);
   };
 
   return (
@@ -70,13 +73,22 @@ function OrderDetails({ match }) {
           {`Total: R$ ${totalValue}`}
         </p>
         {!orderDone && (
-          <Button
-            className="btn btn-success"
-            title="Marcar como entregue"
-            dataTestid="mark-as-delivered-btn"
-            handleClick={ handleClick }
-            btnDisabled={ false }
-          />
+          <div>
+            <Button
+              className="btn btn-success"
+              title="Marcar como entregue"
+              dataTestid="mark-as-delivered-btn"
+              handleClick={ () => handleClick('Entregue') }
+              btnDisabled={ false }
+            />
+            <Button
+              className="btn btn-success"
+              title="Preparar Pedido"
+              dataTestid="mark-as-prepared-btn"
+              handleClick={ () => handleClick('Preparando') }
+              btnDisabled={ isPrepared }
+            />
+          </div>
         )}
       </div>
     </div>
