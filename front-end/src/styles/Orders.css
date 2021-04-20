@@ -1,0 +1,30 @@
+body {
+  background-color: lightslategray;
+}
+
+.orders-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  margin: auto;
+  padding: 10px auto;
+  width: 90%;
+}
+
+.order-card {
+  align-items: center;
+  background-color: snow;
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  flex-flow: column nowrap;
+  height: 200px;
+  justify-content: space-around;
+  margin: 6px;
+  padding: 4px 8px;
+  width: 120px;
+}
+
+.order-card .name {
+  text-align: center;
+}
