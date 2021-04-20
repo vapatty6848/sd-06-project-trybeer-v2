@@ -25,8 +25,8 @@ body {
 }
 
 .product-card img {
-  height: 80px;
   align-self: center;
+  height: 80px;
 }
 
 .product-card .name {

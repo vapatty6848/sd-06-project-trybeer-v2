@@ -3,7 +3,7 @@
   font-size: 0.8em;
 }
 
-.inputError span::before {
+.inputError span:before {
   content: 'warning';
   display: inline;
   margin: 0 3px;

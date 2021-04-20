@@ -4,8 +4,8 @@
 
 button {
   background-color: snow;
-  border-radius: 3px;
   border: none;
+  border-radius: 3px;
   margin: 2px 4px;
   padding: 4px 12px;
 }
@@ -15,12 +15,12 @@ button:hover {
 }
 
 
-button.alert {
+.alert {
   background-color: brown;
   color: snow;
 }
 
-button.green {
+.green {
   background-color: olivedrab;
   color: snow;
 }
@@ -35,7 +35,8 @@ button:disabled {
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
+@media ( prefers-reduced-motion : no-preference ) {
+
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
@@ -57,9 +58,11 @@ button:disabled {
 }
 
 @keyframes App-logo-spin {
+
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
