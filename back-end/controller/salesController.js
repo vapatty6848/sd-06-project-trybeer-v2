@@ -38,25 +38,43 @@ salesRouter.post('/:id', async (req, res) => {
 });
 
 salesRouter.get('/:id', async (req, res) => {
-  const fullSale = [];
   const { id } = req.params;
-  const orders = await models.sales_products.findAll({ where: { sale_id: id } });
-  const sale = await models.sales.findOne({ where: { id } });
-  orders.forEach(async (order, index) => {
-    const product = await models.products.findOne({ where: { id: order.product_id } });
-    const productDetails = {
-        Status: sale.status,
-        idVenda: sale.id,
-        product: product.name,
-        price: product.price,
-        total: sale.total_price,
-        saleDate: sale.sale_date,
-        quantidade: order.quantity,
-      };
-    fullSale.push(productDetails);
-    if (index === orders.length - 1) res.status(200).send(fullSale);
+  const sales = await models.sales.findAll({
+    where: { id },
+    include: { model: models.products, as: 'products' },
   });
+  return res.status(200).json(sales);
 });
+
+// [
+//   {
+//     "Status": "Pendente",
+//     "idVenda": 1,
+//     "product": "Heineken 600ml",
+//     "price": "7.50",
+//     "total": "69.96",
+//     "saleDate": "2021-04-19T21:49:25.000Z",
+//     "quantidade": "3"
+//   },
+//   {
+//     "Status": "Pendente",
+//     "idVenda": 1,
+//     "product": "Antarctica Pilsen 300ml",
+//     "price": "2.49",
+//     "total": "69.96",
+//     "saleDate": "2021-04-19T21:49:25.000Z",
+//     "quantidade": "4"
+//   },
+//   {
+//     "Status": "Pendente",
+//     "idVenda": 1,
+//     "product": "Brahma 600ml",
+//     "price": "7.50",
+//     "total": "69.96",
+//     "saleDate": "2021-04-19T21:49:25.000Z",
+//     "quantidade": "5"
+//   }
+// ]
 
 salesRouter.put('/:id', async (req, res) => {
   const { id } = req.params;
