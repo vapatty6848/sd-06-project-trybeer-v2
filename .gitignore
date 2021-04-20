@@ -289,5 +289,3 @@ $RECYCLE.BIN/
 
 cypress/screenshots/
 cypress/videos/
-tailwind.config.js
-craco.config.js
