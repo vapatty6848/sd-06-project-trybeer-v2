@@ -13,6 +13,7 @@ ProductsController
   
       return res.status(STATUS_OK).json(allProducts);
     } catch (error) {
+      console.log(error.message);
       return res.status(STATUS_INTERNAL_SERVER_ERROR).json({ message: 'Internal Server Error' });
     }
   });

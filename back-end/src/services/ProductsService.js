@@ -12,7 +12,7 @@ const getAll = async () => {
       price: product.price,
       stringPrice: formatPrice(product.price),
       quantity: 0,
-      urlImage: formatUrl(product.url_image),
+      urlImage: formatUrl(product.urlImage),
   }));
 
   return formatedProducts;

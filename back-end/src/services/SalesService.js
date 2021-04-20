@@ -1,5 +1,5 @@
 // const jwt = require('jsonwebtoken');
-const { sales, salesProducts } = require('../../models');
+const { sales, salesProducts, products: productsModel } = require('../../models');
 
 // const secret = 'T1f7C0e8E1p9I8h8M';
 const STATUS_OK = 200;
@@ -26,20 +26,16 @@ const createSale = async (req, res, _next) => {
 
 const getAllSales = async (req, res, _next) => {
   const Sales = await sales.findAll();
-  const formatedSales = Sales.map((sale) => ({
-    id: sale.id,
-    deliveryAddress: sale.delivery_address,
-    deliveryNumber: sale.delivery_number,
-    totalPrice: sale.total_price,
-    saleDate: sale.sale_date,
-    status: sale.status,
-}));
-  return res.status(STATUS_OK).json(formatedSales);
+  return res.status(STATUS_OK).json(Sales);
 };
 
 const getSaleById = async (req, res, _next) => {
   const { id } = req.params;
-  const Sale = await sales.findByPk(id);
+  const Sale = await sales.findOne({ where: { id }, 
+    include: [{ model: productsModel, 
+    as: 'products', 
+    through: { attributes: { include: ['quantity'] } } }],
+  });
   return res.status(STATUS_OK).json(Sale);
 };
 
