@@ -30,9 +30,7 @@ function CardClient(props) {
         >
           {formatedDate}
         </div>
-        <div
-          // className="text-yellow-200"
-        >
+        <div>
           {status}
         </div>
         <div

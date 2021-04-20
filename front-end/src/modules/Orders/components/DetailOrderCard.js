@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 function DetailOrderCard(props) {
   const nine = 9;
   const { sale } = props;
-  console.log(sale)
   const fullDate = new Date(sale.saleDate);
   const day = fullDate.getDate();
   const month = fullDate.getMonth();

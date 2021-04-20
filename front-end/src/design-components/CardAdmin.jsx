@@ -9,7 +9,6 @@ function CardAdmin(props) {
     status,
     totalPrice,
   }, IndexId } = props;
-  console.log(props)
   const formatPrice = `R$ ${totalPrice.replace('.', ',')}`;
   // console.log(formatPrice)
   return (
