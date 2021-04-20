@@ -2,8 +2,8 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const Rescue = require('express-rescue');
-const { handleError } = require('./src/middlewares');
-const routes = require('./src/routes');
+const handleError = require('./src/api/middlewares/handleError');
+const routes = require('./src/api/routes');
 
 const app = express();
 const port = 3001;
