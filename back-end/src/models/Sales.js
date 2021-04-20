@@ -10,8 +10,8 @@ const SaleModel = (sequelize, DataTypes) => {
     timestamps: false,
   });
 
-  Blogpost.associate = (models) => {
-    Blogpost.belongsTo(models.User, { as: 'user', foreignKey: 'user_id' });
+  Sale.associate = (models) => {
+    Sale.belongsTo(models.User, { as: 'user', foreignKey: 'user_id' });
   };
 
   return Sale;
