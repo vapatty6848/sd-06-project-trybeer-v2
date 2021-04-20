@@ -1,4 +1,5 @@
 const socketIO = require('socket.io');
+const service = require('./src/api/conversations/service');
 
 const URL_FRONT = process.env.FRONT_URL || 'http://localhost:3000';
 const chat = (http) => {
@@ -11,10 +12,21 @@ const chat = (http) => {
 
   return io.on('connection', (socket) => {
     console.log('New user on our channel');
-  
-    socket.on('teste', (message) => {
-      socket.emit('teste2', message);
+    socket.emit('server-to-user-connection', { text: 'You are connected!', userId: 'server' });
+
+    socket.on('user-to-server-connection', async (obj) => {
+      const { userId } = obj;
+      const conversation = await service.create(userId);
+      socket.emit('server-to-user-connection', { messages: conversation.messages });
     });
+
+    socket.on('user-to-server', async (obj) => {
+      const { userId, text } = obj;
+      const conversation = await service.writeMessage({ userId, text });
+      socket.emit('server-to-user', obj);
+    });
+
+    socket.on('disconnect', () => console.log('Desconectado'));
   });
 };
 
