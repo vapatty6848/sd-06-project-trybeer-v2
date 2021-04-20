@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { createUser } = require('../models');
+const { getAll } = require('../models/UserModel');
 const {
   getEmailService,
   registerUserService,
@@ -15,7 +15,7 @@ const { secret, jwtConfig, jwtSign, createJWTPayload } = require('../authorizati
 const userRouter = new Router();
 
 userRouter.get('/', async (req, res) => {
-  const allUsers = await createUser.findAll();
+  const allUsers = await getAll();
   return res.status(status.SUCCESS).json(allUsers);
 });
 
@@ -24,14 +24,14 @@ userRouter.post('/login', async (req, res, next) => {
   try {
     if (!user.length) throw new ThrowError(status.NOT_FOUND, messages.USER_NOT_FOUND);
     const payload = createJWTPayload(user);
-
+    
     const token = jwtSign(payload, secret, jwtConfig);
     return res.status(status.SUCCESS)
       .json({
-        token,
-        name: user[0].name,
-        email: user[0].email,
-        role: user[0].role,
+        token, 
+        name: user[0].name, 
+        email: user[0].email, 
+        role: user[0].role, 
         id: user[0].id,
       });
   } catch (error) {
@@ -46,9 +46,9 @@ userRouter.post('/register', async (req, res, next) => {
     if (!resultRegister) {
       throw new ThrowError(status.CONFLICT, messages.EMAIL_EXISTS);
     }
-
+    
     const payload = createJWTPayload(user);
-
+    
     if (!resultRegister.affectedRows) {
       throw new ThrowError(status.INTERNAL_ERROR, messages.DEFAULT_ERROR);
     }
@@ -70,6 +70,8 @@ userRouter.put('/update', tokenValidator, async (req, res) => {
 userRouter.get('/orders', async (req, res) => {
   const { email } = req.headers;
   const allOrders = await allUserOrdersService(email);
+  // console.log('email:', email)
+  // console.log('resultado:', allOrders)
   res.status(status.SUCCESS).json(allOrders);
 });
 
