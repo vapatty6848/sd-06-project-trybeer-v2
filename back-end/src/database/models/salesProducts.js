@@ -7,16 +7,16 @@ module.exports = (sequelize, DataTypes) => {
   {
     timestamps: false,
   });
+  salesProducts.removeAttribute('id');
 
   salesProducts.associate = (models) => {
     salesProducts.belongsTo(models.sales, {
-      foreignKey: 'id', as: 'sale',
+      foreignKey: 'saleId', as: 'sales',
     });
 
     salesProducts.belongsTo(models.products, {
-      foreignKey: 'id', as: 'product',
+      foreignKey: 'productId', as: 'product',
     });
   };
-  
   return salesProducts;
 };
