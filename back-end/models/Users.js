@@ -1,5 +1,5 @@
 const createUsers = (sequelize, DataTypes) => {
-  const Users = sequelize.define('users', {
+  const Users = sequelize.define('Users', {
     id: { primaryKey: true, type: DataTypes.INTEGER },
     name: DataTypes.STRING,
     email: DataTypes.STRING,

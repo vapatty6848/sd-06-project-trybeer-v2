@@ -1,4 +1,4 @@
-const cartModel = require('../models/cartModel');
+const cartModel = require('../model/cartModel');
 
 const addSale = (sale) => cartModel.addSale(sale);
 

@@ -1,8 +1,9 @@
-const userModel = require('../models/userModel');
+const userModel = require('../models/Users');
 
 const validateEmail = (email) => {
   const regex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
   const emailVerified = regex.test(email);
+  console.log('cheguei aqui', emailVerified);
   return emailVerified;
 };
 

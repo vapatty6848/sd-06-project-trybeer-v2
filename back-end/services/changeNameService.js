@@ -1,4 +1,4 @@
-const changeName = require('../models/changeNameModel');
+const changeName = require('../model/changeNameModel');
 
 const changeNameService = (name, email) => changeName(name, email);
 

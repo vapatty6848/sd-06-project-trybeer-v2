@@ -1,4 +1,4 @@
-const adminOrderModel = require('../models/adminOrderModel');
+const adminOrderModel = require('../model/adminOrderModel');
 
 const allOrders = () => adminOrderModel.allOrders();
 const changeStatus = (id) => adminOrderModel.changeStatus(id);
