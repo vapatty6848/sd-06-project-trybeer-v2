@@ -3,13 +3,16 @@ const Sales = (sequelize, DataTypes) => {
     userId: DataTypes.INTEGER,
     totalPrice: DataTypes.INTEGER,
     deliveryAddress: DataTypes.STRING,
-    deliverNumber: DataTypes.STRING,
-    saleDate: DataTypes.DATE,
-    status: DataTypes.STRING,
+    deliveryNumber: DataTypes.STRING,
+    saleDate: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+    },
+    status: { type: DataTypes.STRING, defaultValue: 'Pendente' },
   }, { timestamps: false });
 
   sales.associate = (models) => {
-    sales.belongsTo(models.Users,
+    sales.belongsTo(models.users,
       { foreignKey: 'userId', as: 'user' });
   };
 
