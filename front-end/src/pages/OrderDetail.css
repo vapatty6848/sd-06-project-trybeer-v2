@@ -3,10 +3,9 @@
   display: grid;
   gap: 20px;
   grid-template-areas: 
-  "top top top"
-  "middle middle middle"
-  "bottom bottom bottom"
-  ;
+    'top top top',
+    'middle middle middle',
+    'bottom bottom bottom';
   padding: 20px;
   width: 80%;
 }
@@ -21,8 +20,8 @@
 
 .bottom-card {
   font-size: 1.5em;
-  font-weight: 700;
   display: flex;
+  font-weight: 700;
   grid-area: bottom;
   justify-content: flex-end;
 
@@ -31,8 +30,8 @@
 .middle-card li {
   display: flex;
   font-size: 1.2em;
-  justify-content: space-between;
   grid-area: middle;
-  padding: 10px;
+  justify-content: space-between;
   list-style: none;
+  padding: 10px;
 }
