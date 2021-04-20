@@ -1,6 +1,6 @@
 const tokenValidation = require('../utils/tokenValidation');
 const { OK } = require('../utils/allStatusCode');
-const { updateProfile } = require('../models/ProfileModel');
+const { users } = require('../models');
 
 // const ProfileAuthorization = async (req, res) => {
 //   const { authorization } = req.headers;
@@ -10,12 +10,15 @@ const { updateProfile } = require('../models/ProfileModel');
 // };
 
 const ProfileUpdateService = async (req, res) => {
+  console.log('entrou');
   const { authorization } = req.headers;
   const payload = tokenValidation(authorization);
+  console.log('payload', payload)
   const { id } = payload;
   const { name } = req.body;
 
-  await updateProfile(id, name);
+  const ola = await users.update({ name }, { where: { id } });
+  console.log(ola);
   return res.status(OK).json({ name });
 };
 

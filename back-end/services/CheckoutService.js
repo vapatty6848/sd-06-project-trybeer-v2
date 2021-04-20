@@ -1,6 +1,6 @@
 const tokenValidation = require('../utils/tokenValidation');
 const { BAD_REQUEST, OK } = require('../utils/allStatusCode');
-const { priceById, createSale } = require('../models/CheckoutModel');
+const { products, sales } = require('../models');
 
 const dataValidate = (deliveryNumber, deliveryAddress, salesProducts, res) => {
   const objErr = (err, status) => { res.status(status).json({ status, err }); }; 
@@ -17,7 +17,7 @@ const CheckoutServices = async (req, res) => {
   const payload = tokenValidation(authorization);
   const { id } = payload;
   const { deliveryAddress, deliveryNumber, salesProducts } = req.body;
-  const saleDate = new Date();
+  // const saleDate = new Date();
   const saleStatus = 'PENDING';
 
   dataValidate(deliveryNumber, deliveryAddress, salesProducts, res);
@@ -25,13 +25,22 @@ const CheckoutServices = async (req, res) => {
   const totalPrice = await salesProducts.reduce(async (total, element) => {
     const productId = parseInt(element[0], 10);
     const productQuantity = parseInt(element[1], 10);
-    const [[{ price }]] = await priceById(productId);
+    const { dataValues: { price } } = await products.findByPk(productId);
     const unityPrice = price * productQuantity;
     return (Math.trunc(((await total) + unityPrice) * 100) / 100);
   }, 0);
-  const data = {
-    id, totalPrice, deliveryAddress, deliveryNumber, salesProducts, saleDate, saleStatus };
-  await createSale(data);
+  const data = { user_id: id, total_price: totalPrice, delivery_address: deliveryAddress, 
+    delivery_number: deliveryNumber, status: saleStatus };
+  const saleTable = await sales.create(data);
+  console.log('saleTable', saleTable);
+
+  // const newSalesProducts = [];
+  // salesProducts.forEach((element) => { 
+  //   newSalesProducts.push([saleTable.insertId, ...element]);
+  // });
+  // newSalesProducts.forEach(async (element) => {
+  //   // await 
+  // });
 
   return res.status(OK).json(data);
 };

@@ -1,4 +1,4 @@
-const { createRegister, getUserByEmail } = require('../models/RegisterModel');
+const { users } = require('../models'); // createRegister, getUserByEmail,
 const {
   validateEmail,
   validateName,
@@ -23,8 +23,8 @@ const RegisterValidation = (body) => {
 };
 
 const emailIsExists = async (email) => {
-  const [retorno] = await getUserByEmail(email);
-  if (retorno.length !== 0) return objErr('E-mail already in database.', BAD_REQUEST);
+  const retorno = await users.findOne({ where: { email } });
+  if (retorno) return objErr('E-mail already in database.', BAD_REQUEST);
   return null;
 };
 
@@ -37,7 +37,7 @@ const RegisterServices = async (req, res) => {
   const error2 = await emailIsExists(body.email);
   if (error2) return res.status(error2.status).json({ err: error2.err });
 
-  const user = await createRegister(body);
+  const { dataValues: user } = await users.create(body);
 
   const { password, name, ...userWithoutPasswordAndName } = user;
   const { id, password: _password, ...userWithoutPassword } = user;

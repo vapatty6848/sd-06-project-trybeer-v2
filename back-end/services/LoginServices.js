@@ -1,4 +1,4 @@
-const { getUserByEmail } = require('../models/RegisterModel');
+const { users } = require('../models');
 const { UNAUTHORIZED, OK } = require('../utils/allStatusCode');
 const { createToken } = require('../utils/createToken');
 const {
@@ -42,7 +42,7 @@ const LoginServices = async (req, res) => {
   const error2 = emailAndPasswordCheckContent(email, password);
   if (error2) return res.status(error2.status).json({ err: error2.err });
 
-  const [[user]] = await getUserByEmail(email);
+  const { dataValues: user } = await users.findOne({ where: { email } });
 
   const error3 = checkUserRegister(email, password, user);
   if (error3) return res.status(error3.status).json({ err: error3.err });
