@@ -31,6 +31,14 @@ function SideBarAdmin() {
           Perfil
         </Button>
       </Link>
+      <Link to="/admin/chats">
+        <Button
+          bgColor="black"
+          testId="side-menu-item-chat"
+        >
+          Conversas
+        </Button>
+      </Link>
       <div className="bottom-12">
         <Button
           onClick={ () => onClick() }

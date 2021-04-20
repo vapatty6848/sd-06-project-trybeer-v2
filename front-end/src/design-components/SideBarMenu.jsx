@@ -31,6 +31,11 @@ function SideBarMenu({ visible }) {
           Meu Perfil
         </Button>
       </Link>
+      <Link to="/chat">
+        <Button bgColor="black" testId="side-menu-chat">
+          Conversar com a loja
+        </Button>
+      </Link>
       <div className="bottom-12">
         <Button
           onClick={ () => onClick() }

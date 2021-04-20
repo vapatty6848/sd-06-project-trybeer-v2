@@ -7,7 +7,9 @@ import Orders from './modules/Orders/Orders';
 import Products from './modules/Products/Products';
 import AdminOrders from './modules/Admin/Orders/AdminOrders';
 import AdminProfile from './modules/Admin/Profile/AdminProfile';
+import AdminChats from './modules/Admin/Chats/AdminChats';
 import Checkout from './modules/Checkout/Checkout';
+import Chat from './modules/Chat/Chat';
 import AdminOrderDetail from './modules/Admin/OrderDetail/AdminOrderDetail';
 import DetailOrder from './modules/Orders/DetailOrder';
 
@@ -20,11 +22,13 @@ function Routes() {
         <Route path="/admin/orders/:id" component={ AdminOrderDetail } />
         <Route path="/admin/orders" component={ AdminOrders } />
         <Route path="/admin/profile" component={ AdminProfile } />
+        <Route path="/admin/chats" component={ AdminChats } />
         <Route path="/register" component={ Register } />
         <Route path="/profile" component={ Profile } />
         <Route path="/orders/:id" component={ DetailOrder } />
         <Route path="/orders" component={ Orders } />
         <Route path="/checkout" component={ Checkout } />
+        <Route path="/chat" component={ Chat } />
         <Redirect from="/" to="/login" />
       </Switch>
     </Router>
