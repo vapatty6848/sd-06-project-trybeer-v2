@@ -1,5 +1,5 @@
 const SalesModel = require('../Model/salesModel');
-const UserModel = require('../Model/userModel');
+const models = require('../models');
 const { throwThisError } = require('../Utils');
 
 const registerNewOrder = async (req, res) => {
@@ -7,12 +7,12 @@ const registerNewOrder = async (req, res) => {
   const date = new Date();
   const status = 'Pendente';
 
-  const { id } = await UserModel.findUserByEmail(email);
+  const { id } = await models.user.findOne({ where: { email } });
 
   const order = { id, orderValue, address, number, date, status };
-  const newOrder = await SalesModel.registerNewOrder(order);
+  const newOrder = await models.sales.create(order);
 
-  const { insertId } = newOrder;
+  const insertId = newOrder.id;
   await SalesModel.insertProductSale(insertId, products);
   
   res.status(200).json({ message: 'OK' });

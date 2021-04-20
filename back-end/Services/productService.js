@@ -1,11 +1,11 @@
-const ProductsModel = require('../Model/productsModel');
+const models = require('../models');
 
 require('dotenv').config();
 
 const NOT_FOUND = 404;
 
 const findAllProducts = async (_req, res) => {
-  const products = await ProductsModel.findAllProducts();
+  const products = await models.products.findAll();
 
   if (!products) res.status(NOT_FOUND).json({ message: 'Products not found' });
 
