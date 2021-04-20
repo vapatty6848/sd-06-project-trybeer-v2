@@ -64,14 +64,14 @@ const Routes = () => {
         </BodyContainer>
       </Route>
       {/* ROTAS PRIVADAS - USUÁRIO ADMIN */}
-      <Route path={ ['/admin/orders', '/admin/profile', '/admin/chat'] }>
+      <Route path={ ['/admin/orders', '/admin/profile', '/admin/chats'] }>
         { !existToken && <Redirect to="/" /> }
         <Menu />
         <BodyContainer>
           <Route path="/admin/profile" component={ ProfileAdmin } />
           <Route path="/admin/orders/:id" component={ DetailedOrder } />
           <Route exact path="/admin/orders" component={ OrdersAdmin } />
-          <Route exact path="/admin/chat" component={ PrivateChat } />
+          <Route exact path="/admin/chats" component={ PrivateChat } />
         </BodyContainer>
       </Route>
       {/* ROTA RAIZ - RESPONSÁVEL POR FAZER DIRECIONAMENTO */}
