@@ -39,7 +39,7 @@ function MenuSide() {
         </button>
         <button
           className="side-btn"
-          data-testid={ isClient ? 'side-menu-chat"' : 'side-menu-item-chat' }
+          data-testid={ isClient ? 'side-menu-chat' : 'side-menu-item-chat' }
           type="button"
           onClick={ () => route.push(isClient ? '/chat' : '/admin/chats') }
         >
