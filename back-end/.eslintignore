@@ -1,4 +1,7 @@
 models/index.js
+models/sql/models/index.js
+models/sql/seeders
+models/sql/migrations
 seeders
 migrations
 tests

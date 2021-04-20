@@ -1,0 +1,30 @@
+.checkout-container {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-evenly;
+  margin: auto;
+  padding: 10px auto;
+  width: 90%;
+}
+
+.product-row {
+  align-items: center;
+  background-color: lightsteelblue;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  flex-flow: row nowrap;
+  height: 30px;
+  justify-content: space-between;
+  margin: 6px;
+  padding: 4px 8px;
+}
+
+.product-row > * {
+  margin: 0 8px;
+}
+
+.product-row .name {
+  flex-grow: 1;
+  text-align: center;
+}

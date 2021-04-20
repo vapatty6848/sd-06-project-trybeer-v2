@@ -1,0 +1,46 @@
+.topbar {
+  background-color: darkslategray;
+}
+
+.header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  padding: 8px 3px;
+}
+
+.title {
+  color: snow;
+  margin: auto;
+}
+
+.hamburguer {
+  background: none;
+  border: none;
+}
+
+.hamburguer .icon {
+  color: snow;
+  font-size: 1.5em;
+  padding: 4px 3px;
+}
+
+.side-menu-container, .admin-side-bar-container {
+  background-color: slategray;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.side-menu-container a, .admin-side-bar-container a {
+  margin: 0 6px;
+}
+
+.side-menu-container.show {
+  display: block;
+}
+
+.side-menu-container.hide {
+  display: none;
+}
