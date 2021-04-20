@@ -1,6 +1,7 @@
 const frisby = require('frisby');
-const connection = require('../src/models/connection');
 const { StatusCodes } = require('http-status-codes');
+
+const connection = require('../src/models/connection');
 const { generateToken } = require('../src/security');
 const url = 'http://localhost:3001';
 
