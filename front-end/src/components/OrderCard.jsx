@@ -21,14 +21,14 @@ export default function OrderCard({ order, orderIndex }) {
           {orderIndex + 1}
         </p>
         <p data-testid={ `${orderIndex}-order-date` }>
-          data:
+          Data:
           {' '}
-          {convertData(order.sale_date)}
+          {convertData(order.saleDate)}
         </p>
         <p data-testid={ `${orderIndex}-order-total-value` }>
-          valor total:
+          Valor total:
           {' '}
-          {currencyFormat(Number(order.total_price))}
+          {currencyFormat(Number(order.totalPrice))}
         </p>
         <hr />
       </button>

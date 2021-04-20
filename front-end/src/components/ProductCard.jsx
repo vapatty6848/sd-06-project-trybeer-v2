@@ -1,14 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import currencyFormat from '../utils/currencyFormat';
+import sales from '../methods/sales';
 
-function ProductCard({ product }) {
+function ProductCard({ product })  {
   /* - A quantidade do produto deverá conter a tag `data-testid="0-product-qtd"`
 
 - O nome do produto deverá conter a tag `data-testid="0-product-name"`
 
 - O valor total do produto deverá conter a tag `data-testid="0-product-total-value"` */
-  return (
+
+console.log(sales)
+
+return (
     <>
       <p data-testid={ `${product.id - 1}-product-qtd` }>
         quantidade:

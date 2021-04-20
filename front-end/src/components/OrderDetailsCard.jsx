@@ -4,27 +4,35 @@ import ProductCard from './ProductCard';
 import currencyFormat from '../utils/currencyFormat';
 import convertData from '../utils/convertData';
 
-function OrderDetailsCard({ orderDetails }) {
+function OrderDetailsCard({orderDetails}) {
   console.log(orderDetails);
-  if (orderDetails[0]) {
+
+  if (orderDetails !== {}) {
     return (
 
       <div>
         <p data-testid="order-number">
 
-          {`Pedido ${orderDetails[0].id}`}
+          {`Pedido ${orderDetails.id}`}
         </p>
         <p data-testid="order-date">
           data do pedido:
-          {convertData(orderDetails[0].saleDate)}
+          {convertData(orderDetails.saleDate)}
         </p>
-        {orderDetails.map(
-          (product) => <ProductCard product={ product } key={ product.productName } />,
-        )}
+        {/* {orderDetails.map(
+          (product) => {
+           
+          
+          return 
+          ,
+        )} */}
+
+        <ProductCard product={ orderDetails }  />
+
         <p data-testid="order-total-value">
           total do pedido:
           {' '}
-          {currencyFormat(Number(orderDetails[0].saleTotal))}
+          {currencyFormat(Number(orderDetails.saleTotal))}
           {' '}
         </p>
         <hr />
