@@ -20,6 +20,6 @@ module.exports = {
   },
 
   down: async (queryInterface) => {
-    await queryInterface.dropTable('Sales');
+    await queryInterface.dropTable('sales_products');
   },
 };
