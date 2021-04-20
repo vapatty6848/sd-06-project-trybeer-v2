@@ -26,7 +26,8 @@ export const getSaleByID = async (id) => fetch(`${URL_SALES}/${id}`, {
   headers: headerType,
 }).then((response) => response.json());
 
-export const updateOrderById = async (id) => fetch(`${URL_SALES}/${id}`, {
+export const updateOrderById = async (id, status) => fetch(`${URL_SALES}/${id}`, {
   method: 'PUT',
   headers: headerType,
+  body: JSON.stringify({ status }),
 }).then((response) => response.json());

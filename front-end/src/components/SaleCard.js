@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router';
 
 function SaleCard(props) {
-  const { index, saleNumber, date, value } = props;
+  const { index, saleNumber, date, value, status } = props;
   const FIVE = 5;
   const MINUSFOURTEEN = -14;
   const history = useHistory();
@@ -37,6 +37,7 @@ function SaleCard(props) {
         >
           { `R$ ${value.replace('.', ',')}` }
         </p>
+        <span>{ status }</span>
       </div>
     </div>
   );
@@ -47,6 +48,7 @@ SaleCard.propTypes = {
   saleNumber: PropTypes.number.isRequired,
   date: PropTypes.string.isRequired,
   value: PropTypes.number.isRequired,
+  status: PropTypes.string.isRequired,
 };
 
 export default SaleCard;
