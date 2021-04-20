@@ -1,8 +1,8 @@
-const { User } = require('../models');
+const { users } = require('../models');
 
 const validatePasswordLogin = async (req, res, next) => {
-  const { email, password } = req.body;
-  const user = await User.findOne({ where: { email, password } });
+  const { email, password } = req.body.user;
+  const user = await users.findOne({ where: { email, password } });
   if (!user) {
     return (
       next({
@@ -15,8 +15,8 @@ const validatePasswordLogin = async (req, res, next) => {
 };
 
 const validateEmailLogin = async (req, res, next) => {
-  const { email } = req.body;
-  const user = await User.findOne({ where: { email } });
+  const { email } = req.body.user;
+  const user = await users.findOne({ where: { email } });
   if (!user) {
     return (
       next({
@@ -28,8 +28,8 @@ const validateEmailLogin = async (req, res, next) => {
 };
 
 const validateEmailRegister = async (req, res, next) => {
-  const { email } = req.body;
-  const user = await User.findOne({ where: { email } });
+  const { email } = req.body.user;
+  const user = await users.findOne({ where: { email } });
   if (user) {
     return (
       next({

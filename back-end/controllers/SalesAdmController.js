@@ -6,9 +6,9 @@ const { sales } = require('../models');
 const routerSalesAdm = Router();
 
 routerSalesAdm.get('/', validateToken, async (req, res) => {
+  console.log('cheguei');
   const { role } = res.locals;
   if (role === 'administrator') {
-    // const [orders] = await getAllOrders();
     const orders = await sales.findAll();
     res.status(200).json({ orders });
   }

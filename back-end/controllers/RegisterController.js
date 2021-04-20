@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const jwt = require('jsonwebtoken');
-const { product } = require('../models');
+const { users } = require('../models');
 const { validateUserRegister } = require('../middlewares/userMiddleware');
 
 const routerRegister = Router();
@@ -15,10 +15,8 @@ const SECRET = 'senha';
 routerRegister.post('/', validateUserRegister, async (req, res, next) => {
   const { name, email, password, seller } = req.body.user;
   const role = seller ? 'administrator' : 'client';  
-  
-    try {    
-    // await createOne(name, email, password, role);
-    await product.create(name, email, password, role);
+  try {
+    await users.create({ name, email, password, role });
     const payload = {
       iss: 'Trybeer',
       aud: 'indentity',
@@ -27,6 +25,7 @@ routerRegister.post('/', validateUserRegister, async (req, res, next) => {
     const token = jwt.sign(payload, SECRET, jwtConfig);
     return res.status(200).json({ user: { name, email, role, token } });
   } catch (err) {
+    console.log(err.message);
     return next({ status: 400, message: 'E-mail already in database.' });
   }
 });

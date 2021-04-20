@@ -19,10 +19,10 @@ app.get('/', (_req, res) => res.send('Hello World!'));
 
 app.use('/login', routerLogin);
 app.use('/products', routerProducts);
-// app.use('/profile', routerProfile);
-// app.use('/register', routerRegister);
-// app.use('/orders', routerSales);
-// app.use('/admin/orders', routerSalesAdm);
+app.use('/profile', routerProfile);
+app.use('/register', routerRegister);
+app.use('/orders', routerSales);
+app.use('/admin/orders', routerSalesAdm);
 
 app.listen(port, () => `Running on ${port}`);
 

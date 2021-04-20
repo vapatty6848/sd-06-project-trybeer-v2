@@ -4,7 +4,7 @@ const validateLogin = require('./validateLogin');
 
 const validateUserRegister = async (req, res, next) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password } = req.body.user;
     await userSchema.validate({ name, email, password });
     await validateRegister(req, res, next);
   } catch (err) {
@@ -16,7 +16,7 @@ const validateUserRegister = async (req, res, next) => {
 
 const validateUserLogin = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
+    const { email, password } = req.body.user;
     await loginSchema.validate({ email, password });
     await validateLogin(req, res, next);
   } catch (err) {

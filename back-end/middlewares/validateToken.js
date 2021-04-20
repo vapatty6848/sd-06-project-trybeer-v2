@@ -1,4 +1,5 @@
 const atob = require('atob');
+const { users } = require('../models');
 
 const parseJWT = (token) => {
   try {
@@ -15,6 +16,10 @@ async function validateToken(req, res, next) {
   if (!token) return next({ status: 401, message: 'Token não encontrado' });
   const decode = parseJWT(token);
   if (!decode) return next({ status: 401, message: 'Token expirado ou inválido' });
+  const user = await users.findOne({ where: { email: decode.userData } });
+  if (!user && !user.id) return next({ status: 401, message: 'invalid match of token' });
+  res.locals.role = user.role;
+  res.locals.userId = user.id;
   return next();
 }
 

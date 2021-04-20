@@ -10,9 +10,7 @@ const routerSales = Router();
 routerSales.post('/', validateToken, async (req, res) => {
   const { products, price, address, number, status } = req.body.order;
   const { userId } = res.locals;
-  // const { insertId, date } = await createOne(products,
-  //    { userId, price, address, number, status });
-  const { insertId, date } = await sales.create(products,
+  const sale = await sales.create(products,
     { userId, price, address, number, status });
   res.status(201).json({ order: {
     saleId: insertId, userId, price, address, number, status, date,
