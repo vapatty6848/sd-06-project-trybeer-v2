@@ -10,14 +10,14 @@ import './Orders.css';
 function Orders() {
   const user = JSON.parse(localStorage.getItem('user'));
   const history = useHistory();
-  const { clientOrders, setOrders } = useContext(TrybeerContext);
+  const { orders, setOrders } = useContext(TrybeerContext);
 
   useEffect(() => {
     if (!user) return history.push('/login');
 
     async function fetchOrders() {
-      const orders = await getOrders(user.email);
-      setOrders(orders);
+      const newOrders = await getOrders(user.email);
+      setOrders(newOrders);
     }
 
     fetchOrders();
@@ -30,7 +30,11 @@ function Orders() {
   return (
     <div>
       <TopBar title="Meus Pedidos" />
+<<<<<<< HEAD
       { clientOrders.map((order, index) => (
+=======
+      { orders.map((order, index) => (
+>>>>>>> c4e2dc1ca13d64c9da268fe98471b7114dd64c84
         <div key={ index }>
           <button
             className="divPedidos"
@@ -42,6 +46,10 @@ function Orders() {
               id={ order.id }
               date={ order.sale_date }
               total={ order.total_price }
+<<<<<<< HEAD
+=======
+              status={ order.status }
+>>>>>>> c4e2dc1ca13d64c9da268fe98471b7114dd64c84
             />
           </button>
         </div>

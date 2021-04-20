@@ -15,7 +15,7 @@ const LoginProvider = ({ children }) => {
   const [totalCart, setTotalCart] = useState(0);
   const [address, setAddress] = useState({ rua: '', numero: '' });
   const [sales, setSales] = useState([]);
-  const [clientOrders, setOrders] = useState([]);
+  const [orders, setOrders] = useState([]);
 
   const providerValue = {
     user,
@@ -32,7 +32,7 @@ const LoginProvider = ({ children }) => {
     setAddress,
     sales,
     setSales,
-    clientOrders,
+    orders,
     setOrders,
   };
 

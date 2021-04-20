@@ -66,8 +66,8 @@ export const getOrderDetails = async (id) => {
   return requestResponse;
 };
 
-export const updateOrderStatus = async (id) => {
-  const requestResponse = await api.put(`/admin/orders/${id}`, { status: 'Entregue' })
+export const updateOrderStatus = async (id, string) => {
+  const requestResponse = await api.put(`/admin/orders/${id}`, { status: string })
     .then((response) => response.data)
     .catch((error) => error.response.data);
 

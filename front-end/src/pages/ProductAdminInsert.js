@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import SideBarAdmin from '../components/SideBarAdmin/SideBarAdmin';
-import { createNewProduct } from '../services/api';
+// import { hanldeRegisterProduct, handleChange } from '../services/productInsert';
 import './ProductAdminInsert.css';
 
 function ProductAdminInsert() {
-  const [product, setProduct] = useState({
-    name: '',
-    price: 0,
-  });
+  const [product, setProduct] = useState({ name: '', price: 0 });
 
   function handleChange(event) {
     setProduct({

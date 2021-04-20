@@ -55,6 +55,20 @@ function AdminOrdersDetails(props) {
                       type="button"
                       data-testid="mark-as-delivered-btn"
                       onClick={ () => updateStatus(id, setDelivered) }
+                      data-testid="mark-as-prepared-btn"
+                      onClick={ () => updateStatus(id, setDelivered, 'Preparando') }
+                    >
+                      Preparar pedido
+                    </button>
+                  )
+                  : null }
+                { orders[0].status !== 'Entregue'
+                  ? (
+                    <button
+                      className="buttonEntregar"
+                      type="button"
+                      data-testid="mark-as-delivered-btn"
+                      onClick={ () => updateStatus(id, setDelivered, 'Entregue') }
                     >
                       Marcar como entregue
                     </button>

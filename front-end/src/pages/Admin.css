@@ -46,6 +46,39 @@
   box-shadow: 3px 3px rgb(196, 150, 33);
   border-radius: 5px;
   font-family: 'Syne Mono';
+  background-color: rgb(246, 202, 90);
+  border: rgb(196, 150, 33);
+  border-radius: 5px;
+  box-shadow: 1px 1px rgb(196, 150, 33);
+  font-family: Syne Mono;
+  width: 100px;
+}
+
+.logout {
+  background-color: rgb(246, 202, 90);
+  border: rgb(196, 150, 33);
+  border-radius: 5px;
+  box-shadow: 1px 1px rgb(196, 150, 33);
+  font-family: Syne Mono;
+  margin-bottom: 10px;
+  margin-top: 200px;
+  width: 100px;
+}
+
+.divDetails {
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+.buttonPedidos {
+  background-color: rgb(255, 228, 163);
+  border: none;
+  border-radius: 5px;
+  box-shadow: 3px 3px rgb(196, 150, 33);
+  font-family: Syne Mono;
+  margin: 10px;
+  padding: 10px;
+  width: 100%;
 }
 
 h2 {
@@ -62,6 +95,15 @@ h2 {
   border: none;
   background-color: rgb(255, 228, 163);
   box-shadow: 3px 3px rgb(196, 150, 33);
+  background-color: rgb(255, 228, 163);
+  border: none;
+  border-radius: 10px;
+  box-shadow: 3px 3px rgb(196, 150, 33);
+  font-family: Syne Mono;
+  font-size: 16px;
+  margin: 10px;
+  padding: 10px;
+  width: 90%;
 }
 
 .Pendente {

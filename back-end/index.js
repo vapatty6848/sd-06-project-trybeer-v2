@@ -9,8 +9,6 @@ const SalesController = require('./src/controller/salesController');
 const CheckoutController = require('./src/controller/CheckoutController');
 const ClientOrdersController = require('./src/controller/ClientOrdersController');
 
-// testing css lint
-
 const app = express();
 
 const PORT = 3001;
