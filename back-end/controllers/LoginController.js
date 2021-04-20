@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const jwt = require('jsonwebtoken');
-const { getAll, getById } = require('../models/UsersService');
-const { validateLogin } = require('../middlewares');
+const { users } = require('../models');
+const { validateUserLogin } = require('../middlewares/userMiddleware');
 
 const routerLogin = Router();
 
@@ -13,11 +13,11 @@ const jwtConfig = {
 const SECRET = 'senha';
 
 routerLogin.get('/', async (_req, res) => {
-  const users = await getAll();
-  res.send(users);
+  const user = await users.findAll();
+  res.send(user);
 });
 
-routerLogin.post('/', validateLogin, async (req, res, next) => {
+routerLogin.post('/', validateUserLogin, async (req, res, next) => {
   const { user } = req.body;
   if (!res.locals.user) return next({ status: 404, message: 'not found' });
   const payload = {
@@ -34,8 +34,8 @@ routerLogin.post('/', validateLogin, async (req, res, next) => {
 
 routerLogin.get('/:id', async (req, res) => {
   const { id } = req.params;
-  
-  const user = await getById(id);
+  // const user = await getById(id);
+  const user = await users.findByPk(id);
   res.json(user);
   });
 

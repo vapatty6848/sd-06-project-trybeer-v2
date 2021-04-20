@@ -8,7 +8,7 @@ const config = {
   password: process.env.MYSQL_PASSWORD,
   database: 'Trybeer',
   };
-// console.log('user:', config.user, 'pw:', config.password, 'host', config.host);
+
 const connection = mysql.createPool(config);
 
 module.exports = connection; 

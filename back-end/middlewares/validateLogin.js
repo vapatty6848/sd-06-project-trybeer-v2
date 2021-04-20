@@ -1,15 +1,8 @@
-const validatePassword = require('./validatePassword');
-
-const validateEmail = require('./validateEmail');
+const { validateEmailLogin, validatePasswordLogin } = require('./validations');
 
 const validateLogin = async (req, res, next) => {
-  try {
-    await validateEmail(req, res);
-    await validatePassword(req, res);    
-    next();
-  } catch (Err) {
-    next(Err);
-  }
+  await validateEmailLogin(req, res, next);
+  await validatePasswordLogin(req, res, next);
 };
 
 module.exports = validateLogin;
