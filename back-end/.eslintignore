@@ -1,4 +1,4 @@
-models/index.js
+src/database/sequelize/models/index.js
 seeders
 migrations
 tests
