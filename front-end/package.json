@@ -7,13 +7,19 @@
     "@testing-library/react": "9.5.0",
     "@testing-library/user-event": "7.2.1",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 74903548eff3b81659dae2ba0fae042a557db3f3
     "axios": "^0.21.1",
     "eslint-config-trybe-frontend": "1.2.0",
     "history": "^5.0.0",
     "jquery": "1.9.1",
+<<<<<<< HEAD
 =======
     "eslint-config-trybe-frontend": "1.2.0",
 >>>>>>> 39bf2e48771ae4941ae2e9f9763e6f68b52a0423
+=======
+>>>>>>> 74903548eff3b81659dae2ba0fae042a557db3f3
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-router-dom": "5.2.0",

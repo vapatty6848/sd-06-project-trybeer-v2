@@ -1,7 +1,12 @@
 models/index.js
 seeders
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 migrations
 tests
 >>>>>>> 39bf2e48771ae4941ae2e9f9763e6f68b52a0423
+=======
+migrations
+tests
+>>>>>>> 74903548eff3b81659dae2ba0fae042a557db3f3
