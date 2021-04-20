@@ -5,15 +5,17 @@ import ContextBeer from '../../context/ContextBeer';
 import TopBar from '../../design-components/TopBar';
 import ProductsList from './components/ProductsList';
 import Button from '../../design-components/Button';
-import Inputs from './components/Inputs';
+import LabeledInput from '../../design-components/LabeledInput';
 
 // eslint-disable-next-line max-lines-per-function
 function Checkout() {
-  const { sale, getUser } = useContext(ContextBeer);
+  const { sale, getUser, total, initiateSale } = useContext(ContextBeer);
   const history = useHistory();
   const products = sale.filter((product) => product.quantity !== 0);
   const [buttonDisable, setButtonDisable] = useState(false);
-  const [success] = useState(false);
+  const [deliveryAddress, setDeliveryAddress] = useState('');
+  const [deliveryNumber, setDeliveryNumber] = useState('');
+  const [success, setSuccess] = useState(false);
   const handleSubmit = () => {
     const bodyObj = {
       products,
@@ -48,7 +50,22 @@ function Checkout() {
         items-center"
       >
         <ProductsList products={ products } />
-        <Inputs />
+        <div className="w-full space-y-12">
+          <LabeledInput
+            value={ deliveryAddress }
+            type="text"
+            onChange={ setDeliveryAddress }
+            label="Rua"
+            testId="checkout-street-input"
+          />
+          <LabeledInput
+            value={ deliveryNumber }
+            type="text"
+            onChange={ setDeliveryNumber }
+            label="Número da casa"
+            testId="checkout-house-number-input"
+          />
+        </div>
         <div
           className={ `absolute inset-auto z-100 flex items-center p-12 justify-center
           w-64 h-32 text-xl font-bold bg-green-300 text-green-600 rounded-lg

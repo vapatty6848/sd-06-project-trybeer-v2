@@ -35,7 +35,7 @@ function AdminOrderDetail() {
         >
           {(status === 'Entregue')
             ? <span className={ styling }>Pedido Entregue!</span>
-            : <ButtonGroup />}
+            : <ButtonGroup setStatus={ setStatus } id={ id } />}
         </div>
       </div>
     )
