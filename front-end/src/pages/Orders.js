@@ -16,8 +16,8 @@ function Orders() {
     if (!user) return history.push('/login');
 
     async function fetchOrders() {
-      const orders = await getOrders(user.email);
-      setOrders(orders);
+      const newOrders = await getOrders(user.email);
+      setOrders(newOrders);
     }
 
     fetchOrders();

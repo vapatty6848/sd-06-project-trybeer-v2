@@ -27,7 +27,7 @@ function OrderDetails(props) {
           : (
             <div className="divMain">
               <h2 data-testid="order-number">{`Pedido ${id}`}</h2>
-              <h3 data-testid={ `order-status` }>{`${orders[0].status}`}</h3>
+              <h3 data-testid="order-status">{`${orders[0].status}`}</h3>
               <h3 data-testid="order-date">
                 {`Data: ${moment(orders[0].sale_date).format('DD/MM')}`}
               </h3>

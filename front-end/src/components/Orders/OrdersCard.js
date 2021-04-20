@@ -20,6 +20,7 @@ OrdersCard.propTypes = {
   total: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
+  status: PropTypes.string.isRequired,
 };
 
 export default OrdersCard;
