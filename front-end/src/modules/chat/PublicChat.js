@@ -1,18 +1,26 @@
 import React, { useEffect, useState } from 'react';
+import { getUserInfo } from '../../services/localStorage';
 import socket from './socket';
 
 const PublicChat = () => {
-  const [test, setTest] = useState('Inicio');
-  useEffect(() => {
-    socket.emit('teste', 'Testando');
+  const [userId, setUserInfo] = useState('');
 
-    socket.on('teste2', (message) => setTest(message));
+  useEffect(()=> {
+    const { id } = getUserInfo();
+    setUserInfo(id);
   }, []);
+
+  useEffect(() => {
+    socket.emit('user-to-server-connection' , { userId });
+
+    // socket.on('teste2', (message) => setTest(message));
+  }, [userId]);
 
   return (
     <div>
       Chat Publico
-      <p>{ test }</p>
+      <input />
+      {userId}
     </div>
   );
 };
