@@ -11,7 +11,7 @@ function DetailedOrderCard(props) {
   // Get Sales
   useEffect(() => {
     api.get(`/sales/${id}`).then((resp) => setOrder(resp.data));
-  }, []);
+  }, [id]);
 
   let date = '';
   let orderStatus = '';

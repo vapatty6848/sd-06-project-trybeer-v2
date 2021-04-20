@@ -32,7 +32,7 @@ function Provider({ children }) {
 
   useEffect(() => {
     saveCart();
-  }, [cartItems]);
+  }, [cartItems, saveCart]);
 
   return (
     <GlobalContext.Provider value={ value }>
