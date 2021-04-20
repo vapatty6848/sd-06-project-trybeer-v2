@@ -1,9 +1,9 @@
-const { UserModel } = require('../model');
+const { users } = require('../database/models');
 
-const registerUser = async (name, email, password, role) => UserModel
-  .registerUser(name, email, password, role);
+const registerUser = async (name, email, password, role) => users
+.create({ name, email, password, role });
 
-const updateUser = async (name, email) => UserModel.updateUser(name, email);
+const updateUser = async (name, email) => users.update({ name }, { where: { email } });
 
   module.exports = {
     registerUser,

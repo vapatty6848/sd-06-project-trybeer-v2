@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { UserModel } = require('../model');
+const { users } = require('../database/models');
 require('dotenv/config');
 
 const secret = process.env.TOKEN_SECRET || 'segredodogrupo7';
@@ -15,7 +15,7 @@ module.exports = (req, res, next) => {
   try {
     jwt.verify(authorization, secret, async (err, email) => { 
       if (err) return res.status(401).json({ message: 'jwt malformed' });
-      const [user] = await UserModel.getUserByEmail(email.data);
+      const user = await users.findOne({ where: { email: email.data } });
 
       req.user = user;
       next();

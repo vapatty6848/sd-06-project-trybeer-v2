@@ -1,12 +1,12 @@
-const { OrderModel } = require('../model');
+const { sales } = require('../database/models');
 
-const getOrdersById = async (id) => OrderModel.getOrdersById(id);
+const getOrdersById = async (id) => sales.findByPk({ where: id });
 
-const updateStatusOrder = async (status, id) => OrderModel.updateStatusOrder(status, id);
+const updateStatusOrder = async (status, id) => sales.update({ status }, { where: id });
 
-const getAllOrders = async () => OrderModel.getAllOrders();
+const getAllOrders = async () => sales.findAll();
 
-const getAllOrdersByUser = async (id) => OrderModel.getAllOrdersByUser(id);
+const getAllOrdersByUser = async (id) => sales.findAll({ where: id });
 
 module.exports = {
   getAllOrdersByUser,
