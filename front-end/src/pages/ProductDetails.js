@@ -25,7 +25,7 @@ function ProductDetails({ match }) {
     const five = 5;
     const minusfourteen = -14;
     if (sale.length > 0) {
-      console.log('aquiiii')
+      console.log('aquiiii');
       setTotal(sale[0].total);
       let correctDate = sale[0].saleDate.slice(five, minusfourteen);
       const arrayDate = correctDate.split('-');
