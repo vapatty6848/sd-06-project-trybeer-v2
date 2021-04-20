@@ -31,6 +31,6 @@ const update = async (req, res) => {
 controller.get('/:id', checkToken, getById);
 controller.get('/', checkToken, getAll);
 controller.post('/', checkToken, create);
-controller.put('/', checkToken, update);
+controller.put('/:id', checkToken, update);
 
 module.exports = controller;

@@ -6,13 +6,12 @@ import { update } from '../../../utils';
 
 function DetailedOrderCard(props) {
   const [order, setOrder] = useState();
-  const [saleStatus, setSaleStatus] = useState(false);
   const { match: { params: { id } } } = props;
 
   // Get Sales
   useEffect(() => {
     api.get(`/sales/${id}`).then((resp) => setOrder(resp.data));
-  }, [saleStatus]);
+  }, []);
 
   let date = '';
   let orderStatus = '';
@@ -29,22 +28,39 @@ function DetailedOrderCard(props) {
     orderStatus = status;
   }
 
-  const handleClick = () => {
-    update(`/sales/${id}`).then((resp) => setSaleStatus(resp.message));
+  const handleClick = (status = '') => {
+    update(`/sales/${id}`, { status })
+      .then((resp) => setOrder((prev) => ({ ...prev, status: resp.status })));
   };
 
-  const renderButton = () => {
+  const renderButton = (statusInput) => {
+    const buttonLabel = {
+      preparing: 'Preparar pedido',
+      delivered: 'Marcar como entregue',
+    };
+
+    const testId = {
+      preparing: 'mark-as-prepared-btn',
+      delivered: 'mark-as-delivered-btn',
+    };
+
     const button = (
       <button
         type="button"
-        data-testid="mark-as-delivered-btn"
-        onClick={ () => handleClick() }
+        data-testid={ testId[statusInput] }
+        onClick={ () => handleClick(statusInput) }
       >
-        Marcar como entregue
+        { statusInput && buttonLabel[statusInput] }
       </button>
     );
 
-    if (orderStatus === 'pending') return button;
+    return button;
+  };
+
+  const statusConvert = {
+    pending: 'Pendente',
+    preparing: 'Preparando',
+    delivered: 'Entregue',
   };
 
   return (
@@ -72,11 +88,12 @@ function DetailedOrderCard(props) {
         { order ? `R$ ${order.totalPrice.toString().replace('.', ',')}` : '' }
       </p>
       <p data-testid="order-status">
-        { orderStatus === 'pending' ? 'Pendente' : 'Entregue' }
+        { orderStatus && statusConvert[orderStatus] }
       </p>
-      {
-        renderButton()
-      }
+      <div>
+        { orderStatus === 'pending' && renderButton('preparing') }
+        { orderStatus !== 'delivered' && renderButton('delivered') }
+      </div>
       { order && order.products.map((product, index) => (
         <div
           key={ index }

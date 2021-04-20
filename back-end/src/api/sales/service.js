@@ -19,23 +19,36 @@ const getById = async ({ params }) => {
 
   const sale = await model.findOne('id', id);
 
-  if (!sale) return ({ status: 401, payload: 'Not found.' });
+  if (!sale) return ({ status: 404, payload: 'Not found.' });
 
   return ({ status: 200, payload: sale });
 };
 
 // UPDATE STATUS --------------------------------------------------------
-const update = async ({ params }) => {
-  const { id } = params;
+const statusOperationValid = (status, newStatus) => {
+  const validStatus = ['preparing', 'delivered'];
+  if (status === 'pending' && validStatus.includes(newStatus)) return true;
+  if (status === 'preparing' && newStatus === validStatus[1]) return true;
+  return false;
+};
 
+const update = async ({ params, user, body }) => {
+  const { role } = user;
+
+  if (role !== 'administrator') return ({ status: 401, payload: 'Unauthorized.' });
+
+  const { id } = params;
   const sale = await model.findOne('id', id);
 
-  if (!sale) return ({ status: 401, payload: 'Not found.' });
-  
-  sale.status = 'delivered';
+  if (!sale) return ({ status: 404, payload: 'Not found.' });
+
+  const { status } = sale;
+  const { status: newStatus } = body;
+  if (statusOperationValid(status, newStatus)) sale.status = newStatus;
+
   sale.save();
 
-  return ({ status: 200, payload: { message: 'Sale updated.' } });
+  return ({ status: 200, payload: { message: 'Sale updated.', status: newStatus } });
 };
 
 // CRIAÇÃO DE VENDA----------------------------------------------------------

@@ -25,6 +25,12 @@ function OrderCard({ order, index }) {
   const role = user ? user.role : 'client';
   const pre = role === 'client' ? '' : '/admin';
 
+  const statusConvert = {
+    pending: 'Pendente',
+    preparing: 'Preparando',
+    delivered: 'Entregue',
+  };
+
   return (
     <Link
       to={ `${pre}/orders/${id}` }
@@ -44,7 +50,7 @@ function OrderCard({ order, index }) {
         { `${deliveryAddress}, ${deliveryNumber}` }
       </p>
       <p data-testid={ `${index}-order-status` }>
-        { status === 'pending' ? 'Pendente' : 'Entregue' }
+        { status && statusConvert[status] }
       </p>
     </Link>
   );
