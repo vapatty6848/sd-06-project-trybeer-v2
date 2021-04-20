@@ -21,13 +21,12 @@ function ProductDetails({ match }) {
     }
   };
 
-  const handle = () => {
+  const handle = (result) => {
     const five = 5;
     const minusfourteen = -14;
-    if (sale.length > 0) {
-      console.log('aquiiii');
-      setTotal(sale[0].total);
-      let correctDate = sale[0].saleDate.slice(five, minusfourteen);
+    if (result.length > 0) {
+      setTotal(result[0].total);
+      let correctDate = result[0].saleDate.slice(five, minusfourteen);
       const arrayDate = correctDate.split('-');
       correctDate = `${arrayDate[1]}/${arrayDate[0]}`;
       setDate(correctDate);
@@ -37,12 +36,12 @@ function ProductDetails({ match }) {
   const getSale = async () => {
     const result = await getSaleByID(id);
     setSale(result);
+    handle(result);
   };
 
   useEffect(() => {
     auxFunc();
     getSale();
-    handle();
   }, []);
 
   return (
@@ -53,7 +52,6 @@ function ProductDetails({ match }) {
           <p className="order-number" data-testid="order-number">{`Pedido ${id}`}</p>
           <p className="order-date" data-testid="order-date">{date}</p>
         </div>
-        { console.log(sale) }
         { sale.map((prod, index) => (
           <DetailCard
             key={ index }
