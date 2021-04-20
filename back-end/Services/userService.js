@@ -9,7 +9,7 @@ const secret = process.env.SECRET || 'secretToken';
 
 const loginUser = async (req, res) => {
   const { email } = req.body;
-  const user = await models.user.findOne({ where: { email } });
+  const user = await models.users.findOne({ where: { email } });
 
   if (!user) res.status(404).json({ message: 'User not found' });
 
@@ -21,7 +21,7 @@ const loginUser = async (req, res) => {
 
 const validateEmail = async (req, res, next) => {
   const { email } = req.body;
-  const user = await models.user.findOne({ where: { email } });
+  const user = await models.users.findOne({ where: { email } });
 
   if (user) res.status(409).json({ message: 'E-mail already in database.' });
   next();
@@ -29,7 +29,7 @@ const validateEmail = async (req, res, next) => {
 
 const registerNewUser = async (req, res) => {
   const { name, email, password, role } = req.body;
-  await models.user.create({ name, email, password, role });
+  await models.users.create({ name, email, password, role });
   return res.status(201).json({ message: 'OK' });
 };
 

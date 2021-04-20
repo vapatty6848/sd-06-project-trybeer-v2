@@ -7,14 +7,14 @@ const registerNewOrder = async (req, res) => {
   const date = new Date();
   const status = 'Pendente';
 
-  const { id } = await models.user.findOne({ where: { email } });
+  const { dataValues: { id } } = await models.users.findOne({ where: { email } });
 
-  const order = { id, orderValue, address, number, date, status };
+  const order = { userId: id, orderValue, address, number, date, status };
   const newOrder = await models.sales.create(order);
 
   const insertId = newOrder.id;
   await SalesModel.insertProductSale(insertId, products);
-  
+
   res.status(200).json({ message: 'OK' });
 };
 
