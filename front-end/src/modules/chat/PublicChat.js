@@ -4,8 +4,7 @@ import socket from './socket';
 const PublicChat = () => {
   const [test, setTest] = useState('Inicio');
   useEffect(() => {
-    
-    socket.emit('teste', 'Testando')
+    socket.emit('teste', 'Testando');
 
     socket.on('teste2', (message) => setTest(message));
   }, []);

@@ -30,7 +30,7 @@ function PasswordInput(setError, setInputValue, inputValue) {
     if (errorLabel !== undefined && inputValue !== '') {
       setErrorLabel(!pattern.test(inputValue));
     }
-  }, [debounceValue]);
+  }, [debounceValue, errorLabel, inputValue, pattern]);
 
   return (
     <div className="flex flex-col space-y-2">

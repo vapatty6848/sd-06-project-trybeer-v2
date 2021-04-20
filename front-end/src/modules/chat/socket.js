@@ -1,6 +1,6 @@
 import socketIOClient from 'socket.io-client';
 
-const endpoint = 'http://localhost:3001/'
+const endpoint = 'http://localhost:3001/';
 
 const socket = socketIOClient(endpoint);
 
