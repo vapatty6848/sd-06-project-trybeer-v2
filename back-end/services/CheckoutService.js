@@ -1,6 +1,6 @@
 const tokenValidation = require('../utils/tokenValidation');
 const { BAD_REQUEST, OK } = require('../utils/allStatusCode');
-const { products, sales } = require('../models');
+const { products, sales, sales_products } = require('../models');
 
 const dataValidate = (deliveryNumber, deliveryAddress, salesProducts, res) => {
   const objErr = (err, status) => { res.status(status).json({ status, err }); }; 
@@ -12,37 +12,66 @@ const dataValidate = (deliveryNumber, deliveryAddress, salesProducts, res) => {
   if (errorSalesProducts) objErr('Sales Products can not be empty', BAD_REQUEST);
 };
 
+const totalPriceFunc = (salesProducts) => salesProducts.reduce(async (total, element) => {
+  const productId = parseInt(element[0], 10);
+  const productQuantity = parseInt(element[1], 10);
+  const { dataValues: { price } } = await products.findByPk(productId);
+  const unityPrice = price * productQuantity;
+  return (Math.trunc(((await total) + unityPrice) * 100) / 100);
+}, 0);
+
+const dataFormat = (user_id, total_price, delivery_address, delivery_number, status) => ({
+  user_id,
+  total_price,
+  delivery_address, 
+  delivery_number,
+  status,
+});
+
+const salesFormat = (
+    id,
+    totalPrice,
+    deliveryAddress,
+    deliveryNumber,
+    saleStatus,
+    saleDate,
+    salesProducts,
+  ) => ({
+    id,
+    totalPrice,
+    deliveryAddress,
+    deliveryNumber,
+    saleStatus,
+    saleDate,
+    salesProducts,
+});
+
+const saleStatus = 'PENDING';
 const CheckoutServices = async (req, res) => {
   const { authorization } = req.headers;
-  const payload = tokenValidation(authorization);
-  const { id } = payload;
+  const { id } = tokenValidation(authorization);
   const { deliveryAddress, deliveryNumber, salesProducts } = req.body;
-  // const saleDate = new Date();
-  const saleStatus = 'PENDING';
 
   dataValidate(deliveryNumber, deliveryAddress, salesProducts, res);
 
-  const totalPrice = await salesProducts.reduce(async (total, element) => {
-    const productId = parseInt(element[0], 10);
-    const productQuantity = parseInt(element[1], 10);
-    const { dataValues: { price } } = await products.findByPk(productId);
-    const unityPrice = price * productQuantity;
-    return (Math.trunc(((await total) + unityPrice) * 100) / 100);
-  }, 0);
-  const data = { user_id: id, total_price: totalPrice, delivery_address: deliveryAddress, 
-    delivery_number: deliveryNumber, status: saleStatus };
-  const saleTable = await sales.create(data);
-  console.log('saleTable', saleTable);
+  const { dataValues: saleTable } = await sales
+    .create(
+      dataFormat(id, totalPriceFunc(salesProducts), deliveryAddress, deliveryNumber, saleStatus),
+    );
 
-  // const newSalesProducts = [];
-  // salesProducts.forEach((element) => { 
-  //   newSalesProducts.push([saleTable.insertId, ...element]);
-  // });
-  // newSalesProducts.forEach(async (element) => {
-  //   // await 
-  // });
+  const newSalesProducts = [];
+  salesProducts.forEach((element) => newSalesProducts.push([saleTable.id, ...element]));
 
-  return res.status(OK).json(data);
+  newSalesProducts
+    .forEach(async ([sale_id, product_id, quantity]) => {
+      await sales_products.create({ sale_id, product_id, quantity });
+    });
+  
+  const { user_id, total_price, delivery_address, delivery_number, status, sale_date } = saleTable;
+  const saleReturn = salesFormat(user_id,
+    total_price, delivery_address, delivery_number, status, sale_date, salesProducts);
+  
+  return res.status(OK).json(saleReturn);
 };
 
 module.exports = CheckoutServices;

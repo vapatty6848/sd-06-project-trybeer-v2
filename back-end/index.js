@@ -9,7 +9,7 @@ const VerifyAuthorization = require('./middlewares/VerifyAuthotization');
 const ProductsController = require('./controllers/ProductsController');
 const CheckoutController = require('./controllers/CheckoutController');
 const OrdersController = require('./controllers/OrdersController');
-// const AdminOrdersController = require('./controllers/AdminOrdersController');
+const AdminOrdersController = require('./controllers/AdminOrdersController');
 
 const { products } = require('./models');
 
@@ -56,7 +56,7 @@ app.use('/checkout', VerifyAuthorization, CheckoutController);
 
 app.use('/orders', VerifyAuthorization, OrdersController);
 
-// app.use('/admin/orders', VerifyAuthorization, AdminOrdersController);
+app.use('/admin/orders', VerifyAuthorization, AdminOrdersController);
 
 app.use((err, _req, res, _next) => {
   console.error({ err });

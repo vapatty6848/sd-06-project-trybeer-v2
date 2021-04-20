@@ -10,10 +10,8 @@ const { users } = require('../models');
 // };
 
 const ProfileUpdateService = async (req, res) => {
-  console.log('entrou');
   const { authorization } = req.headers;
   const payload = tokenValidation(authorization);
-  console.log('payload', payload)
   const { id } = payload;
   const { name } = req.body;
 
