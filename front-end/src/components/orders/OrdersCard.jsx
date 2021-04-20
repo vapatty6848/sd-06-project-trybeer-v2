@@ -28,13 +28,13 @@ const OrdersCard = ({ orders }) => {
             <div
               data-testid={ `${index}-order-date` }
             >
-              { handleDate(order.sale_date) }
+              { handleDate(order.saleDate) }
             </div>
           </div>
           <div
             data-testid={ `${index}-order-total-value` }
           >
-            { `R$ ${order.total_price.replace('.', ',')} ` }
+            { `R$ ${order.totalPrice.replace('.', ',')} ` }
           </div>
         </Link>
       </div>

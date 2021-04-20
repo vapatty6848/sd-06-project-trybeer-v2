@@ -73,8 +73,8 @@ const updateStatusOrder = async (status, id) => axios
 
 const regSalesProducts = async (params) => axios
   .post(`${baseUrl}/sales/products`, {
-    idSale: params.idSale,
-    idProduct: params.idProduct,
+    saleId: params.idSale,
+    productId: params.idProduct,
     quantity: params.quantity,
   })
   .then((res) => ({ response: res.data, result: true }))
@@ -83,10 +83,10 @@ const regSalesProducts = async (params) => axios
 const registerSales = async (params) => axios
   .post(`${baseUrl}/sales`, {
     userId: params.userId,
-    total: params.total,
-    address: params.address,
-    adNumber: params.adNumber,
-    date: params.date,
+    totalPrice: params.total,
+    deliveryAddress: params.address,
+    deliveryNumber: params.adNumber,
+    saleDate: params.date,
     status: params.status,
   })
   .then((res) => ({ response: res.data, result: true }))

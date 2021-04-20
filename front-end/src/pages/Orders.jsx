@@ -15,6 +15,7 @@ const Orders = ({ history }) => {
       const response = await api.getAllOrdersByUser(user.token);
       if (response.message) return history.push('/login');
       setOrders(response);
+      console.log(response);
     }
     fetchOrders();
   }, [history]);

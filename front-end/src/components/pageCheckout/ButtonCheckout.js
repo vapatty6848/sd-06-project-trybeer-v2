@@ -29,6 +29,7 @@ function ButtonCheckout() {
   const handleClick = async () => {
     const timeout = 2000;
     const result = await api.registerSales(params);
+    console.log('result', result);
     localStorage.cart = JSON.stringify([]);
     if (result.response.id) {
       setMessage(true);
