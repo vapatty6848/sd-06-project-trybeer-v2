@@ -12,13 +12,13 @@ body {
 }
 
 .product-card {
+  align-items: center;
   background-color: snow;
   border-radius: 20px;
   display: flex;
   flex-flow: column nowrap;
-  justify-content: space-around;
-  align-items: center;
   height: 200px;
+  justify-content: space-around;
   margin: 6px;
   padding: 4px 8px;
   width: 120px;

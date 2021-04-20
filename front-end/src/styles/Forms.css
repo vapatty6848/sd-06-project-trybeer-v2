@@ -4,8 +4,8 @@
 }
 
 .inputError span::before {
-  display: inline;
   content: 'warning';
+  display: inline;
   margin: 0 3px;
 }
 

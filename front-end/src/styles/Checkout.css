@@ -8,16 +8,16 @@
 }
 
 .product-row {
+  align-items: center;
   background-color: lightsteelblue;
   border-radius: 10px;
+  cursor: pointer;
   display: flex;
   flex-flow: row nowrap;
-  justify-content: space-between;
-  align-items: center;
   height: 30px;
+  justify-content: space-between;
   margin: 6px;
   padding: 4px 8px;
-  cursor: pointer;
 }
 
 .product-row > * {
@@ -25,6 +25,6 @@
 }
 
 .product-row .name {
-  text-align: center;
   flex-grow: 1;
+  text-align: center;
 }

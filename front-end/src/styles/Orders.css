@@ -12,16 +12,16 @@ body {
 }
 
 .order-card {
+  align-items: center;
   background-color: snow;
   border-radius: 20px;
+  cursor: pointer;
   display: flex;
   flex-flow: column nowrap;
-  justify-content: space-around;
-  align-items: center;
   height: 200px;
+  justify-content: space-around;
   margin: 6px;
   padding: 4px 8px;
-  cursor: pointer;
   width: 120px;
 }
 
