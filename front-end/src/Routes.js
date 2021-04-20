@@ -12,6 +12,8 @@ import ProfileClient from './modules/profile/pages/ProfileClient';
 import ProfileAdmin from './modules/profile/pages/ProfileAdmin';
 import Checkout from './modules/checkout/pages/Checkout';
 import DetailedOrder from './modules/orders/pages/DetailedOrder';
+import PublicChat from './modules/chat/PublicChat'
+import PrivateChat from './modules/chat/PrivateChat'
 
 const Routes = () => {
   const { token } = useContext(GlobalContext);
@@ -48,7 +50,7 @@ const Routes = () => {
         </BodyContainer>
       </Route>
       {/* ROTAS PRIVADAS - USUÁRIO CLIENT */}
-      <Route path={ ['/profile', '/products', '/orders', '/checkout'] }>
+      <Route path={ ['/profile', '/products', '/orders', '/checkout', '/chat'] }>
         { !existToken && <Redirect to="/" /> }
         { !role === 'client' && <Redirect to="/" /> }
         <Menu />
@@ -58,16 +60,18 @@ const Routes = () => {
           <Route exact path="/checkout" component={ Checkout } />
           <Route exact path="/orders/:id" component={ DetailedOrder } />
           <Route exact path="/orders" component={ OrdersClient } />
+          <Route exact path="/chat" component={ PublicChat } />
         </BodyContainer>
       </Route>
       {/* ROTAS PRIVADAS - USUÁRIO ADMIN */}
-      <Route path={ ['/admin/orders', '/admin/profile'] }>
+      <Route path={ ['/admin/orders', '/admin/profile', '/admin/chat'] }>
         { !existToken && <Redirect to="/" /> }
         <Menu />
         <BodyContainer>
           <Route path="/admin/profile" component={ ProfileAdmin } />
           <Route path="/admin/orders/:id" component={ DetailedOrder } />
           <Route exact path="/admin/orders" component={ OrdersAdmin } />
+          <Route exact path="/admin/chat" component={ PrivateChat } />
         </BodyContainer>
       </Route>
       {/* ROTA RAIZ - RESPONSÁVEL POR FAZER DIRECIONAMENTO */}
