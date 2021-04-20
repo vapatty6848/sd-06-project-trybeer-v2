@@ -1,0 +1,30 @@
+.menuTop {
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 5vh;
+}
+
+.btnSideBar {
+    border: solid 2px white;
+}
+
+.menuSideBar {
+    background-color: black;
+    color: white;
+     margin-top: 50px;    
+    margin-left: -80px;
+}
+
+.menuSideBaraAd {
+    background-color: black;
+    color: white;
+     margin-top: 50px;    
+   
+}
+
+.menuSideBar button:hover {
+background-color: rgb(70, 196, 45);
+}

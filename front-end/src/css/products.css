@@ -1,0 +1,200 @@
+.movie-card {
+  background-color: rgba(231, 231, 231, 0.171);
+  border: 1.5px solid rgba(202, 202, 202, 0.315);
+  font-size: 10px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 5px;
+  overflow: hidden;
+  padding-top: 5px;
+  width: 45%;
+  height: 50%;
+}
+
+.movie-card-prod {
+  background-color: rgba(231, 231, 231, 0.171);
+  border: 1.5px solid rgba(202, 202, 202, 0.315);
+  font-size: 15px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin: 5px;
+  overflow: hidden;
+  padding-top: 5px;
+  width: 320px;
+  height: auto;
+}
+
+.movie-card-orders {
+  background-color: rgba(231, 231, 231, 0.171);
+  border: 1.5px solid rgba(202, 202, 202, 0.315);
+  font-size: 15px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin: 5px;
+  overflow: hidden;
+  padding-top: 5px;
+  width: 120px;
+  height: auto;
+}
+
+.movie-list {
+  border: 0.6px solid rgb(212, 44, 2);
+
+  display: flex;
+  flex-flow: row wrap;
+  padding: 48px 30px;
+}
+
+.buttons-card {
+  display: flex;
+  justify-content: space-between;
+  width: 100px;
+  margin-top: 10px;
+}
+
+.movie-card img {
+  max-width: 120px;
+  max-height: 80px;
+}
+
+.button-cart-space {
+  display: flex;
+  margin-top: 20px;
+  justify-content: flex-end;
+  margin-right: 20%;
+}
+
+.form-profile {
+  /* border: 0.6px solid rgb(9, 156, 4); */
+  margin: auto;
+  width: auto;
+  height: 50%;
+}
+
+.main-content-prod {
+  /* border: 0.6px solid rgb(9, 156, 4); */
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.footer {
+  background-color: rgb(0, 105, 241);
+  border: 0.6px solid rgb(16, 17, 16);
+  max-height: 1px;
+}
+
+.test {
+  display: flex;
+  width: auto;
+  height: 45px;
+  margin: 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+.nova {
+  /* border: 0.6px solid rgb(16, 17, 16); */
+  width: 300px;
+  display: flex;
+  justify-content: space-around;
+  margin-left: 25%;
+}
+
+.length-button-prod {
+  width: 200px;
+}
+
+.form-content-check {
+  margin: auto;
+  width: 300px;
+  height: 50%;
+}
+
+.margin-space {
+  margin-top: 60px;
+}
+
+.title-prod {
+  color: rgb(0, 0, 0);
+  font-size: 25px;
+}
+
+.title-center {
+  width: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.space-entry {
+  margin-right: 5px;
+}
+
+.top-details {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.top-data {
+  border: 0.6px solid rgb(16, 17, 16);
+  display: flex;
+  color: brown;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 1.5px solid rgba(124, 124, 124, 0.315);
+  border-radius: 5px;
+}
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.main-content-orders {
+  font-size: 25px;
+  padding-top: 40%;
+  margin: auto;
+  width: 80%;
+  height: auto;
+}
+
+.message {
+  text-align: center;
+  background-color: white;
+  margin-top: 10px;
+  font-size: 15px;
+  color: rgb(0, 143, 7);
+}
+
+.grupo {
+  font-size: 30px;
+  text-align: center;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.coluna-left {
+  background-color: rgb(2, 250, 15);
+  border: 0.6px solid rgb(0, 235, 0);
+  width: 10%;
+  height: 1000px;
+  float: left;
+}
+
+.coluna-rigth {
+  background-color: blue;
+  border: 0.6px solid rgb(0, 255, 0);
+  width: 10%;
+  height: 1000px;
+  float: right;
+}
+
+@media (max-width:600px) {}

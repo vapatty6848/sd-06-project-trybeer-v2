@@ -1,0 +1,25 @@
+.main-content-reg {
+  /* border: 0.6px solid rgb(9, 156, 4); */
+  display: flex;
+  margin: 0;
+  width: 100%;
+  height: 750px;
+}
+
+.form-content-reg {
+  /* border: 0.6px solid rgb(9, 156, 4); */
+  margin: auto;
+  width: auto;
+  height: 50%;
+}
+
+.length-button-register {
+  width: 350px;
+  height: 60px;
+}
+
+.padding-left {
+  margin-left: 10px;
+  height: 20px;
+  min-width: 20px;
+}
