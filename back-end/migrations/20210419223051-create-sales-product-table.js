@@ -1,9 +1,9 @@
 module.exports = {
-  up: async (queryInterface, Sequelize) => queryInterface.createTable('salesProduct', {
+  up: async (queryInterface, Sequelize) => queryInterface.createTable('salesProducts', {
       saleId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        foreignKey: true,
+        primaryKey: true,
         defaultValue: 1,
         references: {
           model: 'sales',
@@ -15,7 +15,7 @@ module.exports = {
       productId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        foreignKey: true,
+        primaryKey: true,
         defaultValue: 1,
         references: {
           model: 'products',
@@ -30,5 +30,5 @@ module.exports = {
       },
     }),
 
-  down: async (queryInterface) => queryInterface.dropTable('salesProduct'),
+  down: async (queryInterface) => queryInterface.dropTable('salesProducts'),
 };
