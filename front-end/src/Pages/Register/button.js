@@ -2,7 +2,7 @@ import React from 'react';
 
 import Button from '../../Components/Button';
 
-export default function button (isDisabled) {
+export default function button(isDisabled) {
   return (
     <Button
       type="submit"

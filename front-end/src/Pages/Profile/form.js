@@ -19,7 +19,6 @@ const handleSubmit = async (event, { name, email }, token, setUpdateMessage) => 
   setUpdateMessage(true);
 };
 
-
 export default function form([
   name,
   setNameState,
