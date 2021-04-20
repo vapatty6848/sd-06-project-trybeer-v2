@@ -8,13 +8,21 @@ const { sales } = require('../models');
 const routerSales = Router();
 
 routerSales.post('/', validateToken, async (req, res) => {
-  const { products, price, address, number, status } = req.body.order;
+  const { products,
+    price: totalPrice,
+    address: deliveryAddress,
+    number: deliveryNumber,
+    status } = req.body.order;
   const { userId } = res.locals;
-  const sale = await sales.create(products,
-    { userId, price, address, number, status });
-  res.status(201).json({ order: {
-    saleId: insertId, userId, price, address, number, status, date,
-  } });
+    console.log(userId, totalPrice, deliveryAddress, deliveryNumber, status);
+  const sale = await sales.create({
+    userId, totalPrice, deliveryAdress, deliveryNumber, status,
+  });
+  console.log('Venda', sale);
+  console.log('Venda Simplificada', sale.dataValues);
+  // res.status(201).json({ order: {
+  //   saleId: insertId, userId, price, address, number, status, date,
+  // } });
 });
 
 routerSales.get('/', validateToken, async (req, res) => {
