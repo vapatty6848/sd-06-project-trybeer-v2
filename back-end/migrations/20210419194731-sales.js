@@ -12,6 +12,7 @@ module.exports = {
       deliveryAddress: { allowNull: false, type: Sequelize.STRING },
       deliveryNumber: { allowNull: false, type: Sequelize.STRING },
       saleDate: { allowNull: false, type: Sequelize.DATE },
+      status: { allowNull: false, type: Sequelize.STRING },
     });
   },
 
