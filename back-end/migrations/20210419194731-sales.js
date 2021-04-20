@@ -7,7 +7,6 @@ module.exports = {
         allowNull: false,
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
-        references: { model: 'userModel', key: 'id' },
       },
       totalPrice: { allowNull: false, type: Sequelize.DECIMAL(9, 2) },
       deliveryAddress: { allowNull: false, type: Sequelize.STRING },

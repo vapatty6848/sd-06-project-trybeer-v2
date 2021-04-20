@@ -8,11 +8,6 @@ const createProducts = (sequelize, DataTypes) => {
     timestamps: false,
   });
 
-  // Products.associate = (models) => {
-  //   Products.hasOne(models.,
-  //     { foreignKey: '', as: '' });
-  // };
-
   return Products;
 };
 

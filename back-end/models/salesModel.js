@@ -6,15 +6,14 @@ const createSales = (sequelize, DataTypes) => {
     deliveryAddress: DataTypes.STRING,
     deliveryNumber: DataTypes.STRING,
     saleDate: DataTypes.DATE,
-    // status??? recebe como default pendente.. já insere aqui?
   }, {
     timestamps: false,
   });
 
-  // Sales.associate = (models) => {
-  //   Sales.??????(models.userModel,
-  //     { foreignKey: '????', as: 'id' });
-  // };
+  Sales.associate = (models) => {
+    Sales.belongsTo(models.users,
+      { foreignKey: 'userId', as: 'users' });
+  };
 
   return Sales;
 };

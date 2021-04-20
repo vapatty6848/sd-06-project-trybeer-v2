@@ -6,14 +6,12 @@ module.exports = {
         allowNull: false,
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
-        references: { model: 'salesModel', key: 'id' },
       },
       productId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
-        references: { model: 'productModel', key: 'id' },
       },
       quantity: { allowNull: false, type: Sequelize.STRING },
     });
