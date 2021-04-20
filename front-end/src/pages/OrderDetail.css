@@ -2,10 +2,7 @@
   border-style: double;
   display: grid;
   gap: 20px;
-  grid-template-areas: 
-    'top top top' ,
-    'middle middle middle' ,
-    'bottom bottom bottom';
+  grid-template-areas: 'top top top' , 'middle middle middle' , 'bottom bottom bottom';
   padding: 20px;
   width: 80%;
 }
