@@ -11,7 +11,7 @@ function AdminOrders({ history }) {
   const { user } = useContext(TrybeerContext);
   const fetchOrders = async () => {
     const allOrders = await verifyToken('admin/orders/', user, history);
-    setOrders(allOrders);
+    // setOrders(allOrders);
   };
 
   useEffect(() => {
