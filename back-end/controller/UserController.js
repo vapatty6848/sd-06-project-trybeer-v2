@@ -54,14 +54,14 @@ UserController.get('/profile', verifyLogin, async (req, res) => {
 });
 
 // Update
-// UserController.put('/:id', verifyId, verifyLogin, async (req, res) => {
-//   const { id } = req.params;
-//   const { name } = req.body;
+UserController.put('/:id', verifyId, verifyLogin, async (req, res) => {
+  const { id } = req.params;
+  const { name } = req.body;
 
-//   await update(id, name);
-//   const user = await findById(id);
-//   const token = jwt.sign({ data: user }, SECRET, jwtConfig);
-//   res.status(OK).json({ token });
-// });
+  await User.update({ name }, { where: { id } });
+  const user = await User.findByPk(id);
+  const token = jwt.sign({ data: user }, SECRET, jwtConfig);
+  res.status(OK).json({ token });
+});
 
 module.exports = UserController;

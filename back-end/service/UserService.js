@@ -1,4 +1,4 @@
-const userModel = require('../models/User');
+const { User } = require('../models');
 const { NOT_FOUND, CONFLICT } = require('../schema/statusSchema');
 
 // Return all Users
@@ -44,16 +44,16 @@ const { NOT_FOUND, CONFLICT } = require('../schema/statusSchema');
 // };
 
 // Verify id
-// const verifyId = async (req, res, next) => {
-//   const { id } = req.params;
-//   const exist = await userModel.findById(id);
+const verifyId = async (req, res, next) => {
+  const { id } = req.params;
+  const exist = await User.findByPk(id);
 
-//   if (!exist) {
-//     res.status(NOT_FOUND).json({ message: 'incorreted id' });
-//   }
+  if (!exist) {
+    res.status(NOT_FOUND).json({ message: 'incorrect id' });
+  }
 
-//   next();
-// };
+  next();
+};
 
 module.exports = {
   // getAll,
@@ -62,5 +62,5 @@ module.exports = {
   // emailExist,
   // findById,
   // update,
-  // verifyId,
+  verifyId,
 };
