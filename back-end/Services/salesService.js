@@ -20,7 +20,8 @@ const registerNewOrder = async (req, res) => {
 
 const getOrdersByUser = async (req, res) => {
   const { useremail } = req.params;
-  const salesByUser = await SalesModel.getOrdersByUser(useremail);
+  const userByEmail = await models.user.findOne({ where: { useremail } }).id;
+  const salesByUser = await models.sales.findOne({ where: { userByEmail } });
   if (!salesByUser) throwThisError(500, 'Internal error');
 
   res.status(200).json(salesByUser);
@@ -29,8 +30,8 @@ const getOrdersByUser = async (req, res) => {
 const getOrderDetails = async (req, res) => {
   const { saleid } = req.params;
 
-  const orderDetails = await SalesModel.getOrderById(saleid);
-  const orderProductsDetails = await SalesModel.getOrderProductsByOrderId(saleid);
+  const orderDetails = await models.sales.findOne({ where: { saleid } });
+  const orderProductsDetails = await models.sales_products.findAll({ where: { saleid } });
   
   const response = { ...orderDetails, products: orderProductsDetails };
   res.status(200).json(response);
