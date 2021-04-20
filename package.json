@@ -26,7 +26,6 @@
   },
   "homepage": "https://github.com/betrybe/sd-0x-project-trybeer-v2#readme",
   "dependencies": {
-    "@mysql/xdevapi": "8.0.20",
     "dotenv": "8.2.0",
     "mongodb": "3.6.2",
     "mysql2": "^2.1.0",
