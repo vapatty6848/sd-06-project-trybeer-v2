@@ -1,10 +1,29 @@
 import React, { useState } from 'react';
 import SideBarAdmin from '../components/SideBarAdmin/SideBarAdmin';
-import { hanldeRegisterProduct, handleChange } from '../services/ProductInsertService';
+// import { hanldeRegisterProduct, handleChange } from '../services/productInsert';
 import './ProductAdminInsert.css';
 
 function ProductAdminInsert() {
   const [product, setProduct] = useState({ name: '', price: 0 });
+
+  function handleChange(event) {
+    setProduct({
+      ...product,
+      [event.target.name]: event.target.value,
+    });
+  }
+
+  async function hanldeRegisterProduct() {
+    const formData = new FormData();
+    const imageFile = document.getElementById('product-image');
+    console.log(imageFile);
+    formData.append('image', imageFile.files[0]);
+    formData.append('name', product.name);
+    formData.append('price', product.price);
+    await createNewProduct(formData);
+    setProduct({ name: '', price: '' });
+    imageFile.value = [];
+  }
 
   return (
     <div className="div-main">
@@ -30,7 +49,7 @@ function ProductAdminInsert() {
             name="price"
             value={ product.price }
             placeholder="Preço"
-            onChange={ (event) => handleChange(event, product, setProduct) }
+            onChange={ (event) => handleChange(event) }
           />
         </label>
         <label htmlFor="product-image">
@@ -43,7 +62,7 @@ function ProductAdminInsert() {
         </label>
         <button
           type="submit"
-          onClick={ () => hanldeRegisterProduct(product, setProduct) }
+          onClick={ hanldeRegisterProduct }
         >
           Cadastrar
         </button>
