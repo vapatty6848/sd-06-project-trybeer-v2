@@ -53,8 +53,6 @@ function AdminOrdersDetails(props) {
                     <button
                       className="buttonEntregar"
                       type="button"
-                      data-testid="mark-as-delivered-btn"
-                      onClick={ () => updateStatus(id, setDelivered) }
                       data-testid="mark-as-prepared-btn"
                       onClick={ () => updateStatus(id, setDelivered, 'Preparando') }
                     >
