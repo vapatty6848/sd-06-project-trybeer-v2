@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const Service = require('../services/orderService');
-const Model = require('../models/orderModels');
+const { Sale, User } = require('../models');
 const status = require('../utils/httpStatusCode');
 
 const orderRouter = Router();
@@ -9,10 +9,15 @@ const messageJson = { message: 'Internal Server Error' };
 
 orderRouter.post('/', async (req, res) => {
   try {
-    const { userID, value, street, number, date, saleProduct } = req.body;
-    await Service.create({ userID, value, street, number, date, saleProduct });
-    res.status(200).json(userID, value, street, number, date);
+    const { email, totalPrice, deliveryAddress, deliveryNumber, date, saleProduct } = req.body;
+
+    const { id } = await User.findOne({ where: { email } });
+
+    await Service.createSale({ id, totalPrice, deliveryAddress, deliveryNumber, date, saleProduct });
+
+    res.status(200).json(id, totalPrice, deliveryAddress, deliveryNumber, date);
   } catch (error) {
+    console.log(error.message);
     return res.status(erroReturnCatch).json(messageJson);
   }
 });
@@ -41,7 +46,9 @@ orderRouter.get('/:id', async (req, res) => {
 
 orderRouter.put('/', async (req, res) => {
   const { id } = req.body;
-  await Model.updateStatusOrder(id);
+  const updateStatus = await Sale.findByPk(id);
+  updateStatus.status = 'Entregue';
+  updateStatus.save();
   res.status(200).json('atualizado');
 });
 

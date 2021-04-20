@@ -9,19 +9,19 @@ module.exports = {
         autoIncrement: true,
         allowNull: false,
       },
-      total_price: {
+      totalPrice: {
         type: Sequelize.DECIMAL,
         allowNull: false,
       },
-      delivery_address: {
+      deliveryAddress: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      delivery_number: {
+      deliveryNumber: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      sale_date: {
+      saleDate: {
         type: Sequelize.DATE,
         allowNull: false,
         defaultValue: Sequelize.fn('now'),
@@ -29,6 +29,7 @@ module.exports = {
       status: {
         type: Sequelize.STRING,
         allowNull: false,
+        defaultValue: 'Pendente',
       },
     })
   },

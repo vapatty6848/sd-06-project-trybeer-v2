@@ -1,5 +1,5 @@
 const Sale_productModel = (sequelize, DataTypes) => {
-  const Sale_product = sequelize.define('Sales_products', {
+  const Sale_product = sequelize.define('SalesProduct', {
     quantity: DataTypes.STRING,
   },
   {
@@ -8,16 +8,18 @@ const Sale_productModel = (sequelize, DataTypes) => {
 
   Sale_product.associate = (models) => {
 
-    Sale_product.belongsToMany(models.Product, {
+    models.Sale.belongsToMany(models.Product, {
       through: 'Products',
       as: 'products',
-      foreignKey: 'sale_id',
+      foreignKey: 'saleId',
+      otherKey: 'productId',
     });
 
-    Sale_product.belongsToMany(models.Sale, {
+    models.Product.belongsToMany(models.Sale, {
       through: 'Sales',
       as: 'sales',
-      foreignKey: 'product_id',
+      foreignKey: 'productId',
+      otherKey: 'saleId',
     });
 
   }
