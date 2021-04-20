@@ -5,7 +5,7 @@ const cors = require('cors');
 const log = require('./middlewares/log');
 const { NOT_FOUND } = require('./schema/statusSchema');
 const UserController = require('./controller/UserController');
-// const LoginController = require('./controller/LoginController');
+const LoginController = require('./controller/LoginController');
 // const ProductsController = require('./controller/ProductsController');
 // const SalesController = require('./controller/SalesController');
 
@@ -18,7 +18,7 @@ app.use(cors());
 app.use(log);
 
 app.use('/user', UserController);
-// app.use('/login', LoginController);
+app.use('/login', LoginController);
 // app.use('/products', ProductsController);
 // app.use('/sales', SalesController);
 

@@ -2,12 +2,7 @@ const { Router } = require('express');
 const jwt = require('jsonwebtoken');
 const { verifyLogin, SECRET } = require('../middlewares/authToken');
 const {
-  getAll,
-  emailExist,
-  createNewUser,
   verifyId,
-  findById,
-  update,
 } = require('../service/UserService');
 const { User } = require('../models');
 const { OK, CREATED, CONFLICT } = require('../schema/statusSchema');
