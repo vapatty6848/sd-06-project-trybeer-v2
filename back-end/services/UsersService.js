@@ -1,13 +1,13 @@
-const userModel = require('../models/UsersModel');
+const { user } = require('../models');
 
-const createUserService = async ({ name, password, email, role }) => userModel
-  .createUser({ name, password, email, role });
+const createUserService = async ({ name, password, email, role }) => user
+  .create({ name, password, email, role });
 
-const getAll = async () => userModel.getAll();
+const getAll = async () => user.findAll();
 
-const findByEmail = async (email) => userModel.findByEmail(email);
+const findByEmail = async (email) => user.findOne({ where: { email } });
 
-const changeName = async (name, email) => userModel.update(name, email);
+const changeName = async (name, email) => user.update({ name }, { where: { email } });
 
 module.exports = {
   createUserService,
