@@ -3,8 +3,6 @@ import { getSales } from '../../../services/Sales';
 import Header from '../../../components/Header/Header';
 import AdminOrderCard from '../../../components/AdminOrderCard/AdminOrderCard';
 
-import './Order.css';
-
 export default function Orders() {
   const [sales, setSales] = useState([]);
 
