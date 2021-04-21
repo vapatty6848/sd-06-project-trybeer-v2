@@ -72,9 +72,13 @@ function AdminOrdersDetailsPage() {
       <AdminSideBarComponent />
       <div className="admin_orders_details_title">
         <h1 data-testid="order-number">{ `Pedido ${id}` }</h1>
-        <h1 
-          data-testid="order-status" 
-          className={(statusOrder() === 'Entregue') ? "greenStatus" : "redStatus"}
+        <h1
+          data-testid="order-status"
+          className={
+            (statusOrder() === 'Entregue')
+              ? 'greenStatus'
+              : 'redStatus'
+          }
         >
           { statusOrder() }
         </h1>
