@@ -1,8 +1,8 @@
-const productsModel = require('../models/ProductsModel');
+const { product } = require('../models');
 
-const getAll = async () => productsModel.getAll();
+const getAll = async () => product.findAll();
 
-const getPriceAndNameById = async (id) => productsModel.getPriceById(id);
+const getPriceAndNameById = async (id) => product.findByPk(id);
 
 module.exports = {
   getAll,

@@ -1,5 +1,5 @@
 const User = (sequelize, DataTypes) => {
-  const user = sequelize.define('User', {
+  const user = sequelize.define('user', {
     name: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
@@ -8,7 +8,7 @@ const User = (sequelize, DataTypes) => {
     timestamps: false,
   });
   user.associate = (models) => {
-    user.hasMany(models.Sale, { foreignKey: 'userId', as: 'sale' });
+    user.hasMany(models.sale, { foreignKey: 'userId', as: 'sale' });
   };
   return user;
 };

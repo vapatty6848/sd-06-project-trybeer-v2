@@ -26,6 +26,15 @@ const SidebarMenuADM = () => {
           Perfil
         </button>
       </Link>
+      <Link to="/admin/chats">
+        <button
+          data-testid="side-menu-item-chat"
+          type="button"
+          onClick={ setVisibility }
+        >
+          Conversas
+        </button>
+      </Link>
       <Link to="/login" className="justify-at-the-end">
         <button
           className="justify-at-the-end"

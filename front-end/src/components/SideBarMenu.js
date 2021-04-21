@@ -38,6 +38,15 @@ const SidebarMenu = () => {
                   Meu Perfil
                 </button>
               </Link>
+              <Link to="/chat">
+                <button
+                  data-testid="side-menu-chat"
+                  type="button"
+                  onClick={ setVisibility }
+                >
+                  Conversar com a loja
+                </button>
+              </Link>
             </div>
             <Link to="/login" className="justify-at-the-end">
               <button
