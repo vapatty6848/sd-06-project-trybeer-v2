@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import formatPrice from '../service/formatPrice';
+import statusConvert from '../service/statusConvert';
 import '../style/OrderCards.css';
 
 function CostumerOrdersCardsComponent({ element, index }) {
-  const { id, total_price: totalPrice, sale_date: saleDate } = element;
+  const { id, total_price: totalPrice, sale_date: saleDate, status } = element;
 
   const parseDate = () => {
     const dateAsString = new Date(saleDate);
@@ -28,6 +29,7 @@ function CostumerOrdersCardsComponent({ element, index }) {
         <h4 data-testid={ `${index}-order-total-value` }>
           { `R$ ${formatPrice(totalPrice)}` }
         </h4>
+        <p>{ statusConvert(status) }</p>
       </div>
     </div>
   );

@@ -34,6 +34,13 @@ function SideBarComponent() {
       </button>
       <button
         type="button"
+        data-testid="side-menu-chat"
+        onClick={ () => history.push('/chat') }
+      >
+        Conversar com a loja
+      </button>
+      <button
+        type="button"
         data-testid="side-menu-item-logout"
         className="side-menu-container-logout"
         onClick={ () => {

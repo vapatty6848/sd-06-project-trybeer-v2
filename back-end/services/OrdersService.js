@@ -20,6 +20,7 @@ const getUserOrder = async (req, res) => {
     attributes: ['quantity',
     [Sequelize.col('products.name'), 'name'],
     [Sequelize.col('sales.sale_date'), 'saleDate'],
+    [Sequelize.col('sales.status'), 'status'],
     [Sequelize.literal('FORMAT((quantity * products.price), 2)'), 'productPrice']],
     include: [
       { model: products, attributes: [], as: 'products' },

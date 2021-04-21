@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import BeersAppContext from '../context/BeersAppContext';
+import formatPrice from '../service/formatPrice';
 import '../style/CheckoutCard.css';
 
 function CheckoutCardsComponent({ element, index }) {
@@ -45,18 +46,15 @@ function CheckoutCardsComponent({ element, index }) {
     setProductQuantity(productQuantityObjectRemoved);
   };
 
-  const comma = (priceParemeter) => `${parseFloat(priceParemeter).toFixed(2)}`
-    .replace('.', ',');
-
   return (
     <div className="checkout_card">
       <p data-testid={ `${index}-product-qtd-input` }>{qnt}</p>
       <p data-testid={ `${index}-product-name` }>{products.name}</p>
       <p data-testid={ `${index}-product-total-value` }>
-        {`R$ ${comma(totalProductPrice)}`}
+        {`R$ ${formatPrice(totalProductPrice)}`}
       </p>
       <p data-testid={ `${index}-product-unit-price` }>
-        {`(R$ ${comma(products.price)} un)`}
+        {`(R$ ${formatPrice(products.price)} un)`}
       </p>
       <button
         type="button"

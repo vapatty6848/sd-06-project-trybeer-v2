@@ -3,6 +3,7 @@ import { useHistory } from 'react-router';
 import { CheckoutCardsComponent, HeaderComponent } from '../components';
 import BeersAppContext from '../context/BeersAppContext';
 import fetchApiJsonBody from '../service/fetchApi';
+import formatPrice from '../service/formatPrice';
 import '../style/CostumerCheckout.css';
 
 function CostumerCheckoutPage() {
@@ -34,8 +35,6 @@ function CostumerCheckoutPage() {
   useEffect(() => {
     isValid();
   }, [inputValues, productQuantity]);
-
-  const commaAmount = `${amount.toFixed(2)}`.replace('.', ',');
 
   const handleChange = ({ target }) => {
     setInputValues({ ...inputValues, [target.name]: target.value });
@@ -83,7 +82,7 @@ function CostumerCheckoutPage() {
         </div>
         <div className="costumer_checkout_total">
           <p>Total: </p>
-          <p data-testid="order-total-value">{ `R$ ${commaAmount}` }</p>
+          <p data-testid="order-total-value">{ `R$ ${formatPrice(amount)}` }</p>
         </div>
         <div className="costumer_checkout_address">
           <p>Endereço</p>

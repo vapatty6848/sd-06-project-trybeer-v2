@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { CostumerOrdersCardsComponent } from '../components';
 import HeaderComponent from '../components/HeaderComponent';
 import BeersAppContext from '../context/BeersAppContext';
+import socket from '../Socket.io/socket';
 import '../style/CostumerOrder.css';
 
 function CostumerOrdersPage() {
@@ -15,6 +16,18 @@ function CostumerOrdersPage() {
   if (!user.token) history.push('/login');
 
   const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    socket.on('statusUpdate', ({ id, status }) => {
+      const AdminOrdersStatusUpdate = orders
+        .map((element) => {
+          if (element.id === parseInt(id)) return { ...element, status };
+          return element;
+        });
+        setOrders(AdminOrdersStatusUpdate);
+    });
+    return () => socket.off('statusUpdate', () => console.log('canal statusUpdate desconectado'));
+  }, [orders]);
 
   useEffect(() => {
     fetch('http://localhost:3001/orders', {

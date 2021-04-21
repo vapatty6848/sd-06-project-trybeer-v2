@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const { OK } = require('../utils/allStatusCode');
+const { OK, BAD_REQUEST } = require('../utils/allStatusCode');
 const { sales, sales_products, products } = require('../models');
 
 const allOrders = async (_req, res) => {
@@ -26,7 +26,12 @@ const getAdminOrder = async (req, res) => {
 
 const updateAdminOrderStatus = async (req, res) => {
   const { id } = req.params;
-  await sales.update({ status: 'DELIVERED' }, { where: { id } });
+  const { status } = req.body;
+  const valid = ['PENDING', 'PREPARING', 'DELIVERED'];
+  if (!valid.some((element) => element === status)) {
+    res.status(BAD_REQUEST).json({ err: 'wrong status' });
+  }
+  await sales.update({ status }, { where: { id } });
   return res.status(OK).json({ OK: 'OK' });
 };
 

@@ -4,11 +4,13 @@ import Provider from './context/Provider';
 import {
   LoginPage,
   SignupPage,
+  CostumerChat,
   CostumerProfilePage,
   CostumerProductsPage,
   CostumerCheckoutPage,
   CostumerOrdersPage,
   CostumerOrdersDetailsPage,
+  AdminChat,
   AdminProfilePage,
   AdminOrdersPage,
   AdminOrdersDetailsPage,
@@ -25,6 +27,7 @@ function App() {
             <Route exact path="/profile" component={ CostumerProfilePage } />
             <Route exact path="/products" component={ CostumerProductsPage } />
             <Route exact path="/checkout" component={ CostumerCheckoutPage } />
+            <Route exact path="/chat" component={ CostumerChat } />
             <Route
               exact
               path="/orders"
@@ -36,6 +39,11 @@ function App() {
               component={ CostumerOrdersDetailsPage }
             />
             <Route exact path="/admin/profile" component={ AdminProfilePage } />
+            <Route
+              exact
+              path="/admin/chats"
+              component={ AdminChat }
+            />
             <Route
               exact
               path="/admin/orders"
