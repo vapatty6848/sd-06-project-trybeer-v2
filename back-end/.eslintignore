@@ -1,5 +1,4 @@
-models/index.js
-models
-seeders
-migrations
-tests
+src/models
+src/seeders
+src/migrations
+# tests

@@ -1,6 +1,4 @@
-back-end/models
-back-end/models/index
-back-end/seeders
-back-end/migrations
-back-end/tests
-back-end/src/lixo
+back-end/src/models
+back-end/src/seeders
+back-end/src/migrations
+# back-end/tests
