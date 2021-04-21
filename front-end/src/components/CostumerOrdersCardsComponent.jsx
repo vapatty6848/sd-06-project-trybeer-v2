@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import formatPrice from '../service/formatPrice';
 import '../style/OrderCards.css';
 
 function CostumerOrdersCardsComponent({ element, index }) {
@@ -25,7 +26,7 @@ function CostumerOrdersCardsComponent({ element, index }) {
       </div>
       <div className="orderCards_price">
         <h4 data-testid={ `${index}-order-total-value` }>
-          { `R$ ${totalPrice.replace('.', ',')}` }
+          { `R$ ${formatPrice(totalPrice)}` }
         </h4>
       </div>
     </div>

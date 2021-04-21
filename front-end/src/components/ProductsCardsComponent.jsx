@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import BeersAppContext from '../context/BeersAppContext';
+import formatPrice from '../service/formatPrice';
 import '../style/ProductCard.css';
 
 function ProductsCardsComponent({ element, index }) {
@@ -43,8 +44,6 @@ function ProductsCardsComponent({ element, index }) {
     }
   };
 
-  const commaPrice = price.replace('.', ',');
-
   return (
     <div className="productCards">
       <img
@@ -57,7 +56,7 @@ function ProductsCardsComponent({ element, index }) {
           className="txt-productCards"
           data-testid={ `${index}-product-price` }
         >
-          { `R$ ${commaPrice}` }
+          { `R$ ${formatPrice(price)}` }
         </h3>
         <p data-testid={ `${index}-product-name` }>{ name }</p>
       </div>

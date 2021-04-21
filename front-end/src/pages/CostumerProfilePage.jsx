@@ -47,7 +47,7 @@ function CostumerProfilePage() {
 
   return (
     <div>
-      <HeaderComponent text="Meu perfil" id="top-title" />
+      <HeaderComponent text="Meu Perfil" id="top-title" />
       <div className="costumer_profile">
         <p>Nome</p>
         <input
