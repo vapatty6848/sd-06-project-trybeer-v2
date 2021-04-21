@@ -10,8 +10,10 @@ const isEmailValid = (email) => !emailRegex.test(email.toLowerCase());
 const isDateValid = (date) => !dateRegex.test(date.datedAt);
 const isNotEqual = (value1, value2) => value1 !== value2;
 const isNotBool = (value) => (typeof value === 'boolean');
+const notInclude = (array, value) => !array.includes(value);
 
 module.exports = {
+  notInclude,
   isBlank,
   isLessThan,
   isGreaterThan,
