@@ -1,8 +1,8 @@
-const productService = require('../services/productService');
+const { products } = require('../models');
 
 const getAllProducts = async (req, res) => {
   try {
-    const allProducts = await productService.allProducts();
+    const allProducts = await products.findAll();
 
     if (!allProducts) return res.status(404).json({ message: 'produto não encontrado.' });
 

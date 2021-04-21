@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { Users } = require('../models');
+const { users } = require('../models');
 
 const secret = 'dara secret';
 const jwtConfig = {
@@ -11,7 +11,7 @@ const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const user = await Users.findOne({ where: { email } });
+    const user = await users.findOne({ where: { email } });
 
     if (!user || user.password !== password) {
       return res.status(401).json({ message: 'Usuário não existe ou senha inválida' });
@@ -21,7 +21,7 @@ const login = async (req, res) => {
 
     return res.status(200).json({ token, user });
   } catch (error) {
-    return res.status(500).json({ message: error });
+    return res.status(500).json({ message: error.message });
   }
 };
 
@@ -31,13 +31,13 @@ const register = async (req, res) => {
 
     const token = jwt.sign({ data: [email, password] }, secret, jwtConfig);
 
-    const user = await Users.findOne({ where: { email } });
+    const user = await users.findOne({ where: { email } });
     if (user 
       && user.email === email) return res.status(409).json({ message: 'Email already registered' });
 
-    await Users.create({ name, email, password, role });
+    await users.create({ name, email, password, role });
 
-    const findNeWUser = await Users.findOne({ where: { email } });
+    const findNeWUser = await users.findOne({ where: { email } });
     const userObject = { ...findNeWUser, token };
 
     return res.status(201).json({ user: userObject });

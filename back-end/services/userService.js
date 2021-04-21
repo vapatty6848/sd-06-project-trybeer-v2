@@ -1,9 +1,9 @@
-const userModel = require('../models/Users');
+const { users } = require('../models');
 
 const validateEmail = (email) => {
   const regex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
   const emailVerified = regex.test(email);
-  console.log('cheguei aqui', emailVerified);
+
   return emailVerified;
 };
 
@@ -19,10 +19,10 @@ const validateName = (name) => {
   return nameLength && nameVerified;
 };
 
-const findUserByEmail = (email) => userModel.findUserByEmail(email);
+const findUserByEmail = (email) => users.findOne({ where: { email } });
 
 const create = async (name, email, password, role) => {
-  await userModel.createUser(name, email, password, role);
+  await users.create({ name, email, password, role });
   const user = { name, email, password, role };
   return user;
 };
