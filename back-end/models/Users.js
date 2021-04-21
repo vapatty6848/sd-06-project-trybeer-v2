@@ -1,6 +1,6 @@
 const createUsers = (sequelize, DataTypes) => {
   const users = sequelize.define('users', {
-    id: { primaryKey: true, type: DataTypes.INTEGER },
+    // id: { primaryKey: true, type: DataTypes.INTEGER },
     name: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,

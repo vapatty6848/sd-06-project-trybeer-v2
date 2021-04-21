@@ -9,7 +9,14 @@ router.post('/checkout', async (req, res) => {
 
   try {
     const saleId = await sales
-      .create({ userId, total, street, number, data, status });
+      .create({
+        userId,
+        totalPrice: total,
+        deliveryAddress: street,
+        deliveryNumber: number,
+        saleDate: data,
+        status,
+      });
     return res.status(201).json({ saleId });
   } catch (error) {
     return res.status(500).json({ message: error.message });
