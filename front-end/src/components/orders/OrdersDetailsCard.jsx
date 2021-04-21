@@ -71,7 +71,7 @@ const OrdersDetailsCard = ({ order, id }) => {
 };
 
 OrdersDetailsCard.propTypes = {
-  order: PropTypes.arrayOf(PropTypes.object).isRequired,
+  order: PropTypes.object,
   id: PropTypes.string.isRequired,
 };
 

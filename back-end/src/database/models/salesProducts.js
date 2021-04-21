@@ -1,6 +1,3 @@
-const { sales } = require('./sales');
-const { products } = require('./products');
-
 module.exports = (sequelize, DataTypes) => {
   const salesProducts = sequelize.define('salesProducts', {
     saleId: DataTypes.INTEGER,    
