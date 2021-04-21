@@ -7,7 +7,7 @@ import './Order.css';
 
 export default function Orders() {
   const [sales, setSales] = useState([]);
-  
+
   const fetchSales = async () => {
     const allSales = await getSales();
     setSales(allSales);
@@ -20,15 +20,13 @@ export default function Orders() {
   return (
     <div>
       <Header title="TryBeer" user="admin" />
-      {(sales.length && sales.map((sale, index) => {
-        return (
-          <AdminOrderCard
+      {(sales.length && sales.map((sale, index) => (
+        <AdminOrderCard
           sale={ sale }
           key={ sale.id }
           index={ index }
         />
-        )
-      }))
+      )))
       || (<span>Você não possui nenhum pedido :(</span>)}
     </div>
   );

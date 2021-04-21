@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../../../components/Header/Header';
-import { getAdminSaleDetails, fullfilSale, updateProductStatus } from '../../../services/Sales';
+import { getAdminSaleDetails, updateProductStatus } from '../../../services/Sales';
 import capitalize from '../../../utils/capitalize';
 import { parseCartPrice } from '../../../utils/parseValues';
 import './AdminOrdersDetail.css';
@@ -12,7 +12,6 @@ export default function AdminOrdersDetail({ match: { params: { id } } }) {
   useEffect(() => {
     const fetchSale = async () => {
       const sale = await getAdminSaleDetails(id);
-      // console.log(sale, 'sale');
       setSaleDetails(sale);
     };
     fetchSale();
@@ -24,18 +23,18 @@ export default function AdminOrdersDetail({ match: { params: { id } } }) {
       sale: { ...saleDetails.sale, status: 'Entregue' },
     };
     setSaleDetails(newState);
-    await fullfilSale(id, { saleStatus: 'Entregue' });
+    await updateProductStatus(id, { saleStatus: 'Entregue' });
   };
-  
+
   const setAsPreparing = async () => {
     const newState = {
       ...saleDetails,
       sale: { ...saleDetails.sale, status: 'Preparando' },
     };
     setSaleDetails(newState);
-    
-    await updateProductStatus(id, { saleStatus: 'Preparando' })
-  }
+
+    await updateProductStatus(id, { saleStatus: 'Preparando' });
+  };
 
   const { saleProducts, sale } = saleDetails;
 
@@ -74,7 +73,7 @@ export default function AdminOrdersDetail({ match: { params: { id } } }) {
               {sale && parseCartPrice(Number(sale.totalPrice))}
             </h2>
           </div>
-          
+
           {sale && sale.status === 'pendente' && (
             <div>
               <button
@@ -93,7 +92,7 @@ export default function AdminOrdersDetail({ match: { params: { id } } }) {
               </button>
             </div>
           )}
-          
+
           {sale && sale.status === 'Preparando' && (
             <div>
               <button
@@ -105,7 +104,7 @@ export default function AdminOrdersDetail({ match: { params: { id } } }) {
               </button>
             </div>
           )}
-          
+
         </>
       )}
     </div>

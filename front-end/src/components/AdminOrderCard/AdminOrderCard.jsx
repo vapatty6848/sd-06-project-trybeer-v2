@@ -16,7 +16,9 @@ export default function AdminOrderCard({ sale, index }) {
       <h2
         data-testid={ `${index}-order-number` }
       >
-        Pedido {id}
+        Pedido
+        {' '}
+        {id}
       </h2>
       <p
         data-testid={ `${index}-order-address` }
@@ -27,7 +29,9 @@ export default function AdminOrderCard({ sale, index }) {
         <span
           data-testid={ `${index}-order-total-value` }
         >
-          R$ {(totalPrice).replace('.', ',')}
+          R$
+          {' '}
+          {(totalPrice).replace('.', ',')}
         </span>
         <span
           className={
@@ -42,11 +46,22 @@ export default function AdminOrderCard({ sale, index }) {
   );
 }
 
+// AdminOrderCard.propTypes = {
+//   index: PropTypes.number.isRequired,
+//   deliveryAddress: PropTypes.string.isRequired,
+//   id: PropTypes.number.isRequired,
+//   deliveryNumber: PropTypes.string.isRequired,
+//   totalPrice: PropTypes.string.isRequired,
+//   status: PropTypes.string.isRequired,
+// };
+
 AdminOrderCard.propTypes = {
+  sale: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    deliveryAddress: PropTypes.string.isRequired,
+    deliveryNumber: PropTypes.string.isRequired,
+    totalPrice: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+  }).isRequired,
   index: PropTypes.number.isRequired,
-  deliveryAddress: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
-  deliveryNumber: PropTypes.string.isRequired,
-  totalPrice: PropTypes.string.isRequired,
-  status: PropTypes.string.isRequired,
 };

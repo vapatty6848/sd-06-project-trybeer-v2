@@ -39,7 +39,7 @@ salesRouter.get('/admin/details/:id', async (req, res) => {
 
 salesRouter.put('/admin/details/:id', async (req, res) => {
   const { saleStatus } = req.body;
-  console.log(req.body)
+  console.log(req.body);
   const { id: saleId } = req.params;
   await salesService.fullfilSale(saleId, saleStatus);
   

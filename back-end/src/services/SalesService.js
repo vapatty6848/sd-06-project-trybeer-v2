@@ -5,7 +5,7 @@ const { ThrowError } = require('../middlewares/errorHandler/errorHandler');
 
 const createSaleService = async (payload, products) => {
   if (!payload) throw new ThrowError(status.BAD_REQUEST, messages.NO_EMPTY_FIELDS);
-  console.log(payload)
+  console.log(payload);
   const { dataValues } = await sales.create(payload);
 
   const { id } = dataValues;

@@ -5,12 +5,12 @@ const {
   registerUserService,
   updateUserName,
   allUserOrdersService,
-} = require('../services/UserService');
-const tokenValidator = require('../middlewares/tokenValidator');
-const status = require('../utils/statusDictionary');
-const messages = require('../utils/messageDictionary');
-const { ThrowError } = require('../middlewares/errorHandler/errorHandler');
-const { secret, jwtConfig, jwtSign, createJWTPayload } = require('../authorization/jwtConfig');
+} = require('../../services/UserService');
+const tokenValidator = require('../../middlewares/tokenValidator');
+const status = require('../../utils/statusDictionary');
+const messages = require('../../utils/messageDictionary');
+const { ThrowError } = require('../../middlewares/errorHandler/errorHandler');
+const { secret, jwtConfig, jwtSign, createJWTPayload } = require('../../authorization/jwtConfig');
 
 const userRouter = new Router();
 
