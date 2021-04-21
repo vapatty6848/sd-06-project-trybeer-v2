@@ -1,36 +1,41 @@
-const { createSales, createSalesProducts } = require('../models');
+const { sales, salesProducts } = require('../models');
 const status = require('../utils/statusDictionary');
 const messages = require('../utils/messageDictionary');
 const { ThrowError } = require('../middlewares/errorHandler/errorHandler');
 
 const createSaleService = async (payload, products) => {
   if (!payload) throw new ThrowError(status.BAD_REQUEST, messages.NO_EMPTY_FIELDS);
-  const response = await createSales.create(payload);
-  const { insertId } = response;
+  console.log(payload)
+  const { dataValues } = await sales.create(payload);
+
+  const { id } = dataValues;
   const insertProducts = products.map((product) => (
-      { saleId: insertId, productId: product.id, quantity: product.quantity }
-    ));
-  await createSalesProducts.bukCreate(insertProducts);
-  return response;
+    { saleId: id, productId: product.id, quantity: product.quantity }
+  ));
+  
+  await salesProducts.bulkCreate(insertProducts);
+  return dataValues;
 };
 
 const getAllSales = async () => {
-  const sales = await SalesModel.getAllSales();
-  return sales;
+  const allSales = await sales.findAll();
+  return allSales;
 };
 
 const getSaleById = async (saleId) => {
-  const sale = await SalesModel.getSaleById(saleId);
-  const saleProducts = await SalesModel.getSaleProducts(saleId);
+  const { dataValues } = await sales.findByPk(saleId);
+  const saleProducts = await salesProducts.findAll({ where: { saleId } });
+
   const responsePayload = {
-    sale: sale[0],
+    sale: dataValues,
     saleProducts,
   };
   return responsePayload;
 };
 
-const fullfilSale = async (saleId) => {
-  const sale = await SalesModel.fullfilSale(saleId);
+const fullfilSale = async (saleId, saleStatus) => {
+  const sale = await sales.update({ status: saleStatus }, { where: { id: saleId } });
+  console.log(sale);
   return sale;
 };
 
@@ -40,7 +45,7 @@ const fullfilSale = async (saleId) => {
  * @returns Object contendo detalhes da venda
  */
 const getSalesById = async (id) => {
-  const result = await SalesModel.getSalesById(id);
+  const result = await sales.findByPk(id);
   return result;
 };
 

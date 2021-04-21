@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../../../components/Header/Header';
-import { getAdminSaleDetails, fullfilSale } from '../../../services/Sales';
+import { getAdminSaleDetails, fullfilSale, updateProductStatus } from '../../../services/Sales';
 import capitalize from '../../../utils/capitalize';
 import { parseCartPrice } from '../../../utils/parseValues';
 import './AdminOrdersDetail.css';
@@ -12,7 +12,7 @@ export default function AdminOrdersDetail({ match: { params: { id } } }) {
   useEffect(() => {
     const fetchSale = async () => {
       const sale = await getAdminSaleDetails(id);
-      console.log(sale, 'sale');
+      // console.log(sale, 'sale');
       setSaleDetails(sale);
     };
     fetchSale();
@@ -21,11 +21,21 @@ export default function AdminOrdersDetail({ match: { params: { id } } }) {
   const fullfilOrder = async () => {
     const newState = {
       ...saleDetails,
-      sale: { ...saleDetails.sale, status: 'entregue' },
+      sale: { ...saleDetails.sale, status: 'Entregue' },
     };
     setSaleDetails(newState);
-    await fullfilSale(id);
+    await fullfilSale(id, { saleStatus: 'Entregue' });
   };
+  
+  const setAsPreparing = async () => {
+    const newState = {
+      ...saleDetails,
+      sale: { ...saleDetails.sale, status: 'Preparando' },
+    };
+    setSaleDetails(newState);
+    
+    await updateProductStatus(id, { saleStatus: 'Preparando' })
+  }
 
   const { saleProducts, sale } = saleDetails;
 
@@ -61,15 +71,16 @@ export default function AdminOrdersDetail({ match: { params: { id } } }) {
               ))}
             </ul>
             <h2 data-testid="order-total-value">
-              {sale && parseCartPrice(sale.total_price)}
+              {sale && parseCartPrice(Number(sale.totalPrice))}
             </h2>
           </div>
+          
           {sale && sale.status === 'pendente' && (
             <div>
               <button
                 type="button"
                 data-testid="mark-as-prepared-btn"
-                onClick={ _____ }
+                onClick={ setAsPreparing }
               >
                 Preparar pedido
               </button>
@@ -82,6 +93,19 @@ export default function AdminOrdersDetail({ match: { params: { id } } }) {
               </button>
             </div>
           )}
+          
+          {sale && sale.status === 'Preparando' && (
+            <div>
+              <button
+                type="button"
+                data-testid="mark-as-delivered-btn"
+                onClick={ fullfilOrder }
+              >
+                Marcar como entregue
+              </button>
+            </div>
+          )}
+          
         </>
       )}
     </div>

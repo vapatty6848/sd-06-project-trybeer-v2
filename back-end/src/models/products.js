@@ -3,7 +3,7 @@ const createProducts = (sequelize, Datatypes) => {
     name: Datatypes.STRING, 
     price: Datatypes.NUMBER,
     urlImage: Datatypes.STRING,
-  });
+  }, { timestamps: false });
   return Product;
 };
 

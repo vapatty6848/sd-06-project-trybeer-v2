@@ -1,9 +1,10 @@
 const createSalesProducts = (sequelize, Datatypes) => {
-  const SaleProduct = sequelize.define('sales_products', {
+  const SaleProduct = sequelize.define('salesProducts', {
     saleId: Datatypes.INTEGER,
     productId: Datatypes.INTEGER,
     quantity: Datatypes.INTEGER,
-  });
+  }, { timestamps: false });
+  
   SaleProduct.associate = (models) => {
     models.sales.belongsToMany(models.products, {
       as: 'sale',

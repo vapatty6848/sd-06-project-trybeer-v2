@@ -1,8 +1,8 @@
-const { createProducts } = require('../models');
+const { products } = require('../models');
 
 const getAllProducts = async () => {
-  const products = await createProducts.findAll();
-  return products;
+  const allProducts = await products.findAll();
+  return allProducts;
 };
 
 module.exports = {

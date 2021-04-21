@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { createUser } = require('../models');
+const { user } = require('../models');
 const {
   getEmailService,
   registerUserService,
@@ -11,28 +11,30 @@ const status = require('../utils/statusDictionary');
 const messages = require('../utils/messageDictionary');
 const { ThrowError } = require('../middlewares/errorHandler/errorHandler');
 const { secret, jwtConfig, jwtSign, createJWTPayload } = require('../authorization/jwtConfig');
+require('dotenv');
 
 const userRouter = new Router();
 
 userRouter.get('/', async (req, res) => {
-  const allUsers = await createUser.findAll();
+  const allUsers = await user.findAll();
   return res.status(status.SUCCESS).json(allUsers);
 });
 
 userRouter.post('/login', async (req, res, next) => {
-  const user = await getEmailService(req.body.email);
+  const { dataValues } = await getEmailService(req.body.email);
+  console.log(dataValues);
   try {
-    if (!user.length) throw new ThrowError(status.NOT_FOUND, messages.USER_NOT_FOUND);
-    const payload = createJWTPayload(user);
+    if (!dataValues.id) throw new ThrowError(status.NOT_FOUND, messages.USER_NOT_FOUND);
+    const payload = createJWTPayload(dataValues);
 
     const token = jwtSign(payload, secret, jwtConfig);
     return res.status(status.SUCCESS)
       .json({
         token,
-        name: user[0].name,
-        email: user[0].email,
-        role: user[0].role,
-        id: user[0].id,
+        name: dataValues.name,
+        email: dataValues.email,
+        role: dataValues.role,
+        id: dataValues.id,
       });
   } catch (error) {
     next(error);
@@ -40,16 +42,16 @@ userRouter.post('/login', async (req, res, next) => {
 });
 
 userRouter.post('/register', async (req, res, next) => {
-  const { body: user, body: { name, email, role } } = req;
-  const resultRegister = await registerUserService(user);
+  const { body: username, body: { name, email, role } } = req;
+  const resultRegister = await registerUserService(username); 
   try {
     if (!resultRegister) {
       throw new ThrowError(status.CONFLICT, messages.EMAIL_EXISTS);
     }
 
-    const payload = createJWTPayload(user);
+    const payload = createJWTPayload(username);
 
-    if (!resultRegister.affectedRows) {
+    if (!resultRegister.dataValues) {
       throw new ThrowError(status.INTERNAL_ERROR, messages.DEFAULT_ERROR);
     }
     const token = jwtSign(payload, secret, jwtConfig);
@@ -61,10 +63,14 @@ userRouter.post('/register', async (req, res, next) => {
 });
 
 userRouter.put('/update', tokenValidator, async (req, res) => {
+  if (!req.body.name) {
+    return res.status(404).json({ message: 'Adicione um atributo "name"' });
+  }
+  
   const { name: newUserName } = req.body;
   const { email } = req.user;
   await updateUserName(newUserName, email);
-  res.status(status.NO_CONTENT).send({ status: 'ok' });
+  res.status(status.NO_CONTENT).json({ message: 'ok' });
 });
 
 userRouter.get('/orders', async (req, res) => {

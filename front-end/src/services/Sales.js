@@ -3,7 +3,7 @@ const { endpoint } = require('./utils');
 const applicationJsonContent = 'application/json';
 
 const postSale = (token, payload, products) => fetch(`${endpoint}/sales/checkout`, {
-  method: 'post',
+  method: 'POST',
   headers: {
     'Content-type': applicationJsonContent,
     authorization: token,
@@ -27,8 +27,20 @@ const getAdminSaleDetails = async (id) => {
   return result;
 };
 
-const fullfilSale = (id) => fetch(`${endpoint}/sales/admin/details/${id}`, {
-  method: 'put',
+const fullfilSale = (id, status) => fetch(`${endpoint}/sales/admin/details/${id}`, {
+  method: 'PUT',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(status),
+}).then((response) => response.json());
+
+const updateProductStatus = (id, status) => fetch(`${endpoint}/sales/admin/details/${id}`, {
+  method: 'PUT',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(status),
 }).then((response) => response.json());
 
 module.exports = {
@@ -38,4 +50,5 @@ module.exports = {
   fullfilSale,
   getAllSales,
   getSalesById,
+  updateProductStatus
 };

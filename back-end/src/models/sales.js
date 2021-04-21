@@ -6,7 +6,7 @@ const createSales = (sequelize, Datatypes) => {
     deliveryNumber: Datatypes.STRING,
     saleDate: Datatypes.DATE,
     status: Datatypes.STRING,
-  });
+  }, { timestamps: false });
   
   Sale.associate = (models) => {
     Sale.belongsTo(models.user, {

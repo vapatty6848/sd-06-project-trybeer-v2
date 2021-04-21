@@ -6,9 +6,9 @@ import capitalize from '../../utils/capitalize';
 export default function AdminOrderCard({ sale, index }) {
   const {
     id,
-    delivery_address: deliveryAddress,
-    delivery_number: deliveryNumber,
-    total_price: totalPrice,
+    deliveryAddress,
+    deliveryNumber,
+    totalPrice,
     status,
   } = sale;
   return (
@@ -16,9 +16,7 @@ export default function AdminOrderCard({ sale, index }) {
       <h2
         data-testid={ `${index}-order-number` }
       >
-        Pedido
-        {' '}
-        {id}
+        Pedido {id}
       </h2>
       <p
         data-testid={ `${index}-order-address` }
@@ -29,9 +27,7 @@ export default function AdminOrderCard({ sale, index }) {
         <span
           data-testid={ `${index}-order-total-value` }
         >
-          R$
-          {' '}
-          {(totalPrice).replace('.', ',')}
+          R$ {(totalPrice).replace('.', ',')}
         </span>
         <span
           className={
@@ -47,10 +43,10 @@ export default function AdminOrderCard({ sale, index }) {
 }
 
 AdminOrderCard.propTypes = {
-  sale: PropTypes.arrayOf(PropTypes.string).isRequired,
   index: PropTypes.number.isRequired,
-  delivery_address: PropTypes.string.isRequired,
+  deliveryAddress: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
-  delivery_number: PropTypes.string.isRequired,
-  total_price: PropTypes.number.isRequired,
+  deliveryNumber: PropTypes.string.isRequired,
+  totalPrice: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
 };

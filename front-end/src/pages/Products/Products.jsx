@@ -20,7 +20,7 @@ export default function Products() {
     const fetchProducts = async () => {
       verifyUser(history);
       const allProducts = await getProducts();
-      setProducts(allProducts);
+      await setProducts(allProducts);
     };
     fetchProducts();
   }, [history]);

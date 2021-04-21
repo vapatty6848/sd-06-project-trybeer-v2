@@ -50,7 +50,7 @@ const getItemInStorage = (urlImage, name, price, id) => {
 };
 
 export default function DrinkCard({ product, index, setCartSum }) {
-  const { url_image: urlImage, name, price, id } = product;
+  const { urlImage, name, price, id } = product;
   const [cartItem, setCartItem] = useState(getItemInStorage(urlImage, name, price, id));
 
   useEffect(() => {
@@ -101,7 +101,12 @@ export default function DrinkCard({ product, index, setCartSum }) {
 }
 
 DrinkCard.propTypes = {
-  product: PropTypes.arrayOf(PropTypes.string).isRequired,
+  product: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
+    urlImage: PropTypes.string.isRequired,
+  }).isRequired,
   setCartSum: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
 };

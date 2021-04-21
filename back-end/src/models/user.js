@@ -4,7 +4,7 @@ const createUsers = (sequelize, Datatypes) => {
     email: Datatypes.STRING,
     password: Datatypes.STRING,
     role: Datatypes.STRING,
-  });
+  }, { timestamps: false });
   
   User.associate = (models) => {
     User.hasMany(models.sales, {

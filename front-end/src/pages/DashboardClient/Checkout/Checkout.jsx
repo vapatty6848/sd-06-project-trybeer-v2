@@ -19,7 +19,7 @@ const Checkout = (props) => {
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || '');
   const [chkButton, setChkButton] = useState(true);
   const [chkForm, setChkForm] = useState({ st: '', num: '' });
-  const [statusPedido] = useState('pendente'); // ou Entregue
+  const [statusPedido] = useState('Pendente'); // ou Entregue
   const [mySum, setSum] = useState(location.state.sum || ' ');
   const [saleDone, setSaleDone] = useState(false);
 
@@ -58,17 +58,17 @@ const Checkout = (props) => {
       .replace(/-/g, '/')
       .replace('T', ' ');
     const payload = {
-      user_id: user.id,
-      total_price: Number(mySum.split(' ')[1].replace(',', '.')).toFixed(2),
-      delivery_address: chkForm.st,
-      delivery_number: chkForm.num,
-      sale_date: date,
+      userId: user.id,
+      totalPrice: Number(mySum.split(' ')[1].replace(',', '.')).toFixed(2),
+      deliveryAddress: chkForm.st,
+      deliveryNumber: chkForm.num,
+      saleDate: date,
       status: statusPedido,
     };
     const products = getCart();
     const saleResponse = await postSale(user.token, payload, products);
 
-    if (saleResponse.affectedRows) {
+    if (saleResponse.userId) {
       setSaleDone('Compra realizada com sucesso!');
 
       setTimeout(() => {

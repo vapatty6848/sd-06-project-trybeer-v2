@@ -16,26 +16,26 @@ module.exports = {
           model: 'users',
           key: 'id',
         },
-        total_price: {
-          type: Sequelize.DECIMAL,
-          allowNull: false,
-        },
-        delivery_address: {
-          type: Sequelize.STRING,
-          allowNull: false,
-        },
-        delivery_number: {
-          type: Sequelize.STRING,
-          allowNull: false,
-        },
-        sale_date: {
-          type: Sequelize.DATE,
-          allowNull: false,
-        },
-        status: {
-          type: Sequelize.STRING,
-          allowNull: false,
-        },
+      },
+      totalPrice: {
+        type: Sequelize.DECIMAL,
+        allowNull: false,
+      },
+      deliveryAddress: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      deliveryNumber: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      saleDate: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      status: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
     }, { timestamp: false });
   },

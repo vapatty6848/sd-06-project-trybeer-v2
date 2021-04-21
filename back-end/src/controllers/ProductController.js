@@ -9,6 +9,7 @@ const productsRouter = new Router();
 
 productsRouter.get('/', async (req, res) => {
   const products = await ProductsService.getAllProducts();
+  
   res.status(status.SUCCESS).json(products);
 });
 

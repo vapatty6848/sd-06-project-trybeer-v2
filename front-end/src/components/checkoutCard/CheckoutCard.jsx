@@ -47,7 +47,7 @@ CheckoutCard.propTypes = {
   product: PropTypes.shape({
     quantity: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
+    price: PropTypes.string.isRequired,
   }).isRequired,
   changeState: PropTypes.func.isRequired,
   specialNumber: PropTypes.number.isRequired,

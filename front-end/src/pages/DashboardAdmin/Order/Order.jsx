@@ -7,25 +7,28 @@ import './Order.css';
 
 export default function Orders() {
   const [sales, setSales] = useState([]);
+  
+  const fetchSales = async () => {
+    const allSales = await getSales();
+    setSales(allSales);
+  };
 
   useEffect(() => {
-    const fetchSales = async () => {
-      const allSales = await getSales();
-      setSales(allSales);
-    };
     fetchSales();
-  }, []);
+  }, [sales]);
 
   return (
     <div>
       <Header title="TryBeer" user="admin" />
-      {(sales.length && sales.map((sale, index) => (
-        <AdminOrderCard
+      {(sales.length && sales.map((sale, index) => {
+        return (
+          <AdminOrderCard
           sale={ sale }
           key={ sale.id }
           index={ index }
         />
-      )))
+        )
+      }))
       || (<span>Você não possui nenhum pedido :(</span>)}
     </div>
   );
