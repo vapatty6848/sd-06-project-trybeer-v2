@@ -39,6 +39,15 @@ function OrderDetails(props) {
           <div>
             <TopMenu titleMenu="Detalhes de Pedido" />
             <div className="content-panel">
+            <div data-testid="order-number">
+                { `Pedido ${state.id}` }
+              </div>
+              <div data-testid="order-date">
+                { formatedDate(state.saleDate) }
+              </div>
+              <div data-testid="order-total-value">
+                { formatedPrice(state.totalPrice) }
+              </div>
               <div>
                 {
                   orderCart.map(({ quantity, name, price }, index) => (
@@ -69,15 +78,6 @@ function OrderDetails(props) {
                     </div>
                   ))
                 }
-              </div>
-              <div data-testid="order-number">
-                { `Pedido ${state.id}` }
-              </div>
-              <div data-testid="order-date">
-                { formatedDate(state.saleDate) }
-              </div>
-              <div data-testid="order-total-value">
-                { formatedPrice(state.totalPrice) }
               </div>
             </div>
           </div>

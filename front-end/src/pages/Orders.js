@@ -14,6 +14,7 @@ function Orders({ history }) {
 
   const fetchOrders = async () => {
     const allOrders = await verifyToken(`orders/${user.id}`, user, history);
+    console.log(allOrders)
     setOrders(allOrders);
   };
 
@@ -29,7 +30,7 @@ function Orders({ history }) {
       <div className="content-panel">
         <div className="container">
           {
-            orders.map(({ id, date_time: saleDate, total_price: totalPrice }, index) => (
+            orders.map(({ id, saleDate, totalPrice }, index) => (
               <div
                 key={ id }
                 className="order-card-container"

@@ -21,32 +21,51 @@ const createSaleProduct = (productId, quantity, saleId) => sale_product
   .create({ productId, quantity, saleId });
 
 const createOrderProductService = async ({ cart, saleId }) => {
-  const promises = cart.map(({ productId, quantity }) => (
+  const promises = cart.map(({ id: productId, quantity }) => (
     createSaleProduct(productId, quantity, saleId)));
   await Promise.all(promises);
 };
 
-const getById = async (id) => sale.findAll({
+const getById = async (id) => {
+  const specificSale = await sale.findAll({
   include: [{ model: product, required: true, as: 'products' }],
   where: { id },
-});
-
-// getById(1)
-//   .then((resp) => {
-//     console.log(resp[0].dataValues);
-//   });
+  });
+  const products = specificSale[0].products.map((item) => {
+    const productsAndQt = { ...item.dataValues, quantity: item.sale_product.quantity };
+    const { quantity, name, price } = productsAndQt;
+    return { quantity, name, price };
+  });
+  return products;
+};
 
 const alter = async ({ id, status }) => sale.update({ status }, { where: { id } });
 
 const getAll = async () => sale.findAll();
 
-const getAllByUser = async (id) => sale.findAll({ where: { id } });
+const getAllByUser = async (id) => {
+  const sales = sale.findAll({ where: { userId: id } });
+  return sales;
+};
 
-// const getByIdAdmin = async (id) => ordersModel.getByIdAdmin(id);
-const getByIdAdmin = async (id) => sale.findAll({
+const getByIdAdmin = async (id) => {
+  const specificSale = await sale.findAll({
   include: [{ model: product, required: true, as: 'products' }],
   where: { id },
-});
+  });
+  const products = specificSale[0].products.map((item) => {
+    const productsAndQt = { ...item.dataValues, quantity: item.sale_product.quantity };
+    const { sale_product: saleProduct, urlImage, ...importantData } = productsAndQt;
+    return importantData;
+  });
+  const data = {
+    products,
+    saleId: id,
+    totalPrice: specificSale[0].totalPrice,
+    status: specificSale[0].status,
+  };
+  return data;
+};
 
 module.exports = {
   createOrderService,

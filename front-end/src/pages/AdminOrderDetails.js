@@ -15,7 +15,8 @@ function AdminOrderDetails(props) {
   const fetchOrderDetails = async () => {
     if (state) {
       const order = await verifyToken(`admin/orders/details/${state.id}`, user, history);
-      setOrderCart(order);
+      console.log(order);
+      setOrderCart([order]);
     }
   };
 
@@ -53,21 +54,26 @@ function AdminOrderDetails(props) {
                         {`Status: ${orderCart[0].status}` }
                       </div>
                       <div data-testid="order-number">
-                        {`Pedido ${orderCart[0].sale_id}` }
+                        {`Pedido ${orderCart[0].saleId}` }
+                      </div>
+                      <div
+                        className="order-total"
+                        data-testid="order-total-value"
+                      >
+                        { `Valor Total: ${formatedPrice(orderCart[0].totalPrice)}` }
                       </div>
                     </div>
                   )
                 }
                 {
-                  orderCart.map(({
+                  orderCart[0] && orderCart[0].products.map(({
                     quantity,
                     name,
                     price,
-                    sale_id: saleId,
-                    total_price: totalPrice,
+                    id,
                   }, index) => (
                     <div
-                      key={ saleId }
+                      key={ id }
                       className="order-card-container"
                       data-testid={ `${index}-order-card-container` }
                     >
@@ -88,12 +94,6 @@ function AdminOrderDetails(props) {
                         data-testid={ `${index}-product-total-value` }
                       >
                         { `${formatedPrice((price * quantity).toFixed(2))}` }
-                      </div>
-                      <div
-                        className="card-total"
-                        data-testid="order-total-value"
-                      >
-                        { `Valor Total: ${formatedPrice(totalPrice)}` }
                       </div>
                     </div>
                   ))

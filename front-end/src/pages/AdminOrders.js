@@ -11,7 +11,8 @@ function AdminOrders({ history }) {
   const { user } = useContext(TrybeerContext);
   const fetchOrders = async () => {
     const allOrders = await verifyToken('admin/orders/', user, history);
-    // setOrders(allOrders);
+    console.log(allOrders)
+    setOrders(allOrders);
   };
 
   useEffect(() => {
@@ -24,9 +25,9 @@ function AdminOrders({ history }) {
       {
         orders.map(({
           id,
-          delivery_address: deliveryAddress,
-          delivery_number: deliveryNumber,
-          total_price: totalPrice,
+          deliveryAddress,
+          deliveryNumber,
+          totalPrice,
           status,
         }, index) => (
           <div key={ id }>
