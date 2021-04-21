@@ -83,7 +83,7 @@ function OrderDetails({ match }) {
             />
             <Button
               className="btn btn-success"
-              title="Preparar Pedido"
+              title="Preparar pedido"
               dataTestid="mark-as-prepared-btn"
               handleClick={ () => handleClick('Preparando') }
               btnDisabled={ isPrepared }
