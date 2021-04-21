@@ -19,7 +19,7 @@ function ProfileAdmin({ history }) {
   const userEmail = user.email;
 
   return (
-    <div >
+    <div>
       <MenuSideBar />
       <h1>Perfil</h1>
       <p>Email:</p>

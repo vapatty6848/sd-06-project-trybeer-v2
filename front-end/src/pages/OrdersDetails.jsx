@@ -14,7 +14,7 @@ const OrdersDetails = ({ match, history }) => {
     async function fetchOrderDetails() {
       const user = JSON.parse(localStorage.user);
       const response = await api.getOrdersById(user.token, id);
-      console.log(response)
+      console.log(response);
       if (response.message) return history.push('/login');
       setOrderDetails(response);
     }

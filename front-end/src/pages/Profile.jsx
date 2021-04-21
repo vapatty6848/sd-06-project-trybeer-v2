@@ -37,38 +37,37 @@ function Profile({ history }) {
   return (
     <div>
       <MenuTop name="Meu perfil" />
-     
-      
-        <div className="form-profile">
-          <label className="label" htmlFor="name">
-            Nome:
-            <input
-              className="input"
-              value={ name }
-              data-testid="profile-name-input"
-              onChange={ handleChange }
-            />
-          </label>
-          <label className="label space-margin-top" htmlFor="email">
-            Email:
-            <input
-              className="input "
-              readOnly
-              value={ email }
-              data-testid="profile-email-input"
-            />
-          </label>
-          <button
-            className="button is-success space-margin-top"
-            type="button"
-            data-testid="profile-save-btn"
-            disabled={ isDisabled }
-            onClick={ handleClick }
-          >
-            Salvar
-          </button>
-          { (updateName) && <span>Atualização concluída com sucesso</span> }
-        </div>      
+
+      <div className="form-profile">
+        <label className="label" htmlFor="name">
+          Nome:
+          <input
+            className="input"
+            value={ name }
+            data-testid="profile-name-input"
+            onChange={ handleChange }
+          />
+        </label>
+        <label className="label space-margin-top" htmlFor="email">
+          Email:
+          <input
+            className="input "
+            readOnly
+            value={ email }
+            data-testid="profile-email-input"
+          />
+        </label>
+        <button
+          className="button is-success space-margin-top"
+          type="button"
+          data-testid="profile-save-btn"
+          disabled={ isDisabled }
+          onClick={ handleClick }
+        >
+          Salvar
+        </button>
+        { (updateName) && <span>Atualização concluída com sucesso</span> }
+      </div>
     </div>
 
   );

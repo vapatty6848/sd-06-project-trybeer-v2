@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function RenderOrder({ productDetail }) { 
+function RenderOrder({ productDetail }) {
   return (
     <div>
-      {productDetail  && productDetail.products.map((product, index) => (
+      {productDetail && productDetail.products.map((product, index) => (
         <div
           key={ index }
         >
@@ -27,7 +27,7 @@ function RenderOrder({ productDetail }) {
           <span
             data-testid={ `${index}-order-unit-price` }
           >
-           {`(R$ ${product.price.replace('.', ',')})`}
+            {`(R$ ${product.price.replace('.', ',')})`}
           </span>
         </div>
       ))}
@@ -43,7 +43,7 @@ function RenderOrder({ productDetail }) {
 }
 
 RenderOrder.propTypes = {
-  productDetail: PropTypes.arrayOf(PropTypes.object).isRequired,
+  productDetail: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 export default RenderOrder;

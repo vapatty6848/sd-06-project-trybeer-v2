@@ -19,17 +19,17 @@ function AdminOrderDetails({ match, history }) {
       response.map((item) => setStatus(item.productStatus));
       setProductDetail(response);
       setStatus(response[0].status);
-       if (response[0].status !== 'Entregue') setChange(false);
+      if (response[0].status !== 'Entregue') setChange(false);
     };
     fetchProductDetails();
   }, [history, id]);
 
   const fetchStatusOrder = async () => {
-    await api.updateStatusOrder('Entregue', id);        
-  }
+    await api.updateStatusOrder('Entregue', id);
+  };
 
   const handleClick = () => {
-    setChange(true); 
+    setChange(true);
     setStatus('Entregue');
     fetchStatusOrder();
   };

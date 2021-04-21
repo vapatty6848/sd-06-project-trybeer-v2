@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const OrdersDetailsCard = ({ order, id }) => { 
+const OrdersDetailsCard = ({ order, id }) => {
   const handleDate = (dateTime) => {
     const date = new Date(dateTime);
     const twoNumber = -2;
@@ -11,7 +11,7 @@ const OrdersDetailsCard = ({ order, id }) => {
     return formatDate;
   };
 
-  const handleTotalValue = (price, quantity) => {    
+  const handleTotalValue = (price, quantity) => {
     const totalValue = price * quantity;
     const formatValue = totalValue.toFixed(2).replace('.', ',');
     return formatValue;
@@ -32,7 +32,7 @@ const OrdersDetailsCard = ({ order, id }) => {
         </div>
       </div>
       <div>
-        { order ? order.products.map((product,index)=>(
+        { order ? order.products.map((product, index) => (
           <div
             className="top-data"
             key={ index }
@@ -53,8 +53,8 @@ const OrdersDetailsCard = ({ order, id }) => {
               { `R$  ${handleTotalValue(product.price, product.salesProducts.quantity)}` }
             </div>
           </div>
-          ))
-      
+        ))
+
           : true }
         <div className="flex-end">
           <div
@@ -71,7 +71,7 @@ const OrdersDetailsCard = ({ order, id }) => {
 };
 
 OrdersDetailsCard.propTypes = {
-  order: PropTypes.object,
+  order: PropTypes.objectOf(PropTypes.shape).isRequired,
   id: PropTypes.string.isRequired,
 };
 
