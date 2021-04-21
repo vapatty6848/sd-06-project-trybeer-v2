@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+.costumer_orders {
+  align-items: center;
+  align-content: center;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  margin: auto;
+  width: 100%;
+}
+
+.costumer_orders h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 20pt;
+  font-weight: 900;
+}
+
+.order-list {
+  align-items: center;
+  align-content: center;
+  display: flex;
+  flex-flow: row wrap !important;
+  justify-content: center;
+  width: 100%;
+}
