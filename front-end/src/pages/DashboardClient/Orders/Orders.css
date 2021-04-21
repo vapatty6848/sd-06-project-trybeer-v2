@@ -1,26 +1,24 @@
 .orders {
-  width: 90%;
-  text-decoration: none;
-  color: black;
   background-color: transparent;
-  display: inline-block;
   border: 1px solid black;
   border-radius: 2px;
-  padding: 15px 20px;
+  box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.05);
+  color: black;
+  display: inline-block;
   margin: 10px;
-  -webkit-box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.05); 
-  box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.05);
+  padding: 15px 20px;
+  text-decoration: none;
+  width: 90%;
 }
 
 .orders:hover {
+  box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.1);
   transform: scale(1.02);
-  transition: .2s;
-  -webkit-box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.1); 
-  box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.1);
-} 
+  transition: 0.2s;
+}
 
 .date-order {
-  margin-top: -1%;
   margin-bottom: 3%;
+  margin-top: -1%;
   padding-top: 0;
 }

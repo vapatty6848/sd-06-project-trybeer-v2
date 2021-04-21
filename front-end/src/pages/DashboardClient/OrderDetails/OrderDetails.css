@@ -1,13 +1,13 @@
 .geral {
   margin: 1.5rem;
 }
+
 .title {
+  background: rgb(164, 204, 138);
+  border-radius: 0.5rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  border-radius: 0.5rem;
-
-  background: rgb(164, 204, 138);
   padding: 0.5rem 2rem;
 }
 
@@ -24,34 +24,32 @@
 }
 
 .detalhes {
+  border: 5px ridge gray;
+  border-radius: 0.5rem;
   display: flex;
   justify-content: space-around;
-  border: 5px ridge gray;
   margin: 1rem 0;
-  border-radius: 0.5rem;
 }
 
 .quantidade {
   font-size: 22px;
+  text-align: left;
   width: 30vh;
 }
 
-.quantidade {
-  font-size: 22px;
-  width: 25vh;
-  text-align: left;
-}
 .nome {
   font-size: 22px;
-  width: 60vh;
   text-align: start;
+  width: 60vh;
 }
+
 .preço {
   font-size: 22px;
   width: 15vh;
 }
+
 .subtotal {
   font-size: 22px;
-  width: 20vh;
   text-align: left;
+  width: 20vh;
 }
