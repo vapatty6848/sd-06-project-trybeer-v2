@@ -25,11 +25,11 @@ export default function OrdersContainer({ orders }) {
         ? <h4>{ emptyOrders }</h4>
         : orders.map(({
           id,
-          total_price: totalPrice,
-          sale_date: date,
+          totalPrice,
+          createdAt: date,
           status,
-          delivery_address: street,
-          delivery_number: number,
+          deliveryAddress: street,
+          deliveryNumber: number,
         }, index) => (
           <section
             className="order-card"

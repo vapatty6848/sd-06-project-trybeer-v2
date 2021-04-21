@@ -11,7 +11,6 @@ const products = async (payload) => {
       headers,
     };
     const result = await axios(request);
-    console.log('Products request: ', result);
     return result.data;
   } catch (error) {
     if (error.response) {

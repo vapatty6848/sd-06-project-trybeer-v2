@@ -3,7 +3,7 @@ import { PropTypes } from 'prop-types';
 import AppContext from '../context/app.context';
 
 import OrderCard from './OrderCardDetail';
-import Button from './Button';
+import AdminButton from './AdminButton';
 import { convertDate } from '../utils';
 import adminApi from '../services/api.admin';
 
@@ -12,37 +12,41 @@ export default function OrderDetails({ order, callback }) {
     tokenContext: { token },
     productsContext: { products } } = useContext(AppContext);
 
-  const updateStatus = async () => {
+  const updateStatus = async (newStatus) => {
     try {
-      await adminApi({ ...token, saleId: order.id, delivered: true });
-      callback({ ...order, status: 'Entregue' });
-      return { status: 'OK', message: 'Sale status updated' };
+      await adminApi({ ...token, saleId: order.id, status: newStatus });
+      callback({ ...order, status: newStatus });
+      return { status: 'OK', message: `Sale status updated to ${newStatus}` };
     } catch (error) {
       return error;
     }
   };
 
-  if (!order.sale || !products) return 'Loading order...';
+  if (!order.products || !products) return 'Loading order...';
 
   return (
     <section className="order-detail-wrapper">
       <h3 data-testid="order-number">{ `Pedido ${order.id}` }</h3>
-      <p data-testid="order-date">{ convertDate(order.sale_date)[0] }</p>
+      <p data-testid="order-date">{ convertDate(order.createdAt)[0] }</p>
       { (token.role === 'administrator')
         && (
           <section>
-            <p>{ `Cliente: ${order.user_name}` }</p>
+            <p>{ `Cliente: ${order.user.name}` }</p>
             <p data-testid="order-status">{ order.status }</p>
           </section>
         ) }
-      { order.sale.map((curr, index) => (
-        <OrderCard index={ index } order={ curr } key={ index } />
+      { order.products.map((curr, index) => (
+        <OrderCard index={ index } product={ curr } key={ index } />
       )) }
       <p data-testid="order-total-value">
-        { `Total: R$ ${order.total_price.replace('.', ',')}` }
+        { `Total: R$ ${order.totalPrice.replace('.', ',')}` }
       </p>
-      { (token.role === 'administrator' && order.status === 'Pendente')
-      && (<Button callback={ updateStatus } id="updateDeliver" />) }
+      { (token.role === 'administrator' && order.status !== 'Entregue')
+      && (
+        <>
+          <AdminButton callback={ updateStatus } id="preparando" />
+          <AdminButton callback={ updateStatus } id="entregue" />
+        </>) }
     </section>
   );
 }

@@ -10,7 +10,6 @@ import '../styles/Orders.css';
 export default function Orders() {
   const { tokenContext: { token } } = useContext(AppContext);
   const [orders, setOrders] = useState();
-
   const history = useHistory();
 
   useEffect(() => {

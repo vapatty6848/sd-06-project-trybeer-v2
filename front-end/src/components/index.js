@@ -1,6 +1,7 @@
 export { default as Topbar } from './Topbar';
 export { default as ClientMenu } from './ClientSideMenu';
 export { default as AdminMenu } from './AdminSideMenu';
+export { default as AdminButton } from './AdminButton';
 export { default as ProductCard } from './ProductCard';
 export { default as OrderDetails } from './OrderDetails';
 export { default as TextInput } from './TextInput';

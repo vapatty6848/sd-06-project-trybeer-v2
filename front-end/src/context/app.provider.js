@@ -33,8 +33,8 @@ const AppProvider = ({ children }) => {
       const productsArray = await productsApi(token).catch((error) => error);
       setProducts(productsArray);
     };
-    if (token && token.email) fetchProducts();
-  }, [setProducts, token]);
+    if (!products) fetchProducts();
+  }, [setProducts, products, token]);
 
   return (
     <AppContext.Provider value={ { productsContext, tokenContext, cartContext } }>

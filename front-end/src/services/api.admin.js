@@ -13,11 +13,11 @@ const sales = async (payload) => {
 
     if (payload.saleId) request.url = `http://${localhost}:3001/admin/sales/${payload.saleId}`;
 
-    if (payload.delivered) {
-      const delivered = (payload.delivered) ? 'true' : 'false';
+    if (payload.status) {
+      const status = payload.status.toString();
       request.method = 'put';
       request.url = `http://${localhost}:3001/admin/sales/${payload.saleId}`;
-      request.data = { delivered };
+      request.data = { delivered: status };
     }
 
     const result = await axios(request);
