@@ -1,5 +1,6 @@
 const { Router } = require('express');
-const cartService = require('../services/cartService');
+const { sales } = require('../models');
+const { salesProducts } = require('../models');
 
 const router = Router();
 
@@ -7,8 +8,8 @@ router.post('/checkout', async (req, res) => {
   const { userId, total, street, number, data, status } = req.body;
 
   try {
-    const saleId = await cartService
-      .addSale({ userId, total, street, number, data, status });
+    const saleId = await sales
+      .create({ userId, total, street, number, data, status });
     return res.status(201).json({ saleId });
   } catch (error) {
     return res.status(500).json({ message: error.message });
@@ -16,11 +17,15 @@ router.post('/checkout', async (req, res) => {
 });
 
 router.post('/saleProduct', async (req, res) => {
-  const salesProducts = req.body;
+  const salesProductsBody = req.body;
 
   try {
-    await cartService.addSaleProduct(salesProducts);
-    return res.status(201).json(salesProducts);
+    await salesProducts.create({ 
+      saleId: salesProductsBody.saleId,
+      productId: salesProductsBody.productId,
+      quantity: salesProductsBody.quantity,
+    });
+    return res.status(201).json(salesProductsBody);
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -28,7 +33,7 @@ router.post('/saleProduct', async (req, res) => {
 
 router.get('/saleProduct', async (req, res) => {
   try {
-      const allSales = await cartService.getAllSales();
+      const allSales = await sales.findAll();
 
       if (!allSales) return res.status(404).json({ message: 'Requisição não encontrada!' });
 
