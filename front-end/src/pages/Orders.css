@@ -3,11 +3,12 @@
   flex-wrap: wrap;
   width: 100%;
 }
+
 .order-card-container {
-  width: 33%;
   border: 1px solid white;
   display: flex;
   flex-direction: column;
+  width: 33%;
 }
 
 .card-id-date {
@@ -16,7 +17,7 @@
   padding-top: 3%;
 }
 
-.card-total{
-  padding-top: 5%;
+.card-total {
   padding-left: 5%;
+  padding-top: 5%;
 }
