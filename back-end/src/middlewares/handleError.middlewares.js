@@ -22,7 +22,8 @@ module.exports = (error, _req, res, _next) => {
   handleLogs(errorObject, isCustomError);
   console.error({ error });
 
-  const { statusCode, customMessage, customCode } = errorObject;
+  const { customMessage, customCode } = errorObject;
+  const statusCode = errorObject.statusCode || '500';
   const ERR = {
     message: customMessage || 'Erro interno',
     code: customCode || 'INTERNAL_ERROR',

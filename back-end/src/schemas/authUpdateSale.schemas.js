@@ -1,4 +1,4 @@
-const { isNotBool, isBlank } = require('./helpers');
+const { isBlank } = require('./helpers');
 
 const error = {
   invalidStatus: 'C_ERR_INVALID_STATUS',
@@ -6,8 +6,9 @@ const error = {
 };
 
 const authStatusUpdate = (saleId, status) => {
+  console.log('auth update status: ', saleId, status);
   switch (true) {
-    case isNotBool(status): throw new Error(error.invalidStatus);
+    case isBlank(status): throw new Error(error.invalidStatus);
     case isBlank(saleId): throw new Error(error.saleInvalid);
     default: return null;
   }
