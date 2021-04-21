@@ -36,6 +36,13 @@ function SideBar() {
         btnDisable={ false }
       />
       <Button
+        className="btn-login btn btn-success width-med margin-med"
+        title="Conversar com a loja"
+        dataTestid="side-menu-chat"
+        handleClick={ () => history.push('/chat') }
+        btnDisable={ false }
+      />
+      <Button
         className="btn-login btn btn-dark width-med margin-med align-bot"
         title="Sair"
         dataTestid="side-menu-item-logout"

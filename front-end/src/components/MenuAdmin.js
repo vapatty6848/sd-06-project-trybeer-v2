@@ -33,6 +33,13 @@ function MenuAdmin() {
         btnDisable={ false }
       />
       <Button
+        className="btn-login btn btn-success width-med margin-med"
+        title="Conversas"
+        dataTestid="side-menu-item-chat"
+        handleClick={ () => history.push('/admin/chats') }
+        btnDisable={ false }
+      />
+      <Button
         className="btn-login btn btn-dark width-med margin-med align-bot"
         title="Sair"
         dataTestid="side-menu-item-logout"
