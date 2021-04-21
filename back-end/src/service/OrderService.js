@@ -1,4 +1,4 @@
-const { sales, products, salesProducts } = require('../database/models');
+const { sales, products } = require('../database/models');
 
 const getOrdersById = async (id) => {
  // console.log('id', id);

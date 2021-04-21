@@ -11,9 +11,8 @@ const OrdersDetailsCard = ({ order, id }) => {
     return formatDate;
   };
 
-  const handleTotalValue = (price, quantity) => {
-    console.log(price,quantity)
-    const totalValue = Number(price) * quantity;
+  const handleTotalValue = (price, quantity) => {    
+    const totalValue = price * quantity;
     const formatValue = totalValue.toFixed(2).replace('.', ',');
     return formatValue;
   };
