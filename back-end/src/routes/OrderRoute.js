@@ -10,14 +10,14 @@ OrderRoute.get('/admin',
   OrderController.getAllOrders);
 
 OrderRoute.get('/:id',
-  authorization,
+authorization,
   OrderController.getOrdersById);
 
 OrderRoute.put('/:id',
   OrderController.updateStatusOrder);
 
 OrderRoute.get('/',
-  authorization,
+ authorization,
   OrderController.getAllOrdersByUser);
 
 module.exports = OrderRoute;

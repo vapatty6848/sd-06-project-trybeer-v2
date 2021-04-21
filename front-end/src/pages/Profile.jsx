@@ -37,8 +37,8 @@ function Profile({ history }) {
   return (
     <div>
       <MenuTop name="Meu perfil" />
-      <div className="coluna-left" />
-      <div className="main-content-orders">
+     
+      
         <div className="form-profile">
           <label className="label" htmlFor="name">
             Nome:
@@ -68,8 +68,7 @@ function Profile({ history }) {
             Salvar
           </button>
           { (updateName) && <span>Atualização concluída com sucesso</span> }
-        </div>
-      </div>
+        </div>      
     </div>
 
   );

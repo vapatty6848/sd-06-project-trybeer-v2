@@ -1,41 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function RenderOrder({ productDetail }) {
+function RenderOrder({ productDetail }) { 
   return (
     <div>
-      {productDetail.map(({ productQuantity, productName, productPrice }, index) => (
+      {productDetail  && productDetail.products.map((product, index) => (
         <div
           key={ index }
         >
           <span
             data-testid={ `${index}-product-qtd` }
           >
-            { `${productQuantity} - ` }
+            { `${product.salesProducts.quantity} - ` }
           </span>
           <span
             data-testid={ `${index}-product-name` }
           >
-            { productName }
+            { product.name }
           </span>
           <span
             data-testid={ `${index}-product-total-value` }
           >
-            {`R$ ${(productPrice * productQuantity)
+            {`R$ ${(product.price * product.salesProducts.quantity)
               .toFixed(2).replace('.', ',')}`}
           </span>
           <span
             data-testid={ `${index}-order-unit-price` }
           >
-            {`(R$ ${productPrice.replace('.', ',')})`}
+           {`(R$ ${product.price.replace('.', ',')})`}
           </span>
         </div>
       ))}
       <p
         data-testid="order-total-value"
       >
-        {`Total: R$ ${productDetail[0]
-          ? productDetail[0].totalPrice.replace('.', ',')
+        {`Total: R$ ${productDetail
+          ? productDetail.totalPrice.replace('.', ',')
           : true}`}
       </p>
     </div>

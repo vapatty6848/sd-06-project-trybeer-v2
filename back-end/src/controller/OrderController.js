@@ -6,7 +6,6 @@ const getOrdersById = rescue(async (req, res) => {
   const { id } = req.params;
 
   const orders = await OrderService.getOrdersById(id);
-
   return res
     .status(200)
     .json(orders);
@@ -24,7 +23,7 @@ const updateStatusOrder = rescue(async (req, res) => {
 });
 
 const getAllOrders = rescue(async (_req, res) => {
-  const [orders] = await OrderService.getAllOrders();
+  const orders = await OrderService.getAllOrders();
 
   return res
     .status(200)

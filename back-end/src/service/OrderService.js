@@ -1,11 +1,14 @@
-const { sales } = require('../database/models');
+const { sales, products, salesProducts } = require('../database/models');
 
 const getOrdersById = async (id) => {
-  console.log("id", id);
-  const sale = await sales.findByPk(id);
-console.log('sale', sale.dataValues);
-return [sale.dataValues];
-}
+ // console.log('id', id);
+  const sale = await sales.findAll({
+    where: { id },
+    include: [{ model: products, as: 'products' }],
+  });
+
+return sale;
+};
 
 const updateStatusOrder = async (status, id) => {
   const updatedSale = await sales.update({ status }, { where: { id } });
@@ -15,7 +18,7 @@ const updateStatusOrder = async (status, id) => {
 
 const getAllOrders = async () => sales.findAll();
 
-const getAllOrdersByUser = async (id) => sales.findAll({ where: { id } });
+const getAllOrdersByUser = async (id) => sales.findAll({ where: { userId: id } });
 
 module.exports = {
   getAllOrdersByUser,

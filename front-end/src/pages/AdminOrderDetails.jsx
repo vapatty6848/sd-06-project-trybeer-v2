@@ -7,7 +7,7 @@ import RenderOrder from '../components/AdminOrderDetail/RenderOrder';
 function AdminOrderDetails({ match, history }) {
   const [productDetail, setProductDetail] = useState([]);
   const [status, setStatus] = useState('');
-  const [change, setChange] = useState(false);
+  const [change, setChange] = useState(true);
   const { params: { id } } = match;
 
   useEffect(() => {
@@ -18,22 +18,21 @@ function AdminOrderDetails({ match, history }) {
       if (response.message) history.push('/login');
       response.map((item) => setStatus(item.productStatus));
       setProductDetail(response);
+      setStatus(response[0].status);
+       if (response[0].status !== 'Entregue') setChange(false);
     };
     fetchProductDetails();
   }, [history, id]);
 
-  const handleClick = () => {
-    setStatus('Entregue');
-    setChange(true);
-  };
+  const fetchStatusOrder = async () => {
+    await api.updateStatusOrder('Entregue', id);        
+  }
 
-  useEffect(() => {
-    const fetchStatusOrder = async () => {
-      await api.updateStatusOrder(status, id);
-      if (status === 'Entregue') setChange(true);
-    };
+  const handleClick = () => {
+    setChange(true); 
+    setStatus('Entregue');
     fetchStatusOrder();
-  });
+  };
 
   return (
     <div>
@@ -46,7 +45,7 @@ function AdminOrderDetails({ match, history }) {
       >
         { status }
       </span>
-      <RenderOrder productDetail={ productDetail } />
+      <RenderOrder productDetail={ productDetail[0] } />
       <button
         type="button"
         hidden={ change }

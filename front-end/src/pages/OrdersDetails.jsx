@@ -14,6 +14,7 @@ const OrdersDetails = ({ match, history }) => {
     async function fetchOrderDetails() {
       const user = JSON.parse(localStorage.user);
       const response = await api.getOrdersById(user.token, id);
+      console.log(response)
       if (response.message) return history.push('/login');
       setOrderDetails(response);
     }
@@ -25,7 +26,7 @@ const OrdersDetails = ({ match, history }) => {
       <MenuTop name="Detalhes de Pedido" />
       <div className="main-content-orders">
         <OrdersDetailsCard
-          order={ orderDetails }
+          order={ orderDetails[0] }
           id={ id }
         />
       </div>

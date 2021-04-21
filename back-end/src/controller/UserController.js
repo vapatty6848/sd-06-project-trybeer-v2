@@ -19,7 +19,7 @@ const updateUser = rescue(async (req, res) => {
 
   return res
     .status(200)
-    .json(updated);
+    .json(updated.dataValues);
 });
 
 module.exports = {

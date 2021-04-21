@@ -6,13 +6,14 @@ import { FiPlus, FiMinus } from 'react-icons/fi';
 import '../../styles/products/ProductCard.css';
 
 const ProductCard = ({ product, index, plusItemCart, minusItemCart, handleQuantity }) => (
+  
   <div className="movie-card">
     <div>
       <img
         alt={ `Cerveja ${product.name}` }
         data-testid={ `${index}-product-img` }
         className="cardImage"
-        src={ product.url_image }
+        src={ product.urlImage }
       />
     </div>
     <div>

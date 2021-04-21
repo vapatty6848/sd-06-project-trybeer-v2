@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const OrdersDetailsCard = ({ order, id }) => {
+const OrdersDetailsCard = ({ order, id }) => { 
   const handleDate = (dateTime) => {
     const date = new Date(dateTime);
     const twoNumber = -2;
@@ -12,7 +12,8 @@ const OrdersDetailsCard = ({ order, id }) => {
   };
 
   const handleTotalValue = (price, quantity) => {
-    const totalValue = price * quantity;
+    console.log(price,quantity)
+    const totalValue = Number(price) * quantity;
     const formatValue = totalValue.toFixed(2).replace('.', ',');
     return formatValue;
   };
@@ -28,11 +29,11 @@ const OrdersDetailsCard = ({ order, id }) => {
         <div
           data-testid="order-date"
         >
-          { order[0] ? handleDate(order[0].saleDate) : true }
+          { order ? handleDate(order.saleDate) : true }
         </div>
       </div>
       <div>
-        { order ? order.map(({ productQuantity, productName, productPrice }, index) => (
+        { order ? order.products.map((product,index)=>(
           <div
             className="top-data"
             key={ index }
@@ -40,27 +41,28 @@ const OrdersDetailsCard = ({ order, id }) => {
             <div
               data-testid={ `${index}-product-qtd` }
             >
-              { productQuantity }
+              { product.salesProducts.quantity }
             </div>
             <div
               data-testid={ `${index}-product-name` }
             >
-              { productName }
+              { product.name }
             </div>
             <div
               data-testid={ `${index}-product-total-value` }
             >
-              { `R$ ${handleTotalValue(productPrice, productQuantity)} ` }
+              { `R$  ${handleTotalValue(product.price, product.salesProducts.quantity)}` }
             </div>
           </div>
-        ))
+          ))
+      
           : true }
         <div className="flex-end">
           <div
             data-testid="order-total-value"
           >
-            { order[0]
-              ? `Total: R$ ${order[0].totalPrice.replace('.', ',')}`
+            { order
+              ? `Total: R$ ${order.totalPrice.replace('.', ',')}`
               : true }
           </div>
         </div>

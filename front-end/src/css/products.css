@@ -44,7 +44,7 @@
 }
 
 .movie-list {
-  border: 0.6px solid rgb(212, 44, 2);
+  /* border: 0.6px solid rgb(212, 44, 2); */
 
   display: flex;
   flex-flow: row wrap;
@@ -160,7 +160,7 @@
 
 .main-content-orders {
   font-size: 25px;
-  padding-top: 40%;
+  padding-top: 5%;
   margin: auto;
   width: 80%;
   height: auto;
@@ -182,16 +182,16 @@
 }
 
 .coluna-left {
-  background-color: rgb(2, 250, 15);
-  border: 0.6px solid rgb(0, 235, 0);
+  
+  /* border: 0.6px solid rgb(0, 0, 0); */
   width: 10%;
   height: 1000px;
   float: left;
 }
 
 .coluna-rigth {
-  background-color: blue;
-  border: 0.6px solid rgb(0, 255, 0);
+ 
+
   width: 10%;
   height: 1000px;
   float: right;
