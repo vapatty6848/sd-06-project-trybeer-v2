@@ -1,6 +1,8 @@
 import React from 'react';
 
-import Input from '../../Components/Button';
+import Input from '../../Components/Input';
+import { FaStreetView } from 'react-icons/fa';
+import { AiOutlineFieldNumber } from 'react-icons/ai';
 
 import S from './styles';
 

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import moment from 'moment';
 
 import MenuTop from '../../Components/MenuTop';
 import SideBar from '../../Components/SideBar';
@@ -36,6 +37,8 @@ const OrderDetails = () => {
 
       <SideBar />
       <S.ContainerOrder stateSideBar={ stateSideBar }>
+      {console.log(orders)}
+
         {orders && (
           (orders.products.length > 0)
             ? (
@@ -45,7 +48,7 @@ const OrderDetails = () => {
                     {`Pedido ${id} `}
                   </h2>
                   <span data-testid="order-date">
-                    {(orders.date).replace('/2021', '')}
+                    {(moment(orders.saleDate).format('DD/MM/YYYY'))}
                   </span>
                 </S.TopInfos>
 

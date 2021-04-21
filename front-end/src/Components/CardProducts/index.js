@@ -68,7 +68,7 @@ const handleCounter = (
 };
 
 const CardProducts = ({ product }) => {
-  const { id, price, name, url_image: urlImage } = product;
+  const { id, price, name, urlImage } = product;
 
   const image = urlImage.replace('/images', '');
 
@@ -147,7 +147,7 @@ CardProducts.propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
-    url_image: PropTypes.string.isRequired,
+    urlImage: PropTypes.string.isRequired,
   }).isRequired,
 };
 

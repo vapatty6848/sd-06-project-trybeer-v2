@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { FiMail, BiUser } from 'react-icons';
+import { BiUser } from 'react-icons/bi';
+import { FiMail } from 'react-icons/fi';
 
 import S from './styles';
 

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { GlobalContext } from '../../Contexts/GlobalContext';
+import moment from 'moment';
 
 import MenuTop from '../../Components/MenuTop';
 import SideBar from '../../Components/SideBar';
@@ -56,14 +57,14 @@ const MyOrders = () => {
                     className="order-number"
                     data-testid={ `${index}-order-number` }
                   >
-                    {`Pedido ${order.id}`}
+                    { `Pedido ${order.id}` }
                   </span>
                   <span data-testid={ `${index}-order-date` }>
-                    {order.date}
+                    { moment(order.saleDate).format('DD/MM/YYYY') }
                   </span>
                 </div>
                 <p data-testid={ `${index}-order-total-value` }>
-                  {`R$ ${Number(order.valueTotal).toFixed(2).replace('.', ',')}`}
+                  { `R$ ${Number(order.totalPrice).toFixed(2).replace('.', ',')}` }
                 </p>
               </S.CardOrder>
             ))
