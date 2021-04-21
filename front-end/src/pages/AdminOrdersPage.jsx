@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AdminSideBarComponent, AdminOrdersCardsComponent } from '../components';
 import BeersAppContext from '../context/BeersAppContext';
+import socket from '../Socket.io/socket';
 import '../style/AdminOrder.css';
 
 function AdminOrdersPage() {
@@ -10,6 +11,18 @@ function AdminOrdersPage() {
   } = useContext(BeersAppContext);
 
   const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    socket.on('statusUpdate', ({ id, status }) => {
+      const AdminOrdersStatusUpdate = orders
+        .map((element) => {
+          if (element.id === parseInt(id)) return { ...element, status };
+          return element;
+        });
+      setOrders(AdminOrdersStatusUpdate);
+    });
+    return () => socket.off('statusUpdate', () => console.log('canal statusUpdate desconectado'));
+  }, [orders]);
 
   useEffect(() => {
     fetch('http://localhost:3001/admin/orders', {

@@ -1,6 +1,13 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+
+const app = express();
+
+const httpServer = require('http').createServer(app);
+
+require('./Socket.io/connectionSocket')(httpServer);
 
 const LoginController = require('./controllers/LoginController');
 const RegisterController = require('./controllers/RegisterController');
@@ -12,10 +19,6 @@ const OrdersController = require('./controllers/OrdersController');
 const AdminOrdersController = require('./controllers/AdminOrdersController');
 
 const { products } = require('./models');
-
-require('dotenv').config();
-
-const app = express();
 
 const PORT = 3001;
 
@@ -63,4 +66,6 @@ app.use((err, _req, res, _next) => {
   res.status(500).json({ erro: 'erro interno' });
 });
 
-app.listen(PORT, () => console.log('running port', PORT));
+httpServer.listen(PORT, () => console.log('running port', PORT));
+
+// app.listen(PORT, () => console.log('running port', PORT));

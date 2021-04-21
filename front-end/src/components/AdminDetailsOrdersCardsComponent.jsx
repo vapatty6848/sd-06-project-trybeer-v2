@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import formatPrice from '../service/formatPrice';
 import '../style/OrdersDetailsAdmin.css';
 
 function AdminDetailsOrdersCardsComponent({ element, index }) {
-  const commaAmount = (price) => `${price}`.replace('.', ',');
   const { productPrice, quantity, name, price } = element;
   return (
     <div className="admin_orders_details_list">
@@ -12,10 +12,10 @@ function AdminDetailsOrdersCardsComponent({ element, index }) {
           <td data-testid={ `${index}-product-qtd` }>{ quantity }</td>
           <td data-testid={ `${index}-product-name` }>{ name }</td>
           <td data-testid={ `${index}-product-total-value` }>
-            { `R$ ${commaAmount(productPrice)}` }
+            { `R$ ${formatPrice(productPrice)}` }
           </td>
           <td data-testid={ `${index}-order-unit-price` }>
-            { `(R$ ${commaAmount(price)})` }
+            { `(R$ ${formatPrice(price)})` }
           </td>
         </tbody>
       </table>

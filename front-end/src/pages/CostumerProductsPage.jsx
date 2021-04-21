@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { HeaderComponent, ProductsCardsComponent } from '../components';
+import formatPrice from '../service/formatPrice';
 import BeersAppContext from '../context/BeersAppContext';
 
 import '../style/CostumerProducts.css';
@@ -34,8 +35,6 @@ function CostumerProductsPage() {
 
   const clickRedirect = () => history.push('/checkout');
 
-  const commaAmount = `${amount.toFixed(2)}`.replace('.', ',');
-
   return (
     <div className="product-page">
       <HeaderComponent text="TryBeer" id="top-title" />
@@ -63,7 +62,7 @@ function CostumerProductsPage() {
             data-testid="checkout-bottom-btn-value"
             className="value-product"
           >
-            { `R$ ${commaAmount}` }
+            { `R$ ${formatPrice(amount)}` }
           </span>
         </button>
       </div>

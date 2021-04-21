@@ -28,6 +28,14 @@ function AdminSideBarComponent() {
       </button>
       <button
         type="button"
+        data-testid="side-menu-item-chat"
+        onClick={ () => history.push('/admin/chats') }
+        className="bttn_sidebar_admin_bottom"
+      >
+        Conversas
+      </button>
+      <button
+        type="button"
         data-testid="side-menu-item-logout"
         onClick={ () => {
           setUser({});

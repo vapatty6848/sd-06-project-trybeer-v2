@@ -6,6 +6,10 @@ import {
   AdminSideBarComponent,
 } from '../components';
 import '../style/AdminOrderDetails.css';
+import fetchApiJsonBody from '../service/fetchApi';
+import statusConvert from '../service/statusConvert';
+import formatPrice from '../service/formatPrice';
+import socket from '../Socket.io/socket';
 
 function AdminOrdersDetailsPage() {
   const { id } = useParams();
@@ -15,6 +19,15 @@ function AdminOrdersDetailsPage() {
 
   const [AdminOrders, setAdminOrders] = useState([]);
   const [messageError, setMessageError] = useState('');
+ 
+  useEffect(() => {
+    socket.on('statusUpdate', ({ status }) => {
+      const AdminOrdersStatusUpdate = AdminOrders
+        .map((element) => ({ ...element, status }));
+      setAdminOrders(AdminOrdersStatusUpdate);
+    });
+    return () => socket.off('statusUpdate', () => console.log('canal statusUpdate desconectado'));
+  }, [AdminOrders]);
 
   useEffect(() => {
     fetch(`http://localhost:3001/admin/orders/${id}`, {
@@ -36,14 +49,6 @@ function AdminOrdersDetailsPage() {
       return price;
     }, 0).toFixed(2);
 
-  const statusConvert = (status) => {
-    switch (status) {
-    case 'PENDING': return 'Pendente';
-    case 'DELIVERED': return 'Entregue';
-    default: return '';
-    }
-  };
-
   const statusOrder = () => {
     if (AdminOrders.length !== 0) {
       const { status } = AdminOrders[0];
@@ -52,18 +57,18 @@ function AdminOrdersDetailsPage() {
     return '';
   };
 
-  const updateStatus = async () => {
-    const returnUpdate = await fetch(`http://localhost:3001/admin/orders/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        authorization: user.token,
-      },
-    }).then((response) => response.json());
+  const updateStatus = async ({ target: { name: status } }) => {
+    socket.emit('statusUpdate', { id, status});
+    const returnUpdate = await fetchApiJsonBody(
+      `/admin/orders/${id}`,
+      { status },
+      'PUT',
+      user.token,
+    );
     if (returnUpdate.err) return setMessageError(returnUpdate.err);
     setMessageError('');
     const AdminOrdersStatusUpdate = AdminOrders
-      .map((element) => ({ ...element, status: 'DELIVERED' }));
+      .map((element) => ({ ...element, status }));
     setAdminOrders(AdminOrdersStatusUpdate);
   };
 
@@ -95,15 +100,31 @@ function AdminOrdersDetailsPage() {
           ))}
         </div>
         <div className="admin_orders_details_price">
-          <p data-testid="order-total-value">{ `R$ ${totalPrice.replace('.', ',')}` }</p>
+          <p data-testid="order-total-value">{ `R$ ${formatPrice(totalPrice)}` }</p>
         </div>
       </div>
       <div className="admin_orders_details_button">
         {statusOrder() === 'Pendente' && (
           <button
             type="button"
+            data-testid="mark-as-prepared-btn"
+            onClick={ updateStatus }
+            name="PREPARING"
+          >
+            Preparar Pedido
+          </button>
+        )}
+      </div>
+      <div className="admin_orders_details_button">
+        { (
+            statusOrder() === 'Pendente'
+            || statusOrder() === 'Preparando'
+          ) && (
+          <button
+            type="button"
             data-testid="mark-as-delivered-btn"
             onClick={ updateStatus }
+            name="DELIVERED"
           >
             Marcar como entregue
           </button>
