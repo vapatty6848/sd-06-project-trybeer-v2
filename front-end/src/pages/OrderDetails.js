@@ -39,7 +39,7 @@ function OrderDetails(props) {
           <div>
             <TopMenu titleMenu="Detalhes de Pedido" />
             <div className="content-panel">
-            <div data-testid="order-number">
+              <div data-testid="order-number">
                 { `Pedido ${state.id}` }
               </div>
               <div data-testid="order-date">

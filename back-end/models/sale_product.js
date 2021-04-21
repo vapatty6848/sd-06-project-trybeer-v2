@@ -1,5 +1,5 @@
 const SaleProduct = (sequelize, DataTypes) => {
-  const saleProduct = sequelize.define('sale_product', {
+  const saleProduct = sequelize.define('saleProduct', {
     quantity: DataTypes.INTEGER,
   }, { timestamps: false });
   saleProduct.associate = (models) => {

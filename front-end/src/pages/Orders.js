@@ -14,7 +14,6 @@ function Orders({ history }) {
 
   const fetchOrders = async () => {
     const allOrders = await verifyToken(`orders/${user.id}`, user, history);
-    console.log(allOrders)
     setOrders(allOrders);
   };
 

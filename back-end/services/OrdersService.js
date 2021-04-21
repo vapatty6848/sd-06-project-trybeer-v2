@@ -1,4 +1,4 @@
-const { sale, sale_product, product } = require('../models');
+const { sale, saleProduct, product } = require('../models');
 
 const createOrderService = async (requestSale) => {
   const {
@@ -17,7 +17,7 @@ const createOrderService = async (requestSale) => {
   return newOrder;
 };
 
-const createSaleProduct = (productId, quantity, saleId) => sale_product
+const createSaleProduct = (productId, quantity, saleId) => saleProduct
   .create({ productId, quantity, saleId });
 
 const createOrderProductService = async ({ cart, saleId }) => {
@@ -32,7 +32,7 @@ const getById = async (id) => {
   where: { id },
   });
   const products = specificSale[0].products.map((item) => {
-    const productsAndQt = { ...item.dataValues, quantity: item.sale_product.quantity };
+    const productsAndQt = { ...item.dataValues, quantity: item.saleProduct.quantity };
     const { quantity, name, price } = productsAndQt;
     return { quantity, name, price };
   });
@@ -54,8 +54,8 @@ const getByIdAdmin = async (id) => {
   where: { id },
   });
   const products = specificSale[0].products.map((item) => {
-    const productsAndQt = { ...item.dataValues, quantity: item.sale_product.quantity };
-    const { sale_product: saleProduct, urlImage, ...importantData } = productsAndQt;
+    const productsAndQt = { ...item.dataValues, quantity: item.saleProduct.quantity };
+    const { saleProduct: saleProducts, urlImage, ...importantData } = productsAndQt;
     return importantData;
   });
   const data = {
