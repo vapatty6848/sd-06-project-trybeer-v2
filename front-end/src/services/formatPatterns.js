@@ -1,11 +1,11 @@
 import { getUserInfo } from './localStorage';
 
-export const formatDate = (date) => {
-  const dateToFormat = new Date(date);
+export const chatTime = () => {
+  const dateToFormat = new Date();
   const formatedDate = new Intl.DateTimeFormat('pt-BR', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
   }).format(dateToFormat);
 
   return formatedDate;

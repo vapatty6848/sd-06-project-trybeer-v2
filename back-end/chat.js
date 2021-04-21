@@ -14,17 +14,20 @@ const chat = (http) => {
   const io = socketIO(http, configCors);
 
   return io.on('connection', (socket) => {
-    socket.emit('server-to-user-connection', { text: 'You are connected!', userId: 'server' });
+    // socket.emit('server-to-user-connection', { text: 'You are connected!', userId: 'server' });
 
     socket.on('user-to-server-connection', async (obj) => {
-      const { userId } = obj;
-      const conversation = await service.findOrCreate(userId);
-      socket.emit('server-to-user-connection', { messages: conversation.messages });
+      const { userId, email } = obj;
+      const conversation = await service.findOrCreate(userId, email);
+      console.log(conversation);
+      if (conversation.length) {
+        socket.emit('server-to-user-connection', conversation);
+      }
     });
 
     socket.on('user-to-server', async (obj) => {
-      const { userId, text } = obj;
-      await service.writeMessage({ userId, text });
+      const { userId, text, email } = obj;
+      await service.writeMessage({ userId, text, email });
       socket.emit('server-to-user', obj);
     });
 

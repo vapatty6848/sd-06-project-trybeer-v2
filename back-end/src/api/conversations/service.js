@@ -1,24 +1,33 @@
 const model = require('./model');
 
-const findOrCreate = async (userId) => {
+const findOrCreate = async (userId, email) => {
   const conversation = await model.findOne('userId', userId);
 
   if (!conversation) {
-    await model.create(userId);
-    return { userId, messages: [] };
+    console.log(userId, email);
+    await model.create(userId, email);
+    return { userId, messages: [], email };
   }
 
   return conversation.messages;
 };
 
 const writeMessage = async ({ userId, text }) => {
-  const conversation = await model.findOne('userId', userId);
+  const conversation = await model.findOne('userId', userId)
+    .then((data) => {
+      const currentMessage = data.messages;
+      currentMessage.push({ currMessage: text.currMessage, time: text.time });
+      return currentMessage;
+    });
 
-  const currentMessages = conversation.messages;
-  conversation.messages = currentMessages.push(text);
+    const update = await model.update(userId, conversation);
 
-  conversation.save();
-  return conversation.messages;
+  // if (conversation) {
+  //   console.log(text);
+  //   conversation.messages = [text];
+  //   return conversation.messages;
+  // }
+  return update;
 };
 
 module.exports = {
