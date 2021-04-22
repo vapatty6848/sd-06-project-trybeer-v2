@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import { PropTypes } from 'prop-types';
 import AppContext from '../context/app.context';
 
 import OrderProduct from './OrderProduct';
@@ -31,7 +30,7 @@ export default function OrderDetails() {
       }
     };
     if (!order) fetchOrder();
-  }, [setOrder, params, token, history]);
+  }, [order, setOrder, params, token, history]);
 
   if (!order || !products) return 'Loading order...';
 
@@ -51,11 +50,3 @@ export default function OrderDetails() {
     </section>
   );
 }
-
-OrderDetails.propTypes = {
-  order: PropTypes.objectOf(PropTypes.any),
-};
-
-OrderDetails.defaultProps = {
-  order: {},
-};
