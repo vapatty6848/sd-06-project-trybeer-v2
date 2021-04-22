@@ -19,14 +19,15 @@ function AdminOrdersDetailsPage() {
 
   const [AdminOrders, setAdminOrders] = useState([]);
   const [messageError, setMessageError] = useState('');
- 
+
   useEffect(() => {
     socket.on('statusUpdate', ({ status }) => {
       const AdminOrdersStatusUpdate = AdminOrders
         .map((element) => ({ ...element, status }));
       setAdminOrders(AdminOrdersStatusUpdate);
     });
-    return () => socket.off('statusUpdate', () => console.log('canal statusUpdate desconectado'));
+    return () => socket
+      .off('statusUpdate', () => console.log('canal statusUpdate desconectado'));
   }, [AdminOrders]);
 
   useEffect(() => {
@@ -58,7 +59,7 @@ function AdminOrdersDetailsPage() {
   };
 
   const updateStatus = async ({ target: { name: status } }) => {
-    socket.emit('statusUpdate', { id, status});
+    socket.emit('statusUpdate', { id, status });
     const returnUpdate = await fetchApiJsonBody(
       `/admin/orders/${id}`,
       { status },
@@ -117,9 +118,9 @@ function AdminOrdersDetailsPage() {
       </div>
       <div className="admin_orders_details_button">
         { (
-            statusOrder() === 'Pendente'
+          statusOrder() === 'Pendente'
             || statusOrder() === 'Preparando'
-          ) && (
+        ) && (
           <button
             type="button"
             data-testid="mark-as-delivered-btn"

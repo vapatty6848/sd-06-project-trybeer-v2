@@ -12,8 +12,15 @@ const dataValidate = (deliveryNumber, deliveryAddress, salesProductsParam, res) 
   if (errorSalesProducts) objErr('Sales Products can not be empty', BAD_REQUEST);
 };
 
+const funcTotalPrice = (salesProductsParam) => salesProductsParam.reduce(async (total, element) => {
+  const productId = parseInt(element[0], 10);
+  const productQuantity = parseInt(element[1], 10);
+  const { dataValues: { price } } = await products.findByPk(productId);
+  const unityPrice = price * productQuantity;
+  return (Math.trunc(((await total) + unityPrice) * 100) / 100);
+}, 0);
+
 const saleStatus = 'PENDING';
-// eslint-disable-next-line max-lines-per-function
 const CheckoutServices = async (req, res) => {
   const { authorization } = req.headers;
   const payload = tokenValidation(authorization);
@@ -22,35 +29,17 @@ const CheckoutServices = async (req, res) => {
 
   dataValidate(deliveryNumber, deliveryAddress, salesProductsParam, res);
 
-  const totalPrice = await salesProductsParam.reduce(async (total, element) => {
-    const productId = parseInt(element[0], 10);
-    const productQuantity = parseInt(element[1], 10);
-    const { dataValues: { price } } = await products.findByPk(productId);
-    const unityPrice = price * productQuantity;
-    return (Math.trunc(((await total) + unityPrice) * 100) / 100);
-  }, 0);
+  const totalPrice = await funcTotalPrice(salesProductsParam);
 
-  const data = {
-    userId: id,
-    totalPrice,
-    deliveryAddress, 
-    deliveryNumber,
-    status: saleStatus,
-  };
+  const data = { userId: id, totalPrice, deliveryAddress, deliveryNumber, status: saleStatus };
 
   const { dataValues: saleTable } = await sales.create(data);
 
   const newSalesProducts = [];
-  salesProductsParam.forEach((element) => { 
-    newSalesProducts.push([saleTable.id, ...element]);
-  });
+  salesProductsParam.forEach((element) => newSalesProducts.push([saleTable.id, ...element]));
 
   newSalesProducts.forEach(async ([saleId, productId, quantity]) => {
-    await salesProducts.create({
-      saleId,
-      productId,
-      quantity,
-    });
+    await salesProducts.create({ saleId, productId, quantity });
   });
 
   return res.status(OK).json({ ...saleTable, salesProducts: salesProductsParam });

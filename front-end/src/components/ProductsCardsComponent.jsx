@@ -12,7 +12,7 @@ function ProductsCardsComponent({ element, index }) {
     setAmount,
   } = useContext(BeersAppContext);
 
-  const { name, urlImage: urlImage, price, id } = element;
+  const { name, urlImage, price, id } = element;
 
   const storageInitialState = () => {
     const objQuantity = productQuantity

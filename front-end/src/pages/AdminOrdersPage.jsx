@@ -16,12 +16,15 @@ function AdminOrdersPage() {
     socket.on('statusUpdate', ({ id, status }) => {
       const AdminOrdersStatusUpdate = orders
         .map((element) => {
-          if (element.id === parseInt(id)) return { ...element, status };
+          const elementId = parseInt(element.id, 10);
+          const orderId = parseInt(id, 10);
+          if (elementId === orderId) return { ...element, status };
           return element;
         });
       setOrders(AdminOrdersStatusUpdate);
     });
-    return () => socket.off('statusUpdate', () => console.log('canal statusUpdate desconectado'));
+    return () => socket
+      .off('statusUpdate', () => console.log('canal statusUpdate desconectado'));
   }, [orders]);
 
   useEffect(() => {

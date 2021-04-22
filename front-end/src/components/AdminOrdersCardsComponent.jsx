@@ -7,10 +7,10 @@ import '../style/OrderCardsAdmin.css';
 function AdminOrdersCardsComponent({ element, index }) {
   const {
     id,
-    totalPrice: totalPrice,
+    totalPrice,
     status,
-    deliveryAddress: deliveryAddress,
-    deliveryNumber: deliveryNumber,
+    deliveryAddress,
+    deliveryNumber,
   } = element;
 
   return (
