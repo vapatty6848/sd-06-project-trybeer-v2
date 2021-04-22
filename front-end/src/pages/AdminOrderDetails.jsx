@@ -8,6 +8,7 @@ function AdminOrderDetails({ match, history }) {
   const [productDetail, setProductDetail] = useState([]);
   const [status, setStatus] = useState('');
   const [change, setChange] = useState(true);
+  const [prepar, setPrepar] = useState(true);
   const { params: { id } } = match;
 
   useEffect(() => {
@@ -20,18 +21,25 @@ function AdminOrderDetails({ match, history }) {
       setProductDetail(response);
       setStatus(response[0].status);
       if (response[0].status !== 'Entregue') setChange(false);
+      if (response[0].status !== 'Preparando') setPrepar(false);
     };
     fetchProductDetails();
   }, [history, id]);
 
-  const fetchStatusOrder = async () => {
-    await api.updateStatusOrder('Entregue', id);
+  const fetchStatusOrder = async (sts) => {
+    await api.updateStatusOrder(sts, id);
   };
 
   const handleClick = () => {
     setChange(true);
     setStatus('Entregue');
-    fetchStatusOrder();
+    fetchStatusOrder('Entregue');
+  };
+
+  const handlePrepar = () => {
+    setPrepar(true);
+    setStatus('Preparando');
+    fetchStatusOrder('Preparando');
   };
 
   return (
@@ -46,6 +54,14 @@ function AdminOrderDetails({ match, history }) {
         { status }
       </span>
       <RenderOrder productDetail={ productDetail[0] } />
+      <button
+        type="button"
+        hidden={ prepar }
+        onClick={ handlePrepar }
+        data-testid="mark-as-prepared-btn"
+      >
+        Preparar pedido
+      </button>
       <button
         type="button"
         hidden={ change }
