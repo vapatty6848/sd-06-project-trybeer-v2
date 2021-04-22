@@ -6,9 +6,20 @@ const statusUpdate = (socket) => {
   });
 };
 
-const messageProcess = (socket) => {
-  socket.on('message', (message) => {
+const messageProcess = (socket, io) => {
+  socket.on('message', ({ message, email }) => {
     console.log(message);
+    const date = new Date();
+    const five = 5;
+    const hour = date.toLocaleTimeString().substring(0, five);
+    io.to(email).emit('message', { message, email, hour });
+  });
+};
+
+const rootRoom = (socket) => {
+  // para escutar a sala
+  socket.on('openRoom', (email) => {
+    socket.join(email);
   });
 };
 
@@ -30,7 +41,8 @@ module.exports = (httpServer) => {
   io.on('connection', async (socket) => {
     console.log('1 connection foi feita no back');
     statusUpdate(socket);
-    messageProcess(socket);
+    messageProcess(socket, io);
     onDisconnect(socket);
+    rootRoom(socket);
   });
 };
