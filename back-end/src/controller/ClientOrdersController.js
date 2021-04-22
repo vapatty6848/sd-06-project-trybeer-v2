@@ -27,9 +27,9 @@ router.get('/:id', rescue(async (req, res) => {
   try {
     const { id } = req.params;
 
-    const orders = await sales.findOne(
-      { where: { id } },
+    const dataValues = await sales.findAll(
       {
+        where: { id },
         include: [
           {
             model: products,
@@ -40,9 +40,7 @@ router.get('/:id', rescue(async (req, res) => {
       },
     );
 
-    console.log(orders);
-
-    return res.status(OK).json(orders);
+    return res.status(OK).json(dataValues);
   } catch (error) {
     return res.status(BAD_REQUEST).json({ message: 'No orders found' });
   }

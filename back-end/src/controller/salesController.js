@@ -1,11 +1,11 @@
 const { Router } = require('express');
 const rescue = require('express-rescue');
-const { sales, products } = require('../../models');
+const { sales } = require('../../models');
 
 const router = new Router();
 
 const OK = 200;
-const BAD_REQUEST = 404;
+// const BAD_REQUEST = 404;
 
 router.get('/', rescue(async (_req, res) => {
   const sale = await sales.findAll();
@@ -16,18 +16,19 @@ router.get('/', rescue(async (_req, res) => {
 // router.get('/:id', rescue(async (req, res) => {
 //   try {
 //     const { id } = req.params;
-//     const orderInfo = await sales.findByPK(
-//       id,
+
+//     const [{ dataValues }] = await sales.findAll(
 //       {
-//         include: {
-//           model: products,
-//           as: 'products',
-//           through: { attributes: ['quantity'], as: 'sale' },
-//         },
-//       }
+//         where: { id },
+//         include: [
+//           { model: products, as: 'products' },
+//         ],
+//       },
 //     );
 
-//     return res.status(OK).json(orderInfo);
+//     console.log(dataValues)
+
+//     return res.status(OK).json(dataValues);
 //   } catch (error) {
 //     return res.status(BAD_REQUEST).json({ message: 'No orders found' });
 //   }
