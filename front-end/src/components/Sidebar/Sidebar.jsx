@@ -19,6 +19,11 @@ const clientOptions = [
     testId: 'side-menu-item-my-profile',
   },
   {
+    name: 'Conversar com a loja',
+    redirect: '/chat',
+    testId: 'side-menu-chat',
+  },
+  {
     name: 'Sair',
     redirect: '/login',
     testId: 'side-menu-item-logout',
@@ -35,6 +40,11 @@ const adminOptions = [
     name: 'Perfil',
     redirect: '/admin/profile',
     testId: 'side-menu-item-profile',
+  },
+  {
+    name: 'Conversas',
+    redirect: '/admin/chats',
+    testId: 'side-menu-item-chat',
   },
   {
     name: 'Sair',
