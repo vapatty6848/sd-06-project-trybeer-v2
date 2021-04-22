@@ -22,7 +22,7 @@ function OrderDetails() {
   return (
     <>
       <h1 data-testid="top-title"> Detalhe do pedido</h1>
-      {orderDetails && <OrderDetailsCard orderDetails={ orderDetails } /> }
+      {orderDetails.length > 0 && <OrderDetailsCard orderDetails={ orderDetails } /> }
     </>
   );
 }

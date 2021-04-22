@@ -7,16 +7,16 @@ function ProductCardAdm({ product }) {
     <div>
       <p>
         <span data-testid={ `${product.id - 1}-product-qtd` }>
-          {`${product.productQuantity} - `}
+          {`${product.quantity} - `}
         </span>
         <span data-testid={ `${product.id - 1}-product-name` }>
-          {`${product.productName}`}
+          {`${product.name}`}
         </span>
         <span data-testid={ `${product.id - 1}-product-total-value` }>
-          {currencyFormat(Number(product.productPrice * product.productQuantity))}
+          {currencyFormat(Number(product.totalPrice))}
         </span>
         <span data-testid={ `${product.id - 1}-order-unit-price` }>
-          {`(${currencyFormat(Number(product.productPrice))})`}
+          {`(${currencyFormat(Number(product.price))})`}
         </span>
       </p>
     </div>

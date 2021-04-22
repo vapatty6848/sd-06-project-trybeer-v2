@@ -8,13 +8,13 @@ function OrderDetailsCard({ orderDetails }) {
   const [update, setUpdate] = useState(orderDetails[0]);
   let visible = true;
 
-  if (orderDetails[0] && orderDetails[0].statusSale === 'Entregue') {
+  if (orderDetails[0] && orderDetails[0].status === 'Entregue') {
     console.log('Já estava entregue');
     visible = false;
   }
   if (update && update.status === 'Entregue') {
     console.log('mudou para entregue');
-    orderDetails[0].statusSale = update.status;
+    orderDetails[0].status = update.status;
     visible = false;
   }
 
@@ -23,20 +23,20 @@ function OrderDetailsCard({ orderDetails }) {
 
       <div>
         <div>
-          <span data-testid="order-number">{`Pedido ${orderDetails[0].id}`}</span>
-          <span data-testid="order-status">{` - ${orderDetails[0].statusSale}`}</span>
+          <span data-testid="order-number">{`Pedido ${orderDetails[0].saleId}`}</span>
+          <span data-testid="order-status">{` - ${orderDetails[0].status}`}</span>
         </div>
         <div>
           {orderDetails.map(
             (product) => (<ProductCardAdm
               product={ product }
-              key={ product.productName }
+              key={ product.name }
             />),
           )}
           <p data-testid="order-total-value">
             total do pedido:
             {' '}
-            {currencyFormat(Number(orderDetails[0].saleTotal))}
+            {currencyFormat(Number(orderDetails[0].totalPrice))}
             {' '}
           </p>
           <hr />
