@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const rescue = require('express-rescue');
 const multer = require('multer');
-const { Products } = require('../../models');
+const { products } = require('../../models');
 
 const router = new Router();
 
@@ -19,7 +19,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 router.get('/', rescue(async (_req, res) => {
-  const products = await Products.findAll();
+  const products = await products.findAll();
 
   return res.status(OK).json(products);
 }));
@@ -29,7 +29,7 @@ router.post('/new', upload.single('image'), rescue(async (req, res) => {
   const { filename } = req.file;
   const urlImage = `http://localhost:3001/images/${filename}`;
 
-  await Products.create({ name, price, urlImage });
+  await products.create({ name, price, urlImage });
 
   return res.status(OK).json({ message: 'Produto criado com sucesso' });
 }));

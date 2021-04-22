@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { Users } = require('../../models');
+const { users } = require('../../models');
 const createToken = require('../authentication/createToken');
 
 const router = new Router();
@@ -10,7 +10,8 @@ const BAD_REQUEST = 404;
 router.post('/', async (req, res) => {
   try {
     const user = req.body;
-    const { role, email, name, password } = await Users.findOne({ where: {
+
+    const { role, email, name, password } = await users.findOne({ where: {
       email: user.email,
     } });
 

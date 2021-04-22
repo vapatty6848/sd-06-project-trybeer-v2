@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const rescue = require('express-rescue');
 const OrdersService = require('../service/OrdersService');
-const { Users, Sales } = require('../../models');
+const { users, sales } = require('../../models');
 
 const router = new Router();
 
@@ -11,11 +11,11 @@ const BAD_REQUEST = 404;
 router.post('/', rescue(async (req, res) => {
   try {
     const user = req.body;
-    const { id: userId } = await Users.findOne({ where: {
+    const { id: userId } = await users.findOne({ where: {
       email: user.email,
     } });
 
-    const orders = await Sales.findAll({ where: { userId } });
+    const orders = await sales.findAll({ where: { userId } });
 
     return res.status(OK).json(orders);
   } catch (error) {
