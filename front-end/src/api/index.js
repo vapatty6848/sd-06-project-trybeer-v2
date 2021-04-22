@@ -92,8 +92,22 @@ async function getSalesProductsBySaleId(setSaleDetail, saleId) {
   await axios.get(`/sales/products/${saleId}`, {
     headers: {
       authorization: token,
-    // } }).then((response) => console.log(response.data[0]));
-    } }).then((response) => setSaleDetail(response.data[0]));
+    // } }).then((response) => console.log(response.data[0].products[0].salesProduct.saleId, response.data[0].status, response.data[0].totalPrice, response.data[0].products));
+    } }).then((response) => {
+      const data = {
+        saleId: response.data[0].products[0].salesProduct.saleId,
+        saleStatus: response.data[0].status,
+        saleTotal: response.data[0].totalPrice,
+        products: response.data[0].products,
+      }
+      console.log(data, 'Funcionou????????????????');
+      setSaleDetail(data);
+    });
+  // } }).then((response) => setSaleDetail({ saleId: response.data[0].products[0].salesProduct.saleId,
+  //   saleStatus: response.data[0].status,
+  //   saleTotal: response.data[0].totalPrice,
+  //   products: response.data[0].products,
+  // }));
   await axios.put(`/sales/status/${saleId}`, { status });
 }
 
