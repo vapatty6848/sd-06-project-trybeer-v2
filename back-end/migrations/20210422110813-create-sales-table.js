@@ -39,6 +39,11 @@ module.exports = {
         type: Sequelize.DATE,
         name: 'saleDate',
       },
+      updatedAt: {
+        allowNull: false,
+        defaultValue: Sequelize.NOW,
+        type: Sequelize.DATE,
+      },
     });
   },
 
