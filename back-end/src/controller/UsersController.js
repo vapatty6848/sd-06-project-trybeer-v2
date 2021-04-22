@@ -8,7 +8,7 @@ const OK = 200;
 const BAD_REQUEST = 404;
 
 router.post('/', rescue(async (req, res) => {
-  const { name, email, password, role} = req.body;
+  const { name, email, password, role } = req.body;
 
   const requestedUser = await Users.findOne({ where: { email } });
 
