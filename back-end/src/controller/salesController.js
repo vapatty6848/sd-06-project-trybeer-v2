@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const rescue = require('express-rescue');
-const { sales } = require('../../models');
+const { sales, products } = require('../../models');
 
 const router = new Router();
 
@@ -16,7 +16,14 @@ router.get('/', rescue(async (_req, res) => {
 router.get('/:id', rescue(async (req, res) => {
   try {
     const { id } = req.params;
-    const orderInfo = await sales.findAll({ where: { userId: id } });
+    const orderInfo = await sales.findOne({
+      where: { id },
+      include: {
+        model: products,
+        as: 'products',
+        through: { attributes: ['quantity'], as: 'sale' },
+      },
+    });
 
     return res.status(OK).json(orderInfo);
   } catch (error) {

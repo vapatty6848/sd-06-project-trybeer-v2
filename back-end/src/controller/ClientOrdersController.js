@@ -1,7 +1,6 @@
 const { Router } = require('express');
 const rescue = require('express-rescue');
-const OrdersService = require('../service/OrdersService');
-const { users, sales } = require('../../models');
+const { users, sales, products } = require('../../models');
 
 const router = new Router();
 
@@ -28,7 +27,14 @@ router.post('/', rescue(async (req, res) => {
 router.get('/:id', rescue(async (req, res) => {
   try {
     const { id } = req.params;
-    const orderInfo = await OrdersService.getDetails(id);
+    const orderInfo = await sales.findOne({
+      where: { id },
+      include: {
+        model: products,
+        as: 'products',
+        through: { attributes: ['quantity'], as: 'sale' },
+      },
+    });
     console.log(orderInfo);
 
     return res.status(OK).json(orderInfo);
