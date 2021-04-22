@@ -1,29 +1,31 @@
 import React, { useContext, useState } from 'react';
+import PropTypes from 'prop-types';
 import { TopMenu } from '../components';
 import TrybeerContext from '../context/TrybeerContext';
 import { verifyToken } from '../utils/verifications';
-import PropTypes from 'prop-types';
+import fetchFunctions from '../api/fetchFunctions';
+
+const dateFormat = require('dateformat');
 
 function Chat({ history }) {
   const [currentMessage, setCurrentMessage] = useState('');
+  const [messagesHistory, setMessagesHistory] = useState([]);
   const { user } = useContext(TrybeerContext);
-  const messages = [{ message: 'Hello', timestamp: '14:36' },
-    { message: 'Hello', timestamp: '14:36' }];
 
   const fetchMessages = async () => {
     const allMessages = await verifyToken('chat', user, history);
-    console.log('allMessages', allMessages);
+    const { messages } = allMessages;
+    console.log(messages);
+    setMessagesHistory(messages);
   };
-
-  fetchMessages();
 
   const onChangeMessage = ({ target: { value } }) => {
     setCurrentMessage(value);
   };
 
-  const handleSubmit = () => {
-    messages.push({ currentMessage, timestamp: '14:00' });
-    console.log(messages);
+  const handleSubmit = async () => {
+    await fetchFunctions.post('chat', { email: user.email, message: currentMessage });
+    fetchMessages();
   };
 
   return (
@@ -31,12 +33,13 @@ function Chat({ history }) {
       <TopMenu />
       <br />
       <br />
+      <h1>CHAT</h1>
       <ul>
-        {messages.map(({ message, timestamp }, index) => (
+        {messagesHistory && messagesHistory.map(({ message, date }, index) => (
           <li key={ index }>
-            {user.email}
-            {timestamp}
-            {message}
+            <p data-testid="nickname">{user.email}</p>
+            <p data-testid="message-time">{dateFormat(date, 'HH:MM')}</p>
+            <p data-testid="text-message">{message}</p>
           </li>
         ))}
       </ul>
