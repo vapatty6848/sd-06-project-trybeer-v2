@@ -1,6 +1,8 @@
 const { Router } = require('express');
 const rescue = require('express-rescue');
-const { users, sales, products } = require('../../models');
+const {
+  users, sales, products, sales_products: salesProducts,
+} = require('../../models');
 
 const router = new Router();
 
@@ -11,12 +13,7 @@ router.post('/', rescue(async (req, res) => {
     const { id: userId } = await users.findOne({ where: { email: userEmail } });
     const newProducts = await products.findAll();
 
-    const newCart = cart.map((product) => {
-      const newProduct = newProducts.find((newP) => product.name === newP.name);
-      return { productId: newProduct.id, quantity: product.quantity };
-    });
-
-    const newSale = await sales.create({
+    const { id: saleId } = await sales.create({
       userId,
       totalPrice: totalPrice.replace(',', '.'),
       deliveryAddress: rua,
@@ -24,7 +21,12 @@ router.post('/', rescue(async (req, res) => {
       status,
     });
 
-    newSale.setProducts(newCart);
+    const newCart = cart.map((product) => {
+      const newProduct = newProducts.find((newP) => product.name === newP.name);
+      return { saleId, productId: newProduct.id, quantity: product.quantity };
+    });
+
+    await salesProducts.bulkCreate(newCart);
 
     return res.status(OK).json({ message: 'Sales success' });
 }));
