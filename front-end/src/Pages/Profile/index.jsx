@@ -25,15 +25,6 @@ const Profile = () => {
     setNameState(name);
   }, []);
 
-  useEffect(() => {
-    const nameFormat = /^[A-Za-z ]+$/.test(nameState);
-    const dataStorage = localStorage.getItem('user');
-    const { name } = JSON.parse(dataStorage);
-    const twelve = 12;
-
-    setIsDisabled(!((nameFormat && nameState.length > twelve && nameState !== name)));
-  }, [nameState]);
-
   const dataStorage = localStorage.getItem('user');
 
   let token = '';
@@ -50,12 +41,13 @@ const Profile = () => {
         <LogoTryBeer />
         {form([
           nameState,
-          setNameState,
           emailState,
           token,
           isDisabled,
           updateMessage,
           setUpdateMessage,
+          setIsDisabled,
+          setNameState,
         ])}
       </Container>
     </>

@@ -21,15 +21,26 @@ const handleSubmit = async (event, { name, email }, token, setUpdateMessage) => 
 
 export default function form([
   name,
-  setNameState,
   email,
   token,
   isDisabled,
   updateMessage,
   setUpdateMessage,
+  setIsDisabled,
+  setNameState,
 ]) {
   const user = { name, email };
   const theme = JSON.parse(localStorage.getItem('@trybeer:theme'));
+
+  const validateUpdate = (newName) => {
+    setNameState(newName);
+    const nameFormat = /^([a-zA-Zà-úÀ-Ú]|\s+)+$/i.test(newName);
+    const dataStorage = localStorage.getItem('user');
+    const { name } = JSON.parse(dataStorage);
+    const twelve = 12;
+
+    setIsDisabled(!(nameFormat && newName.length > twelve && name !== newName));
+  };
 
   return (
     <form onSubmit={ (e) => handleSubmit(e, user, token, setUpdateMessage) }>
@@ -39,7 +50,7 @@ export default function form([
         value={ name }
         label="Nome"
         dataTestid="profile-name-input"
-        onChange={ ({ target }) => setNameState(target.value) }
+        onChange={ ({ target: { value } }) =>  validateUpdate(value)}
         themeStorage={ theme && theme.title }
         icon={ BiUser }
       />
