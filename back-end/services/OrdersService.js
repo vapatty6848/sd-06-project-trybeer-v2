@@ -32,9 +32,13 @@ const getById = async (id) => {
   where: { id },
   });
   const products = specificSale[0].products.map((item) => {
-    const productsAndQt = { ...item.dataValues, quantity: item.saleProduct.quantity };
+    const productsAndQt = { 
+      ...item.dataValues,
+      quantity: item.saleProduct.quantity,
+    };
     const { quantity, name, price } = productsAndQt;
-    return { quantity, name, price };
+    const { status } = specificSale[0].dataValues;
+    return { quantity, name, price, status };
   });
   return products;
 };

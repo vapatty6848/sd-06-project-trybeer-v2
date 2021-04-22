@@ -15,6 +15,7 @@ function OrderDetails(props) {
   const fetchOrderDetails = async () => {
     if (state) {
       const order = await verifyToken(`orders/details/${state.id}`, user, history);
+      console.log(order);
       setOrderCart(order);
     }
   };
@@ -40,13 +41,13 @@ function OrderDetails(props) {
             <TopMenu titleMenu="Detalhes de Pedido" />
             <div className="content-panel">
               <div data-testid="order-number">
-                { `Pedido ${state.id}` }
+                { state && `Pedido ${state.id} - ${state.status}` }
               </div>
               <div data-testid="order-date">
-                { formatedDate(state.saleDate) }
+                { state && formatedDate(state.saleDate) }
               </div>
               <div data-testid="order-total-value">
-                { formatedPrice(state.totalPrice) }
+                { state && formatedPrice(state.totalPrice) }
               </div>
               <div>
                 {
@@ -93,6 +94,7 @@ OrderDetails.propTypes = {
       id: PropTypes.number.isRequired,
       saleDate: PropTypes.string.isRequired,
       totalPrice: PropTypes.string.isRequired,
+      status: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,

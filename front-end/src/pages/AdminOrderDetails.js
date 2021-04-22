@@ -40,7 +40,7 @@ function AdminOrderDetails(props) {
   };
 
   const markAsDone = async (status) => {
-    markAsPreparing(status);
+    await markAsPreparing(status);
     setIsShowing(false);
   };
 
