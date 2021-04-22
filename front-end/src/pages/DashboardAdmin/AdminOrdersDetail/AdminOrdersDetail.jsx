@@ -74,7 +74,7 @@ export default function AdminOrdersDetail({ match: { params: { id } } }) {
             </h2>
           </div>
 
-          {sale && sale.status === 'pendente' && (
+          {sale && sale.status === 'Pendente' && (
             <div>
               <button
                 type="button"
