@@ -1,4 +1,4 @@
-src/models
-src/seeders
-src/migrations
+models
+seeders
+migrations
 # tests
