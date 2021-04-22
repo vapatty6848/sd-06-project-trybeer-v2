@@ -36,6 +36,9 @@ const OrdersCard = ({ orders }) => {
           >
             { `R$ ${order.totalPrice.replace('.', ',')} ` }
           </div>
+          <p data-testid={ `${index}-order-status` }>
+            {order.status}
+          </p>
         </Link>
       </div>
     </div>
