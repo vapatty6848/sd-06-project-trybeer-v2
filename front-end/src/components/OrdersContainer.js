@@ -56,9 +56,7 @@ export default function OrdersContainer({ orders }) {
               <br />
               { convertDate(date)[1] }
             </section>
-            { (token.role === 'administrator') && (
-              <span data-testid={ `${index}-order-status` }>{status}</span>
-            ) }
+            <span data-testid={ `${index}-order-status` }>{status}</span>
           </section>
         )) }
     </section>

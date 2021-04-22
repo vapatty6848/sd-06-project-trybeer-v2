@@ -44,7 +44,7 @@ const filterByUserId = async (saleId, userId, userRole) => {
     include: {
       model: products,
       as: 'products',
-      through: { attributes: [] },
+      through: { attributes: ['quantity'], as: 'sale' },
     },
   });
   authDetailsSale(result, userId, userRole);

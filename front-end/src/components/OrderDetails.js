@@ -28,13 +28,11 @@ export default function OrderDetails({ order, callback }) {
     <section className="order-detail-wrapper">
       <h3 data-testid="order-number">{ `Pedido ${order.id}` }</h3>
       <p data-testid="order-date">{ convertDate(order.createdAt)[0] }</p>
-      { (token.role === 'administrator')
-        && (
-          <section>
-            <p>{ `Cliente: ${order.user.name}` }</p>
-            <p data-testid="order-status">{ order.status }</p>
-          </section>
-        ) }
+      <section>
+        { (token.role === 'administrator')
+          && (<p>{ `Cliente: ${order.user.name}` }</p>) }
+        <p data-testid="order-status">{ order.status }</p>
+      </section>
       { order.products.map((curr, index) => (
         <OrderCard index={ index } product={ curr } key={ index } />
       )) }
