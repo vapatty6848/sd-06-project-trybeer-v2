@@ -22,6 +22,15 @@ const Sale_productModel = (sequelize, DataTypes) => {
       otherKey: 'saleId',
     });
 
+    Sale_product.belongsTo(models.Sale, {
+      foreignKey: 'saleId',
+      as: 'sale',
+    });
+    Sale_product.belongsTo(models.Product, {
+      foreignKey: 'productId',
+      as: 'product',
+    });
+
   }
 
   return Sale_product;

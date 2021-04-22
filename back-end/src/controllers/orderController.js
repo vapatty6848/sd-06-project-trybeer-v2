@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const Service = require('../services/orderService');
-const { Sale, User } = require('../models');
+const { Sale, User, SalesProduct, sequelize, Product } = require('../models');
 const status = require('../utils/httpStatusCode');
 
 const orderRouter = Router();
@@ -34,13 +34,23 @@ orderRouter.get('/', async (_req, res) => {
 
 orderRouter.get('/:id', async (req, res) => {
   const { id } = req.params;
-  try {
-    const Salebyid = await Sale.findByPk(id);
+  // try {
+    const Salebyid = await SalesProduct.findAll({
+       where: { saleId: id } ,
+       include: [{ model: Sale, as: 'sale', attributes: [] }, { model: Product, as: 'product', attributes: [] }],
+       attributes: ['quantity',
+       [sequelize.col('sale.status'), 'status'],
+       [sequelize.col('sale.saleDate'), 'saleDate'],
+       [sequelize.col('product.name'), 'name'],
+       [sequelize.col('product.price'), 'price'],
+       [sequelize.literal('product.price * quantity'), 'price2'],
+      ],
+    });
 
     return res.status(status.OK).json(Salebyid);
-  } catch (error) {
-    return res.status(erroReturnCatch).json(messageJson);
-  }
+  // } catch (error) {
+    // return res.status(erroReturnCatch).json(messageJson);
+  // }
 });
 
 orderRouter.put('/', async (req, res) => {
