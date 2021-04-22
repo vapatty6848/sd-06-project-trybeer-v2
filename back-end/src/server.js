@@ -4,6 +4,18 @@ const cors = require('cors');
 require('dotenv/config');
 const path = require('path');
 
+const app = express();
+
+const httpServer = require('http').createServer(app);
+
+const io = require('socket.io')(httpServer, {
+  cors: {
+    origin: 'http://localhost:3001',
+    methods: ['GET', 'POST'],
+    credentials: true,
+  },
+});
+
 const { 
   UserRoute,
   LoginRoute,
@@ -14,9 +26,12 @@ const {
 
 const { error } = require('./middleware');
 
-const app = express();
+io.on('connection', (socket) => {
+console.log('conectado');
+// io.emit('chatMessage', 'test');
+});
 
-app.use(cors());
+// app.use(cors());
 app.use(bodyParser.json());
 
 app.use('/login', LoginRoute);
@@ -27,4 +42,4 @@ app.use('/sales', SalesRoute);
 app.use('/images', express.static(path.join(__dirname, '/images')));
 app.use(error);
 
-module.exports = app;
+module.exports = httpServer;
