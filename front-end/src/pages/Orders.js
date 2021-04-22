@@ -41,7 +41,7 @@ function Orders() {
               index={ index }
               id={ order.id }
               date={ order.sale_date }
-              total={ order.total_price }
+              total={ order.totalPrice }
               status={ order.status }
             />
           </button>

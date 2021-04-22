@@ -46,7 +46,7 @@ function AdminOrdersDetails(props) {
                   </div>
                 ))}
                 <h2 data-testid="order-total-value">
-                  {`Total: R$ ${(orders[0].total_price).replace('.', ',')}`}
+                  {`Total: R$ ${(orders[0].totalPrice).replace('.', ',')}`}
                 </h2>
                 { orders[0].status === 'Pendente'
                   ? (

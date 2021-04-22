@@ -10,15 +10,15 @@ exports.getAll = async (userId) =>
   exports.getDetails = async (orderId) => (
     connection.execute(
       `SELECT
-        s.id, s.sale_date,
-        s.total_price, s.status,
+        s.id, s.createdAt,
+        s.totalPrice, s.status,
         p.name, p.price, sp.quantity,
         ROUND((p.price * sp.quantity), 2) as total
       FROM sales as s
       JOIN sales_products as sp
-      ON sp.sale_id = s.id
+      ON sp.saleId = s.id
       JOIN products as p
-      ON p.id = sp.product_id
+      ON p.id = sp.productId
       WHERE s.id = ?;`, [orderId],
     ).then(([orderInfo]) => orderInfo || null)
   );

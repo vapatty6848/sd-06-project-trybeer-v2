@@ -11,11 +11,13 @@ const BAD_REQUEST = 404;
 router.post('/', rescue(async (req, res) => {
   try {
     const user = req.body;
+
     const { id: userId } = await users.findOne({ where: {
       email: user.email,
     } });
 
-    const orders = await sales.findAll({ where: { userId } });
+    const [{ dataValues }] = await sales.findAll({ where: { userId } });
+    const orders = [dataValues];
 
     return res.status(OK).json(orders);
   } catch (error) {
@@ -27,6 +29,7 @@ router.get('/:id', rescue(async (req, res) => {
   try {
     const { id } = req.params;
     const orderInfo = await OrdersService.getDetails(id);
+    console.log(orderInfo);
 
     return res.status(OK).json(orderInfo);
   } catch (error) {

@@ -33,7 +33,7 @@ function Products() {
           <TopBar title="TryBeer" />
           <div className="divFilha">
             { products.map((product, index) => {
-              const { id, name, price, url_image: urlImage } = product;
+              const { id, name, price, urlImage } = product;
               return (
                 <div className="divCards" key={ index }>
                   <ProductCard

@@ -23,6 +23,7 @@ router.post('/', rescue(async (req, res) => {
       deliveryNumber: numero,
       status,
     });
+    console.log(saleId);
     const saleProduct = newCart.map((element) => ({ saleId, ...element }));
     await salesProducts.create(saleProduct);
     return res.status(OK).json({ message: 'Sales success' });
