@@ -94,7 +94,22 @@ export const getAllOrders = async (email) => {
 export const getOrderDetails = async (id) => {
   const order = await axios({
     url: `http://localhost:3001/orderdetails/${id}`,
-  }).then((res) => res.data)
+  }).then((res) => {
+      const productsArray = res.data.products.map((product) => {
+        return {
+          name: product.name,
+          price: Number(product.price) * product.sales_products.quantity,
+          quantity: product.sales_products.quantity,
+        }
+      });
+      const finalResponse = {
+        id: res.data.id,
+        saleDate: res.data.saleDate,
+        valueTotal: res.data.totalPrice,
+        products: productsArray,
+      }
+      return finalResponse;
+      })
     .catch(() => {
       console.error(ORDER_NOT_FOUND);
     });

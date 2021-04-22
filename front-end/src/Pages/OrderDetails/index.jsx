@@ -37,7 +37,7 @@ const OrderDetails = () => {
 
       <SideBar />
       <S.ContainerOrder stateSideBar={ stateSideBar }>
-      {console.log(orders)}
+        {console.log(orders)}
 
         {orders && (
           (orders.products.length > 0)
@@ -70,12 +70,12 @@ const OrderDetails = () => {
                       className="description"
                       data-testid={ `${index}-product-name` }
                     >
-                      {product.description}
+                      {product.name}
                     </span>
                     <span data-testid={ `${index}-product-total-value` }>
                       R$
                       {' '}
-                      {`${Number(product.valueTotal).toFixed(2).replace('.', ',')}`}
+                      {`${Number(product.price).toFixed(2).replace('.', ',')}`}
                     </span>
                   </S.ContainerInfos>
                 ))}

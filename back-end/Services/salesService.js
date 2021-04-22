@@ -37,19 +37,19 @@ const getOrdersByUser = async (req, res) => {
 };
 
 const getOrderDetails = async (req, res) => {
-  const { saleid } = req.params;
+  try {
+    const { saleid } = req.params;
+    console.log('cheguei no orderDetails');
+    const orderProductsDetailsData = await models.sales
+      .findOne({
+        where: { id: saleid },
+        include: [{ model: models.products, as: 'products' }],
+      });
 
-  const orderProductsDetailsData = await models.sales_products
-    .findAll({
-      where: { saleId: saleid },
-      attributes: ['quantity'],
-    });
-    console.log(orderProductsDetailsData);
-
-  const orderProductsDetails = Object.values(orderProductsDetailsData.products)
-    .map((product) => product.dataValues);
-
-  res.status(200).json(orderProductsDetails);
+    res.status(200).json(orderProductsDetailsData);
+  } catch (e) {
+    console.error(e.message);
+  }
 };
 
 const getAdminOrders = async (_req, res) => {

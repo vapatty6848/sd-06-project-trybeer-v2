@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { GlobalContext } from '../../Contexts/GlobalContext';
 import moment from 'moment';
+import { GlobalContext } from '../../Contexts/GlobalContext';
 
 import MenuTop from '../../Components/MenuTop';
 import SideBar from '../../Components/SideBar';
