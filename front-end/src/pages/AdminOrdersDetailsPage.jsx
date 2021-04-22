@@ -5,7 +5,7 @@ import {
   AdminDetailsOrdersCardsComponent,
   AdminSideBarComponent,
 } from '../components';
-import '../style/AdminOrderDetails.css';
+// import '../style/AdminOrderDetails.css';
 import fetchApiJsonBody from '../service/fetchApi';
 import statusConvert from '../service/statusConvert';
 import formatPrice from '../service/formatPrice';
@@ -112,7 +112,7 @@ function AdminOrdersDetailsPage() {
             onClick={ updateStatus }
             name="PREPARING"
           >
-            Preparar Pedido
+            Preparar pedido
           </button>
         )}
       </div>

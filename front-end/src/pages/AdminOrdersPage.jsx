@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { AdminSideBarComponent, AdminOrdersCardsComponent } from '../components';
 import BeersAppContext from '../context/BeersAppContext';
 import socket from '../Socket.io/socket';
-import '../style/AdminOrder.css';
+// import '../style/AdminOrder.css';
 
 function AdminOrdersPage() {
   const {

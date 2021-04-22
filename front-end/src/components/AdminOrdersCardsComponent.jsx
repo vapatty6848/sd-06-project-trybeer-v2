@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import formatPrice from '../service/formatPrice';
 import statusConvert from '../service/statusConvert';
-import '../style/OrderCardsAdmin.css';
+// import '../style/OrderCardsAdmin.css';
 
 function AdminOrdersCardsComponent({ element, index }) {
   const {
