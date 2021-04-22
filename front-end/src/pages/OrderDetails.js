@@ -94,6 +94,7 @@ OrderDetails.propTypes = {
       id: PropTypes.number.isRequired,
       saleDate: PropTypes.string.isRequired,
       totalPrice: PropTypes.string.isRequired,
+      status: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
