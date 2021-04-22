@@ -1,2 +1,4 @@
-models/index.js
-seeders
+src/database/models/index.js
+src/database/seeders
+src/database/migrations
+src/test
