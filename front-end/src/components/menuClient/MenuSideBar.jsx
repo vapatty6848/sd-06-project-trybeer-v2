@@ -47,6 +47,15 @@ function MenuSideBar() {
       <button
         type="button"
         className="btnSideBar"
+        data-testid="side-menu-chat"
+        onClick={ handlePage }
+        name="chat"
+      >
+        Conversar com a loja
+      </button>
+      <button
+        type="button"
+        className="btnSideBar"
         data-testid="side-menu-item-logout"
         onClick={ handlePage }
         name="login"

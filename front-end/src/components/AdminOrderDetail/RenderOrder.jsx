@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function RenderOrder({ productDetail }) {
+  console.log(productDetail);
   return (
     <div>
       {productDetail && productDetail.products.map((product, index) => (

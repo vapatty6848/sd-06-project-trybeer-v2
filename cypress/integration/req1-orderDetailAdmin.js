@@ -20,7 +20,7 @@ describe('1 - Desenvolver os status para o pedido da tela de `Detalhe pedido` do
     logout();
   });
 
-  it('Dado que é feito uma compra, será validado que ela está com status `Pendente` na tela de `Detalhes do pedido` do admin', () => {
+  it.only('Dado que é feito uma compra, será validado que ela está com status `Pendente` na tela de `Detalhes do pedido` do admin', () => {
     login(Cypress.env('loginAdmin'), Cypress.env('passwordAdmin'));
     accessOrdersAdmin();
     clickButton('[data-testid="0-order-number"]');

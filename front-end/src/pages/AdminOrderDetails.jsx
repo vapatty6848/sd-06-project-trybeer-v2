@@ -36,24 +36,27 @@ function AdminOrderDetails({ match, history }) {
 
   return (
     <div>
-      <MenuSideBar />
-      <span data-testid="order-number">
-        {`Pedido ${id} - `}
-      </span>
-      <span
-        data-testid="order-status"
-      >
-        { status }
-      </span>
-      <RenderOrder productDetail={ productDetail[0] } />
-      <button
-        type="button"
-        hidden={ change }
-        onClick={ handleClick }
-        data-testid="mark-as-delivered-btn"
-      >
-        Marcar como entregue
-      </button>
+      {productDetail.length > 0 && (
+        <div>
+          <MenuSideBar />
+          <span data-testid="order-number">
+            {`Pedido ${id} - `}
+          </span>
+          <span
+            data-testid="order-status"
+          >
+            { status }
+          </span>
+          <RenderOrder productDetail={ productDetail[0] } />
+          <button
+            type="button"
+            hidden={ change }
+            onClick={ handleClick }
+            data-testid="mark-as-delivered-btn"
+          >
+            Marcar como entregue
+          </button>
+        </div>)}
     </div>
   );
 }

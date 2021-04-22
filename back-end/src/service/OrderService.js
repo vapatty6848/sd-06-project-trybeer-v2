@@ -4,7 +4,12 @@ const getOrdersById = async (id) => {
  // console.log('id', id);
   const sale = await sales.findAll({
     where: { id },
-    include: [{ model: products, as: 'products' }],
+    attributes: { exclude: ['deliveryAddress', 'deliveryNumber'] },
+    include: [{
+      model: products,
+      as: 'products', 
+      attributes: { exclude: ['urlImage', 'id'] },
+      through: { attributes: { exclude: ['productId', 'saleId', 'name'] } } }],
   });
 
 return sale;

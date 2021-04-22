@@ -17,7 +17,7 @@ const AdminOrders = ({ history }) => {
     }
     fetchOrders();
   }, [history]);
-
+  console.log(orders);
   const handleClick = (id) => {
     history.push(`/admin/orders/${id}`);
   };
@@ -25,10 +25,14 @@ const AdminOrders = ({ history }) => {
   return (
     <div>
       <MenuSideBar />
-      {orders.map((order, index) => (
+      {orders.length > 0 && orders.map((order, index) => (
         <div className="movie-card" key={ index }>
-          <button type="button" onClick={ () => handleClick(order.id) }>
-            <p data-testid={ `${index}-order-number` }>
+          <button
+            type="button"
+            data-testid={ `${index}-order-number` }
+            onClick={ () => handleClick(order.id) }
+          >
+            <p>
               {`Pedido ${order.id}`}
             </p>
             <p data-testid={ `${index}-order-address` }>

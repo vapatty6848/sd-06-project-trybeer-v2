@@ -15,6 +15,7 @@ import Checkout from '../pages/Checkout';
 import AdminOrders from '../pages/AdminOrders';
 import Orders from '../pages/Orders';
 import OrdersDetails from '../pages/OrdersDetails';
+import ChatClient from '../pages/ChatClient';
 
 const Routes = () => (
   <Router>
@@ -32,6 +33,7 @@ const Routes = () => (
       <Route path="/checkout" component={ Checkout } />
       <Route path="/orders/:id" component={ OrdersDetails } />
       <Route path="/orders" component={ Orders } />
+      <Route path="/chat" component={ ChatClient } />
     </Switch>
   </Router>
 );
