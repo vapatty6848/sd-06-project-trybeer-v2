@@ -24,6 +24,7 @@ export default function AdminOrdersDetails() {
 
   const handleClick = async () => {
     await api.fetchChangeStatus(id);
+    console.log(id);
     setButtonDisabled(false);
   };
 

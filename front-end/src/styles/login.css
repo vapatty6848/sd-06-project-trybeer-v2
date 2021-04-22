@@ -3,27 +3,27 @@ body {
 }
 
 body {
-  -ms-flex-align: center;
   align-items: center;
-  padding-top: 100px;
+  -ms-flex-align: center;
   padding-bottom: 100px;
+  padding-top: 100px;
 }
 
 .form-signin {
-  width: 100%;
+  font-family: 'Pangolin' , cursive;
+  margin: auto;
   max-width: 330px;
   padding: 15px;
-  margin: auto;
-  font-family: 'Pangolin', cursive;
+  width: 100%;
 }
 
-.form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
+.form-signin input[ type = "email" ] {
   border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  margin-bottom: -1px;
 }
-.form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
+.form-signin input[ type = "password" ] {
   border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  margin-bottom: 10px;
 }

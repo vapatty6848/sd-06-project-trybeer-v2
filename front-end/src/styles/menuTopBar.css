@@ -1,26 +1,26 @@
 body {
+  border: 0;
+  font-family: 'Pangolin' , cursive;
   margin: 0;
   padding: 0;
-  border: 0;
-  font-family: 'Pangolin', cursive;
 }
 
 .top-bar {
-  display: flex;
-  width: 100%;
   align-self: flex-start;
+  display: flex;
   background-color: red;
+  width: 100%;
 }
 
 .button-title {
   height: 100%;
 }
 
-.h1-title{
+.h1-title {
   align-self: center;
+  color: white;
   text-align: center;
   width: 100%;
-  color: white;
 }
 
 .button-title button {

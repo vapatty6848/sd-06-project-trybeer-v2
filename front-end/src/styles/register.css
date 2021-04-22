@@ -1,16 +1,16 @@
 .check-button {
-  display: flex;
-  justify-content: center;
   align-items: center;
-  margin: 30px 0;
+  display: flex;
   font-size: 20px;
+  justify-content: center;
+  margin: 30px 0;
 }
 
-.check-button input[type=checkbox] {
+.check-button input[ type = checkbox ] {
   margin: 10px;
-  -webkit-transform: scale(2);
-  transform: scale(2);
   padding: 10px;
+  transform: scale(2);
+  -webkit-transform: scale(2);
 }
 
 .button-register {
@@ -27,12 +27,12 @@
 }
 
 .title-register {
+  align-items: center;
   display: flex;
   justify-content: center;
-  align-items: center;
   margin: 20px;
 }
 
-.title-register h1{
+.title-register h1 {
   font-size: 50px;
 }

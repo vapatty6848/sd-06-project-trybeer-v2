@@ -1,17 +1,17 @@
 .container-adm {
   display: flex;
+  background-color: red;
   flex-direction: column;
   height: 100vh;
-  background-color: red;
 }
 
 .title-adm {
+  align-items: center;
+  color: white;
   display: flex;
   height: 15%;
-  width: 100%;
-  color: white;
   justify-content: center;
-  align-items: center;
+  width: 100%;
 }
 
 .title-adm h1 {
@@ -23,9 +23,9 @@
 }
 
 .main-link-adm {
-  height: 85vh;
   display: flex;
   flex-direction: column;
+  height: 85vh;
 }
 
 .link-first-adm {
@@ -37,11 +37,10 @@
   align-items: flex-end;
 }
 
-.link-first-adm .btn-danger{
+.link-first-adm .btn-danger {
   font-size: 140%;
 }
 
-.link-second-adm .btn-danger{
-  font-size:140%;
+.link-second-adm .btn-danger {
+  font-size: 140%;
 }
-

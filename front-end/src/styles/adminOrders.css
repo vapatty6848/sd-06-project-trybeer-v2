@@ -12,13 +12,13 @@
 }
 
 .page-title-adm {
-  display: flex;
-  justify-content: center;
   align-items: center;
+  display: flex;
   height: 15%;
+  justify-content: center;
 }
 
-.page-title-adm  h1 {
+.page-title-adm h1 {
   font-size: 50px;
 }
 
@@ -27,18 +27,18 @@
 }
 
 .cada-venda-adm {
-  width: 90%;
-  margin: 10px;
   border: 2px solid rgba(0, 0, 0, 0.125);
   border-radius: 5%;
-  height: 60px;
   display: flex;
+  height: 60px;
+  margin: 10px;
+  width: 90%;
 }
 
 .venda-adm {
+  align-items: center;
+  color: black;
   display: flex;
   justify-content: space-around;
   width: 100%;
-  align-items: center;
-  color: black;
 }
