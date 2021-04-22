@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import Header from '../../../components/Header/Header';
 import './OrderDetails.css';
 import { getSalesById } from '../../../services/Sales';
-import { correctDate, parseCartPrice } from '../../../utils/parseValues';
+import { parseCartPrice } from '../../../utils/parseValues';
 import { verifyUser } from '../../../store/LocalStorage/actions';
 
 /**
