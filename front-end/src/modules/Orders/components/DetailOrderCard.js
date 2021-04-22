@@ -43,7 +43,7 @@ function DetailOrderCard(props) {
           </div>
         </div>
         {sale.products.map((product, index) => {
-          const formatedPrice = `R$ ${mult(product.price, product.salesProducts.quantity)}`;
+          const fmtdPrice = `R$ ${mult(product.price, product.salesProducts.quantity)}`;
           return (
             <div
               key={ index }
@@ -66,7 +66,7 @@ function DetailOrderCard(props) {
                 className="m-4"
                 data-testid={ `${index}-product-total-value` }
               >
-                {formatedPrice}
+                {fmtdPrice}
               </div>
             </div>
 
