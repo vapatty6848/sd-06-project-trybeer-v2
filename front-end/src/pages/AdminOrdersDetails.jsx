@@ -13,6 +13,8 @@ export default function AdminOrdersDetails() {
     setProductsOfSale(productDetails);
   };
 
+  console.log(productsOfSale);
+
   useEffect(() => {
     fetchApiProductOfSale(id);
     if (productsOfSale.length !== 0 && productsOfSale[0].status === 'Entregue') {
