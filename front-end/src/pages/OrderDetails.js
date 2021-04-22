@@ -15,6 +15,7 @@ function OrderDetails(props) {
   const fetchOrderDetails = async () => {
     if (state) {
       const order = await verifyToken(`orders/details/${state.id}`, user, history);
+      console.log(order);
       setOrderCart(order);
     }
   };
@@ -40,7 +41,7 @@ function OrderDetails(props) {
             <TopMenu titleMenu="Detalhes de Pedido" />
             <div className="content-panel">
               <div data-testid="order-number">
-                { `Pedido ${state.id}` }
+                { `Pedido ${state.id} - ${state.status}` }
               </div>
               <div data-testid="order-date">
                 { formatedDate(state.saleDate) }
