@@ -13,14 +13,16 @@ router.get('/orderDetails/:id', async (req, res) => {
     //     model: products, as: 'products', attributes: ['name', 'price'],
     //   }],
     // });
-    const sale = await sales.findAll({
-      where: { id },
-      include: { model: products, as: 'products' },
-    });
+    // const sale = await sales.findAll({
+    //   where: { id },
+    //   include: { model: products, as: 'products' },
+    // });
 
-    const salesProducts = sale[0].products;
+    // const salesProducts = sale[0].products;
 
     // const allProducts = 
+
+    const productsOfSale = await salesProducts.findAll({ salesId: id });
 
     if (!productsOfSale) return res.status(404).json({ message: 'Não foram encontrado vendas.' });
     return res.status(200).json(productsOfSale);
