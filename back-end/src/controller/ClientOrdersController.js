@@ -15,8 +15,7 @@ router.post('/', rescue(async (req, res) => {
       email: user.email,
     } });
 
-    const [{ dataValues }] = await sales.findAll({ where: { userId } });
-    const orders = [dataValues];
+    const orders = await sales.findAll({ where: { userId } });
 
     return res.status(OK).json(orders);
   } catch (error) {
@@ -28,22 +27,22 @@ router.get('/:id', rescue(async (req, res) => {
   try {
     const { id } = req.params;
 
-    const { dataValues } = await sales.findOne(
+    const orders = await sales.findOne(
+      { where: { id } },
       {
         include: [
           {
-          model: products,
-          as: 'products',
-          through: { attributes: ['quantity'], as: 'sale' },
+            model: products,
+            as: 'products',
+            through: { attributes: ['quantity'] },
           },
         ]
       },
-      { where: { id } },
     );
 
-    console.log(dataValues)
+    console.log(orders);
 
-    return res.status(OK).json(dataValues);
+    return res.status(OK).json(orders);
   } catch (error) {
     return res.status(BAD_REQUEST).json({ message: 'No orders found' });
   }
