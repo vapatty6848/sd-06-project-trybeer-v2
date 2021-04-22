@@ -12,6 +12,7 @@ import Orders from './pages/Orders';
 import AdminOrdersDetails from './pages/AdminOrdersDetails';
 import OrderDetails from './pages/OrderDetails';
 import ProductAdminInsert from './pages/ProductAdminInsert';
+import UserChat from './pages/UserChat';
 import './App.css';
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
           <Route exact path="/admin/profile" component={ AdminProfile } />
           <Route exact path="/admin/orders/:id" component={ AdminOrdersDetails } />
           <Route exact path="/admin/products" component={ ProductAdminInsert } />
+          <Route exact path="/chat" component={ UserChat } />
         </Switch>
       </BrowserRouter>
     </LoginProvider>
