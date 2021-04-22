@@ -4,16 +4,16 @@ import api from '../../axios';
 import socket from './socket';
 
 const ChatMenu = () => {
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [inboxes, setInboxes] = useState([]);
   const empty = <p data-test="text-for-no-conversation">Nenhuma conversa por aqui</p>;
 
   useEffect(() => {
-    setLoading(true);
+    // setLoading(true);
     api.get('/conversations').then((response) => {
       const { data: { conversations } } = response;
       setInboxes(conversations);
-      setLoading(false);
+      // setLoading(false);
     });
   }, []);
 
@@ -43,7 +43,7 @@ const ChatMenu = () => {
 
   return (
     <div>
-      { (!loading && inboxes.length) ? renderConversations() : empty }
+      { (inboxes.length) ? renderConversations() : empty }
     </div>
   );
 };
