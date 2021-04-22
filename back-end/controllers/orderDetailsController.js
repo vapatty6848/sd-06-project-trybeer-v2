@@ -3,25 +3,13 @@ const { salesProducts } = require('../models');
 
 const router = Router();
 
+// colunas: saleDate, status -> tabela sales
+// colunas: name, price -> tabela products 
+// colunas: saleId, productId e quantity para formar a junção que é a tabela salesProducts
+
 router.get('/orderDetails/:id', async (req, res) => {
   const { id } = req.params;
   try {
-    // const productsOfSale = await salesProducts.findAll({
-    //   include: [{
-    //     model: sales, as: 'sales', attributes: ['saleDate', 'status'],
-    //   }, {
-    //     model: products, as: 'products', attributes: ['name', 'price'],
-    //   }],
-    // });
-    // const sale = await sales.findAll({
-    //   where: { id },
-    //   include: { model: products, as: 'products' },
-    // });
-
-    // const salesProducts = sale[0].products;
-
-    // const allProducts = 
-
     const productsOfSale = await salesProducts.findAll({ salesId: id });
 
     if (!productsOfSale) return res.status(404).json({ message: 'Não foram encontrado vendas.' });

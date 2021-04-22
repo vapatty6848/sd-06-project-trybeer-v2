@@ -7,6 +7,8 @@ import '../styles/orderDetails.css';
 export default function OrderDetails() {
   const { id } = useParams();
   const [productsOfSale, setProductsOfSale] = useState([]);
+  console.log(productsOfSale);
+
   const fetchApiProductOfSale = async (idFetch) => {
     const productDetails = await api.fetchSaleProduct(idFetch);
     setProductsOfSale(productDetails);

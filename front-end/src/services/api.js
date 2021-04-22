@@ -68,11 +68,14 @@ const fetchAddSale = async (sale) => {
 };
 
 const fetchAddSaleProduct = async (salesProducts) => {
-  await fetch('http://localhost:3001/saleProduct', {
+  console.log('cheguei aqui')
+  const result = await fetch('http://localhost:3001/saleProduct', {
     method: 'POST',
     headers: contentType,
     body: JSON.stringify(salesProducts),
   });
+  console.log(salesProducts, 'cheguei aqui')
+  console.log(result);
 };
 
 const fetchSales = async () => {
@@ -100,6 +103,7 @@ const fetchSaleProduct = async (id) => {
     headers: contentType,
     body: JSON.stringify(),
   }).then((res) => res.json());
+  console.log(productsOfSale);
   return productsOfSale;
 };
 

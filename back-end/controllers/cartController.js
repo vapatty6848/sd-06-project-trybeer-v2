@@ -34,6 +34,7 @@ router.post('/saleProduct', async (req, res) => {
     });
     return res.status(201).json(salesProductsBody);
   } catch (error) {
+    console.log(`cartController: ${error.message}`);
     return res.status(500).json({ message: error.message });
   }
 });

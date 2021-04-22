@@ -1,8 +1,8 @@
 const createSalesProducts = (sequelize, DataTypes) => {
   const salesProducts = sequelize.define('salesProducts', {
     // id: { primaryKey: true, type: DataTypes.INTEGER },
-    saleId: DataTypes.INTEGER,
-    productId: DataTypes.INTEGER,
+    // saleId: DataTypes.INTEGER,
+    // productId: DataTypes.INTEGER,
     quantity: DataTypes.STRING,
   }, { timestamps: false });
   salesProducts.associate = (models) => {

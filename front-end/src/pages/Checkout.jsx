@@ -65,15 +65,23 @@ export default function Checkout() {
       status: 'Pendente',
     });
 
+    console.log(saleId);
+
     const productsCart = products.map((product) => (
       {
         productId: Number(product.id),
         quantity: product.qty,
-        saleId,
+        saleId: saleId.id,
       }
     ));
 
-    await api.fetchAddSaleProduct(productsCart);
+
+    const fetch = async (products) => {
+      await api.fetchAddSaleProduct(products);
+    }
+    productsCart.forEach((products) => {
+      fetch(products);
+    });
   };
 
   return (
