@@ -55,7 +55,6 @@ routerSalesDetails.get('/:id', async (req, res, next) => {
     return res.status(200).json(vendas);
   } catch (err) {
     next({ status: 404, message: err.message });
-    // next({ status: 404, message: 'not Found' });
   }
 });
 
