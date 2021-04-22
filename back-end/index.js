@@ -1,20 +1,35 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-// const multer = require('multer');
+
+const app = express();
+const httpServer = require('http').createServer(app);
+
+const io = require('socket.io')(httpServer, {
+  cors: {
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST'],
+  },
+});
+
+io.on('connection', (socket) => {
+  console.log(`${socket.id} connected`);
+  socket.on('disconnect', () => {
+    console.log(`${socket.id} disconnected`);
+  });
+});
+
 const LoginController = require('./src/controllers/LoginController');
 const RegisterController = require('./src/controllers/RegisterController');
 const ProductsController = require('./src/controllers/ProductsController');
 const ProfileController = require('./src/controllers/ProfileController');
 const SalesController = require('./src/controllers/SalesController');
+const MessageController = require('./src/controllers/MessageController');
 require('dotenv').config();
 
-const app = express();
 const port = process.env.PORT || 3001;
 
 app.use(express.static(path.join(__dirname, 'public')));
-
-// const images = multer({ dest: 'images/' });
 
 app.use(cors());
 
@@ -30,4 +45,6 @@ app.use('/profile', ProfileController);
 
 app.use('/sales', SalesController);
 
-app.listen(port, () => console.log(`Running at ${port}`));
+app.use('/chat', MessageController);
+
+httpServer.listen(port, () => console.log(`Running at ${port}`));
