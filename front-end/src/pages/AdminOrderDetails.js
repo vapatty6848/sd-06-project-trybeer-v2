@@ -12,10 +12,16 @@ function AdminOrderDetails(props) {
   const [hasState, setHasState] = useState(false);
   const [isShowing, setIsShowing] = useState(true);
   const { location: { state }, history } = props;
+
+  const checkStatus = (status) => {
+    if (status === 'Entregue') return setIsShowing(false);
+  };
+
   const fetchOrderDetails = async () => {
     if (state) {
       const order = await verifyToken(`admin/orders/details/${state.id}`, user, history);
-      console.log(order);
+      console.log(order.status);
+      checkStatus(order.status);
       setOrderCart([order]);
     }
   };
@@ -28,9 +34,13 @@ function AdminOrderDetails(props) {
     }
   };
 
-  const markAsDone = async () => {
-    await put(`admin/orders/${state.id}`, user.token, { status: 'Entregue' });
+  const markAsPreparing = async (status) => {
+    await put(`admin/orders/${state.id}`, user.token, { status });
     fetchOrderDetails();
+  };
+
+  const markAsDone = async (status) => {
+    markAsPreparing(status);
     setIsShowing(false);
   };
 
@@ -111,13 +121,22 @@ function AdminOrderDetails(props) {
       }
       {
         isShowing && (
-          <button
-            type="button"
-            data-testid="mark-as-delivered-btn"
-            onClick={ markAsDone }
-          >
-            Marcar como entregue
-          </button>
+          <div>
+            <button
+              type="button"
+              data-testid="mark-as-delivered-btn"
+              onClick={ () => markAsDone('Entregue') }
+            >
+              Marcar como entregue
+            </button>
+            <button
+              type="button"
+              data-testid="mark-as-prepared-btn"
+              onClick={ () => markAsPreparing('Preparando') }
+            >
+              Preparar pedido
+            </button>
+          </div>
         )
       }
     </div>
