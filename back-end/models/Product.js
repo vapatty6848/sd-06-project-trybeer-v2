@@ -5,17 +5,17 @@ const Product = (sequelize, DataTypes) => {
       name: DataTypes.STRING,
       price: DataTypes.STRING,
       // eslint-disable-next-line camelcase
-      url_image: DataTypes.STRING,
+      urlImage: DataTypes.STRING,
     },
     { timestamps: false },
   );
   
   products.associate = (models) => {
-    // products.hasMany(models.sales_products, { foreignKey: 'product_id', as: 'sales_products' });
+    // products.hasMany(models.salesProducts, { foreignKey: 'productId', as: 'salesProducts' });
     products.belongsToMany(models.sales, {
-      through: 'sales_products',
+      through: 'salesProducts',
       as: 'ola2',
-      foreignKey: 'product_id',
+      foreignKey: 'productId',
     });
   };
 

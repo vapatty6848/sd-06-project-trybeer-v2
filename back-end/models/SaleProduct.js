@@ -1,19 +1,19 @@
 const salesProduct = (sequelize, DataTypes) => {
   const salesProducts = sequelize.define(
-    'sales_products',
+    'salesProducts',
     {
       // eslint-disable-next-line camelcase
-      sale_id: { type: DataTypes.INTEGER, primaryKey: true },
+      saleId: { type: DataTypes.INTEGER, primaryKey: true },
       // eslint-disable-next-line camelcase
-      product_id: { type: DataTypes.INTEGER, primaryKey: true },
+      productId: { type: DataTypes.INTEGER, primaryKey: true },
       quantity: DataTypes.INTEGER,
     },
     { timestamps: false },
   );
 
   salesProducts.associate = (models) => {
-    salesProducts.belongsTo(models.products, { foreignKey: 'product_id', as: 'products' });
-    salesProducts.belongsTo(models.sales, { foreignKey: 'sale_id', as: 'sales' });
+    salesProducts.belongsTo(models.products, { foreignKey: 'productId', as: 'products' });
+    salesProducts.belongsTo(models.sales, { foreignKey: 'saleId', as: 'sales' });
   };
 
   return salesProducts;

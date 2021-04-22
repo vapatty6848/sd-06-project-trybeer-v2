@@ -4,7 +4,7 @@ export { default as CostumerProfilePage } from './CostumerProfilePage';
 export { default as CostumerProductsPage } from './CostumerProductsPage';
 export { default as CostumerCheckoutPage } from './CostumerCheckouPage';
 export { default as CostumerOrdersPage } from './CostumerOrdersPage';
-export { default as CostumerChat} from './CostumerChat';
+export { default as CostumerChat } from './CostumerChat';
 export { default as AdminOrdersPage } from './AdminOrdersPage';
 export { default as AdminProfilePage } from './AdminProfilePage';
 export { default as CostumerOrdersDetailsPage } from './CostumerOrdersDetailsPage';

@@ -7,7 +7,8 @@ const statusUpdate = (socket) => {
 };
 
 const messageProcess = (socket) => {
-  socket.on('message', async (message) => {
+  socket.on('message', (message) => {
+    console.log(message);
   });
 };
 

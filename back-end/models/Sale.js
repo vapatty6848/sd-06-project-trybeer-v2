@@ -1,20 +1,20 @@
 const Sale = (sequelize, DataTypes) => {
   const sales = sequelize.define('sales',
     {
-      user_id: DataTypes.INTEGER,
-      total_price: DataTypes.FLOAT,
-      delivery_address: DataTypes.STRING,
-      delivery_number: DataTypes.STRING,
+      userId: DataTypes.INTEGER,
+      totalPrice: DataTypes.FLOAT,
+      deliveryAddress: DataTypes.STRING,
+      deliveryNumber: DataTypes.STRING,
       status: DataTypes.STRING,
     },
-    { createdAt: 'sale_date', updatedAt: false });
+    { createdAt: 'saleDate', updatedAt: false });
   
   sales.associate = (models) => {
-    sales.belongsTo(models.users, { foreignKey: 'user_id', as: 'users' });
+    sales.belongsTo(models.users, { foreignKey: 'userId', as: 'users' });
     sales.belongsToMany(models.products, {
-      through: 'sales_products',
+      through: 'salesProducts',
       as: 'ola',
-      foreignKey: 'sale_id',
+      foreignKey: 'saleId',
     });
   };
 

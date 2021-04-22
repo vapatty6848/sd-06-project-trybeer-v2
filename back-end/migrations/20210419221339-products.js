@@ -5,7 +5,7 @@ module.exports = {
       name: { type: Sequelize.STRING, allowNull: false, unique: true },
       price: { type: Sequelize.INTEGER, allowNull: false },
       // eslint-disable-next-line camelcase
-      url_image: { type: Sequelize.STRING, allowNull: false },
+      urlImage: { type: Sequelize.STRING, allowNull: false },
     });
   },
 

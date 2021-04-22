@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { AdminSideBarComponent, AdminOrdersCardsComponent } from '../components';
 import BeersAppContext from '../context/BeersAppContext';
 import socket from '../Socket.io/socket';
-import '../style/AdminOrder.css';
+// import '../style/AdminOrder.css';
 
 function AdminOrdersPage() {
   const {
@@ -16,12 +16,15 @@ function AdminOrdersPage() {
     socket.on('statusUpdate', ({ id, status }) => {
       const AdminOrdersStatusUpdate = orders
         .map((element) => {
-          if (element.id === parseInt(id)) return { ...element, status };
+          const elementId = parseInt(element.id, 10);
+          const orderId = parseInt(id, 10);
+          if (elementId === orderId) return { ...element, status };
           return element;
         });
       setOrders(AdminOrdersStatusUpdate);
     });
-    return () => socket.off('statusUpdate', () => console.log('canal statusUpdate desconectado'));
+    return () => socket
+      .off('statusUpdate', () => console.log('canal statusUpdate desconectado'));
   }, [orders]);
 
   useEffect(() => {

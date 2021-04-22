@@ -12,7 +12,7 @@ function ProductsCardsComponent({ element, index }) {
     setAmount,
   } = useContext(BeersAppContext);
 
-  const { name, url_image: urlImage, price, id } = element;
+  const { name, urlImage, price, id } = element;
 
   const storageInitialState = () => {
     const objQuantity = productQuantity
@@ -86,7 +86,7 @@ ProductsCardsComponent.propTypes = {
     name: PropTypes.string,
     price: PropTypes.string,
     id: PropTypes.number,
-    url_image: PropTypes.string,
+    urlImage: PropTypes.string,
   }).isRequired,
   index: PropTypes.number.isRequired,
 };

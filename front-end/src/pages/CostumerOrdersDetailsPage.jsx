@@ -22,9 +22,10 @@ function CostumerOrdersDetailsPage() {
     socket.on('statusUpdate', ({ status }) => {
       const AdminOrdersStatusUpdate = orders
         .map((element) => ({ ...element, status }));
-        setOrders(AdminOrdersStatusUpdate);
+      setOrders(AdminOrdersStatusUpdate);
     });
-    return () => socket.off('statusUpdate', () => console.log('canal statusUpdate desconectado'));
+    return () => socket
+      .off('statusUpdate', () => console.log('canal statusUpdate desconectado'));
   }, [orders]);
 
   useEffect(() => {
