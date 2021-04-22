@@ -12,11 +12,11 @@ const findOrCreate = async (userId, email) => {
   return conversation.messages;
 };
 
-const writeMessage = async ({ userId, text }) => {
+const writeMessage = async ({ userId, text, sender = 'client' }) => {
   const conversation = await model.findOne('userId', userId)
     .then((data) => {
       const currentMessage = data.messages;
-      currentMessage.push({ currMessage: text.currMessage, time: text.time });
+      currentMessage.push({ currMessage: text.currMessage, time: text.time, sender });
       return currentMessage;
     });
 

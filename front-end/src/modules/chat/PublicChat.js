@@ -14,6 +14,7 @@ const PublicChat = () => {
       text: { currMessage, time: chatTime() },
       email: userInfo.email,
     };
+
     const frontEndMessage = { currMessage, time: chatTime() };
     setMessagesList([...messagesList, frontEndMessage]);
     socket.emit('user-to-server', message);
@@ -43,9 +44,9 @@ const PublicChat = () => {
         {
           messagesList.map((message, index) => (
             <div key={ `message-${index}` }>
-              <p>{ message.time }</p>
-              <span>{ userInfo.email }</span>
-              <p>{ message.currMessage }</p>
+              <p data-testid="message-time">{ message.time }</p>
+              <span data-testid="nickname">{ userInfo.email }</span>
+              <p data-testid="text-message">{ message.currMessage }</p>
             </div>
           ))
         }
@@ -56,6 +57,7 @@ const PublicChat = () => {
         data-testid="message-input"
       />
       <button
+        data-testid="send-message"
         type="button"
         onClick={ () => handleSendBtn() }
       >

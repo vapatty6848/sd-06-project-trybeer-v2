@@ -5,7 +5,6 @@ export const chatTime = () => {
   const formatedDate = new Intl.DateTimeFormat('pt-BR', {
     hour: 'numeric',
     minute: 'numeric',
-    second: 'numeric',
   }).format(dateToFormat);
 
   return formatedDate;
