@@ -1,48 +1,54 @@
 import React from 'react';
 import '../../styles/Menu.css';
 import { useHistory } from 'react-router';
-import { FiMenu } from 'react-icons/fi';
+// import { FiMenu } from 'react-icons/fi';
 
-function MenuSideBar() {
+function MenuSideBarClient() {
   const history = useHistory();
 
   const handlePage = ({ target }) => {
     const { name } = target;
-    history.push(`/admin/${name}`);
+    history.push(`/${name}`);
   };
 
   return (
-    <div className="admin-side-bar-container menuSideBaraAd">
+    <div className="side-menu-container menuSideBar">
       <span
         data-testid="top-hamburguer"
         className="menuIcon"
-      >
-        <FiMenu />
-      </span>
-
+      />
       <button
         type="button"
         className="btnSideBar"
-        data-testid="side-menu-item-orders"
-        onClick={ handlePage }
-        name="orders"
+        data-testid="side-menu-item-products"
+        onClick={ (e) => handlePage(e) }
+        name="products"
       >
-        Meus Pedidos
+        Produtos
       </button>
       <button
         type="button"
         className="btnSideBar"
-        data-testid="side-menu-item-profile"
+        data-testid="side-menu-item-my-orders"
+        onClick={ handlePage }
+        name="orders"
+      >
+        Meus pedidos
+      </button>
+      <button
+        type="button"
+        className="btnSideBar"
+        data-testid="side-menu-item-my-profile"
         onClick={ handlePage }
         name="profile"
       >
-        Meu Perfil
+        Meu perfil
       </button>
       <button
         type="button"
         className="btnSideBar"
         data-testid="side-menu-item-logout"
-        onClick={ () => history.push('/login') }
+        onClick={ handlePage }
         name="login"
       >
         Sair
@@ -51,4 +57,4 @@ function MenuSideBar() {
   );
 }
 
-export default MenuSideBar;
+export default MenuSideBarClient;

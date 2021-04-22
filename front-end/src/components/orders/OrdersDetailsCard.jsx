@@ -25,7 +25,7 @@ const OrdersDetailsCard = ({ order, id }) => {
         >
           {`Pedido ${id}`}
         </div>
-        <p>{ order && order.status }</p>
+        <p>{ order.status }</p>
         <div
           data-testid="order-date"
         >

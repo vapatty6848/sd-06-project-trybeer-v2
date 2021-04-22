@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import '../../styles/Menu.css';
 import { FiMenu } from 'react-icons/fi';
-import MenuSideBar from './MenuSideBar';
+import MenuSideBarClient from './MenuSideBarClient';
 
 function MenuTop({ name }) {
   const [showSideBar, setShowSideBar] = useState(false);
@@ -24,7 +24,7 @@ function MenuTop({ name }) {
         </button>
         <span data-testid="top-title">{ name }</span>
         <div>
-          {showSideBar && <MenuSideBar />}
+          {showSideBar && <MenuSideBarClient />}
         </div>
       </div>
     </header>

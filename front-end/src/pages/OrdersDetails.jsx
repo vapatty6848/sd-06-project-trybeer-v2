@@ -13,10 +13,10 @@ const OrdersDetails = ({ match, history }) => {
   useEffect(() => {
     async function fetchOrderDetails() {
       const user = JSON.parse(localStorage.user);
-      const response = await api.getOrdersById(user.token, id);
-      console.log(response);
-      if (response.message) return history.push('/login');
-      setOrderDetails(response);
+      api.getOrdersById(user.token, id).then((response) => {
+        if (response.message) return history.push('/login');
+        setOrderDetails(response);
+      });
     }
     fetchOrderDetails();
   }, [history, id]);

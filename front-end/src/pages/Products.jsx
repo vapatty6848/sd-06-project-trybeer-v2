@@ -18,9 +18,10 @@ function Products({ history }) {
   useEffect(() => {
     async function fetchProducts() {
       const user = JSON.parse(localStorage.user);
-      const response = await api.getAllProducts(user.token);
-      if (response.message) return history.push('/login');
-      setProducts(response);
+      api.getAllProducts(user.token).then((response) => {
+        if (response.message) return history.push('/login');
+        setProducts(response);
+      });
     }
     fetchProducts();
   }, [history]);

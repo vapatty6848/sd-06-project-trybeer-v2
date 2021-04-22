@@ -3,52 +3,46 @@ import '../../styles/Menu.css';
 import { useHistory } from 'react-router';
 // import { FiMenu } from 'react-icons/fi';
 
-function MenuSideBar() {
+function MenuSideBarAdm() {
   const history = useHistory();
 
   const handlePage = ({ target }) => {
     const { name } = target;
-    history.push(`/${name}`);
+    history.push(`/admin/${name}`);
   };
 
   return (
-    <div className="side-menu-container menuSideBar">
-      <span
+    <div className="admin-side-bar-container menuSideBaraAd">
+      {/* <span
         data-testid="top-hamburguer"
         className="menuIcon"
-      />
-      <button
-        type="button"
-        className="btnSideBar"
-        data-testid="side-menu-item-products"
-        onClick={ (e) => handlePage(e) }
-        name="products"
       >
-        Produtos
-      </button>
+        <FiMenu />
+      </span> */}
+
       <button
         type="button"
         className="btnSideBar"
-        data-testid="side-menu-item-my-orders"
+        data-testid="side-menu-item-orders"
         onClick={ handlePage }
         name="orders"
       >
-        Meus pedidos
+        Meus Pedidos
       </button>
       <button
         type="button"
         className="btnSideBar"
-        data-testid="side-menu-item-my-profile"
+        data-testid="side-menu-item-profile"
         onClick={ handlePage }
         name="profile"
       >
-        Meu perfil
+        Meu Perfil
       </button>
       <button
         type="button"
         className="btnSideBar"
         data-testid="side-menu-item-logout"
-        onClick={ handlePage }
+        onClick={ () => history.push('/login') }
         name="login"
       >
         Sair
@@ -57,4 +51,4 @@ function MenuSideBar() {
   );
 }
 
-export default MenuSideBar;
+export default MenuSideBarAdm;

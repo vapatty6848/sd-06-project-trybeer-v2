@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import MenuSideBar from '../components/menuAdmin/MenuSideBar';
+import MenuSideBarAdm from '../components/menuAdmin/MenuSideBarAdm';
 
 function ProfileAdmin({ history }) {
   useEffect(() => {
@@ -20,7 +20,7 @@ function ProfileAdmin({ history }) {
 
   return (
     <div>
-      <MenuSideBar />
+      <MenuSideBarAdm />
       <h1>Perfil</h1>
       <p>Email:</p>
       <p data-testid="profile-email">{ userEmail }</p>

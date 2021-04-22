@@ -20,8 +20,9 @@ function Profile({ history }) {
   const handleClick = async () => {
     const updateUser = { ...JSON.parse(localStorage.user), name };
     localStorage.user = JSON.stringify(updateUser);
-    const updateApi = await api.updateNameOfUser(name, email);
-    if (updateApi) setUpdateName(true);
+    api.updateNameOfUser(name, email).then((response) => {
+      if (response) setUpdateName(true);
+    });
   };
 
   const handleChange = ({ target }) => {
