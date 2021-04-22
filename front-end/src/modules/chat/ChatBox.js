@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const ChatBox = ({ messages, handleSend, userInfo }) => {
   const [currMessage, setCurrMessage] = useState('');
@@ -28,11 +29,11 @@ const ChatBox = ({ messages, handleSend, userInfo }) => {
         onChange={ ({ target }) => handleChange(target.value) }
         placeholder="Digite..."
         data-testid="message-input"
-        onKeyPress={(e) => {
+        onKeyPress={ (e) => {
           if (e.key === 'Enter') {
-            handleEnter()
+            handleEnter();
           }
-        }}
+        } }
       />
       <button
         data-testid="send-message"
@@ -43,6 +44,12 @@ const ChatBox = ({ messages, handleSend, userInfo }) => {
       </button>
     </div>
   );
+};
+
+ChatBox.propTypes = {
+  messages: PropTypes.arrayOf(PropTypes.string).isRequired,
+  handleSend: PropTypes.func.isRequired,
+  userInfo: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 export default ChatBox;

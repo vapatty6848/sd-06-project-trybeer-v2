@@ -39,5 +39,5 @@ const writeMessage = async ({ userId, text, sender = 'client' }) => {
 module.exports = {
   findOrCreate,
   writeMessage,
-  getAll
+  getAll,
 };

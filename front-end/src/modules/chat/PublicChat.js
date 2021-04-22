@@ -3,10 +3,9 @@ import { chatTime } from '../../services/formatPatterns';
 import getUserInfo from '../../services/localStorage';
 import socket from './socket';
 import ChatBox from './ChatBox';
-import ChatMenu from './ChatMenu';
 
 const PublicChat = () => {
-  const [userInfo, setUserInfo] = useState({});
+  const [userInfo, setUserInfo] = useState(false);
   const [messagesList, setMessagesList] = useState([]);
 
   const handleSendBtn = (currMessage) => {
@@ -27,17 +26,24 @@ const PublicChat = () => {
   }, []);
 
   useEffect(() => {
-    const { userId, email } = userInfo;
-    socket.emit('user-to-server-connection', { userId, email });
-    socket.on('server-to-user-connection', (data) => setMessagesList([...data]));
-
-    // socket.on('teste2', (message) => setTest(message));
+    if (userInfo && userInfo.userId) {
+      const { userId, email } = userInfo;
+      socket.emit('user-to-server-connection', { userId, email });
+      socket.on('server-to-user-connection', (data) => setMessagesList([...data]));
+    }
   }, [userInfo]);
 
   return (
     <div>
       Chat Publico
-      <ChatBox messages={messagesList} handleSend={handleSendBtn} userInfo={userInfo} />
+      {
+        userInfo.userId
+        && <ChatBox
+          messages={ messagesList }
+          handleSend={ handleSendBtn }
+          userInfo={ userInfo }
+        />
+      }
     </div>
   );
 };
