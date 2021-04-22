@@ -9,7 +9,10 @@ function Orders() {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    getOrdersByUser().then((json) => setOrders(json));
+    getOrdersByUser().then((json) => {
+      console.log(json);
+      setOrders(json);
+    });
   }, []);
 
   const history = useHistory();

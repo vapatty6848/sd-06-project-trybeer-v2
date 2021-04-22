@@ -6,7 +6,7 @@ import '../styles/productcard.css';
 
 function ProductCard({ productInfo, index }) {
   const { totalPrice, setTotalPrice } = useContext(Context);
-  const { id, name, price, url_image: urlImage } = productInfo;
+  const { id, name, price, urlImage } = productInfo;
   const [productQuantity, setProductQuantity] = useState('0');
 
   useEffect(() => {

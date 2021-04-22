@@ -18,10 +18,13 @@ adminRouter.get('/orders/:id', validateToken, async (req, res) => {
   res.status(200).json(orderDetails);
 });
 
-adminRouter.put('/orders/:orderId', validateToken, async (req, res) => {
+adminRouter.put('/orders/:orderId/', validateToken, async (req, res) => {
   const { orderId } = req.params;
+  const { status } = req.headers;
+  console.log('req.body', req.headers.status);
+  console.log('req.params', req.params);
 
-  await services.markAsDelivered(orderId);
+  await services.updateStatus(orderId, status);
 
   return res.status(200).json({ message: 'order marked as delivered' });
 });

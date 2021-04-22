@@ -1,7 +1,7 @@
 const createSale = (sequelize, DataTypes) => {
-  const Sale = sequelize.define('Sale', {
+  const Sale = sequelize.define('sale', {
     userId: { type: DataTypes.INTEGER, foreignKey: true },
-    totalPrice: DataTypes.FLOAT,
+    totalPrice: DataTypes.STRING,
     deliveryAddress: DataTypes.STRING,
     deliveryNumber: DataTypes.INTEGER,
     saleDate: DataTypes.DATE,
@@ -10,10 +10,10 @@ const createSale = (sequelize, DataTypes) => {
 
   Sale.associate = (models) => {
     Sale.belongsTo(
-      models.User,
+      models.user,
       { foreignKey: 'userId', as: 'user' },
     );
-    Sale.hasMany(models.SaleProduct);
+    Sale.hasMany(models.saleProduct);
   };
 
   return Sale;

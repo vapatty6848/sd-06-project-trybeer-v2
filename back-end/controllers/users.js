@@ -7,7 +7,7 @@ const usersRouter = new Router();
 usersRouter.post('/', async (req, res) => {
   const { email, password } = req.body;
 
-  const [user] = await services.getUser(email, password);
+  const user = await services.getUser(email, password);
 
   if (user) {
     const token = createToken({ email, id: user.id, name: user.name });

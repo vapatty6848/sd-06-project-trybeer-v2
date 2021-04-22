@@ -6,9 +6,9 @@ import ParseCurrency from '../utils/parseCurrencyToBRL';
 function OrderCardAdm({ orderInfo, index }) {
   const {
     id,
-    delivery_address: house,
-    delivery_number: numberHouse,
-    total_price: totalPrice,
+    deliveryAddress: house,
+    deliveryNumber: numberHouse,
+    totalPrice,
     status,
   } = orderInfo;
 

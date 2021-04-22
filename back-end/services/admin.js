@@ -1,13 +1,16 @@
-const models = require('../models/admin');
+const { sale, product } = require('../models');
 
-const getAllOrders = async () => models.getAllOrders();
+const getAllOrders = async () => sale.findAll();
 
-const markAsDelivered = async (orderId) => models.markAsDelivered(orderId);
+const updateStatus = async (id, status) => sale.update({ status }, { where: { id } });
 
-const getOrderDetailsById = async (id) => models.getOrderDetailsById(id);
+const getOrderDetailsById = async (id) => (sale.findOne({ 
+  where: { id },
+  include: [{ model: product, as: 'product', through: { attributes: ['quantity'] } }], /* By Coruja */
+}));
 
 module.exports = {
   getAllOrders,
-  markAsDelivered,
+  updateStatus,
   getOrderDetailsById,
 };

@@ -24,7 +24,9 @@ function Products() {
 
     if (!user) history.push('/login');
 
-    getAllProducts().then((json) => setProducts(json.products));
+    getAllProducts().then((json) => {
+      setProducts(json.products);
+    });
   }, [history]);
 
   useEffect(() => {

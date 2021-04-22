@@ -8,8 +8,8 @@ import '../styles/orders.css';
 function OrderCard({ orderInfo, index }) {
   const {
     id: orderId,
-    total_price: totalPrice,
-    sale_date: date,
+    totalPrice,
+    saleDate: date,
   } = orderInfo;
 
   const history = useHistory();

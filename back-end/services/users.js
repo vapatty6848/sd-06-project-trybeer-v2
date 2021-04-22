@@ -1,12 +1,12 @@
-const models = require('../models/users');
+const { user } = require('../models');
 
-const getUser = async (email, password) => models.getUser(email, password);
+const getUser = async (email, password) => user.findOne({ where: { email, password } });
 
-const getUserByEmail = async (email) => models.getUserByEmail(email);
+const getUserByEmail = async (email) => user.findOne({ where: { email } });
 
-const addUser = async (name, email, password, role) => models.addUser(name, email, password, role);
+const addUser = async (name, email, password, role) => user.create(name, email, password, role);
 
-const updateUser = async (name, email) => models.updateUser(name, email);
+const updateUser = async (name, email) => user.update({ name }, { where: { email } });
 
 module.exports = {
   getUser,

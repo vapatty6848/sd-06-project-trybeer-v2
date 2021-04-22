@@ -17,20 +17,20 @@ function DetailsOrderAdm({ match }) {
 
     if (!user) history.push('/login');
 
-    getOrderDetails(id).then((response) => { setOrderDetails(response); });
+    getOrderDetails(id).then((response) => setOrderDetails(response));
   }, [history, id]);
 
   const handleClick = async () => {
-    await markAsDelivered(id);
     setStatus('Entregue');
+    await markAsDelivered(id, 'Entregue');
   };
 
   useEffect(() => {
-    const statusOrder = orderDetails.map((order) => order.status)[0];
+    const statusOrder = orderDetails.status;
     if (statusOrder === 'Entregue') {
       setStatus('Entregue');
     }
-  });
+  }, [orderDetails.status]);
 
   return !orderDetails ? <h1>Loading...</h1> : (
     <div>
@@ -47,10 +47,10 @@ function DetailsOrderAdm({ match }) {
         </div>
         <div className="order-items-adm">
           <ul>
-            {(orderDetails.map((order, index) => (
+            {(orderDetails.product && orderDetails.product.map((order, index) => (
               <li key={ index }>
                 <span data-testid={ `${index}-product-qtd` }>
-                  { `${order.quantity}  ` }
+                  { `${order.saleProduct.quantity}  ` }
                 </span>
                 <span data-testid={ `${index}-product-name` }>
                   { ` ${order.name}  ` }
@@ -62,13 +62,15 @@ function DetailsOrderAdm({ match }) {
                   className="total-item-price"
                   data-testid={ `${index}-product-total-value` }
                 >
-                  { parseCurrency(`${(order.price * order.quantity).toFixed(2)}`) }
+                  {parseCurrency(
+                    `${(order.price * order.saleProduct.quantity).toFixed(2)}`,
+                  )}
                 </span>
               </li>)))}
           </ul>
           <span className="price-order" data-testid="order-total-value">
             Total:
-            { orderDetails.map((order) => parseCurrency(order.total_price))[0] }
+            { orderDetails.totalPrice && parseCurrency(orderDetails.totalPrice) }
           </span>
         </div>
         <button

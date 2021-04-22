@@ -2,14 +2,17 @@ const url = 'http://localhost:3001/admin';
 
 const getAllOrders = () => fetch(`${url}/orders`).then((response) => response.json());
 
-const markAsDelivered = async (id) => {
+const markAsDelivered = async (id, status) => {
   const user = JSON.parse(localStorage.getItem('user'));
+  console.log(status);
 
   return fetch(`${url}/orders/${id}`, {
     method: 'PUT',
     headers: {
       authorization: user.token,
+      status: 'Entregue',
     },
+    // body: {"status": "Entregue"},
   }).then((response) => response.json());
 };
 

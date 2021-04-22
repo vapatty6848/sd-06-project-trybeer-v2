@@ -7,6 +7,7 @@
     "drop": "npx sequelize-cli db:drop $",
     "seed": "npx sequelize-cli db:seed:all $",
     "prestart": "npx sequelize-cli db:create && npx sequelize-cli db:migrate $",
+    "all": "npm run drop && npm run prestart && npm run seed",
     "start": "node index.js",
     "test": "jest --watchAll",
     "test-band": "jest --watchAll --runInBand --detectOpenHandles",

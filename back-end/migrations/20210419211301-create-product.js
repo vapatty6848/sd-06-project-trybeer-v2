@@ -8,7 +8,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       name: Sequelize.STRING,
-      price: Sequelize.FLOAT,
+      price: Sequelize.STRING,
       urlImage: Sequelize.STRING,
     });
   },
