@@ -23,7 +23,7 @@ routerSalesDetails.get('/:id', async (req, res, next) => {
          { model: products, as: 'product', attributes: [] },
         ],
        attributes: [
-         'quantity',
+         'quantity', 'saleId',
          [sequelize.col('sale.saleDate'), 'saleDate'],
          [sequelize.col('product.price'), 'price'],
          [sequelize.literal('product.price * quantity'), 'totalPrice'],
