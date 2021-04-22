@@ -24,10 +24,19 @@ routerSales.post('/', validateToken, async (req, res) => {
   } });
 });
 
-routerSales.get('/', validateToken, async (req, res) => {
-  const { userId } = res.locals;
-  const orders = await sales.findByPk(userId);
-  res.status(200).json({ orders });
+routerSales.get('/', validateToken, async (req, res, next) => {
+  try {
+    const { userId } = res.locals;
+    // const orders = await sales.findByPk(userId);
+    const orders = await sales.findAll({ where: { userId } });
+    // const orders = await sales.getUser();
+    // const orders = await sales.getUsers();
+    // const orders = await sales.getUserId();
+    // const orders = await sales.getUsersId();
+    res.status(200).json({ orders });
+  } catch (err) {
+    next(err);
+  }
 });
 
 routerSales.use('/', routerSalesDetails);
