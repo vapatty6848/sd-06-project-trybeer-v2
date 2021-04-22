@@ -1,8 +1,6 @@
 const { Router } = require('express');
 const rescue = require('express-rescue');
-const LoginService = require('../service/LoginService');
-const ProductService = require('../service/ProductService');
-const CheckoutService = require('../service/CheckoutService');
+const { Users, Sales, Products, SalesProducts } = require('../../models');
 
 const router = new Router();
 
@@ -13,8 +11,10 @@ router.post('/', rescue(async (req, res) => {
   try {
     const { cart, userEmail, totalPrice, status, rua, numero } = req.body;
 
-    const { id: userId } = await LoginService.getByEmail(userEmail);
-    const products = await ProductService.getAll();
+    const { id: userId } = await Users.findOne({ where: {
+      email: userEmail,
+    } });
+    const products = await Products.findAll();
 
     const newCart = cart.map((product) => {
       const newProduct = products.find((newP) => product.name === newP.name);
@@ -22,13 +22,17 @@ router.post('/', rescue(async (req, res) => {
       return { id: newProduct.id, quantity: product.quantity };
     });
 
-    const { id: saleId } = await CheckoutService.create({
-      userId, totalPrice: totalPrice.replace(',', '.'), rua, numero, status,
+    const { id: saleId } = await Sales.create({
+      userId,
+      totalPrice: totalPrice.replace(',', '.'),
+      deliveryAddress,
+      deliveryNumber,
+      status,
     });
 
     const saleProduct = newCart.map((element) => ({ saleId, ...element }));
 
-    await CheckoutService.createSaleProduct(saleProduct);
+    await SalesProducts.create(saleProduct);
 
     return res.status(OK).json({ message: 'Sales success' });
   } catch (err) {
