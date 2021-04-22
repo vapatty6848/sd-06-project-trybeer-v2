@@ -2,9 +2,9 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('sales_products', {
+    await queryInterface.createTable('salesProducts', {
       // eslint-disable-next-line camelcase
-      sale_id: { type: Sequelize.INTEGER,
+      saleId: { type: Sequelize.INTEGER,
         primaryKey: true,
         allowNull: false,
         onUpdate: 'CASCADE', 
@@ -12,7 +12,7 @@ module.exports = {
         references: { model: 'sales', key: 'id' },
       },
       // eslint-disable-next-line camelcase
-      product_id: { type: Sequelize.INTEGER,
+      productId: { type: Sequelize.INTEGER,
         primaryKey: true,
         allowNull: false,
         onUpdate: 'CASCADE',
@@ -24,6 +24,6 @@ module.exports = {
   },
 
   down: async (queryInterface, _Sequelize) => {
-    await queryInterface.dropTable('sales_products');
+    await queryInterface.dropTable('salesProducts');
   },
 };

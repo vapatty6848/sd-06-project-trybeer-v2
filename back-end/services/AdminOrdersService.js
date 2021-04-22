@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const { OK, BAD_REQUEST } = require('../utils/allStatusCode');
-const { sales, sales_products, products } = require('../models');
+const { sales, salesProducts, products } = require('../models');
 
 const allOrders = async (_req, res) => {
   const ordersList = await sales.findAll();
@@ -9,8 +9,8 @@ const allOrders = async (_req, res) => {
 
 const getAdminOrder = async (req, res) => {
   const { id } = req.params;
-  const order = await sales_products.findAll({
-    where: { sale_id: id },
+  const order = await salesProducts.findAll({
+    where: { saleId: id },
     attributes: ['quantity',
     [Sequelize.col('products.name'), 'name'],
     [Sequelize.col('products.price'), 'price'],

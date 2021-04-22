@@ -5,7 +5,7 @@ import statusConvert from '../service/statusConvert';
 import '../style/OrderCards.css';
 
 function CostumerOrdersCardsComponent({ element, index }) {
-  const { id, total_price: totalPrice, sale_date: saleDate, status } = element;
+  const { id, totalPrice: totalPrice, saleDate: saleDate, status } = element;
 
   const parseDate = () => {
     const dateAsString = new Date(saleDate);
@@ -40,8 +40,8 @@ CostumerOrdersCardsComponent.propTypes = {
   element: PropTypes.shape({
     replace: PropTypes.func,
     id: PropTypes.number,
-    sale_date: PropTypes.string,
-    total_price: PropTypes.number,
+    saleDate: PropTypes.string,
+    totalPrice: PropTypes.number,
   }).isRequired,
 };
 

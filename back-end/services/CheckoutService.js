@@ -1,12 +1,12 @@
 const tokenValidation = require('../utils/tokenValidation');
 const { BAD_REQUEST, OK } = require('../utils/allStatusCode');
-const { products, sales, sales_products } = require('../models');
+const { products, sales, salesProducts } = require('../models');
 
-const dataValidate = (deliveryNumber, deliveryAddress, salesProducts, res) => {
+const dataValidate = (deliveryNumber, deliveryAddress, salesProductsParam, res) => {
   const objErr = (err, status) => { res.status(status).json({ status, err }); }; 
   const errorDeliveryNumber = Number.isNaN(deliveryNumber);
   const errorDeliveryAddress = !deliveryAddress;
-  const errorSalesProducts = salesProducts.length < 1;
+  const errorSalesProducts = salesProductsParam.length < 1;
   if (errorDeliveryNumber) objErr('Delivery number, must be a number', BAD_REQUEST);
   if (errorDeliveryAddress) objErr('Address field, must be filled', BAD_REQUEST);
   if (errorSalesProducts) objErr('Sales Products can not be empty', BAD_REQUEST);
@@ -18,11 +18,11 @@ const CheckoutServices = async (req, res) => {
   const { authorization } = req.headers;
   const payload = tokenValidation(authorization);
   const { id } = payload;
-  const { deliveryAddress, deliveryNumber, salesProducts } = req.body;
+  const { deliveryAddress, deliveryNumber, salesProducts: salesProductsParam } = req.body;
 
-  dataValidate(deliveryNumber, deliveryAddress, salesProducts, res);
+  dataValidate(deliveryNumber, deliveryAddress, salesProductsParam, res);
 
-  const totalPrice = await salesProducts.reduce(async (total, element) => {
+  const totalPrice = await salesProductsParam.reduce(async (total, element) => {
     const productId = parseInt(element[0], 10);
     const productQuantity = parseInt(element[1], 10);
     const { dataValues: { price } } = await products.findByPk(productId);
@@ -31,39 +31,29 @@ const CheckoutServices = async (req, res) => {
   }, 0);
 
   const data = {
-    user_id: id,
-    total_price: totalPrice,
-    delivery_address: deliveryAddress, 
-    delivery_number: deliveryNumber,
+    userId: id,
+    totalPrice,
+    deliveryAddress, 
+    deliveryNumber,
     status: saleStatus,
   };
 
   const { dataValues: saleTable } = await sales.create(data);
 
   const newSalesProducts = [];
-  salesProducts.forEach((element) => { 
+  salesProductsParam.forEach((element) => { 
     newSalesProducts.push([saleTable.id, ...element]);
   });
 
-  newSalesProducts.forEach(async ([sale_id, product_id, quantity]) => {
-    await sales_products.create({
-      sale_id,
-      product_id,
+  newSalesProducts.forEach(async ([saleId, productId, quantity]) => {
+    await salesProducts.create({
+      saleId,
+      productId,
       quantity,
     });
   });
 
-  const saleReturn = {
-    id: saleTable.user_id,
-    totalPrice: saleTable.total_price,
-    deliveryAddress: saleTable.delivery_address,
-    deliveryNumber: saleTable.delivery_number,
-    saleStatus: saleTable.status,
-    saleDate: saleTable.sale_date,
-    salesProducts,
-  };
-  
-  return res.status(OK).json(saleReturn);
+  return res.status(OK).json({ ...saleTable, salesProducts: salesProductsParam });
 };
 
 module.exports = CheckoutServices;
