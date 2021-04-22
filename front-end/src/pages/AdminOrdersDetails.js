@@ -18,8 +18,6 @@ function AdminOrdersDetails(props) {
     getOrder(id).then((result) => setOrders(result));
   }, [delivered]);
 
-  console.log(orders)
-
   return (
     <div className="div-main">
       { !loggedUser && <Redirect to="/login" />}
@@ -37,7 +35,7 @@ function AdminOrdersDetails(props) {
                 {orders[0].products.map((order, index) => (
                   <div key={ index }>
                     <h3 data-testid={ `${index}-product-qtd` }>
-                      {`${order['sales_products'].quantity}`}
+                      {`${order.sales_products.quantity}`}
                     </h3>
                     <h3 data-testid={ `${index}-product-name` }>{order.name}</h3>
                     <h3 data-testid={ `${index}-product-total-value` }>
