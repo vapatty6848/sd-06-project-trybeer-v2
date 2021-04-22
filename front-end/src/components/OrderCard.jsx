@@ -18,7 +18,7 @@ function CheckoutCard(props) {
     setTotalprice,
   } = useContext(BeerContext);
 
-  const date = JSON.stringify(order.sale_date);
+  const date = JSON.stringify(order.saleDate);
   const formattedDate = `${date
     .substr(firstPositionDay, length)}/${date.substr(firstPositionMonth, length)}`;
 
@@ -27,7 +27,7 @@ function CheckoutCard(props) {
       await getproductsBySaleId(setProductsOrder, order.id);
       setSaleIdOrder(order.id);
       setDateOrder(formattedDate);
-      setTotalprice(order.total_price.toString().replace('.', ','));
+      setTotalprice(order.totalPrice.toString().replace('.', ','));
     }
     setInfoProvider();
   };
@@ -52,7 +52,7 @@ function CheckoutCard(props) {
       <p data-testid={ `${index}-order-total-value` }>
         Preço: R$
         {' '}
-        { order.total_price.toString().replace('.', ',') }
+        { order.totalPrice.toString().replace('.', ',') }
       </p>
     </div>
   );

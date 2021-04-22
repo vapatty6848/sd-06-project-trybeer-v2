@@ -4,7 +4,7 @@ const { verifyLogin, SECRET } = require('../middlewares/authToken');
 const {
   verifyId,
 } = require('../service/UserService');
-const { User } = require('../models');
+const { user: User } = require('../models');
 const { OK, CREATED, CONFLICT } = require('../schema/statusSchema');
 
 const jwtConfig = {

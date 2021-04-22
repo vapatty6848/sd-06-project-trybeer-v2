@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { user: User } = require('../models');
 const { NOT_FOUND, CONFLICT } = require('../schema/statusSchema');
 
 // Verify user by email and password

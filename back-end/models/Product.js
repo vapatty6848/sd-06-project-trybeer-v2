@@ -1,11 +1,11 @@
 module.exports = (sequelize, DataTypes) => {
-  const Products = sequelize.define('Product', {
+  const Products = sequelize.define('product', {
     name: DataTypes.STRING,
     price: DataTypes.DOUBLE,
     urlImage: DataTypes.STRING,
   },
   {
-    timestamps: false
+    timestamps: false,
   });
 
   // Products.associate = (models) => {

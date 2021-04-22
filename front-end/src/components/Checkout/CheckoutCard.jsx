@@ -16,12 +16,12 @@ function CheckoutCard(props) {
       <div>
         <p data-testid={ `${index}-product-name` }>{product.name}</p>
         <p data-testid={ `${index}-product-unit-price` }>
-          {`(R$ ${product.price.replace('.', ',')} un)`}
+          {`(R$ ${product.price.toString().replace('.', ',')} un)`}
         </p>
       </div>
       <p data-testid={ `${index}-product-total-value` }>
         R$
-        {` ${(parseFloat(product.price) * product.total).toFixed(2).replace('.', ',')}`}
+        {` ${(parseFloat(product.price) * product.total).toFixed(2).toString().replace('.', ',')}`}
       </p>
       <button
         data-testid={ `${index}-removal-button` }

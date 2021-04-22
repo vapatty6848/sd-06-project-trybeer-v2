@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { Product } = require('../models');
+const { product: Product } = require('../models');
 const { verifyLogin } = require('../middlewares/authToken');
 const { OK } = require('../schema/statusSchema');
 

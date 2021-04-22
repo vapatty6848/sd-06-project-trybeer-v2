@@ -7,7 +7,7 @@ import '../css/OrderCardAdmin.css';
 
 function OrderCardAdmin(props) {
   const { order, index } = props;
-  const total = order.total_price.replace('.', ',');
+  const total = order.totalPrice.toString().replace('.', ',');
   const { setSaleDetail } = useContext(BeerContext);
 
   const handleClick = () => {
@@ -34,7 +34,7 @@ function OrderCardAdmin(props) {
             data-testid={ `${index}-order-address` }
             className="admin-order-address"
           >
-            {`${order.delivery_address}, ${order.delivery_number}`}
+            {`${order.deliveryAddress}, ${order.deliveryNumber}`}
           </p>
           <div className="total-and-status">
             <p

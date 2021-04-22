@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { verifyLogin } = require('../middlewares/authToken');
-const { Product, Sale, SalesProducts } = require('../models');
+const { product: Product, sale: Sale, salesProduct: SalesProduct } = require('../models');
 const { OK } = require('../schema/statusSchema');
 
 const SalesController = new Router();
@@ -8,7 +8,7 @@ const SalesController = new Router();
 // Get All Sales
 SalesController.get('/', verifyLogin, async (req, res) => {
   const sales = await Sale.findAll();
-  res.status(OK).json(sales);
+  return res.status(OK).json(sales);
 });
 
 // Get All Sales by User
@@ -55,10 +55,10 @@ SalesController.post('/checkout', verifyLogin, async (req, res) => {
     status: 'Pendente',
   });
 
-  items.map((elem) => SaleProduct.create({
+  items.map((elem) => SalesProduct.create({
     saleId: id,
     productId: elem.id,
-    quantity: elem.total
+    quantity: elem.total,
   }));
 
   res.status(OK).json({ saleId: id });

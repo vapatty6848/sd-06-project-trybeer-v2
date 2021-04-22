@@ -7,7 +7,7 @@ const jwtConfig = {
   algorithm: 'HS256',
 };
 
-const { User } = require('../models');
+const { user: User } = require('../models');
 const { OK, UNAUTHORIZED } = require('../schema/statusSchema');
 const LoginController = new Router();
 
@@ -19,9 +19,9 @@ LoginController.post('/', async (req, res) => {
     const { role } = user;
     const token = jwt.sign({ data: user }, SECRET, jwtConfig);
 
-    res.status(OK).json({ token, role });
+    return res.status(OK).json({ token, role });
   } catch (e) {
-    res.status(UNAUTHORIZED).json({ message: 'Incorrect email or password' });
+    return res.status(UNAUTHORIZED).json({ message: 'Incorrect email or password' });
   }
 });
 

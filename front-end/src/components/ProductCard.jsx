@@ -7,7 +7,7 @@ function ProductCard(props) {
   const { product, setTotal, index } = props;
   const quantityStorage = localStorage.getItem(product.name);
   const [quantity, setQuantity] = useState(0);
-  const { id, name, price, url_image: urlImage } = product;
+  const { id, name, price, urlImage } = product;
   const params = { quantity, setQuantity, name, setTotal, price, id };
 
   useEffect(() => {
@@ -29,7 +29,7 @@ function ProductCard(props) {
       <section className="product-info">
         <p data-testid={ `${index}-product-price` }>
           R$
-          { ` ${price.replace('.', ',')}` }
+          { ` ${price.toString().replace('.', ',')}` }
         </p>
         <p data-testid={ `${index}-product-name` }>{ product.name }</p>
         <section>
