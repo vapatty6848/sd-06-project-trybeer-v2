@@ -13,23 +13,25 @@ router.get('/', rescue(async (_req, res) => {
   return res.status(OK).json(sale);
 }));
 
-router.get('/:id', rescue(async (req, res) => {
-  try {
-    const { id } = req.params;
-    const orderInfo = await sales.findOne({
-      where: { id },
-      include: {
-        model: products,
-        as: 'products',
-        through: { attributes: ['quantity'], as: 'sale' },
-      },
-    });
+// router.get('/:id', rescue(async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const orderInfo = await sales.findByPK(
+//       id,
+//       {
+//         include: {
+//           model: products,
+//           as: 'products',
+//           through: { attributes: ['quantity'], as: 'sale' },
+//         },
+//       }
+//     );
 
-    return res.status(OK).json(orderInfo);
-  } catch (error) {
-    return res.status(BAD_REQUEST).json({ message: 'No orders found' });
-  }
-}));
+//     return res.status(OK).json(orderInfo);
+//   } catch (error) {
+//     return res.status(BAD_REQUEST).json({ message: 'No orders found' });
+//   }
+// }));
 
 router.put('/:id', rescue(async (req, res) => {
   const { id } = req.params;

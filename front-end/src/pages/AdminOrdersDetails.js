@@ -8,6 +8,7 @@ import './Admin.css';
 
 function AdminOrdersDetails(props) {
   const { match: { params: { id } } } = props;
+
   const [orders, setOrders] = useState([]);
   const [delivered, setDelivered] = useState(false);
 
@@ -17,21 +18,23 @@ function AdminOrdersDetails(props) {
     getOrder(id).then((result) => setOrders(result));
   }, [delivered]);
 
+  console.log(orders.length)
+
   return (
     <div className="div-main">
       { !loggedUser && <Redirect to="/login" />}
       <SideBarAdmin />
       <div className="div-filha">
         {
-          !orders.length > 0
+          !orders
             ? <div>no orders</div>
             : (
               <div className="divDetails">
                 <h2 data-testid="order-number">{`Pedido ${id} - `}</h2>
-                <h2 data-testid="order-status" className={ orders[0].status }>
-                  {orders[0].status}
+                <h2 data-testid="order-status" className={ orders.status }>
+                  {orders.status}
                 </h2>
-                {orders.map((order, index) => (
+                {orders.products.map((order, index) => (
                   <div key={ index }>
                     <h3 data-testid={ `${index}-product-qtd` }>
                       {`${order.quantity}`}

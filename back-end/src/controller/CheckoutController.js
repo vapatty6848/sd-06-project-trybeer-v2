@@ -1,8 +1,6 @@
 const { Router } = require('express');
 const rescue = require('express-rescue');
-const {
-  users, sales, products, sales_products: salesProducts,
-} = require('../../models');
+const { users, sales, products } = require('../../models');
 
 const router = new Router();
 
@@ -12,20 +10,22 @@ router.post('/', rescue(async (req, res) => {
     const { cart, userEmail, totalPrice, status, rua, numero } = req.body;
     const { id: userId } = await users.findOne({ where: { email: userEmail } });
     const newProducts = await products.findAll();
+
     const newCart = cart.map((product) => {
       const newProduct = newProducts.find((newP) => product.name === newP.name);
-      return { id: newProduct.id, quantity: product.quantity };
+      return { productId: newProduct.id, quantity: product.quantity };
     });
-    const { id: saleId } = await sales.create({
+
+    const newSale = await sales.create({
       userId,
       totalPrice: totalPrice.replace(',', '.'),
       deliveryAddress: rua,
       deliveryNumber: numero,
       status,
     });
-    console.log(saleId);
-    const saleProduct = newCart.map((element) => ({ saleId, ...element }));
-    await salesProducts.create(saleProduct);
+
+    newSale.setProducts(newCart);
+
     return res.status(OK).json({ message: 'Sales success' });
 }));
 
