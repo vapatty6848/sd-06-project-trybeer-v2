@@ -1,35 +1,43 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { TopMenu } from '../components';
 import TrybeerContext from '../context/TrybeerContext';
 import { verifyToken } from '../utils/verifications';
+import PropTypes from 'prop-types';
 
 function Chat({ history }) {
-  const [message, setMessage] = useState('');
+  const [currentMessage, setCurrentMessage] = useState('');
   const { user } = useContext(TrybeerContext);
-  const messages = [{ message: 'Hello', timestamp: '14:36'}, { message: 'Hello', timestamp: '14:36'}]
+  const messages = [{ message: 'Hello', timestamp: '14:36' },
+    { message: 'Hello', timestamp: '14:36' }];
 
   const fetchMessages = async () => {
     const allMessages = await verifyToken('chat', user, history);
     console.log('allMessages', allMessages);
   };
 
+  fetchMessages();
+
   const onChangeMessage = ({ target: { value } }) => {
-    setMessage(value);
-  }
+    setCurrentMessage(value);
+  };
 
   const handleSubmit = () => {
-    messages.push({ message, timestamp: '14:00'});
+    messages.push({ currentMessage, timestamp: '14:00' });
     console.log(messages);
-  }
+  };
 
   return (
     <div>
       <TopMenu />
-      <br/>
-      <br/>
+      <br />
+      <br />
       <ul>
-        {messages.map(({ message, timestamp}) => (
-          <li>{user.email} {timestamp} {message}</li>
+        {messages.map(({ message, timestamp }, index) => (
+          <li key={ index }>
+            {user.email}
+            {timestamp}
+            {message}
+          </li>
         ))}
       </ul>
       <input
@@ -50,5 +58,9 @@ function Chat({ history }) {
     </div>
   );
 }
+
+Chat.propTypes = {
+  history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
+};
 
 export default Chat;
