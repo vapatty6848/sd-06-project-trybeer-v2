@@ -96,23 +96,20 @@ export const getOrderDetails = async (id) => {
   const order = await axios({
     url: `http://localhost:3001/orderdetails/${id}`,
   }).then((res) => {
-      console.log(res.data);
-      const productsArray = res.data.products.map((product) => {
-        return {
-          name: product.name,
-          price: Number(product.price) * product.sales_products.quantity,
-          quantity: product.sales_products.quantity,
-          urlImage: product.urlImage,
-        }
-      });
-      const finalResponse = {
-        id: res.data.id,
-        saleDate: res.data.saleDate,
-        valueTotal: res.data.totalPrice,
-        products: productsArray,
-      }
-      return finalResponse;
-      })
+    const productsArray = res.data.products.map((product) => ({
+      name: product.name,
+      price: Number(product.price) * product.sales_products.quantity,
+      quantity: product.sales_products.quantity,
+      urlImage: product.urlImage,
+    }));
+    const finalResponse = {
+      id: res.data.id,
+      saleDate: res.data.saleDate,
+      valueTotal: res.data.totalPrice,
+      products: productsArray,
+    };
+    return finalResponse;
+  })
     .catch(() => {
       console.error(ORDER_NOT_FOUND);
     });
@@ -124,16 +121,16 @@ export const getAllAdminOrders = async () => {
   const orders = await axios({
     url: 'http://localhost:3001/admin/orders',
   }).then((res) => {
-      const newResponse = res.data.map((sale) => ({
-        id: sale.id,
-        number: sale.deliveryNumber,
-        status: sale.status,
-        address: sale.deliveryAddress,
-        totalValue: sale.totalPrice,
-      }));
+    const newResponse = res.data.map((sale) => ({
+      id: sale.id,
+      number: sale.deliveryNumber,
+      status: sale.status,
+      address: sale.deliveryAddress,
+      totalValue: sale.totalPrice,
+    }));
 
-      return newResponse;
-    })
+    return newResponse;
+  })
     .catch(() => {
       console.error(ORDER_NOT_FOUND);
     });

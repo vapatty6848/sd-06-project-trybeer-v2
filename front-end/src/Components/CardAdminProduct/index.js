@@ -9,7 +9,7 @@ const CardAdminProduct = ({ product, index }) => (
     <S.Products>
 
       <S.Image>
-        <img src={product.urlImage} alt={product.name} />
+        <img src={ product.urlImage } alt={ product.name } />
       </S.Image>
 
       <S.DescriptionProducts>
@@ -49,7 +49,7 @@ const CardAdminProduct = ({ product, index }) => (
 
 CardAdminProduct.defaultValue = {
   quantity: '',
-}
+};
 
 CardAdminProduct.propTypes = {
   product: PropTypes.shape({

@@ -17,7 +17,7 @@ const SalesService = require('./Services/salesService');
 app.use(bodyParser.json());
 app.use(cors());
 
-app.use(express.static(`${__dirname}/images`));
+app.use('/images', express.static(`${__dirname}/images`));
 
 app.post('/login', rescue(UserService.loginUser));
 

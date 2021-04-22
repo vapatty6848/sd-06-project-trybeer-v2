@@ -223,7 +223,6 @@ const PreparingButton = styled.button`
   `}
 `;
 
-
 export default {
   Container,
   Content,

@@ -8,7 +8,6 @@ import CardAdminProduct from '../CardAdminProduct';
 import S from './styles';
 
 const modifyStatus = async (setPending, id) => {
-
   setPending(false);
 
   await updateStatus(id, 'Entregue');
@@ -16,7 +15,7 @@ const modifyStatus = async (setPending, id) => {
 
 const modifyPreparingStatus = async (setPreparing, id) => {
   setPreparing(false);
-  console.log('entrei no preparingStatus');
+
   await updateStatus(id, 'Preparando');
 };
 
@@ -33,7 +32,7 @@ const CardAdminDetails = () => {
       const fetchData = await getAdminOrderById(id);
       setOrders(fetchData);
       setStatus(fetchData.status);
-      
+
       if (fetchData.status === 'Pendente') {
         setPending(true);
       } else {
@@ -84,7 +83,8 @@ const CardAdminDetails = () => {
               {' '}
               R$
               {' '}
-              {(!orders.totalPrice ? '' : Number(orders.totalPrice)).toFixed(2).replace('.', ',')}
+              {(!orders.totalPrice ? '' : Number(orders.totalPrice))
+                .toFixed(2).replace('.', ',')}
             </h1>
 
             <S.PreparingButton

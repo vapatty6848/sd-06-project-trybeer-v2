@@ -50,7 +50,7 @@ export default function form([
         value={ name }
         label="Nome"
         dataTestid="profile-name-input"
-        onChange={ ({ target: { value } }) =>  validateUpdate(value)}
+        onChange={ ({ target: { value } }) => validateUpdate(value) }
         themeStorage={ theme && theme.title }
         icon={ BiUser }
       />

@@ -8,7 +8,7 @@ import CardAdminDetails from '../../Components/CardAdminDetails';
 
 import S from './styles';
 
-const AdminOrderDetails = (props) => {
+const AdminOrderDetails = () => {
   const { stateSideBarAdmin } = useContext(GlobalContext);
 
   return (

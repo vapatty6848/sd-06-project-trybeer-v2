@@ -70,7 +70,9 @@ const getAdminOrderDetails = async (req, res) => {
 
 const editOrderStatus = async (req, res) => {
   const { id } = req.params;
-  await models.sales.update({ status: 'Entregue' }, { where: { id } });
+  const { status } = req.body;
+  
+  await models.sales.update({ status }, { where: { id } });
   
   res.status(200).json({ message: 'ok' });
 };
