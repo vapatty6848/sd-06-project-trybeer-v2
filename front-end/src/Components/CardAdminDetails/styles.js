@@ -192,6 +192,38 @@ const ConfirmButton = styled.button`
   `}
 `;
 
+const PreparingButton = styled.button`
+  ${({ theme, preparing }) => css`
+    width: 180px;
+    height: 50px;
+
+    font-size: 18px;
+    font-weight: 550;
+    color: #353535;
+
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 5px ${theme.colors.shadowCards};
+    
+    background: ${theme.colors.colorStatusYellow};
+
+    display: ${!preparing && 'none'};
+
+    @media (max-width: 900px) {
+      animation: ${animate} 0.5s;
+    }
+
+    cursor: pointer;
+    outline: none;
+    transition: filter 0.3s;
+
+    &:hover {
+      filter: brightness(0.9);
+    }
+  `}
+`;
+
+
 export default {
   Container,
   Content,
@@ -200,4 +232,5 @@ export default {
   ColorStatusBottom,
   ContentLeft,
   ContentRight,
+  PreparingButton,
 };

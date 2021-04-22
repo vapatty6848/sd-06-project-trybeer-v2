@@ -27,6 +27,19 @@ const Products = styled.div`
   `}
 `;
 
+const Image = styled.div`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 115px;
+
+  > img {
+    height: 115px;
+    margin-bottom: 5px;
+  }
+`;
+
 const DescriptionProducts = styled.div`
   ${() => css`
     width: 100%;
@@ -111,6 +124,7 @@ const ButtonProduct = styled.button`
 export default {
   Container,
   Products,
+  Image,
   DescriptionProducts,
   ButtonProduct,
 };

@@ -17,7 +17,7 @@ const handleCartList = ({
   quantity,
   value,
   name,
-  image,
+  urlImage,
 }, cartList, setCartList) => {
   if (value === 'plus') quantity += 1;
   else quantity -= 1;
@@ -25,7 +25,7 @@ const handleCartList = ({
   const product = cartList.find((item) => item.id === id);
 
   if (!product || product === undefined) {
-    setCartList([...cartList, { id, name, price, quantity, imageUrl: image }]);
+    setCartList([...cartList, { id, name, price, quantity, imageUrl: urlImage }]);
   } else if (product && product.id === id) {
     product.quantity = quantity;
   } else {
@@ -70,8 +70,6 @@ const handleCounter = (
 const CardProducts = ({ product }) => {
   const { id, price, name, urlImage } = product;
 
-  const image = urlImage.replace('/images', '');
-
   const {
     stateSumPrice,
     setStateSumPrice,
@@ -89,7 +87,7 @@ const CardProducts = ({ product }) => {
     id,
     name,
     price,
-    image,
+    urlImage,
     cartList,
     setCartList,
   };
@@ -99,7 +97,7 @@ const CardProducts = ({ product }) => {
       <S.Image>
         <img
           data-testid={ `${id - 1}-product-img` }
-          src={ image }
+          src={ urlImage }
           alt={ name }
         />
       </S.Image>

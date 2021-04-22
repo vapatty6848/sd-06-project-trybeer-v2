@@ -16,7 +16,7 @@ const redirectOrderDetails = ({ history, id, address, number, setStateDetailsSal
 const modifyStatus = async (setPending, id) => {
   setPending(false);
 
-  await updateStatus(id);
+  await updateStatus(id, 'Entregue');
 };
 
 const CardAdminStatus = ({

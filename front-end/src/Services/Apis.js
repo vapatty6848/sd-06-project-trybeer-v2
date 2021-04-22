@@ -49,9 +49,10 @@ export const updateUser = async (name, email, token) => {
   return response;
 };
 
-export const updateStatus = async (id) => {
+export const updateStatus = async (id, orderStatus) => {
   const response = await axios({
     method: 'PUT',
+    data: { status: orderStatus },
     url: `http://localhost:3001/admin/orders/${id}`,
   }).then((res) => res.data)
     .catch((err) => err.response.data);
@@ -95,11 +96,13 @@ export const getOrderDetails = async (id) => {
   const order = await axios({
     url: `http://localhost:3001/orderdetails/${id}`,
   }).then((res) => {
+      console.log(res.data);
       const productsArray = res.data.products.map((product) => {
         return {
           name: product.name,
           price: Number(product.price) * product.sales_products.quantity,
           quantity: product.sales_products.quantity,
+          urlImage: product.urlImage,
         }
       });
       const finalResponse = {

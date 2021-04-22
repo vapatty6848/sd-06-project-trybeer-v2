@@ -7,7 +7,10 @@ const CardAdminProduct = ({ product, index }) => (
   <S.Container>
 
     <S.Products>
-      <img src="/images/image-heineken.png" alt="Heineken 600ml" />
+
+      <S.Image>
+        <img src={product.urlImage} alt={product.name} />
+      </S.Image>
 
       <S.DescriptionProducts>
         <div className="content-left-product">
@@ -44,11 +47,15 @@ const CardAdminProduct = ({ product, index }) => (
   </S.Container>
 );
 
+CardAdminProduct.defaultValue = {
+  quantity: '',
+}
+
 CardAdminProduct.propTypes = {
   product: PropTypes.shape({
-    description: PropTypes.string.isRequired,
-    valueTotal: PropTypes.string.isRequired,
-    quantity: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
+    quantity: PropTypes.string,
   }).isRequired,
   index: PropTypes.number.isRequired,
 };
