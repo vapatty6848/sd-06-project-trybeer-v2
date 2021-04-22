@@ -120,7 +120,17 @@ export const getOrderDetails = async (id) => {
 export const getAllAdminOrders = async () => {
   const orders = await axios({
     url: 'http://localhost:3001/admin/orders',
-  }).then((res) => res.data)
+  }).then((res) => {
+      const newResponse = res.data.map((sale) => ({
+        id: sale.id,
+        number: sale.deliveryNumber,
+        status: sale.status,
+        address: sale.deliveryAddress,
+        totalValue: sale.totalPrice,
+      }));
+
+      return newResponse;
+    })
     .catch(() => {
       console.error(ORDER_NOT_FOUND);
     });

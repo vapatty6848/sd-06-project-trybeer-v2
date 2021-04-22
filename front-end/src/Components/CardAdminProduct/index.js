@@ -12,22 +12,22 @@ const CardAdminProduct = ({ product, index }) => (
       <S.DescriptionProducts>
         <div className="content-left-product">
           <span data-testid={ `${index}-product-name` }>
-            {product.description}
+            {product.name}
           </span>
 
           <p data-testid={ `${index}-order-unit-price` }>
-            {`(R$ ${(product.valueTotal).replace('.', ',')})`}
+            {`(R$ ${Number(product.price).toFixed(2).replace('.', ',')})`}
           </p>
         </div>
 
         <div className="content-right-product">
           <span data-testid={ `${index}-product-qtd` }>
-            {product.quantity}
+            {product.sales_products.quantity}
           </span>
           -
           <p data-testid={ `${index}-product-total-value` }>
-            {`R$ ${((product.valueTotal * product.quantity)
-              .toFixed(2))
+            {`R$ ${(Number(product.price) * Number(product.sales_products.quantity))
+              .toFixed(2)
               .replace('.', ',')}`}
           </p>
         </div>

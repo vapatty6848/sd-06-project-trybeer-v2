@@ -41,11 +41,11 @@ const registerNewUser = async (req, res) => {
 const updateUser = async (req, res) => {
   const { name, email } = req.body;
 
-  const updatedData = await models.user.update({ name }, {
+  const updatedData = await models.users.update({ name }, {
     where: { email },
   });
-  const updated = updatedData.dataValues;
-  if (!updated) throwThisError(NOT_FOUND, 'Dados inválidos');
+
+  if (!updatedData) throwThisError(NOT_FOUND, 'Dados inválidos');
   res.status(SUCCESS).json(req.body);
 };
 

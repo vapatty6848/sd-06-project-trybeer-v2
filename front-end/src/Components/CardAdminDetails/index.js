@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-// import { useHistory } from 'react-router-dom';
+import { useParams } from 'react-router';
 
 import { GlobalContext } from '../../Contexts/GlobalContext';
 import { getAdminOrderById, updateStatus } from '../../Services/Apis';
@@ -9,15 +9,10 @@ import CardAdminProduct from '../CardAdminProduct';
 import S from './styles';
 
 const modifyStatus = async (setPending, id) => {
-  // const time = 1000;
 
   setPending(false);
 
   await updateStatus(id);
-
-  // setTimeout(() => {
-  //   history.push('/admin/orders');
-  // }, time);
 };
 
 const CardAdminDetails = () => {
@@ -25,10 +20,7 @@ const CardAdminDetails = () => {
   const [pending, setPending] = useState(true);
 
   const { stateDetailsSale } = useContext(GlobalContext);
-
-  const { id } = stateDetailsSale;
-
-  // const history = useHistory();
+  const { id } = useParams();
 
   useEffect(() => {
     const fetchMyOrders = async () => {
@@ -45,6 +37,7 @@ const CardAdminDetails = () => {
     fetchMyOrders();
   }, [id]);
 
+  console.log('console orders', orders);
   return (
     <S.Container pending={ pending }>
       <S.ColorStatus pending={ pending } />
@@ -55,7 +48,7 @@ const CardAdminDetails = () => {
           <S.ContentLeft pending={ pending }>
             <div>
               <h1 data-testid="order-number">
-                {`Pedido ${stateDetailsSale.id}`}
+                {`Pedido ${orders.id}`}
               </h1>
 
               <h2 data-testid="order-status">
@@ -63,7 +56,7 @@ const CardAdminDetails = () => {
               </h2>
             </div>
 
-            <h3>{`${stateDetailsSale.address}, ${stateDetailsSale.number}`}</h3>
+            <h3>{`${orders.deliveryAddress}, ${orders.deliveryNumber}`}</h3>
           </S.ContentLeft>
 
           {orders.products.map((product, index) => (
@@ -80,7 +73,7 @@ const CardAdminDetails = () => {
               {' '}
               R$
               {' '}
-              {(!orders.valueTotal ? '' : orders.valueTotal).replace('.', ',')}
+              {(!orders.totalPrice ? '' : orders.totalPrice).replace('.', ',')}
             </h1>
 
             <S.ConfirmButton

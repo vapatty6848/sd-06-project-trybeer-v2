@@ -77,7 +77,7 @@ const CardAdminStatus = ({
         <p data-testid={ `${index}-order-total-value` }>
           R$
           {' '}
-          {(totalValue).replace('.', ',')}
+          {Number(totalValue).toFixed(2).replace('.', ',')}
         </p>
       </S.ContentRight>
 

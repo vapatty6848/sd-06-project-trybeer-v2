@@ -54,23 +54,18 @@ const getOrderDetails = async (req, res) => {
 
 const getAdminOrders = async (_req, res) => {
   const ordersData = await models.sales.findAll();
-  const orders = ordersData.dataValues;
 
-  res.status(200).json(orders);
+  res.status(200).json(ordersData);
 };
 
 const getAdminOrderDetails = async (req, res) => {
   const { id } = req.params;
-
-  const orderDetailsData = await models.sales.findOne({ where: { id } });
-  const orderDetails = orderDetailsData.dataValues;
-  const orderProductsDetailsData = await models.sales.findAll({
+  
+  const orderProductsDetailsData = await models.sales.findOne({
     where: { id },
-    include: [{ model: models.products, as: 'products', through: { attributes: [] } }],
+    include: [{ model: models.products, as: 'products' }],
   });
-  const orderProductsDetails = orderProductsDetailsData.dataValues;
-  const response = { ...orderDetails, products: orderProductsDetails };
-  res.status(200).json(response);
+  res.status(200).json(orderProductsDetailsData);
 };
 
 const editOrderStatus = async (req, res) => {
