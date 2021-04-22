@@ -51,6 +51,7 @@ function ProductDetails({ match }) {
         <div className="order-head-info">
           <p className="order-number" data-testid="order-number">{`Pedido ${id}`}</p>
           <p className="order-date" data-testid="order-date">{date}</p>
+          {sale.length > 0 ? <p>{sale[0].Status}</p> : null}
         </div>
         { sale.map((prod, index) => (
           <DetailCard
