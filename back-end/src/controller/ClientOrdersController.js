@@ -36,7 +36,7 @@ router.get('/:id', rescue(async (req, res) => {
             as: 'products',
             through: { attributes: ['quantity'] },
           },
-        ]
+        ],
       },
     );
 
