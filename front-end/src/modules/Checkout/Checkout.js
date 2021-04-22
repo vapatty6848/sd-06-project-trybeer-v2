@@ -7,7 +7,6 @@ import ProductsList from './components/ProductsList';
 import Button from '../../design-components/Button';
 import LabeledInput from '../../design-components/LabeledInput';
 
-// eslint-disable-next-line max-lines-per-function
 function Checkout() {
   const { sale, getUser, total, initiateSale } = useContext(ContextBeer);
   const history = useHistory();
@@ -40,7 +39,7 @@ function Checkout() {
       || deliveryAddress === ''
       || deliveryNumber === '') setButtonDisable(true);
     else setButtonDisable(false);
-  }, [sale]);
+  }, [sale, deliveryAddress, deliveryNumber]);
 
   return (
     <div>
