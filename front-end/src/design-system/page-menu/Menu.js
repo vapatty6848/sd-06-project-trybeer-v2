@@ -55,6 +55,12 @@ function Menu(props) {
       nameSpec: 'Perfil',
       testId: 'side-menu-item-profile',
     },
+    {
+      to: '/admin/chats',
+      name: 'Conversas',
+      nameSpec: 'Conversas',
+      testId: 'side-menu-item-chat',
+    },
   ];
 
   const storage = JSON.parse(localStorage.getItem('user'));
