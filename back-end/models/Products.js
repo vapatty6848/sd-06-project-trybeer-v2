@@ -1,4 +1,4 @@
-const Products = (sequelize, Datatypes) => {
+const ProductsModel = (sequelize, Datatypes) => {
   const Products = sequelize.define('Product', {
     name: Datatypes.STRING,
     price: Datatypes.DECIMAL(10, 2),
@@ -16,4 +16,4 @@ const Products = (sequelize, Datatypes) => {
   return Products;
 };
 
-module.exports = Products;
+module.exports = ProductsModel;
