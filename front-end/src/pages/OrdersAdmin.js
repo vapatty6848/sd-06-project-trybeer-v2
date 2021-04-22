@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, useCallback } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import AppContext from '../context/app.context';
 import { Topbar, Loading } from '../components';
@@ -37,8 +37,6 @@ export default function Orders() {
   const getOrderDetails = useCallback((id) => {
     history.push(`/orders/${id}`);
   }, [history]);
-
-  if (!token) return <Redirect to="/login" />;
 
   return (
     <section>

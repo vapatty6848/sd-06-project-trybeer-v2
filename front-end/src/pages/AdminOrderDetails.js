@@ -2,24 +2,22 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import AppContext from '../context/app.context';
 
-import { Topbar, Loading, OrderDetails as OrderDetailComponent } from '../components';
-import salesApi from '../services/api.sales';
+import { Topbar, Loading, AdminOrderDetails as AdminOrderComponent } from '../components';
+import api from '../services';
 
 import '../styles/OrderDetails.css';
 
-export default function OrderDetails() {
+export default function AdminOrderDetails() {
   const { tokenContext: { token } } = useContext(AppContext);
   const [order, setOrder] = useState();
   const params = useParams();
 
   const history = useHistory();
 
-  const title = 'Meu Pedido';
-
   useEffect(() => {
     const fetchOrder = async () => {
       try {
-        const currOrder = await salesApi({ ...token, saleId: params.id });
+        const currOrder = await api.admin({ ...token, saleId: params.id });
         if (currOrder.code) {
           history.push({
             pathname: '/error',
@@ -35,10 +33,10 @@ export default function OrderDetails() {
 
   return (
     <section>
-      <Topbar title={ title } />
+      <Topbar title="Detalhes de Pedido" />
       { (!order)
         ? <Loading />
-        : <OrderDetailComponent order={ order } callback={ setOrder } /> }
+        : <AdminOrderComponent order={ order } callback={ setOrder } /> }
     </section>
   );
 }

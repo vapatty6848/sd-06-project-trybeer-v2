@@ -4,7 +4,7 @@ import AppContext from '../context/app.context';
 
 import { getProductInfo, calcProductTotal } from '../utils';
 
-export default function OrderCard({ product, index }) {
+export default function OrderProduct({ product, index }) {
   const { productsContext: { products } } = useContext(AppContext);
 
   if (!products) return 'Loading ...';
@@ -29,11 +29,11 @@ export default function OrderCard({ product, index }) {
   );
 }
 
-OrderCard.propTypes = {
+OrderProduct.propTypes = {
   product: PropTypes.objectOf(PropTypes.any),
   index: PropTypes.number.isRequired,
 };
 
-OrderCard.defaultProps = {
+OrderProduct.defaultProps = {
   product: {},
 };

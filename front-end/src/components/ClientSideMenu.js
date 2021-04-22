@@ -14,6 +14,9 @@ export default function ClientMenu({ className, callback }) {
       <Link to="/profile" data-testid="side-menu-item-my-profile">
         Meu perfil
       </Link>
+      <Link to="/chat" data-testid="side-menu-chat">
+        Conversar com a loja
+      </Link>
       <button type="button" onClick={ callback } data-testid="side-menu-item-logout">
         Sair
       </button>

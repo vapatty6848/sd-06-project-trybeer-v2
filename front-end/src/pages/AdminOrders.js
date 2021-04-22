@@ -8,7 +8,7 @@ import api from '../services';
 import '../styles/Orders.css';
 import OrdersContainer from '../components/OrdersContainer';
 
-export default function Orders() {
+export default function AdminOrders() {
   const { tokenContext: { token } } = useContext(AppContext);
   const [orders, setOrders] = useState();
 
@@ -17,7 +17,7 @@ export default function Orders() {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const ordersArray = await api.sales(token);
+        const ordersArray = await api.admin(token);
         setOrders(ordersArray);
       } catch (error) {
         console.log(error);
@@ -29,11 +29,9 @@ export default function Orders() {
     fetchOrders();
   }, [setOrders, token, history]);
 
-  const title = (token && token.role === 'administrator') ? 'Pedidos' : 'Meus Pedidos';
-
   return (
     <section>
-      <Topbar title={ title } />
+      <Topbar title="Pedidos" />
       { (!orders)
         ? <Loading />
         : <OrdersContainer orders={ orders } /> }
