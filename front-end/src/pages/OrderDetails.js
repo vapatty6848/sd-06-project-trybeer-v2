@@ -16,29 +16,12 @@ export default function OrderDetails() {
 
   const title = 'Meu Pedido';
 
-  useEffect(() => {
-    const fetchOrder = async () => {
-      try {
-        const currOrder = await salesApi({ ...token, saleId: params.id });
-        if (currOrder.code) {
-          history.push({
-            pathname: '/error',
-            state: { ...currOrder } });
-        }
-        setOrder(currOrder);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchOrder();
-  }, [setOrder, params, token, history]);
-
   return (
     <section>
       <Topbar title={ title } />
       { (!order)
         ? <Loading />
-        : <OrderDetailComponent order={ order } callback={ setOrder } /> }
+        : <OrderDetailComponent /> }
     </section>
   );
 }

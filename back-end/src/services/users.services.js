@@ -3,10 +3,13 @@ const { generateToken } = require('../security');
 const { authRegisterUser, utils: { validateUserName } } = require('../schemas');
 
 const create = async (body) => {
-  const data = { ...body };
-  const { name, email } = data;
+  const data = {
+    name: body.name,
+    email: body.email,
+    password: body.password,
+    isVendor: body.isVendor };
 
-  const isEmailAvailable = await users.findOne({ where: { email } });
+  const isEmailAvailable = await users.findOne({ where: { email: data.email } });
   authRegisterUser(data, isEmailAvailable);
 
   data.role = (data.isVendor) ? 'administrator' : 'client';
@@ -14,7 +17,7 @@ const create = async (body) => {
   console.log('novo user: ', newUserId);
 
   const token = generateToken(newUserId, data.role);
-  const { role } = data;
+  const { role, name, email } = data;
   return { name, email, token, role };
 };
 

@@ -1,20 +1,44 @@
-import React, { useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 import AppContext from '../context/app.context';
 
 import OrderProduct from './OrderProduct';
 import AdminButton from './AdminButton';
 import { convertDate } from '../utils';
-import adminApi from '../services/api.admin';
+import api from '../services';
 
-export default function OrderDetails({ order, callback }) {
+export default function OrderDetails() {
   const { tokenContext: { token },
     productsContext: { products } } = useContext(AppContext);
 
+  const [order, setOrder] = useState();
+
+  const params = useParams();
+
+  const history = useHistory();
+
+  useEffect(() => {
+    const fetchOrder = async () => {
+      try {
+        const currOrder = await api.admin({ ...token, saleId: params.id });
+        if (currOrder.code) {
+          history.push({
+            pathname: '/error',
+            state: { ...currOrder } });
+        }
+        setOrder(currOrder);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    if (!order) fetchOrder();
+  }, [setOrder, params, token, history]);
+
   const updateStatus = async (newStatus) => {
     try {
-      await adminApi({ ...token, saleId: order.id, status: newStatus });
-      callback({ ...order, status: newStatus });
+      await api.admin({ ...token, saleId: order.id, status: newStatus });
+      setOrder({ ...order, status: newStatus });
       return { status: 'OK', message: `Sale status updated to ${newStatus}` };
     } catch (error) {
       return error;

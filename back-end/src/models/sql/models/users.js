@@ -3,7 +3,7 @@ const UserModel = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     email: {
       type: DataTypes.STRING,
-      unique: { msg: 'Email Taken' },
+      unique: { msg: 'Email Taken.' },
     },
     password: DataTypes.STRING,
     role: DataTypes.STRING,
