@@ -8,7 +8,6 @@ export default function OrderCard({ product, index }) {
   const { productsContext: { products } } = useContext(AppContext);
 
   if (!products) return 'Loading ...';
-  console.log('order detail: ', product);
 
   return (
     <section key={ index } className="order-details-product">
