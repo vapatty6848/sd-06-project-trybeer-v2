@@ -39,11 +39,11 @@ export default function AdminOrders() {
                   </span>
                   <br />
                   <span data-testid={ `${index}-order-address` }>
-                    { `Rua ${order.delivery_address}, ${order.delivery_number}` }
+                    { `Rua ${order.deliveryAddress}, ${order.deliveryNumber}` }
                   </span>
                   <br />
                   <span data-testid={ `${index}-order-total-value` }>
-                    { Number(order.total_price)
+                    { Number(order.totalPrice)
                       .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }
                   </span>
                   <br />

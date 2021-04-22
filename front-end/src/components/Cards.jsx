@@ -84,7 +84,7 @@ export default function Cards() {
           <div className="img-container">
             <img
               data-testid={ `${index}-product-img` }
-              src={ product.url_image }
+              src={ product.urlImage }
               alt={ product.name }
             />
           </div>

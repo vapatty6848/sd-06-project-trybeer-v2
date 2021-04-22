@@ -37,9 +37,9 @@ export default function CardOrders() {
           <div className="cada-compra">
             <div data-testid={ `${index}-order-card-container` } className="compra">
               <h4 data-testid={ `${index}-order-number` }>{`Pedido ${sale.id}`}</h4>
-              <h4 data-testid={ `${index}-order-date` }>{formatDate(sale.sale_date)}</h4>
+              <h4 data-testid={ `${index}-order-date` }>{formatDate(sale.saleDate)}</h4>
               <h4 data-testid={ `${index}-order-total-value` }>
-                {Number(sale.total_price).toLocaleString('pt-BR', {
+                {Number(sale.totalPrice).toLocaleString('pt-BR', {
                   style: 'currency',
                   currency: 'BRL',
                 })}

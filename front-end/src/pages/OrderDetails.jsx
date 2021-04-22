@@ -40,7 +40,7 @@ export default function OrderDetails() {
       <div className="en-title">
         <h2 data-testid="order-number">{ `Pedido ${id}` }</h2>
         <h2 data-testid="order-date">
-          {productsOfSale.length !== 0 && formatDate(productsOfSale[0].sale_date)}
+          {productsOfSale.length !== 0 && formatDate(productsOfSale[0].saleDate)}
         </h2>
       </div>
       <div className="main-container">
