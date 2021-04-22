@@ -30,7 +30,7 @@ function Orders({ history }) {
       <div className="content-panel">
         <div className="container">
           {
-            orders.map(({ id, saleDate, totalPrice, status}, index) => (
+            orders.map(({ id, saleDate, totalPrice, status }, index) => (
               <div
                 key={ id }
                 className="order-card-container"
@@ -42,7 +42,7 @@ function Orders({ history }) {
                 >
                   <div className="card-id-date">
                     <div data-testid={ `${index}-order-number` }>
-                      {`Pedido ${id}` } - { status }
+                      {`Pedido ${id} - ${status}` }
                     </div>
                     <div data-testid={ `${index}-order-date` }>
                       { formatedDate(saleDate) }
