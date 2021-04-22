@@ -1,4 +1,4 @@
-const { Product } = require('../models/');
+const { Product } = require('../models');
 
 // Get all users
 const getAll = async () => Product.findAll();

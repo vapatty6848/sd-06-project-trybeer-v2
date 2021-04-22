@@ -7,7 +7,6 @@ const Sale_productModel = (sequelize, DataTypes) => {
   });
 
   Sale_product.associate = (models) => {
-
     models.Sale.belongsToMany(models.Product, {
       through: Sale_product,
       as: 'products',
@@ -30,8 +29,7 @@ const Sale_productModel = (sequelize, DataTypes) => {
       foreignKey: 'productId',
       as: 'product',
     });
-
-  }
+  };
 
   return Sale_product;
 };

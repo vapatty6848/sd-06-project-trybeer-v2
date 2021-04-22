@@ -13,7 +13,7 @@
     "test-coverage": "jest --coverage",
     "debug": "nodemon index.js",
     "start:watch": "nodemon index.js",
-    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json ."
+    "lint": "eslint --fix --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json ."
   },
   "keywords": [],
   "author": "",
