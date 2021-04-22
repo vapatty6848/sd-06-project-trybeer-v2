@@ -1,6 +1,6 @@
 .container-adm {
-  display: flex;
   background-color: red;
+  display: flex;
   flex-direction: column;
   height: 100vh;
 }

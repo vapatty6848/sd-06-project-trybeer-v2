@@ -6,11 +6,11 @@
   margin: 30px 0;
 }
 
-.check-button input[ type = checkbox ] {
+.check-button input[ type = 'checkbox' ] {
   margin: 10px;
   padding: 10px;
-  transform: scale(2);
   -webkit-transform: scale(2);
+  transform: scale(2);
 }
 
 .button-register {
