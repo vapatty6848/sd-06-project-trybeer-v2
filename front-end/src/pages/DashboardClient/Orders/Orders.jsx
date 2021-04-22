@@ -42,10 +42,11 @@ export default function Orders() {
               data-testid={ `${index}-order-date` }
               className="date-order"
             >
-              {correctDate(order.sale_date)}
+              {correctDate(order.saleDate)}
             </h4>
+            <h3>{order.status}</h3>
             <h4 data-testid={ `${index}-order-total-value` }>
-              {parseCartPrice(order.total_price)}
+              {parseCartPrice(order.totalPrice)}
             </h4>
           </div>
         ))}

@@ -21,7 +21,8 @@ salesRouter.post('/checkout', tokenValidator, async (req, res) => {
 salesRouter.get('/:id', async (req, res) => {
   const { id } = req.params;
   const result = await sales.findByPk(id);
-  res.status(status.SUCCESS).json(result);
+  console.log(result.dataValues, 'result do controller');
+  res.status(status.SUCCESS).json(result.dataValues);
 });
 
 // salesRouter.get('/', async (_req, res) => {

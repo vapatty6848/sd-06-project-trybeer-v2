@@ -16,7 +16,8 @@ const getAllSales = () => fetch(`${endpoint}/sales`)
   .then((response) => response.json());
 
 const getSalesById = (id) => fetch(`${endpoint}/sales/${id}`)
-  .then((response) => response.json());
+  .then((responses) => responses.json())
+  // .then((response) => response.dataValues);
 
 const getSales = () => fetch(`${endpoint}/sales`)
   .then((response) => response.json());

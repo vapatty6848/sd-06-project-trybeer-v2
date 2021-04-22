@@ -45,7 +45,9 @@ const fullfilSale = async (saleId, saleStatus) => {
  * @returns Object contendo detalhes da venda
  */
 const getSalesById = async (id) => {
+  console.log(id, 'iddddd');
   const result = await sales.findByPk(id);
+  console.log(result, 'result back');
   return result;
 };
 

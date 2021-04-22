@@ -12,13 +12,13 @@ import { verifyUser } from '../../../store/LocalStorage/actions';
  * @param {String} products
  * @returns String contendo a soma dos itens teste teste
  */
-const soma = (products) => {
-  let totalVenda = 0;
-  products.forEach((e) => {
-    totalVenda += Number(e.quantity) * Number(e.price);
-  });
-  return totalVenda;
-};
+// const soma = (products) => {
+//   let totalVenda = 0;
+//   products.forEach((e) => {
+//     totalVenda += Number(e.quantity) * Number(e.price);
+//   });
+//   return totalVenda;
+// };
 
 export default function Orders({ match: { params: { id } } }) {
   const [orderDetails, setOrderDetails] = useState([]);
@@ -30,8 +30,10 @@ export default function Orders({ match: { params: { id } } }) {
 
   useEffect(() => {
     const getOrderDetails = async () => {
-      const [result] = await getSalesById(id);
+      console.log(id, 'iddd');
+      const result = await getSalesById(id);
       setOrderDetails(result);
+      console.log(result, 'resuuuult');
     };
     getOrderDetails();
   }, [id]);
@@ -41,42 +43,38 @@ export default function Orders({ match: { params: { id } } }) {
       <div>
         <Header title="Detalhes de Pedido" user="client" />
       </div>
-      {orderDetails.map((details, index) => (
-        <div className="geral" key={ index }>
-          { index === 0 && (
-            <div className="title">
-              <div className="pedido">
-                <h2 h2 data-testid="order-number">{`Pedido ${details.idSales}`}</h2>
-              </div>
-              <div className="data">
-                <h2>Data</h2>
-                <h2 data-testid="order-date">{ correctDate(details.dateSale) }</h2>
-              </div>
-            </div>
-          )}
-          <div className="detalhes" key={ index }>
-            <p className="quantidade" data-testid={ `${index}-product-qtd` }>
-              { details.quantity }
-            </p>
-            <p className="nome" data-testid={ `${index}-product-name` }>
-              { details.productName }
-            </p>
-            <p className="preço">{ parseCartPrice(details.price) }</p>
-            <p
-              className="subtotal"
-              data-testid={ `${index}-product-total-value` }
-            >
-              {
-                parseCartPrice(details.quantity * details.price)
-              }
-            </p>
+      <div className="geral">
+        <div className="title">
+          <div className="pedido">
+            <h2 data-testid="order-number">{`Pedido ${orderDetails.id}`}</h2>
+            <h2>{orderDetails.status}</h2>
+          </div>
+          <div className="data">
+            <h2>Data</h2>
+            {/* <h2 data-testid="order-date">{correctDate(orderDetails.saleDate)}</h2> */}
           </div>
         </div>
-      ))}
+        <div className="detalhes">
+          <p className="quantidade">
+            {orderDetails.quantity}
+          </p>
+          <p className="nome">
+            {orderDetails.productName}
+          </p>
+          <p className="preço">{parseCartPrice(orderDetails.price)}</p>
+          <p
+            className="subtotal"
+          >
+            {
+              parseCartPrice(orderDetails.quantity * orderDetails.price)
+            }
+          </p>
+        </div>
+      </div>
       <div className="resumo">
         <h2>total</h2>
         <h2 data-testid="order-total-value">
-          { parseCartPrice(soma(orderDetails)) }
+          {parseCartPrice((orderDetails))}
         </h2>
       </div>
     </div>
@@ -86,7 +84,7 @@ export default function Orders({ match: { params: { id } } }) {
 Orders.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
 };
