@@ -10,12 +10,12 @@ const messageJson = { message: 'Internal Server Error' };
 orderRouter.post('/', async (req, res) => {
   try {
     const { email, totalPrice, deliveryAddress, deliveryNumber, date, saleProduct } = req.body;
-
+    
     const { id } = await User.findOne({ where: { email } });
 
     await Service.createSale({ id, totalPrice, deliveryAddress, deliveryNumber, date, saleProduct });
 
-    res.status(200).json(id, totalPrice, deliveryAddress, deliveryNumber, date);
+    res.status(200).json({id, totalPrice, deliveryAddress, deliveryNumber, date});
   } catch (error) {
     console.log(error.message);
     return res.status(erroReturnCatch).json(messageJson);
@@ -24,7 +24,7 @@ orderRouter.post('/', async (req, res) => {
 
 orderRouter.get('/', async (_req, res) => {
   try {
-    const allSales = await Service.getAll();
+    const allSales = await Sale.findAll();
 
     return res.status(status.OK).json(allSales);
   } catch (error) {
@@ -34,11 +34,10 @@ orderRouter.get('/', async (_req, res) => {
 
 orderRouter.get('/:id', async (req, res) => {
   const { id } = req.params;
-  console.log(id);
   try {
-    const Sale = await Service.getBySalesId(id);
+    const Salebyid = await Sale.findByPk(id);
 
-    return res.status(status.OK).json(Sale);
+    return res.status(status.OK).json(Salebyid);
   } catch (error) {
     return res.status(erroReturnCatch).json(messageJson);
   }

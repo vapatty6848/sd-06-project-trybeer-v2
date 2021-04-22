@@ -9,14 +9,14 @@ const Sale_productModel = (sequelize, DataTypes) => {
   Sale_product.associate = (models) => {
 
     models.Sale.belongsToMany(models.Product, {
-      through: 'Products',
+      through: Sale_product,
       as: 'products',
       foreignKey: 'saleId',
       otherKey: 'productId',
     });
 
     models.Product.belongsToMany(models.Sale, {
-      through: 'Sales',
+      through: Sale_product,
       as: 'sales',
       foreignKey: 'productId',
       otherKey: 'saleId',

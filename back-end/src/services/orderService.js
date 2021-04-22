@@ -10,11 +10,13 @@ const createSale = async ({ id, totalPrice, deliveryAddress, deliveryNumber, sal
     userId: id,
   });
 
-  const salesId = orders.id;
+  const saleId = orders.id;
 
-  saleProduct.forEach((e) => {
-    SalesProduct.create({salesId, productId: e.id, quantity: e.quantity});
+  saleProduct.forEach(async(e) => {
+    await SalesProduct.create({saleId, productId: e.id, quantity: e.quantity})
   });
+
+  console.log(orders);
 
   return orders;
 };

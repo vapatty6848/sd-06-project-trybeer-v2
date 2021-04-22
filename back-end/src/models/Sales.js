@@ -5,6 +5,7 @@ const SaleModel = (sequelize, DataTypes) => {
     deliveryNumber: DataTypes.STRING,
     saleDate: { type: DataTypes.DATE, defaultValue: new Date() },
     deliveryNumber: DataTypes.STRING,
+    status: DataTypes.STRING,
   },
   {
     timestamps: false,
