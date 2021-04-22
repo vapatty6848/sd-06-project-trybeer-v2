@@ -4,14 +4,14 @@ import '../css/ProductCardAdmin.css';
 
 function ProductCardAdmin(props) {
   const { product, index } = props;
-  const { productName, productPrice, quantity } = product;
-  const productTotal = parseFloat(productPrice) * parseFloat(quantity);
+  const { productName, productPrice, salesProduct } = product;
+  const productTotal = parseFloat(productPrice) * parseFloat(salesProduct.quantity);
 
   return (
     <div className="admin-container-card">
       <section className="admin-product-info">
         <div>
-          <span data-testid={ `${index}-product-qtd` }>{ quantity }</span>
+          <span data-testid={ `${index}-product-qtd` }>{ salesProduct.quantity }</span>
           <span data-testid={ `${index}-product-name` }>{ ` - ${productName}` }</span>
         </div>
         <div>
@@ -24,7 +24,7 @@ function ProductCardAdmin(props) {
           <span
             data-testid={ `${index}-order-unit-price` }
           >
-            {`(R$ ${productPrice.replace('.', ',')})`}
+            {`(R$ ${productPrice.toString().replace('.', ',')})`}
           </span>
         </div>
       </section>

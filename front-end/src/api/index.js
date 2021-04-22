@@ -93,7 +93,7 @@ async function getSalesProductsBySaleId(setSaleDetail, saleId) {
     headers: {
       authorization: token,
     // } }).then((response) => console.log(response.data[0]));
-    } }).then((response) => setSaleDetail(response.data[0]));
+    } }).then((response) => setSaleDetail(response.data));
   await axios.put(`/sales/status/${saleId}`, { status });
 }
 

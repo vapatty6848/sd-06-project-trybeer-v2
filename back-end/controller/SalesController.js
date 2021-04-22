@@ -25,22 +25,25 @@ SalesController.get('/user/:userId', verifyLogin, async (req, res) => {
 // Get All Sales Products by saleID
 SalesController.get('/products/:saleId', verifyLogin, async (req, res) => {
   const { saleId } = req.params;
+  const sale = await Sale.findByPk(saleId);
   const sales = await Sale.findAll({
     where: { id: saleId },
-    // attributes: ['saleDate', ['id', 'saleId'], ['totalPrice', 'saleTotal'], ['status', 'saleStatus']],
     include: [
       {
         model: Product,
-        as: 'products'
-        // include: [
-        //   {
-        //     model: db.comments
-        //   }
-        // ]
+        as: 'products',
+        through: { attributes: ['quantity'] },
+        attributes: [
+          ['id', 'productId'],
+          ['name', 'productName'],
+          ['price', 'productPrice'],
+        ]
       }
     ]
   });
-  return res.status(OK).json(sales);
+  const products = sales[0].products;
+  const saleProducts = { sale, products };
+  return res.status(OK).json(saleProducts);
 });
 
 // Store request
