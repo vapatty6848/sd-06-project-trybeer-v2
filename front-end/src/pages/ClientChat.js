@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import formatMessage from '../utils';
+import { createMessage } from '../services/chatService';
+import { formatMessage, getEmailLocalStorage } from '../utils';
 // import socket from '../services/socketClient';
 // import MenuTop from '../components/MenuTop';
 
@@ -15,11 +16,20 @@ function ClientChat() {
     setMessage(e.target.value);
   };
 
+  const sendMessage = (data) => {
+    const user = getEmailLocalStorage();
+    const obj = { [user]: data };
+    console.log(obj);
+    createMessage(obj);
+  };
+
   const handleClick = (e) => {
     const formatedMessage = formatMessage(message);
     e.preventDefault();
-    setMessages([...messages, formatedMessage]);
+    const msgArray = [...messages, formatedMessage];
+    setMessages(msgArray);
     setMessage('');
+    sendMessage(msgArray);
   };
 
   return (

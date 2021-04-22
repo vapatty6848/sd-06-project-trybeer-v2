@@ -1,4 +1,4 @@
-const getEmailLocalStorage = () => {
+export const getEmailLocalStorage = () => {
   const user = JSON.parse(localStorage.getItem('user'));
   return user.email;
 };
@@ -8,10 +8,8 @@ const getHour = () => {
   return `${date.getHours()}:${date.getMinutes()}`;
 };
 
-const formatMessage = (message) => {
+export const formatMessage = (message) => {
   const user = getEmailLocalStorage();
   const hour = getHour();
   return { user, hour, message };
 };
-
-export default formatMessage;
