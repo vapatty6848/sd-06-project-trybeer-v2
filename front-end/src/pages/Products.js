@@ -21,7 +21,7 @@ function Products({ history }) {
     <div>
       <TopMenu />
       <div className="products-container">
-        {products && products.map(({ id, name, price, url_image: urlImage }, index) => (
+        {products.length > 0 && products.map(({ id, name, price, url_image: urlImage }, index) => (
           <ProductCard
             id={ id }
             key={ index }

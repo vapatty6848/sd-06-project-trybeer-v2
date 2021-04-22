@@ -41,13 +41,13 @@ function OrderDetails(props) {
             <TopMenu titleMenu="Detalhes de Pedido" />
             <div className="content-panel">
               <div data-testid="order-number">
-                { `Pedido ${state.id} - ${state.status}` }
+                { state && `Pedido ${state.id} - ${state.status}` }
               </div>
               <div data-testid="order-date">
-                { formatedDate(state.saleDate) }
+                { state && formatedDate(state.saleDate) }
               </div>
               <div data-testid="order-total-value">
-                { formatedPrice(state.totalPrice) }
+                { state && formatedPrice(state.totalPrice) }
               </div>
               <div>
                 {
