@@ -1,6 +1,8 @@
 const { Router } = require('express');
 const rescue = require('express-rescue');
-const { users, sales, products, sales_products } = require('../../models');
+const {
+  users, sales, products, sales_products: salesProducts,
+} = require('../../models');
 
 const router = new Router();
 
@@ -22,7 +24,7 @@ router.post('/', rescue(async (req, res) => {
       status,
     });
     const saleProduct = newCart.map((element) => ({ saleId, ...element }));
-    await sales_products.create(saleProduct);
+    await salesProducts.create(saleProduct);
     return res.status(OK).json({ message: 'Sales success' });
 }));
 
