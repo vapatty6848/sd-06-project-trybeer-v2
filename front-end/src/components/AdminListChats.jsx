@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-// import bancoDeDados from '../pedidosPendentes';
 import admOrders from '../methods/admOrders';
 
 function AdminListChats() {
   const [orders, setOrders] = useState([]);
   const history = useHistory();
+  const dateFormat = require('dateformat');
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -20,26 +20,24 @@ function AdminListChats() {
 
   return (
     <div>
-      { orders.map((e, i) => (
-        <button
-          key={ e.id }
-          className="order-card"
-          type="button"
-          onClick={ () => history.push(`/admin/orders/${e.id}`) }
-        >
-          <h1 data-testid={ `${i}-order-number` }>{ `Pedido ${e.id}` }</h1>
-          <p data-testid={ `${i}-order-address` }>
-            { `${e.delivery_address}, ${e.delivery_number}` }
-          </p>
-          <span data-testid={ `${i}-order-total-value` }>
-            {`R$ ${e.total_price.replace('.', ',')}` }
-          </span>
-          <span data-testid={ `${i}-order-status` }>
-            { e.status }
-          </span>
-        </button>
-      ))}
+    <div>
+      {orders.length === 0
+        ? <p data-testid="text-for-no-conversation">Nenhuma conversa por aqui!</p>
+        : orders.map(({email, date}, i) => (
+          <div
+            data-testid="containerChat"
+            key={ i }
+            className="paracss"
+          >
+            <p data-testid="profile-name">{email}</p>
+            <p data-testid="last-message">
+              Última mensagem às
+              {dateFormat(date, 'HH:MM')}
+            </p>
+          </div>
+        ))}
     </div>
+  </div>
   );
 }
 
