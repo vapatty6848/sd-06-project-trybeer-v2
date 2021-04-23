@@ -23,7 +23,7 @@ function Routes() {
         <Route path="/admin/orders/:id" component={ AdminOrderDetail } />
         <Route path="/admin/orders" component={ AdminOrders } />
         <Route path="/admin/profile" component={ AdminProfile } />
-        <Route path="/admin/chats/:id" component={ ClientChat } />
+        <Route path="/admin/chats/:email" component={ ClientChat } />
         <Route path="/admin/chats" component={ AdminChats } />
         <Route path="/register" component={ Register } />
         <Route path="/profile" component={ Profile } />

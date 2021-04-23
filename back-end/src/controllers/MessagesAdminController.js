@@ -1,17 +1,24 @@
 const { Router } = require('express');
 const {  
-  getAllMessages,
+  getLastMessageByEmail,
+  getMessagesByEmail,
 } = require('../models/adminMessages');
 
 const MessagesAdminController = new Router();
 
-MessagesAdminController.get('/', async (req, res) => {
-  const messages = await getAllMessages();
-  res.status(200).send(messages);
+MessagesAdminController.get('/search', async (req, res) => {
+  const { q } = req.query;
+  const messagesByEmail = await getMessagesByEmail(q);
+  res.status(200).send(messagesByEmail);
 });
 
-MessagesAdminController.get('/:id', async (_req, res) => {
-  res.send('test');
+MessagesAdminController.get('/', async (req, res) => {
+  const messages = await getLastMessageByEmail();
+  try {
+    res.status(200).send(messages);
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
 });
 
 module.exports = MessagesAdminController;

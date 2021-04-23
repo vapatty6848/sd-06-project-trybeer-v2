@@ -1,5 +1,7 @@
 import { io } from 'socket.io-client';
 import React, { useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { ChevronDoubleLeftIcon } from '@heroicons/react/solid';
 import Loader from '../../../design-components/Loader';
 import SideBarAdmin from '../../../design-components/SideBarAdmin';
 import api from '../../../axios/api';
@@ -7,6 +9,7 @@ import api from '../../../axios/api';
 const socket = io('http://localhost:3001');
 
 function ClientChat() {
+  const { email } = useParams();
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
@@ -25,16 +28,16 @@ function ClientChat() {
     socket.on('connect', () => {
       console.log(`${socket.id}`);
     });
-    api.get('/admin/chats/:id').then((response) => {
+    api.get(`/admin/chats/search?q=${email}`).then((response) => {
       console.log(response.data);
       setMessages(response.data);
       setLoading(false);
     });
-  }, [admin]);
+  }, [admin, email]);
 
   const handleClick = () => {
     const messageObj = {
-      email: admin,
+      email: 'Loja',
       message,
       date: new Date(),
     };
@@ -49,10 +52,18 @@ function ClientChat() {
       <div className="rounded-md shadow-sm space-y-4">
         <SideBarAdmin />
         <div className="text-center justify-content-center">
+          <div className="flex content-center justify-center m-4">
+            <Link data-testid="back-button" to="/admin/chats">
+              <ChevronDoubleLeftIcon className="h-8 w-8" />
+            </Link>
+            <h3 className="text-xl ml-2 font-bold">
+              {`Conversando com ${messages[0].email}`}
+            </h3>
+          </div>
           {messages.length !== 0 && messages.map((el, i) => (
             <div key={ i }>
               <div>
-                <span data-testid="nickname" className="text-green-600">Loja</span>
+                <span data-testid="nickname" className="text-green-600">{el.email}</span>
                 {' - '}
                 <span data-testid="message-time">{timeFormated(el.date)}</span>
               </div>
