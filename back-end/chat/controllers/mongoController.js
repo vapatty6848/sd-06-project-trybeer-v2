@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { createMessages, getAllMessages } = require('../models/mongoModel');
+const { createMessages, getAllMessages, getUserMessages } = require('../models/mongoModel');
 // const {
 //   getAllUsersService,
 //   createUserService,
@@ -12,14 +12,21 @@ const CREATED = 201;
 const SUCCESS = 200;
 
 routerMessage.post('/', async (req, res) => {
-  const { user, time, message } = req.body;
-  const messageCreated = await createMessages(user, time, message);
+  const { user, time, message, to } = req.body;
+  const messageCreated = await createMessages(user, time, message, to);
   return res.status(CREATED).json(messageCreated);
 });
 
 routerMessage.get('/', async (req, res) => {
   const allMessages = await getAllMessages();
   return res.status(SUCCESS).json(allMessages);
+});
+
+routerMessage.get('/userMessages/:email', async (req, res) => {
+  const { email } = req.params;
+  const messages = await getUserMessages(email);
+  
+  return res.status(SUCCESS).json(messages);
 });
 
 module.exports = routerMessage;
