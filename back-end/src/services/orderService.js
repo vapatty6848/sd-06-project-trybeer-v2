@@ -1,4 +1,4 @@
-const { Sale, SalesProduct } = require('../models');
+const { Sale, salesProduct } = require('../models');
 
 const createSale = async (
   { id, totalPrice, deliveryAddress, deliveryNumber, saleDate, saleProduct },
@@ -14,7 +14,7 @@ const createSale = async (
   const saleId = orders.id;
 
   saleProduct.forEach(async (e) => {
-    await SalesProduct.create({ saleId, productId: e.id, quantity: e.quantity });
+    await salesProduct.create({ saleId, productId: e.id, quantity: e.quantity });
   });
 
   console.log(orders);
