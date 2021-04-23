@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import { Login, Register,
   Products, ClientProfile,
   AdminProfile, Orders, OrdersAdm,
-  Checkout, OrderDetails, OrdersAdmDetails } from './pages';
+  Checkout, OrderDetails, OrdersAdmDetails, Chat } from './pages';
 
 function App() {
   return (
@@ -27,6 +27,7 @@ function App() {
         path="/admin/orders/:id"
         render={ (routeProps) => <OrdersAdmDetails { ...routeProps } /> }
       />
+      <Route exact path="/chat" component={ Chat } />
     </Switch>
   );
 }

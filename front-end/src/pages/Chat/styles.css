@@ -1,0 +1,38 @@
+.chat-container {
+  width: 100vw;
+  height: 100vh;
+}
+
+.input-container {
+  position: fixed;
+  bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100vw;
+}
+
+#messageInput {
+  height: 42px;
+  width: 70vw;
+  border: solid 1px rgb(56, 56, 56);
+  border-radius: 14px;
+  outline: 0;
+  padding-left: 2vw;
+  font-size: 16px;
+}
+
+.send-btn {
+  outline: 0;
+  background-color: #000;
+  border: none;
+  border-radius: 14px 14px 14px 14px;
+  box-shadow: 0px 5px 20px -16px;
+  color: whitesmoke;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 6px 14px;
+  text-transform: uppercase;
+  height: 42px;
+}
