@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 
 import AdminChatCard from './AdminChatCard';
@@ -10,8 +11,17 @@ export default function AdminChatContainer({ chats }) {
     <section className="admin-chats-container">
       { (chats.length < 1)
         ? <h4>{ emptyChats }</h4>
-        : chats.map((chat, index) => (
-          <AdminChatCard chat={ chat } index={ index } key={ chat.userId } />)) }
+        : chats.map((chat) => (
+          <Link
+            to={ {
+              pathname: `/admin/chats/${chat.userId}`,
+              state: { user: chat.nickname },
+            } }
+            key={ chat.userId }
+          >
+            <AdminChatCard chat={ chat } />
+          </Link>
+        )) }
     </section>
   );
 }

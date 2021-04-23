@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useCallback } from 'react';
+import React, { useState, useEffect, useContext, useCallback, useMemo } from 'react';
 
 import AppContext from '../context/app.context';
 import api from '../services';
@@ -11,24 +11,28 @@ export default function Chat() {
   const [message, setMessage] = useState('');
   const [messageList, setMessageList] = useState([]);
 
+  const ENDPOINT = 'http://localhost:4001';
+  const options = useMemo(() => ({ auth: { token } }), [token]);
+  const socket = useMemo(() => api.chat(ENDPOINT, options), [options]);
+
   const sendMessage = useCallback((e) => {
     e.preventDefault();
     const newMessage = { nickname: token.email, message, timestamp: new Date() };
-    api.chat.emit('chat:clientMessage', { msg: newMessage, token });
+    socket.emit('chat:clientMessage', { msg: newMessage, token });
     setMessage('');
-  }, [message, token]);
+  }, [message, socket, token]);
 
   useEffect(() => {
-    api.chat.emit('user:login', token.token);
-  }, [token]);
+    socket.emit('user:login', token.token);
+  }, [socket, token]);
 
   const getMessage = useCallback(({ target }) => setMessage(target.value), []);
 
-  api.chat.on('chat:serverMessage', (msg) => {
+  socket.on('chat:serverMessage', (msg) => {
     setMessageList([...messageList, msg]);
   });
 
-  api.chat.on('user:storedMessages', (msgs) => {
+  socket.on('user:storedMessages', (msgs) => {
     setMessageList(msgs);
   });
 
@@ -42,7 +46,9 @@ export default function Chat() {
         sendMessage={ sendMessage }
         value={ message }
       />
-      { messageList.map((msg, i) => <ChatMessage msg={ msg } key={ i } />) }
+      { messageList.map((msg, i) => (
+        <ChatMessage msg={ msg } key={ i } client={ token.email } />
+      )) }
     </div>
   );
 }

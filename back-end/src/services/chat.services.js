@@ -5,18 +5,18 @@ const { verifyToken } = require('../security');
 const saveMessage = async (message, token) => {
   const { sub: userId } = verifyToken(token.token);
   // validateMessage(message);
-  await chat.saveMessage(message, userId);
+  await chat.saveMessage(message, userId, token.email);
 
   return { saved: message, status: 'SAVED' };
 };
 
-const getMessagesById = async (userId) => {
-  // validateUserName(name);
+const getMessagesByUserId = async (token) => {
+  const { sub: userId } = verifyToken(token.token);
   console.log('getting messages...');
-  return chat.getMessagesById(userId);
+  return chat.getMessagesByUserId(userId);
 };
 
 module.exports = {
   saveMessage,
-  getMessagesById,
+  getMessagesByUserId,
 };
