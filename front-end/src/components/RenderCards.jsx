@@ -40,7 +40,6 @@ const renderCards = (allProducts, asd, setAsd, itemQty) => allProducts.map(
             items.push(prod);
             localStorage.setItem('items', JSON.stringify(items));
             setAsd(asd + 1);
-            console.log(typeof prod.price);
           } }
         >
           +

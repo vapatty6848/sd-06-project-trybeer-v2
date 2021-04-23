@@ -14,12 +14,12 @@ function Orders() {
       if (user) {
         const response = await clientOrders.getAll(user.token);
         console.log(response);
-        console.log(orders)
+        console.log(orders);
         setOrders(response.orders);
       } else { history.push('/login'); }
     };
     fetchOrders();
-  }, [history]);
+  }, [history, orders]);
 
   return (
     <div>
