@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const products = async (payload) => {
+const getProducts = async (payload) => {
   try {
     const headers = { authorization: payload.token };
     const localhost = process.env.HOSTNAME || 'localhost';
@@ -32,4 +32,4 @@ const products = async (payload) => {
   }
 };
 
-export default products;
+export default getProducts;

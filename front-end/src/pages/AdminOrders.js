@@ -17,7 +17,7 @@ export default function AdminOrders() {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const ordersArray = await api.admin.sales(token);
+        const ordersArray = await api.admin.getSales(token);
         setOrders(ordersArray);
       } catch (error) {
         console.log(error);

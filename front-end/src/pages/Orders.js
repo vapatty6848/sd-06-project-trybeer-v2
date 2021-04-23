@@ -17,7 +17,7 @@ export default function Orders() {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const ordersArray = await api.sales(token);
+        const ordersArray = await api.client.getSales(token);
         setOrders(ordersArray);
       } catch (error) {
         console.log(error);
@@ -29,7 +29,7 @@ export default function Orders() {
     fetchOrders();
   }, [setOrders, token, history]);
 
-  const title = (token && token.role === 'administrator') ? 'Pedidos' : 'Meus Pedidos';
+  const title = 'Meus Pedidos';
 
   return (
     <section>

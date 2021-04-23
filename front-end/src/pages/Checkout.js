@@ -3,7 +3,7 @@ import { Redirect, useHistory } from 'react-router-dom';
 
 import AppContext from '../context/app.context';
 import { Topbar, Button, TextInput } from '../components';
-import salesApi from '../services/api.sales';
+import api from '../services';
 import { handleProductQuantity } from '../utils';
 
 import '../styles/Checkout.css';
@@ -52,7 +52,7 @@ export default function Checkout() {
       salePrice: cartTotal.replace(',', '.'),
     };
 
-    await salesApi({ ...token, order })
+    await api.client.createSale({ ...token, order })
       .then(() => {
         setSuccess(true);
         setCart({});

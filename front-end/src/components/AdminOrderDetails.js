@@ -20,7 +20,7 @@ export default function OrderDetails() {
   useEffect(() => {
     const fetchOrder = async () => {
       try {
-        const currOrder = await api.admin({ ...token, saleId: params.id });
+        const currOrder = await api.admin.getSaleById({ ...token, saleId: params.id });
         if (currOrder.code) {
           history.push({
             pathname: '/error',
@@ -36,7 +36,7 @@ export default function OrderDetails() {
 
   const updateStatus = async (newStatus) => {
     try {
-      await api.admin({ ...token, saleId: order.id, status: newStatus });
+      await api.admin.updateSale({ ...token, saleId: order.id, status: newStatus });
       setOrder({ ...order, status: newStatus });
       return { status: 'OK', message: `Sale status updated to ${newStatus}` };
     } catch (error) {

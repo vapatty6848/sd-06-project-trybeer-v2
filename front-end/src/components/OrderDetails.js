@@ -18,7 +18,7 @@ export default function OrderDetails() {
   useEffect(() => {
     const fetchOrder = async () => {
       try {
-        const currOrder = await api.sales({ ...token, saleId: params.id });
+        const currOrder = await api.sales.getSaleById({ ...token, saleId: params.id });
         if (currOrder.code) {
           history.push({
             pathname: '/error',
