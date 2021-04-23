@@ -72,8 +72,6 @@ function OrderDetail() {
             </div>
           )
         }
-
-        {console.log(orders) }
       </Container>
 
     </section>
