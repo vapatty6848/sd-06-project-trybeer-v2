@@ -7,14 +7,17 @@ import CardAdminProduct from '../CardAdminProduct';
 
 import S from './styles';
 
-const modifyStatus = async (setPending, id) => {
+const modifyStatus = async (setPending, setPreparing, setStatus, id) => {
   setPending(false);
+  setPreparing(false);
+  setStatus('Entregue');
 
   await updateStatus(id, 'Entregue');
 };
 
-const modifyPreparingStatus = async (setPreparing, id) => {
+const modifyPreparingStatus = async (setPreparing, setStatus, id) => {
   setPreparing(false);
+  setStatus('Preparando');
 
   await updateStatus(id, 'Preparando');
 };
@@ -33,12 +36,12 @@ const CardAdminDetails = () => {
       setOrders(fetchData);
       setStatus(fetchData.status);
 
-      if (fetchData.status === 'Pendente') {
+      if (fetchData.status !== 'Entregue') {
         setPending(true);
       } else {
         setPending(false);
       }
-      if (fetchData.status === 'Preparando' || fetchData.status === 'Pendente') {
+      if (fetchData.status === 'Pendente') {
         setPreparing(true);
       } else {
         setPreparing(false);
@@ -91,16 +94,16 @@ const CardAdminDetails = () => {
               type="button"
               preparing={ preparing }
               data-testid="mark-as-prepared-btn"
-              onClick={ () => modifyPreparingStatus(setPreparing, id) }
+              onClick={ () => modifyPreparingStatus(setPreparing, setStatus, id) }
             >
-              Preparar Pedido
+              Preparar pedido
             </S.PreparingButton>
 
             <S.ConfirmButton
               type="button"
               pending={ pending }
               data-testid="mark-as-delivered-btn"
-              onClick={ () => modifyStatus(setPending, id) }
+              onClick={ () => modifyStatus(setPending, setPreparing, setStatus, id) }
             >
               Marcar como entregue
             </S.ConfirmButton>
