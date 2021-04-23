@@ -73,13 +73,13 @@ function AdminOrderDetail() {
                     </button>
                   )
                 }
-                    <button
-                      type="button"
-                      data-testid="mark-as-prepared-btn" 
-                      onClick={ () => handleStatusOrderPreparing() }
-                    >
-                      Preparar pedido
-                    </button>
+                <button
+                  type="button"
+                  data-testid="mark-as-prepared-btn"
+                  onClick={ () => handleStatusOrderPreparing() }
+                >
+                  Preparar pedido
+                </button>
               </div>
             )
           }
