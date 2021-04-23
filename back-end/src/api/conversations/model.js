@@ -2,6 +2,12 @@ const connection = require('../../database/mongodb/connection');
 
 const collection = 'conversations';
 
+const find = () => connection()
+  .then((db) => db.collection(collection))
+  .then((table) => table.find({ messages:
+    { $exists: true, $type: 'array', $ne: [] },
+  }).toArray());
+
 const findOne = (property, value) => connection()
   .then((db) => db.collection(collection))
   .then((table) => table.findOne({ [property]: value }));
@@ -19,6 +25,7 @@ const update = (id, newMessage) => connection()
 
 module.exports = {
   findOne,
+  find,
   create,
   update,
 };

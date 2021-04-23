@@ -1,5 +1,11 @@
 const model = require('./model');
 
+const getAll = async () => {
+  const conversations = await model.find();
+
+  return ({ status: 200, payload: { conversations } });
+};
+
 const findOrCreate = async (userId, email) => {
   const conversation = await model.findOne('userId', userId);
 
@@ -33,4 +39,5 @@ const writeMessage = async ({ userId, text, sender = 'client' }) => {
 module.exports = {
   findOrCreate,
   writeMessage,
+  getAll,
 };

@@ -1,20 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import socket from './socket';
+import React from 'react';
+// import { chatTime } from '../../services/formatPatterns';
+// import getUserInfo from '../../services/localStorage';
+// import socket from './socket';
+// import ChatBox from './ChatBox';
+import ChatMenu from './ChatMenu';
 
-const PublicChat = () => {
-  const [test, setTest] = useState('Inicio');
-  useEffect(() => {
-    socket.emit('teste', 'Testando');
+const PrivateChat = () => (
+  <div>
+    Chat Privado
+    <ChatMenu />
+  </div>
+);
 
-    socket.on('teste2', (message) => setTest(message));
-  }, []);
-
-  return (
-    <div>
-      Private Chat
-      <p>{ test }</p>
-    </div>
-  );
-};
-
-export default PublicChat;
+export default PrivateChat;
