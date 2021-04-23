@@ -3,6 +3,7 @@ import { chatTime } from '../../services/formatPatterns';
 import getUserInfo from '../../services/localStorage';
 import socket from './socket';
 import ChatBox from './ChatBox';
+// comentario
 
 const AdminChat = () => {
   const [userInfo, setUserInfo] = useState(false);
