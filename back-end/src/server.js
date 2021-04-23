@@ -22,12 +22,7 @@ const {
   OrderRoute,
 } = require('./routes');
 const { error } = require('./middleware');
-
-const getHour = () => {
-  const date = new Date();
-  const hour = `${date.getHours()}:${date.getMinutes()}`;
-  return hour;
-};
+const { chatUtils } = require('./utils');
 
 io.on('connection', (socket) => {
 console.log(socket.id);
@@ -37,7 +32,7 @@ console.log(socket.id);
   });
 
   socket.on('message', ((message) => {
-    const bodyMessage = { message, hour: getHour() };
+    const bodyMessage = { message, hour: chatUtils.getTime() };
     io.emit('sendMessage', bodyMessage);
     }));
 });
