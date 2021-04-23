@@ -30,6 +30,11 @@ export default function OrderCard({ order, orderIndex }) {
           {' '}
           {currencyFormat(Number(order.totalPrice))}
         </p>
+        <p data-testid={ `${orderIndex}-order-status` }>
+          Status:
+          {' '}
+          {order.status}
+        </p>
         <hr />
       </button>
     </div>

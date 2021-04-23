@@ -24,6 +24,11 @@ function OrderDetailsCard({orderDetails}) {
           {currencyFormat(Number(orderDetails.reduce(((acc,cur) => acc + cur.totalPrice),0)))}
           {' '}
         </p>
+        <p data-testid={ 'order-status' }>
+          Status:
+          {' '}
+          {orderDetails[0].status}
+        </p>
         <hr />
         <Link to="/orders" >Voltar</Link>
       </div>);
