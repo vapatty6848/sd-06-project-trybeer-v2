@@ -23,8 +23,9 @@ export default function AdminSaleDetail() {
     if (!token) return history.push('/login');
   };
 
-  const handletotalValue = () => {
+  const changeStatusToDelivered = () => {
     if (orderDetail.products) {
+      console.log(orderDetail.products);
       const totalPrice = orderDetail.products
         .reduce((accumulator, current) => accumulator
           + (Number(current.salesProducts.quantity) * Number(current.price)), 0);
@@ -34,8 +35,8 @@ export default function AdminSaleDetail() {
   };
 
   const handleChangeStatusButton = () => {
-    fetches.updateSale(tokenFromLocalStorage, adminPathName);
-    window.location.reload();
+    fetches.updateSale(tokenFromLocalStorage, adminPathName, 'Entregue');
+    history.push('/admin/orders');
   };
 
   return (
@@ -70,7 +71,7 @@ export default function AdminSaleDetail() {
         className={ orderDetail.length && orderDetail[0].status }
         data-testid="mark-as-delivered-btn"
         type="button"
-        onClick={ handleChangeStatusButton }
+        onClick={ changeStatusToDelivered }
       >
         Marcar como entregue
       </button>

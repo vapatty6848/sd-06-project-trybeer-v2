@@ -46,7 +46,6 @@ const getSaleDetail = (saleId) => sales.findByPk(saleId, { include: [
 const getAllSales = async () => sales.findAll(); 
 
 const updateSale = async (saleId, saleStatus) => {
-  console.log(saleId, saleStatus);
   sales.update(
   { status: saleStatus },
   { where: { id: saleId } },

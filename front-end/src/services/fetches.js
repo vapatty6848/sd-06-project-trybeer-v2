@@ -61,10 +61,10 @@ const getAllSales = async (token) => {
   return allSales;
 };
 
-const updateSale = async (token, adminPathName) => {
+const updateSale = async (token, adminPathName, status) => {
   try {
     await axios.put(`${path}${adminPathName}`,
-      {},
+      { status },
       config(token));
   } catch (error) {
     console.log(error);

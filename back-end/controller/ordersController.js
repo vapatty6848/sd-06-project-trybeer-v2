@@ -49,7 +49,9 @@ router.post('/orders', validateToken, rescue(async (req, res) => {
 
   router.put('/orders/:id', validateToken, rescue(async (req, res) => {
     const saleId = req.params.id;
-    await ordersService.updateSale(saleId);
+    const { status } = req.body;
+
+    await ordersService.updateSale(saleId, status);
 
     return res.status(201).json({ message: 'Sale atualizada com sucesso!' });
   }));

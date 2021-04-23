@@ -17,6 +17,11 @@ module.exports = {
         productId: 3,
         quantity: 15,
       },
+      {
+        saleId: 2,
+        productId: 1,
+        quantity: 50,
+      }
     ], {});
   },
 
