@@ -1,11 +1,26 @@
 const { Router } = require('express');
+const messages = require('../modelMongo/messages');
+const { isUserLoggedIn } = require('../middlewares/validations');
 
 const ChatController = new Router();
 
-ChatController.get('/', async (req, res, next) => {
+ChatController.get('/', isUserLoggedIn, async (req, res, next) => {
   try {
-    const chat = 'CHATCONTROLLER';
-    return res.status(200).json(chat);
+    const { user: { email } } = req;
+    const userMessages = await messages.getByNickname(email);
+    const { messages: currentMessages } = userMessages;
+    return res.status(200).json(currentMessages);
+  } catch (err) {
+    next(err);
+  }
+});
+
+ChatController.post('/', async (req, res, next) => {
+  try {
+    const { email, message } = req.body;
+    await messages.saveMessage(email, message);
+    const chats = await messages.getAll();
+    return res.status(200).json(chats);
   } catch (err) {
     next(err);
   }
