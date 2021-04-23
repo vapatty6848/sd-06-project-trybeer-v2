@@ -8,7 +8,7 @@ const ProductsController = new Router();
 // Get All products
 ProductsController.get('/', verifyLogin, async (_req, res) => {
   const products = await Product.findAll();
-  res.status(OK).json(products);
+  return res.status(OK).json(products);
 });
 
 module.exports = ProductsController;
