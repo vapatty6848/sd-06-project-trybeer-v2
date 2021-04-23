@@ -45,9 +45,9 @@ function OrderDetailsCard({ orderDetails }) {
         </div>
         <div>
           <button
-            data-testid="mark-as-delivery-btn"
+            data-testid="mark-as-delivered-btn"
             value="Entregue"
-            disabled={deliveryBTN}
+            hidden={deliveryBTN}
             type="button"
             onClick={async (e) => {
               return setProductADM(await updateStatus(productADM[0], e.target.value))
@@ -59,7 +59,7 @@ function OrderDetailsCard({ orderDetails }) {
             data-testid="mark-as-prepared-btn"
             type="button"
             value="Preparando"
-            disabled={preparingBTN}
+            hidden={preparingBTN}
             onClick={async (e) => {
               return setProductADM(await updateStatus(productADM[0], e.target.value))
             }}
