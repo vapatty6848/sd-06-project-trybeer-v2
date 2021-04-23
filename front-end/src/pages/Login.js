@@ -12,13 +12,13 @@ export default function Login() {
   const [loginUserLocal, setLoginUserLocal] = useState({ email: '', password: '' });
 
   const handleLogin = async (dataUser) => {
-    const user = await login(dataUser);
-    localStorage.setItem('user', JSON.stringify(user));
-    setLoginUser({ ...loginUser, user });
+    const pacote = await login(dataUser);
+    localStorage.setItem('user', JSON.stringify(pacote));
+    setLoginUser({ ...loginUser, pacote });
 
-    if (user.role === 'client') {
+    if (pacote.role === 'client') {
       history.push({ pathname: '/products' });
-    } else if (user.role === 'administrator') {
+    } else if (pacote.role === 'administrator') {
       history.push({ pathname: '/admin/orders' });
     } else {
       history.push({ pathname: '/register' });

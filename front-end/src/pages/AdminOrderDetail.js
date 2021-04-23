@@ -14,7 +14,7 @@ function AdminOrderDetail() {
   const [status, setStatus] = useState(null);
   const { result } = useDataFetch(Api.getByIdSales, id);
 
-  const totalValue = result.map((el) => el.total_price.replace('.', ','));
+  const totalValue = result.map((el) => el.totalPrice.replace('.', ','));
   const orderNumber = result.map((el) => el.id);
   const orderStatus = result.map((el) => el.status);
 

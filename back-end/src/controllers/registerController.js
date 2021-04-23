@@ -29,11 +29,4 @@ registerRouter.delete('/delete-user/:id', async (req, res) => {
   res.status(httpStatusCode.OK).json('Response deleted successfully');
 });
 
-// Edit a user
-registerRouter.put('/edit-user', async (req, res) => {
-  const { prevName, nextName } = req.body;
-  await Service.edit(prevName, nextName);
-  res.status(httpStatusCode.OK).send({ message: 'Atualização concluída com sucesso' });
-});
-
 module.exports = registerRouter;

@@ -39,10 +39,10 @@ function Order(orders) {
                       {`Pedido ${index + 1}`}
                     </button>
                     <h5 data-testid={ `${index}-order-date` }>
-                      {formatDate(e.sale_date)}
+                      {formatDate(e.saleDate)}
                     </h5>
                     <p data-testid={ `${index}-order-total-value` }>
-                      {`R$ ${e.total_price.replace('.', ',')}`}
+                      {`R$ ${e.totalPrice.replace('.', ',')}`}
                     </p>
                   </div>
                 </li>
