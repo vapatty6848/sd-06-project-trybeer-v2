@@ -103,7 +103,6 @@ const fetchSaleProduct = async (id) => {
     headers: contentType,
     body: JSON.stringify(),
   }).then((res) => res.json());
-  console.log(productsOfSale);
   return productsOfSale;
 };
 
