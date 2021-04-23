@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import socket from '../../utils/socketClient';
+// import socket from '../../utils/socketClient';
 
 function FormMessage() {
   const [message, setMessage] = useState('');
@@ -9,7 +9,7 @@ function FormMessage() {
     console.log(message);
     // const from = localStorage.getItem('currentUser'); JÁ TEM O USER
     // socket.emit('chat.sendMessage', { message, from, dest });
-  }
+  };
 
   return (
     <form onSubmit={ handleSend }>
@@ -17,11 +17,9 @@ function FormMessage() {
         <input
           type="text"
           placeholder="Digite uma mensagem..."
-          onChange={(event) => setMessage(event.target.value)}
+          onChange={ (event) => setMessage(event.target.value) }
         />
-        <button
-          type="submit"
-        >Enviar</button>
+        <button type="submit">Enviar</button>
       </div>
     </form>
   );
