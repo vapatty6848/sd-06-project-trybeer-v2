@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const moment = require('moment');
 const LoginController = require('./src/controller/LoginControler');
 const UsersController = require('./src/controller/UsersController');
 const ProductsController = require('./src/controller/ProductsController');
@@ -27,8 +28,19 @@ const io = require('socket.io')(httpServer, {
 io.on('connection', (socket) => {
   console.log('Usuário conectado');
 
+  socket.on('connectRoom', (roomName) => {
+    socket.join(roomName);
+  });
+
   socket.on('teste', (msg) => {
     console.log(`Server recebe mensagem: ${msg}`);
+  });
+
+  socket.on('chat.sendMessage', (data) => {
+    const sentAt = moment().format('HH:mm');
+    data = { ...data, sentAt };
+    console.log(data);
+    io.to(data.from).emit('chat.receiveMessage', data);
   });
 });
 
