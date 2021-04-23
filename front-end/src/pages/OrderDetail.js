@@ -38,8 +38,6 @@ function OrderDetail() {
       <Header />
       <Navbar />
       <Container>
-      {/* {console.log('orders', orders)} */}
-
         {
           (orders && orders.length > 0) && (
             <div className="content">

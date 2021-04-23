@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const Service = require('../services/orderService');
-const { sale, user, salesProduct, sequelize, product } = require('../models');
+const { sale, salesProduct, sequelize, product } = require('../models');
 const status = require('../utils/httpStatusCode');
 
 const orderRouter = Router();

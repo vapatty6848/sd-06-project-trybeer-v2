@@ -4,11 +4,11 @@ const BASE_URL = 'http://localhost:3001/';
 
 export async function login(loginUser) {
   const user = await axios.post('http://localhost:3001/login', loginUser)
-  .then((resp) => resp.data)
-  .catch((err) => {
-    console.log(err.response);
-    return err.response;
-  });
+    .then((resp) => resp.data)
+    .catch((err) => {
+      console.log(err.response);
+      return err.response;
+    });
   return user;
 }
 
@@ -62,8 +62,9 @@ export async function registerOrder(
   const orderDB = await axios.post(`${BASE_URL}orders`, {
     value, date, userID, street, number, saleProduct,
   })
-    .then((resp) => {})
+    .then((resp) => resp.data)
     .catch((err) => {
+      console.log(err.response);
       return err.response;
     });
   return orderDB;
