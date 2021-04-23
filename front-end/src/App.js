@@ -11,6 +11,8 @@ import {
   DetailsOrderAdm,
   ProfileAdm,
   OrdersAdm,
+  Chat,
+  ChatAdmin,
 } from './pages/index';
 import Provider from './hooks/Provider';
 import './App.css';
@@ -30,6 +32,8 @@ function App() {
           <Route path="/admin/orders/:id" component={ DetailsOrderAdm } />
           <Route exact path="/admin/orders" component={ OrdersAdm } />
           <Route path="/admin/profile" component={ ProfileAdm } />
+          <Route path="/chat" component={ Chat } />
+          <Route path="/admin/chats" component={ ChatAdmin } />
           <Redirect from="/" to="/login" />
         </Switch>
       </Provider>

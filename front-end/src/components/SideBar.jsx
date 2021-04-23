@@ -41,6 +41,13 @@ function SideBar() {
       <button
         className="buttonside"
         type="button"
+        onClick={ () => history.push('/chat') }
+      >
+        Conversar com a loja
+      </button>
+      <button
+        className="buttonside"
+        type="button"
         data-testid="side-menu-item-logout"
         onClick={ handleLogout }
       >
