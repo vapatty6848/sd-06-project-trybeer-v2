@@ -1,30 +1,38 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { TopMenu } from '../components';
 import TrybeerContext from '../context/TrybeerContext';
 import { verifyToken } from '../utils/verifications';
 import PropTypes from 'prop-types';
+import { Children } from 'react';
 
 function Chat({ history }) {
   const [currentMessage, setCurrentMessage] = useState('');
   const { user } = useContext(TrybeerContext);
-  const messages = [{ message: 'Hello', timestamp: '14:36' },
-    { message: 'Hello', timestamp: '14:36' }];
+  // const messages = [{ message: 'Hello', timestamp: '14:36' },
+  //   { message: 'Hello', timestamp: '14:36' }];
+  const [messageHistory, setMessageHistory] = useState([]);
 
   const fetchMessages = async () => {
     const allMessages = await verifyToken('chat', user, history);
+    setMessageHistory(allMessages);
     console.log('allMessages', allMessages);
   };
-
-  fetchMessages();
 
   const onChangeMessage = ({ target: { value } }) => {
     setCurrentMessage(value);
   };
 
   const handleSubmit = () => {
-    messages.push({ currentMessage, timestamp: '14:00' });
-    console.log(messages);
+    const date = new Date();
+    console.log(date.getHours())
+    const timestamp = `${date.getHours()}:${date.getMinutes()}`
+    messages.push({ currentMessage, timestamp });
+    // console.log(messages);
   };
+
+  useEffect(() => {
+    fetchMessages();
+  }, []);
 
   return (
     <div>
@@ -32,11 +40,10 @@ function Chat({ history }) {
       <br />
       <br />
       <ul>
-        {messages.map(({ message, timestamp }, index) => (
+        {messageHistory.map(({ message, timestamp }, index) => (
           <li key={ index }>
-            {user.email}
-            {timestamp}
-            {message}
+            <div data-testid="nickname">{user.email} - <spam data-testid="message-time"> {timestamp} </spam> </div> 
+            <div data-testid="text-message">{message}</div>
           </li>
         ))}
       </ul>
