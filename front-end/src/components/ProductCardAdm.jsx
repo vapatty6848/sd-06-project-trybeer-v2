@@ -32,5 +32,5 @@ ProductCardAdm.propTypes = {
     totalPrice: PropTypes.number.isRequired,
     price: PropTypes.string.isRequired,
   }).isRequired,
-  index: PropTypes.number.isRequired
+  index: PropTypes.number.isRequired,
 };
