@@ -14,7 +14,7 @@ function AdminOrders({ history }) {
     const allOrders = await verifyToken('admin/orders/', user, history);
     setOrders(allOrders);
   }, [history, user]);
-  
+
   useEffect(() => {
     fetchOrders();
   }, [fetchOrders]);

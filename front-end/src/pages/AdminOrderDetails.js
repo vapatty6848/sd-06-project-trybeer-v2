@@ -13,6 +13,10 @@ function AdminOrderDetails(props) {
   const [isShowing, setIsShowing] = useState(true);
   const { location: { state }, history } = props;
 
+  const checkStatus = (status) => {
+    if (status === 'Entregue') return setIsShowing(false);
+  };
+
   const fetchOrderDetails = useCallback(async () => {
     if (state) {
       const order = await verifyToken(`admin/orders/details/${state.id}`, user, history);
@@ -34,15 +38,11 @@ function AdminOrderDetails(props) {
     fetchOrderDetails();
   }, [fetchOrderDetails, observeState]);
 
-  const checkStatus = (status) => {
-    if (status === 'Entregue') return setIsShowing(false);
-  };
-  
   const markAsPreparing = async (status) => {
     await put(`admin/orders/${state.id}`, user.token, { status });
     fetchOrderDetails();
   };
-  
+
   const markAsDone = async (status) => {
     await markAsPreparing(status);
     setIsShowing(false);

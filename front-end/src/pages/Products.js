@@ -12,7 +12,7 @@ function Products({ history }) {
     const allProducts = await verifyToken('products', user, history);
     setProducts(allProducts);
   }, [user, history]);
-  
+
   useEffect(() => {
     fetchProducts();
   }, [fetchProducts]);
