@@ -1,4 +1,4 @@
-const { sales, sales_products } = require('../models');
+const { sales, products } = require('../models');
 
 // const ordersModel = require('../model/ordersModel');
 
@@ -30,11 +30,13 @@ const createProductsSales = async (mySaleProducts) => {
 // };
 
 const getSaleDetail = (saleId) => {
-  sales.findByPk(saleId, { include: {
-      model: 'products', as: 'product',
-      model: 'sales_products', as: 'saleProducts',
-      model: 'sales', as: 'sale'
-    } })}
+  console.log('Entrei no detail');
+  sales.findByPk(saleId, { include: [
+    { model: products, as: 'products' },
+    // { model: 'sales_products', as: 'saleProducts' },
+    // { model: 'sales', as: 'sale' },
+    ] });
+  };
 // const getSaleDetail = async (saleId) => {
 //   const saleDetail = await ordersModel.getSaleDetail(saleId);
 //   console.log('entrei no service', saleDetail);
@@ -50,8 +52,8 @@ const getAllSales = async () => sales.findAll();
 
 const updateSale = async (saleId, saleStatus) => sales.update(
   { status: saleStatus },
-  { where: { id: saleId } }
-)
+  { where: { id: saleId } },
+);
 // const updateSale = async (saleId) => {
 //   await ordersModel.updateSale(saleId);
 
