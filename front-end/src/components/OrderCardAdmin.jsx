@@ -18,11 +18,7 @@ function OrderCardAdmin(props) {
   };
 
   return (
-    <Link to={ `/admin/orders/${order.id}` } className="admin-order-card">
-      <a
-        href="/admin/orders/:id"
-        onClick={ () => handleClick() }
-      >
+    <Link to={ `/admin/orders/${order.id}` } className="admin-order-card" onClick={ () => handleClick() }>
         <div data-testid={ `${index}-order-card-container` } className="lol">
           <p
             data-testid={ `${index}-order-number` }
@@ -51,7 +47,6 @@ function OrderCardAdmin(props) {
             </p>
           </div>
         </div>
-      </a>
     </Link>
   );
 }

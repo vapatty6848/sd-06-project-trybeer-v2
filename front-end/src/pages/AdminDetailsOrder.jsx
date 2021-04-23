@@ -1,25 +1,22 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import AdminSideBar from '../components/AdminSideBar';
 import BeerContext from '../context/BeerContext';
 import ProductCardAdmin from '../components/ProductCardAdmin';
-import { getSalesProductsBySaleId } from '../api/index';
+import { changeStatus } from '../api/index';
 import '../css/AdminOrders.css';
 import '../css/General.css';
 
 function AdminDetailsOrder() {
   const { saleDetail, setSaleDetail } = useContext(BeerContext);
   const { sale, products } = saleDetail;
-  console.log(saleDetail)
-  //const sale = saleDetail;
 
+  // const handleClick = () => {
+  //   async function getSaleDetail() {
+  //     await changeStatus(sale.id);
+  //   }
+  //   getSaleDetail();
+  // };
 
-  const handleClick = () => {
-    async function getSaleDetail() {
-      await getSalesProductsBySaleId(setSaleDetail, sale.saleId);
-    }
-    getSaleDetail();
-  };
- 
   return (
     <div className="admin-container">
       <AdminSideBar />
@@ -30,8 +27,8 @@ function AdminDetailsOrder() {
         { !saleDetail ? <p>Loading</p> : (
           <div className="admin-order-details">
             <div className="larger-text">
-              <span data-testid="order-number">{`Pedido ${sale.id}`}</span>
-              <span data-testid="order-status">{` - ${sale.status}`}</span>
+              <span data-testid={`${sale.id}-order-number`}>{`Pedido ${sale.id} - `}</span>
+              <span data-testid="order-status">{`${sale.status}`}</span>
             </div>
             <section className="orders-list">
               { products && products
@@ -48,16 +45,26 @@ function AdminDetailsOrder() {
             >
               {`Total: R$ ${sale.totalPrice.toString().replace('.', ',')}`}
             </p>
-            { sale.saleStatus === 'Pendente' && (
-              <button
+            { (sale.status !== 'Entregue') ? (
+              <div>
+                <button
                 type="button"
-                onClick={ async () => handleClick() }
+                onClick={ async () => await changeStatus(setSaleDetail, sale.id, 'Entregue') }
                 data-testid="mark-as-delivered-btn"
                 className="mark-as-delivered-btn"
               >
                 Marcar como entregue
               </button>
-            )}
+              <button
+                type="button"
+                onClick={ async () => await changeStatus(setSaleDetail, sale.id, 'Preparando') }
+                data-testid="mark-as-prepared-btn"
+                className="mark-as-delivered-btn"
+              >
+                Preparar pedido
+              </button>
+              </div>
+            ): ''}
           </div>
         )}
       </div>
