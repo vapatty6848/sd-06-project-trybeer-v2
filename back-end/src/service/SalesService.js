@@ -2,12 +2,12 @@ const { sales, salesProducts } = require('../database/models');
 
 const registerSale = async (params) => {
   const createSale = await sales.create(params);
-  return createSale.dataValues;
+  return createSale;
 };
 
 const regSalesProducts = async (params) => {
   const regSale = await salesProducts.create(params);
-  return regSale.dataValues;
+  return regSale;
 };
 
 module.exports = { registerSale, regSalesProducts };
