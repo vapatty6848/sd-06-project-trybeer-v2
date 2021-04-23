@@ -12,9 +12,17 @@ const ClientOrdersController = require('./src/controller/ClientOrdersController'
 const PORT = 3001;
 
 const app = express();
+const httpServer = require('http').createServer(app);
 
 app.use(express.json());
 app.use(cors());
+
+const io = require('socket.io')(httpServer, {
+  cors: {
+    origin: 'http://localhost:3001',
+    methods: ['GET', 'POST']
+  }
+});
 
 app.use('/login', LoginController);
 
@@ -30,4 +38,4 @@ app.use((err, _req, res, _next) => {
   res.status(err.status || 500).json(err.message);
 });
 
-app.listen(PORT, console.log(`Experando Requisições na porta ${PORT}`));
+httpServer.listen(PORT, console.log(`Experando Requisições na porta ${PORT}`));
