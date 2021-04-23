@@ -1,19 +1,30 @@
-const connection = require('./connection');
-
-const getOne = async (saleId) => {
-  const [sale] = await connection.query(
-   'SELECT s.id as id, s.total_price as saleTotal, p.price as productPrice,'
-    + 'sD.quantity as productQuantity,'
-    + 'p.name as productName, s.sale_date as saleDate,'
-    + 's.status as statusSale'
-    + ' FROM sales_products as sD'
-    + ' INNER JOIN products as p ON sD.product_id = p.id' 
-    + ' INNER JOIN sales as s ON sD.sale_id = s.id WHERE s.id = ? ;', [Number(saleId)],
-  );
-
-  return sale;
+const SalesProducts = (sequelize, DataTypes) => {
+  const salesProducts = sequelize.define('salesProducts', {
+    quantity: DataTypes.STRING,
+  }, { timestamps: false });
+  salesProducts.associate = (models) => {
+    models.products.belongsToMany(models.sales, {
+      as: 'sales',
+      through: salesProducts,
+      foreignKey: 'productId',
+      otherKey: 'saleId',
+    });
+    models.sales.belongsToMany(models.products, {
+      as: 'products',
+      through: salesProducts,
+      foreignKey: 'saleId',
+      otherKey: 'productId',
+    });
+  salesProducts.belongsTo(models.sales, {
+    foreignKey: 'saleId',
+    as: 'sale',
+  });
+  salesProducts.belongsTo(models.products, {
+    foreignKey: 'productId',
+    as: 'product',
+  });
+  };
+  return salesProducts;
 };
 
-module.exports = {
-  getOne,
-};
+module.exports = SalesProducts;

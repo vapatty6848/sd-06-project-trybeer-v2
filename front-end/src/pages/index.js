@@ -10,6 +10,8 @@ import AdminProfile from './AdminProfile';
 import OrdersAdm from './OrdersAdm';
 import Checkout from './Checkout';
 import OrdersAdmDetails from './OrderAdmDetails';
+import Chat from './Chat';
+import AdminChat from './AdminChat';
 
 export {
   Login,
@@ -24,4 +26,6 @@ export {
   OrdersAdm,
   Checkout,
   OrdersAdmDetails,
+  Chat,
+  AdminChat,
 };

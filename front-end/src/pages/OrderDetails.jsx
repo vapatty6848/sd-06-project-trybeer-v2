@@ -18,6 +18,7 @@ function OrderDetails() {
     };
     fetchData();
   }, [history, id]);
+
   return (
     <>
       <h1 data-testid="top-title"> Detalhe do pedido</h1>

@@ -23,6 +23,7 @@ const salesDetails = async (id) => {
   if (!token) return { redirect: true };
   const apiRequest = await fetch(`${baseURL}/${id}`, getMethod);
   const apiResponse = await apiRequest.json();
+
   return apiResponse;
 };
 

@@ -1,20 +1,19 @@
 const baseURL = 'http://localhost:3001/admin/orders';
 
-const updateStatus = async (sale) => {
+const updateStatus = async (sale, status) => {
   const postMethod = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      sale,
+      sale: {id: sale.saleId, status,},
     }),
   };
-  const apiRequest = await fetch(`${baseURL}/${sale.id}`, postMethod);
+  const apiRequest = await fetch(`${baseURL}/${sale.saleId}`, postMethod);
   const apiResponse = await apiRequest.json();
-  // console.log('minha resposta foi', apiResponse.updatedSale[0]);
-  // localStorage.setItem('user', JSON.stringify(apiResponse));
-  return apiResponse.updatedSale[0];
+  console.log('resposta da api', apiResponse)
+  return apiResponse;
 };
 
 export default updateStatus;

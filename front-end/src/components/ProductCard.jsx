@@ -1,30 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import currencyFormat from '../utils/currencyFormat';
+import sales from '../methods/sales';
 
-function ProductCard({ product }) {
-  /* - A quantidade do produto deverá conter a tag `data-testid="0-product-qtd"`
-
-- O nome do produto deverá conter a tag `data-testid="0-product-name"`
-
-- O valor total do produto deverá conter a tag `data-testid="0-product-total-value"` */
-  return (
-    <>
-      <p data-testid={ `${product.id - 1}-product-qtd` }>
+function ProductCard({ product })  {
+return (
+  <>
+  {product.map((e,i) => {
+    return <>
+    <p data-testid={ `${i}-product-qtd` }>
         quantidade:
         {' '}
-        {`${product.productQuantity} und`}
+        {`${e.quantity} und`}
         {' '}
       </p>
-      <p data-testid={ `${product.id - 1}-product-name` }>
-        {`nome do produto: ${product.productName}`}
+      <p data-testid={ `${i}-product-name` }>
+        {`nome do produto: ${e.name}`}
       </p>
-      <p data-testid={ `${product.id - 1}-product-total-value` }>
+      <p data-testid={ `${i}-product-total-value` }>
         subtotal:
         {' '}
-        {currencyFormat(Number(product.productQuantity * product.productPrice))}
+        {currencyFormat(Number(e.totalPrice))}
       </p>
       <hr />
+    </>
+  })}
     </>
   );
 }
