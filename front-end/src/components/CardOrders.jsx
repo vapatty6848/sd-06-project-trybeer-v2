@@ -11,6 +11,7 @@ export default function CardOrders() {
 
     setSales(salesOrder);
   };
+
   useEffect(() => {
     fetchApiSales();
   }, []);
@@ -44,6 +45,7 @@ export default function CardOrders() {
                   currency: 'BRL',
                 })}
               </h4>
+              <h4>{sales[index].status}</h4>
             </div>
           </div>
         </Link>

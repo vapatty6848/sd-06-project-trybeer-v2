@@ -36,19 +36,17 @@ export default function AdminOrdersDetails() {
     } else {
       setButtonPrepared(false);
     }
-
   }, [id, buttonDisabled, buttonPrepared]);
 
   const handleClick = async (status) => {
     setOrderStatus(status);
-    
+
     if (status === 'Preparando') {
       setButtonPrepared(true);
       await api.fetchChangeStatus(id, status);
       // window.location.reload();
-  } 
-      
-    
+    }
+
     if (status === 'Entregue') {
       setButtonDisabled(false);
       await api.fetchChangeStatus(id, status);
