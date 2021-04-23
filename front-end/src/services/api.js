@@ -59,7 +59,7 @@ export const getAllOrders = async (email) => {
 };
 
 export const getOrderDetails = async (id) => {
-  const requestResponse = await api.get(`orders/${id}`)
+  const requestResponse = await api.get(`/orders/${id}`)
     .then((response) => response.data)
     .catch((error) => error.response.data);
 

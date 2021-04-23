@@ -16,7 +16,7 @@ function ProductAdminInsert() {
   async function hanldeRegisterProduct() {
     const formData = new FormData();
     const imageFile = document.getElementById('product-image');
-    console.log(imageFile);
+
     formData.append('image', imageFile.files[0]);
     formData.append('name', product.name);
     formData.append('price', product.price);

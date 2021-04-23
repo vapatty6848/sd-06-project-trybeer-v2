@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { Redirect } from 'react-router';
+import { useHistory } from 'react-router';
 import ProductCard from '../components/Products/ProductCard';
 import Cart from '../components/Products/Cart';
 import TopBar from '../components/SideBarClient/TopBar';
@@ -13,8 +13,11 @@ function Products() {
     products, setProducts, cart, setCart,
   } = useContext(TrybeerContext);
   const loggedUser = JSON.parse(localStorage.getItem('user'));
+  const history = useHistory();
 
   useEffect(() => {
+    if (!loggedUser || !loggedUser.token) history.push('/login');
+
     getAllProducts()
       .then((product) => setProducts(product));
 
@@ -27,32 +30,26 @@ function Products() {
   }, [cart]);
 
   return (
-    loggedUser
-      ? (
-        <div className="mainDivProducts">
-          <TopBar title="TryBeer" />
-          <div className="divFilha">
-            { products.map((product, index) => {
-              const { id, name, price, urlImage } = product;
-              return (
-                <div className="divCards" key={ index }>
-                  <ProductCard
-                    key={ id }
-                    name={ name }
-                    price={ price }
-                    urlImage={ urlImage }
-                    index={ index }
-                  />
-                </div>
-              );
-            }) }
-          </div>
-          <Cart />
-        </div>
-      )
-      : (
-        <Redirect to="/login" />
-      )
+    <div className="mainDivProducts">
+      <TopBar title="TryBeer" />
+      <div className="divFilha">
+        {products.map((product, index) => {
+          const { id, name, price, urlImage } = product;
+          return (
+            <div className="divCards" key={ index }>
+              <ProductCard
+                key={ id }
+                name={ name }
+                price={ price }
+                urlImage={ urlImage }
+                index={ index }
+              />
+            </div>
+          );
+        })}
+      </div>
+      <Cart />
+    </div>
   );
 }
 

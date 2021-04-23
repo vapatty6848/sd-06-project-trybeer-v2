@@ -16,8 +16,9 @@ function AdminProfile() {
   }, []);
 
   return (
-    existsLocal === true
-      ? (
+    !existsLocal
+      ? <div>Loading</div>
+      : (
         <div className="div-main">
           <SideBarAdmin />
           <div className="div-filha">
@@ -27,7 +28,6 @@ function AdminProfile() {
           </div>
         </div>
       )
-      : null
   );
 }
 

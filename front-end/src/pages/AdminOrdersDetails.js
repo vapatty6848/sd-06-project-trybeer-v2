@@ -18,30 +18,28 @@ function AdminOrdersDetails(props) {
     getOrder(id).then((result) => setOrders(result));
   }, [delivered]);
 
-  console.log(orders.length)
-
   return (
     <div className="div-main">
       { !loggedUser && <Redirect to="/login" />}
       <SideBarAdmin />
       <div className="div-filha">
         {
-          !orders
+          !orders.length
             ? <div>no orders</div>
             : (
               <div className="divDetails">
                 <h2 data-testid="order-number">{`Pedido ${id} - `}</h2>
-                <h2 data-testid="order-status" className={ orders.status }>
-                  {orders.status}
+                <h2 data-testid="order-status" className={ orders[0].status }>
+                  {orders[0].status}
                 </h2>
-                {orders.products.map((order, index) => (
+                {orders[0].products.map((order, index) => (
                   <div key={ index }>
                     <h3 data-testid={ `${index}-product-qtd` }>
-                      {`${order.quantity}`}
+                      {`${order.sales_products.quantity}` }
                     </h3>
                     <h3 data-testid={ `${index}-product-name` }>{order.name}</h3>
                     <h3 data-testid={ `${index}-product-total-value` }>
-                      {`R$ ${(order.total).toFixed(2).replace('.', ',')}`}
+                      {`R$ ${(order.price).replace('.', ',')}` }
                     </h3>
                     <h3 data-testid={ `${index}-order-unit-price` }>
                       {`(R$ ${(order.price).toString().replace('.', ',')})`}
@@ -62,7 +60,7 @@ function AdminOrdersDetails(props) {
                       Preparar pedido
                     </button>
                   )
-                  : null }
+                  : null}
                 { orders[0].status !== 'Entregue'
                   ? (
                     <button
@@ -74,7 +72,7 @@ function AdminOrdersDetails(props) {
                       Marcar como entregue
                     </button>
                   )
-                  : null }
+                  : null}
               </div>
             )
         }

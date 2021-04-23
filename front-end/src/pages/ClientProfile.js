@@ -13,14 +13,18 @@ function ClientProfile() {
   const [nameLocal, setNameLocal] = useState('');
   const [emailLocal, setEmailLocal] = useState('');
   const [existsLocal, setExistsLocal] = useState(false);
+
   useEffect(() => {
     getLocal({ setEditedName, setNameLocal, setEmailLocal, setExistsLocal, history });
   }, []);
+
   useEffect(() => {
     if (editedName !== nameLocal) setDisableButton(false);
     else setDisableButton(true);
   }, [editedName]);
+
   function handleChangeName(event) { setEditedName(event.target.value); }
+
   return (
     <div id="div-profile">
       <TopBar title="Meu perfil" />
