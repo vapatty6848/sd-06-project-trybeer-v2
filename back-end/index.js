@@ -19,9 +19,17 @@ app.use(cors());
 
 const io = require('socket.io')(httpServer, {
   cors: {
-    origin: 'http://localhost:3001',
+    origin: 'http://localhost:3000',
     methods: ['GET', 'POST']
   }
+});
+
+io.on('connection', (socket) => {
+  console.log('Usuário conectado');
+
+  socket.on('teste', (msg) => {
+    console.log(`Server recebe mensagem: ${msg}`);
+  });
 });
 
 app.use('/login', LoginController);
