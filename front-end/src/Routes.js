@@ -8,6 +8,7 @@ import Products from './modules/Products/Products';
 import AdminOrders from './modules/Admin/Orders/AdminOrders';
 import AdminProfile from './modules/Admin/Profile/AdminProfile';
 import AdminChats from './modules/Admin/Chats/AdminChats';
+import ClientChat from './modules/Admin/Chats/ClientChat';
 import Checkout from './modules/Checkout/Checkout';
 import Chat from './modules/Chat/Chat';
 import AdminOrderDetail from './modules/Admin/OrderDetail/AdminOrderDetail';
@@ -22,6 +23,7 @@ function Routes() {
         <Route path="/admin/orders/:id" component={ AdminOrderDetail } />
         <Route path="/admin/orders" component={ AdminOrders } />
         <Route path="/admin/profile" component={ AdminProfile } />
+        <Route path="/admin/chats/:id" component={ ClientChat } />
         <Route path="/admin/chats" component={ AdminChats } />
         <Route path="/register" component={ Register } />
         <Route path="/profile" component={ Profile } />

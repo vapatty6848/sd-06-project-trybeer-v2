@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const {  
-  getAllMessages,
+  getMessagesByEmail,
   createMessage,
 } = require('../models/messages');
 
@@ -8,8 +8,8 @@ const MessageController = new Router();
 
 MessageController.get('/', async (req, res) => {
   const { email } = req.headers;
-  const messages = await getAllMessages(email);
-  res.status(200).send(messages);
+  const messagesByEmail = await getMessagesByEmail(email);
+  res.status(200).send(messagesByEmail);
 });
 
 MessageController.post('/', async (req, res) => {
