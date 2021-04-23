@@ -19,11 +19,7 @@ function DetailsOrder() {
 
     if (!user) history.push('/login');
 
-    getOrderDetails(url).then((response) => {
-      // products = response.product;
-      console.log('response', response);
-      return setOrderDetails(response);
-    });
+    getOrderDetails(url).then((response) => setOrderDetails(response));
   }, [history, url]);
 
   return !orderDetails ? <h1>Loading...</h1> : (

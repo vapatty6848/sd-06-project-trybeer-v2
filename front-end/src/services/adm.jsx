@@ -4,15 +4,15 @@ const getAllOrders = () => fetch(`${url}/orders`).then((response) => response.js
 
 const markAsDelivered = async (id, status) => {
   const user = JSON.parse(localStorage.getItem('user'));
-  console.log(status);
+  const data = JSON.stringify({ status });
 
   return fetch(`${url}/orders/${id}`, {
     method: 'PUT',
     headers: {
+      'Content-Type': 'application/json',
       authorization: user.token,
-      status: 'Entregue',
     },
-    // body: {"status": "Entregue"},
+    body: data,
   }).then((response) => response.json());
 };
 

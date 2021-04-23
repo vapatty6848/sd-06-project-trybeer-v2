@@ -4,7 +4,6 @@ const createOrder = async (totalPrice, street, checkoutProducts) => {
   const user = JSON.parse(localStorage.getItem('user'));
   const { streetInput, houseNumberInput } = street;
   const body = { totalPrice, streetInput, houseNumberInput, checkoutProducts };
-  console.log(checkoutProducts);
 
   return fetch(`${url}`,
     {

@@ -8,7 +8,7 @@ function OrderAdm() {
   const [allOrders, setAllOrders] = useState([]);
 
   useEffect(() => {
-    getAllOrders().then((json) => { console.log(json); setAllOrders(json); });
+    getAllOrders().then((json) => setAllOrders(json));
   }, []);
 
   const history = useHistory();

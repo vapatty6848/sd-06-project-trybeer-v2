@@ -20,9 +20,9 @@ function DetailsOrderAdm({ match }) {
     getOrderDetails(id).then((response) => setOrderDetails(response));
   }, [history, id]);
 
-  const handleClick = async () => {
-    setStatus('Entregue');
-    await markAsDelivered(id, 'Entregue');
+  const handleClick = async (newStatus) => {
+    setStatus(newStatus);
+    await markAsDelivered(id, newStatus);
   };
 
   useEffect(() => {
@@ -76,7 +76,7 @@ function DetailsOrderAdm({ match }) {
         <button
           type="button"
           data-testid="mark-as-delivered-btn"
-          onClick={ handleClick }
+          onClick={ () => handleClick('Entregue') }
           hidden={ status === 'Entregue' }
           className="delivered-button"
         >
