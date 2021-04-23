@@ -10,6 +10,7 @@ const messageJson = { message: 'Internal Server Error' };
 orderRouter.post('/', async (req, res) => {
   try {
     const { email, totalPrice, deliveryAddress, deliveryNumber, date, saleProduct } = req.body;
+    console.log(req.body);
     
     const { id } = await User.findOne({ where: { email } });
 

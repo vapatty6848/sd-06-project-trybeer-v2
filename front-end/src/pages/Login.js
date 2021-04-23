@@ -16,9 +16,9 @@ export default function Login() {
     localStorage.setItem('user', JSON.stringify(user));
     setLoginUser({ ...loginUser, user });
 
-    if (user.role === 'client') {
+    if (user.user.role === 'client') {
       history.push({ pathname: '/products' });
-    } else if (user.role === 'administrator') {
+    } else if (user.user.role === 'administrator') {
       history.push({ pathname: '/admin/orders' });
     } else {
       history.push({ pathname: '/register' });

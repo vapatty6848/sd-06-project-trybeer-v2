@@ -6,14 +6,14 @@ module.exports = {
       saleId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
-        references: { model: 'Sales', key: 'id'},
+        references: { model: 'sales', key: 'id'},
         onDelete: 'CASCADE',
         allowNull: false,
       },
       productId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
-        references: { model: 'Products', key: 'id'},
+        references: { model: 'products', key: 'id'},
         onDelete: 'CASCADE',
         allowNull: false,
       },
@@ -26,6 +26,6 @@ module.exports = {
   
   down: async (queryInterface, Sequelize) => {
     
-    await queryInterface.dropTable('SalesProducts');
+    await queryInterface.dropTable('salesProducts');
   }
 };
