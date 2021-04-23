@@ -7,23 +7,27 @@ import './styles.css';
 
 const Chat = () => {
   const [messages, setMessages] = useState([]);
+  const [user, setUser] = useState('');
 
   useEffect(() => {
-    socket.on('chat.receiveMessage', (message) => {
-      setMessages([{ message }]);
+    socket.on('chat.receiveMessage', (data) => {
+      setMessages([...messages, data]);
     });
-  }, []);
+
+    const { name } = JSON.parse(localStorage.getItem('user'));
+    setUser(name);
+  }, [messages]);
 
   return (
     <section className="chat-container">
       <MenuTop title="Trybeer" />
       {
-        messages.map(({ isMine, user, sentTime, message }, id) => (
+        messages.map(({ userName, sentTime, message }, id) => (
           <MessageBox
             key={ id }
-            isMine={ isMine || true }
-            user={ user || 'Thiago' }
-            sentTime={ sentTime || '00:00' }
+            isMine={ userName === user }
+            user={ userName }
+            sentTime={ sentTime }
             message={ message }
           />
         ))

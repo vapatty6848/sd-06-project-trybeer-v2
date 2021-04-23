@@ -6,21 +6,24 @@ const FormMessage = () => {
 
   const handleSend = (e) => {
     e.preventDefault();
-    socket.emit('chat.sendMessage', message);
+    const { name } = JSON.parse(localStorage.getItem('user'));
+    socket.emit('chat.sendMessage', { message, userName: name });
     setMessage('');
   };
 
   return (
-    <form className="input-container" onSubmit={ handleSend }>
-      <input
-        type="text"
-        id="messageInput"
-        value={ message }
-        onChange={ ({ target }) => setMessage(target.value) }
-      />
-      <button type="submit" id="sendButton" className="send-btn">
-        Send
-      </button>
+    <form className="form-container" onSubmit={ handleSend }>
+      <section className="input-container">
+        <input
+          type="text"
+          id="messageInput"
+          value={ message }
+          onChange={ ({ target }) => setMessage(target.value) }
+        />
+        <button type="submit" id="sendButton" className="send-btn">
+          Send
+        </button>
+      </section>
     </form>
   );
 };

@@ -12,10 +12,17 @@ const io = require('socket.io')(httpServer, {
 });
 const cors = require('cors');
 
+const currentDate = () => {
+  const now = new Date();
+  return `${now.getHours()}:${now.getMinutes()}`;
+};
+
 io.on('connection', (socket) => {
   console.log(`${socket.id} conectado`);
-  socket.on('chat.sendMessage', (message) => {
-    io.emit('chat.receiveMessage', message);
+  
+  socket.on('chat.sendMessage', (data) => {
+    const dataWithDate = { ...data, sentTime: currentDate() };
+    io.emit('chat.receiveMessage', dataWithDate);
   });
 });
 
