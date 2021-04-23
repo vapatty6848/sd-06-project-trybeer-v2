@@ -6,9 +6,10 @@ const ChatBox = ({ messages, handleSend, userInfo }) => {
 
   const handleChange = (text) => setCurrMessage(text);
 
-  const handleEnter = () => {
+  const handleEnter = (input) => {
     handleSend(currMessage);
     setCurrMessage('');
+    input.value = '';
   };
 
   return (
@@ -29,16 +30,21 @@ const ChatBox = ({ messages, handleSend, userInfo }) => {
         onChange={ ({ target }) => handleChange(target.value) }
         placeholder="Digite..."
         data-testid="message-input"
+        id="msg-input"
         onKeyPress={ (e) => {
           if (e.key === 'Enter') {
-            handleEnter();
+            const msgTarget = e.target;
+            handleEnter(msgTarget);
           }
         } }
       />
       <button
         data-testid="send-message"
         type="button"
-        onClick={ () => handleEnter() }
+        onClick={ () => {
+          const msgInput = document.getElementById('msg-input');
+          handleEnter(msgInput);
+        } }
       >
         Enviar
       </button>
