@@ -12,7 +12,6 @@ function Products() {
   const {
     products, setProducts, cart, setCart,
   } = useContext(TrybeerContext);
-  const [loading, setLoading] = useState(true);
   const loggedUser = JSON.parse(localStorage.getItem('user'));
   const history = useHistory();
 
@@ -24,8 +23,6 @@ function Products() {
 
     const localStorageCart = JSON.parse(localStorage.getItem('cart'));
     if (localStorageCart) setCart(localStorageCart);
-
-    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -33,30 +30,26 @@ function Products() {
   }, [cart]);
 
   return (
-    loading
-      ? <div>Loading</div>
-      : (
-        <div className="mainDivProducts">
-          <TopBar title="TryBeer" />
-          <div className="divFilha">
-            {products.map((product, index) => {
-              const { id, name, price, urlImage } = product;
-              return (
-                <div className="divCards" key={ index }>
-                  <ProductCard
-                    key={ id }
-                    name={ name }
-                    price={ price }
-                    urlImage={ urlImage }
-                    index={ index }
-                  />
-                </div>
-              );
-            })}
-          </div>
-          <Cart />
-        </div>
-      )
+    <div className="mainDivProducts">
+      <TopBar title="TryBeer" />
+      <div className="divFilha">
+        {products.map((product, index) => {
+          const { id, name, price, urlImage } = product;
+          return (
+            <div className="divCards" key={ index }>
+              <ProductCard
+                key={ id }
+                name={ name }
+                price={ price }
+                urlImage={ urlImage }
+                index={ index }
+              />
+            </div>
+          );
+        })}
+      </div>
+      <Cart />
+    </div>
   );
 }
 

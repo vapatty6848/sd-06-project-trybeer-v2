@@ -13,12 +13,9 @@ function ClientProfile() {
   const [nameLocal, setNameLocal] = useState('');
   const [emailLocal, setEmailLocal] = useState('');
   const [existsLocal, setExistsLocal] = useState(false);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getLocal({ setEditedName, setNameLocal, setEmailLocal, setExistsLocal, history });
-
-    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -29,46 +26,42 @@ function ClientProfile() {
   function handleChangeName(event) { setEditedName(event.target.value); }
 
   return (
-    loading
-      ? <div>Loading</div>
-      : (
-        <div id="div-profile">
-          <TopBar title="Meu perfil" />
-          {existsLocal === true
-            ? (
-              <form className="formClientProfile">
-                <InputProfile
-                  title="Name"
-                  id="profile-name-input"
-                  type="text"
-                  value={ editedName }
-                  callback={ (e) => handleChangeName(e) }
-                />
-                <br />
-                <label htmlFor="profile-email-input">
-                  Email
-                  <br />
-                  <input
-                    type="email"
-                    data-testid="profile-email-input"
-                    value={ emailLocal }
-                    readOnly
-                  />
-                </label>
-                <br />
-                <button
-                  className="buttonUpdate"
-                  type="button"
-                  data-testid="profile-save-btn"
-                  disabled={ disableButton }
-                  onClick={ () => sendNewName(editedName, emailLocal) }
-                >
-                  Salvar
-                </button>
-              </form>
-            ) : null}
-        </div>
-      )
+    <div id="div-profile">
+      <TopBar title="Meu perfil" />
+      {existsLocal === true
+        ? (
+          <form className="formClientProfile">
+            <InputProfile
+              title="Name"
+              id="profile-name-input"
+              type="text"
+              value={ editedName }
+              callback={ (e) => handleChangeName(e) }
+            />
+            <br />
+            <label htmlFor="profile-email-input">
+              Email
+              <br />
+              <input
+                type="email"
+                data-testid="profile-email-input"
+                value={ emailLocal }
+                readOnly
+              />
+            </label>
+            <br />
+            <button
+              className="buttonUpdate"
+              type="button"
+              data-testid="profile-save-btn"
+              disabled={ disableButton }
+              onClick={ () => sendNewName(editedName, emailLocal) }
+            >
+              Salvar
+            </button>
+          </form>
+        ) : null}
+    </div>
   );
 }
 
