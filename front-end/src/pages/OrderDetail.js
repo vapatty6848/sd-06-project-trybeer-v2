@@ -17,7 +17,6 @@ function OrderDetail() {
   useEffect(() => {
     const findByID = async () => {
       const result = await Api.getByIdSales(id);
-      console.log('result', result);
       setOrders(result);
     };
     findByID();
@@ -68,7 +67,6 @@ function OrderDetail() {
                 className="bottom-card total-value item-grid"
                 data-testid="order-total-value"
               >
-                {console.log('totalPrice', orders)}
                 {` Valor total do pedido: R$ ${orders[0].totalPrice.replace('.', ',')}`}
               </div>
             </div>

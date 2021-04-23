@@ -14,6 +14,7 @@ function AdminOrders(orders) {
       <Header isAdmin />
       <NavbarAdmin />
       <Container>
+        {console.log('orders data', orders.data)}
         {
           !orders.loading && orders.data.map((order, index) => (
             <div key="index" className="card">
@@ -28,12 +29,12 @@ function AdminOrders(orders) {
                   <p
                     data-testid={ `${index}-order-address` }
                   >
-                    {`${order.delivery_address}, ${order.delivery_number}`}
+                    {`${order.deliveryAddress}, ${order.deliveryNumber}`}
                   </p>
                   <p
                     data-testid={ `${index}-order-total-value` }
                   >
-                    {`R$ ${order.total_price.replace('.', ',')}`}
+                    {`R$ ${order.totalPrice.replace('.', ',')}`}
                   </p>
                   <p
                     data-testid={ `${index}-order-status` }
