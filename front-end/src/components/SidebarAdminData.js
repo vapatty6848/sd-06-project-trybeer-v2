@@ -4,7 +4,7 @@ import * as ImIcons from 'react-icons/im';
 
 const SidebarAdminData = [
   {
-    label: 'Pedidos',
+    label: 'Meus Pedidos',
     path: '/admin/orders',
     icon: <FaIcons.FaCartPlus />,
     id: 'side-menu-item-orders',
