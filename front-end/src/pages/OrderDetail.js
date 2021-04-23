@@ -17,6 +17,7 @@ function OrderDetail() {
   useEffect(() => {
     const findByID = async () => {
       const result = await Api.getByIdSales(id);
+      console.log('result', result);
       setOrders(result);
     };
     findByID();
@@ -37,6 +38,8 @@ function OrderDetail() {
       <Header />
       <Navbar />
       <Container>
+      {/* {console.log('orders', orders)} */}
+
         {
           (orders && orders.length > 0) && (
             <div className="content">
@@ -51,7 +54,7 @@ function OrderDetail() {
                   className="date"
                   data-testid="order-date"
                 >
-                  { formatDate(orders[0].sale_date) }
+                  { formatDate(orders[0].saleDate) }
                 </h2>
               </div>
               <ul className="middle-card">
@@ -67,7 +70,8 @@ function OrderDetail() {
                 className="bottom-card total-value item-grid"
                 data-testid="order-total-value"
               >
-                {` Valor total do pedido: R$ ${orders[0].total_price.replace('.', ',')}`}
+                {console.log('totalPrice', orders)}
+                {` Valor total do pedido: R$ ${orders[0].totalPrice.replace('.', ',')}`}
               </div>
             </div>
           )

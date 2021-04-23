@@ -1,8 +1,5 @@
-'use strict';
-
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable('sales', {
+  up: async (queryInterface, Sequelize) => queryInterface.createTable('sales', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -10,7 +7,7 @@ module.exports = {
         allowNull: false,
       },
       totalPrice: {
-        type: Sequelize.DECIMAL,
+        type: Sequelize.DECIMAL(9, 2),
         allowNull: false,
       },
       deliveryAddress: {
@@ -31,12 +28,7 @@ module.exports = {
         allowNull: false,
         defaultValue: 'Pendente',
       },
-    })
-  },
+    }),
 
-  down: async (queryInterface, Sequelize) => {
-    
-    return queryInterface.dropTable('sales');
-     
-  }
+  down: async (queryInterface, Sequelize) => queryInterface.dropTable('sales'),
 };
