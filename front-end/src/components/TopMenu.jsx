@@ -72,7 +72,7 @@ export default function TopMenu({ pageTitle }) {
           <div className="side-menu-container">
             <button
               type="button"
-              data-testid="side-menu-chat" 
+              data-testid="side-menu-chat"
               onClick={ handleOnClickAsideButton }
               value="Conversar com a loja"
             >
