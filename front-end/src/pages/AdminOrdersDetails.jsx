@@ -10,7 +10,7 @@ export default function AdminOrdersDetails() {
   const [productsOfSale, setProductsOfSale] = useState([]);
   const [buttonDisabled, setButtonDisabled] = useState(null);
   const [orderStatus, setOrderStatus] = useState('');
-  const [buttonPrepared, setButtonPrepared] = useState(false);
+  const [buttonPrepared, setButtonPrepared] = useState(null);
 
   const fetchApiProductOfSale = async (idFetch) => {
     const productDetails = await api.fetchSaleProduct(idFetch);
@@ -30,6 +30,11 @@ export default function AdminOrdersDetails() {
     } else {
       setButtonDisabled(true);
     }
+
+    if (products.length !== 0 && productsOfSale.status === 'Preparando') {
+      setButtonPrepared(true);
+    }
+
   }, [id]);
 
   const handleClick = async (status) => {
@@ -39,6 +44,7 @@ export default function AdminOrdersDetails() {
     if (status === 'Preparando') setButtonPrepared(true);
 
     await api.fetchChangeStatus(id, status);
+    // window.location.reload();
   };
 
   const user = JSON.parse(localStorage.getItem('user'));
