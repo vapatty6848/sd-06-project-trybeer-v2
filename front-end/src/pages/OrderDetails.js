@@ -34,7 +34,7 @@ function OrderDetails(props) {
               {orders[0].products.map((order, index) => (
                 <div key={ index }>
                   <h3 data-testid={ `${index}-product-qtd` }>
-                    {`${order.sales_products.quantity}`}
+                    {`${order.sales_products.quantity}` }
                   </h3>
                   <h3 data-testid={ `${index}-product-name` }>{order.name}</h3>
                   <h3 data-testid={ `${index}-product-total-value` }>

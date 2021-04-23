@@ -32,16 +32,21 @@ function Checkout() {
 
   useEffect(() => {
     if (!loggedUser || !loggedUser.token) history.push('/login');
+
     const localStorageCart = JSON.parse(localStorage.getItem('cart'));
+
     if (localStorageCart) setCart(localStorageCart);
   }, []);
 
   useEffect(() => {
     let totalValue = 0;
+
     cart.forEach((cartItem) => {
       totalValue += parseFloat(cartItem.price) * Number(cartItem.quantity);
     });
+
     setTotalCart(totalValue);
+
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
@@ -65,7 +70,7 @@ function Checkout() {
             )
         }
         <p data-testid="order-total-value" className="totalPrice">
-          {`Total: R$ ${totalCart.toFixed(2).replace('.', ',')}` }
+          {`Total: R$ ${totalCart.toFixed(2).replace('.', ',')}`}
         </p>
         <Address />
         <button

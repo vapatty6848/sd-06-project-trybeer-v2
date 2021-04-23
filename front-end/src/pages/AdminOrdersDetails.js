@@ -35,11 +35,11 @@ function AdminOrdersDetails(props) {
                 {orders[0].products.map((order, index) => (
                   <div key={ index }>
                     <h3 data-testid={ `${index}-product-qtd` }>
-                      {`${order.sales_products.quantity}`}
+                      {`${order.sales_products.quantity}` }
                     </h3>
                     <h3 data-testid={ `${index}-product-name` }>{order.name}</h3>
                     <h3 data-testid={ `${index}-product-total-value` }>
-                      {`R$ ${(order.price).replace('.', ',')}`}
+                      {`R$ ${(order.price).replace('.', ',')}` }
                     </h3>
                     <h3 data-testid={ `${index}-order-unit-price` }>
                       {`(R$ ${(order.price).toString().replace('.', ',')})`}
@@ -60,7 +60,7 @@ function AdminOrdersDetails(props) {
                       Preparar pedido
                     </button>
                   )
-                  : null }
+                  : null}
                 { orders[0].status !== 'Entregue'
                   ? (
                     <button
@@ -72,7 +72,7 @@ function AdminOrdersDetails(props) {
                       Marcar como entregue
                     </button>
                   )
-                  : null }
+                  : null}
               </div>
             )
         }

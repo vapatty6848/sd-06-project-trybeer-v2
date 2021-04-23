@@ -46,7 +46,7 @@ function Orders() {
             />
           </button>
         </div>
-      )) }
+      ))}
     </div>
   );
 }
