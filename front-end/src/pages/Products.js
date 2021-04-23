@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { Redirect } from 'react-router';
+import { useHistory } from 'react-router';
 import ProductCard from '../components/Products/ProductCard';
 import Cart from '../components/Products/Cart';
 import TopBar from '../components/SideBarClient/TopBar';
@@ -12,14 +12,20 @@ function Products() {
   const {
     products, setProducts, cart, setCart,
   } = useContext(TrybeerContext);
+  const [loading, setLoading] = useState(true);
   const loggedUser = JSON.parse(localStorage.getItem('user'));
+  const history = useHistory();
 
   useEffect(() => {
+    if (!loggedUser || !loggedUser.token) history.push('/login');
+
     getAllProducts()
       .then((product) => setProducts(product));
 
     const localStorageCart = JSON.parse(localStorage.getItem('cart'));
     if (localStorageCart) setCart(localStorageCart);
+
+    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -27,12 +33,13 @@ function Products() {
   }, [cart]);
 
   return (
-    loggedUser
-      ? (
+    loading
+      ? <div>Loading</div>
+      : (
         <div className="mainDivProducts">
           <TopBar title="TryBeer" />
           <div className="divFilha">
-            { products.map((product, index) => {
+            {products.map((product, index) => {
               const { id, name, price, urlImage } = product;
               return (
                 <div className="divCards" key={ index }>
@@ -45,13 +52,10 @@ function Products() {
                   />
                 </div>
               );
-            }) }
+            })}
           </div>
           <Cart />
         </div>
-      )
-      : (
-        <Redirect to="/login" />
       )
   );
 }
