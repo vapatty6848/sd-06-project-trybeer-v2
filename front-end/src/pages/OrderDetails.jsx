@@ -7,7 +7,6 @@ export default function OrderDetails() {
   const { id } = useParams();
   const [products, setProducts] = useState([]);
   const [productsOfSale, setProductsOfSale] = useState([]);
-  console.log(productsOfSale);
 
   const fetchApiProductOfSale = async (idFetch) => {
     const productDetails = await api.fetchSaleProduct(idFetch);
