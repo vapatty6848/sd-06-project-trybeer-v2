@@ -14,6 +14,7 @@ function Orders({ history }) {
 
   const fetchOrders = async () => {
     const allOrders = await verifyToken(`orders/${user.id}`, user, history);
+    console.log(allOrders);
     setOrders(allOrders);
   };
 
@@ -29,7 +30,7 @@ function Orders({ history }) {
       <div className="content-panel">
         <div className="container">
           {
-            orders.map(({ id, saleDate, totalPrice }, index) => (
+            orders.map(({ id, saleDate, totalPrice, status }, index) => (
               <div
                 key={ id }
                 className="order-card-container"
@@ -37,11 +38,11 @@ function Orders({ history }) {
               >
                 <Link
                   to={ { pathname: `/orders/${id}`,
-                    state: { id, saleDate, totalPrice } } }
+                    state: { id, saleDate, totalPrice, status } } }
                 >
                   <div className="card-id-date">
                     <div data-testid={ `${index}-order-number` }>
-                      {`Pedido ${id}` }
+                      {`Pedido ${id} - ${status}` }
                     </div>
                     <div data-testid={ `${index}-order-date` }>
                       { formatedDate(saleDate) }
