@@ -8,21 +8,20 @@ const ChatMenu = () => {
   const [inboxes, setInboxes] = useState([]);
   const empty = <p data-test="text-for-no-conversation">Nenhuma conversa por aqui</p>;
 
-  useEffect(() => {
-    // setLoading(true);
+  const fetchApi = () => {
     api.get('/conversations').then((response) => {
       const { data: { conversations } } = response;
       setInboxes(conversations);
-      // setLoading(false);
     });
+  };
+
+  useEffect(() => {
+    fetchApi();
   }, []);
 
   useEffect(() => {
     socket.on('server-to-admin', () => {
-      api.get('/conversations').then((response) => {
-        const { data: { conversations } } = response;
-        setInboxes(conversations);
-      });
+      fetchApi();
     });
   });
 
