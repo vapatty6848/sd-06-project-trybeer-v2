@@ -33,6 +33,7 @@ const mountData = (params) => {
 const checkOutRedirect = async (setCheckOut, history, params) => {
   const time = 2000;
   const order = mountData(params);
+  console.log('order', order);
 
   await registerOrder(order);
   setCheckOut(true);
