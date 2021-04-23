@@ -13,8 +13,6 @@ const createSale = async (
 
   const saleId = orders.id;
 
-  console.log('Aquiiiiii saleId', saleId);
-
   saleProduct.forEach(async (e) => {
     await salesProduct.create({ saleId, productId: e.id, quantity: e.quantity });
   });

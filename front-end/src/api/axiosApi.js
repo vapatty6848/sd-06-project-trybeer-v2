@@ -62,9 +62,8 @@ export async function registerOrder(
   const orderDB = await axios.post(`${BASE_URL}orders`, {
     value, date, userID, street, number, saleProduct,
   })
-    .then((resp) => resp)
+    .then((resp) => {})
     .catch((err) => {
-      console.log(err.response);
       return err.response;
     });
   return orderDB;

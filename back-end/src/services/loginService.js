@@ -14,7 +14,7 @@ const loginService = async (email, password) => {
 
   const authenticatedUser = generateToken(loginUser.dataValues);
   
-  return { token: authenticatedUser.token, user: authenticatedUser.dataValues };
+  return authenticatedUser ;
 };
 
 module.exports = {
