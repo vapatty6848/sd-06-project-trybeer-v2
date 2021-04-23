@@ -15,17 +15,12 @@ function Products() {
   const loggedUser = JSON.parse(localStorage.getItem('user'));
   const history = useHistory();
 
-  const verifyUser = () => {
+  useEffect(() => {
     if (!loggedUser || !loggedUser.token) history.push('/login');
-
-    getAllProducts()
-      .then((product) => setProducts(product));
-
+    getAllProducts().then((product) => setProducts(product));
     const localStorageCart = JSON.parse(localStorage.getItem('cart'));
     if (localStorageCart) setCart(localStorageCart);
-  };
-
-  useEffect(() => verifyUser(), [verifyUser]);
+  }, []);
 
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
