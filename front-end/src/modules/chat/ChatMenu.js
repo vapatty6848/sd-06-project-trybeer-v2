@@ -43,7 +43,7 @@ const ChatMenu = () => {
 
   return (
     <div>
-      { (inboxes.length === 0) ?  empty : renderConversations() }
+      { (inboxes.length === 0) ? empty : renderConversations() }
       {/* <p data-test="text-for-no-conversation">Nenhuma conversa por aqui</p> */}
     </div>
   );
