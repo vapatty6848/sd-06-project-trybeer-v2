@@ -17,7 +17,7 @@ const getAllMessages = async () => connection()
     
 const getUserMessages = async (email) => connection()
   .then((database) => database.collection('messages')
-  .find({ $or: [{ user: email }, { user: 'admin', to: email }] }).toArray());
+  .find({ $or: [{ user: email }, { user: 'Loja', to: email }] }).toArray());
 
 module.exports = {
   createMessages,

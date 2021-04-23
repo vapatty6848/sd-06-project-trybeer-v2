@@ -2,47 +2,74 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import socket from './socketClient';
 import { verifyUser } from '../../store/LocalStorage/actions';
+import { sendMessage } from './Requests';
 
 export default function ChatClient() {
   const [inputValue, setInputValue] = useState('');
   const [messages, setMessages] = useState([]);
+  const [att, setAtt] = useState(0);
+  const [emailUser, setEmail] = useState('');
   socket.emit('message', 'minha mensagem incrivel!');
   // recebe msg do back
   socket.on('mensagem', (msg) => {
     console.log(msg, 'msg');
   });
-  
+
+  socket.on('Mensagem do admin pro cliente', () => {
+    setAtt(att + 1);
+  });
+
   const history = useHistory();
-  
+  const getAllMessages = async (email) => {
+    const allMessages = await fetch(`http://localhost:4001/chat/userMessages/${email}`);
+    const allMsg = await allMessages.json();
+    setMessages(allMsg);
+  };
+
   useEffect(() => {
     const { email } = verifyUser(history);
-    const getAllMessages = async () => {
-      const allMessages = await fetch(`http://localhost:4001/chat/userMessages/${email}`);
-      
-      // console.log(messages);
-      
-      setMessages(allMessages);
-    }
-    getAllMessages();
-  }, [history]);
+    setEmail(email);
+    getAllMessages(email);
+  }, [history, att]);
+
+  const newMessage = async () => {
+    const hora = new Date().toLocaleTimeString().split(':');
+    const time = `${hora[0]}:${hora[1]}`;
+    const messageToSend = await sendMessage(emailUser, time, inputValue, 'Loja');
+    return messageToSend;
+  };
 
   const handleSendMessage = (e) => {
     e.preventDefault();
+    newMessage();
     setInputValue('');
-    console.log(e, 'eeeeee');
+    getAllMessages(emailUser);
+    setAtt(att + 1);
+    socket.emit('clientMsg');
   };
 
   const handleChangeMessage = (value) => {
     setInputValue(value);
   };
-  
-  
 
   return (
     <div>
       <h1>Chat Client</h1>
       <div>
         <ul>
+          {messages && messages.map((msg, index) => (
+            <li key={ index }>
+              <p data-testid="nickname">
+                {msg.user}
+              </p>
+              <p data-testid="message-time">
+                {msg.time}
+              </p>
+              <p data-testid="text-message">
+                {msg.message}
+              </p>
+            </li>
+          ))}
         </ul>
       </div>
       <form>

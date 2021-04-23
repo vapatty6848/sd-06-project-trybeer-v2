@@ -13,6 +13,7 @@ const SUCCESS = 200;
 
 routerMessage.post('/', async (req, res) => {
   const { user, time, message, to } = req.body;
+  console.log(user, time, message, to);
   const messageCreated = await createMessages(user, time, message, to);
   return res.status(CREATED).json(messageCreated);
 });

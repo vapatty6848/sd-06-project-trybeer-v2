@@ -29,6 +29,14 @@ socket.on('message', async (msg) => {
   console.log(teste);
 });
 
+socket.on('adminMsg', async () => {
+  io.emit('Mensagem do admin pro cliente');
+});
+
+socket.on('clientMsg', async () => {
+  io.emit('Mensagem do cliente pro admin');
+});
+
 socket.emit('mensagem', 'minha mensagem incrivel!');
 });
 
