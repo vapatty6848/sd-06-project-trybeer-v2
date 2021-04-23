@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import TrybeerContext from '../context/TrybeerContext';
 
@@ -10,7 +10,7 @@ const {
 
 function Login() {
   const { user, setUser } = useContext(TrybeerContext);
-  const [enableButton, setEnableButton] = useState(true);
+  // const [enableButton, setEnableButton] = useState(true);
   const history = useHistory();
   localStorage.clear();
   return (
@@ -25,7 +25,7 @@ function Login() {
             type="email"
             name="email"
             data-testid="email-input"
-            onChange={ () => userValidation(user, setUser, setEnableButton) }
+            onChange={ () => userValidation(user, setUser) }
           />
         </label>
       </div>
@@ -38,14 +38,14 @@ function Login() {
             id="password-input"
             type="password"
             data-testid="password-input"
-            onChange={ () => userValidation(user, setUser, setEnableButton) }
+            onChange={ () => userValidation(user, setUser) }
           />
         </label>
       </div>
       <div>
         <button
           className="buttonLogin"
-          disabled={ enableButton }
+          // disabled={ enableButton }
           type="button"
           data-testid="signin-btn"
           onClick={ () => redirectPath(history, user) }
