@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import TrybeerContext from '../context/TrybeerContext';
@@ -12,15 +12,14 @@ function Orders({ history }) {
   const [orders, setOrders] = useState([]);
   const { user } = useContext(TrybeerContext);
 
-  const fetchOrders = async () => {
+  const fetchOrders = useCallback(async () => {
     const allOrders = await verifyToken(`orders/${user.id}`, user, history);
-    console.log(allOrders);
     setOrders(allOrders);
-  };
+  }, [user, history]);
 
   useEffect(() => {
     fetchOrders();
-  }, []);
+  }, [fetchOrders]);
 
   return (
     <div>

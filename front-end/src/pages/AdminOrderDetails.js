@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { TopMenu } from '../components';
 import { verifyToken } from '../utils/verifications';
@@ -17,22 +17,26 @@ function AdminOrderDetails(props) {
     if (status === 'Entregue') return setIsShowing(false);
   };
 
-  const fetchOrderDetails = async () => {
+  const fetchOrderDetails = useCallback(async () => {
     if (state) {
       const order = await verifyToken(`admin/orders/details/${state.id}`, user, history);
-      console.log(order.status);
       checkStatus(order.status);
       setOrderCart([order]);
     }
-  };
+  }, [user, history, state]);
 
-  const observeState = () => {
+  const observeState = useCallback(() => {
     if (!state) {
       history.push('/login');
     } else {
       setHasState(true);
     }
-  };
+  }, [history, state]);
+
+  useEffect(() => {
+    observeState();
+    fetchOrderDetails();
+  }, [fetchOrderDetails, observeState]);
 
   const markAsPreparing = async (status) => {
     await put(`admin/orders/${state.id}`, user.token, { status });
@@ -43,11 +47,6 @@ function AdminOrderDetails(props) {
     await markAsPreparing(status);
     setIsShowing(false);
   };
-
-  useEffect(() => {
-    observeState();
-    fetchOrderDetails();
-  }, []);
 
   return (
     <div>

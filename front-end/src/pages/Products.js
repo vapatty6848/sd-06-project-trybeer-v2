@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { TopMenu, ProductCard, Cart } from '../components';
 import TrybeerContext from '../context/TrybeerContext';
@@ -8,14 +8,14 @@ function Products({ history }) {
   const [products, setProducts] = useState([]);
   const { user } = useContext(TrybeerContext);
 
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     const allProducts = await verifyToken('products', user, history);
     setProducts(allProducts);
-  };
+  }, [user, history]);
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [fetchProducts]);
 
   return (
     <div>

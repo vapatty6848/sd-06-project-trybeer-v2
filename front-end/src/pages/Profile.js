@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { TopMenu } from '../components';
 import fetchFunctions from '../api/fetchFunctions';
@@ -12,10 +12,10 @@ function Profile(props) {
   const [isUpdated, setIsUpdated] = useState(false);
   const TIME_TO_REDIRECT = 3000;
 
-  const setConfig = () => {
+  const setConfig = useCallback(() => {
     setEmail(user.email);
     setName(user.name);
-  };
+  }, [user.email, user.name]);
 
   const onChangeName = ({ target: { value } }) => {
     if (name === value) {

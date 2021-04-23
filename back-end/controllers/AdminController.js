@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const messages = require('../modelMongo/messages');
 const ordersService = require('../services/OrdersService');
 
 const AdminRouter = new Router();
@@ -28,6 +29,15 @@ AdminRouter.put('/orders/:id', async (req, res, next) => {
     const { status } = req.body;
     await ordersService.alter({ id, status });
     res.status(200).json({ message: 'OK' });
+  } catch (err) {
+    next(err);
+  }
+});
+
+AdminRouter.get('/chats', async (req, res, next) => {
+  try {
+    const chats = await messages.getAll();
+    return res.status(200).json(chats);
   } catch (err) {
     next(err);
   }

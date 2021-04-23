@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { TopMenu } from '../components';
 import { verifyToken } from '../utils/verifications';
@@ -12,26 +12,25 @@ function OrderDetails(props) {
   const [hasState, setHasState] = useState(false);
   const { location: { state }, history } = props;
 
-  const fetchOrderDetails = async () => {
-    if (state) {
-      const order = await verifyToken(`orders/details/${state.id}`, user, history);
-      console.log(order);
-      setOrderCart(order);
-    }
-  };
-
-  const observeState = () => {
+  const observeState = useCallback(() => {
     if (!state) {
       history.push('/login');
     } else {
       setHasState(true);
     }
-  };
+  }, [state, history]);
+
+  const fetchOrderDetails = useCallback(async () => {
+    if (state) {
+      const order = await verifyToken(`orders/details/${state.id}`, user, history);
+      setOrderCart(order);
+    }
+  }, [state, user, history]);
 
   useEffect(() => {
     observeState();
     fetchOrderDetails();
-  }, []);
+  }, [observeState, fetchOrderDetails]);
 
   return (
     <div>
@@ -93,7 +92,7 @@ OrderDetails.propTypes = {
     state: PropTypes.shape({
       id: PropTypes.number.isRequired,
       saleDate: PropTypes.string.isRequired,
-      totalPrice: PropTypes.string.isRequired,
+      totalPrice: PropTypes.number.isRequired,
       status: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
