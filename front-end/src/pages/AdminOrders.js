@@ -32,14 +32,14 @@ function AdminOrders() {
               <h2 data-testid={ `${index}-order-number` }>
                 {`Pedido ${sale.id}`}
               </h2>
+              <h3 data-testid={ `${index}-order-status` }>
+                {sale.status}
+              </h3>
               <p data-testid={ `${index}-order-address` }>
                 {`${sale.deliveryAddress}, ${sale.deliveryNumber}`}
               </p>
               <h3 data-testid={ `${index}-order-total-value` }>
                 {`R$ ${sale.totalPrice.replace('.', ',')}`}
-              </h3>
-              <h3 data-testid={ `${index}-order-status` }>
-                {sale.status}
               </h3>
             </button>
           </div>
