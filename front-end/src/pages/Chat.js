@@ -1,9 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { TopMenu } from '../components';
 import TrybeerContext from '../context/TrybeerContext';
 import { verifyToken } from '../utils/verifications';
 import fetchFunctions from '../api/fetchFunctions';
+
+import socket from '../utils/socketClient';
 
 const dateFormat = require('dateformat');
 
@@ -27,6 +29,10 @@ function Chat({ history }) {
     await fetchFunctions.post('chat', { email: user.email, message: currentMessage });
     fetchMessages();
   };
+
+  useEffect(() => {
+    socket.emit('emit', user.email);
+  });
 
   return (
     <div>
