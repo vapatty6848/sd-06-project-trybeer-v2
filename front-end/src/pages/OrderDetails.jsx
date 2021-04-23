@@ -41,6 +41,7 @@ export default function OrderDetails() {
         <h2 data-testid="order-date">
           {productsOfSale.length !== 0 && formatDate(productsOfSale.saleDate)}
         </h2>
+        <h2>{productsOfSale.status}</h2>
       </div>
       <div className="main-container">
         {products.map((produto, index) => (
