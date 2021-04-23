@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { user } = require('../models/');
+const { user } = require('../models');
 const { UNAUTHORIZED } = require('../schema/statusSchema');
 
 const SECRET = 'senhaSuperSecreta.com';

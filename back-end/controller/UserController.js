@@ -30,7 +30,7 @@ UserController.post('/', async (req, res) => {
       const token = jwt.sign({ data: user.dataValues }, SECRET, jwtConfig);
       return res.status(CREATED).json({ token });
   } catch (error) {
-      console.log(error)
+      console.log(error);
       return res.status(CONFLICT).json({ message: 'email already in database' });
   }
 });

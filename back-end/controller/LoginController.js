@@ -9,13 +9,14 @@ const jwtConfig = {
 
 const { user: User } = require('../models');
 const { OK, UNAUTHORIZED } = require('../schema/statusSchema');
+
 const LoginController = new Router();
 
 // Post Login
 LoginController.post('/', async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({ where: { email, password }});
+    const user = await User.findOne({ where: { email, password } });
     const { role } = user;
     const token = jwt.sign({ data: user }, SECRET, jwtConfig);
 

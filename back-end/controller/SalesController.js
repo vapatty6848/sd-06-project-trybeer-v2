@@ -16,8 +16,11 @@ SalesController.get('/user/:userId', verifyLogin, async (req, res) => {
   const { userId } = req.params;
   const sales = await Sale.findAll({
     where: { userId },
-    attributes: ['saleDate', ['id', 'saleId'], ['totalPrice', 'saleTotal'], ['status', 'saleStatus']],
-    order: [['userId', 'asc']]
+    attributes: ['saleDate',
+    ['id', 'saleId'],
+    ['totalPrice', 'saleTotal'],
+    ['status', 'saleStatus']],
+    order: [['userId', 'asc']],
   });
   return res.status(OK).json(sales);
 });
@@ -33,15 +36,12 @@ SalesController.get('/products/:saleId', verifyLogin, async (req, res) => {
         model: Product,
         as: 'products',
         through: { attributes: ['quantity'] },
-        attributes: [
-          ['id', 'productId'],
-          ['name', 'productName'],
-          ['price', 'productPrice'],
-        ]
-      }
-    ]
+        attributes: [['id', 'productId'], ['name', 'productName'], ['price', 'productPrice'],
+        ],
+      },
+    ],
   });
-  const products = sales[0].products;
+  const { products } = sales[0];
   const saleProducts = { sale, products };
   return res.status(OK).json(saleProducts);
 });
