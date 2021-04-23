@@ -21,7 +21,9 @@ function OrderDetailsCard({ orderDetails }) {
         <p data-testid="order-total-value">
           total do pedido:
           {' '}
-          {currencyFormat(Number(orderDetails.reduce(((acc, cur) => acc + cur.totalPrice), 0)))}
+          {currencyFormat(Number(orderDetails.reduce(
+            ((acc, cur) => acc + cur.totalPrice), 0,
+          )))}
           {' '}
         </p>
         <p data-testid="order-status">
