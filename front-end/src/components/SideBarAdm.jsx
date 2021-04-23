@@ -32,6 +32,7 @@ function SideBarAdm() {
       <button
         className="buttonside"
         type="button"
+        data-testid="side-menu-item-chat"
         onClick={ () => history.push('/admin/chats') }
       >
         Conversas
