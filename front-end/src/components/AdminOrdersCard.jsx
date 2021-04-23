@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-// import bancoDeDados from '../pedidosPendentes';
 import admOrders from '../methods/admOrders';
 
 function AdminOrdersCard() {
@@ -22,7 +21,7 @@ function AdminOrdersCard() {
     <div>
       { orders.map((e, i) => (
         <button
-          key={ e.saleId }
+          key={ i}
           className="order-card"
           type="button"
           onClick={ () => history.push(`/admin/orders/${e.id}`) }

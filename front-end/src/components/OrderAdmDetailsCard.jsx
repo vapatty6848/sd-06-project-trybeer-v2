@@ -1,80 +1,74 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import ProductCardAdm from './ProductCardAdm';
 import currencyFormat from '../utils/currencyFormat';
 import updateStatus from '../methods/updateStatus';
 
 function OrderDetailsCard({ orderDetails }) {
-  const [productADM, setProductADM] = useState(orderDetails[0]);
+  const [productADM, setProductADM] = useState(orderDetails);
+  const [deliveryBTN, setDeliveryBTN] = useState(false)
+  const [preparingBTN, setPreparingBTN] = useState(false)
 
   useEffect(() => {
-
-    switch (orderDetails[0].status) {
-      case 'Pendente':
-        orderDetails[0].status = "Preparando"
-        break;
-      case 'Preparando':
-        orderDetails[0].status = "Entregue"
-        break;
-      case 'Entregue':
-        break;
-      default:
-        console.log(`Error`);
+    if (productADM && productADM[0].status === 'Entregue') {
+      setDeliveryBTN(true)
+      setPreparingBTN(true)
+    }
+    if (productADM && productADM[0].status === 'Preparando') {
+      setPreparingBTN(true)
     }
   }, [productADM]);
 
-  let visible = true;
-
-
-
-  if (orderDetails[0]) {
+  if (productADM[0]) {
     return (
-
       <div>
         <div>
-          <span data-testid="order-number">{`Pedido ${orderDetails[0].saleId}`}</span>
-          <span data-testid="order-status">{` - ${orderDetails[0].status}`}</span>
+          <span data-testid="order-number">{`Pedido ${productADM[0].saleId}`}</span>
+          <span data-testid="order-status">{` - ${productADM[0].status}`}</span>
         </div>
         <div>
-          {orderDetails.map(
-            (product) => (<ProductCardAdm
+          {productADM.map(
+            (product, index) => (<ProductCardAdm
               product={product}
+              index={index}
               key={product.name}
             />),
           )}
           <p data-testid="order-total-value">
             total do pedido:
             {' '}
-            {currencyFormat(Number(orderDetails[0].totalPrice))}
+            {currencyFormat(Number(productADM[0].totalPrice))}
             {' '}
           </p>
           <hr />
         </div>
-        { visible
-          && (
-            <div>
-              <button
-                // data-testid="mark-as-prepared-btn"
-                type="button"
-                onClick={async () => {
-                  return setProductADM(await updateStatus(orderDetails[0]))
-                }}
-              >
-                Marcar como entregue
+        <div>
+          <button
+            data-testid="mark-as-delivery-btn"
+            value="Entregue"
+            disabled={deliveryBTN}
+            type="button"
+            onClick={async (e) => {
+              return setProductADM(await updateStatus(productADM[0], e.target.value))
+            }}
+          >
+            Marcar como entregue
           </button>
-              <button
-                data-testid="mark-as-prepared-btn"
-                type="button"
-                onClick={async (e) => {
-                  console.log(e.currentTarget)
-                  // return setProductADM(await updateStatus(orderDetails[0]))
-                }}
-              >
-                Preparar pedido
+          <button
+            data-testid="mark-as-prepared-btn"
+            type="button"
+            value="Preparando"
+            disabled={preparingBTN}
+            onClick={async (e) => {
+              return setProductADM(await updateStatus(productADM[0], e.target.value))
+            }}
+          >
+            Preparar pedido
           </button>
-            </div>
+          <Link to="/admin/orders" >Voltar</Link>
+        </div>
 
-          )}
       </div>);
   }
   return <p>...loading </p>;

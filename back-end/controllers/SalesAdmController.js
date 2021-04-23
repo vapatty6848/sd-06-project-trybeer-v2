@@ -1,44 +1,31 @@
 const { Router } = require('express');
 
 const validateToken = require('../middlewares/validateToken');
+const customSequelizeTable = require('../utils/customSequelizeTable');
 const { sales } = require('../models');
 
 const routerSalesAdm = Router();
 
-routerSalesAdm.get('/', validateToken, async (req, res) => {
-
-  const { role } = res.locals;
-  if (role === 'administrator') {
-    const orders = await sales.findAll();
-    res.status(200).json({ orders });
+routerSalesAdm.get('/', validateToken, async (req, res, next) => {
+  try {
+    const { role } = res.locals;
+    if (role === 'administrator') {
+      const orders = await sales.findAll();
+      res.status(200).json({ orders });
+    }
+  } catch (err) {
+    next(err);
   }
-  res.status(404).json({ message: 'something went wrong' });
 });
 
-routerSalesAdm.post('/:id', async (req, res) => {
-  const { id } = req.params;
-  const { status } = req.body.sale;
-  let newStatus = status
-  switch (status) {
-    case 'Pendente':
-      newStatus = "Preparando"
-      break;
-    case 'Preparando':
-      newStatus = "Entregue" 
-      break;
-    case 'Entregue':
-      break;
-    default:
-      console.log(`Error`);
-  }
-
+routerSalesAdm.post('/:id', async (req, res, next) => {
+  const { id, status } = req.body.sale;
   try {
     await sales.update(
-      { status: newStatus },
+      { status },
       { where: { id } },
-      ); 
-      const saleADM  = await sales.findOne({ where: { id } });
-
+    ); 
+    const saleADM = await customSequelizeTable(id);
     return res.status(200).json(saleADM);
   } catch (err) {
     next(err);

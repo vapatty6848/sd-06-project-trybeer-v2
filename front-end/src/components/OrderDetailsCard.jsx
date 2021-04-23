@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import ProductCard from './ProductCard';
 import currencyFormat from '../utils/currencyFormat';
@@ -24,6 +25,7 @@ function OrderDetailsCard({orderDetails}) {
           {' '}
         </p>
         <hr />
+        <Link to="/orders" >Voltar</Link>
       </div>);
   }
   return <p>...loading </p>;
