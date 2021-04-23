@@ -1,4 +1,4 @@
-const { sales, products } = require('../models');
+const { sales, products, salesProducts } = require('../models');
 
 const createOrders = async (userId, sale) => {
   try {
@@ -32,26 +32,26 @@ const getOrders = async (userId) => {
 // }
 
 const createProductsSales = async (mySaleProducts) => {
-  sales.create(mySaleProducts);
+  salesProducts.create(mySaleProducts);
 };
 
-const getSaleDetail = (saleId) => {
-  console.log('Entrei no detail');
-  return sales.findByPk(saleId, { include: [
+const getSaleDetail = (saleId) => sales.findByPk(saleId, { include: [
     { model: products, 
       as: 'products', 
-      through: { // through trás os dados da tabela intermediária sales_products, esperando um array de nome Attributes, se passar vazio não vem nada, do contrário passar por string.
+      through: { // through trás os dados da tabela intermediária salesProducts, esperando um array de nome Attributes, se passar vazio não vem nada, do contrário passar por string.
       attributes: ['saleId', 'quantity'],
     } },
     ] });
-  };
 
 const getAllSales = async () => sales.findAll(); 
 
-const updateSale = async (saleId, saleStatus) => sales.update(
+const updateSale = async (saleId, saleStatus) => {
+  console.log(saleId, saleStatus);
+  sales.update(
   { status: saleStatus },
   { where: { id: saleId } },
-);
+  );
+};
 
 module.exports = {
   createOrders,

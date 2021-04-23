@@ -1,5 +1,5 @@
 const createProductsSales = (sequelize, DataTypes) => {
-  const order = sequelize.define('sales_products', {
+  const order = sequelize.define('salesProducts', {
     saleId: { type: DataTypes.INTEGER, primaryKey: true, foreignKey: true, autoIncrement: true },
     productId: { type: DataTypes.INTEGER, primaryKey: true, foreignKey: true },
     quantity: DataTypes.DECIMAL,

@@ -24,10 +24,10 @@ export default function AdminSaleDetail() {
   };
 
   const handletotalValue = () => {
-    if (orderDetail.length) {
-      const totalPrice = orderDetail
+    if (orderDetail.products) {
+      const totalPrice = orderDetail.products
         .reduce((accumulator, current) => accumulator
-          + (Number(current.quantity) * Number(current.price)), 0);
+          + (Number(current.salesProducts.quantity) * Number(current.price)), 0);
       const totalOrderPrice = (totalPrice.toFixed(2)).replace('.', ',');
       return totalOrderPrice;
     }

@@ -12,10 +12,10 @@ router.post('/orders', validateToken, rescue(async (req, res) => {
     const { totalPrice, address, number, date, orderStatus, cartProducts } = req.body.objOrder;
     const userId = req.user.id;
     const orderData = { totalPrice, address, number, date, orderStatus };
-    const { insertId } = await ordersService.createOrders(userId, orderData);
+    const insertId = await ordersService.createOrders(userId, orderData);
     cartProducts.map(async (product) => {
       const mySaleProducts = {
-        saleId: insertId,
+        saleId: insertId.dataValues.id,
         productId: product.id + 1,
         quantity: product.quantityItem,
       };
@@ -49,7 +49,6 @@ router.post('/orders', validateToken, rescue(async (req, res) => {
 
   router.put('/orders/:id', validateToken, rescue(async (req, res) => {
     const saleId = req.params.id;
-    // console.log('entrei no orders controller', saleId);
     await ordersService.updateSale(saleId);
 
     return res.status(201).json({ message: 'Sale atualizada com sucesso!' });
