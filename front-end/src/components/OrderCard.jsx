@@ -9,6 +9,7 @@ function OrderCard({ orderInfo, index }) {
   const {
     id: orderId,
     totalPrice,
+    status,
     saleDate: date,
   } = orderInfo;
 
@@ -24,6 +25,7 @@ function OrderCard({ orderInfo, index }) {
         <h3 className="inlinestyle">
           <div data-testid={ `${index}-order-number` }>{`Pedido ${orderId}`}</div>
           <div data-testid={ `${index}-order-date` }>{formatDate(date)}</div>
+          <div>{status}</div>
         </h3>
         <div
           className="ordervalue"

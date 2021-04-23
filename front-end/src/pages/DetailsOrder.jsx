@@ -33,6 +33,9 @@ function DetailsOrder() {
             <span data-testid="order-date">
               {formatDate(orderDetails.saleDate)}
             </span>
+            <span>
+              {orderDetails.status}
+            </span>
           </div>
           <ul>
             {(orderDetails.product.map((order, index) => (
