@@ -19,8 +19,14 @@ const FormMessage = () => {
           id="messageInput"
           value={ message }
           onChange={ ({ target }) => setMessage(target.value) }
+          data-testid="message-input"
         />
-        <button type="submit" id="sendButton" className="send-btn">
+        <button
+          type="submit"
+          id="sendButton"
+          className="send-btn"
+          data-testid="send-message"
+        >
           Send
         </button>
       </section>

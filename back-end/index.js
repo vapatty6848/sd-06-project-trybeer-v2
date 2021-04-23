@@ -17,11 +17,19 @@ const currentDate = () => {
   return `${now.getHours()}:${now.getMinutes()}`;
 };
 
+// const Messages = require('./models/messagesModel');
+
+// app.get('/chat', async (_req, res) => {
+//   const allMessages = await Messages.getAll();
+//   res.status(200).json(allMessages);
+// });
+
 io.on('connection', (socket) => {
   console.log(`${socket.id} conectado`);
   
   socket.on('chat.sendMessage', (data) => {
     const dataWithDate = { ...data, sentTime: currentDate() };
+    // await Messages.create(dataWithDate);
     io.emit('chat.receiveMessage', dataWithDate);
   });
 });

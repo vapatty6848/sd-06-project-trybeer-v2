@@ -7,14 +7,14 @@ const MessageBox = ({ isMine, user, sentTime, message }) => {
   return (
     <section className={ `msg-container ${positionMsg}` }>
       <section className="info-container">
-        <p className="msg-name">
+        <p className="msg-name" data-testid="nickname">
           {user}
         </p>
-        <p className="msg-date">
+        <p className="msg-date" data-testid="message-time">
           {sentTime}
         </p>
       </section>
-      <section className="msg-text">
+      <section className="msg-text" data-testid="text-message">
         {message}
       </section>
     </section>
