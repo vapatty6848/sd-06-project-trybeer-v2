@@ -22,9 +22,7 @@ const getOrderDetails = async (id) => {
   return fetch(`${url}/orders/${id}`,
     {
       method: 'GET',
-
-      headers: {
-        Authorization: user.token },
+      headers: { Authorization: user.token },
     }).then((response) => response.json());
 };
 

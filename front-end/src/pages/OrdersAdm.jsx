@@ -19,7 +19,7 @@ function OrderAdm() {
     if (!user) history.push('/login');
   }, [history]);
 
-  return !allOrders ? <h1>Loading...</h1> : (
+  return !allOrders.length ? <h1>Loading...</h1> : (
     <div>
       <SideBarAdm />
       <h1 className="title-order-adm"> Pedidos </h1>

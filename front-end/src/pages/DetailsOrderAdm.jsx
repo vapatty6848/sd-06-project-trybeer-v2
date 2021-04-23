@@ -7,7 +7,7 @@ import parseCurrency from '../utils/parseCurrencyToBRL';
 import '../styles/ordersadmdetails.css';
 
 function DetailsOrderAdm({ match }) {
-  const [orderDetails, setOrderDetails] = useState([]);
+  const [orderDetails, setOrderDetails] = useState();
   const [status, setStatus] = useState('Pendente');
   const history = useHistory();
   const { id } = match.params;
@@ -26,11 +26,9 @@ function DetailsOrderAdm({ match }) {
   };
 
   useEffect(() => {
-    const statusOrder = orderDetails.status;
-    if (statusOrder === 'Entregue') {
-      setStatus('Entregue');
-    }
-  }, [orderDetails.status]);
+    const statusOrder = orderDetails && orderDetails.status;
+    if (statusOrder === 'Entregue') setStatus('Entregue');
+  }, [orderDetails]);
 
   return !orderDetails ? <h1>Loading...</h1> : (
     <div>

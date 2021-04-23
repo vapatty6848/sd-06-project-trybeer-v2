@@ -20,7 +20,7 @@ function Orders() {
     if (!user) history.push('/login');
   }, [history]);
 
-  return !orders ? <h1>Loading...</h1> : (
+  return !orders.length ? <h1>Loading...</h1> : (
     <div>
       <TopBar name="Meus Pedidos" />
       <div className="ordersmaincontainer">

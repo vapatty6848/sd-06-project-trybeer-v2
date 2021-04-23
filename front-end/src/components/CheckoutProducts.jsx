@@ -39,7 +39,7 @@ function CheckoutProducts() {
     setCheckoutProducts(products);
   }, [setCheckoutProducts]);
 
-  return !checkoutProducts ? <h1>Loading...</h1> : (
+  return (
     <div className="checkoutproducts">
       <h1>Produtos</h1>
       <ul>

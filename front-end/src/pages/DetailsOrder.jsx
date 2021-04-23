@@ -7,8 +7,7 @@ import parseCurrency from '../utils/parseCurrencyToBRL';
 import '../styles/orderdetail.css';
 
 function DetailsOrder() {
-  const [orderDetails, setOrderDetails] = useState([]);
-  // let products = [];
+  const [orderDetails, setOrderDetails] = useState();
 
   const url = window.location.href.replace('3000', '3001');
 
@@ -36,7 +35,7 @@ function DetailsOrder() {
             </span>
           </div>
           <ul>
-            {(orderDetails.product && orderDetails.product.map((order, index) => (
+            {(orderDetails.product.map((order, index) => (
               <li className="orderlist" key={ index }>
                 <span data-testid={ `${index}-product-qtd` }>
                   { `${order.saleProduct.quantity}  ` }
@@ -53,7 +52,7 @@ function DetailsOrder() {
           </ul>
           <span data-testid="order-total-value">
             Total:
-            {orderDetails.totalPrice && parseCurrency(orderDetails.totalPrice) }
+            {parseCurrency(orderDetails.totalPrice) }
           </span>
         </div>
       </div>

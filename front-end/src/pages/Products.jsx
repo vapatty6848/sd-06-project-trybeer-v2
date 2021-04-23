@@ -24,16 +24,14 @@ function Products() {
 
     if (!user) history.push('/login');
 
-    getAllProducts().then((json) => {
-      setProducts(json.products);
-    });
+    getAllProducts().then((json) => setProducts(json.products));
   }, [history]);
 
   useEffect(() => {
     createList();
   }, []);
 
-  return !products ? <h1>Loading...</h1> : (
+  return !products.length ? <h1>Loading...</h1> : (
     <div>
       <TopBar name="TryBeer" />
       <div className="productcontainer">
