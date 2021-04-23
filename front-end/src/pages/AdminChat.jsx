@@ -1,6 +1,6 @@
 import React from 'react';
-import MenuTop from '../components/MenuTop';
 import { Redirect } from 'react-router-dom';
+import MenuTop from '../components/MenuTop';
 import AdminListChats from '../components/AdminListChats';
 
 function AdminChat() {
