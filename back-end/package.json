@@ -13,7 +13,7 @@
     "test-coverage": "jest --coverage",
     "debug": "nodemon index.js",
     "start:watch": "nodemon index.js",
-    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json ."
+    "lint": "eslint --fix --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json ."
   },
   "keywords": [],
   "author": "",
@@ -28,7 +28,7 @@
     "mongodb": "3.6.2",
     "morgan": "^1.10.0",
     "mysql2": "2.1.0",
-    "sequelize": "6.3.4",
+    "sequelize": "^6.3.4",
     "socket.io": "3.0.4"
   },
   "devDependencies": {

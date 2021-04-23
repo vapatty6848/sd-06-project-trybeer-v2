@@ -1,12 +1,15 @@
-const Model = require('../models/profileModels');
+const { user } = require('../models');
 
 // Get all users
-const getAll = async () => Model.getAll();
+const getAll = async () => user.findAll();
 
 // Edit a user
 const editUserService = async (name, email) => {
-  const users = await Model.editUserModels(name, email);
-  return users;
+  const userUpdate = await user.findOne({ where: { email } });
+  userUpdate.name = name;
+  await userUpdate.save();
+
+  return userUpdate;
 };
 
 module.exports = {

@@ -51,7 +51,7 @@ function OrderDetail() {
                   className="date"
                   data-testid="order-date"
                 >
-                  { formatDate(orders[0].sale_date) }
+                  { formatDate(orders[0].saleDate) }
                 </h2>
               </div>
               <ul className="middle-card">
@@ -67,13 +67,11 @@ function OrderDetail() {
                 className="bottom-card total-value item-grid"
                 data-testid="order-total-value"
               >
-                {` Valor total do pedido: R$ ${orders[0].total_price.replace('.', ',')}`}
+                {` Valor total do pedido: R$ ${orders[0].totalPrice.replace('.', ',')}`}
               </div>
             </div>
           )
         }
-
-        {console.log(orders) }
       </Container>
 
     </section>

@@ -91,9 +91,9 @@ function Products() {
           {products && products.map((product, index) => (
             <Card key={ product.id }>
               <img
-                alt={ product.url_image }
+                alt={ product.urlImage }
                 data-testid={ `${index}-product-img` }
-                src={ product.url_image }
+                src={ product.urlImage }
                 style={ { objectFit: 'cover', width: '100%' } }
               />
               <Title data-testid={ `${index}-product-name` }>
