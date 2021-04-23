@@ -13,7 +13,9 @@ orderRouter.post('/', async (req, res) => {
     
     const { id } = await User.findOne({ where: { email } });
 
-    await Service.createSale({ id, totalPrice, deliveryAddress, deliveryNumber, date, saleProduct });
+    await Service.createSale(
+      { id, totalPrice, deliveryAddress, deliveryNumber, date, saleProduct },
+    );
 
     res.status(200).json({ id, totalPrice, deliveryAddress, deliveryNumber, date });
   } catch (error) {
@@ -37,7 +39,10 @@ orderRouter.get('/:id', async (req, res) => {
   // try {
     const Salebyid = await SalesProduct.findAll({
        where: { saleId: id },
-       include: [{ model: Sale, as: 'sale', attributes: [] }, { model: Product, as: 'product', attributes: [] }],
+       include: [
+         { model: Sale, as: 'sale', attributes: [] },
+         { model: Product, as: 'product', attributes: [] },
+        ],
        attributes: ['quantity',
        [sequelize.col('sale.status'), 'status'],
        [sequelize.col('sale.saleDate'), 'saleDate'],

@@ -3,7 +3,6 @@ import axios from 'axios';
 const BASE_URL = 'http://localhost:3001/';
 
 export async function login(loginUser) {
-  console.log("passei aqui", loginUser);
   const user = await axios.post('http://localhost:3001/login', loginUser)
     .then((resp) => resp.data)
     .catch((err) => {

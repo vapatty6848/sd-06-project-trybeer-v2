@@ -1,6 +1,8 @@
 const { Sale, SalesProduct } = require('../models');
 
-const createSale = async ({ id, totalPrice, deliveryAddress, deliveryNumber, saleDate, saleProduct }) => {
+const createSale = async (
+  { id, totalPrice, deliveryAddress, deliveryNumber, saleDate, saleProduct },
+  ) => {
   const orders = await Sale.create({ 
     totalPrice, 
     deliveryAddress,

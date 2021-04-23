@@ -14,7 +14,7 @@ export default function Login() {
   const handleLogin = async (dataUser) => {
     const user = await login(dataUser);
     // const token = await login(dataUser);
-    // const user = jwt.decode(token);
+    // const user = jwt_decode(token);
     localStorage.setItem('user', JSON.stringify(user));
     setLoginUser({ ...loginUser, user });
 
