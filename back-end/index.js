@@ -1,22 +1,22 @@
 const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
 
+const port = process.env.PORT || 3001;
 const app = express();
 const httpServer = require('http').createServer(app);
 
 const io = require('socket.io')(httpServer, {
   cors: {
-    origin: 'http://localhost:3000/',
+    origin: 'http://localhost:3000',
     methods: ['GET', 'POST'],
   },
 });
+const cors = require('cors');
 
-const port = process.env.PORT || 3001;
-
-// eslint-disable-next-line no-unused-vars
 io.on('connection', (socket) => {
-  console.log('conectado');
+  console.log(`${socket.id} conectado`);
+  socket.on('chat.sendMessage', (message) => {
+    io.emit('chat.receiveMessage', message);
+  });
 });
 
 const { errorMiddleware } = require('./middlewares/errorMiddleware');
@@ -27,7 +27,7 @@ const { routerLogin,
   routerSalesAdm } = require('./controllers');
 
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 
 app.use(express.static(`${__dirname}/uploads`));
 
@@ -38,6 +38,6 @@ app.use('/register', routerRegister);
 app.use('/orders', routerSales);
 app.use('/admin/orders', routerSalesAdm);
 
-app.listen(port, () => console.log(`Running on ${port}`));
-
 app.use(errorMiddleware);
+
+httpServer.listen(port, () => console.log(`Running on ${port}`));

@@ -1,29 +1,29 @@
-import React from 'react';
-import io from 'socket.io-client';
-import MenuTop from '../../components/MenuTop';
+import React, { useEffect, useState } from 'react';
 import MessageBox from '../../components/MessageBox';
 import FormMessage from '../../components/FormMessage';
+import MenuTop from '../../components/MenuTop';
+import socket from '../../utils/socketClient';
 import './styles.css';
 
-// eslint-disable-next-line no-unused-vars
-const socket = io('http://localhost:3001');
-
 const Chat = () => {
-  const messages = [
-    { isMine: false, user: 'Bot', sentTime: '21:23', message: 'Olá, meu nome é Bot' },
-    { isMine: true, user: 'Thiago', sentTime: '21:24', message: 'fala rôbo' },
-    { isMine: true, user: 'Thiago', sentTime: '21:24', message: 'suave?' },
-  ];
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    socket.on('chat.receiveMessage', (message) => {
+      setMessages([{ message }]);
+    });
+  }, []);
+
   return (
     <section className="chat-container">
-      <MenuTop title="Chat" />
+      <MenuTop title="Trybeer" />
       {
-        messages.map(({ isMine, user, sentTime, message }) => (
+        messages.map(({ isMine, user, sentTime, message }, id) => (
           <MessageBox
-            key={ sentTime }
-            isMine={ isMine }
-            user={ user }
-            sentTime={ sentTime }
+            key={ id }
+            isMine={ isMine || true }
+            user={ user || 'Thiago' }
+            sentTime={ sentTime || '00:00' }
             message={ message }
           />
         ))
