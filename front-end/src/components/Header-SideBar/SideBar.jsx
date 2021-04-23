@@ -27,6 +27,13 @@ function SideBar() {
       >
         Meu Perfil
       </button>
+      <button
+        type="button"
+        data-testid="side-menu-chat"
+        onClick={ () => redirectMenuBar(history, '/chat')}
+      >
+        Conversar com a loja
+      </button>
       <Link to="/login">
         <button
           data-testid="side-menu-item-logout"
