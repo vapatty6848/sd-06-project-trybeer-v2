@@ -11,6 +11,11 @@ function SideBarAdmin() {
   return (
     <nav className="admin-side-bar-container">
       <h1>TryBeer</h1>
+      <Link to="/admin/chats">
+        <button type="button" data-testid="side-menu-item-chat" className="botoes">
+          Conversas
+        </button>
+      </Link>
       <Link to="/admin/orders">
         <button type="button" data-testid="side-menu-item-orders" className="botoes">
           Pedidos
