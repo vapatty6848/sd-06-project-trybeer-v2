@@ -26,20 +26,20 @@ const ChatMenu = () => {
     });
   });
 
-  // const renderConversations = () => {
-  //   const chats = inboxes.map((inbox, index) => (
-  //     <Link to="/admin/chat" key={ `conversation-${index}` }>
-  //       <div data-testid="containerChat">
-  //         <p data-testid="profile-name">{ inbox.email }</p>
-  //         <p data-testid="last-message">
-  //           { `Última mensagem às ${inbox.messages[inbox.messages.length - 1].time}` }
-  //         </p>
-  //       </div>
-  //     </Link>
-  //   ));
+  const renderConversations = () => {
+    const chats = inboxes.map((inbox, index) => (
+      <Link to="/admin/chat" key={ `conversation-${index}` }>
+        <div data-testid="containerChat">
+          <p data-testid="profile-name">{ inbox.email }</p>
+          <p data-testid="last-message">
+            { `Última mensagem às ${inbox.messages[inbox.messages.length - 1].time}` }
+          </p>
+        </div>
+      </Link>
+    ));
 
-  //   return chats;
-  // };
+    return chats;
+  };
 
   return (
     <div>
