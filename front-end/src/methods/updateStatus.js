@@ -11,9 +11,9 @@ const updateStatus = async (sale) => {
       sale,
     }),
   };
-  const apiRequest = await fetch(`${baseURL}/${sale.id}`, postMethod);
+  const apiRequest = await fetch(`${baseURL}/${sale.saleId}`, postMethod);
   const apiResponse = await apiRequest.json();
-  return apiResponse.updatedSale[0];
+  return apiResponse;
 };
 
 export default updateStatus;

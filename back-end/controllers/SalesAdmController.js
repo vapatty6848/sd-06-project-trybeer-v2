@@ -6,7 +6,7 @@ const { sales } = require('../models');
 const routerSalesAdm = Router();
 
 routerSalesAdm.get('/', validateToken, async (req, res) => {
-  console.log('cheguei');
+
   const { role } = res.locals;
   if (role === 'administrator') {
     const orders = await sales.findAll();
@@ -16,19 +16,33 @@ routerSalesAdm.get('/', validateToken, async (req, res) => {
 });
 
 routerSalesAdm.post('/:id', async (req, res) => {
-  const { sale } = req.body;
-  // await updatedOne(sale);
-  console.log(sale);
-  await sales.update(
-    sale,
-    {
-      where: { id: sale.id },
-    },
-  );
-  // const [updatedSale] = await getSaleById(sale.id);
-  const updatedSale = await sales.findByPk(sale.id);
-  console.log(updatedSale);
-  res.status(200).json({ updatedSale });
+  const { id } = req.params;
+  const { status } = req.body.sale;
+  let newStatus = status
+  switch (status) {
+    case 'Pendente':
+      newStatus = "Preparando"
+      break;
+    case 'Preparando':
+      newStatus = "Entregue" 
+      break;
+    case 'Entregue':
+      break;
+    default:
+      console.log(`Error`);
+  }
+
+  try {
+    await sales.update(
+      { status: newStatus },
+      { where: { id } },
+      ); 
+      const saleADM  = await sales.findOne({ where: { id } });
+
+    return res.status(200).json(saleADM);
+  } catch (err) {
+    next(err);
+  }
 });
 
 module.exports = routerSalesAdm;
