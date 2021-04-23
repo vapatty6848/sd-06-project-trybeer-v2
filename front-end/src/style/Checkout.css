@@ -43,9 +43,9 @@
 
 .checkout-inputs {
   border: solid 1px rgb(56, 56, 56);
+  border-radius: 14px;
   height: 30px;
   margin-bottom: 10px;
-  border-radius: 14px;
   margin-top: 5px;
 }
 
