@@ -1,7 +1,8 @@
-models/index.js
-models/sql/models/index.js
-models/sql/seeders
-models/sql/migrations
+src/models/backup
+src/services/backup
+src/models/sql/models/*
+src/models/sql/seeders/*
+src/models/sql/migrations/*
 seeders
 migrations
 tests

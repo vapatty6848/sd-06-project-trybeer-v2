@@ -1,29 +1,29 @@
-const { users, utils } = require('../models');
+const { users } = require('../models/sql/models');
 const { generateToken } = require('../security');
 const { authRegisterUser, utils: { validateUserName } } = require('../schemas');
 
 const create = async (body) => {
-  const data = body;
-  const { name, email } = data;
+  const data = {
+    name: body.name,
+    email: body.email,
+    password: body.password,
+    isVendor: body.isVendor };
 
-  const [isEmailAvailable] = await utils.getByFilter({
-    table: 'users',
-    filter: 'email',
-    value: email,
-  });
+  const isEmailAvailable = await users.findOne({ where: { email: data.email } });
   authRegisterUser(data, isEmailAvailable);
 
   data.role = (data.isVendor) ? 'administrator' : 'client';
-  const newUserId = await users.insertNewUser(data);
+  const { dataValues: { id: newUserId } } = await users.create(data);
+  console.log('novo user: ', newUserId);
 
   const token = generateToken(newUserId, data.role);
-  const { role } = data;
+  const { role, name, email } = data;
   return { name, email, token, role };
 };
 
 const updateName = async (name, id) => {
   validateUserName(name);
-  return users.updateNameByEmail(name, id);
+  return users.update({ name }, { where: { id } });
 };
 
 module.exports = {

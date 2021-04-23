@@ -14,7 +14,7 @@ const validateIsVendor = (bool) => {
 };
 
 const verifyEmailAvaibility = (object) => {
-  if (typeof object !== 'undefined') throw new Error(error.unavaibleEmail);
+  if (object) throw new Error(error.unavaibleEmail);
 };
 
 module.exports = ({ name, email, password, isVendor = false }, isEmailAvaible) => {

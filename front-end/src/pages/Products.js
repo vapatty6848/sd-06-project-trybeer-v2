@@ -1,5 +1,5 @@
 import React, { useContext, useMemo } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import AppContext from '../context/app.context';
 import { Topbar, Loading, Button, ProductCard } from '../components';
@@ -9,7 +9,6 @@ import '../styles/Products.css';
 export default function Products() {
   const {
     productsContext: { products },
-    tokenContext: { token },
     cartContext: { cart, setCart },
   } = useContext(AppContext);
 
@@ -18,8 +17,6 @@ export default function Products() {
   const goCheckout = () => history.push('/checkout');
 
   const disabled = useMemo(() => (Object.keys(cart).length === 0), [cart]);
-
-  if (!token) return <Redirect to="/login" />;
 
   return (
     <section>

@@ -3,6 +3,7 @@ const users = require('./users.services');
 const products = require('./products.services');
 const sales = require('./sales.services');
 const admin = require('./admin.services');
+const chat = require('./chat.services');
 
 module.exports = {
   session,
@@ -10,4 +11,5 @@ module.exports = {
   products,
   sales,
   admin,
+  chat,
 };

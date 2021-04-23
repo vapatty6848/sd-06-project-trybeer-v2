@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { useHistory, Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { yupSchemas, handleSaveUser } from '../utils';
 
 import AppContext from '../context/app.context';
@@ -34,8 +34,6 @@ export default function Profile() {
     if (!nameChanged) setDisableBtn(true);
     if (nameChanged) validateForm();
   }, [name, token, disableBtn]);
-
-  if (!token) return <Redirect to="/login" />;
 
   return (
     <section>

@@ -1,10 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import AppContext from '../context/app.context';
 import { Topbar, Loading } from '../components';
-import salesApi from '../services/api.sales';
-import adminApi from '../services/api.admin';
+import api from '../services';
 
 import '../styles/Orders.css';
 import OrdersContainer from '../components/OrdersContainer';
@@ -18,9 +17,7 @@ export default function Orders() {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        let ordersArray;
-        if (token.role === 'administrator') ordersArray = await adminApi(token);
-        if (token.role === 'client') ordersArray = await salesApi(token);
+        const ordersArray = await api.sales(token);
         setOrders(ordersArray);
       } catch (error) {
         console.log(error);
@@ -33,8 +30,6 @@ export default function Orders() {
   }, [setOrders, token, history]);
 
   const title = (token && token.role === 'administrator') ? 'Pedidos' : 'Meus Pedidos';
-
-  if (!token) return <Redirect to="/login" />;
 
   return (
     <section>

@@ -6,7 +6,7 @@ import { PropTypes } from 'prop-types';
 import { handleProductQuantity } from '../utils';
 
 export default function ProductCard({ product, index, cart, callback }) {
-  const { id, url_image: urlImage, price, name } = product;
+  const { id, urlImage, price, name } = product;
 
   const updateQuantity = (action, data = {}) => {
     const newCart = handleProductQuantity({

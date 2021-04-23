@@ -1,6 +1,6 @@
-const { utils } = require('../models');
+const { products } = require('../models/sql/models');
 
-const getAll = async () => utils.getAll('products');
+const getAll = async () => products.findAll();
 
 module.exports = {
   getAll,

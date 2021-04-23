@@ -94,4 +94,9 @@ module.exports = {
     customCode: 'C_ERR_PRICE',
     customMessage: 'price inconsistency',
   },
+  C_ERR_INVALID_STATUS: {
+    statusCode: 400,
+    customCode: 'C_ERR_INVALID_STATUS',
+    customMessage: 'Error. Status is either empty or invalid.',
+  },
 };
