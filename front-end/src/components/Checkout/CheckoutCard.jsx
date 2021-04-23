@@ -21,7 +21,8 @@ function CheckoutCard(props) {
       </div>
       <p data-testid={ `${index}-product-total-value` }>
         R$
-        {` ${(parseFloat(product.price) * product.total).toFixed(2).toString().replace('.', ',')}`}
+        {` ${(parseFloat(product.price) * product.total)
+          .toFixed(2).toString().replace('.', ',')}`}
       </p>
       <button
         data-testid={ `${index}-removal-button` }

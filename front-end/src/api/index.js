@@ -100,7 +100,7 @@ async function changeStatus(setSaleDetail, saleId, status) {
   const axios = buildAxiosHandler();
   await axios.put(`/sales/status/${saleId}`, { status });
   await getSalesProductsBySaleId(setSaleDetail, saleId);
-};
+}
 
 export {
   checkout,

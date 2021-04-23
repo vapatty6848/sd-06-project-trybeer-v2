@@ -11,7 +11,7 @@ function AdminOrders() {
   useEffect(() => {
     getOrders(setOrders);
   }, []);
-
+  console.log(orders);
   return (
     <div className="admin-container">
       <div>

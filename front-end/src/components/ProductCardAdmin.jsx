@@ -36,7 +36,9 @@ ProductCardAdmin.propTypes = {
   product: PropTypes.shape({
     productName: PropTypes.string.isRequired,
     productPrice: PropTypes.string.isRequired,
-    quantity: PropTypes.string.isRequired,
+    salesProduct: PropTypes.shape({
+      quantity: PropTypes.string.isRequired,
+    }),
   }).isRequired,
   index: PropTypes.number.isRequired,
 };

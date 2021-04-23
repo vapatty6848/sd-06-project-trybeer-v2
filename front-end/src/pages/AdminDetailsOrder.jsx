@@ -27,7 +27,7 @@ function AdminDetailsOrder() {
         { !saleDetail ? <p>Loading</p> : (
           <div className="admin-order-details">
             <div className="larger-text">
-              <span data-testid={`${sale.id}-order-number`}>{`Pedido ${sale.id} - `}</span>
+              <span data-testid="order-number">{`Pedido ${sale.id} - `}</span>
               <span data-testid="order-status">{`${sale.status}`}</span>
             </div>
             <section className="orders-list">
@@ -48,23 +48,23 @@ function AdminDetailsOrder() {
             { (sale.status !== 'Entregue') ? (
               <div>
                 <button
-                type="button"
-                onClick={ async () => await changeStatus(setSaleDetail, sale.id, 'Entregue') }
-                data-testid="mark-as-delivered-btn"
-                className="mark-as-delivered-btn"
-              >
-                Marcar como entregue
-              </button>
-              <button
-                type="button"
-                onClick={ async () => await changeStatus(setSaleDetail, sale.id, 'Preparando') }
-                data-testid="mark-as-prepared-btn"
-                className="mark-as-delivered-btn"
-              >
-                Preparar pedido
-              </button>
+                  type="button"
+                  onClick={ () => changeStatus(setSaleDetail, sale.id, 'Entregue') }
+                  data-testid="mark-as-delivered-btn"
+                  className="mark-as-delivered-btn"
+                >
+                  Marcar como entregue
+                </button>
+                <button
+                  type="button"
+                  onClick={ () => changeStatus(setSaleDetail, sale.id, 'Preparando') }
+                  data-testid="mark-as-prepared-btn"
+                  className="mark-as-delivered-btn"
+                >
+                  Preparar pedido
+                </button>
               </div>
-            ): ''}
+            ) : ''}
           </div>
         )}
       </div>

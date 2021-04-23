@@ -16,37 +16,41 @@ function OrderCardAdmin(props) {
     }
     setInfoProvider();
   };
-
+  console.log(index);
   return (
-    <Link to={ `/admin/orders/${order.id}` } className="admin-order-card" onClick={ () => handleClick() }>
-        <div data-testid={ `${index}-order-card-container` } className="lol">
+    <Link
+      to={ `/admin/orders/${order.id}` }
+      className="admin-order-card"
+      nClick={ () => handleClick() }
+    >
+      <div data-testid={ `${index}-order-card-container` } className="lol">
+        <p
+          data-testid={ `${index}-order-number` }
+          className="admin-order-number"
+        >
+          {`Pedido ${order.id}`}
+        </p>
+        <p
+          data-testid={ `${index}-order-address` }
+          className="admin-order-address"
+        >
+          {`${order.deliveryAddress}, ${order.deliveryNumber}`}
+        </p>
+        <div className="total-and-status">
           <p
-            data-testid={ `${index}-order-number` }
-            className="admin-order-number"
+            data-testid={ `${index}-order-total-value` }
+            className="admin-order-value"
           >
-            {`Pedido ${order.id}`}
+            {`R$ ${total}`}
           </p>
           <p
-            data-testid={ `${index}-order-address` }
-            className="admin-order-address"
+            data-testid={ `${index}-order-status` }
+            className="admin-order-status"
           >
-            {`${order.deliveryAddress}, ${order.deliveryNumber}`}
+            {`${order.status}`}
           </p>
-          <div className="total-and-status">
-            <p
-              data-testid={ `${index}-order-total-value` }
-              className="admin-order-value"
-            >
-              {`R$ ${total}`}
-            </p>
-            <p
-              data-testid={ `${index}-order-status` }
-              className="admin-order-status"
-            >
-              {`${order.status}`}
-            </p>
-          </div>
         </div>
+      </div>
     </Link>
   );
 }
