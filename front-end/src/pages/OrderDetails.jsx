@@ -3,6 +3,7 @@ import { useParams, Redirect } from 'react-router-dom';
 import api from '../services/api';
 import MenuTop from '../components/MenuTop';
 import '../styles/orderDetails.css';
+
 export default function OrderDetails() {
   const { id } = useParams();
   const [products, setProducts] = useState([]);
@@ -27,7 +28,9 @@ export default function OrderDetails() {
     const day = date.slice(eigth, fourteen);
     return `${day}/${month}`;
   };
-  const sumOfCart = (sum, product) => sum + product.salesProducts.quantity * product.price;
+
+  const sumOfCart = (sum, prod) => sum + prod.salesProducts.quantity * prod.price;
+
   return (
     <div>
       <div>
@@ -46,10 +49,11 @@ export default function OrderDetails() {
               <div data-testid={ `${index}-product-qtd` }>{produto.quantity}</div>
               <div data-testid={ `${index}-product-name` }>{produto.name}</div>
               <div data-testid={ `${index}-product-total-value` }>
-                {(produto.price * produto.salesProducts.quantity).toLocaleString('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL',
-                })}
+                {(produto.price * produto.salesProducts.quantity)
+                  .toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                  })}
               </div>
             </div>
           </div>

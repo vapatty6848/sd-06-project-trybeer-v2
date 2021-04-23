@@ -75,12 +75,12 @@ export default function Checkout() {
       }
     ));
 
+    const fetch = async (product) => {
+      await api.fetchAddSaleProduct(product);
+    };
 
-    const fetch = async (products) => {
-      await api.fetchAddSaleProduct(products);
-    }
-    productsCart.forEach((products) => {
-      fetch(products);
+    productsCart.forEach((prod) => {
+      fetch(prod);
     });
   };
 

@@ -9,15 +9,22 @@ export default function AdminOrdersDetails() {
   const [products, setProducts] = useState([]);
   const [productsOfSale, setProductsOfSale] = useState([]);
   const [buttonDisabled, setButtonDisabled] = useState(null);
+  const [orderStatus, setOrderStatus] = useState('');
+  const [buttonPrepared, setButtonPrepared] = useState(false);
+
   const fetchApiProductOfSale = async (idFetch) => {
     const productDetails = await api.fetchSaleProduct(idFetch);
     setProductsOfSale(productDetails);
-    setProducts(productDetails.products)
-    console.log('imprimindo')
+    setProducts(productDetails.products);
+    setOrderStatus(productDetails.status);
+    console.log(orderStatus);
   };
 
   useEffect(() => {
     fetchApiProductOfSale(id);
+    // console.log(productsOfSale);
+    // console.log(products);
+    // console.log(productsOfSale, products) -> estão chegando vazios;
     if (products.length !== 0 && productsOfSale.status === 'Entregue') {
       setButtonDisabled(false);
     } else {
@@ -25,15 +32,19 @@ export default function AdminOrdersDetails() {
     }
   }, [id]);
 
-  const handleClick = async () => {
-    await api.fetchChangeStatus(id);
-    setButtonDisabled(false);
+  const handleClick = async (status) => {
+    setOrderStatus(status);
+
+    if (status === 'Entregue') setButtonDisabled(false);
+    if (status === 'Preparando') setButtonPrepared(true);
+
+    await api.fetchChangeStatus(id, status);
   };
 
   const user = JSON.parse(localStorage.getItem('user'));
   if (!user) return <Redirect to="/login" />;
 
-  const sumOfCart = (sum, product) => sum + product.salesProducts.quantity * product.price;
+  const sumOfCart = (sum, prod) => sum + prod.salesProducts.quantity * prod.price;
 
   return (
     <div className="main-container-adm">
@@ -58,10 +69,11 @@ export default function AdminOrdersDetails() {
                   <div data-testid={ `${index}-product-qtd` }>{produto.quantity}</div>
                   <div data-testid={ `${index}-product-name` }>{produto.name}</div>
                   <div data-testid={ `${index}-product-total-value` }>
-                    {(produto.price * produto.salesProducts.quantity).toLocaleString('pt-BR', {
-                      style: 'currency',
-                      currency: 'BRL',
-                    })}
+                    {(produto.price * produto.salesProducts.quantity)
+                      .toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL',
+                      })}
                     <div data-testid={ `${index}-order-unit-price` }>
                       (
                       {Number(produto.price).toLocaleString('pt-BR', {
@@ -82,14 +94,25 @@ export default function AdminOrdersDetails() {
           </h2>
           <div className="button-register">
             {buttonDisabled && (
-              <button
-                className="btn btn-danger "
-                type="button"
-                data-testid="mark-as-delivered-btn"
-                onClick={ handleClick }
-              >
-                Marcar como entregue
-              </button>
+              <div>
+                <button
+                  className="btn btn-danger"
+                  type="button"
+                  data-testid="mark-as-delivered-btn"
+                  onClick={ () => handleClick('Entregue') }
+                >
+                  Marcar como entregue
+                </button>
+                <button
+                  className="btn btn-danger"
+                  type="button"
+                  data-testid="mark-as-prepared-btn"
+                  onClick={ () => handleClick('Preparando') }
+                  disabled={ buttonPrepared }
+                >
+                  Preparar pedido
+                </button>
+              </div>
             )}
           </div>
         </div>

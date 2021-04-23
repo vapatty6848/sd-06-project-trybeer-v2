@@ -68,14 +68,11 @@ const fetchAddSale = async (sale) => {
 };
 
 const fetchAddSaleProduct = async (salesProducts) => {
-  console.log('cheguei aqui')
-  const result = await fetch('http://localhost:3001/saleProduct', {
+  await fetch('http://localhost:3001/saleProduct', {
     method: 'POST',
     headers: contentType,
     body: JSON.stringify(salesProducts),
   });
-  console.log(salesProducts, 'cheguei aqui')
-  console.log(result);
 };
 
 const fetchSales = async () => {
@@ -106,13 +103,13 @@ const fetchSaleProduct = async (id) => {
   return productsOfSale;
 };
 
-const fetchChangeStatus = async (idModified) => {
-  const data = { id: idModified };
+const fetchChangeStatus = async (idModified, status) => {
+  const data = { id: idModified, status };
   await fetch('http://localhost:3001/changeStatus', {
     method: 'PUT',
     headers: contentType,
     body: JSON.stringify(data),
-  });
+  }).then((response) => response.json());
 };
 
 module.exports = {
