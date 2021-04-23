@@ -3,7 +3,7 @@ import MessageBox from '../../components/MessageBox';
 import FormMessage from '../../components/FormMessage';
 import MenuTop from '../../components/MenuTop';
 import socket from '../../utils/socketClient';
-import fechtMessages from '../../methods/getMessages'
+import fechtMessages from '../../methods/getMessages';
 import './styles.css';
 
 const Chat = () => {
@@ -12,7 +12,7 @@ const Chat = () => {
 
   useEffect(() => {
     const fechtMsg = async () => {
-      const dbMessages = await fechtMessages()
+      const dbMessages = await fechtMessages();
       setMessages(dbMessages);
     };
     fechtMsg();
