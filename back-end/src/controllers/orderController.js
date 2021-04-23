@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const Service = require('../services/orderService');
-const { Sale, User, SalesProduct, sequelize, Product } = require('../models');
+const { sale, user, salesProduct, sequelize, product } = require('../models');
 const status = require('../utils/httpStatusCode');
 
 const orderRouter = Router();
@@ -12,9 +12,11 @@ orderRouter.post('/', async (req, res) => {
     const { email, totalPrice, deliveryAddress, deliveryNumber, date, saleProduct } = req.body;
     console.log(req.body);
     
-    const { id } = await User.findOne({ where: { email } });
+    const { id } = await user.findOne({ where: { email } });
 
-    await Service.createSale({ id, totalPrice, deliveryAddress, deliveryNumber, date, saleProduct });
+    await Service.createSale(
+      { id, totalPrice, deliveryAddress, deliveryNumber, date, saleProduct },
+    );
 
     res.status(200).json({ id, totalPrice, deliveryAddress, deliveryNumber, date });
   } catch (error) {
@@ -25,7 +27,7 @@ orderRouter.post('/', async (req, res) => {
 
 orderRouter.get('/', async (_req, res) => {
   try {
-    const allSales = await Sale.findAll();
+    const allSales = await sale.findAll();
 
     return res.status(status.OK).json(allSales);
   } catch (error) {
@@ -36,9 +38,12 @@ orderRouter.get('/', async (_req, res) => {
 orderRouter.get('/:id', async (req, res) => {
   const { id } = req.params;
   // try {
-    const Salebyid = await SalesProduct.findAll({
+    const Salebyid = await salesProduct.findAll({
        where: { saleId: id },
-       include: [{ model: Sale, as: 'sale', attributes: [] }, { model: Product, as: 'product', attributes: [] }],
+       include: [
+         { model: sale, as: 'sale', attributes: [] },
+         { model: product, as: 'product', attributes: [] },
+        ],
        attributes: ['quantity',
        [sequelize.col('sale.status'), 'status'],
        [sequelize.col('sale.saleDate'), 'saleDate'],
@@ -56,7 +61,7 @@ orderRouter.get('/:id', async (req, res) => {
 
 orderRouter.put('/', async (req, res) => {
   const { id } = req.body;
-  const updateStatus = await Sale.findByPk(id);
+  const updateStatus = await sale.findByPk(id);
   updateStatus.status = 'Entregue';
   updateStatus.save();
   res.status(200).json('atualizado');

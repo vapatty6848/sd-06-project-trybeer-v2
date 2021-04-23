@@ -1,37 +1,27 @@
-const Sale_productModel = (sequelize, DataTypes) => {
-  const Sale_product = sequelize.define('SalesProduct', {
+const saleProductModel = (sequelize, DataTypes) => {
+  const saleProduct = sequelize.define('salesProduct', {
     quantity: DataTypes.STRING,
   },
   {
     timestamps: false,
   });
 
-  Sale_product.associate = (models) => {
-    models.Sale.belongsToMany(models.Product, {
-      through: Sale_product,
-      as: 'products',
-      foreignKey: 'saleId',
-      otherKey: 'productId',
-    });
+  saleProduct.associate = (models) => {
+    models.sale.belongsToMany(models.product, 
+      { through: saleProduct, as: 'products', foreignKey: 'saleId', otherKey: 'productId' });
 
-    models.Product.belongsToMany(models.Sale, {
-      through: Sale_product,
-      as: 'sales',
-      foreignKey: 'productId',
-      otherKey: 'saleId',
-    });
+    models.product.belongsToMany(models.sale, 
+      { through: saleProduct, as: 'sales', foreignKey: 'productId', otherKey: 'saleId' });
 
-    Sale_product.belongsTo(models.Sale, {
-      foreignKey: 'saleId',
-      as: 'sale',
-    });
-    Sale_product.belongsTo(models.Product, {
-      foreignKey: 'productId',
-      as: 'product',
+    saleProduct.belongsTo(models.sale,
+      { foreignKey: 'saleId', as: 'sale' });
+    
+    saleProduct.belongsTo(models.product, {
+      foreignKey: 'productId', as: 'product',
     });
   };
 
-  return Sale_product;
+  return saleProduct;
 };
 
-module.exports = Sale_productModel;
+module.exports = saleProductModel;

@@ -1,18 +1,18 @@
-const { User } = require('../models');
+const { user } = require('../models');
 const httpResponse = require('../utils/httpResponses');
 const generateToken = require('../auth/generateToken');
 
 const loginService = async (email, password) => {
   if (!email || !password) return httpResponse.INVALID_DATA;
 
-  const user = await User.findOne({ where:
+  const loginUser = await user.findOne({ where:
     { email, password },
   });
  
-  if (!user || user.length === 0) return httpResponse.USER_NOT_FOUND;
-  delete user.password;
-    
-  const authenticatedUser = generateToken(user);
+  if (!loginUser || loginUser.length === 0) return httpResponse.USER_NOT_FOUND;
+  delete loginUser.dataValues.password;
+
+  const authenticatedUser = generateToken(loginUser.dataValues);
   
   return { token: authenticatedUser.token, user: authenticatedUser.dataValues };
 };

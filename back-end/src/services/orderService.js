@@ -1,7 +1,9 @@
-const { Sale, SalesProduct } = require('../models');
+const { sale, salesProduct } = require('../models');
 
-const createSale = async ({ id, totalPrice, deliveryAddress, deliveryNumber, saleDate, saleProduct }) => {
-  const orders = await Sale.create({ 
+const createSale = async (
+  { id, totalPrice, deliveryAddress, deliveryNumber, saleDate, saleProduct },
+  ) => {
+  const orders = await sale.create({ 
     totalPrice, 
     deliveryAddress,
     deliveryNumber,
@@ -11,22 +13,22 @@ const createSale = async ({ id, totalPrice, deliveryAddress, deliveryNumber, sal
 
   const saleId = orders.id;
 
-  saleProduct.forEach(async (e) => {
-    await SalesProduct.create({ saleId, productId: e.id, quantity: e.quantity });
-  });
+  console.log('Aquiiiiii saleId', saleId);
 
-  console.log(orders);
+  saleProduct.forEach(async (e) => {
+    await salesProduct.create({ saleId, productId: e.id, quantity: e.quantity });
+  });
 
   return orders;
 };
 
 // Get all users
-const getAll = async () => Sale.findAll();
+const getAll = async () => sale.findAll();
 
 // Get id sale
 const getBySalesId = async (id) => {
-  const sale = await Sale.findByPk(id);
-  return sale;
+  const saleId = await sale.findByPk(id);
+  return saleId;
 };
 
 module.exports = { 
