@@ -36,10 +36,11 @@ export default function form([
     setNameState(newName);
     const nameFormat = /^([a-zA-Zà-úÀ-Ú]|\s+)+$/i.test(newName);
     const dataStorage = localStorage.getItem('user');
-    const { name } = JSON.parse(dataStorage);
+    //  const { name } = JSON.parse(dataStorage);
     const twelve = 12;
 
-    setIsDisabled(!(nameFormat && newName.length > twelve && name !== newName));
+    setIsDisabled(!(nameFormat && newName.length
+      > twelve && dataStorage.name !== newName));
   };
 
   return (

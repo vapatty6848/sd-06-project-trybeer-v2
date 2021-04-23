@@ -55,7 +55,9 @@ CardAdminProduct.propTypes = {
   product: PropTypes.shape({
     name: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
+    urlImage: PropTypes.string.isRequired,
     quantity: PropTypes.string,
+    sales_products: PropTypes.string,
   }).isRequired,
   index: PropTypes.number.isRequired,
 };
