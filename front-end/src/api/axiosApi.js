@@ -101,10 +101,11 @@ async function getByIdSales(id) {
   return sales;
 }
 
-async function updateStatusOrder(id) {
+async function updateStatusOrder(id, statusOrder) {
   const token = localStorage.getItem('token');
   const order = await axios.put('http://localhost:3001/orders', {
     id,
+    statusOrder,
     headers: {
       authorization: JSON.parse(token),
     },
