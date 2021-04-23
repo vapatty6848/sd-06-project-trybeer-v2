@@ -18,6 +18,7 @@ const PublicChat = () => {
     const frontEndMessage = { currMessage, time: chatTime() };
     setMessagesList([...messagesList, frontEndMessage]);
     socket.emit('user-to-server', message);
+    console.log(`socket id do cliente ${socket.id}`);
   };
 
   useEffect(() => {

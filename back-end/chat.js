@@ -24,6 +24,7 @@ const chat = (http) => {
 
     socket.on('user-to-server', async (obj) => {
       const { userId, text, email } = obj;
+      console.log(`socketid do server: ${socket.id}`, obj);
       await service.writeMessage({ userId, text, email });
       socket.emit('server-to-user', obj);
       io.emit('server-to-admin', 'new conversation');
