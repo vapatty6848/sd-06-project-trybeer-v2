@@ -1,19 +1,18 @@
 .main-container {
   align-items: center;
-  border-radius: 10px;
   border: 2px solid rgba(0, 0, 0, 0.125);
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin-top: 90px;
-  margin: auto;
   padding: 30px 15px;
   width: 80%;
 }
 
 .form-container {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .search-input {
