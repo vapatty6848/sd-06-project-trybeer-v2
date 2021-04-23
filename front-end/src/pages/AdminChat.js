@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { TopMenu } from '../components';
 import TrybeerContext from '../context/TrybeerContext';
@@ -19,15 +19,15 @@ function AdminChat({ history }) {
     return chatsArray;
   };
 
-  const fetchChats = async () => {
+  const fetchChats = useCallback(async () => {
     const allChats = await verifyToken('admin/chats/', user, history);
     const chatsArray = formatChats(allChats);
     setChats(chatsArray);
-  };
+  }, [user, history]);
 
   useEffect(() => {
     fetchChats();
-  }, []);
+  }, [fetchChats]);
 
   return (
     <div>

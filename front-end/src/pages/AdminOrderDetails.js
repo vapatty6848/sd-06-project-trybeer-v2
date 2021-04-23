@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { TopMenu } from '../components';
 import { verifyToken } from '../utils/verifications';
@@ -13,41 +13,40 @@ function AdminOrderDetails(props) {
   const [isShowing, setIsShowing] = useState(true);
   const { location: { state }, history } = props;
 
-  const checkStatus = (status) => {
-    if (status === 'Entregue') return setIsShowing(false);
-  };
-
-  const fetchOrderDetails = async () => {
+  const fetchOrderDetails = useCallback(async () => {
     if (state) {
       const order = await verifyToken(`admin/orders/details/${state.id}`, user, history);
-      console.log(order.status);
       checkStatus(order.status);
       setOrderCart([order]);
     }
-  };
+  }, [user, history, state]);
 
-  const observeState = () => {
+  const observeState = useCallback(() => {
     if (!state) {
       history.push('/login');
     } else {
       setHasState(true);
     }
-  };
-
-  const markAsPreparing = async (status) => {
-    await put(`admin/orders/${state.id}`, user.token, { status });
-    fetchOrderDetails();
-  };
-
-  const markAsDone = async (status) => {
-    await markAsPreparing(status);
-    setIsShowing(false);
-  };
+  }, [history, state]);
 
   useEffect(() => {
     observeState();
     fetchOrderDetails();
-  }, []);
+  }, [fetchOrderDetails, observeState]);
+
+  const checkStatus = (status) => {
+    if (status === 'Entregue') return setIsShowing(false);
+  };
+  
+  const markAsPreparing = async (status) => {
+    await put(`admin/orders/${state.id}`, user.token, { status });
+    fetchOrderDetails();
+  };
+  
+  const markAsDone = async (status) => {
+    await markAsPreparing(status);
+    setIsShowing(false);
+  };
 
   return (
     <div>
