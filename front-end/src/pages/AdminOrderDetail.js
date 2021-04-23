@@ -19,8 +19,13 @@ function AdminOrderDetail() {
   const orderStatus = result.map((el) => el.status);
 
   const handleStatusOrder = async () => {
-    await Api.updateStatusOrder(id);
+    await Api.updateStatusOrder(id, 'Entregue');
     setStatus('Entregue');
+  };
+
+  const handleStatusOrderPreparing = async () => {
+    await Api.updateStatusOrder(id, 'Preparando');
+    setStatus('Preparando');
   };
 
   return (
@@ -68,6 +73,13 @@ function AdminOrderDetail() {
                     </button>
                   )
                 }
+                    <button
+                      type="button"
+                      data-testid="mark-as-prepared-btn" 
+                      onClick={ () => handleStatusOrderPreparing() }
+                    >
+                      Preparar pedido
+                    </button>
               </div>
             )
           }

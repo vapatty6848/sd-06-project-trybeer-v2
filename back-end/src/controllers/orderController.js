@@ -65,9 +65,9 @@ orderRouter.get('/:id', async (req, res) => {
 });
 
 orderRouter.put('/', async (req, res) => {
-  const { id } = req.body;
+  const { id, statusOrder } = req.body;
   const updateStatus = await sale.findByPk(id);
-  updateStatus.status = 'Entregue';
+  updateStatus.status = statusOrder;
   updateStatus.save();
   res.status(200).json('atualizado');
 });
