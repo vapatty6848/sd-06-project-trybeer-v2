@@ -6,8 +6,8 @@ const FormMessage = () => {
 
   const handleSend = (e) => {
     e.preventDefault();
-    const { name } = JSON.parse(localStorage.getItem('user'));
-    socket.emit('chat.sendMessage', { message, userName: name });
+    const { email } = JSON.parse(localStorage.getItem('user'));
+    socket.emit('chat.sendMessage', { message, email });
     setMessage('');
   };
 

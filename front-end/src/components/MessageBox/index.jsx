@@ -2,13 +2,13 @@
 import React from 'react';
 import './styles.css';
 
-const MessageBox = ({ isMine, user, sentTime, message }) => {
+const MessageBox = ({ isMine, email, sentTime, message }) => {
   const positionMsg = (isMine) ? 'right-msg' : 'left-msg';
   return (
     <section className={ `msg-container ${positionMsg}` }>
       <section className="info-container">
         <p className="msg-name" data-testid="nickname">
-          {user}
+          {email}
         </p>
         <p className="msg-date" data-testid="message-time">
           {sentTime}

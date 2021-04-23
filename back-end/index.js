@@ -12,31 +12,27 @@ const io = require('socket.io')(httpServer, {
 });
 const cors = require('cors');
 
+const Messages = require('./mongodb/messagesModel');
+
 const currentDate = () => {
   const now = new Date();
   return `${now.getHours()}:${now.getMinutes()}`;
 };
 
-// const Messages = require('./models/messagesModel');
-
-// app.get('/chat', async (_req, res) => {
-//   const allMessages = await Messages.getAll();
-//   res.status(200).json(allMessages);
-// });
-
 io.on('connection', (socket) => {
   console.log(`${socket.id} conectado`);
   
-  socket.on('chat.sendMessage', (data) => {
+  socket.on('chat.sendMessage', async (data) => {
     const dataWithDate = { ...data, sentTime: currentDate() };
-    // await Messages.create(dataWithDate);
     io.emit('chat.receiveMessage', dataWithDate);
+    await Messages.create(dataWithDate);
   });
 });
 
 const { errorMiddleware } = require('./middlewares/errorMiddleware');
 
 app.get('/', (_req, res) => res.status(200).send('Hello World!'));
+
 const { routerLogin,
   routerRegister, routerProducts, routerProfile, routerSales, 
   routerSalesAdm } = require('./controllers');
@@ -52,6 +48,10 @@ app.use('/profile', routerProfile);
 app.use('/register', routerRegister);
 app.use('/orders', routerSales);
 app.use('/admin/orders', routerSalesAdm);
+app.get('/chat', async (req, res) => {
+  const allMessages = await Messages.getAll();
+  res.status(200).json(allMessages);
+});
 
 app.use(errorMiddleware);
 

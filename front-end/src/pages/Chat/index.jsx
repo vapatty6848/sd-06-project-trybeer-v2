@@ -3,6 +3,7 @@ import MessageBox from '../../components/MessageBox';
 import FormMessage from '../../components/FormMessage';
 import MenuTop from '../../components/MenuTop';
 import socket from '../../utils/socketClient';
+import fechtMessages from '../../methods/getMessages'
 import './styles.css';
 
 const Chat = () => {
@@ -10,23 +11,31 @@ const Chat = () => {
   const [user, setUser] = useState('');
 
   useEffect(() => {
+    const fechtMsg = async () => {
+      const dbMessages = await fechtMessages()
+      setMessages(dbMessages);
+    };
+    fechtMsg();
+  }, []);
+
+  useEffect(() => {
     socket.on('chat.receiveMessage', (data) => {
       setMessages([...messages, data]);
     });
 
-    const { name } = JSON.parse(localStorage.getItem('user'));
-    setUser(name);
+    const { email } = JSON.parse(localStorage.getItem('user'));
+    setUser(email);
   }, [messages]);
 
   return (
     <section className="chat-container">
       <MenuTop title="Trybeer" />
       {
-        messages.map(({ userName, sentTime, message }, id) => (
+        messages.map(({ email, sentTime, message }, id) => (
           <MessageBox
             key={ id }
-            isMine={ userName === user }
-            user={ userName }
+            isMine={ email === user }
+            email={ email }
             sentTime={ sentTime }
             message={ message }
           />
