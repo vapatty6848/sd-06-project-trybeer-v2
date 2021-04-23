@@ -22,35 +22,30 @@ function OrderCardAdm({ orderInfo, index }) {
     >
       <div>
         <p className="order-number" data-testid={ `${index}-order-number` }>
-
           {`Pedido ${id}`}
         </p>
         <p className="shipping-adress" data-testid={ `${index}-order-address` }>
-
           {`${house}, ${numberHouse}`}
         </p>
       </div>
       <div className="price-status">
-        <div
-          data-testid={ `${index}-order-total-value` }
-        >
+        <div data-testid={ `${index}-order-total-value` }>
           {ParseCurrency(totalPrice)}
         </div>
         <div data-testid={ `${index}-order-status` }>{status}</div>
       </div>
     </button>
-
   );
 }
 
 OrderCardAdm.propTypes = {
-  orderInfo: {
+  orderInfo: PropTypes.shape({
     id: PropTypes.number,
-    delivery_address: PropTypes.string,
-    delivery_number: PropTypes.string,
+    deliveryAddress: PropTypes.string,
+    deliveryNumber: PropTypes.number,
     totalPrice: PropTypes.string,
     status: PropTypes.string,
-  }.isRequired,
+  }).isRequired,
   index: PropTypes.number.isRequired,
 };
 
