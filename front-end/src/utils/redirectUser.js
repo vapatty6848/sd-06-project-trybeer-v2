@@ -1,6 +1,6 @@
 export default (user, history, callback) => {
-  if (user.code) {
-    history.push({
+  if (!user || user.code) {
+    return history.push({
       pathname: '/error',
       state: { ...user } });
   }

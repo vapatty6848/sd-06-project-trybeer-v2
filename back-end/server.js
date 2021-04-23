@@ -22,7 +22,8 @@ const controllers = require('./src/controllers/chat');
 
 const specs = swaggerJsDoc(swaggerOptions);
 
-const PORT = process.env.PORT || 3001;
+const APP_PORT = process.env.APP_PORT || 3001;
+const SOCKET_PORT = process.env.APP_PORT || 4001;
 
 app.use('/documentation', swaggerUI.serve, swaggerUI.setup(specs));
 
@@ -33,8 +34,20 @@ app.use(bodyParser.json());
 app.use(routes);
 
 io.on('connection', (socket) => {
-  controllers.chat(io, socket);
-  controllers.user(io, socket);
+  console.log('backend -> usuário logou');
+  const { token } = socket.handshake.auth;
+  if (token.role === 'client') {
+    token.roomKey = `${token.email}-room`;
+    socket.join(token.roomKey);
+  }
+  socket.on('admin:joinRoom', (client) => {
+    token.roomKey = `${client}-room`;
+    socket.join(token.roomKey);
+  });
+  controllers.chat(io, socket, token);
+  controllers.user(io, socket, token);
+  controllers.admin(io, socket, token);
 });
 
-http.listen(PORT, () => console.log(`On na port ${PORT}`));
+app.listen(APP_PORT, () => console.log(`App lissssssning na port ${APP_PORT}`));
+http.listen(SOCKET_PORT, () => console.log(`Socket lisssning na port ${SOCKET_PORT}`));

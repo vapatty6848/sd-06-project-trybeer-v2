@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import useStorage from '../hooks/useStorage';
 import AppContext from './app.context';
-import productsApi from '../services/api.products';
+import api from '../services';
 
 const AppProvider = ({ children }) => {
   const [token, setToken] = useState(JSON.parse(localStorage.getItem('login')));
@@ -30,10 +30,10 @@ const AppProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const productsArray = await productsApi(token).catch((error) => error);
+      const productsArray = await api.getProducts(token).catch((error) => error);
       setProducts(productsArray);
     };
-    if (!products) fetchProducts();
+    if (!products && (token && Object.keys(token).length > 0)) fetchProducts();
   }, [setProducts, products, token]);
 
   return (

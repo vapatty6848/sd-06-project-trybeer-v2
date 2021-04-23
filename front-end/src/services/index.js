@@ -1,13 +1,13 @@
 import admin from './api.admin';
-import products from './api.products';
-import sales from './api.sales';
+import getProducts from './api.products';
+import client from './api.client';
 import user from './api.user';
 import chat from './api.chat';
 
 export default {
   admin,
-  products,
-  sales,
+  getProducts,
+  client,
   user,
   chat,
 };

@@ -11,6 +11,9 @@ export default function AdminMenu({ className, callback }) {
       <Link to="/admin/profile" data-testid="side-menu-item-profile">
         Perfil
       </Link>
+      <Link to="/admin/chats" data-testid="side-menu-item-chat">
+        Conversas
+      </Link>
       <button type="button" onClick={ callback } data-testid="side-menu-item-logout">
         Sair
       </button>
