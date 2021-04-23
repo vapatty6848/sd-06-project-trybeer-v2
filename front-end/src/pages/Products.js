@@ -15,7 +15,7 @@ function Products() {
   const loggedUser = JSON.parse(localStorage.getItem('user'));
   const history = useHistory();
 
-  useEffect(() => {
+  const verifyUser = () => {
     if (!loggedUser || !loggedUser.token) history.push('/login');
 
     getAllProducts()
@@ -23,7 +23,9 @@ function Products() {
 
     const localStorageCart = JSON.parse(localStorage.getItem('cart'));
     if (localStorageCart) setCart(localStorageCart);
-  }, []);
+  };
+
+  useEffect(() => verifyUser(), [verifyUser]);
 
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));

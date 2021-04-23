@@ -40,7 +40,7 @@ function Orders() {
             <OrdersCard
               index={ index }
               id={ order.id }
-              date={ order.sale_date }
+              date={ order.createdAt }
               total={ order.totalPrice }
               status={ order.status }
             />
