@@ -43,7 +43,7 @@ function MenuSide() {
           type="button"
           onClick={ () => route.push(isClient ? '/chat' : '/admin/chats') }
         >
-          {isClient ? 'Meu Conversar com a loja' : 'Conversas'}
+          {isClient ? 'Conversar com a loja' : 'Conversas'}
         </button>
         <button
           className="side-btn"
