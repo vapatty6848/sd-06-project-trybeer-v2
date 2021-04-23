@@ -8,21 +8,23 @@ const CREATED = 201;
 const OK = 200;
 
 router.post('/orders', validateToken, rescue(async (req, res) => {
+  try {
     const { totalPrice, address, number, date, orderStatus, cartProducts } = req.body.objOrder;
     const userId = req.user.id;
     const orderData = { totalPrice, address, number, date, orderStatus };
-    const [{ insertId }] = await ordersService.createOrders(userId, orderData);
-    // console.log('meu carrinho', cartProducts);
-        cartProducts.map(async (product) => {
-          const mySaleProducts = {
-            saleId: insertId,
-            productId: product.id + 1,
-            quantity: product.quantityItem,
-          };
-          await ordersService.createProductsSales(mySaleProducts);
-        });
-    
+    const { insertId } = await ordersService.createOrders(userId, orderData);
+    cartProducts.map(async (product) => {
+      const mySaleProducts = {
+        saleId: insertId,
+        productId: product.id + 1,
+        quantity: product.quantityItem,
+      };
+      await ordersService.createProductsSales(mySaleProducts);
+    });
     res.status(CREATED).json({ message: 'Compra realizada com sucesso!' });
+  } catch (error) {
+    console.error(error.message);
+  }
   }));
 
   router.get('/orders', validateToken, rescue(async (req, res) => {

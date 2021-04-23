@@ -1,12 +1,21 @@
 const { sales, products } = require('../models');
 
-// const ordersModel = require('../model/ordersModel');
-
-const createOrders = async (sale) => sales.create(sale);
+const createOrders = async (userId, sale) => {
+  try {
+    return await sales.create({ 
+      userId,
+      totalPrice: sale.totalPrice,
+      deliveryAddress: sale.address,
+      deliveryNumber: sale.number,
+      saleDate: sale.date,
+      status: sale.orderStatus,
+     });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 
 const getOrders = async (userId) => {
-  // const sales = ordersModel.getOrders(userId);
-  // return sales;
   sales.findAll({
     where: {
       userId,
@@ -25,40 +34,24 @@ const getOrders = async (userId) => {
 const createProductsSales = async (mySaleProducts) => {
   sales.create(mySaleProducts);
 };
-// const createProductsSales = async (mySaleProducts) => {
-//     ordersModel.createProductsSales(mySaleProducts);
-// };
 
 const getSaleDetail = (saleId) => {
   console.log('Entrei no detail');
-  sales.findByPk(saleId, { include: [
-    { model: products, as: 'products' },
-    // { model: 'sales_products', as: 'saleProducts' },
-    // { model: 'sales', as: 'sale' },
+  return sales.findByPk(saleId, { include: [
+    { model: products, 
+      as: 'products', 
+      through: { // through trás os dados da tabela intermediária sales_products, esperando um array de nome Attributes, se passar vazio não vem nada, do contrário passar por string.
+      attributes: ['saleId', 'quantity'],
+    } },
     ] });
   };
-// const getSaleDetail = async (saleId) => {
-//   const saleDetail = await ordersModel.getSaleDetail(saleId);
-//   console.log('entrei no service', saleDetail);
-//   return saleDetail;
-// };
 
 const getAllSales = async () => sales.findAll(); 
-// const getAllSales = async () => {  
-// const allSales = await ordersModel.getAllSales();
-// console.log('entrei no service', allSales);
-//   return allSales;
-// };
 
 const updateSale = async (saleId, saleStatus) => sales.update(
   { status: saleStatus },
   { where: { id: saleId } },
 );
-// const updateSale = async (saleId) => {
-//   await ordersModel.updateSale(saleId);
-
-//   console.log('entrei no orders service', saleId);
-// };
 
 module.exports = {
   createOrders,
