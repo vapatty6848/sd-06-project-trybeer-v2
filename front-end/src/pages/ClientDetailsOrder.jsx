@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { getSalesProductsBySaleId } from '../api/index';
 import BeerContext from '../context/BeerContext';
 import ControllerHeader from '../components/Header-SideBar/ControllerHeader';
 import CardClientDetailsOrder from '../components/ClientDetailsOrder/CardClientOrder';
@@ -13,13 +14,16 @@ function ClientDetailsOrder() {
     saleIdOrder,
     dateOrder,
     totalPriceOrder,
+    saleDetail,
+    setSaleDetail,
   } = useContext(BeerContext);
   const [products, setProducts] = useState(false);
 
   useEffect(() => {
     tokenExists(history);
     setProducts(productsOrder);
-  }, [productsOrder, history]);
+    getSalesProductsBySaleId(setSaleDetail, saleIdOrder);
+  }, [productsOrder, history, setSaleDetail, saleIdOrder]);
 
   return (
     <div>
@@ -30,6 +34,11 @@ function ClientDetailsOrder() {
           className="larger-text"
         >
           {`Pedido ${saleIdOrder}`}
+        </p>
+        <p>
+          Status:
+          {' '}
+          { !saleDetail ? '' : saleDetail.sale.status }
         </p>
         <section className="client-card-list">
           { products && products

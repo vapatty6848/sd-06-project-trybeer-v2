@@ -7,7 +7,7 @@ function ClientDetailsOrder(props) {
   return (
     <div className="client-details-card">
       <p data-testid={ `${index}-product-qtd` }>
-        { `Quantidade: ${product.quantity}` }
+        { `Quantidade: ${product.salesProduct.quantity}` }
       </p>
       <h1 data-testid={ `${index}-product-name` }>{ product.productName }</h1>
       <p data-testid={ `${index}-product-total-value` }>
@@ -23,7 +23,9 @@ ClientDetailsOrder.propTypes = {
     productId: PropTypes.number.isRequired,
     productName: PropTypes.string.isRequired,
     productPrice: PropTypes.string.isRequired,
-    quantity: PropTypes.string.isRequired,
+    salesProduct: PropTypes.shape({
+      quantity: PropTypes.string.isRequired,
+    }),
   }).isRequired,
   index: PropTypes.number.isRequired,
 };

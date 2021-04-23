@@ -54,6 +54,11 @@ function CheckoutCard(props) {
         {' '}
         { order.totalPrice.toString().replace('.', ',') }
       </p>
+      <p>
+        Status:
+        {' '}
+        {order.status}
+      </p>
     </div>
   );
 }
