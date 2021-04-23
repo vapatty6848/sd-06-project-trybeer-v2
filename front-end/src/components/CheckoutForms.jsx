@@ -60,7 +60,7 @@ function CheckoutForms() {
         <input
           className="inputcheckout"
           id="houseNumberInput"
-          type="text"
+          type="number"
           data-testid="checkout-house-number-input"
           onChange={ ({ target }) => setStreet({ ...street, [target.id]: target.value }) }
         />

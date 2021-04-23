@@ -28,6 +28,7 @@ function DetailsOrderAdm({ match }) {
   useEffect(() => {
     const statusOrder = orderDetails && orderDetails.status;
     if (statusOrder === 'Entregue') setStatus('Entregue');
+    if (statusOrder === 'Preparando') setStatus('Preparando');
   }, [orderDetails]);
 
   return !orderDetails ? <h1>Loading...</h1> : (
@@ -71,6 +72,15 @@ function DetailsOrderAdm({ match }) {
             { orderDetails.totalPrice && parseCurrency(orderDetails.totalPrice) }
           </span>
         </div>
+        <button
+          type="button"
+          data-testid="mark-as-prepared-btn"
+          onClick={ () => handleClick('Preparando') }
+          hidden={ status === 'Entregue' }
+          className="delivered-button"
+        >
+          Preparar pedido
+        </button>
         <button
           type="button"
           data-testid="mark-as-delivered-btn"
