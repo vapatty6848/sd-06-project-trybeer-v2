@@ -14,25 +14,32 @@ const getOrders = async (userId) => {
   });
 };
 
-const getLastSaleId = async () => {
+/* const getLastSaleId = async () => {
   const lastOrderId = ordersModel.getLastSaleId();
   return lastOrderId;
-};
+}; */
 
 const createProductsSales = async (mySaleProducts) => {
-    ordersModel.createProductsSales(mySaleProducts);
+    sales.create(mySaleProducts);
 };
 
 const getSaleDetail = async (saleId) => {
-  const saleDetail = await ordersModel.getSaleDetail(saleId);
+  sales.findOne({
+    where: {
+      saleId,
+    },
+  });
+  
+/*   const saleDetail = await ordersModel.getSaleDetail(saleId);
   // console.log('entrei no service', saleDetail);
-  return saleDetail;
+  return saleDetail; */
 };
 
 const getAllSales = async () => {
-  const allSales = await ordersModel.getAllSales();
+  sales.findAll();
+/*   const allSales = await ordersModel.getAllSales();
   // console.log('entrei no service', allSales);
-  return allSales;
+  return allSales; */
 };
 
 const updateSale = async (saleId) => {
@@ -44,7 +51,6 @@ const updateSale = async (saleId) => {
 module.exports = {
   createOrders,
   getOrders,
-  getLastSaleId,
   createProductsSales,
   getSaleDetail,
   getAllSales,
