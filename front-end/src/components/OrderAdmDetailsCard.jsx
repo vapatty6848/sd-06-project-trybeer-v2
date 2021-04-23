@@ -7,16 +7,16 @@ import updateStatus from '../methods/updateStatus';
 
 function OrderDetailsCard({ orderDetails }) {
   const [productADM, setProductADM] = useState(orderDetails);
-  const [deliveryBTN, setDeliveryBTN] = useState(false)
-  const [preparingBTN, setPreparingBTN] = useState(false)
+  const [deliveryBTN, setDeliveryBTN] = useState(false);
+  const [preparingBTN, setPreparingBTN] = useState(false);
 
   useEffect(() => {
     if (productADM && productADM[0].status === 'Entregue') {
-      setDeliveryBTN(true)
-      setPreparingBTN(true)
+      setDeliveryBTN(true);
+      setPreparingBTN(true);
     }
     if (productADM && productADM[0].status === 'Preparando') {
-      setPreparingBTN(true)
+      setPreparingBTN(true);
     }
   }, [productADM]);
 
@@ -30,9 +30,9 @@ function OrderDetailsCard({ orderDetails }) {
         <div>
           {productADM.map(
             (product, index) => (<ProductCardAdm
-              product={product}
-              index={index}
-              key={product.name}
+              product={ product }
+              index={ index }
+              key={ product.name }
             />),
           )}
           <p data-testid="order-total-value">
@@ -47,11 +47,11 @@ function OrderDetailsCard({ orderDetails }) {
           <button
             data-testid="mark-as-delivered-btn"
             value="Entregue"
-            hidden={deliveryBTN}
+            hidden={ deliveryBTN }
             type="button"
-            onClick={async (e) => {
-              return setProductADM(await updateStatus(productADM[0], e.target.value))
-            }}
+            onClick={ async (e) => {
+              setProductADM(await updateStatus(productADM[0], e.target.value));
+            } }
           >
             Marcar como entregue
           </button>
@@ -59,14 +59,14 @@ function OrderDetailsCard({ orderDetails }) {
             data-testid="mark-as-prepared-btn"
             type="button"
             value="Preparando"
-            hidden={preparingBTN}
-            onClick={async (e) => {
-              return setProductADM(await updateStatus(productADM[0], e.target.value))
-            }}
+            hidden={ preparingBTN }
+            onClick={ async (e) => {
+              setProductADM(await updateStatus(productADM[0], e.target.value));
+            } }
           >
             Preparar pedido
           </button>
-          <Link to="/admin/orders" >Voltar</Link>
+          <Link to="/admin/orders">Voltar</Link>
         </div>
 
       </div>);

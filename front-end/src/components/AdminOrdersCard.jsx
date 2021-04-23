@@ -21,7 +21,7 @@ function AdminOrdersCard() {
     <div>
       { orders.map((e, i) => (
         <button
-          key={ i}
+          key={ i }
           className="order-card"
           type="button"
           onClick={ () => history.push(`/admin/orders/${e.id}`) }

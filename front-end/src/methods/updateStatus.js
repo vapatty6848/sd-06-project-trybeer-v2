@@ -7,12 +7,12 @@ const updateStatus = async (sale, status) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      sale: {id: sale.saleId, status,},
+      sale: { id: sale.saleId, status },
     }),
   };
   const apiRequest = await fetch(`${baseURL}/${sale.saleId}`, postMethod);
   const apiResponse = await apiRequest.json();
-  console.log('resposta da api', apiResponse)
+  console.log('resposta da api', apiResponse);
   return apiResponse;
 };
 
