@@ -44,7 +44,7 @@ export default function OrderDetails() {
     }
   };
 
-  if (!order.products || !products) return 'Loading order...';
+  if (!order || !order.products || !products) return 'Loading order...';
 
   return (
     <section className="order-detail-wrapper">
