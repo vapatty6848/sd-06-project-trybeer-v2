@@ -12,5 +12,6 @@ export { default as MessageInput } from './MessageInput';
 export { default as AdminMenu } from './AdminSideMenu';
 export { default as AdminButton } from './AdminButton';
 export { default as AdminOrderDetails } from './AdminOrderDetails';
+export { default as AdminChatsContainer } from './AdminChatsContainer';
 
 export { default as ProtectedRoute } from './ProtectedRoute';

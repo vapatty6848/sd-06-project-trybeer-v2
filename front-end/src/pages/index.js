@@ -9,5 +9,6 @@ export { default as OrderDetails } from './OrderDetails';
 export { default as AdminProfile } from './AdminProfile';
 export { default as AdminOrders } from './AdminOrders';
 export { default as AdminOrderDetails } from './AdminOrderDetails';
+export { default as AdminChat } from './AdminChat';
 export { default as NotFound } from './NotFound';
 export { default as Error } from './Error';

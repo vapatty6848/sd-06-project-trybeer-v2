@@ -1,10 +1,8 @@
 const { chat } = require('../../services');
-const { verifyToken } = require('../../security');
 
 module.exports = (ioServer, socket) => {
   const chatMessage = async ({ msg, token }) => {
-    const { sub: userId } = verifyToken(token);
-    await chat.saveMessage(msg, userId);
+    await chat.saveMessage(msg, token);
     ioServer.emit('chat:serverMessage', msg);
   };
 

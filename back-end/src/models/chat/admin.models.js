@@ -1,13 +1,10 @@
 const connection = require('./connection');
 
-const saveMessage = async (message, userId) => {
+const saveAdminMessage = async (message, userId) => {
   await connection()
     .then((db) => db.collection('messages').updateOne(
       { userId },
-      {
-        $push: { messages: message },
-        $set: { nickname: message.nickname },
-      },
+      { $push: { messages: message } },
       { upsert: true },
     ))
     .catch((err) => err);
@@ -15,14 +12,14 @@ const saveMessage = async (message, userId) => {
   return true;
 };
 
-const getMessagesById = async (userId) => {
+const getChats = async () => {
     const result = await connection()
-      .then((db) => db.collection('messages').findOne({ userId }));
+      .then((db) => db.collection('messages').find().toArray());
 
     return result;
 };
 
 module.exports = {
-  getMessagesById,
-  saveMessage,
+  getChats,
+  saveAdminMessage,
 };

@@ -6,8 +6,8 @@ import {
   Redirect,
 } from 'react-router-dom';
 
-import { NotFound, Login, Register, Profile, Products, Checkout, OrderDetails, Chat,
-  Error, Orders, AdminProfile, AdminOrders, AdminOrderDetails } from './pages';
+import { Login, Register, Profile, Products, Checkout, OrderDetails, Chat, Orders,
+  AdminProfile, AdminOrders, AdminOrderDetails, AdminChat, NotFound, Error } from './pages';
 import { ProtectedRoute } from './components';
 
 import './styles/App.css';
@@ -22,9 +22,10 @@ function App() {
         <ProtectedRoute path="/orders/:id" component={ OrderDetails } />
         <ProtectedRoute path="/orders" component={ Orders } />
         <ProtectedRoute path="/chat" component={ Chat } />
+        <ProtectedRoute path="/admin/profile" component={ AdminProfile } />
         <ProtectedRoute path="/admin/orders/:id" component={ AdminOrderDetails } />
         <ProtectedRoute path="/admin/orders" component={ AdminOrders } />
-        <ProtectedRoute path="/admin/profile" component={ AdminProfile } />
+        <ProtectedRoute path="/admin/chats" component={ AdminChat } />
         <Route path="/login" component={ Login } />
         <Route path="/register" component={ Register } />
         <Route exact path="/">

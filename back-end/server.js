@@ -35,6 +35,7 @@ app.use(routes);
 io.on('connection', (socket) => {
   controllers.chat(io, socket);
   controllers.user(io, socket);
+  controllers.admin(io, socket);
 });
 
 http.listen(PORT, () => console.log(`On na port ${PORT}`));

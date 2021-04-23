@@ -1,9 +1,10 @@
 const chat = require('../models/chat/chat.models');
+const { verifyToken } = require('../security');
 // const { authRegisterUser, utils: { validateUserName } } = require('../schemas');
 
-const saveMessage = async (message, userId) => {
+const saveMessage = async (message, token) => {
+  const { sub: userId } = verifyToken(token.token);
   // validateMessage(message);
-
   await chat.saveMessage(message, userId);
 
   return { saved: message, status: 'SAVED' };

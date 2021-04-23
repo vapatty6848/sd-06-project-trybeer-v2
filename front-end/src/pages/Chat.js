@@ -14,7 +14,7 @@ export default function Chat() {
   const sendMessage = useCallback((e) => {
     e.preventDefault();
     const newMessage = { nickname: token.email, message, timestamp: new Date() };
-    api.chat.emit('chat:clientMessage', { msg: newMessage, token: token.token });
+    api.chat.emit('chat:clientMessage', { msg: newMessage, token });
     setMessage('');
   }, [message, token]);
 

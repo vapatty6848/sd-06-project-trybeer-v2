@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import AppContext from '../context/app.context';
 import { Topbar, Loading } from '../components';
-import salesApi from '../services/api.sales';
+import api from '../services';
 
 import '../styles/Orders.css';
 
@@ -15,7 +15,7 @@ export default function Orders() {
   useEffect(() => {
     const magicTime = 100;
     const fetchOrders = async () => {
-      const ordersArray = await salesApi(token).catch((error) => error);
+      const ordersArray = await api.admin.sales(token).catch((error) => error);
       setOrders(ordersArray);
     };
     const timeOut = setTimeout(() => fetchOrders(), magicTime);
