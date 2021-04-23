@@ -19,12 +19,12 @@ function OrderAdm() {
     if (!user) history.push('/login');
   }, [history]);
 
-  return !allOrders.length ? <h1>Loading...</h1> : (
+  return (
     <div>
       <SideBarAdm />
       <h1 className="title-order-adm"> Pedidos </h1>
       <div className="orderadmcontainer">
-        {allOrders.map((order, index) => (
+        {allOrders[0] && allOrders.map((order, index) => (
           <OrderCardAdm
             key={ order.id }
             orderInfo={ order }

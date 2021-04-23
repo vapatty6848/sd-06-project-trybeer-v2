@@ -10,7 +10,7 @@ usersRouter.post('/', async (req, res) => {
   const user = await services.getUser(email, password);
 
   if (user) {
-    const token = createToken({ email, id: user.id, name: user.name });
+    const token = createToken({ email, id: user.id, name: user.name, role: user.role });
     const { name, email: userEmail, role } = user;
 
     return res.status(200).json({ name, email: userEmail, token, role });

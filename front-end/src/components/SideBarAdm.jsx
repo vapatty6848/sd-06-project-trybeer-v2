@@ -32,6 +32,15 @@ function SideBarAdm() {
       <button
         className="buttonside"
         type="button"
+        data-testid="side-menu-item-chat"
+        onClick={ () => history.push('/admin/chats') }
+      >
+        Conversas
+      </button>
+      <button
+        className="buttonside"
+        s
+        type="button"
         data-testid="side-menu-item-logout"
         onClick={ handleLogout }
       >

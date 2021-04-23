@@ -7,6 +7,7 @@ const { usersRouter } = require('./controllers/users');
 const { productsRouter } = require('./controllers/products');
 const ordersRouter = require('./controllers/orders');
 const adminRouter = require('./controllers/admin');
+const userChatRouter = require('./controllers/chatUser');
 
 const app = express();
 const port = 3001;
@@ -20,7 +21,8 @@ app.use('/users', usersRouter);
 app.use('/products', productsRouter);
 app.use('/orders', ordersRouter);
 app.use('/admin', adminRouter);
+app.use('/chat', userChatRouter);
 
-app.get('/', (req, res) => res.send('Hello World!'));
+app.get('/', (_req, res) => res.send('Hello World!'));
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
