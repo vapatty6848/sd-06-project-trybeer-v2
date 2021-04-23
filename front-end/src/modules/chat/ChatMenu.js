@@ -6,7 +6,7 @@ import socket from './socket';
 const ChatMenu = () => {
   // const [loading, setLoading] = useState(false);
   const [inboxes, setInboxes] = useState([]);
-  // const empty = <p data-test="text-for-no-conversation">Nenhuma conversa por aqui</p>;
+  const empty = <p data-test="text-for-no-conversation">Nenhuma conversa por aqui</p>;
 
   const fetchApi = () => {
     api.get('/conversations').then((response) => {
@@ -43,8 +43,8 @@ const ChatMenu = () => {
 
   return (
     <div>
-      {/* { (inboxes.length) ? renderConversations() : empty } */}
-      <p data-test="text-for-no-conversation">Nenhuma conversa por aqui</p>
+      { (inboxes.length === 0) ?  empty : renderConversations() }
+      {/* <p data-test="text-for-no-conversation">Nenhuma conversa por aqui</p> */}
     </div>
   );
 };
