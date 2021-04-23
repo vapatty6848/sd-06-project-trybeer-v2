@@ -22,29 +22,38 @@ export default function AdminOrdersDetails() {
 
   useEffect(() => {
     fetchApiProductOfSale(id);
-    // console.log(productsOfSale);
+    console.log(productsOfSale);
     // console.log(products);
     // console.log(productsOfSale, products) -> estão chegando vazios;
-    if (products.length !== 0 && productsOfSale.status === 'Entregue') {
+    if (products.length !== 0 && orderStatus === 'Entregue') {
       setButtonDisabled(false);
     } else {
       setButtonDisabled(true);
     }
 
-    if (products.length !== 0 && productsOfSale.status === 'Preparando') {
+    if (products.length !== 0 && orderStatus === 'Preparando') {
       setButtonPrepared(true);
+    } else {
+      setButtonPrepared(false);
     }
 
-  }, [id]);
+  }, [id, buttonDisabled, buttonPrepared]);
 
   const handleClick = async (status) => {
     setOrderStatus(status);
-
-    if (status === 'Entregue') setButtonDisabled(false);
-    if (status === 'Preparando') setButtonPrepared(true);
-
-    await api.fetchChangeStatus(id, status);
-    // window.location.reload();
+    
+    if (status === 'Preparando') {
+      setButtonPrepared(true);
+      await api.fetchChangeStatus(id, status);
+      // window.location.reload();
+  } 
+      
+    
+    if (status === 'Entregue') {
+      setButtonDisabled(false);
+      await api.fetchChangeStatus(id, status);
+      // window.location.reload();
+    }
   };
 
   const user = JSON.parse(localStorage.getItem('user'));
@@ -99,7 +108,7 @@ export default function AdminOrdersDetails() {
               .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
           </h2>
           <div className="button-register">
-            {buttonDisabled && (
+            {buttonDisabled && (orderStatus !== 'Entregue') && (
               <div>
                 <button
                   className="btn btn-danger"
