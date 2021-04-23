@@ -1,5 +1,5 @@
 const SaleModel = (sequelize, DataTypes) => {
-  const Sale = sequelize.define('Sale', {
+  const Sale = sequelize.define('sale', {
     totalPrice: DataTypes.DECIMAL,
     deliveryAddress: DataTypes.STRING,
     deliveryNumber: DataTypes.STRING,
@@ -12,7 +12,7 @@ const SaleModel = (sequelize, DataTypes) => {
   });
 
   Sale.associate = (models) => {
-    Sale.belongsTo(models.User, { as: 'user', foreignKey: 'userId' });
+    Sale.belongsTo(models.user, { as: 'user', foreignKey: 'userId' });
   };
 
   return Sale;
