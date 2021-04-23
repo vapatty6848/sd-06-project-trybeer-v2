@@ -1,7 +1,7 @@
 const url = 'http://localhost:3001';
 
 const editUserName = async (user) => {
-  // console.log(user);
+  console.log(user); // enviando email e Newname
   const postMethod = {
     method: 'POST',
     headers: {

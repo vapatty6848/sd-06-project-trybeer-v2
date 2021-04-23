@@ -1,9 +1,6 @@
 const { Router } = require('express');
-
 const validateToken = require('../middlewares/validateToken');
-// const SalesProductsModel = require('../models/SalesProducts');
-// const ProductModel = require('../models/ProductsModel');
-const { sales } = require('../models');
+const customSequelizeTable = require('../utils/customSequelizeTable');
 
 const routerSalesDetails = Router();
 
@@ -12,11 +9,10 @@ routerSalesDetails.use(validateToken);
 routerSalesDetails.get('/:id', async (req, res, next) => {
   const { id } = req.params;
   try {
-    // const sale = await SalesProductsModel.getOne(id);
-    const sale = await sales.findByPk(id);
-    return res.status(200).json(sale);
+    const sales = await customSequelizeTable(id);
+    return res.status(200).json(sales);
   } catch (err) {
-    next({ status: 404, message: 'not Found' });
+    next({ status: 404, message: err.message });
   }
 });
 

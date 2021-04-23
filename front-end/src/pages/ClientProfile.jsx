@@ -27,7 +27,7 @@ function ClientProfile() {
         <button
           type="button"
           data-testid="profile-save-btn"
-          onClick={ async () => setProfile(await editUserName({ name, newName })) }
+          onClick={ async () => setProfile(await editUserName({ email, newName })) }
           disabled={ newName === name }
         >
           Salvar

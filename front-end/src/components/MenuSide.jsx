@@ -39,6 +39,14 @@ function MenuSide() {
         </button>
         <button
           className="side-btn"
+          data-testid={ isClient ? 'side-menu-chat' : 'side-menu-item-chat' }
+          type="button"
+          onClick={ () => route.push(isClient ? '/chat' : '/admin/chats') }
+        >
+          {isClient ? 'Conversar com a loja' : 'Conversas'}
+        </button>
+        <button
+          className="side-btn"
           data-testid="side-menu-item-logout"
           type="button"
           onClick={ () => {
