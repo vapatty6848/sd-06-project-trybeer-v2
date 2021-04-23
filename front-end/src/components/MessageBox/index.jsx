@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
+import PropTypes from 'prop-types';
 import './styles.css';
 
 const MessageBox = ({ isMine, email, sentTime, message }) => {
@@ -22,3 +22,10 @@ const MessageBox = ({ isMine, email, sentTime, message }) => {
 };
 
 export default MessageBox;
+
+MessageBox.propTypes = {
+  isMine: PropTypes.bool.isRequired,
+  email: PropTypes.string.isRequired,
+  sentTime: PropTypes.string.isRequired,
+  message: PropTypes.string.isRequired,
+};
