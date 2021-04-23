@@ -18,7 +18,7 @@ function MenuTop({ name }) {
           type="button"
           data-testid="top-hamburguer"
           className="menuIcon"
-          onMouseOverCapture={ handleClick }
+          onClick={ handleClick }
         >
           <FiMenu />
         </button>

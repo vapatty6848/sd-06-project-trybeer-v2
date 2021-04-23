@@ -12,7 +12,7 @@ function MenuSideBar() {
   };
 
   return (
-    <div className="admin-side-bar-container menuSideBaraAd">
+    <div className="admin-side-bar-container menuSideBar">
       <span
         data-testid="top-hamburguer"
         className="menuIcon"
