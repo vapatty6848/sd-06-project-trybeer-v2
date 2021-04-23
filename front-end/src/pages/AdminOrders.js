@@ -1,20 +1,16 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import TrybeerContext from '../context/TrybeerContext';
 import { getAllSales } from '../services/api';
 import SideBarAdmin from '../components/SideBarAdmin/SideBarAdmin';
-// import { Link } from 'react-router-dom';
-// import { Redirect } from 'react-router';
 
 import './Admin.css';
 
 function AdminOrders() {
-  const { sales, setSales } = useContext(TrybeerContext);
+  const [sales, setSales] = useState([]);
   const history = useHistory();
 
   useEffect(() => {
-    getAllSales()
-      .then((salesAPI) => setSales(salesAPI));
+    getAllSales().then((salesAPI) => setSales(salesAPI));
   }, []);
 
   function redirectDetails(id) {
