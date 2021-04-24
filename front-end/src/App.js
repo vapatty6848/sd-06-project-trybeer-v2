@@ -11,6 +11,7 @@ import Register from './pages/Register';
 import orders from './pages/Orders';
 import OrderDetail from './pages/OrderDetail';
 import AdminOrdersDetail from './pages/AdminOrderDetail';
+import ChatMessager from './pages/Chat';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route exact path="/admin/profile" component={ AdminProfile } />
         <Route exact path="/admin/orders" component={ AdminOrders } />
         <Route exact path="/admin/orders/:id" component={ AdminOrdersDetail } />
+        <Route exact path="/chat" component={ ChatMessager } />
       </Switch>
     </div>
   );
