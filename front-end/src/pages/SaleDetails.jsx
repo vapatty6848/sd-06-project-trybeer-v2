@@ -61,7 +61,9 @@ export default function SaleDetails() {
       </div>
       {orderDetail.products && orderDetail.products.map((order, index) => (
         <div key={ order.id } className="products-details-container">
-          <span data-testid={ `${index}-product-qtd` }>{order.salesProducts.quantity}</span>
+          <span data-testid={ `${index}-product-qtd` }>
+            {order.salesProducts.quantity}
+          </span>
           <p data-testid={ `${index}-product-name` }>{order.name}</p>
           <span data-testid={ `${index}-product-total-value` }>
             {`R$ ${(Number(order.salesProducts.quantity) * Number(order.price))

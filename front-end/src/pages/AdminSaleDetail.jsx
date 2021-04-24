@@ -8,7 +8,7 @@ export default function AdminSaleDetail() {
   const tokenFromLocalStorage = localStorage.getItem('token');
   const location = useLocation();
   const [orderDetail, setOrderDetail] = useState([]);
-  const [orderStatus, setOrderStatus] = useState('Pendente');
+  const [_orderStatus, setOrderStatus] = useState('Pendente');
   const [delivered, setDelivered] = useState(false);
   const SIX = 6;
   const pathName = location.pathname;
@@ -49,21 +49,6 @@ export default function AdminSaleDetail() {
     setOrderStatus('Preparando');
   };
 
-
-  /* const hidePrepareButton = () => {
-    if(orderDetail.status === 'Pendente' || orderDetail.status === 'Entregue') {
-      return false;
-    };
-    return true;
-  }
-
-    const hideDeliveredButton = () => {
-    if(orderDetail.status === 'Pendente' || orderDetail.status === 'Preparando') {
-      return false;
-    };
-    return true;
-  } */
-
   return (
     <div>
       { handleRedirect(tokenFromLocalStorage) }
@@ -78,7 +63,9 @@ export default function AdminSaleDetail() {
       </div>
       {orderDetail.products && orderDetail.products.map((order, index) => (
         <div key={ order.id } className="products-details-container">
-          <span data-testid={ `${index}-product-qtd` }>{order.salesProducts.quantity}</span>
+          <span data-testid={ `${index}-product-qtd` }>
+            {order.salesProducts.quantity}
+          </span>
           <p data-testid={ `${index}-product-name` }>{order.name}</p>
           <span data-testid={ `${index}-product-total-value` }>
             {`R$ ${(Number(order.salesProducts.quantity) * Number(order.price))
