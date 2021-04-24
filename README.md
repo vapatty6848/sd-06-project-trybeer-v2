@@ -607,11 +607,11 @@ OBS: Haverá um arquivo de conexão com o mongodb já pronto no caminho `sd-06-p
 
 #### Tela de chat do admin
 
-![Chat do admin](./public/chatAdmin.png)
+![Chat do cliente](./public/chatAdmin.png)
 
-  - O campo input de mensagem deverá conter a tag `data-testid="message-input"`
+  - O campo input de mensagem deverá conter a tag `data-testid="chat-message"`
 
-  - O botão de enviar mensagem deverá conter a tag `data-testid="send-message"`
+  - O botão de enviar mensagem deverá conter a tag `data-testid="send-message-btn"`
 
 - O email da mensagem deverá conter a tag `data-testid="nickname"`
 
