@@ -1,9 +1,9 @@
-const connectionMongo = require('../database/connectionMongo');
+const connection = require('../database/connection');
 // const { ObjectId } = require('mongodb');
 const collectionName = 'conversations';
 
 const createMessage = async (message, emailUser, timestamp) => {
-  const { insertedId } = await connectionMongo()
+  const { insertedId } = await connection()
     .then((db) => db.collection(collectionName).insertOne({
       message, emailUser, timestamp,
     }));
@@ -11,7 +11,7 @@ const createMessage = async (message, emailUser, timestamp) => {
 };
 
 const getMessageByNickname = async (emailUser) => {
-  const menssageResponse = await connectionMongo()
+  const menssageResponse = await connection()
     .then((db) => db.collection(collectionName).find({
       emailUser,
     }).toArray());
@@ -19,7 +19,7 @@ const getMessageByNickname = async (emailUser) => {
 };
 
 const getAllMessages = async () => {
-  const messagesResponse = await connectionMongo()
+  const messagesResponse = await connection()
     .then((db) => db.collection(collectionName).find().toArray());
   return messagesResponse;
 };

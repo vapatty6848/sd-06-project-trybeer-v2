@@ -96,7 +96,7 @@ function Checkout() {
 
   async function handleCallApi() {
     const userStorage = JSON.parse(localStorage.user);
-    const TIMEOUT = 3000;
+    const TIMEOUT = 2000;
     const { id } = userStorage;
     const value = totalPrice.toFixed(2);
     const userID = JSON.stringify(id);
@@ -107,8 +107,9 @@ function Checkout() {
     setSuccess(true);
 
     setTimeout(() => {
-      history.push('/products');
-      clear();
+      // history.push('/products');
+      if (history.location.pathname === '/checkout') history.push('/products');
+      // clear();
     }, TIMEOUT);
   }
 
