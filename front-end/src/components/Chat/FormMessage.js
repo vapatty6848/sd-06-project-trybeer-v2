@@ -6,10 +6,11 @@ function FormMessage() {
 
   const handleSend = (event) => {
     event.preventDefault();
-    console.log(message);
-    // const from = localStorage.getItem('currentUser'); JÁ TEM O USER
-    // socket.emit('chat.sendMessage', { message, from, dest });
-  };
+    const user = JSON.parse(localStorage.getItem('user'));
+    const from = user.email;
+    console.log(from);
+    //socket.emit('chat.sendMessage', { message, from, dest });
+  }
 
   return (
     <form onSubmit={ handleSend }>
