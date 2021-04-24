@@ -5,7 +5,7 @@ import TrybeerContext from '../context/TrybeerContext';
 import { verifyToken } from '../utils/verifications';
 import { post } from '../api/fetchFunctions';
 
-import socket from '../utils/socketClient';
+// import socket from '../utils/socketClient';
 
 const dateFormat = require('dateformat');
 
@@ -24,12 +24,12 @@ function Chat({ history }) {
   };
 
   const handleSubmit = async () => {
-    const date = new Date();
+    // const date = new Date();
     await post('chat', { email: user.email, message: currentMessage });
     if (messageHistory.length) {
-      setMessageHistory([...messageHistory, {message: currentMessage, user}]);
+      setMessageHistory([...messageHistory, { message: currentMessage, user }]);
     } else {
-      setMessageHistory([{message: currentMessage, user}])
+      setMessageHistory([{ message: currentMessage, user }]);
     }
     setCurrentMessage('');
     // fetchMessages();
@@ -47,7 +47,15 @@ function Chat({ history }) {
       <ul>
         {messageHistory.length && messageHistory.map(({ message, date }, index) => (
           <li key={ index }>
-            <div data-testid="nickname">{user.email} - <span data-testid="message-time"> {dateFormat(date, 'HH:MM')} </span> </div> 
+            <div
+              data-testid="nickname"
+            >
+              {user.email}
+              -
+              <span data-testid="message-time">
+                {dateFormat(date, 'HH:MM')}
+              </span>
+            </div>
             <div data-testid="text-message">{message}</div>
           </li>
         ))}
@@ -59,7 +67,7 @@ function Chat({ history }) {
         placeholder="Digite aqui"
         id="message"
         onChange={ onChangeMessage }
-        value={currentMessage}
+        value={ currentMessage }
       />
       <button
         data-testid="send-message"
