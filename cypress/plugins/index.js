@@ -25,7 +25,7 @@ const deleteMessages = async (collection) => {
 module.exports = (on, config) => {
   on('task', {
     deleteCollection(collection) {
-       return new Promise((resolve) => {
+      return new Promise((resolve) => {
         deleteMessages(collection);
         resolve('');
         close();

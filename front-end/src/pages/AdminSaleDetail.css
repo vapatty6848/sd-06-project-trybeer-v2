@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.order-data-container {
+  display: flex;
+  justify-content: space-around;
+  margin-left: 300px;
+}
+
+.products-details-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.total-value-container {
+  align-content: right;
+}
+
+.Entregue {
+  display: none;
+  visibility: hidden;
+}
