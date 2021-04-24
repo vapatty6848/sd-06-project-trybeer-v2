@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import socket from '../utilities/socketClient';
 
@@ -31,5 +32,11 @@ function FormMessage({ emailUser }) {
     </form>
   );
 }
+
+const { string } = PropTypes;
+
+FormMessage.propTypes = {
+  emailUser: string.isRequired,
+};
 
 export default FormMessage;
