@@ -12,6 +12,5 @@ export const formatMessage = (message, client, store) => {
   const user = store || getEmailLocalStorage();
   const hour = getHour();
   const room = client;
-  console.log(user)
   return { user, hour, message, room };
 };

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { getMessages } from '../services/chatService';
-import { formatMessage, getEmailLocalStorage } from '../utils';
-import socket from '../utils/socketClient';
 import { Link } from 'react-router-dom';
+import { getMessages } from '../services/chatService';
+import { formatMessage } from '../utils';
+import socket from '../utils/socketClient';
+import MenuAdmin from '../components/MenuAdmin';
 
 function AdminChat({ match }) {
-
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(true);
@@ -47,33 +47,36 @@ function AdminChat({ match }) {
     !isLoading
       ? (
         <div>
-          <Link to="/admin/chats" data-testid="back-button">Voltar</Link>
-          <div>
-            {messages.map((msg, index) => (
-              <div key={ index }>
-                <p data-testid="text-message">{ msg.message }</p>
-                <span data-testid="nickname">{ msg.user }</span>
-                <span>{'  -  '}</span>
-                <span data-testid="message-time">{ msg.hour }</span>
-              </div>
-            ))}
+          <MenuAdmin />
+          <div className="orders-container">
+            <Link to="/admin/chats" data-testid="back-button">Voltar</Link>
+            <div>
+              {messages.map((msg, index) => (
+                <div key={ index }>
+                  <p data-testid="text-message">{ msg.message }</p>
+                  <span data-testid="nickname">{ msg.user }</span>
+                  <span>{'  -  '}</span>
+                  <span data-testid="message-time">{ msg.hour }</span>
+                </div>
+              ))}
+            </div>
+            <form>
+              <input
+                data-testid="message-input"
+                type="text"
+                placeholder="Envie sua mensagem ..."
+                value={ message }
+                onChange={ (e) => handleMessage(e) }
+              />
+              <button
+                data-testid="send-message"
+                type="submit"
+                onClick={ (e) => handleClick(e) }
+              >
+                Botão
+              </button>
+            </form>
           </div>
-          <form>
-            <input
-              data-testid="message-input"
-              type="text"
-              placeholder="Envie sua mensagem ..."
-              value={ message }
-              onChange={ (e) => handleMessage(e) }
-            />
-            <button
-              data-testid="send-message"
-              type="submit"
-              onClick={ (e) => handleClick(e) }
-            >
-              Botão
-            </button>
-          </form>
         </div>
       ) : null
   );

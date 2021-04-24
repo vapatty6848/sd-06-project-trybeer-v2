@@ -42,35 +42,34 @@ function ClientChat() {
   return (
     <div>
       <MenuTop title="Chat" />
-      <br />
-      <br />
-      <br /><br /><br /><br /><br /><br /><br /><br />
-      <div>
-        {messages && messages.map((msg, index) => (
-          <div key={ index }>
-            <p data-testid="text-message">{ msg.message }</p>
-            <span data-testid="nickname">{ msg.user }</span>
-            <span>{'  -  '}</span>
-            <span data-testid="message-time">{ msg.hour }</span>
-          </div>
-        ))}
+      <div className="orders-container">
+        <div>
+          {messages && messages.map((msg, index) => (
+            <div key={ index }>
+              <p data-testid="text-message">{ msg.message }</p>
+              <span data-testid="nickname">{ msg.user }</span>
+              <span>{'  -  '}</span>
+              <span data-testid="message-time">{ msg.hour }</span>
+            </div>
+          ))}
+        </div>
+        <form>
+          <input
+            data-testid="message-input"
+            type="text"
+            placeholder="Envie sua mensagem ..."
+            value={ message }
+            onChange={ (e) => handleMessage(e) }
+          />
+          <button
+            data-testid="send-message"
+            type="submit"
+            onClick={ (e) => handleClick(e) }
+          >
+            Botão
+          </button>
+        </form>
       </div>
-      <form>
-        <input
-          data-testid="message-input"
-          type="text"
-          placeholder="Envie sua mensagem ..."
-          value={ message }
-          onChange={ (e) => handleMessage(e) }
-        />
-        <button
-          data-testid="send-message"
-          type="submit"
-          onClick={ (e) => handleClick(e) }
-        >
-          Botão
-        </button>
-      </form>
     </div>
   );
 }
