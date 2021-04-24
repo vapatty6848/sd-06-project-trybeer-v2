@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import socket from '../../utils/socketClient';
+import socket from '../../utils/socketClient';
 
 function FormMessage() {
   const [message, setMessage] = useState('');
@@ -9,7 +9,7 @@ function FormMessage() {
     const user = JSON.parse(localStorage.getItem('user'));
     const from = user.email;
     console.log(from);
-    //socket.emit('chat.sendMessage', { message, from, dest });
+    socket.emit('chat.sendMessage', { message, from });
   }
 
   return (
