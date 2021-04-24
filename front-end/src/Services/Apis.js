@@ -151,7 +151,7 @@ export const getAdminOrderById = async (id) => {
 
 export const getMessages = async () => {
   const messages = await axios({
-    url: `http://localhost:3001/chat`,
+    url: 'http://localhost:3001/chat',
   }).then((res) => res.data)
     .catch(() => {
       console.error('Ops... Messages not found!');
@@ -164,7 +164,7 @@ export const saveMessage = async (message, email, timestamp, role) => {
   await axios({
     method: 'POST',
     data: { message, email, timestamp, role },
-    url: `http://localhost:3001/chat`,
+    url: 'http://localhost:3001/chat',
   }).then((res) => res.data)
     .catch(() => {
       console.error('Ops... Fail at saving...');

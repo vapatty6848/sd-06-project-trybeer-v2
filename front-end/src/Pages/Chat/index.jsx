@@ -9,10 +9,10 @@ export default function Chat() {
 
   useEffect(() => {
     const dataStorage = localStorage.getItem('user');
-    const { email, role } = JSON.parse(dataStorage);
+    const { email: localStorageEmail, role: localStorageRole } = JSON.parse(dataStorage);
 
-    setEmail(email);
-    setRole(role)
+    setEmail(localStorageEmail);
+    setRole(localStorageRole);
   }, []);
 
   const generateTimeStamp = () => {
@@ -25,30 +25,31 @@ export default function Chat() {
       },
     ).formatToParts(new Date());
     const dateParts = {};
-  
+
     dateOptions.forEach(({ type, value }) => {
       dateParts[type] = value;
     });
-  
+
     const { hour, minute } = dateParts;
-  
+
     return `${hour}:${minute}`;
   };
 
   const renderMessage = (timestamp) => {
-    const ul = document.getElementById('messages-container')
+    const DATA_TESTID = 'data-testid';
+    const ul = document.getElementById('messages-container');
     const li = document.createElement('li');
 
     const emailSpan = document.createElement('span');
-    emailSpan.setAttribute('data-testid', 'nickname');
+    emailSpan.setAttribute(DATA_TESTID, 'nickname');
     emailSpan.innerText = email;
 
     const timeSpan = document.createElement('span');
-    timeSpan.setAttribute('data-testid', 'message-time');
+    timeSpan.setAttribute(DATA_TESTID, 'message-time');
     timeSpan.innerText = timestamp;
 
     const messageSpan = document.createElement('p');
-    messageSpan.setAttribute('data-testid', 'text-message');
+    messageSpan.setAttribute(DATA_TESTID, 'text-message');
     messageSpan.innerText = message;
 
     const lineSpan = document.createElement('span');
@@ -71,8 +72,7 @@ export default function Chat() {
 
   return (
     <div>
-      <ul id="messages-container">
-      </ul>
+      <ul id="messages-container" />
       <form>
         <input
           type="text"
@@ -89,5 +89,5 @@ export default function Chat() {
         </button>
       </form>
     </div>
-  )
+  );
 }
