@@ -95,8 +95,8 @@ ___
 
 ## Data de Entrega
 
-  - Serão `X` dias de projeto.
-  - Data de entrega para avaliação final do projeto: `DD/MM/YYYY - 14:00h`.
+  - Serão `5` dias de projeto.
+  - Data de entrega para avaliação final do projeto: `03/05/2021 - 14:00h`.
 
 ---
 
@@ -105,7 +105,7 @@ ___
 ## Antes de começar a desenvolver:
 
 1. Clone o repositório
-  * `git clone https://github.com/betrybe/sd-06-project-trybeer-v2.git`.
+  * `git clone https://github.com/tryber/sd-06-project-trybeer-v2.git`.
   * Entre na pasta do repositório que você acabou de clonar:
     * `cd sd-06-project-trybeer-v2`
 
@@ -184,8 +184,8 @@ Usaremos o [ESLint](https://eslint.org/) para fazer a análise estática do seu 
 
 Este projeto já vem com as dependências relacionadas ao _linter_ configuradas nos arquivos `package.json` nos seguintes caminhos:
 
-- `sd-0x-trybeer/back-end/package.json`
-- `sd-0x-trybeer/front-end/package.json`
+- `sd-06-project-trybeer-v2/back-end/package.json`
+- `sd-06-project-trybeer-v2/front-end/package.json`
 
 Para poder rodar os `ESLint` em um projeto basta executar o comando `npm install` dentro do projeto e depois `npm run lint`. Se a análise do `ESLint` encontrar problemas no seu código, tais problemas serão mostrados no seu terminal. Se não houver problema no seu código, nada será impresso no seu terminal.
 

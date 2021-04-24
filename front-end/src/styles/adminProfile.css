@@ -1,0 +1,27 @@
+.main-container-adm {
+  display: flex;
+  height: 100vh;
+}
+
+.menu-top-adm {
+  width: 18%;
+}
+
+.page-body-adm {
+  width: 82%;
+}
+
+.page-title-adm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 15%;
+}
+
+.page-title-adm  h1 {
+  font-size: 50px;
+}
+
+.main-page-adm {
+  height: 85%;
+}
