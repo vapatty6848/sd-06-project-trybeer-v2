@@ -24,6 +24,5 @@ const createUser = async (name, email, password, role) => {
 module.exports = {
   findUserByEmail,
   updateUserNameByEmail,
-  createUser, 
-
+  createUser,
 };
