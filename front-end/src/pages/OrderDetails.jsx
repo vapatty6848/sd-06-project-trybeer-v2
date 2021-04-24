@@ -9,38 +9,39 @@ export default function OrderDetails() {
   const [products, setProducts] = useState([]);
   const [productsOfSale, setProductsOfSale] = useState([]);
 
-  const fetchApiProductOfSale = async (idFetch) => {
-    const productDetails = await api.fetchSaleProduct(idFetch);
-    setProductsOfSale(productDetails);
-    setProducts(productDetails.products);
-  };
   useEffect(() => {
-    fetchApiProductOfSale(id);
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) return <Redirect to="/login" />;
+
+    api.fetchSaleProduct(id).then((response) => {
+      setProductsOfSale(response);
+      setProducts(response.products);
+    });
+
   }, [id]);
-  const user = JSON.parse(localStorage.getItem('user'));
-  if (!user) return <Redirect to="/login" />;
-  const seventeen = -17;
-  const five = 5;
-  const eigth = 8;
-  const fourteen = -14;
-  const formatDate = (date) => {
-    const month = date.slice(five, seventeen);
-    const day = date.slice(eigth, fourteen);
-    return `${day}/${month}`;
-  };
 
-  const sumOfCart = (sum, prod) => sum + prod.salesProducts.quantity * prod.price;
+  // const seventeen = -17;
+  // const five = 5;
+  // const eigth = 8;
+  // const fourteen = -14;
+  // const formatDate = (date) => {
+  //   const month = date.slice(five, seventeen);
+  //   const day = date.slice(eigth, fourteen);
+  //   return `${day}/${month}`;
+  // };
 
-  return (
+  // const sumOfCart = (sum, prod) => sum + prod.salesProducts.quantity * prod.price;
+
+  return !productsOfSale ? <p>Loading...</p> : (
     <div>
       <div>
         <MenuTop title="Detalhes de Pedido" />
       </div>
       <div className="en-title">
         <h2 data-testid="order-number">{ `Pedido ${id}` }</h2>
-        <h2 data-testid="order-date">
+        {/* <h2 data-testid="order-date">
           {productsOfSale.length !== 0 && formatDate(productsOfSale.saleDate)}
-        </h2>
+        </h2> */}
         <h2>{productsOfSale.status}</h2>
       </div>
       <div className="main-container">
@@ -60,11 +61,11 @@ export default function OrderDetails() {
           </div>
         ))}
       </div>
-      <h2 data-testid="order-total-value" className="total-price">
+      {/* <h2 data-testid="order-total-value" className="total-price">
         {products
           .reduce(sumOfCart, 0)
           .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-      </h2>
+      </h2> */}
     </div>
   );
 }

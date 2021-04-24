@@ -6,60 +6,34 @@ import '../styles/adminOrdersDetails.css';
 
 export default function AdminOrdersDetails() {
   const { id } = useParams();
-  const [products, setProducts] = useState([]);
   const [productsOfSale, setProductsOfSale] = useState([]);
-  const [buttonDisabled, setButtonDisabled] = useState(null);
-  const [orderStatus, setOrderStatus] = useState('');
-  const [buttonPrepared, setButtonPrepared] = useState(null);
+  const [status, setStatus] = useState('Pendente');
 
-  const fetchApiProductOfSale = async (idFetch) => {
-    const productDetails = await api.fetchSaleProduct(idFetch);
-    setProductsOfSale(productDetails);
-    setProducts(productDetails.products);
-    setOrderStatus(productDetails.status);
-    console.log(orderStatus);
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) return <Redirect to="/login" />;
+
+    api.fetchSaleProduct(id).then((response) => {
+      setProductsOfSale(response);
+    });
+
+  }, [id]);
+
+  const handleClick = async (newStatus) => {
+    setStatus(newStatus);
+    await api.fetchChangeStatus(id, newStatus);
   };
 
   useEffect(() => {
-    fetchApiProductOfSale(id);
-    console.log(productsOfSale);
-    // console.log(products);
-    // console.log(productsOfSale, products) -> estão chegando vazios;
-    if (products.length !== 0 && orderStatus === 'Entregue') {
-      setButtonDisabled(false);
-    } else {
-      setButtonDisabled(true);
-    }
+    const statusOrder = productsOfSale && productsOfSale.status;
+    if (statusOrder === 'Entregue') setStatus('Entregue');
+    if (statusOrder === 'Preparando') setStatus('Preparando');
+  }, [productsOfSale]);
 
-    if (products.length !== 0 && orderStatus === 'Preparando') {
-      setButtonPrepared(true);
-    } else {
-      setButtonPrepared(false);
-    }
-  }, [id, buttonDisabled, buttonPrepared]);
+  // const sumOfCart = (sum, prod) => sum + prod.salesProducts.quantity * prod.price;
+  // o reducer não funciona por fora e nem dentro do html.
 
-  const handleClick = async (status) => {
-    setOrderStatus(status);
-
-    if (status === 'Preparando') {
-      setButtonPrepared(true);
-      await api.fetchChangeStatus(id, status);
-      // window.location.reload();
-    }
-
-    if (status === 'Entregue') {
-      setButtonDisabled(false);
-      await api.fetchChangeStatus(id, status);
-      // window.location.reload();
-    }
-  };
-
-  const user = JSON.parse(localStorage.getItem('user'));
-  if (!user) return <Redirect to="/login" />;
-
-  const sumOfCart = (sum, prod) => sum + prod.salesProducts.quantity * prod.price;
-
-  return (
+  return !productsOfSale ? <p>Loading...</p> : (
     <div className="main-container-adm">
       <div className="menu-top-adm">
         <MenuTopAdmin />
@@ -72,12 +46,11 @@ export default function AdminOrdersDetails() {
           <div className="title-adm-details">
             <h2 data-testid="order-number">{`Pedido ${id}`}</h2>
             <h2 data-testid="order-status">
-              { orderStatus }
-              {/* {productsOfSale.length !== 0 && productsOfSale.status} */}
+              {status}
             </h2>
           </div>
           <div>
-            {products.map((produto, index) => (
+            {productsOfSale.products && productsOfSale.products.map((produto, index) => (
               <div key={ produto.id } className="cada-venda-adm">
                 <div className="venda-adm">
                   <div data-testid={ `${index}-product-qtd` }>{produto.quantity}</div>
@@ -101,33 +74,30 @@ export default function AdminOrdersDetails() {
               </div>
             ))}
           </div>
-          <h2 data-testid="order-total-value" className="total-price">
-            {products
+          {/* <h2 data-testid="order-total-value" className="total-price">
+            {productsOfSale
               .reduce(sumOfCart, 0)
               .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-          </h2>
+          </h2> */}
           <div className="button-register">
-            {buttonDisabled && (orderStatus !== 'Entregue') && (
-              <div>
-                <button
-                  className="btn btn-danger"
-                  type="button"
-                  data-testid="mark-as-delivered-btn"
-                  onClick={ () => handleClick('Entregue') }
-                >
-                  Marcar como entregue
-                </button>
-                <button
-                  className="btn btn-danger"
-                  type="button"
-                  data-testid="mark-as-prepared-btn"
-                  onClick={ () => handleClick('Preparando') }
-                  disabled={ buttonPrepared }
-                >
-                  Preparar pedido
-                </button>
-              </div>
-            )}
+            <button
+              className="btn btn-danger"
+              type="button"
+              data-testid="mark-as-delivered-btn"
+              onClick={ () => handleClick('Entregue') }
+              hidden={ status === 'Entregue' }
+            >
+              Marcar como entregue
+            </button>
+            <button
+              className="btn btn-danger"
+              type="button"
+              data-testid="mark-as-prepared-btn"
+              onClick={ () => handleClick('Preparando') }
+              hidden={ status === 'Entregue' }
+            >
+              Preparar pedido
+            </button>
           </div>
         </div>
       </div>

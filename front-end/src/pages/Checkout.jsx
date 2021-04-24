@@ -44,7 +44,7 @@ export default function Checkout() {
   }
 
   const finalizar = async () => {
-    const time = 2500;
+    const time = 5000;
     setMessage(true);
     localStorage.setItem('productsCart', JSON.stringify([]));
 
