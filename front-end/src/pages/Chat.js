@@ -4,6 +4,8 @@ import MessageBox from '../components/MessageBox';
 import { loadState } from '../utilities/localStorage';
 import socket from '../utilities/socketClient';
 import api from '../api/axiosApi';
+import Navbar from '../components/Navbar';
+import Header from '../components/Header';
 import './chat.css';
 
 function ChatMessager() {
@@ -32,6 +34,9 @@ function ChatMessager() {
   }, []);
 
   return (
+    <>
+    <Header />
+    <Navbar />
     <section className="msger">
       <header className="msger-header">
         <div className="msger-header-title">
@@ -58,6 +63,7 @@ function ChatMessager() {
       <FormMessage emailUser={ emailUser } />
 
     </section>
+    </>
   );
 }
 

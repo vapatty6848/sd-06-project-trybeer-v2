@@ -54,14 +54,15 @@ app.get('/chat', async (req, res) => {
 
 app.get('/chat/admin', async (req, res) => {
   const allUsers = await getAllUsers();
-  const arrayResponse = []
-  allUsers.forEach( async(element) => {
+
+  const arrayResponse = allUsers.map( async(element) => {
     const array = await getMessageByNickname(element.emailUser);
     const lastMessage = array[array.length -1].timestamp;
-    arrayResponse.push({user: element.emailUser, lastMessage})
+    return {user: element.emailUser, lastMessage}
   });
-  console.log('testando', arrayResponse);
-  res.status(200).json(arrayResponse);
+
+  Promise.all([...arrayResponse]).then((e) => res.status(200).json(e))
+  
 });
 
 app.use('/images', express.static(`${__dirname}/images`));

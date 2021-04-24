@@ -123,10 +123,12 @@ async function updateStatusOrder(id, statusOrder) {
 }
 
 const reloadChat = (emailuser) => (api.get('/chat', { headers: { emailuser } }));
+const chatAdminList = () => (api.get('/chat/admin'));
 
 export default {
   getSales,
   getByIdSales,
   updateStatusOrder,
   reloadChat,
+  chatAdminList,
 };
