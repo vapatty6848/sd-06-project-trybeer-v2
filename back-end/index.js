@@ -3,6 +3,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+require('./database/connectionMongo');
+
 const app = express();
 
 const httpServer = require('http').createServer(app);
@@ -17,8 +19,7 @@ const ProductsController = require('./controllers/ProductsController');
 const CheckoutController = require('./controllers/CheckoutController');
 const OrdersController = require('./controllers/OrdersController');
 const AdminOrdersController = require('./controllers/AdminOrdersController');
-
-const { products } = require('./models');
+const ChatController = require('./controllers/ChatController');
 
 const PORT = 3001;
 
@@ -37,29 +38,23 @@ app.use(bodyParser.json());
 
 app.use(express.static(__dirname));
 
-// app.get('/eai', async (_req, res) => {
-//   const [retornoSql] = await connection.execute('SELECT * FROM products');
-//   res.json(retornoSql);
-// });
-
-app.get('/oie', async (req, res) => {
-  const ola = await products.findAll();
-  res.json(ola);
-});
-
 app.use('/login', LoginController);
 
 app.use('/register', RegisterController);
 
-app.use('/profile', VerifyAuthorization, ProfileController);
+app.use(VerifyAuthorization);
 
-app.use('/products', VerifyAuthorization, ProductsController);
+app.use('/chat', ChatController);
 
-app.use('/checkout', VerifyAuthorization, CheckoutController);
+app.use('/profile', ProfileController);
 
-app.use('/orders', VerifyAuthorization, OrdersController);
+app.use('/products', ProductsController);
 
-app.use('/admin/orders', VerifyAuthorization, AdminOrdersController);
+app.use('/checkout', CheckoutController);
+
+app.use('/orders', OrdersController);
+
+app.use('/admin/orders', AdminOrdersController);
 
 app.use((err, _req, res, _next) => {
   console.error({ err });
@@ -67,5 +62,3 @@ app.use((err, _req, res, _next) => {
 });
 
 httpServer.listen(PORT, () => console.log('running port', PORT));
-
-// app.listen(PORT, () => console.log('running port', PORT));

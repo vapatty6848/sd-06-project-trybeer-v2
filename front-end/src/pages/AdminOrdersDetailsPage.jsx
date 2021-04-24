@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useParams } from 'react-router';
+import { useParams } from 'react-router-dom';
 import BeersAppContext from '../context/BeersAppContext';
 import {
   AdminDetailsOrdersCardsComponent,

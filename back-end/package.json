@@ -27,6 +27,7 @@
     "http": "0.0.1-security",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "3.6.2",
+    "mongoose": "^5.12.5",
     "mysql2": "2.1.0",
     "sequelize": "6.3.4",
     "socket.io": "3.0.4"

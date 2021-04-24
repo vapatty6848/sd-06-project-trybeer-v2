@@ -1,5 +1,7 @@
 const SocketIo = require('socket.io');
 
+const Chat = require('../mongoDB/SchemaMongoose');
+
 const statusUpdate = (socket) => {
   socket.on('statusUpdate', (status) => {
     socket.broadcast.emit('statusUpdate', status);
@@ -7,12 +9,25 @@ const statusUpdate = (socket) => {
 };
 
 const messageProcess = (socket, io) => {
-  socket.on('message', ({ message, email }) => {
-    console.log(message);
-    const date = new Date();
-    const five = 5;
-    const hour = date.toLocaleTimeString().substring(0, five);
-    io.to(email).emit('message', { message, email, hour });
+  socket.on('message', ({ message, email, cli }) => {
+    console.log(message, ' ', email, ' ', cli);
+    if (typeof message === 'string' && typeof email === 'string' && typeof cli === 'boolean') {
+      console.log('entrou message')
+      const date = new Date();
+      const response = { message, date };
+
+      io.to(email).emit('message', response);
+
+      Chat.updateOne({ email }, {
+        $push: {
+          messages: {
+            $each: [{ ...response, cli }],
+            $sort: { date: 1 },
+          },
+        },
+      }, { upsert: true })
+        .then((oiii) => console.log('oiii', oiii));
+    }
   });
 };
 
@@ -30,6 +45,12 @@ const onDisconnect = (socket) => {
   });
 };
 
+const onCloseRoom = (socket) => {
+  socket.on('closeRoom', (email) => {
+    socket.leave(email);
+  });
+};
+
 module.exports = (httpServer) => {
   const io = SocketIo(httpServer, {
     cors: {
@@ -44,5 +65,6 @@ module.exports = (httpServer) => {
     messageProcess(socket, io);
     onDisconnect(socket);
     rootRoom(socket);
+    onCloseRoom(socket);
   });
 };

@@ -4,16 +4,17 @@ import Provider from './context/Provider';
 import {
   LoginPage,
   SignupPage,
-  CostumerChat,
+  CostumerWebChat,
   CostumerProfilePage,
   CostumerProductsPage,
   CostumerCheckoutPage,
   CostumerOrdersPage,
   CostumerOrdersDetailsPage,
-  AdminChat,
+  AdminWebChat,
   AdminProfilePage,
   AdminOrdersPage,
   AdminOrdersDetailsPage,
+  AdminIntermediatePage,
 } from './pages';
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
             <Route exact path="/profile" component={ CostumerProfilePage } />
             <Route exact path="/products" component={ CostumerProductsPage } />
             <Route exact path="/checkout" component={ CostumerCheckoutPage } />
-            <Route exact path="/chat" component={ CostumerChat } />
+            <Route exact path="/chat" component={ CostumerWebChat } />
             <Route
               exact
               path="/orders"
@@ -42,7 +43,12 @@ function App() {
             <Route
               exact
               path="/admin/chats"
-              component={ AdminChat }
+              component={ AdminIntermediatePage }
+            />
+            <Route
+              exact
+              path="/admin/chats/:email"
+              component={ AdminWebChat }
             />
             <Route
               exact
