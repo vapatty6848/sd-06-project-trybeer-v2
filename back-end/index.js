@@ -24,20 +24,20 @@ const portSocket = 4001;
 io.on('connection', (socket) => {
   console.log('hello!');
 
-socket.on('message', async (msg) => {
-  const teste = await msg;
-  console.log(teste);
-});
+  socket.on('message', async (msg) => {
+    const teste = await msg;
+    console.log(teste);
+  });
 
-socket.on('adminMsg', async () => {
-  io.emit('Mensagem do admin pro cliente');
-});
+  socket.on('adminMsg', async () => {
+    io.emit('Mensagem do admin pro cliente');
+  });
 
-socket.on('clientMsg', async () => {
-  io.emit('Mensagem do cliente pro admin');
-});
+  socket.on('clientMsg', async () => {
+    io.emit('Mensagem do cliente pro admin');
+  });
 
-socket.emit('mensagem', 'minha mensagem incrivel!');
+  // socket.emit('mensagem', 'minha mensagem incrivel!');
 });
 
 app.use(cors());
