@@ -44,7 +44,7 @@ function RenderOrder({ productDetail }) {
 }
 
 RenderOrder.propTypes = {
-  productDetail: PropTypes.objectOf(PropTypes.object).isRequired,
+  productDetail: PropTypes.objectOf(Object).isRequired,
 };
 
 export default RenderOrder;

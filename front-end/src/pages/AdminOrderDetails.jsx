@@ -10,6 +10,8 @@ function AdminOrderDetails({ match }) {
   const [status, setStatus] = useState('');
   const [change, setChange] = useState(true);
   const [prepar, setPrepar] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+
   const history = useHistory();
   const { params: { id } } = match;
 
@@ -22,8 +24,12 @@ function AdminOrderDetails({ match }) {
         response.map((item) => setStatus(item.productStatus));
         setProductDetail(response);
         setStatus(response[0].status);
-        if (response[0].status !== 'Entregue') setChange(false);
-        if (response[0].status !== 'Preparando') setPrepar(false);
+        if (response[0].status === 'Pendente') {
+          setChange(false);
+          setPrepar(false);
+        }
+
+        setIsLoading(true);
       });
     };
     fetchProductDetails();
@@ -35,9 +41,9 @@ function AdminOrderDetails({ match }) {
 
   const handleClick = () => {
     setChange(true);
-    setPrepar(true);
     setStatus('Entregue');
     fetchStatusOrder('Entregue');
+    setPrepar(true);
   };
 
   const handlePrepar = () => {
@@ -47,34 +53,37 @@ function AdminOrderDetails({ match }) {
   };
 
   return (
-    <div>
-      <MenuSideBarAdm />
-      <span data-testid="order-number">
-        {`Pedido ${id} - `}
-      </span>
-      <span
-        data-testid="order-status"
-      >
-        { status }
-      </span>
-      <RenderOrder productDetail={ productDetail[0] } />
-      <button
-        type="button"
-        hidden={ prepar }
-        onClick={ handlePrepar }
-        data-testid="mark-as-prepared-btn"
-      >
-        Preparar pedido
-      </button>
-      <button
-        type="button"
-        hidden={ change }
-        onClick={ handleClick }
-        data-testid="mark-as-delivered-btn"
-      >
-        Marcar como entregue
-      </button>
-    </div>
+    isLoading
+      ? (
+        <div>
+          <MenuSideBarAdm />
+          <span data-testid="order-number">
+            {`Pedido ${id} - `}
+          </span>
+          <span
+            data-testid="order-status"
+          >
+            { status }
+          </span>
+          <RenderOrder productDetail={ productDetail[0] } />
+          <button
+            type="button"
+            hidden={ prepar }
+            onClick={ handlePrepar }
+            data-testid="mark-as-prepared-btn"
+          >
+            Preparar pedido
+          </button>
+          <button
+            type="button"
+            hidden={ change }
+            onClick={ handleClick }
+            data-testid="mark-as-delivered-btn"
+          >
+            Marcar como entregue
+          </button>
+        </div>
+      ) : false
   );
 }
 

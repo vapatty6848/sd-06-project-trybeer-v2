@@ -7,6 +7,8 @@ import api from '../services/api';
 
 const AdminOrders = () => {
   const [orders, setOrders] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
   const history = useHistory();
 
   useEffect(() => {
@@ -15,6 +17,7 @@ const AdminOrders = () => {
       api.getAllOrders(user.token).then((response) => {
         setOrders(response);
         if (response.message) return history.push('/login');
+        setIsLoading(true);
       });
     }
     fetchOrders();
@@ -25,29 +28,32 @@ const AdminOrders = () => {
   // };
 
   return (
-    <div>
-      <MenuSideBarAdm />
-      {orders.map((order, index) => (
-        <div className="movie-card" key={ index }>
-          <Link
-            to={ `/admin/orders/${order.id}` }
-          >
-            <p data-testid={ `${index}-order-number` }>
-              {`Pedido ${order.id}`}
-            </p>
-            <p data-testid={ `${index}-order-address` }>
-              {`${order.deliveryAddress}, ${order.deliveryNumber}`}
-            </p>
-            <p data-testid={ `${index}-order-total-value` }>
-              {`R$ ${order.totalPrice.replace('.', ',')}`}
-            </p>
-            <p data-testid={ `${index}-order-status` }>
-              {order.status}
-            </p>
-          </Link>
+    isLoading
+      ? (
+        <div>
+          <MenuSideBarAdm />
+          {orders.map((order, index) => (
+            <div className="movie-card" key={ index }>
+              <Link
+                to={ `/admin/orders/${order.id}` }
+              >
+                <p data-testid={ `${index}-order-number` }>
+                  {`Pedido ${order.id}`}
+                </p>
+                <p data-testid={ `${index}-order-address` }>
+                  {`${order.deliveryAddress}, ${order.deliveryNumber}`}
+                </p>
+                <p data-testid={ `${index}-order-total-value` }>
+                  {`R$ ${order.totalPrice.replace('.', ',')}`}
+                </p>
+                <p data-testid={ `${index}-order-status` }>
+                  {order.status}
+                </p>
+              </Link>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
+      ) : true
   );
 };
 

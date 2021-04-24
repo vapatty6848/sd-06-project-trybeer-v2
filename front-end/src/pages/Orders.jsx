@@ -8,6 +8,7 @@ import api from '../services/api';
 
 const Orders = ({ history }) => {
   const [orders, setOrders] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     async function fetchOrders() {
@@ -15,18 +16,22 @@ const Orders = ({ history }) => {
       api.getAllOrdersByUser(user.token).then((response) => {
         if (response.message) return history.push('/login');
         setOrders(response);
+        setIsLoading(true);
       });
     }
     fetchOrders();
   }, [history]);
 
   return (
-    <div>
-      <MenuTop name="Meus Pedidos" />
-      <div className="movie-list">
-        <OrdersCard orders={ orders } />
-      </div>
-    </div>
+    isLoading
+      ? (
+        <div>
+          <MenuTop name="Meus Pedidos" />
+          <div className="movie-list">
+            <OrdersCard orders={ orders } />
+          </div>
+        </div>
+      ) : false
   );
 };
 

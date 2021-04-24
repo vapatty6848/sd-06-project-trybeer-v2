@@ -14,30 +14,37 @@ function Products({ history }) {
   const initialCart = JSON.parse(localStorage.cart || []);
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState(initialCart);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const user = JSON.parse(localStorage.user);
     api.getAllProducts(user.token).then((response) => {
-      if (response.message) return history.push('/login');
-      setProducts(response);
+      if (response.message) history.push('/login');
+      else {
+        setProducts(response);
+        setIsLoading(true);
+      }
     });
   }, [history]);
 
   return (
-    <ProductsContext.Provider value={ { products } }>
-      <CartContext.Provider value={ { cart, setCart, history } }>
-        <MenuTop name="TryBeer" />
-        <div className="main-content-prod">
-          <div className="coluna-left" />
-          <div className="coluna-rigth" />
+    isLoading
+      ? (
+        <ProductsContext.Provider value={ { products } }>
+          <CartContext.Provider value={ { cart, setCart, history } }>
+            <MenuTop name="TryBeer" />
+            <div className="main-content-prod">
+              <div className="coluna-left" />
+              <div className="coluna-rigth" />
 
-          <div className="movie-list">
-            <ProductsList />
-          </div>
-        </div>
-        <CheckoutCart />
-      </CartContext.Provider>
-    </ProductsContext.Provider>
+              <div className="movie-list">
+                <ProductsList />
+              </div>
+            </div>
+            <CheckoutCart />
+          </CartContext.Provider>
+        </ProductsContext.Provider>
+      ) : true
   );
 }
 

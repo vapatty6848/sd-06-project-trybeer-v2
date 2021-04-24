@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-// import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import MenuTop from '../components/menuClient/MenuTop';
 import socket from '../services/socketClient';
-import BodyChat from '../components/chaClient/BodyChat';
-import FormChat from '../components/chaClient/FormChat';
+import BodyChat from '../components/chatClient/BodyChat';
+import FormChat from '../components/chatClient/FormChat';
 
 function ChatClient() {
   const { email } = JSON.parse(localStorage.user);
@@ -12,9 +12,12 @@ function ChatClient() {
   const [buttonDisable, setButtonDisable] = useState(true);
   const [user, setUser] = useState(email);
 
-  // const history = useHistory();
+  const history = useHistory();
 
   useEffect(() => {
+    const { email: userEmail, role } = JSON.parse(localStorage.user);
+    console.log(userEmail);
+    if (!email || role !== 'client')history.push('/login');
     socket.emit('login', user);
     socket.on('socketNick', (userNick) => {
       setUser(userNick);
