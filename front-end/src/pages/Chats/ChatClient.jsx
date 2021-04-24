@@ -35,13 +35,14 @@ export default function ChatClient() {
   }, [history, att]);
 
   const newMessage = async () => {
-    // const hora = new Date().toLocaleTimeString().split(':');
-    // const time = `${hora[0]}:${hora[1]}`;
+    const hora = new Date().toLocaleTimeString().split(':');
+    const time1 = `${hora[0]}:${hora[1]}`;
     const date = new Date();
     const hour = date.getHours();
     const minutes = date.getMinutes();
-    const MINUS_TWO = -2;
-    const time = `${hour}:${(`0 ${minutes}`).slice(MINUS_TWO)}`;
+    const MINUS_TWO = 2;
+    const time2 = `${hour}:${(`0${minutes}`).slice(-MINUS_TWO)}`;
+    const time = `${time1} ${time2}`
 
     const messageToSend = await sendMessage(emailUser, time, inputValue, 'Loja');
     return messageToSend;

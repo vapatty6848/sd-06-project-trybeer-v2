@@ -9,11 +9,11 @@ export default function ChatAdmin() {
   const [messages, setMessages] = useState([]);
   const [att, setAtt] = useState(0);
   const [emailUser] = useState('zebirita@gmail.com');
-  socket.emit('message', 'minha mensagem incrivel!');
+  // socket.emit('message', 'minha mensagem incrivel!');
   // recebe msg do back
-  socket.on('mensagem', (msg) => {
-    console.log(msg, 'msg');
-  });
+  // socket.on('mensagem', (msg) => {
+  //   console.log(msg, 'msg');
+  // });
 
   const history = useHistory();
   const getAllMessages = async (email) => {
