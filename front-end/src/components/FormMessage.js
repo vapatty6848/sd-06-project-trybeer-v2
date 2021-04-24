@@ -16,6 +16,7 @@ function FormMessage({ emailUser }) {
         type="text"
         className="msger-input"
         placeholder="Digite uma mensagem..."
+        data-testid="message-input"
         onChange={ (e) => setMessage(e.target.value) }
       />
 
@@ -23,6 +24,7 @@ function FormMessage({ emailUser }) {
         type="submit"
         className="msger-send-btn"
         onClick={ handleSend }
+        data-testid="send-message"
       >
         Enviar
       </button>
