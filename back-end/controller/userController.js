@@ -15,41 +15,34 @@ router.post('/login', validatePassword, validateEmail, rescue(async (req, res) =
   if (getUser.isError) {
     return res.status(getUser.status).json({ message: getUser.message });
   }
-
   const userDataForFront = {
     name: getUser.name,
     email: getUser.email,
     role: getUser.role,
   };
-
   const userToken = createToken(userDataForFront);
-
   return res.status(200).json([userDataForFront, userToken]);
 }));
 
-  router.post('/register',
+router.post('/register',
   validatePassword, validateEmail, nameValidation, rescue(async (req, res) => {
   const { name, email, password, role } = req.body;
-  await userService.createUser(name, email, password, role);
-  const user = await userService.findUserByEmailAndPassword(email, password);
-  
+  const user = { name, email, password, role };
+  await userService.createUser(user);
+  const userFound = await userService.findUserByEmailAndPassword(email, password);
   const userDataForFront = {
-    id: user.id,
+    id: userFound.id,
     name,
     email,
     role,
   };
-
   const userToken = createToken(userDataForFront);
-  console.log(userToken);
   return res.status(201).json({ userToken });
 }));
 
 router.put('/', rescue(async (req, res) => {
   const { email, name } = req.body;
-
   await userService.updateUserNameByEmail(email, name);
-
   return res.status(201).json({ message: 'Name has been successfully updated.' });
 }));
 

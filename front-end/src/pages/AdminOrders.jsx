@@ -9,7 +9,9 @@ export default function AdminOrders() {
 
   useEffect(() => {
     fetches.getAllSales(tokenFromLocalStorage)
-      .then((response) => setAllSales(response.data));
+      .then((response) => {
+        setAllSales(response.data);
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -23,10 +25,10 @@ export default function AdminOrders() {
               {`Pedido ${sale.id}`}
             </div>
             <div data-testid={ `${index}-order-address` }>
-              {`${sale.delivery_address}, ${sale.delivery_number}`}
+              {`${sale.deliveryAddress}, ${sale.deliveryNumber}`}
             </div>
             <div data-testid={ `${index}-order-total-value` }>
-              {`R$ ${Number(sale.total_price).toFixed(2).replace('.', ',')}`}
+              {`R$ ${Number(sale.totalPrice).toFixed(2).replace('.', ',')}`}
             </div>
             <div data-testid={ `${index}-order-status` }>
               {`${sale.status}`}

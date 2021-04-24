@@ -75,7 +75,7 @@ export default function Checkout() {
         setTimeout(() => {
           setCartProducts([]);
           localStorage.removeItem('cartProducts');
-          history.push('/products');
+          // history.push('/products');
         }, SUCCESSMESSAGEDESAPEAR);
       });
   };

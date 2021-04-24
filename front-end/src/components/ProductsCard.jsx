@@ -90,7 +90,7 @@ export default function ProductsCard() {
             </p>
             <img
               data-testid={ `${index}-product-img` }
-              src={ product.url_image }
+              src={ product.urlImage }
               alt="Imagem do produto"
               width="50px"
             />
