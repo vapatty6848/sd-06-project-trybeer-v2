@@ -35,6 +35,7 @@ function AdminOrderDetails({ match }) {
 
   const handleClick = () => {
     setChange(true);
+    setPrepar(true);
     setStatus('Entregue');
     fetchStatusOrder('Entregue');
   };

@@ -42,7 +42,7 @@ function ButtonCheckout() {
         };
         api.regSalesProducts(objtProd);
       });
-      setTimeout(() => history.push('/products'), timeout);
+      // setTimeout(() => history.push('/products'), timeout);
     } else { setError(true); }
   };
 
