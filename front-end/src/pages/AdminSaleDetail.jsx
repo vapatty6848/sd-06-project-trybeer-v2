@@ -8,7 +8,7 @@ export default function AdminSaleDetail() {
   const tokenFromLocalStorage = localStorage.getItem('token');
   const location = useLocation();
   const [orderDetail, setOrderDetail] = useState([]);
-  //const [orderStatus, setOrderStatus] = useState('Pendente');
+  // const [orderStatus, setOrderStatus] = useState('Pendente');
   const [delivered, setDelivered] = useState(false);
   const SIX = 6;
   const pathName = location.pathname;
