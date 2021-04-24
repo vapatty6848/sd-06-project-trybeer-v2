@@ -69,6 +69,7 @@ function OrderDetail() {
               >
                 {` Valor total do pedido: R$ ${orders[0].totalPrice.replace('.', ',')}`}
               </div>
+              <h3 data-testid="order-status">{`${orders[0].status}`}</h3>
             </div>
           )
         }
