@@ -1,38 +1,38 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import MenuSideBar from '../components/menuAdmin/MenuSideBar';
+import { Link, useHistory } from 'react-router-dom';
+import MenuSideBarAdm from '../components/menuAdmin/MenuSideBarAdm';
 
 import api from '../services/api';
 // import { valueTotal } from '../utils/checkoutUtils';
 
-const AdminOrders = ({ history }) => {
+const AdminOrders = () => {
   const [orders, setOrders] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     async function fetchOrders() {
       const user = JSON.parse(localStorage.user);
-      const response = await api.getAllOrders(user.token);
-      if (response.message) return history.push('/login');
-      setOrders(response);
+      api.getAllOrders(user.token).then((response) => {
+        setOrders(response);
+        if (response.message) return history.push('/login');
+      });
     }
     fetchOrders();
   }, [history]);
-  console.log(orders);
-  const handleClick = (id) => {
-    history.push(`/admin/orders/${id}`);
-  };
+
+  // const handleClick = (id) => {
+  //   history.push(`/admin/orders/${id}`);
+  // };
 
   return (
     <div>
-      <MenuSideBar />
-      {orders.length > 0 && orders.map((order, index) => (
+      <MenuSideBarAdm />
+      {orders.map((order, index) => (
         <div className="movie-card" key={ index }>
-          <button
-            type="button"
-            data-testid={ `${index}-order-number` }
-            onClick={ () => handleClick(order.id) }
+          <Link
+            to={ `/admin/orders/${order.id}` }
           >
-            <p>
+            <p data-testid={ `${index}-order-number` }>
               {`Pedido ${order.id}`}
             </p>
             <p data-testid={ `${index}-order-address` }>
@@ -44,15 +44,11 @@ const AdminOrders = ({ history }) => {
             <p data-testid={ `${index}-order-status` }>
               {order.status}
             </p>
-          </button>
+          </Link>
         </div>
       ))}
     </div>
   );
-};
-
-AdminOrders.propTypes = {
-  history: PropTypes.objectOf(Object).isRequired,
 };
 
 export default AdminOrders;

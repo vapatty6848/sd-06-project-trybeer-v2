@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router';
 
 import OrdersDetailsCard from '../components/orders/OrdersDetailsCard';
 import MenuTop from '../components/menuClient/MenuTop';
 
 import api from '../services/api';
 
-const OrdersDetails = ({ match, history }) => {
-  const [orderDetails, setOrderDetails] = useState([]);
+const OrdersDetails = ({ match }) => {
+  const [orderDetails, setOrderDetails] = useState({});
+  const history = useHistory();
   const { params: { id } } = match;
 
   useEffect(() => {
-    async function fetchOrderDetails() {
-      const user = JSON.parse(localStorage.user);
-      const response = await api.getOrdersById(user.token, id);
-      console.log(response);
+    const user = JSON.parse(localStorage.user);
+    api.getOrdersById(user.token, id).then((response) => {
       if (response.message) return history.push('/login');
-      setOrderDetails(response);
-    }
-    fetchOrderDetails();
+      console.log('response', response);
+      setOrderDetails(response[0]);
+    });
   }, [history, id]);
 
   return (
@@ -26,7 +26,7 @@ const OrdersDetails = ({ match, history }) => {
       <MenuTop name="Detalhes de Pedido" />
       <div className="main-content-orders">
         <OrdersDetailsCard
-          order={ orderDetails[0] }
+          order={ orderDetails }
           id={ id }
         />
       </div>
@@ -35,7 +35,6 @@ const OrdersDetails = ({ match, history }) => {
 };
 
 OrdersDetails.propTypes = {
-  history: PropTypes.objectOf(Object).isRequired,
   match: PropTypes.objectOf(Object).isRequired,
 };
 

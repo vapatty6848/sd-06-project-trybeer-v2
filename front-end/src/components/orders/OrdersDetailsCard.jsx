@@ -25,6 +25,7 @@ const OrdersDetailsCard = ({ order, id }) => {
         >
           {`Pedido ${id}`}
         </div>
+        <p>{ order.status }</p>
         <div
           data-testid="order-date"
         >
@@ -32,7 +33,7 @@ const OrdersDetailsCard = ({ order, id }) => {
         </div>
       </div>
       <div>
-        { order ? order.products.map((product, index) => (
+        { order.products && order.products.map((product, index) => (
           <div
             className="top-data"
             key={ index }
@@ -53,14 +54,12 @@ const OrdersDetailsCard = ({ order, id }) => {
               { `R$  ${handleTotalValue(product.price, product.salesProducts.quantity)}` }
             </div>
           </div>
-        ))
-
-          : true }
+        )) }
         <div className="flex-end">
           <div
             data-testid="order-total-value"
           >
-            { order
+            { order.totalPrice
               ? `Total: R$ ${order.totalPrice.replace('.', ',')}`
               : true }
           </div>

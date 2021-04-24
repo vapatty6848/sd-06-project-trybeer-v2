@@ -3,7 +3,7 @@ import CheckoutContext from '../../context/CheckoutContext';
 import { api } from '../../services';
 
 function ButtonCheckout() {
-  const { able, history, address, sumTotal, products } = useContext(CheckoutContext);
+  const { able, address, sumTotal, products } = useContext(CheckoutContext);
   const [message, setMessage] = useState(false);
   const [isError, setError] = useState(false);
 
@@ -27,13 +27,10 @@ function ButtonCheckout() {
   };
 
   const handleClick = async () => {
-    const timeout = 2000;
     const result = await api.registerSales(params);
     console.log('result', result);
     localStorage.cart = JSON.stringify([]);
     if (result.response.id) {
-      setMessage(true);
-      setError(false);
       products.forEach((element) => {
         const objtProd = {
           idSale: result.response.id,
@@ -42,7 +39,8 @@ function ButtonCheckout() {
         };
         api.regSalesProducts(objtProd);
       });
-      setTimeout(() => history.push('/products'), timeout);
+      setMessage(true);
+      setError(false);
     } else { setError(true); }
   };
 

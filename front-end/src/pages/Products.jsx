@@ -16,13 +16,11 @@ function Products({ history }) {
   const [cart, setCart] = useState(initialCart);
 
   useEffect(() => {
-    async function fetchProducts() {
-      const user = JSON.parse(localStorage.user);
-      const response = await api.getAllProducts(user.token);
+    const user = JSON.parse(localStorage.user);
+    api.getAllProducts(user.token).then((response) => {
       if (response.message) return history.push('/login');
       setProducts(response);
-    }
-    fetchProducts();
+    });
   }, [history]);
 
   return (
