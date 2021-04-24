@@ -29,7 +29,7 @@ export default function TopMenuAdmin({ pageTitle }) {
         type="button"
         data-testid="side-menu-item-orders"
         value="Pedidos"
-        onClick={handleClick}
+        onClick={ handleClick }
       >
         Pedidos
       </button>
@@ -37,7 +37,7 @@ export default function TopMenuAdmin({ pageTitle }) {
         type="button"
         data-testid="side-menu-item-profile"
         value="Perfil"
-        onClick={handleClick}
+        onClick={ handleClick }
       >
         Perfil
       </button>
@@ -45,13 +45,18 @@ export default function TopMenuAdmin({ pageTitle }) {
         <button
           type="button"
           data-testid="side-menu-item-chat"
-          onClick={handleClick}
+          onClick={ handleClick }
           value="Conversas"
         >
           Conversas
         </button>
       </div>
-      <button type="button" data-testid="side-menu-item-logout" value="Sair" onClick={handleClick}>
+      <button
+        type="button"
+        data-testid="side-menu-item-logout"
+        value="Sair"
+        onClick={ handleClick }
+      >
         Sair
       </button>
     </aside>
