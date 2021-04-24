@@ -40,8 +40,9 @@ export default function ChatClient() {
     const date = new Date();
     const hour = date.getHours();
     const minutes = date.getMinutes();
-    const time = `${date.getHours()}:${('0'+new Date().getMinutes()).slice(-2)}`;
-    
+    const MINUS_TWO = -2;
+    const time = `${hour}:${(`0 ${minutes}`).slice(MINUS_TWO)}`;
+
     const messageToSend = await sendMessage(emailUser, time, inputValue, 'Loja');
     return messageToSend;
   };
