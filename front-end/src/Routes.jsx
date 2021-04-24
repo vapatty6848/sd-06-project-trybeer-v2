@@ -10,6 +10,7 @@ import SaleDetails from './pages/SaleDetails';
 import AdminProfile from './pages/AdminProfile';
 import AdminOrders from './pages/AdminOrders';
 import AdminSaleDetail from './pages/AdminSaleDetail';
+import CostumerChat from './pages/CostumerChat';
 
 export default function Routes() {
   return (
@@ -27,6 +28,8 @@ export default function Routes() {
       <Route path="/profile" component={ Profile } />
       <Route path="/checkout" component={ Checkout } />
       <Route path="/admin/profile" component={ AdminProfile } />
+      <Route path="/chat" component={ CostumerChat } />
+      <Route path="/admin/chats" component={ CostumerChat } />
     </Switch>
   );
 }

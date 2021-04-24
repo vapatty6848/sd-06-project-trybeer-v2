@@ -13,6 +13,9 @@ export default function TopMenuAdmin({ pageTitle }) {
     if (e.target.value === 'Perfil') {
       history.push('/admin/profile');
     }
+    if (e.target.value === 'Conversas') {
+      history.push('/admin/chats');
+    }
     if (e.target.value === 'Sair') {
       localStorage.setItem('token', '');
       history.push('/login');
@@ -38,6 +41,16 @@ export default function TopMenuAdmin({ pageTitle }) {
       >
         Perfil
       </button>
+      <div className="side-menu-container">
+        <button
+          type="button"
+          data-testid="side-menu-item-chat"
+          onClick={ handleClick }
+          value="Conversas"
+        >
+          Conversas
+        </button>
+      </div>
       <button
         type="button"
         data-testid="side-menu-item-logout"
