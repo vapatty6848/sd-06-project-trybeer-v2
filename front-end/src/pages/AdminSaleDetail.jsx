@@ -8,7 +8,7 @@ export default function AdminSaleDetail() {
   const tokenFromLocalStorage = localStorage.getItem('token');
   const location = useLocation();
   const [orderDetail, setOrderDetail] = useState([]);
-  const [_orderStatus, setOrderStatus] = useState('Pendente');
+  //const [orderStatus, setOrderStatus] = useState('Pendente');
   const [delivered, setDelivered] = useState(false);
   const SIX = 6;
   const pathName = location.pathname;
@@ -19,7 +19,7 @@ export default function AdminSaleDetail() {
     fetches.getSaleById(tokenFromLocalStorage, adminPathName)
       .then((response) => {
         setOrderDetail(response.data);
-        setOrderStatus(response.data.status);
+        // setOrderStatus(response.data.status);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -40,13 +40,13 @@ export default function AdminSaleDetail() {
 
   const handleDeliverButton = async () => {
     await fetches.updateSale(tokenFromLocalStorage, adminPathName, 'Entregue');
-    setOrderStatus('Entregue');
+    // setOrderStatus('Entregue');
     setDelivered(true);
   };
 
   const handlePreparationButton = async () => {
     await fetches.updateSale(tokenFromLocalStorage, adminPathName, 'Preparando');
-    setOrderStatus('Preparando');
+    // setOrderStatus('Preparando');
   };
 
   return (
