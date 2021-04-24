@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   margin: 20px;
-  padding: 20px;
   max-width: 60vw;
+  padding: 20px;
 }
 
 .left-msg {

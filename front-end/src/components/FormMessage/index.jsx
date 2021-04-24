@@ -16,7 +16,7 @@ const FormMessage = () => {
       <section className="input-container">
         <input
           type="text"
-          id="messageInput"
+          className="messageInput"
           value={ message }
           onChange={ ({ target }) => setMessage(target.value) }
           data-testid="message-input"
