@@ -55,14 +55,13 @@ app.get('/chat', async (req, res) => {
 app.get('/chat/admin', async (req, res) => {
   const allUsers = await getAllUsers();
 
-  const arrayResponse = allUsers.map( async(element) => {
+  const arrayResponse = allUsers.map(async (element) => {
     const array = await getMessageByNickname(element.emailUser);
-    const lastMessage = array[array.length -1].timestamp;
-    return {user: element.emailUser, lastMessage}
+    const lastMessage = array[array.length - 1].timestamp;
+    return { user: element.emailUser, lastMessage };
   });
 
-  Promise.all([...arrayResponse]).then((e) => res.status(200).json(e))
-  
+  Promise.all([...arrayResponse]).then((e) => res.status(200).json(e));
 });
 
 app.use('/images', express.static(`${__dirname}/images`));
@@ -85,7 +84,7 @@ io.on('connection', (socket) => {
 
   socket.on('sendMessage', async ({ message, emailUser }) => {
     const firstInsertion = await getMessageByNickname(emailUser);
-    if(firstInsertion.length === 0) {
+    if (firstInsertion.length === 0) {
       await createUser(emailUser);
     }
 
