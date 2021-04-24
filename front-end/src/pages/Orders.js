@@ -20,9 +20,12 @@ function Order(orders) {
     return `${newDate.getDate()}/${month}`;
   }
 
+  const user = JSON.parse(localStorage.getItem('user'));
+  const { role } = user;
+
   return (
     <div>
-      <Header />
+      <Header isAdmin={ role === 'administrator' } />
       <Navbar />
       <Container>
         <div data-testid="0-order-card-container">

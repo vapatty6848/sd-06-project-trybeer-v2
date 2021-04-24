@@ -22,6 +22,9 @@ function OrderDetail() {
     findByID();
   }, [id]);
 
+  const user = JSON.parse(localStorage.getItem('user'));
+  const { role } = user;
+
   function formatDate(date) {
     const TEN = 10;
     const newDate = new Date(date);
@@ -34,7 +37,7 @@ function OrderDetail() {
 
   return (
     <section>
-      <Header />
+      <Header isAdmin={ role === 'administrator' } />
       <Navbar />
       <Container>
         {

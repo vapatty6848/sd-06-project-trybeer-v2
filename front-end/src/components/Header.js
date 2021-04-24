@@ -53,10 +53,10 @@ function Header({ isAdmin }) {
   );
 }
 
-const { string } = PropTypes;
+const { bool } = PropTypes;
 
 Header.propTypes = {
-  isAdmin: string.isRequired,
+  isAdmin: bool.isRequired,
 };
 
 export default Header;

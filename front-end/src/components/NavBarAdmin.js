@@ -21,7 +21,10 @@ const NavbarAdmin = () => {
   }, []);
 
   return (
-    <DivNavContainer isAdmin>
+    <DivNavContainer
+      isAdmin
+      style={ sidebar ? { width: '100%' } : { width: '0%' } }
+    >
       <DivNavContent
         className="admin-side-bar-container"
       >

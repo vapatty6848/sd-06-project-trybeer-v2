@@ -21,7 +21,7 @@ function ProductsProvider({ children }) {
 }
 
 ProductsProvider.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.object).isRequired,
+  children: PropTypes.element.isRequired,
 };
 
 export default ProductsProvider;

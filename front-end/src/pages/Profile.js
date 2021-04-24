@@ -12,6 +12,9 @@ function Profile() {
 
   const localStorageProfile = JSON.parse(localStorage.getItem('user'));
 
+  const user = JSON.parse(localStorage.getItem('user'));
+  const { role } = user;
+
   const idProfile = localStorageProfile.id;
   const nameProfile = localStorageProfile.name;
   const emailProfile = localStorageProfile.email;
@@ -25,7 +28,7 @@ function Profile() {
 
   return (
     <div>
-      <Header />
+      <Header isAdmin={ role === 'administrator' } />
       <Navbar title="Meu perfil" data-testid="top-title" className="top-title" />
       <Container>
         <Content>
