@@ -1,23 +1,21 @@
 .msg-container {
   display: flex;
   flex-direction: column;
-  padding: 20px;
   margin: 20px;
+  padding: 20px;
   max-width: 60vw;
 }
 
 .left-msg {
   background-color: black;
-  border-radius: 0 26px 26px 26px;
-  /* box-shadow: 0px 5px 20px -16px; */
+  border-radius: 0 26px 26px;
   color: white;
 }
 
 .right-msg {
-  background-color: rgb(211, 211, 211);
+  background-color: lightgray;
+  border-radius: 26px 26px 0;
   color: black;
-  border-radius: 26px 26px 0 26px;
-  /* box-shadow: 0px 5px 20px -16px; */
   margin-left: 30vw;
 }
 
