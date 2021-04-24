@@ -24,8 +24,8 @@ export default function SaleDetails() {
   const handleDate = () => {
     const five = 5;
     const three = 3;
-    if (orderDetail.length) {
-      const fullDate = orderDetail[0].sale_date.substr(five, five);
+    if (orderDetail.saleDate) {
+      const fullDate = orderDetail.saleDate.substr(five, five);
       const month = fullDate.substr(0, 2);
       const day = fullDate.substr(three);
       const saleDate = `${day}/${month}`;
@@ -34,10 +34,10 @@ export default function SaleDetails() {
   };
 
   const handletotalValue = () => {
-    if (orderDetail.length) {
-      const totalPrice = orderDetail
+    if (orderDetail.products) {
+      const totalPrice = orderDetail.products
         .reduce((accumulator, current) => accumulator
-          + (Number(current.quantity) * Number(current.price)), 0);
+          + (Number(current.salesProducts.quantity) * Number(current.price)), 0);
       const totalOrderPrice = (totalPrice.toFixed(2)).replace('.', ',');
       return totalOrderPrice;
     }
@@ -47,20 +47,24 @@ export default function SaleDetails() {
     <div>
       { handleRedirect(tokenFromLocalStorage) }
       <TopMenu pageTitle="Detalhes de Pedido" />
+      {console.log(orderDetail)}
       <div className="order-data-container">
         <span data-testid="order-number">
-          {orderDetail.length && `Pedido ${orderDetail[0].sale_id}`}
+          {orderDetail && `Pedido ${orderDetail.id}`}
         </span>
         <span data-testid="order-date">
-          {orderDetail.length && handleDate() }
+          {orderDetail && handleDate()}
+        </span>
+        <span>
+          {orderDetail.status}
         </span>
       </div>
-      {orderDetail.length && orderDetail.map((order, index) => (
+      {orderDetail.products && orderDetail.products.map((order, index) => (
         <div key={ order.id } className="products-details-container">
-          <span data-testid={ `${index}-product-qtd` }>{order.quantity}</span>
+          <span data-testid={ `${index}-product-qtd` }>{order.salesProducts.quantity}</span>
           <p data-testid={ `${index}-product-name` }>{order.name}</p>
           <span data-testid={ `${index}-product-total-value` }>
-            {`R$ ${(Number(order.quantity) * Number(order.price))
+            {`R$ ${(Number(order.salesProducts.quantity) * Number(order.price))
               .toFixed(2).replace('.', ',')}`}
           </span>
         </div>
