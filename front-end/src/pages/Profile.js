@@ -6,15 +6,16 @@ import Navbar from '../components/Navbar';
 import Header from '../components/Header';
 import { Container, Content, Input, Button, Message } from '../styles/styles';
 
+
 function Profile() {
   const { loginUser, setLoginUser } = useContext(UserContext);
   const [confirmationMessage, setConfirmationMessage] = useState(false);
+  
   const localStorageProfile = JSON.parse(localStorage.getItem('user'));
-
+  
   const idProfile = localStorageProfile.id;
   const nameProfile = localStorageProfile.name;
   const emailProfile = localStorageProfile.email;
-
   const handleProfile = async (id, name, email) => {
     id = idProfile;
     name = loginUser.name;
@@ -26,11 +27,7 @@ function Profile() {
   return (
     <div>
       <Header />
-      <Navbar
-        title="Meu perfil"
-        data-testid="top-title"
-        className="top-title"
-      />
+      <Navbar title="Meu perfil" data-testid="top-title" className="top-title" />
       <Container>
         <Content>
           <div>

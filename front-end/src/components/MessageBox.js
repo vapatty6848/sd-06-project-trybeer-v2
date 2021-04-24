@@ -19,7 +19,7 @@ function MessageBox({ isMine, emailUser, sendAt, message }) {
             {sendAt}
           </div>
         </div>
-        <div className="msg-text" data-testid="text-message" >
+        <div className="msg-text" data-testid="text-message">
           {message}
         </div>
       </div>

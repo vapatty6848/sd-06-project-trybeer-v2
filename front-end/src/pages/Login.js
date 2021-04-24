@@ -6,6 +6,19 @@ import { login } from '../api/axiosApi';
 import { Container, Content } from '../components/styled-components';
 import { Button, Input, Title, Label } from '../components';
 
+const redirectIf = (pacote, history) => {
+  if (pacote.role === 'client') {
+    history.push({ pathname: '/products' });
+  } else if (pacote.role === 'administrator') {
+    history.push({ pathname: '/admin/orders' });
+  } else {
+    history.push({ pathname: '/register' });
+  }
+};
+
+const inputEmail = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+const PASSWORD_MIN_SIZE = 6;
+
 export default function Login() {
   const history = useHistory();
   const { loginUser, setLoginUser } = useContext(UserContext);
@@ -15,24 +28,15 @@ export default function Login() {
     const pacote = await login(dataUser);
     localStorage.setItem('user', JSON.stringify(pacote));
     setLoginUser({ ...loginUser, pacote });
-
-    if (pacote.role === 'client') {
-      history.push({ pathname: '/products' });
-    } else if (pacote.role === 'administrator') {
-      history.push({ pathname: '/admin/orders' });
-    } else {
-      history.push({ pathname: '/register' });
-    }
+    redirectIf(pacote, history);
   };
 
-  const handleChange = ({ target }) => {
+  const hc = ({ target }) => {
     const { name, value } = target;
     setLoginUserLocal({ ...loginUserLocal, [name]: value });
   };
 
   const { email, password } = loginUserLocal;
-  const inputEmail = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-  const PASSWORD_MIN_SIZE = 6;
   const activeButton = inputEmail.test(email) && password.length >= PASSWORD_MIN_SIZE;
 
   return (
@@ -41,19 +45,9 @@ export default function Login() {
         <Content>
           <Title title="Login" />
           <Label text="Email" />
-          <Input
-            type="email"
-            id="email-input"
-            name="email"
-            onChange={ handleChange }
-          />
+          <Input type="email" id="email-input" name="email" onChange={ hc } />
           <Label text="Senha" />
-          <Input
-            type="password"
-            id="password-input"
-            name="password"
-            onChange={ handleChange }
-          />
+          <Input type="password" id="password-input" name="password" onChange={ hc } />
           <Button
             type="button"
             id="signin-btn"
