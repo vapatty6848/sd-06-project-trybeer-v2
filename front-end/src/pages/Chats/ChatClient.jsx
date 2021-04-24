@@ -4,7 +4,7 @@ import socket from './socketClient';
 import { verifyUser } from '../../store/LocalStorage/actions';
 import { sendMessage } from './Requests';
 import Header from '../../components/Header/Header';
-import './chats.css'
+import './chats.css';
 
 export default function ChatClient() {
   const [inputValue, setInputValue] = useState('');
@@ -58,7 +58,7 @@ export default function ChatClient() {
     <div>
       <Header title="Chat Client" user="client" />
       <h1>Chat Client</h1>
-      <div class="messageBox">
+      <div className="messageBox">
         <ul>
           {messages && messages.map((msg, index) => (
             <li key={ index }>
