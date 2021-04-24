@@ -12,7 +12,7 @@ function clearCart(setCart) {
 }
 
 function redirectCart(history, setCart) {
-  const timeOut = 2000;
+  const timeOut = 5000;
 
   setTimeout(() => {
     clearCart(setCart);
