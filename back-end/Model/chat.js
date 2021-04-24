@@ -5,8 +5,6 @@ const saveMessage = async (message, email, timestamp, role) => {
     .then((db) => db.collection('messages').findOne({ email }));
 
   if (userFound) {
-    console.log(userFound)
-
     await connection().then((db) => db.collection('messages')
       .updateOne(
         { email },
