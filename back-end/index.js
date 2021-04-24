@@ -11,6 +11,7 @@ const bodyParser = require('body-parser');
 const rescue = require('express-rescue');
 const UserService = require('./Services/userService');
 const ProductsService = require('./Services/productService');
+const chatService = require('./Services/chatService');
 const Utils = require('./Utils');
 const SalesService = require('./Services/salesService');
 
@@ -44,6 +45,10 @@ app.get('/admin/orders', rescue(SalesService.getAdminOrders));
 app.get('/admin/orders/:id', rescue(SalesService.getAdminOrderDetails));
 
 app.put('/admin/orders/:id', rescue(SalesService.editOrderStatus));
+
+app.post('/chat', rescue(chatService.saveMessage));
+
+app.get('/chat', rescue(chatService.getMessages));
 
 app.use((err, _req, res, _next) => {
   const codeStatus = (err.codeStatus) ? err.codeStatus : 500;
