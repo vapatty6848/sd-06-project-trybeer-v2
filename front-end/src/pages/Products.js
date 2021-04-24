@@ -18,10 +18,12 @@ function Products() {
 
   useEffect(() => {
     if (!loggedUser || !loggedUser.token) history.push('/login');
+
     getAllProducts().then((product) => {
       setProducts(product);
       setLoading(false);
     });
+
     const localStorageCart = JSON.parse(localStorage.getItem('cart'));
     if (localStorageCart) setCart(localStorageCart);
   }, []);

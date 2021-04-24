@@ -41,7 +41,7 @@ function CheckoutItem({ name, price, quantity, index }) {
 CheckoutItem.propTypes = {
   name: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
-  quantity: PropTypes.string.isRequired,
+  quantity: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
 };
 
