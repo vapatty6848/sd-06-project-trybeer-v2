@@ -8,8 +8,10 @@ const getHour = () => {
   return `${date.getHours()}:${date.getMinutes()}`;
 };
 
-export const formatMessage = (message) => {
-  const user = getEmailLocalStorage();
+export const formatMessage = (message, client, store) => {
+  const user = store || getEmailLocalStorage();
   const hour = getHour();
-  return { user, hour, message };
+  const room = client;
+  console.log(user)
+  return { user, hour, message, room };
 };

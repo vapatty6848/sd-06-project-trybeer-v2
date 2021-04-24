@@ -1,42 +1,52 @@
-import React, { useState } from 'react';
-import { createMessage } from '../services/chatService';
+import React, { useState, useEffect } from 'react';
+import { getMessages } from '../services/chatService';
 import { formatMessage, getEmailLocalStorage } from '../utils';
-// import socket from '../services/socketClient';
-// import MenuTop from '../components/MenuTop';
+import socket from '../utils/socketClient';
+import MenuTop from '../components/MenuTop';
 
 function ClientChat() {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
 
-  // useEffect(() => {
+  const fetchMessages = async () => {
+    const user = getEmailLocalStorage();
+    const msg = await getMessages(user);
+    setMessages(msg);
+  };
 
-  // }, [messages]);
+  useEffect(() => {
+    fetchMessages();
+  }, []);
+
+  useEffect(() => {
+    const key = getEmailLocalStorage();
+    socket.emit('connectRoom', key);
+
+    socket.on('receivedMessage', (data) => {
+      setMessages([...messages, data]);
+    });
+  }, [messages]);
 
   const handleMessage = (e) => {
     setMessage(e.target.value);
   };
 
-  const sendMessage = (data) => {
-    const user = getEmailLocalStorage();
-    const obj = { [user]: data };
-    console.log(obj);
-    createMessage(obj);
-  };
-
   const handleClick = (e) => {
-    const formatedMessage = formatMessage(message);
     e.preventDefault();
-    const msgArray = [...messages, formatedMessage];
-    setMessages(msgArray);
+    const client = getEmailLocalStorage();
+    const formatedMessage = formatMessage(message, client);
     setMessage('');
-    sendMessage(msgArray);
+    socket.emit('sendMessage', formatedMessage);
   };
 
   return (
     <div>
-      {/* <MenuTop title="Chat" /> */}
+      <MenuTop title="Chat" />
+      <br />
+      <br />
+      <br /><br /><br /><br /><br /><br /><br /><br />
       <div>
-        {messages.map((msg, index) => (
+        {messages && messages.map((msg, index) => (
           <div key={ index }>
             <p data-testid="text-message">{ msg.message }</p>
             <span data-testid="nickname">{ msg.user }</span>

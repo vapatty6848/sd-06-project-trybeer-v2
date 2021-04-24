@@ -4,17 +4,30 @@ const addMessage = async (message) => {
   const { insertedId } = await connection()
   .then((db) => db.collection('messages').insertOne(message))
   .catch((err) => err);
+  
+  return { id: insertedId, ...message };
+  }; 
 
-return { id: insertedId, ...message };
+const getAllUsers = async () => {
+  const res = await connection()
+    .then((db) => db.collection('messages').aggregate([
+      {
+        $group: {
+          _id: '$user',
+        },
+      },
+    ]).toArray());
+  return res;
 };
 
-const getAllMessages = async () => {
+const getMessages = async (id) => {
   const res = await connection()
-    .then((db) => db.collection('messages').find().toArray());
+    .then((db) => db.collection('messages').find({ room: id }).toArray());
   return res;
 };
 
 module.exports = { 
   addMessage,
-  getAllMessages,
+  getAllUsers,
+  getMessages,
 };

@@ -13,6 +13,8 @@ import AdminProfile from './pages/AdminProfile';
 import ProductDetails from './pages/ProductDetails';
 import OrderDetails from './pages/OrderDetails';
 import ClientChat from './pages/ClientChat';
+import AdminChats from './pages/AdminChats';
+import AdminChat from './pages/AdminChat';
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
         <Route exact path="/admin/profile" component={ AdminProfile } />
         <Route exact path="/orders/:id" component={ ProductDetails } />
         <Route exact path="/chat" component={ ClientChat } />
+        <Route exact path="/admin/chats" component={ AdminChats } />
+        <Route exact path="/admin/chats/:id" component={ AdminChat } />
       </Switch>
     </Provider>
   );

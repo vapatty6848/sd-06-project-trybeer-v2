@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { addMessage, getAllMessages } = require('../model/chat');
+const { addMessage, getAllUsers, getMessages } = require('../model/chat');
 
 const chatRouter = new Router();
 
@@ -9,17 +9,30 @@ chatRouter.post('/', async (req, res) => {
     await addMessage(message);
     res.status(201).send(message);
   } catch (err) {
-    res.status(404).send('ERRO');
+    res.status(404).send('ERROR');
     throw new Error(err);
   }
 });
 
 chatRouter.get('/', async (req, res) => {
   try {
-    const messages = await getAllMessages();
-    res.status(200).json({ messages });
+    const users = await getAllUsers();
+    const usersArr = users.map(({ _id: user }) => (user))
+      .filter((item) => item !== 'tryber@trybe.com.br');
+    res.status(200).json(usersArr);
   } catch (err) {
-    res.status(404).send('ERRO');
+    res.status(404).send('ERROR');
+    throw new Error(err);
+  }
+});
+
+chatRouter.get('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const messages = await getMessages(id);
+    res.status(200).json(messages);
+  } catch (err) {
+    res.status(404).send('ERROR');
     throw new Error(err);
   }
 });
