@@ -17,7 +17,6 @@ export default function OrderDetails() {
       setProductsOfSale(response);
       setProducts(response.products);
     });
-
   }, [id]);
 
   // const seventeen = -17;

@@ -16,7 +16,6 @@ export default function AdminOrdersDetails() {
     api.fetchSaleProduct(id).then((response) => {
       setProductsOfSale(response);
     });
-
   }, [id]);
 
   const handleClick = async (newStatus) => {
