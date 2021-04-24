@@ -21,7 +21,7 @@ function FormMessage() {
           placeholder="Digite uma mensagem..."
           onChange={ (event) => setMessage(event.target.value) }
         />
-        <button type="submit">Enviar</button>
+        <button type="submit" data-testid="send-message">Enviar</button>
       </div>
     </form>
   );
