@@ -42,7 +42,7 @@ export default function ChatClient() {
     const minutes = date.getMinutes();
     const MINUS_TWO = 2;
     const time2 = `${hour}:${(`0${minutes}`).slice(-MINUS_TWO)}`;
-    const time = `${time1} ${time2}`
+    const time = `${time1} ${time2}`;
 
     const messageToSend = await sendMessage(emailUser, time, inputValue, 'Loja');
     return messageToSend;
