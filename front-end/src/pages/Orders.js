@@ -44,6 +44,9 @@ function Order(orders) {
                     <p data-testid={ `${index}-order-total-value` }>
                       {`R$ ${e.totalPrice.replace('.', ',')}`}
                     </p>
+                    <p data-testid={ `${index}-order-status` }>
+                      {`${e.status}`}
+                    </p>
                   </div>
                 </li>
               </ul>
