@@ -72,7 +72,8 @@ export default function AdminOrdersDetails() {
           <div className="title-adm-details">
             <h2 data-testid="order-number">{`Pedido ${id}`}</h2>
             <h2 data-testid="order-status">
-              {productsOfSale.length !== 0 && productsOfSale.status}
+              { orderStatus }
+              {/* {productsOfSale.length !== 0 && productsOfSale.status} */}
             </h2>
           </div>
           <div>
