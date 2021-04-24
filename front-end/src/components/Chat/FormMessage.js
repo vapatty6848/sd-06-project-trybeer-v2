@@ -16,6 +16,7 @@ function FormMessage() {
     <form onSubmit={ handleSend }>
       <div>
         <input
+          data-testid="message-input"
           type="text"
           placeholder="Digite uma mensagem..."
           onChange={ (event) => setMessage(event.target.value) }
