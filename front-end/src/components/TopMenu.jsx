@@ -19,6 +19,7 @@ export default function TopMenu({ pageTitle }) {
     if (e.target.value === 'Produtos') { history.push('/products'); }
     if (e.target.value === 'Meus Pedidos') { history.push('/orders'); }
     if (e.target.value === 'Meu Perfil') { history.push('/profile'); }
+    if (e.target.value === 'Conversar com a loja') { history.push('/chat'); }
     if (e.target.value === 'Sair') {
       localStorage.setItem('token', '');
       history.push('/login');
@@ -66,6 +67,16 @@ export default function TopMenu({ pageTitle }) {
               value="Meu Perfil"
             >
               Meu Perfil
+            </button>
+          </div>
+          <div className="side-menu-container">
+            <button
+              type="button"
+              data-testid="side-menu-chat"
+              onClick={ handleOnClickAsideButton }
+              value="Conversar com a loja"
+            >
+              Conversar com a loja
             </button>
           </div>
           <div className="side-menu-container">
