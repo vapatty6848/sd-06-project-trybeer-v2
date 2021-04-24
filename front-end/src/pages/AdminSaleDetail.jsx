@@ -8,6 +8,8 @@ export default function AdminSaleDetail() {
   const tokenFromLocalStorage = localStorage.getItem('token');
   const location = useLocation();
   const [orderDetail, setOrderDetail] = useState([]);
+  const [orderStatus, setOrderStatus] = useState('');
+  const [delivered, setDelivered] = useState(false);
   const SIX = 6;
   const pathName = location.pathname;
   const adminPathName = pathName.substr(SIX);
@@ -15,7 +17,10 @@ export default function AdminSaleDetail() {
 
   useEffect(() => {
     fetches.getSaleById(tokenFromLocalStorage, adminPathName)
-      .then((response) => setOrderDetail(response.data));
+      .then((response) => {
+        setOrderDetail(response.data);
+        setOrderStatus(response.data.status);
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -23,9 +28,8 @@ export default function AdminSaleDetail() {
     if (!token) return history.push('/login');
   };
 
-  const changeStatusToDelivered = () => {
+  const handletotalValue = () => {
     if (orderDetail.products) {
-      console.log(orderDetail.products);
       const totalPrice = orderDetail.products
         .reduce((accumulator, current) => accumulator
           + (Number(current.salesProducts.quantity) * Number(current.price)), 0);
@@ -34,9 +38,15 @@ export default function AdminSaleDetail() {
     }
   };
 
-  const handleChangeStatusButton = () => {
-    fetches.updateSale(tokenFromLocalStorage, adminPathName, 'Entregue');
-    history.push('/admin/orders');
+  const handleDeliverButton = async () => {
+    await fetches.updateSale(tokenFromLocalStorage, adminPathName, 'Entregue');
+    setOrderStatus('Entregue');
+    setDelivered(true);
+  };
+
+  const handlePreparationButton = async () => {
+    await fetches.updateSale(tokenFromLocalStorage, adminPathName, 'Preparando');
+    setOrderStatus('Preparando');
   };
 
   return (
@@ -67,11 +77,23 @@ export default function AdminSaleDetail() {
       <div className="total-value-container">
         <span data-testid="order-total-value">{`Total: R$ ${handletotalValue()}`}</span>
       </div>
+      <div>
+        { orderStatus }
+      </div>
+      <button
+        type="button"
+        data-testid="mark-as-prepared-btn"
+        onClick={ handlePreparationButton }
+        hidden={ delivered }
+      >
+        Preparar pedido
+      </button>
       <button
         className={ orderDetail.length && orderDetail[0].status }
         data-testid="mark-as-delivered-btn"
         type="button"
-        onClick={ changeStatusToDelivered }
+        onClick={ handleDeliverButton }
+        hidden={ delivered }
       >
         Marcar como entregue
       </button>

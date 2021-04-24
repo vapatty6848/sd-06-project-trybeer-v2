@@ -37,13 +37,11 @@ router.post('/orders', validateToken, rescue(async (req, res) => {
     const saleId = req.params.id;
 
     const mySaleDetail = await ordersService.getSaleDetail(saleId);
-    // console.log('entrei no controller', mySaleDetail);
     res.status(200).json(mySaleDetail);
   }));
 
   router.get('/admin/orders', validateToken, rescue(async (req, res) => {
     const allSales = await ordersService.getAllSales();
-    // console.log('entrei no controller', allSales);
     res.status(200).json(allSales);
   }));
 
