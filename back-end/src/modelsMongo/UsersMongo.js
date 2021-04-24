@@ -1,4 +1,5 @@
 const connection = require('../database/connection');
+
 const collectionName = 'users';
 
 const createUser = async (emailUser) => {
@@ -17,5 +18,5 @@ const getAllUsers = async () => {
 
 module.exports = {
   createUser,
-  getAllUsers
+  getAllUsers,
 };
