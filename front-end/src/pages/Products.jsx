@@ -14,14 +14,12 @@ function Products({ history }) {
   const initialCart = JSON.parse(localStorage.cart || []);
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState(initialCart);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const user = JSON.parse(localStorage.user);
     api.getAllProducts(user.token).then((response) => {
       if (response.message) return history.push('/login');
       setProducts(response);
-      setIsLoading(false);
     });
   }, [history]);
 
