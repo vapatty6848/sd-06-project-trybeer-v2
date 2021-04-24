@@ -27,9 +27,9 @@ ChatController.get('/admin/:email', async (req, res) => {
   
   const resRequired = await Chat.findOne({ email });
 
-  if (!resRequired) return res.status(NO_CONTENT).json({ err: 'NO_CONTENT' });
+  if (!resRequired) return res.status(NOT_FOUND).json({ err: 'NO_CONTENT' });
 
-  res.status(OK).json(resRequired);
+  res.status(OK).json(resRequired.messages);
 });
 
 module.exports = ChatController;

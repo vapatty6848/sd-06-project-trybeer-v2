@@ -11,7 +11,7 @@ function CostumerWebChat() {
   useEffect(() => {
     socket.emit('openRoom', email);
 
-    fetch(`http://localhost:3001/chat/`, {
+    fetch('http://localhost:3001/chat/', {
       headers: {
         'Content-Type': 'application/json',
         authorization: token,
@@ -29,6 +29,14 @@ function CostumerWebChat() {
   useEffect(() => {
     socket.on('message', (messageParam) => {
       console.log('messageParam', messageParam);
+      const ola = [
+        ...messages,
+        {
+          ...messageParam,
+          cli: false,
+        }
+      ]
+      setMessages(ola);
     });
   }, [messages]);
 

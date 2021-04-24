@@ -8,15 +8,15 @@ const statusUpdate = (socket) => {
   });
 };
 
-const messageProcess = (socket, io) => {
+const messageProcess = (socket) => {
   socket.on('message', ({ message, email, cli }) => {
     console.log(message, ' ', email, ' ', cli);
     if (typeof message === 'string' && typeof email === 'string' && typeof cli === 'boolean') {
-      console.log('entrou message')
+      console.log('entrou message');
       const date = new Date();
       const response = { message, date };
 
-      io.to(email).emit('message', response);
+      socket.to(email).emit('message', response);
 
       Chat.updateOne({ email }, {
         $push: {
