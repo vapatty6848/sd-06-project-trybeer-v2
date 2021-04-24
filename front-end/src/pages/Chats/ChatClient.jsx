@@ -3,6 +3,8 @@ import { useHistory } from 'react-router-dom';
 import socket from './socketClient';
 import { verifyUser } from '../../store/LocalStorage/actions';
 import { sendMessage } from './Requests';
+import Header from '../../components/Header/Header';
+import './chats.css'
 
 export default function ChatClient() {
   const [inputValue, setInputValue] = useState('');
@@ -54,8 +56,9 @@ export default function ChatClient() {
 
   return (
     <div>
+      <Header title="Chat Client" user="client" />
       <h1>Chat Client</h1>
-      <div>
+      <div class="messageBox">
         <ul>
           {messages && messages.map((msg, index) => (
             <li key={ index }>
