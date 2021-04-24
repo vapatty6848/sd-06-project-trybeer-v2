@@ -1,17 +1,27 @@
-const { sales, products, sales_products } = require('../models');
+const { sales, products, salesProducts } = require('../models');
 
-// const ordersModel = require('../model/ordersModel');
-
-const createOrders = async (sale) => sales.create(sale);
+const createOrders = async (userId, sale) => {
+  try {
+    return await sales.create({ 
+      userId,
+      totalPrice: sale.totalPrice,
+      deliveryAddress: sale.address,
+      deliveryNumber: sale.number,
+      saleDate: sale.date,
+      status: sale.orderStatus,
+     });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 
 const getOrders = async (userId) => {
-  // const sales = ordersModel.getOrders(userId);
-  // return sales;
-  sales.findAll({
+  const allSales = sales.findAll({
     where: {
       userId,
     },
   });
+  return allSales;
 };
 
 // NÃO ESTAMOS USANDO ESSA FUNÇÃO!!!
@@ -23,43 +33,25 @@ const getOrders = async (userId) => {
 // }
 
 const createProductsSales = async (mySaleProducts) => {
-  sales.create(mySaleProducts);
-};
-// const createProductsSales = async (mySaleProducts) => {
-//     ordersModel.createProductsSales(mySaleProducts);
-// };
-
-const getSaleDetail = (saleId) => {
-  sales.findAll({
-    where: { saleId },
-    include: [{
-      model: products, as: 'product',
-      model: sales_products , as: 'saleProducts',
-      model: sales, as: 'sale',
-    }],
-  });
+  salesProducts.create(mySaleProducts);
 };
 
-// const getSaleDetail = async (saleId) => {
-//   const saleDetail = await ordersModel.getSaleDetail(saleId);
-//   console.log('entrei no service', saleDetail);
-//   return saleDetail;
-// };
+const getSaleDetail = (saleId) => sales.findByPk(saleId, { include: [
+    { model: products, 
+      as: 'products', 
+      through: { // through trás os dados da tabela intermediária salesProducts, esperando um array de nome Attributes, se passar vazio não vem nada, do contrário passar por string.
+      attributes: ['saleId', 'quantity'],
+    } },
+    ] });
 
-const getAllSales = async () => sales.findAll();
-// const getAllSales = async () => {
-// const allSales = await ordersModel.getAllSales();
-// console.log('entrei no service', allSales);
-//   return allSales;
-// };
+const getAllSales = async () => sales.findAll(); 
 
-const updateSale = async (saleId, saleStatus) =>
-  sales.update({ status: saleStatus }, { where: { id: saleId } });
-// const updateSale = async (saleId) => {
-//   await ordersModel.updateSale(saleId);
-
-//   console.log('entrei no orders service', saleId);
-// };
+const updateSale = async (saleId, saleStatus) => {
+  sales.update(
+  { status: saleStatus },
+  { where: { id: saleId } },
+  );
+};
 
 module.exports = {
   createOrders,

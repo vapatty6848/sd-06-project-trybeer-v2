@@ -14,11 +14,6 @@ const createSales = (sequelize, DataTypes) => {
       { foreignKey: 'userId', as: 'user' });
   };
 
-  sale.associate = (models) => {
-    sale.belongsToMany(models.sales_products,
-      { foreignKey: 'saleId', as: 'sale', through: sale });
-  };
-
   return sale;
 };
 
