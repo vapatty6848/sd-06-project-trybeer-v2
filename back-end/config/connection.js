@@ -1,5 +1,5 @@
 const mongoClient = require('mongodb').MongoClient;
-require('dotenv').config();
+require('dotenv').config({ path: '../.env' });
 
 let schema = null;
 

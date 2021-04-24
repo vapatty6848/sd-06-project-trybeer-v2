@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { verifyEmailAndPassword, handleSubmit } from '../services';
 import logo from '../img/trybe.png';
-// import '../css/Login.css';
+import '../css/Login.css';
 
 function Login() {
   const [activeBtn, setActiveBtn] = useState(false);
