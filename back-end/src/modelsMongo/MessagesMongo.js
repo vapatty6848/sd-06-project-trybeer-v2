@@ -39,6 +39,7 @@ const getAllMessages = async () => {
 //   return product;
 // };
 
+
 module.exports = {
   createMessage,
   getMessageByNickname,

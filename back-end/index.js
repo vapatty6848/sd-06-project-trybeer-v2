@@ -23,6 +23,7 @@ const orderController = require('./src/controllers/orderController');
 const PORT = process.env.PORT || 3001;
 
 const { createMessage, getMessageByNickname } = require('./src/modelsMongo/MessagesMongo');
+const { createUser, getAllUsers } = require('./src/modelsMongo/UsersMongo.js');
 
 // Para entregar arquivos estáticos como imagens, arquivos CSS, e arquivos JavaScript
 app.use(express.static(path.join(__dirname, 'public')));
@@ -51,6 +52,18 @@ app.get('/chat', async (req, res) => {
   res.status(200).json(arrayMessages);
 });
 
+app.get('/chat/admin', async (req, res) => {
+  const allUsers = await getAllUsers();
+  const arrayResponse = []
+  allUsers.forEach( async(element) => {
+    const array = await getMessageByNickname(element.emailUser);
+    const lastMessage = array[array.length -1].timestamp;
+    arrayResponse.push({user: element.emailUser, lastMessage})
+  });
+  console.log('testando', arrayResponse);
+  res.status(200).json(arrayResponse);
+});
+
 app.use('/images', express.static(`${__dirname}/images`));
 
 app.all('*', (_req, res) => {
@@ -70,6 +83,11 @@ io.on('connection', (socket) => {
   console.log('Novo usuario conectado');
 
   socket.on('sendMessage', async ({ message, emailUser }) => {
+    const firstInsertion = await getMessageByNickname(emailUser);
+    if(firstInsertion.length === 0) {
+      await createUser(emailUser);
+    }
+
     const timestamp = getCurrentHour();
     await createMessage(message, emailUser, timestamp);
     const data = { data: message, sendAt: getCurrentHour() };

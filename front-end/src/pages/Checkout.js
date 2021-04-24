@@ -109,7 +109,7 @@ function Checkout() {
     setTimeout(() => {
       // history.push('/products');
       if (history.location.pathname === '/checkout') history.push('/products');
-      // clear();
+      clear();
     }, TIMEOUT);
   }
 
