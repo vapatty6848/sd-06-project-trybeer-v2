@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import api from '../api/axiosApi';
+import { Link } from 'react-router-dom';
 
 function ChatAdmin() {
   const [chatList, setChatList] = useState([]);
@@ -18,13 +19,15 @@ function ChatAdmin() {
   return (
     <div>
       {chatList.map((element, index) => (
-        <div key={ index } data-testid="containerChat">
-          <h2 data-testid="profile-name">{element.user}</h2>
-          <h3 data-testid="last-message">
-            Última mensagem às
-            {element.lastMessage}
-          </h3>
-        </div>
+        <Link to={`/admin/chat`}>
+          <div key={ index } data-testid="containerChat">
+            <h2 data-testid="profile-name">{element.user}</h2>
+            <h3 data-testid="last-message">
+              Última mensagem às
+              {element.lastMessage}
+            </h3>
+          </div>
+        </Link>
       ))}
     </div>
   );
