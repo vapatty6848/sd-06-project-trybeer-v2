@@ -19,7 +19,7 @@ function ChatAdmin() {
   return (
     <div>
       {chatList.map((element, index) => (
-        <Link to="/admin/chat" key={ `link-${index} `}>
+        <Link to="/admin/chat" key={ `link-${index} ` }>
           <div key={ index } data-testid="containerChat">
             <h2 data-testid="profile-name">{element.user}</h2>
             <h3 data-testid="last-message">
