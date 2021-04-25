@@ -76,6 +76,7 @@ export default function Login() {
             onClick={ () => history.push('/register') }
             disabled={ false }
           />
+          <h1>add</h1>
         </Content>
       </Container>
     </section>
