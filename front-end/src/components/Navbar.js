@@ -11,9 +11,8 @@ const Navbar = () => {
   const logout = () => localStorage.removeItem('user');
 
   return (
-    <DivNavContainer >
+    <DivNavContainer>
       {/* // style={ sidebar ? { width: '100%' } : { width: '0%' } } */}
-    
       <DivNavContent className="side-menu-container">
         {
           SidebarData.map((link, index) => (
