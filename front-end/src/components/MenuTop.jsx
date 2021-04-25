@@ -64,7 +64,7 @@ export default function MenuTop(props) {
                 <Link
                   className="nav-link btn btn-danger"
                   to="/Chat"
-                  data-testid="side-menu-item-logout"
+                  data-testid="side-menu-chat"
                 >
                   Sair
                 </Link>
