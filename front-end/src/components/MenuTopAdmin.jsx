@@ -25,6 +25,13 @@ export default function MenuTopAdmin() {
             >
               Meu Perfil
             </Link>
+            <Link
+              to="/admin/chats"
+              data-testid="side-menu-item-chat"
+              className="btn btn-danger"
+            >
+              Conversas
+            </Link>
           </div>
           <div className="link-second-adm">
             <Link

@@ -11,6 +11,8 @@ import Checkout from './pages/Checkout';
 import OrderDetails from './pages/OrderDetails';
 import AdminProfile from './pages/AdminProfile';
 import AdminOrdersDetails from './pages/AdminOrdersDetails';
+import Chat from './pages/Chat';
+import ChatAdmin from './pages/ChatAdmin';
 
 function App() {
   return (
@@ -23,10 +25,12 @@ function App() {
           <Route exact path="/login" component={ Login } />
           <Route exact path="/register" component={ Register } />
           <Route exact path="/products" component={ Products } />
+          <Route exact path="/chat" component={ Chat } />
           <Route exact path="/orders" component={ Orders } />
           <Route exact path="/profile" component={ Profile } />
           <Route exact path="/checkout" component={ Checkout } />
           <Route exact path="/orders/:id" component={ OrderDetails } />
+          <Route exact path="/admin/chats" component={ ChatAdmin } />
           <Redirect from="/" to="/login" />
         </Switch>
       </Provider>
