@@ -27,6 +27,7 @@ function App() {
           <Route exact path="/profile" component={ Profile } />
           <Route exact path="/checkout" component={ Checkout } />
           <Route exact path="/orders/:id" component={ OrderDetails } />
+          <Route exact path="/chat" component={ Chat } />
           <Redirect from="/" to="/login" />
         </Switch>
       </Provider>
