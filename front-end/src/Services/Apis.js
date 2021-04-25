@@ -108,7 +108,7 @@ export const getOrderDetails = async (id) => {
       saleDate: res.data.saleDate,
       valueTotal: res.data.totalPrice,
       products: productsArray,
-      status: res.data.status
+      status: res.data.status,
     };
     return finalResponse;
   })

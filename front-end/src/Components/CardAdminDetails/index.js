@@ -64,7 +64,7 @@ const CardAdminDetails = () => {
                 {`Pedido ${orders.id}`}
               </h1>
 
-              <h2 data-testid={`${id}-order-status`}>
+              <h2 data-testid={ `${id}-order-status` }>
                 {status}
               </h2>
             </div>
