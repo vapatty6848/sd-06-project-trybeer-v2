@@ -60,7 +60,7 @@ const MyOrders = () => {
                   </span>
                   <span
                     className="order-number"
-                    data-testid={ `${index}-order-number` }
+                    data-testid={ `${index}-order-status` }
                   >
                     { `Pedido ${order.status}` }
                   </span>

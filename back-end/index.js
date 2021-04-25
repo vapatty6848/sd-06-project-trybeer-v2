@@ -50,4 +50,4 @@ app.use((err, _req, res, _next) => {
   res.status(codeStatus).json({ message: err.message });
 });
 
-app.listen(PORT);
+app.listen(PORT, () => console.log(`server running on port ${PORT}`));

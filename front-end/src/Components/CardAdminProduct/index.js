@@ -57,7 +57,7 @@ CardAdminProduct.propTypes = {
     price: PropTypes.string.isRequired,
     urlImage: PropTypes.string.isRequired,
     quantity: PropTypes.string,
-    sales_products: PropTypes.string,
+    sales_products: PropTypes.instanceOf(Object),
   }).isRequired,
   index: PropTypes.number.isRequired,
 };

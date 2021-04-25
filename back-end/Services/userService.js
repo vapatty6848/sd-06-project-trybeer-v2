@@ -26,7 +26,7 @@ const loginUser = async (req, res) => {
 const validateEmail = async (req, res, next) => {
   const { email } = req.body;
   const userData = await models.users.findOne({ where: { email } });
-  const user = userData.dataValues;
+  const user = userData;
 
   if (user) res.status(CONFLICT).json({ message: 'E-mail already in database.' });
   next();
@@ -34,7 +34,9 @@ const validateEmail = async (req, res, next) => {
 
 const registerNewUser = async (req, res) => {
   const { name, email, password, role } = req.body;
+  console.log('backUser', name, email, password, role);
   await models.users.create({ name, email, password, role });
+  
   return res.status(CREATED).json({ message: 'OK' });
 };
 

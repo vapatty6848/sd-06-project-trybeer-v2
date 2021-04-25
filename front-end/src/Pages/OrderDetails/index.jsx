@@ -47,6 +47,9 @@ const OrderDetails = () => {
                   <h2 data-testid="order-number">
                     {`Pedido ${id} `}
                   </h2>
+                  <h2 data-testid="order-status">
+                    {`Pedido ${orders.status} `}
+                  </h2>
                   <span data-testid="order-date">
                     {(moment(orders.saleDate).format('DD/MM/YYYY'))}
                   </span>
