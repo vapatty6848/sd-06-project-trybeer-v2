@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { FaListAlt, FaUserAlt } from 'react-icons/fa';
+import { BsChatSquareQuoteFill } from 'react-icons/bs';
 import { ImExit } from 'react-icons/im';
 
 import { GlobalContext } from '../../Contexts/GlobalContext';
@@ -58,6 +59,17 @@ const SideBarAdmin = () => {
             size="25px"
           />
           Perfil
+        </S.Navigation>
+        <S.Navigation
+          onClick={ () => navigationPages(params, '/admin/chats', setStateSideBarAdmin) }
+          data-testid="side-menu-item-chat"
+        >
+          <BsChatSquareQuoteFill
+            className="icon"
+            fill="#cf8d2e"
+            size="25px"
+          />
+          Conversas
         </S.Navigation>
 
         <S.Navigation

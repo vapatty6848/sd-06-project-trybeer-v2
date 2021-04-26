@@ -9,6 +9,7 @@ import Register from './Pages/Register';
 import Profile from './Pages/Profile';
 import Products from './Pages/Products';
 import Checkout from './Pages/Checkout';
+import AdminChats from './Pages/AdminChats';
 import Chat from './Pages/Chat';
 // import CheckoutTest from './Pages/CheckoutTest';
 import MyOrders from './Pages/OrderDetails';
@@ -27,6 +28,7 @@ const Routes = () => (
     />
     <Route path="/login" component={ Login } />
     <Route path="/chat" component={ Chat } />
+    <Route path="/admin/chats" component={ AdminChats } />
     <Route path="/register" component={ Register } />
     <Route path="/profile" component={ Profile } />
     <Route path="/products" component={ Products } />
