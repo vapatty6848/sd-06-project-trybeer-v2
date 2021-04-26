@@ -22,8 +22,15 @@ const { createMessages } = require('./chat/models/mongoModel');
 const port = 3001;
 const portSocket = 4001;
 
+const hora = () => {
+  const allTime = new Date().toLocaleTimeString().split(':');
+  const time = `${allTime[0]}:${allTime[1]}`;
+  return time;
+};
+
 io.on('connection', (socket) => {
-  socket.on('message', async ({ user, time, message, Loja }) => {
+  socket.on('message', async ({ user, message, Loja }) => {
+    const time = hora();
     // console.log(userBack, time, msg, Loja);
     if (user !== undefined) {
       createMessages(user, time, message, Loja);

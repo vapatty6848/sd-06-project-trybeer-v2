@@ -39,12 +39,11 @@ export default function ChatClient() {
   }, [history]);
 
   const newMessage = async () => {
-    const hora = new Date().toLocaleTimeString().split(':');
-    const time = `${hora[0]}:${hora[1]}`;
-    console.log(time, emailUser, inputValue);
+    // const hora = new Date().toLocaleTimeString().split(':');
+    // const time = `${hora[0]}:${hora[1]}`;
+    console.log(emailUser, inputValue);
     socket.emit('message', ({
       user: emailUser,
-      time,
       message: inputValue,
       Loja: 'Loja',
     }));
