@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import fechtMessages from '../methods/getMessages';
 
-const dateFormat = require('dateformat');
-
 function AdminListChats() {
   const [messages, setMessages] = useState([]);
-  // const [user, setUser] = useState('');
 
   useEffect(() => {
     const fechtMsg = async () => {
@@ -14,9 +11,6 @@ function AdminListChats() {
     };
     fechtMsg();
   }, []);
-
-
-  console.log(messages);
 
   return (
     <div>
