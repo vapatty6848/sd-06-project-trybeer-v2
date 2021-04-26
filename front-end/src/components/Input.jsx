@@ -1,18 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import TextField from '@material-ui/core/TextField';
 
 function Input({ type, value, setValue, label }) {
   return (
-    <label htmlFor={ type } className={ `${type}-label` }>
-      {`${label}`}
-      <input
-        type={ type }
-        name={ type }
-        autoComplete={ `current-${type}` }
-        className={ `${type}-input` }
-        data-testid={ `${type}-input` }
-        value={ value }
-        onChange={ (e) => setValue(e.target.value) }
+    <label htmlFor={type} className={`${type}-label`}>
+      <TextField
+        variant="outlined"
+        label={`${label}`}
+        type={type}
+        name={type}
+        autoComplete={`current-${type}`}
+        className={`${type}-input`}
+        data-testid={`${type}-input`}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
       />
     </label>
   );

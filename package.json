@@ -26,6 +26,8 @@
   },
   "homepage": "https://github.com/betrybe/sd-0x-project-trybeer-v2#readme",
   "dependencies": {
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
     "@mysql/xdevapi": "8.0.20",
     "dotenv": "8.2.0",
     "mongodb": "3.6.2",

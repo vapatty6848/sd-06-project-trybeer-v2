@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TextField from '@material-ui/core/TextField';
+import Checkbox from '@material-ui/core/Checkbox';
 
-function InputRegister({ name, value, setValue, checked, label, type = 'text' }) {
+function InputCheckbox({ name, value, setValue, checked, label, type = 'text' }) {
   return (
     <label htmlFor={ name } className={ `${name}-label` }>
-      <TextField
+      {label}
+      <Checkbox
         variant="outlined"
+        color="primary"
         label={`${label}`}
         type={ type }
         name={ name }
@@ -21,16 +23,16 @@ function InputRegister({ name, value, setValue, checked, label, type = 'text' })
   );
 }
 
-export default InputRegister;
+export default InputCheckbox;
 
-InputRegister.defaultProps = {
+InputCheckbox.defaultProps = {
   type: '',
   value: '',
   checked: false,
 
 };
 
-InputRegister.propTypes = {
+InputCheckbox.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   value: PropTypes.string,

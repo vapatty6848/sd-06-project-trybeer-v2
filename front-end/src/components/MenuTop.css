@@ -1,15 +1,6 @@
-.top {
-  align-items: center;
-  border: none;
-  box-shadow: 1px 5px 15px -16px black;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 0.8rem;
-}
 
 .top-btn {
-  background-color: black;
+  background-color: #3F51B5;
   border: none;
   border-radius: 14px 1px 14px 14px;
   padding: 7px;

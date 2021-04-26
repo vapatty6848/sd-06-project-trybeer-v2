@@ -1,17 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ButtonMaterial from '@material-ui/core/Button';
 
-function Button({ className, onClick, disabled, children }) {
+function Button({ className, onClick, disabled, children, size }) {
   return (
-    <button
+    <ButtonMaterial
+    variant="contained"
+    color="primary"
       type="button"
       data-testid={ className }
       className={ className }
       onClick={ onClick }
       disabled={ disabled }
+      size={size || "medium"}
     >
       {children}
-    </button>
+    </ButtonMaterial>
   );
 }
 

@@ -12,6 +12,7 @@ function Register() {
   const [formValidated, setFormValidated] = useState(false);
   const [messageError, setMessageError] = useState('');
   const [responseError, setResponseError] = useState('');
+
   const url = useHistory();
 
   useEffect(() => {
@@ -48,7 +49,7 @@ function Register() {
     <RegisterForm
       state={ {
         name, email, password, seller, formValidated, messageError, responseError } }
-      setState={ { setName, setEmail, setPassword, setSeller, setMessageError } }
+      setState={ { setName, setEmail, setPassword, setSeller, setMessageError, } }
       handleClick={ handleClick }
     />
   );

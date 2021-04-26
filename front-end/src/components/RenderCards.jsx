@@ -6,7 +6,7 @@ const renderCards = (allProducts, asd, setAsd, itemQty) => allProducts.map(
     <section className="card-content" key={ id }>
       <img
         className="products-img"
-        src={ prod.url_image }
+        src={ prod.urlImage }
         alt="Foto do Produto"
         data-testid={ `${id}-product-img` }
       />

@@ -2,10 +2,9 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin-top: 40px;
 }
 
-.email-label {
+.register-label {
   display: flex;
   flex-direction: column;
   margin: auto;
@@ -14,9 +13,6 @@
 }
 
 .signup-email {
-  border: solid 1px rgb(56, 56, 56);
-  border-radius: 14px;
-  height: 30px;
   margin-bottom: 10px;
   margin-top: 5px;
 }
@@ -30,9 +26,6 @@
 }
 
 .signup-password {
-  border: solid 1px rgb(56, 56, 56);
-  border-radius: 14px;
-  height: 30px;
   margin-bottom: 10px;
   margin-top: 5px;
 }
@@ -46,9 +39,6 @@
 }
 
 .signup-name {
-  border: solid 1px rgb(56, 56, 56);
-  border-radius: 14px;
-  height: 30px;
   margin-bottom: 10px;
   margin-top: 5px;
 }

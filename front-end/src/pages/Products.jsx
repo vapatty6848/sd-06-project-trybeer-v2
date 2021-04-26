@@ -4,8 +4,14 @@ import fetchProducts from '../methods/products';
 import renderCards from '../components/RenderCards';
 import isLogged from '../components/isLogged';
 import MenuTop from '../components/MenuTop';
+import buttomFloatChat from '../components/ButtonFloatChat'
 import currencyFormat from '../utils/currencyFormat';
 import './Products.css';
+
+
+
+import AppBar from '@material-ui/core/AppBar';
+import Fab from '@material-ui/core/Fab';
 
 const itemQty = (prod) => {
   const items = JSON.parse(localStorage.getItem('items'));
@@ -53,23 +59,29 @@ function Products() {
     <>
       <MenuTop title="TryBeer" />
       {onSuccess ? <p>Compra realizada com sucesso!</p> : null}
+ 
       <section className="cards-container">
+      <buttomFloatChat/>
         {renderCards(allProducts, reload, setReload, itemQty)}
-        <section className="checkout-prods-container">
-          <p data-testid="checkout-bottom-btn-value" className="checkout-value">
-            {currencyFormat(cartTotal)}
-          </p>
-          <button
-            type="button"
-            className="checkout-btn"
-            disabled={ reload === 0 }
-            data-testid="checkout-bottom-btn"
-            onClick={ () => route.push('/checkout') }
-          >
-            Ver Carrinho
+        <AppBar className="app-bar" position="fixed">
+          <section className="checkout-prods-container">
+            <p data-testid="checkout-bottom-btn-value" className="checkout-value">
+              {currencyFormat(cartTotal)}
+            </p>
+            <button
+              type="button"
+              className="checkout-btn"
+              disabled={reload === 0}
+              data-testid="checkout-bottom-btn"
+              onClick={() => route.push('/checkout')}
+            >
+              Ver Carrinho
           </button>
-        </section>
+          </section>
+        </AppBar>
+
       </section>
+
     </>
   );
 }

@@ -2,6 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import InputRegister from './InputRegister';
+import InputCheckbox from './InputCheckbox';
+import Button from '../components/Button';
+
+// Material-ui
+import Grow from '@material-ui/core/Grow';
+
 import '../style/Register.css';
 
 const RegisterForm = ({ state, setState, handleClick }) => {
@@ -10,10 +16,11 @@ const RegisterForm = ({ state, setState, handleClick }) => {
   const { setName, setEmail, setPassword, setSeller } = setState;
   return (
 
-    <section className="register-container">
+    <main>
+      <form>
       <h1>Pagina de Registro</h1>
       <InputRegister
-        name="name"
+        name="email"
         setValue={ setName }
         value={ name }
         label="Nome"
@@ -26,40 +33,51 @@ const RegisterForm = ({ state, setState, handleClick }) => {
         type="email"
       />
       <InputRegister
-        name="password"
+        name="email"
         setValue={ setPassword }
         value={ password }
         label="Senha"
         type="password"
       />
-      <InputRegister
+      <InputCheckbox
         name="seller"
         setValue={ setSeller }
         checked={ seller }
         label="Quero vender"
         type="checkbox"
       />
+      <Grow
+      in={messageError}
+      style={{ transformOrigin: '0 0 0' }}
+          {...(messageError ? { timeout: 1500 } : {})}
+      >
       <p className="signup-p">
         {messageError
        !== '' || responseError !== '' ? messageError || responseError : null}
       </p>
-      <button
-        className="signup-btn"
+      </Grow>
+
+      <Button
+        className="email-label"
         type="button"
         disabled={ !formValidated }
         data-testid="signup-btn"
         onClick={ async () => handleClick() }
       >
         Cadastrar
-      </button>
+      </Button>
+
       <Link
         to="/login"
         className="no-account-btn"
         data-testid="no-account-btn"
       >
+        <Button>
         Já tenho conta
+        </Button>
       </Link>
-    </section>
+      </form>
+    </main>
   );
 };
 export default RegisterForm;
