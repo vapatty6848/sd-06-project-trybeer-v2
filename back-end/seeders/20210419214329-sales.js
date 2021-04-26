@@ -3,7 +3,7 @@ module.exports = {
     await queryInterface.bulkInsert('sales', [
       {
         userId: 2,
-        totalPrice: 4.40,
+        totalPrice: 96.85,
         deliveryAddress: 'Rua dos Bobos',
         deliveryNumber: 0,
         saleDate: '2021-03-30 09:51:14',
