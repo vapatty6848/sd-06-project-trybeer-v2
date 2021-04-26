@@ -3,8 +3,8 @@
   flex-wrap: wrap;
   font-family: Open Sans , Courier New , sans-serif;
   justify-content: space-between;
-  margin-top: 72px;
   margin-bottom: 72px;
+  margin-top: 72px;
   padding: 12px;
 }
 
@@ -15,7 +15,7 @@
   box-shadow: 2px 5px 20px -16px;
   display: flex;
   flex-direction: column;
-  margin: 5px ;
+  margin: 5px;
   padding: 5px;
   text-align: center;
   width: 150px;
@@ -56,7 +56,7 @@ h4 {
 
 .checkout-prods-container {
   align-items: center;
-  background-color: #3F51B5;
+  background-color: #3f51b5;
   bottom: 0;
   display: flex;
   justify-content: space-around;
@@ -84,9 +84,8 @@ h4 {
 }
 
 
-@media only screen and (max-width: 650px) {
-  /* For mobile phones: */
-  [class="card-content"] {
+@media only screen and ( max-width : 650px ) {
+  [ class = 'card-content' ] {
     width: 100%;
   }
 }
