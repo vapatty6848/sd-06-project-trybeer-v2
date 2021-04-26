@@ -13,7 +13,7 @@ export default function Register() {
     wantToSell: false,
   });
 
-  const numberSetTime = 2300;
+  const numberSetTime = 5000;
 
   const handleRegisterUser = async (dataUser) => {
     const { name, email, password, wantToSell } = dataUser;

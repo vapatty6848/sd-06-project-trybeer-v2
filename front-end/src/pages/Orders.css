@@ -19,11 +19,11 @@
   background-color: #9e2a41;
   border: double;
   color: white;
+  display: inline-block;
+  font-size: 16px;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
 }
 
-.buttonOrder:hover {background-color: #451311}
+.buttonOrder:hover { background-color: #451311 };
