@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
-import { saveMessage } from '../../Services/Apis';
+import socket from '../../utils/socketClient';
+import { saveMessage, getMessages } from '../../Services/Apis';
+import MessagesBox from '../../Components/MessagesBox';
 
-export default function Chat() {
+function Chat({ location: { pathname } }) {
+  const [isLoading, setIsLoading] = useState(true);
   const [message, setMessage] = useState('');
+  const [messages, setMessages] = useState([]);
   const [email, setEmail] = useState('');
   const [role, setRole] = useState('');
-
-  useEffect(() => {
-    const dataStorage = localStorage.getItem('user');
-    const { email: localStorageEmail, role: localStorageRole } = JSON.parse(dataStorage);
-
-    setEmail(localStorageEmail);
-    setRole(localStorageRole);
-  }, []);
 
   const generateTimeStamp = () => {
     const dateOptions = Intl.DateTimeFormat(
@@ -35,45 +32,58 @@ export default function Chat() {
     return `${hour}:${minute}`;
   };
 
-  const renderMessage = (timestamp) => {
-    const DATA_TESTID = 'data-testid';
-    const ul = document.getElementById('messages-container');
-    const li = document.createElement('li');
+  const renderOldMessages = async () => {
+    const oldMessagesData = await getMessages();
+    const oldMessages = oldMessagesData.find((oldMessage) => oldMessage.email === email);
+    const messagesList = [];
 
-    const emailSpan = document.createElement('span');
-    emailSpan.setAttribute(DATA_TESTID, 'nickname');
-    emailSpan.innerText = email;
-
-    const timeSpan = document.createElement('span');
-    timeSpan.setAttribute(DATA_TESTID, 'message-time');
-    timeSpan.innerText = timestamp;
-
-    const messageSpan = document.createElement('p');
-    messageSpan.setAttribute(DATA_TESTID, 'text-message');
-    messageSpan.innerText = message;
-
-    const lineSpan = document.createElement('span');
-    lineSpan.innerText = ' - ';
-
-    li.appendChild(emailSpan);
-    li.appendChild(lineSpan);
-    li.appendChild(timeSpan);
-    li.appendChild(messageSpan);
-    ul.appendChild(li);
+    if (oldMessages && email) {
+      oldMessages.messages.forEach((oldMessage) => {
+        oldMessage.email = oldMessages.email;
+        messagesList.push(oldMessage);
+      });
+    }
+    setMessages(messagesList);
+    setIsLoading(false);
   };
 
-  const handleSendMessage = () => {
+  useEffect(() => {
+    const dataStorage = localStorage.getItem('user');
+    const { email: localStorageEmail, role: localStorageRole } = JSON.parse(dataStorage);
+    setEmail(localStorageEmail);
+    setRole(localStorageRole);
+  }, []);
+
+  useEffect(() => {
+    renderOldMessages();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading]);
+
+  const handleSendMessage = (event) => {
+    event.preventDefault();
     const timestamp = generateTimeStamp();
     saveMessage(message, email, timestamp, role);
-
-    renderMessage(timestamp);
+    socket.emit('sendMessage', { data: { message, email, timestamp, role } });
     setMessage('');
   };
 
+  useEffect(() => {
+    socket.on('receiveMessage', ({ data }) => {
+      setMessages([...messages, {
+        message: data.message,
+        email: data.email,
+        timestamp: data.timestamp,
+        role: data.role,
+      }]);
+    });
+  }, [messages]);
+
   return (
     <div>
-      <ul id="messages-container" />
-      <form>
+      { isLoading ? <p>Carregando mensagens</p> : (
+        <MessagesBox messages={ messages } pathname={ pathname } clientEmail={ email } />
+      ) }
+      <form onSubmit={ handleSendMessage }>
         <input
           type="text"
           value={ message }
@@ -81,8 +91,7 @@ export default function Chat() {
           data-testid="message-input"
         />
         <button
-          type="button"
-          onClick={ handleSendMessage }
+          type="submit"
           data-testid="send-message"
         >
           Enviar
@@ -91,3 +100,9 @@ export default function Chat() {
     </div>
   );
 }
+
+Chat.propTypes = {
+  location: PropTypes.instanceOf(Object).isRequired,
+};
+
+export default Chat;
