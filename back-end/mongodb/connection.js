@@ -7,11 +7,11 @@ const connection = async () => {
   if (schema) return Promise.resolve(schema);
 
   return mongoClient
-  .connect("mongodb://localhost:27017", {
+  .connect('mongodb://localhost:27017', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then((conn) => conn.db("Trybeer"))
+  .then((conn) => conn.db('Trybeer'))
   .then((dbSchema) => {
     schema = dbSchema;
     return schema;

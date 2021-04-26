@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
+import AppBar from '@material-ui/core/AppBar';
 import fetchProducts from '../methods/products';
 import renderCards from '../components/RenderCards';
 import isLogged from '../components/isLogged';
 import MenuTop from '../components/MenuTop';
-import buttomFloatChat from '../components/ButtonFloatChat'
+// import buttomFloatChat from '../components/ButtonFloatChat';
 import currencyFormat from '../utils/currencyFormat';
 import './Products.css';
-
-
-
-import AppBar from '@material-ui/core/AppBar';
-
 
 const itemQty = (prod) => {
   const items = JSON.parse(localStorage.getItem('items'));
@@ -59,9 +55,9 @@ function Products() {
     <>
       <MenuTop title="TryBeer" />
       {onSuccess ? <p>Compra realizada com sucesso!</p> : null}
- 
+
       <section className="cards-container">
-      <buttomFloatChat/>
+        <buttomFloatChat />
         {renderCards(allProducts, reload, setReload, itemQty)}
         <AppBar className="app-bar" position="fixed">
           <section className="checkout-prods-container">
@@ -71,12 +67,12 @@ function Products() {
             <button
               type="button"
               className="checkout-btn"
-              disabled={reload === 0}
+              disabled={ reload === 0 }
               data-testid="checkout-bottom-btn"
-              onClick={() => route.push('/checkout')}
+              onClick={ () => route.push('/checkout') }
             >
               Ver Carrinho
-          </button>
+            </button>
           </section>
         </AppBar>
 

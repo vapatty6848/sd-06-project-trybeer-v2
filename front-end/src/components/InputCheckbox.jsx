@@ -9,7 +9,7 @@ function InputCheckbox({ name, value, setValue, checked, label, type = 'text' })
       <Checkbox
         variant="outlined"
         color="primary"
-        label={`${label}`}
+        label={ `${label}` }
         type={ type }
         name={ name }
         className={ `signup-${name}` }

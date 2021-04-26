@@ -4,10 +4,10 @@ import TextField from '@material-ui/core/TextField';
 
 function InputRegister({ name, value, setValue, checked, label, type = 'text' }) {
   return (
-    <label htmlFor={ name } className={ `${name}-label` }>
+    <div htmlFor={ name } className={ `${name}-label` }>
       <TextField
         variant="outlined"
-        label={`${label}`}
+        label={ `${label}` }
         type={ type }
         name={ name }
         className={ `signup-${name}` }
@@ -17,7 +17,7 @@ function InputRegister({ name, value, setValue, checked, label, type = 'text' })
         onChange={ (e) => (type !== 'checkbox'
           ? setValue(e.target.value) : setValue(e.target.checked)) }
       />
-    </label>
+    </div>
   );
 }
 

@@ -5,14 +5,14 @@ import ButtonMaterial from '@material-ui/core/Button';
 function Button({ className, onClick, disabled, children, size }) {
   return (
     <ButtonMaterial
-    variant="contained"
-    color="primary"
+      variant="contained"
+      color="primary"
       type="button"
       data-testid={ className }
       className={ className }
       onClick={ onClick }
       disabled={ disabled }
-      size={size || "medium"}
+      size={ size || 'medium' }
     >
       {children}
     </ButtonMaterial>
@@ -29,4 +29,5 @@ Button.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
+  size: PropTypes.string.isRequired,
 };

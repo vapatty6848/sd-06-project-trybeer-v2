@@ -17,7 +17,6 @@ const handleChanges = async (email, password, disableButton) => {
 };
 
 function Login() {
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [buttonLogin, setButton] = useState(true);
@@ -37,20 +36,20 @@ function Login() {
         <h1>Login</h1>
         <Input
           type="email"
-          setValue={setEmail}
-          value={email}
+          setValue={ setEmail }
+          value={ email }
           label="Email"
         />
         <Input
           type="password"
-          setValue={setPassword}
-          value={password}
+          setValue={ setPassword }
+          value={ password }
           label="Senha"
         />
         <Button
           className="signin-btn"
-          onClick={async () => setUser(await login({ email, password }))}
-          disabled={buttonLogin}
+          onClick={ async () => setUser(await login({ email, password })) }
+          disabled={ buttonLogin }
 
         >
           Entrar
@@ -63,7 +62,7 @@ function Login() {
         >
           <Button size="small">
             Ainda não tenho conta
-            </Button>
+          </Button>
         </Link>
 
       </form>

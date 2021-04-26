@@ -4,19 +4,19 @@ import TextField from '@material-ui/core/TextField';
 
 function Input({ type, value, setValue, label }) {
   return (
-    <label htmlFor={type} className={`${type}-label`}>
+    <div htmlFor={ type } className={ `${type}-label` }>
       <TextField
         variant="outlined"
-        label={`${label}`}
-        type={type}
-        name={type}
-        autoComplete={`current-${type}`}
-        className={`${type}-input`}
-        data-testid={`${type}-input`}
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
+        label={ `${label}` }
+        type={ type }
+        name={ type }
+        autoComplete={ `current-${type}` }
+        className={ `${type}-input` }
+        data-testid={ `${type}-input` }
+        value={ value }
+        onChange={ (e) => setValue(e.target.value) }
       />
-    </label>
+    </div>
   );
 }
 

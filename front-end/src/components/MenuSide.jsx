@@ -10,11 +10,11 @@ function MenuSide() {
       urlRoute = '/admin'; modifyId = '-'; isClient = false;
     }
     return (
-      
+
       <div className="side-menu-container">
         { isClient
         && (
-          
+
           <button
             className="side-btn"
             data-testid="side-menu-item-products"
