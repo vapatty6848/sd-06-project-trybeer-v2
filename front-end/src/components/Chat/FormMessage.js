@@ -7,9 +7,10 @@ function FormMessage() {
   const handleSend = (event) => {
     event.preventDefault();
     const user = JSON.parse(localStorage.getItem('user'));
-    const from = user.email;
-    console.log(from);
-    //socket.emit('chat.sendMessage', { message, from, dest });
+    const nickname = user.email;
+    console.log(`${nickname} enviou ${message}`);
+    socket.emit('chat.sendMessage', { message, nickname });
+    setMessage('');
   }
 
   return (
@@ -17,11 +18,15 @@ function FormMessage() {
       <div>
         <input
           type="text"
+          id="message-input"
+          data-testid="message-input"
           placeholder="Digite uma mensagem..."
           onChange={(event) => setMessage(event.target.value)}
+          value={ message }
         />
         <button
           type="submit"
+          data-testid="send-message"
         >Enviar</button>
       </div>
     </form>

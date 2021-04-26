@@ -85,3 +85,21 @@ export const createNewProduct = async (product) => {
 
   return requestResponse;
 };
+
+export const getAllChats = async () => {
+  const requestResponse = await api.get('messages/chatList')
+    .then((response) => response.data)
+    .catch((error) => error.response.data);
+  
+  return requestResponse;
+};
+
+export const getRoomMessages = async (nickname) =>  {
+  const requestResponse = await api.post('messages/chatRoom', {
+    nickname,
+  })
+    .then(response => response.data)
+    .catch((error) => error.response.data);
+  
+  return requestResponse;
+}
