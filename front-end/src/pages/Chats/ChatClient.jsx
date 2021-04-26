@@ -10,15 +10,6 @@ export default function ChatClient() {
   const [messages, setMessages] = useState([]);
   // const [att, setAtt] = useState(0);
   const [emailUser, setEmail] = useState('');
-  // socket.emit('message', 'minha mensagem incrivel!');
-  // // recebe msg do back
-  // socket.on('mensagem', (msg) => {
-  //   console.log(msg, 'msg');
-  // });
-
-  // socket.on('Mensagem do admin pro cliente', () => {
-  //   setAtt(att + 1);
-  // });
 
   socket.on('messages', async ({ user, time, message, Loja }) => {
     // console.log(userBack, time, msg, Loja);
@@ -39,8 +30,6 @@ export default function ChatClient() {
   }, [history]);
 
   const newMessage = async () => {
-    // const hora = new Date().toLocaleTimeString().split(':');
-    // const time = `${hora[0]}:${hora[1]}`;
     console.log(emailUser, inputValue);
     socket.emit('message', ({
       user: emailUser,
@@ -53,9 +42,6 @@ export default function ChatClient() {
     e.preventDefault();
     newMessage();
     setInputValue('');
-    // getAllMessages(emailUser);
-    // setAtt(att + 12);
-    // socket.emit('clientMsg');
   };
 
   const handleChangeMessage = (value) => {
