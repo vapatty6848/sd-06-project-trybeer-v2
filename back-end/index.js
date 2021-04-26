@@ -22,8 +22,8 @@ const orderController = require('./src/controllers/orderController');
 
 const PORT = process.env.PORT || 3001;
 
-const { createMessage, getMessageByNickname } = require('./src/modelsMongo/MessagesMongo');
-const { createUser, getAllUsers } = require('./src/modelsMongo/UsersMongo.js');
+const { createMessage, getMessageByNickname, getListAdminChat } = require('./src/modelsMongo/MessagesMongo');
+const { createUser, getAllUsers  } = require('./src/modelsMongo/UsersMongo.js');
 
 // Para entregar arquivos estáticos como imagens, arquivos CSS, e arquivos JavaScript
 app.use(express.static(path.join(__dirname, 'public')));
@@ -53,15 +53,21 @@ app.get('/chat', async (req, res) => {
 });
 
 app.get('/chat/admin', async (req, res) => {
-  const allUsers = await getAllUsers();
+  // const allUsers = await getAllUsers();
+  // const arrayResponse = allUsers.map(async (element) => {
+  //   const array = await getMessageByNickname(element.emailUser);
+  //   const lastMessage = array[array.length - 1].timestamp;
+  //   return { user: element.emailUser, lastMessage };
+  // });
+  // Promise.all([...arrayResponse]).then((e) => res.status(200).json(e));
+  const listAdmin = await getListAdminChat();
+  const arrayListAdmin = listAdmin.map((element) => {
+    const hour = element.timestamp.getHours();
+    const minute = element.timestamp.getMinutes();
+    return {user: element.email, lastMessage:`${hour}:${minute}`  }
+  })
 
-  const arrayResponse = allUsers.map(async (element) => {
-    const array = await getMessageByNickname(element.emailUser);
-    const lastMessage = array[array.length - 1].timestamp;
-    return { user: element.emailUser, lastMessage };
-  });
-
-  Promise.all([...arrayResponse]).then((e) => res.status(200).json(e));
+  return res.status(200).json(arrayListAdmin);
 });
 
 app.use('/images', express.static(`${__dirname}/images`));
@@ -76,21 +82,21 @@ app.use(error);
 
 const getCurrentHour = () => {
   const now = new Date();
-  return `${now.getHours()}:${now.getMinutes()}`;
+  // return `${now.getHours()}:${now.getMinutes()}`;
+  return now;
 };
 
 io.on('connection', (socket) => {
   console.log('Novo usuario conectado');
 
   socket.on('sendMessage', async ({ message, emailUser }) => {
-    const firstInsertion = await getMessageByNickname(emailUser);
-    if (firstInsertion.length === 0) {
-      await createUser(emailUser);
-    }
-
+    // const firstInsertion = await getMessageByNickname(emailUser);
+    // if (firstInsertion.length === 0) {
+    //   await createUser(emailUser);
+    // }
     const timestamp = getCurrentHour();
     await createMessage(message, emailUser, timestamp);
-    const data = { data: message, sendAt: getCurrentHour() };
+    const data = { data: message, sendAt: getCurrentHour(), };
     io.emit('receiveMessage', data);
   });
 });

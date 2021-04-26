@@ -1,6 +1,6 @@
 const connection = require('../database/connection');
 // const { ObjectId } = require('mongodb');
-const collectionName = 'conversations';
+const collectionName = 'messages';
 
 const createMessage = async (message, emailUser, timestamp) => {
   const { insertedId } = await connection()
@@ -24,6 +24,15 @@ const getAllMessages = async () => {
   return messagesResponse;
 };
 
+const getListAdminChat = async () => {
+  const list = await connection()
+    .then((db) => db.collection(collectionName).aggregate([
+      { $group: { _id: "$emailUser", timestamp: { $max: '$timestamp' } } },
+      { $project: { _id: 0, email: '$_id', timestamp: '$timestamp' } }
+   ]).toArray());
+  return list;
+}
+
 // const deleteById = async (id) => {
 
 //   const product = await connection()
@@ -43,5 +52,6 @@ module.exports = {
   createMessage,
   getMessageByNickname,
   getAllMessages,
+  getListAdminChat,
   // deleteById,
 };

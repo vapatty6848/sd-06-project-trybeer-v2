@@ -13,7 +13,7 @@ describe('8 - Criar funcionalidade de lista de conversas de chat na visão de ad
     cy.exec('cd back-end && npx sequelize-cli db:drop');
     cy.exec('cd back-end && npx sequelize-cli db:create && npx sequelize-cli db:migrate $');
     cy.exec('cd back-end && npx sequelize-cli db:seed:all $');
-    cy.task('deleteCollection', 'mensagens');
+    cy.task('deleteCollection', 'messages');
     cy.visit(`${Cypress.config().baseUrl}/login`);
   });
 
