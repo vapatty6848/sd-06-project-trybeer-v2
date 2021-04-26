@@ -47,7 +47,7 @@ function Checkout() {
 
   const handleDelay = () => {
     setSuccess(false);
-    history.push('/products');
+    // history.push('/products');
   };
 
   const registerProducts = (saleId) => {
