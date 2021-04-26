@@ -1,9 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { AdminChatCardsComponent, AdminSideBarComponent } from '../components'
-// import Header from '../components/HeaderComponent';
+import { AdminChatCardsComponent, AdminSideBarComponent } from '../components';
 import BeersAppContext from '../context/BeersAppContext';
 
-function AdminChatList () {
+function AdminChatList() {
   const {
     user: { token },
   } = useContext(BeersAppContext);
@@ -11,7 +10,7 @@ function AdminChatList () {
   const [chats, setChats] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:3001/chat/admin/get`, {
+    fetch('http://localhost:3001/chat/admin/get', {
       headers: {
         'Content-Type': 'application/json',
         authorization: token,
@@ -20,11 +19,11 @@ function AdminChatList () {
       .then((allUserChats) => {
         setChats(allUserChats);
       })
-      .catch(() => console.log('entrou no catch'));
-  }, [])
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
-    <>
+    <div>
       <AdminSideBarComponent />
       {
         (chats.length === 0)
@@ -32,19 +31,18 @@ function AdminChatList () {
           : (
             <div data-testid="containerChat">
               {
-                chats.map((element, index) => (
+                chats.map((element) => (
                   <div key={ element.email }>
                     <AdminChatCardsComponent
                       cliente={ element }
-                      index={ index }
                     />
                   </div>
                 ))
               }
             </div>
           )
-        }
-    </>
+      }
+    </div>
   );
 }
 

@@ -24,19 +24,16 @@ function AdminWebChat() {
       },
     }).then((response) => response.json())
       .then((historyMessages) => {
-        console.log('entrou no then');
         if (historyMessages.err) return;
-        console.log('entrou no then e passou do err');
         setMessages(historyMessages);
       })
-      .catch(() => console.log('entrou no catch'));
+      .catch((err) => console.log(err));
 
     return () => socket.emit('closeRoom', email);
   }, []);
 
   useEffect(() => {
     socket.on('message', (messageParam) => {
-      console.log('messageParam', messageParam);
       const ola = [
         ...messages,
         {
@@ -52,11 +49,10 @@ function AdminWebChat() {
     setInput(value);
   };
 
-  const submeterMessage = () => {
+  const submitMessage = () => {
     const cli = false;
     socket.emit('message', { email, message: input, cli });
-    console.log('entrou botão');
-    const ola = [
+    const messageShape = [
       ...messages,
       {
         message: input,
@@ -64,7 +60,7 @@ function AdminWebChat() {
         cli,
       },
     ];
-    setMessages(ola);
+    setMessages(messageShape);
     setInput('');
   };
 
@@ -100,9 +96,9 @@ function AdminWebChat() {
                 </p>
                 <p data-testid="text-message">{message}</p>
               </div>
-            )
+            );
           })
-      };
+      }
       <input
         data-testid="message-input"
         type="text"
@@ -113,7 +109,7 @@ function AdminWebChat() {
       <button
         type="button"
         data-testid="send-message"
-        onClick={ submeterMessage }
+        onClick={ submitMessage }
       >
         Enviar
       </button>

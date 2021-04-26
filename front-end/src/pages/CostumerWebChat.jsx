@@ -19,7 +19,6 @@ function CostumerWebChat() {
       },
     }).then((response) => response.json())
       .then((historyMessages) => {
-        console.log('entrou no then');
         if (historyMessages.err) return;
         setMessages(historyMessages);
       })
@@ -63,7 +62,7 @@ function CostumerWebChat() {
 
   return (
     <div>
-      <HeaderComponent text="Trybeer"/>
+      <HeaderComponent text="Trybeer" />
       {
         messages.sort((a, b) => a.date - b.date)
           .map(({ message, date, cli }, index) => {
@@ -83,9 +82,9 @@ function CostumerWebChat() {
                 </p>
                 <p data-testid="text-message">{message}</p>
               </div>
-            )
+            );
           })
-      };
+      }
 
       <input
         data-testid="message-input"
