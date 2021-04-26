@@ -19,8 +19,9 @@ const getByNickname = async (nickname) => {
   return allMessages;
 };
 
+const date = getCurrentHour();
+
 const saveMessage = async (nickname, message) => {
-  const date = getCurrentHour();
   const newMessage = await connection()
     .then((db) => db.collection(COLLECTION_NAME)
       .updateOne(
@@ -32,8 +33,21 @@ const saveMessage = async (nickname, message) => {
   return newMessage;
 };
 
+const saveMessageAdmin = async (nickname, sender, message) => {
+  const newMessage = await connection()
+    .then((db) => db.collection(COLLECTION_NAME)
+      .updateOne(
+        { nickname },
+        { $push: { messages: { message, date, sender } } },
+        { upsert: true },
+      ));
+
+  return newMessage;
+};
+
 module.exports = {
   getAll,
   getByNickname,
   saveMessage,
+  saveMessageAdmin,
 };

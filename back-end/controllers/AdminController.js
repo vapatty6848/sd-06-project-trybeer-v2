@@ -34,6 +34,27 @@ AdminRouter.put('/orders/:id', async (req, res, next) => {
   }
 });
 
+AdminRouter.get('/chats/:nickname', async (req, res, next) => {
+  try {
+    const { nickname } = req.params;
+    const chat = await messages.getByNickname(nickname);
+    return res.status(200).json(chat);
+  } catch (err) {
+    next(err);
+  }
+});
+
+AdminRouter.post('/chats', async (req, res, next) => {
+  try {
+    const { nickname, sender, message } = req.body;
+    console.log('INFOBACK', nickname, sender, message);
+    const chat = await messages.saveMessageAdmin(nickname, sender, message);
+    return res.status(200).json(chat);
+  } catch (err) {
+    next(err);
+  }
+});
+
 AdminRouter.get('/chats', async (req, res, next) => {
   try {
     const chats = await messages.getAll();

@@ -26,4 +26,15 @@ ChatController.post('/', async (req, res, next) => {
   }
 });
 
+ChatController.post('/admin/', async (req, res, next) => {
+  try {
+    const { nickname, sender, message } = req.body;
+    console.log('INFOBACK', nickname, sender, message);
+    const chat = await messages.saveMessageAdmin(nickname, sender, message);
+    return res.status(200).json(chat);
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = ChatController;

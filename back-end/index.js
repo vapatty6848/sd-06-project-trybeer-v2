@@ -22,7 +22,6 @@ const handleError = require('./middlewares/handleError');
 const OrdersController = require('./controllers/OrdersController');
 const AdminController = require('./controllers/AdminController');
 const ChatController = require('./controllers/ChatController');
-// const { isObject } = require('util');
 
 io.on('connection', (socket) => {
   console.log('Novo usuário conectado', socket.id);
@@ -31,7 +30,7 @@ io.on('connection', (socket) => {
     console.log('Email SOCKET emit', email);
   });
   socket.on('chat.sendMessage', (data) => {
-    const dataWithTime = { ...data, date: getCurrentHour() };
+    const dataWithTime = { ...data, date: new Date() };
     io.emit('chat.receiveMessage', dataWithTime);
   });
 });

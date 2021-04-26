@@ -6,6 +6,9 @@ import RegisterForm from './RegisterForm';
 import SideBarMenu from './SideBarMenu';
 import SideBarMenuAdmin from './SideBarMenuAdmin';
 import TopMenu from './TopMenu';
+import Chat from './Chat';
+import ChatList from './ChatList';
+import TestChat from './TestChat';
 
 export {
   AddressForm,
@@ -16,4 +19,7 @@ export {
   SideBarMenu,
   SideBarMenuAdmin,
   TopMenu,
+  ChatList,
+  Chat,
+  TestChat,
 };
