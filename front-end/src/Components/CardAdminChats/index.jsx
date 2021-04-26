@@ -18,7 +18,7 @@ const CardAdminChats = () => {
     <div>
       {message.length > 0
         ? message.map((el) => (
-          <Link to="/admin/chat/talks">
+          <Link to="/admin/chat/talks" key={ el.id }>
             <Container key={ el.id }>
               <h2 data-testid="profile-name">{el.email}</h2>
               <h2 data-testid="last-message">{`Última mensagem às ${el.lastMessage}`}</h2>
