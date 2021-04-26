@@ -1,0 +1,25 @@
+.msg-container {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  max-width: 60vw;
+  padding: 20px;
+}
+
+.left-msg {
+  background-color: black;
+  border-radius: 0 26px 26px;
+  color: white;
+}
+
+.right-msg {
+  background-color: lightgray;
+  border-radius: 26px 26px 0;
+  color: black;
+  margin-left: 30vw;
+}
+
+.info-container {
+  display: flex;
+  justify-content: space-around;
+}
