@@ -55,7 +55,11 @@ app.get('/chat', async (req, res) => {
   const convertArray = arrayMessages.map((element) => {
     const hour = element.timestamp.getHours();
     const minute = element.timestamp.getMinutes();
-    return { emailUser: element.emailUser, timestamp: `${hour}:${minute}`, message: element.message };
+    return {
+      emailUser: element.emailUser,
+      timestamp: `${hour}:${minute}`,
+      message: element.message
+    };
   });
   res.status(200).json(convertArray);
 });
