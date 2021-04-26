@@ -18,7 +18,7 @@ function SideBar() {
         onClick={ () => redirectMenuBar(history, '/orders') }
         type="button"
       >
-        Meus Pedidos
+        Pedidos
       </button>
       <button
         data-testid="side-menu-item-my-profile"
@@ -30,7 +30,7 @@ function SideBar() {
       <button
         type="button"
         data-testid="side-menu-chat"
-        onClick={ () => redirectMenuBar(history, '/chat')}
+        onClick={ () => redirectMenuBar(history, '/chat') }
       >
         Conversar com a loja
       </button>

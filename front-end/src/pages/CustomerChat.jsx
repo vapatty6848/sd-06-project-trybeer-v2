@@ -1,51 +1,92 @@
 import React, { useState, useEffect } from 'react';
-import { getMessages } from '../api/index';
+import { getMessages, profile } from '../api/index';
 import socket from '../services/socket';
+import ControllerHeader from '../components/Header-SideBar/ControllerHeader';
 
 function CustomerChat() {
   const [messages, setMessages] = useState('');
   const [typedMessage, setTypedMessage] = useState('');
-  const [test, setTest] = useState('');
+  const [user, setUser] = useState('');
+
+  const fetchMessages = async () => {
+    try {
+      await getMessages(setMessages);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const decodeToken = async () => {
+    const token = localStorage.getItem('token');
+    const response = await profile(token);
+    setUser({ name: response.name, email: response.email, id: response.id });
+  };
+
+  const calcTimestamp = () => {
+    const ten = 10;
+    const date = new Date();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    if (minutes < ten) {
+      return `${hours}:0${minutes}`;
+    }
+    return `${hours}:${minutes}`;
+  };
 
   useEffect(() => {
-    getMessages(setMessages);
+    fetchMessages();
+    decodeToken();
   }, []);
 
   useEffect(() => {
     socket.on('message', (message) => {
-      console.log('entrou')
       setMessages([...messages, message]);
     });
   }, [messages]);
-  console.log(test)
-  const handleClick = (e) => {
-    e.preventDefault();
-    setMessages(typedMessage)
-    const user = JSON.parse(localStorage.getItem('user'));
+
+  const handleClick = () => {
+    const objMessage = {
+      message: typedMessage,
+      timestamp: calcTimestamp(),
+      user: user.email,
+    };
+    setMessages([...messages, objMessage]);
     socket.emit('message', { user: user.email, message: typedMessage });
+    document.getElementById('message-input').value = '';
+    window.location.reload(); // "apaga" os undefined
+    // console.log(messages, 'clickkkkkkkkkkkkkkkkk');
   };
 
   return (
     <div>
+      <ControllerHeader />
       <h1>TELA DE CHAT</h1>
-        <div>
-          {messages && messages.map((data) => <p>{`${data.user} - ${data.timestamp}: ${data.message}`}</p>)}
-        </div>
-        <form>
-          <input
-            id="message-input"
-            data-testid="message-input"
-            autocomplete="off"
-            onChange={({target}) => setTypedMessage(target.value)}
-          />
-          <button
-            id="send-message"
-            data-testid="send-message"
-            onClick={(e) => handleClick(e)}
-          >
-            Enviar
-          </button>
-        </form>
+      <div>
+        {
+          messages && messages.map((data, index) => (
+            <div key={ index }>
+              <span data-testid="nickname">{`${data.user} - `}</span>
+              <span data-testid="message-time">{`${data.timestamp}`}</span>
+              <div data-testid="text-message">{`${data.message}`}</div>
+            </div>))
+        }
+      </div>
+      <form>
+        <input
+          id="message-input"
+          data-testid="message-input"
+          autoComplete="off"
+          onChange={ ({ target }) => setTypedMessage(target.value) }
+        />
+        <button
+          type="button"
+          id="send-message"
+          data-testid="send-message"
+          onClick={ () => handleClick() }
+        >
+          Enviar
+        </button>
+      </form>
     </div>
   );
 }

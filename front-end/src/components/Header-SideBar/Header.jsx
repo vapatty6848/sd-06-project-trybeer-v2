@@ -22,6 +22,9 @@ function Header() {
     case '/orders':
       setTitle('Meus Pedidos');
       break;
+    case '/chat':
+      setTitle('Conversar com a Loja');
+      break;
     default:
       setTitle('Detalhes de Pedido');
       break;

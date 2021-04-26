@@ -16,7 +16,8 @@ function ControllerHeader() {
         ☰
       </button>
       <Header />
-      { viewMenu && <SideBar setViewMenu={ setViewMenu } /> }
+      <SideBar />
+      {/* { viewMenu && <SideBar setViewMenu={ setViewMenu } /> } */}
     </div>
   );
 }

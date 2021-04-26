@@ -20,19 +20,29 @@ function ProfileClient() {
     setUser({ ...user, name: value });
   };
 
-  useEffect(() => {
-    async function fetchData() {
-      const token = localStorage.getItem('token');
-      const response = await profile(token);
-      localStorage.setItem(
-        'user',
-        JSON.stringify({ name: response.name, email: response.email, id: response.id }),
-      );
-      setUser({ name: response.name, email: response.email });
-    }
+  const decodeToken = async () => {
+    const token = localStorage.getItem('token');
+    const response = await profile(token);
+    localStorage.setItem(
+      'user',
+      JSON.stringify({ name: response.name, email: response.email, id: response.id }),
+    );
+    setUser({ name: response.name, email: response.email });
+  };
 
+  useEffect(() => {
+    decodeToken();
+    // async function fetchData() {
+    //   const token = localStorage.getItem('token');
+    //   const response = await profile(token);
+    //   localStorage.setItem(
+    //     'user',
+    //     JSON.stringify({ name: response.name, email: response.email, id: response.id }),
+    //   );
+    //   setUser({ name: response.name, email: response.email });
+    // }
     setActiveBtn(false);
-    fetchData();
+    // fetchData();
   }, []);
 
   useEffect(() => {

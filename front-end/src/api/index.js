@@ -102,9 +102,9 @@ async function changeStatus(setSaleDetail, saleId, status) {
   await getSalesProductsBySaleId(setSaleDetail, saleId);
 }
 
-async function getMessages(setTest) {
+async function getMessages(setMessages) {
   const axios = buildAxiosHandler();
-  await axios.get('/chat').then(({ data }) => setTest(data));
+  await axios.get('/chat').then(({ data }) => setMessages(data));
 }
 
 export {
