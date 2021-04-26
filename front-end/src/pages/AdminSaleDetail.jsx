@@ -8,7 +8,7 @@ export default function AdminSaleDetail() {
   const tokenFromLocalStorage = localStorage.getItem('token');
   const location = useLocation();
   const [orderDetail, setOrderDetail] = useState([]);
-  const [orderStatus, setOrderStatus] = useState('');
+  const [orderStatus, setOrderStatus] = useState('Pendente');
   const [delivered, setDelivered] = useState(false);
   const SIX = 6;
   const pathName = location.pathname;
@@ -55,18 +55,20 @@ export default function AdminSaleDetail() {
       <TopMenuAdmin pageTitle="TryBeer" />
       <div className="order-data-container">
         <div data-testid="order-number">
-          {orderDetail.length && `Pedido ${orderDetail[0].sale_id}`}
+          {orderDetail && `Pedido ${orderDetail.id}`}
         </div>
         <span data-testid="order-status">
-          {orderDetail.length && orderDetail[0].status }
+          {orderDetail && orderStatus }
         </span>
       </div>
-      {orderDetail.length && orderDetail.map((order, index) => (
+      {orderDetail.products && orderDetail.products.map((order, index) => (
         <div key={ order.id } className="products-details-container">
-          <span data-testid={ `${index}-product-qtd` }>{order.quantity}</span>
+          <span data-testid={ `${index}-product-qtd` }>
+            {order.salesProducts.quantity}
+          </span>
           <p data-testid={ `${index}-product-name` }>{order.name}</p>
           <span data-testid={ `${index}-product-total-value` }>
-            {`R$ ${(Number(order.quantity) * Number(order.price))
+            {`R$ ${(Number(order.salesProducts.quantity) * Number(order.price))
               .toFixed(2).replace('.', ',')}`}
           </span>
           <span data-testid={ `${index}-order-unit-price` }>
@@ -77,10 +79,8 @@ export default function AdminSaleDetail() {
       <div className="total-value-container">
         <span data-testid="order-total-value">{`Total: R$ ${handletotalValue()}`}</span>
       </div>
-      <div>
-        { orderStatus }
-      </div>
       <button
+        // className={ orderDetail.status }
         type="button"
         data-testid="mark-as-prepared-btn"
         onClick={ handlePreparationButton }
@@ -89,7 +89,7 @@ export default function AdminSaleDetail() {
         Preparar pedido
       </button>
       <button
-        className={ orderDetail.length && orderDetail[0].status }
+        className={ orderDetail.status }
         data-testid="mark-as-delivered-btn"
         type="button"
         onClick={ handleDeliverButton }

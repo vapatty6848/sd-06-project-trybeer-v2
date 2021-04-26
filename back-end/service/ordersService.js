@@ -16,11 +16,12 @@ const createOrders = async (userId, sale) => {
 };
 
 const getOrders = async (userId) => {
-  sales.findAll({
+  const allSales = sales.findAll({
     where: {
       userId,
     },
   });
+  return allSales;
 };
 
 // NÃO ESTAMOS USANDO ESSA FUNÇÃO!!!

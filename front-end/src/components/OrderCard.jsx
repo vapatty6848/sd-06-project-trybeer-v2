@@ -33,10 +33,13 @@ export default function OrderCard() {
             <div
               data-testid={ `${index}-order-date` }
             >
-              { formatDate(new Date(order.sale_date)) }
+              { formatDate(new Date(order.saleDate)) }
             </div>
             <div data-testid={ `${index}-order-total-value` }>
-              {formatTotalPrice(order.total_price)}
+              {formatTotalPrice(order.totalPrice)}
+            </div>
+            <div>
+              {order.status}
             </div>
           </div>
         </Link>
