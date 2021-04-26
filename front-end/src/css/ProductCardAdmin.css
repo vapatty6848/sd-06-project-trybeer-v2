@@ -1,0 +1,29 @@
+.admin-container-card {
+  border: 2px solid #047575;
+  border-radius: 50px;
+  box-shadow:  10px 10px 16px #071a1a, 
+              -1px -1px 1px #111d1d;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: large;
+  margin: 30px auto;
+  padding: 10px;
+  width: 80%; 
+}
+
+.admin-product-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.admin-product-info div {
+  padding: 10px;
+}
+
+.admin-product-info div:last-of-type {
+  display: flex;
+  justify-content: space-around;
+}

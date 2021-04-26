@@ -1,0 +1,37 @@
+.checkout-card-container {
+  align-items: center;
+  border: 2px solid #047575;
+  border-radius: 50px;
+  box-shadow:  10px 10px 16px #046868, 
+              -1px -1px 1px #048282;
+  color: #004370;
+  display: flex;
+  flex-flow: column;
+  font-size: larger;
+  margin: 30px auto;
+  max-width: 50%; 
+  padding: 10px;
+  width: 25%; 
+}
+
+.checkout-card-container div {
+  display: flex;
+  flex-flow: row;
+}
+
+.checkout-card-container div p {
+  margin: auto 10px;
+}
+
+.removal-button {
+  background-color: rgb(0, 117, 117);
+  color: white;
+  font-size: larger;
+  margin: 20px auto;
+  padding: 10px;
+}
+
+img {
+  height: 50px;
+}
+

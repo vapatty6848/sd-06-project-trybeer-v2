@@ -1,29 +1,43 @@
 import React from 'react';
-import logo from './logo.svg';
+import {
+  BrowserRouter,
+  Route,
+} from 'react-router-dom';
+import BeerProvider from './provider/Provider';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Products from './pages/Products';
+import ProfileClient from './pages/ProfileClient';
+import AdminOrders from './pages/AdminOrders';
+import AdminProfile from './pages/AdminProfile';
+import Checkout from './pages/Checkout';
+import Orders from './pages/Orders';
+import ClientDetailsOrder from './pages/ClientDetailsOrder';
+import AdminDetailsOrder from './pages/AdminDetailsOrder';
+import CustomerChat from './pages/CustomerChat';
+
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={ logo } className="App-logo" alt="logo" />
-        <p>
-          Edit
-          {' '}
-          <code>src/App.js</code>
-          {' '}
-          and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <BeerProvider>
+        <div className="App">
+          <Route exact path="/"><Login /></Route>
+          <Route exact path="/login"><Login /></Route>
+          <Route exact path="/register"><Register /></Route>
+          <Route exact path="/products"><Products /></Route>
+          <Route exact path="/profile"><ProfileClient /></Route>
+          <Route exact path="/chat"><CustomerChat /></Route>
+          <Route exact path="/admin/orders"><AdminOrders /></Route>
+          <Route exact path="/admin/profile"><AdminProfile /></Route>
+          <Route exact path="/checkout"><Checkout /></Route>
+          <Route exact path="/orders"><Orders /></Route>
+          <Route exact path="/orders/:id"><ClientDetailsOrder /></Route>
+          <Route exact path="/admin/orders/:id"><AdminDetailsOrder /></Route>
+        </div>
+      </BeerProvider>
+    </BrowserRouter>
   );
 }
 

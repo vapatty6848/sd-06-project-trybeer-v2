@@ -1,0 +1,48 @@
+.controller-header {
+  background-color: #004370;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  height: 100px;
+}
+
+.controller-header button {
+  background-color: #004370;
+  color: white;
+  height: 60%;
+  justify-content: start;
+  margin-left: 30px;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 60px;
+}
+
+.top-title {
+  justify-content: center;
+  margin: auto;
+}
+
+.controller-header .side-menu-container {
+  background-color: #004370;
+  display: flex !important;
+  flex-flow: column !important;
+  height: 900px;
+  align-items: center;
+  margin-top: 100px;
+  position: absolute;
+  width: 15%;
+}
+
+.controller-header .side-menu-container button {
+  height: 40px;
+  width: 80%;
+  margin: 30px auto 0 auto;
+}
+
+.controller-header .side-menu-container a {
+  height: 40px;
+  width: 100%;
+  margin: 30px auto 0 auto;
+  bottom: 10;
+  color: red;
+}

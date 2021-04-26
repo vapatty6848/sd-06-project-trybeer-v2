@@ -1,0 +1,45 @@
+.admin-order-card {
+  align-items: center;
+  border: 2px solid #047575;
+  border-radius: 50px;
+  box-shadow:  10px 10px 16px #046868, 
+              -1px -1px 1px #048282;
+  display: flex;
+  font-size: large;
+  margin: 30px auto;
+  max-width: 50%; 
+  padding: 10px;
+  width: 25%; 
+}
+
+.admin-order-card, .admin-order-card a {
+  text-decoration: none;
+}
+
+.admin-order-card a,
+.admin-order-card a > div {
+  color: #004370;
+  width: 100%;
+}
+
+.admin-order-number {
+  color: blue;
+  text-decoration: underline;
+  width: 100%;
+}
+
+.admin-order-address {
+  width: 100%;
+}
+
+.admin-order-value {
+  width: 50%;
+}
+
+.admin-order-status {
+  width: 50%;
+}
+
+.total-and-status {
+  display: flex;
+}

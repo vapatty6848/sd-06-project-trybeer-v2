@@ -1,0 +1,19 @@
+.checkout-form {
+  align-items: center;
+  color: #004370;
+  display: flex;
+  flex-flow: row;
+  font-size: large;
+  height: 100px;
+  justify-content: center;
+}
+
+.checkout-form div {
+  margin: auto 20px;
+  padding: 10px;
+  width: fit-content;
+}
+
+.checkout-form input {
+  height: 20px;
+}
