@@ -4,7 +4,6 @@ import socket from '../utils/socket';
 import api from '../services/api';
 
 export default function Chat() {
-  // const { email } = JSON.parse(localStorage.getItem('user'));
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
 
@@ -13,14 +12,13 @@ export default function Chat() {
     api.fetchChat(email).then((res) => {
       if (res !== null && res.length > 0) setMessages(res[0].messageDetails);
     });
-
-    socket.on('chat.sentMessage', () => {
-      api.fetchChat(email).then((resp) => {
-        if (resp !== null && resp.length > 0) setMessages(resp[0].messageDetails);
-      });
-    });
   }, []);
-  console.log(messages);
+
+  useEffect(() => {
+    socket.on('chat.sentMessage', ({ email, message, time }) => {
+      setMessages([...messages, { email, message, time }]);
+    });
+  }, [messages]);
 
   const handleClick = () => {
     const { email } = JSON.parse(localStorage.getItem('user'));

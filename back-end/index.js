@@ -43,7 +43,7 @@ io.on('connection', (socket) => {
     console.log(time);
     const message = newMessage;
     sendMessage(email, message, time);
-    io.emit('chat.sentMessage');
+    io.emit('chat.sentMessage', { email, message, time });
   });
 });
 

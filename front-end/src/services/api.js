@@ -126,12 +126,10 @@ const fetchChat = async (email) => {
   return result;
 };
 
-const fetchAllChat = async (email) => {
+const fetchAllChat = async () => {
   const result = await fetch('http://localhost:3001/getallchat', {
     method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers: contentType,
     body: JSON.stringify(),
   }).then((res) => res.json());
   return result;
