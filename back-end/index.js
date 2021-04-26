@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const moment = require('moment');
+const httpServer = require('http');
+const io = require('socket.io');
 const LoginController = require('./src/controller/LoginControler');
 const UsersController = require('./src/controller/UsersController');
 const ProductsController = require('./src/controller/ProductsController');
@@ -13,16 +15,16 @@ const ClientOrdersController = require('./src/controller/ClientOrdersController'
 const PORT = 3001;
 
 const app = express();
-const httpServer = require('http').createServer(app);
+const server = httpServer.createServer(app);
 
 app.use(express.json());
 app.use(cors());
 
-const io = require('socket.io')(httpServer, {
+io(server, {
   cors: {
     origin: 'http://localhost:3000',
-    methods: ['GET', 'POST']
-  }
+    methods: ['GET', 'POST'],
+  },
 });
 
 io.on('connection', (socket) => {
@@ -38,9 +40,9 @@ io.on('connection', (socket) => {
 
   socket.on('chat.sendMessage', (data) => {
     const sentAt = moment().format('HH:mm');
-    data = { ...data, sentAt };
-    console.log(data);
-    io.to(data.from).emit('chat.receiveMessage', data);
+    const chatData = { ...data, sentAt };
+    console.log(chatData);
+    io.to(chatData.from).emit('chat.receiveMessage', chatData);
   });
 });
 
