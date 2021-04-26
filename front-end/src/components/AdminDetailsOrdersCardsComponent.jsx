@@ -10,7 +10,7 @@ function AdminDetailsOrdersCardsComponent({ element, index }) {
       <p>
         <span data-testid={ `${index}-product-qtd` }>{ quantity }</span>
         {' '}
-        <span data-testid={ `${index}-product-name` }>{ name } </span>
+        <span data-testid={ `${index}-product-name` }>{ name }</span>
         {' '}
         <span data-testid={ `${index}-product-total-value` }>
           { `R$ ${formatPrice(productPrice)}` }
