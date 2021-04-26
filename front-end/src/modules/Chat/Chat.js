@@ -1,10 +1,8 @@
-import { io } from 'socket.io-client';
 import React, { useState, useEffect } from 'react';
 import Loader from '../../design-components/Loader';
 import TopBar from '../../design-components/TopBar';
 import api from '../../axios/api';
-
-const socket = io('http://localhost:3001');
+import socket from '../../utils/socketClient';
 
 function Chat() {
   const [loading, setLoading] = useState(true);
@@ -22,15 +20,15 @@ function Chat() {
   };
 
   useEffect(() => {
-    socket.on('connect', () => {
-      console.log(`${socket.id}`);
+    socket.on('serverMessage', (data) => {
+      setMessages([...messages, data]);
+      console.log(data);
     });
     api.get('/chat', {
       headers: {
         email: user,
       },
     }).then((response) => {
-      console.log(response.data);
       setMessages(response.data);
       setLoading(false);
     });
@@ -38,14 +36,15 @@ function Chat() {
 
   const handleClick = () => {
     const messageObj = {
-      email: user,
+      from: user,
+      to: 'Loja',
       message,
       date: new Date(),
     };
     api.post('/chat', messageObj);
     setMessage('');
     setMessages([...messages, messageObj]);
-    // io.emit('message', messageObj)
+    socket.emit('chatMessage', messageObj);
   };
 
   return (

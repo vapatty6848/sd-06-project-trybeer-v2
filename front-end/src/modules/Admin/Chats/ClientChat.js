@@ -23,8 +23,9 @@ function ClientChat() {
   };
 
   useEffect(() => {
-    socket.on('connect', () => {
-      console.log(`${socket.id}`);
+    socket.on('serverMessage', (data) => {
+      setMessages([...messages, data]);
+      console.log('message received: ', data);
     });
     api.get(`/admin/chats/search?q=${email}`).then((response) => {
       console.log(response.data);
@@ -35,7 +36,8 @@ function ClientChat() {
 
   const handleClick = () => {
     const messageObj = {
-      email,
+      from: 'Loja',
+      to: email,
       message,
       date: new Date(),
     };

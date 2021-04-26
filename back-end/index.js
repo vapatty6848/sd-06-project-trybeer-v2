@@ -23,8 +23,8 @@ io.on('connection', (socket) => {
   });
 
   socket.on('chatMessage', (data) => {
-    const { email } = data;
-    const key = `Loja-${email}`;
+    const { from, to } = data;
+    const key = [from, to].sort().join('-');
     io.to(key).emit('serverMessage', data);
   });
 });
