@@ -58,7 +58,7 @@ app.get('/chat', async (req, res) => {
     return {
       emailUser: element.emailUser,
       timestamp: `${hour}:${minute}`,
-      message: element.message
+      message: element.message,
     };
   });
   res.status(200).json(convertArray);
