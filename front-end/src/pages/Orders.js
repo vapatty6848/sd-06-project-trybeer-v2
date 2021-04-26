@@ -6,6 +6,7 @@ import withHandleApi from '../components/hocs/withHandleApi';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 import { Container } from '../styles/styles';
+import './Orders.css';
 
 function Order(orders) {
   const history = useHistory();
@@ -28,31 +29,37 @@ function Order(orders) {
       <Header isAdmin={ role === 'administrator' } />
       <Navbar />
       <Container>
-        <div data-testid="0-order-card-container">
+        <div
+          data-testid="0-order-card-container"
+          className="content-order"
+        >
           {
             !orders.loading && orders.data.map((e, index) => (
-              <ul key={ index }>
-                <li>
-                  <div>
-                    <button
-                      type="button"
-                      data-testid={ `${index}-order-number` }
-                      onClick={ () => history.push(`/orders/${index + 1}`) }
-                    >
-                      {`Pedido ${index + 1}`}
-                    </button>
-                    <h5 data-testid={ `${index}-order-date` }>
-                      {formatDate(e.saleDate)}
-                    </h5>
-                    <p data-testid={ `${index}-order-total-value` }>
-                      {`R$ ${e.totalPrice.replace('.', ',')}`}
-                    </p>
-                    <p data-testid={ `${index}-order-status` }>
-                      {`${e.status}`}
-                    </p>
-                  </div>
-                </li>
-              </ul>
+              <div key={ e.id } className="card card-order">
+                <ul key={ index }>
+                  <li>
+                    <div>
+                      <button
+                        className="buttonOrder"
+                        type="button"
+                        data-testid={ `${index}-order-number` }
+                        onClick={ () => history.push(`/orders/${index + 1}`) }
+                      >
+                        {`Pedido ${index + 1}`}
+                      </button>
+                      <h5 data-testid={ `${index}-order-date` }>
+                        {formatDate(e.saleDate)}
+                      </h5>
+                      <p data-testid={ `${index}-order-total-value` }>
+                        {`R$ ${e.totalPrice.replace('.', ',')}`}
+                      </p>
+                      <p data-testid={ `${index}-order-status` }>
+                        {`${e.status}`}
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
             ))
           }
         </div>
