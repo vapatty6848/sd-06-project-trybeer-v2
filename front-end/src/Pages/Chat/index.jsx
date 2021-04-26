@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
+import MenuTop from '../../Components/MenuTop';
+import SideBar from '../../Components/SideBar';
+import S from './styles';
 import socket from '../../utils/socketClient';
 import { saveMessage, getMessages } from '../../Services/Apis';
 import MessagesBox from '../../Components/MessagesBox';
@@ -79,25 +82,36 @@ function Chat({ location: { pathname } }) {
   }, [messages]);
 
   return (
-    <div>
-      { isLoading ? <p>Carregando mensagens</p> : (
-        <MessagesBox messages={ messages } pathname={ pathname } clientEmail={ email } />
-      ) }
-      <form onSubmit={ handleSendMessage }>
-        <input
-          type="text"
-          value={ message }
-          onChange={ ({ target: { value } }) => setMessage(value) }
-          data-testid="message-input"
-        />
-        <button
-          type="submit"
-          data-testid="send-message"
-        >
-          Enviar
-        </button>
-      </form>
-    </div>
+    <S.Container>
+
+      <MenuTop />
+
+      <SideBar />
+
+      <S.ContainerCard>
+        { isLoading ? <p>Carregando mensagens</p> : (
+          <MessagesBox
+            messages={ messages }
+            pathname={ pathname }
+            clientEmail={ email }
+          />
+        ) }
+        <form onSubmit={ handleSendMessage }>
+          <input
+            type="text"
+            value={ message }
+            onChange={ ({ target: { value } }) => setMessage(value) }
+            data-testid="message-input"
+          />
+          <button
+            type="submit"
+            data-testid="send-message"
+          >
+            Enviar
+          </button>
+        </form>
+      </S.ContainerCard>
+    </S.Container>
   );
 }
 

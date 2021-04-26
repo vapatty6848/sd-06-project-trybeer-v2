@@ -21,6 +21,7 @@ export default function AdminChats() {
         <S.ContainerCard stateSideBarAdmin={ stateSideBarAdmin }>
 
           <CardAdminChats />
+
         </S.ContainerCard>
 
       </S.Context>
