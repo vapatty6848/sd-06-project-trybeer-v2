@@ -10,7 +10,7 @@ import AdminProfile from './AdminProfile';
 import OrdersAdm from './OrdersAdm';
 import Checkout from './Checkout';
 import OrdersAdmDetails from './OrderAdmDetails';
-import Chat from './Chat';
+import Chat from './Chat/index';
 import AdminChat from './AdminChat';
 
 export {
