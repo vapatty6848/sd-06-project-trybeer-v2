@@ -27,6 +27,13 @@ function AdminSideBar() {
       </button>
       <button
         type="button"
+        data-testid="side-menu-item-chat"
+        onClick={ () => history.push('/admin/chats') }
+      >
+        Conversas
+      </button>
+      <button
+        type="button"
         data-testid="side-menu-item-logout"
         onClick={ () => {
           localStorage.clear();
