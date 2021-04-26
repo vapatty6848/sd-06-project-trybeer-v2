@@ -126,6 +126,17 @@ const fetchChat = async (email) => {
   return result;
 };
 
+const fetchAllChat = async (email) => {
+  const result = await fetch('http://localhost:3001/getallchat', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(),
+  }).then((res) => res.json());
+  return result;
+};
+
 module.exports = {
   fetchLogin,
   fetchRegister,
@@ -138,4 +149,5 @@ module.exports = {
   fetchSaleProduct,
   fetchChangeStatus,
   fetchChat,
+  fetchAllChat,
 };
