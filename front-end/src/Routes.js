@@ -17,6 +17,7 @@ import OrderDetails from './Pages/MyOrders';
 import AdminProfile from './Pages/AdminProfile';
 import AdminOrders from './Pages/AdminOrders';
 import AdminOrderDetails from './Pages/AdminOrderDetails';
+import AdminChatTalks from './Pages/AdminChatTalks';
 
 const Routes = () => (
 
@@ -29,6 +30,7 @@ const Routes = () => (
     <Route path="/login" component={ Login } />
     <Route path="/chat" component={ Chat } />
     <Route path="/admin/chats" component={ AdminChats } />
+    <Route path="/admin/chat/talks" component={ AdminChatTalks } />
     <Route path="/register" component={ Register } />
     <Route path="/profile" component={ Profile } />
     <Route path="/products" component={ Products } />

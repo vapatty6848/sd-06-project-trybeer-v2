@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { getMessages } from '../../Services/Apis';
 import Container from './styles';
 
@@ -13,15 +14,16 @@ const CardAdminChats = () => {
   useEffect(() => {
     messageData();
   }, []);
-  console.log('data', message);
   return (
     <div>
       {message.length > 0
         ? message.map((el) => (
-          <Container key={ el.id }>
-            <h2 data-testid="profile-name">{el.email}</h2>
-            <h2 data-testid="last-message">{`Última mensagem às ${el.lastMessage}`}</h2>
-          </Container>
+          <Link to="/admin/chat/talks">
+            <Container key={ el.id }>
+              <h2 data-testid="profile-name">{el.email}</h2>
+              <h2 data-testid="last-message">{`Última mensagem às ${el.lastMessage}`}</h2>
+            </Container>
+          </Link>
         ))
         : <p data-testid="text-for-no-conversation">Nenhuma conversa por aqui</p>}
     </div>
