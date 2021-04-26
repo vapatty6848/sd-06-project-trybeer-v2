@@ -2,23 +2,28 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import socket from './socketClient';
 import { verifyUser } from '../../store/LocalStorage/actions';
-import { sendMessage } from './Requests';
+// import { sendMessage } from './Requests';
 import './styleChat.css';
 
 export default function ChatClient() {
   const [inputValue, setInputValue] = useState('');
   const [messages, setMessages] = useState([]);
-  const [att, setAtt] = useState(0);
+  // const [att, setAtt] = useState(0);
   const [emailUser, setEmail] = useState('');
-  socket.emit('message', 'minha mensagem incrivel!');
-  // recebe msg do back
-  socket.on('mensagem', (msg) => {
-    console.log(msg, 'msg');
-  });
+  // socket.emit('message', 'minha mensagem incrivel!');
+  // // recebe msg do back
+  // socket.on('mensagem', (msg) => {
+  //   console.log(msg, 'msg');
+  // });
 
-  socket.on('Mensagem do admin pro cliente', () => {
-    setAtt(att + 1);
-  });
+  // socket.on('Mensagem do admin pro cliente', () => {
+  //   setAtt(att + 1);
+  // });
+
+  // socket.on('messages', async ({ userBack, time, msg, Loja }) => {
+  //   console.log(userBack, time, msg, Loja);
+  //   setMessages([...messages, { userBack, time, msg, Loja }]);
+  // });
 
   const history = useHistory();
   const getAllMessages = async (email) => {
@@ -31,13 +36,18 @@ export default function ChatClient() {
     const { email } = verifyUser(history);
     setEmail(email);
     getAllMessages(email);
-  }, [history, att]);
+  }, [history]);
 
   const newMessage = async () => {
     const hora = new Date().toLocaleTimeString().split(':');
     const time = `${hora[0]}:${hora[1]}`;
-    const messageToSend = await sendMessage(emailUser, time, inputValue, 'Loja');
-    return messageToSend;
+    console.log(time, emailUser, inputValue);
+    socket.emit('message', ({
+      userBack: emailUser,
+      time,
+      msg: inputValue,
+      Loja: 'Loja',
+    }));
   };
 
   const handleSendMessage = (e) => {
@@ -45,8 +55,8 @@ export default function ChatClient() {
     newMessage();
     setInputValue('');
     getAllMessages(emailUser);
-    setAtt(att + 1);
-    socket.emit('clientMsg');
+    // setAtt(att + 1);
+    // socket.emit('clientMsg');
   };
 
   const handleChangeMessage = (value) => {
@@ -54,8 +64,23 @@ export default function ChatClient() {
   };
 
   return (
-    <div>
+    <div className="boxContainer">
       <h1>Chat Client</h1>
+      <form>
+        <input
+          type="text"
+          data-testid="message-input"
+          value={ inputValue }
+          onChange={ ({ target }) => handleChangeMessage(target.value) }
+        />
+        <button
+          type="submit"
+          data-testid="send-message"
+          onClick={ (e) => handleSendMessage(e) }
+        >
+          Send
+        </button>
+      </form>
       <div className="messageBox">
         <ul>
           {messages && messages.map((msg, index) => (
@@ -73,21 +98,6 @@ export default function ChatClient() {
           ))}
         </ul>
       </div>
-      <form>
-        <input
-          type="text"
-          data-testid="message-input"
-          value={ inputValue }
-          onChange={ ({ target }) => handleChangeMessage(target.value) }
-        />
-        <button
-          type="submit"
-          data-testid="send-message"
-          onClick={ (e) => handleSendMessage(e) }
-        >
-          Send
-        </button>
-      </form>
     </div>
   );
 }

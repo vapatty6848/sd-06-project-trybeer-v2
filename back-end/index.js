@@ -17,27 +17,27 @@ const productsRouter = require('./src/controllers/ProductController');
 const salesRouter = require('./src/controllers/SalesController');
 const routerMessage = require('./chat/controllers/mongoController');
 const errorMiddleware = require('./src/middlewares/errorMiddleware');
+const { createMessages } = require('./chat/models/mongoModel');
 
 const port = 3001;
 const portSocket = 4001;
 
 io.on('connection', (socket) => {
-  console.log('hello!');
+  socket.on('message', async ({ userBack, time, msg, Loja }) => {
+    console.log(userBack, time, msg, Loja);
+    if (userBack !== undefined) {
+      await createMessages(userBack, time, msg, Loja);
+    }
+    io.emit('messages', { userBack, time, msg, Loja });
+  });
 
-socket.on('message', async (msg) => {
-  const teste = await msg;
-  console.log(teste);
-});
+  // socket.on('adminMsg', async () => {
+  //   io.emit('Mensagem do admin pro cliente');
+  // });
 
-socket.on('adminMsg', async () => {
-  io.emit('Mensagem do admin pro cliente');
-});
-
-socket.on('clientMsg', async () => {
-  io.emit('Mensagem do cliente pro admin');
-});
-
-socket.emit('mensagem', 'minha mensagem incrivel!');
+  // socket.on('clientMsg', async () => {
+  //   io.emit('Mensagem do cliente pro admin');
+  // });
 });
 
 app.use(cors());
