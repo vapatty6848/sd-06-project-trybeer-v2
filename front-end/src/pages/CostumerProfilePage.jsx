@@ -54,7 +54,7 @@ function CostumerProfilePage() {
           type="text"
           name="p-name"
           id="p-name"
-          disable={ valid }
+          disable={ `${valid}` }
           data-testid="profile-name-input"
           onChange={ ({ target }) => setInputName(target.value) }
           value={ inputName }

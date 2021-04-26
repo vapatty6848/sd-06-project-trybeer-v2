@@ -84,7 +84,7 @@ function ProductsCardsComponent({ element, index }) {
 ProductsCardsComponent.propTypes = {
   element: PropTypes.shape({
     name: PropTypes.string,
-    price: PropTypes.string,
+    price: PropTypes.number,
     id: PropTypes.number,
     urlImage: PropTypes.string,
   }).isRequired,

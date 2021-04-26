@@ -13,12 +13,10 @@ function LoginPage() {
   const history = useHistory();
   const {
     setUser,
-    setProductQuantity,
-    setAmount,
-    user,
+    // user,
   } = useContext(BeersAppContext);
 
-  if (user.token) history.push('/products');
+  // if (user.token) history.push('/products');
 
   const [valid, setValid] = useState(true);
   const [inputValues, setInputValues] = useState({ email: '', password: '' });
@@ -49,14 +47,14 @@ function LoginPage() {
       return;
     }
     setUser(returnLogin);
-    setProductQuantity([]);
-    setAmount(0.00);
     if (returnLogin.role === 'administrator') {
       history.push('/admin/orders');
     } else if (returnLogin.role === 'client') {
       history.push('/products');
     }
   };
+
+  const redirect = () => history.push('/register');
 
   return (
     <div className="login-register">
@@ -99,7 +97,7 @@ function LoginPage() {
           data-testid="no-account-btn"
           id="sign-up"
           type="button"
-          onClick={ () => history.push('/register') }
+          onClick={ redirect }
           className="bttn-text"
         >
           Ainda não tenho conta
