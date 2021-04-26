@@ -11,15 +11,16 @@ const mult = (strNum1, strNum2) => {
 function DetailAdminCard(props) {
   const { sale, status } = props;
   const formatedTotalPrice = `R$ ${sale.totalPrice.replace('.', ',')}`;
+  console.log('sale from oder details: ', sale);
   return (
     <div className="m-2 sm:m-4 md:m-8 lg:m-12 xl:m-16 sm:text-xl md:texl-2xl lg:text-3xl">
       <div>
         <div
           className="flex justify-between m-5"
-          data-testid={ `${sale.saleId - 1}-order-card-container` }
+          data-testid={ `${sale.id - 1}-order-card-container` }
         >
           <div data-testid="order-number" className="font-bold">
-            {`Pedido ${sale.saleId}`}
+            {`Pedido ${sale.id}: `}
             <span data-testid="order-status">{ status }</span>
           </div>
         </div>

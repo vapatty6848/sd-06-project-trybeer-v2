@@ -1,12 +1,10 @@
-import { io } from 'socket.io-client';
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ChevronDoubleLeftIcon } from '@heroicons/react/solid';
 import Loader from '../../../design-components/Loader';
 import SideBarAdmin from '../../../design-components/SideBarAdmin';
 import api from '../../../axios/api';
-
-const socket = io('http://localhost:3001');
+import socket from '../../../utils/socketClient';
 
 function ClientChat() {
   const { email } = useParams();
@@ -37,14 +35,14 @@ function ClientChat() {
 
   const handleClick = () => {
     const messageObj = {
-      email: 'Loja',
+      email,
       message,
       date: new Date(),
     };
     api.post('/chat', messageObj);
     setMessage('');
     setMessages([...messages, messageObj]);
-    // io.emit('message', messageObj)
+    socket.emit('chatMessage', messageObj);
   };
 
   return (

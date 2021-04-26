@@ -17,6 +17,16 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log(`${socket.id} disconnected`);
   });
+
+  socket.on('privateRoom', (key) => {
+    socket.join(key);
+  });
+
+  socket.on('chatMessage', (data) => {
+    const { email } = data;
+    const key = `Loja-${email}`;
+    io.to(key).emit('serverMessage', data);
+  });
 });
 
 const LoginController = require('./src/controllers/LoginController');

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 function DetailOrderCard(props) {
   const nine = 9;
   const { sale } = props;
+  console.log(sale);
   const fullDate = new Date(sale.saleDate);
   const day = fullDate.getDate();
   const month = fullDate.getMonth();
@@ -25,7 +26,7 @@ function DetailOrderCard(props) {
       <div>
         <div
           className="flex justify-between mb-3"
-          data-testid={ `${sale.saleId - 1}-order-card-container` }
+          data-testid={ `${sale.id - 1}-order-card-container` }
         >
           <div
             data-testid="order-number"
@@ -33,7 +34,7 @@ function DetailOrderCard(props) {
           >
             Pedido
             {' '}
-            {sale.saleId}
+            {sale.id}
           </div>
           <div
             className="sm:text-lg md:texl-xl lg:text-2xl"
