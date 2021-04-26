@@ -4,7 +4,20 @@ import UserContext from '../context/UserContext';
 import { login } from '../api/axiosApi';
 
 import { Container, Content } from '../components/styled-components';
-import { Button, Input, Title, Label } from '../components';
+import { Button, Input, Title } from '../components';
+
+const redirectIf = (pacote, history) => {
+  if (pacote.role === 'client') {
+    history.push({ pathname: '/products' });
+  } else if (pacote.role === 'administrator') {
+    history.push({ pathname: '/admin/orders' });
+  } else {
+    history.push({ pathname: '/register' });
+  }
+};
+
+const inputEmail = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+const PASSWORD_MIN_SIZE = 6;
 
 export default function Login() {
   const history = useHistory();
@@ -15,24 +28,15 @@ export default function Login() {
     const pacote = await login(dataUser);
     localStorage.setItem('user', JSON.stringify(pacote));
     setLoginUser({ ...loginUser, pacote });
-
-    if (pacote.role === 'client') {
-      history.push({ pathname: '/products' });
-    } else if (pacote.role === 'administrator') {
-      history.push({ pathname: '/admin/orders' });
-    } else {
-      history.push({ pathname: '/register' });
-    }
+    redirectIf(pacote, history);
   };
 
-  const handleChange = ({ target }) => {
+  const hc = ({ target }) => {
     const { name, value } = target;
     setLoginUserLocal({ ...loginUserLocal, [name]: value });
   };
 
   const { email, password } = loginUserLocal;
-  const inputEmail = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-  const PASSWORD_MIN_SIZE = 6;
   const activeButton = inputEmail.test(email) && password.length >= PASSWORD_MIN_SIZE;
 
   return (
@@ -40,19 +44,23 @@ export default function Login() {
       <Container>
         <Content>
           <Title title="Login" />
-          <Label text="Email" />
           <Input
             type="email"
             id="email-input"
             name="email"
-            onChange={ handleChange }
+            onChange={ hc }
+            label="Email"
+            readOnly={ false }
+            value={ email }
           />
-          <Label text="Senha" />
           <Input
             type="password"
             id="password-input"
             name="password"
-            onChange={ handleChange }
+            onChange={ hc }
+            label="Senha"
+            readOnly={ false }
+            value={ password }
           />
           <Button
             type="button"
@@ -66,6 +74,7 @@ export default function Login() {
             id="no-account-btn"
             label="Ainda não tenho conta"
             onClick={ () => history.push('/register') }
+            disabled={ false }
           />
         </Content>
       </Container>

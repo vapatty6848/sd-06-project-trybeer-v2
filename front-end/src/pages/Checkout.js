@@ -13,7 +13,6 @@ import {
 import {
   Button,
   Input,
-  Label,
 } from '../components';
 import {
   Table,
@@ -38,6 +37,11 @@ function Checkout() {
     },
   );
   const [success, setSuccess] = useState(false);
+
+  const headers = ['Quantidade', 'Produto', 'Valor', 'Valor unitário', 'Excluir Item'];
+
+  const user = JSON.parse(localStorage.getItem('user'));
+  const { role } = user;
 
   let cartValue = 0;
   const totalPriceLocalStorage = localStorage.totalPrice;
@@ -96,7 +100,7 @@ function Checkout() {
 
   async function handleCallApi() {
     const userStorage = JSON.parse(localStorage.user);
-    const TIMEOUT = 3000;
+    const TIMEOUT = 2000;
     const { id } = userStorage;
     const value = totalPrice.toFixed(2);
     const userID = JSON.stringify(id);
@@ -107,24 +111,27 @@ function Checkout() {
     setSuccess(true);
 
     setTimeout(() => {
-      history.push('/products');
+      // history.push('/products');
+      if (history.location.pathname === '/checkout') history.push('/products');
       clear();
     }, TIMEOUT);
   }
 
   return (
     <section>
-      <Header />
+      <Header isAdmin={ role === 'administrator' } />
       <Navbar />
       <Container>
         <Table>
-          <tr>
-            <th>Quantidade</th>
-            <th>Produto</th>
-            <th>Valor</th>
-            <th>Valor unitário</th>
-            <th>Excluir Item</th>
-          </tr>
+          <thead>
+            <tr>
+              {
+                headers.length && headers.map((header, index) => (
+                  <th key={ index }>{header}</th>
+                ))
+              }
+            </tr>
+          </thead>
           <tbody>
             {
               cartList.length ? cartList
@@ -165,7 +172,13 @@ function Checkout() {
 
                     </td>
                   </tr>
-                )) : <Message> Não há produtos no carrinho  </Message>
+                ))
+                : (
+                  <tr>
+                    <td colSpan="5">
+                      <Message> Não há produtos no carrinho  </Message>
+                    </td>
+                  </tr>)
             }
           </tbody>
         </Table>
@@ -177,19 +190,23 @@ function Checkout() {
             .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}` }
         </SpanTotalPrice>
         <div>
-          <Label text="Rua" />
           <Input
             type="text"
             name="street"
             id="checkout-street-input"
             onChange={ handleChange }
+            label="Rua"
+            readOnly={ false }
+            value={ street }
           />
-          <Label text="Número da casa" />
           <Input
             type="text"
             name="number"
             id="checkout-house-number-input"
             onChange={ handleChange }
+            label="Número da casa"
+            readOnly={ false }
+            value={ number }
           />
           <Button
             type="button"

@@ -15,6 +15,11 @@ const SidebarAdminData = [
     icon: <ImIcons.ImProfile />,
     id: 'side-menu-item-profile',
   },
+  {
+    label: 'Conversas',
+    path: '/admin/chats',
+    id: 'side-menu-item-chat',
+  },
 ];
 
 export default SidebarAdminData;

@@ -6,7 +6,7 @@ import withAuth from '../components/hocs/withAuth';
 import { Container } from '../styles/styles';
 import Api from '../api/axiosApi';
 import withOrders from '../components/hocs/withHandleApi';
-import './AdminOrderDetail.css';
+import './AdminOrders.css';
 
 function AdminOrders(orders) {
   return (
@@ -14,39 +14,40 @@ function AdminOrders(orders) {
       <Header isAdmin />
       <NavbarAdmin />
       <Container>
-        {console.log('orders data', orders.data)}
-        {
-          !orders.loading && orders.data.map((order, index) => (
-            <div key="index" className="card">
-              <ul>
-                <Link to={ `/admin/orders/${index + 1}` }>
-                  <button
-                    type="button"
-                    data-testid={ `${index}-order-number` }
-                  >
-                    {`Pedido ${index + 1}`}
-                  </button>
-                  <p
-                    data-testid={ `${index}-order-address` }
-                  >
-                    {`${order.deliveryAddress}, ${order.deliveryNumber}`}
-                  </p>
-                  <p
-                    data-testid={ `${index}-order-total-value` }
-                  >
-                    {`R$ ${order.totalPrice.replace('.', ',')}`}
-                  </p>
-                  <p
-                    data-testid={ `${index}-order-status` }
-                  >
-                    { order.status }
-                  </p>
-                </Link>
-              </ul>
+        <div className="content-order">
+          {
+            !orders.loading && orders.data.map((order, index) => (
+              <div key={ order.id } className="card card-order">
+                <ul>
+                  <Link to={ `/admin/orders/${index + 1}` }>
+                    <button
+                      type="button"
+                      data-testid={ `${index}-order-number` }
+                    >
+                      {`Pedido ${index + 1}`}
+                    </button>
+                    <p
+                      data-testid={ `${index}-order-address` }
+                    >
+                      {`${order.deliveryAddress}, ${order.deliveryNumber}`}
+                    </p>
+                    <p
+                      data-testid={ `${index}-order-total-value` }
+                    >
+                      {`R$ ${order.totalPrice.replace('.', ',')}`}
+                    </p>
+                    <p
+                      data-testid={ `${index}-order-status` }
+                    >
+                      { order.status }
+                    </p>
+                  </Link>
+                </ul>
 
-            </div>
-          ))
-        }
+              </div>
+            ))
+          }
+        </div>
       </Container>
     </div>
   );

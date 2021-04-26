@@ -22,6 +22,9 @@ function OrderDetail() {
     findByID();
   }, [id]);
 
+  const user = JSON.parse(localStorage.getItem('user'));
+  const { role } = user;
+
   function formatDate(date) {
     const TEN = 10;
     const newDate = new Date(date);
@@ -34,7 +37,7 @@ function OrderDetail() {
 
   return (
     <section>
-      <Header />
+      <Header isAdmin={ role === 'administrator' } />
       <Navbar />
       <Container>
         {
@@ -69,6 +72,7 @@ function OrderDetail() {
               >
                 {` Valor total do pedido: R$ ${orders[0].totalPrice.replace('.', ',')}`}
               </div>
+              <h3 data-testid="order-status">{`${orders[0].status}`}</h3>
             </div>
           )
         }

@@ -14,6 +14,11 @@ const SidebarData = [
     path: '/profile',
     id: 'side-menu-item-my-profile',
   },
+  {
+    label: 'Conversar com a loja',
+    path: '/chat',
+    id: 'side-menu-chat',
+  },
 ];
 
 export default SidebarData;

@@ -37,14 +37,10 @@ function AdminOrderDetail() {
           {
             result && (
               <div className="card">
-                <h2
-                  data-testid="order-number"
-                >
+                <h2 data-testid="order-number">
                   {`Pedido ${orderNumber[0]}`}
                 </h2>
-                <h2
-                  data-testid="order-status"
-                >
+                <h2 data-testid="order-status">
                   { status || orderStatus[0] }
                 </h2>
                 <ul>
@@ -73,13 +69,17 @@ function AdminOrderDetail() {
                     </button>
                   )
                 }
-                <button
-                  type="button"
-                  data-testid="mark-as-prepared-btn"
-                  onClick={ () => handleStatusOrderPreparing() }
-                >
-                  Preparar pedido
-                </button>
+                {
+                  status !== 'Entregue' && (
+                    <button
+                      type="button"
+                      data-testid="mark-as-prepared-btn"
+                      onClick={ () => handleStatusOrderPreparing() }
+                    >
+                      Preparar pedido
+                    </button>
+                  )
+                }
               </div>
             )
           }

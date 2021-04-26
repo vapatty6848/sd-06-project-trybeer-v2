@@ -20,9 +20,12 @@ function Order(orders) {
     return `${newDate.getDate()}/${month}`;
   }
 
+  const user = JSON.parse(localStorage.getItem('user'));
+  const { role } = user;
+
   return (
     <div>
-      <Header />
+      <Header isAdmin={ role === 'administrator' } />
       <Navbar />
       <Container>
         <div data-testid="0-order-card-container">
@@ -43,6 +46,9 @@ function Order(orders) {
                     </h5>
                     <p data-testid={ `${index}-order-total-value` }>
                       {`R$ ${e.totalPrice.replace('.', ',')}`}
+                    </p>
+                    <p data-testid={ `${index}-order-status` }>
+                      {`${e.status}`}
                     </p>
                   </div>
                 </li>

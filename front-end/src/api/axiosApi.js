@@ -2,6 +2,10 @@ import axios from 'axios';
 
 const BASE_URL = 'http://localhost:3001/';
 
+const api = axios.create({
+  baseURL: 'http://localhost:3001/',
+});
+
 export async function login(loginUser) {
   const user = await axios.post('http://localhost:3001/login', loginUser)
     .then((resp) => resp.data)
@@ -118,8 +122,13 @@ async function updateStatusOrder(id, statusOrder) {
   return order;
 }
 
+const reloadChat = (emailuser) => (api.get('/chat', { headers: { emailuser } }));
+const chatAdminList = () => (api.get('/chat/admin'));
+
 export default {
   getSales,
   getByIdSales,
   updateStatusOrder,
+  reloadChat,
+  chatAdminList,
 };

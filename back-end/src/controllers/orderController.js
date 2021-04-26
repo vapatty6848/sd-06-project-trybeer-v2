@@ -10,7 +10,6 @@ const messageJson = { message: 'Internal Server Error' };
 orderRouter.post('/', async (req, res) => {
   try {
     const { userID, value, street, number, date, saleProduct } = req.body;
-    console.log(req.body);
     
     const id = userID;
     const totalPrice = value;

@@ -43,6 +43,9 @@ function Products() {
     execute();
   }, [setProducts]);
 
+  const user = JSON.parse(localStorage.getItem('user'));
+  const { role } = user;
+
   const handleClickMinus = (product) => {
     product.quantity = product.quantity > 0 ? product.quantity - 1 : 0;
     const cloneProducts = [...products];
@@ -70,7 +73,7 @@ function Products() {
   }, [products, setTotalPrice]);
   return (
     <div>
-      <Header />
+      <Header isAdmin={ role === 'administrator' } />
       <Navbar />
       <DivInfoCart>
         <ButtonCart
