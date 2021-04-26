@@ -30,7 +30,7 @@ app.use('/images', express.static(`${__dirname}/images`));
 
 const getCurrentHour = () => {
   const now = new Date();
-  return `${now.getHours()}:${now.getMinutes()}`;
+  return `${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}`;
 };
 
 const sendMessage = async (email, message, time) => {
@@ -40,6 +40,7 @@ const sendMessage = async (email, message, time) => {
 io.on('connection', (socket) => {
   socket.on('chat.sendMessage', ({ email, newMessage }) => {
     const time = getCurrentHour();
+    console.log(time);
     const message = newMessage;
     sendMessage(email, message, time);
     io.emit('chat.sentMessage');

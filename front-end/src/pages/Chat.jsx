@@ -9,16 +9,16 @@ export default function Chat() {
   const [newMessage, setNewMessage] = useState('');
 
   useEffect(() => {
-    api.fetchChat(email).then((response) => {
-      setMessages(response[0]);
+    api.fetchChat(email).then((res) => {
+      if (res !== null && res.length > 0) setMessages(res[0].messageDetails);
     });
 
     socket.on('chat.sentMessage', () => {
-      api.fetchChat(email).then((response) => {
-        setMessages(response);
+      api.fetchChat(email).then((resp) => {
+        if (resp !== null && resp.length > 0) setMessages(resp[0].messageDetails);
       });
     });
-  }, []);
+  }, [email]);
   console.log(messages);
 
   const handleClick = () => {
@@ -29,7 +29,7 @@ export default function Chat() {
     <div>
       <MenuTop title="Chat" />
       <h2>Chat aqui</h2>
-      {messages.messageDetails && messages.messageDetails.map((message, index) => (
+      { messages && messages.map((message, index) => (
         <div key={ index }>
           <span data-testid="nickname">{ `${message.email} - ` }</span>
           <span data-testid="message-time">{ message.time }</span>
