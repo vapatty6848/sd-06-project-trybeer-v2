@@ -7,12 +7,14 @@ const router = Router();
 const OK = 200;
 const CREATED = 201;
 
-router.get('/messages', validateToken, rescue(async (req, res) => {
-  const messages = await messagesService.getAll();
+router.get('/', validateToken, rescue(async (req, res) => {
+  const userEmail = req.user.dataValues.email;
+  console.log('user email', userEmail);
+  const messages = await messagesService.getAll(userEmail);
   res.status(OK).json(messages);
 }));
 
-router.post('/messages', validateToken, rescue(async (req, res) => {
+router.post('/', validateToken, rescue(async (req, res) => {
   const { email, sentAt, message } = req.body;
   await messagesService.createMessage(email, sentAt, message);
   res.status(CREATED).end();

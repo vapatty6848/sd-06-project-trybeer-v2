@@ -5,7 +5,9 @@ const createMessage = (email, sentAt, message) => connection().then((db) =>
     { email, sentAt, message },
   ));
 
-const getAll = () => connection().then((db) => db.collection('messages').find().toArray());
+const getAll = (userEmail) => connection().then((db) => db.collection('messages').find(
+ { email: userEmail },
+).toArray());
 
 module.exports = {
   createMessage,
