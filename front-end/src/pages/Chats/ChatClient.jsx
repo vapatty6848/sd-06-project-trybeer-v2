@@ -55,7 +55,7 @@ export default function ChatClient() {
     newMessage();
     setInputValue('');
     getAllMessages(emailUser);
-    // setAtt(att + 1);
+    // setAtt(att + 12);
     // socket.emit('clientMsg');
   };
 
