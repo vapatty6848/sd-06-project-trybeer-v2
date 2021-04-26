@@ -4,11 +4,12 @@ import socket from '../utils/socket';
 import api from '../services/api';
 
 export default function Chat() {
-  const { email } = JSON.parse(localStorage.getItem('user'));
+  // const { email } = JSON.parse(localStorage.getItem('user'));
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
 
   useEffect(() => {
+    const { email } = JSON.parse(localStorage.getItem('user'));
     api.fetchChat(email).then((res) => {
       if (res !== null && res.length > 0) setMessages(res[0].messageDetails);
     });
@@ -18,10 +19,11 @@ export default function Chat() {
         if (resp !== null && resp.length > 0) setMessages(resp[0].messageDetails);
       });
     });
-  }, [email]);
+  }, []);
   console.log(messages);
 
   const handleClick = () => {
+    const { email } = JSON.parse(localStorage.getItem('user'));
     socket.emit('chat.sendMessage', { email, newMessage });
   };
 
