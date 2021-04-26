@@ -53,8 +53,7 @@ function CustomerChat() {
     setMessages([...messages, objMessage]);
     socket.emit('message', { user: user.email, message: typedMessage });
     document.getElementById('message-input').value = '';
-    window.location.reload(); // "apaga" os undefined
-    // console.log(messages, 'clickkkkkkkkkkkkkkkkk');
+    window.location.reload();
   };
 
   return (
