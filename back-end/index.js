@@ -36,6 +36,8 @@ app.use(cors());
 
 app.use(express.json());
 
+app.get('/', (req, res) => res.send('Hello Trybeer!'));
+
 app.use('/login', LoginController);
 
 app.use('/register', RegisterController);
