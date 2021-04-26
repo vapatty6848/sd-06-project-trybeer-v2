@@ -32,7 +32,7 @@ function AdminListChats() {
               <p data-testid="profile-name">{email}</p>
               <p data-testid="last-message">
                 Última mensagem às
-                {dateFormat(sentTime, 'HH:MM')}
+                {sentTime}
               </p>
             </div>
           ))}
