@@ -20,7 +20,6 @@ router.post('/chatRoom', async (request, response) => {
     const chatRoom = request.body.nickname;
     const result = await Messages.getByChatRoom(chatRoom);
     return response.status(OK).json(result);
-    // PEGAR MENSAGENS ESPECÍFICAS DO CHAT DO CLIENTE
   } catch (error) {
     return response.status(BAD_REQUEST).json({ message: 'No messages found' });
   }

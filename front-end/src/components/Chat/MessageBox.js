@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function MessageBox({ message, nickname, sentAt }) {
   return (
@@ -11,5 +12,11 @@ function MessageBox({ message, nickname, sentAt }) {
     </div>
   );
 }
+
+MessageBox.propTypes = {
+  nickname: PropTypes.string.isRequired,
+  message: PropTypes.string.isRequired,
+  sentAt: PropTypes.string.isRequired,
+};
 
 export default MessageBox;

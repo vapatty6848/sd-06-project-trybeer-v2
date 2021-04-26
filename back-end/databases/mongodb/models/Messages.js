@@ -64,6 +64,10 @@ async function getByChatRoom(nickname) {
   const queryResult = await db
     .collection('messages')
     .findOne({ chatRoom: nickname });
+  
+  if (!queryResult) {
+    return { chatRoom: '', messages: [] };
+  }
   return queryResult;
 }
 

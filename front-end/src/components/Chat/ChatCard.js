@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 function ChatCard({ chatRoom, messages }) {
-  const lastMessage = messages[messages.length -1].sentAt;
+  const lastMessage = messages[messages.length - 1].sentAt;
   return (
     <div data-testid="containerChat">
       <h2 data-testid="profile-name">
@@ -17,7 +17,7 @@ function ChatCard({ chatRoom, messages }) {
 
 ChatCard.propTypes = {
   chatRoom: PropTypes.string.isRequired,
-  messages: PropTypes.array.isRequired,
+  messages: PropTypes.arrayOf(PropTypes.shape).isRequired,
 };
 
 export default ChatCard;

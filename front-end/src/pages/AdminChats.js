@@ -4,34 +4,29 @@ import SideBarAdmin from '../components/SideBarAdmin/SideBarAdmin';
 import { getAllChats } from '../services/api';
 
 function AdminChats() {
-  const [messages, setMessages] = useState([]);
-
+  const [messagesList, setMessagesList] = useState([]);
   useEffect(() => {
     getAllChats()
-      .then((result) => setMessages(result));
+      .then((result) => setMessagesList(result));
   }, []);
   return (
     <div className="div-main">
-          <SideBarAdmin />
-          <div className="div-filha">
-            <h1 className="title">Conversas</h1>
-            {
-              messages.length !== 0 ?
-                messages.map(({ chatRoom, messages }, index) => (
-                  <ChatCard
-                    key={ index}
-                    chatRoom={ chatRoom }
-                    messages={messages}
-                  />
-                )) :
-                <div
-                  data-testid="text-for-no-conversation"
-                >
-                  Nenhuma conversa por aqui
-                </div>
-            }
-          </div>
-        </div>
+      <SideBarAdmin />
+      <div className="div-filha">
+        <h1 className="title">Conversas</h1>
+        {
+          messagesList.length !== 0
+            ? messagesList.map(({ chatRoom, messages }, index) => (
+              <ChatCard
+                key={ index }
+                chatRoom={ chatRoom }
+                messages={ messages }
+              />
+            ))
+            : <div data-testid="text-for-no-conversation">Nenhuma conversa por aqui</div>
+        }
+      </div>
+    </div>
   );
 }
 
