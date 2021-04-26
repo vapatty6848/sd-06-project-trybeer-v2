@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import { IoIosBeer } from 'react-icons/io';
 import { FaListAlt, FaUserAlt } from 'react-icons/fa';
+import { BsChatSquareQuoteFill } from 'react-icons/bs';
 import { ImExit } from 'react-icons/im';
 
 import { GlobalContext } from '../../Contexts/GlobalContext';
@@ -77,7 +78,7 @@ const SideBar = () => {
             onClick={ () => navigationPages(params, '/chat') }
             data-testid="side-menu-chat"
           >
-            <FaUserAlt
+            <BsChatSquareQuoteFill
               className="icon"
               fill="#cf8d2e"
               size="25px"
