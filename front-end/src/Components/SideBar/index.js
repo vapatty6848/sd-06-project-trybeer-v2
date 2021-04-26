@@ -73,6 +73,17 @@ const SideBar = () => {
             />
             Meu Perfil
           </S.Navigation>
+          <S.Navigation
+            onClick={ () => navigationPages(params, '/chat') }
+            data-testid="side-menu-chat"
+          >
+            <FaUserAlt
+              className="icon"
+              fill="#cf8d2e"
+              size="25px"
+            />
+            Conversar com a loja
+          </S.Navigation>
 
           <S.Navigation
             className="get-out"
