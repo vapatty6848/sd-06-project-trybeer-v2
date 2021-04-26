@@ -3,17 +3,18 @@ import { useHistory } from 'react-router-dom';
 import socket from './socketClient';
 import { verifyUser } from '../../store/LocalStorage/actions';
 import { sendMessage } from './Requests';
+import './styleChat.css';
 
 export default function ChatClient() {
   const [inputValue, setInputValue] = useState('');
   const [messages, setMessages] = useState([]);
   const [att, setAtt] = useState(0);
   const [emailUser, setEmail] = useState('');
-  socket.emit('message', 'minha mensagem incrivel!');
+  // socket.emit('message', 'minha mensagem incrivel!');
   // recebe msg do back
-  socket.on('mensagem', (msg) => {
-    console.log(msg, 'msg');
-  });
+  // socket.on('mensagem', (msg) => {
+  //   console.log(msg, 'msg');
+  // });
 
   socket.on('Mensagem do admin pro cliente', () => {
     setAtt(att + 1);
@@ -55,7 +56,7 @@ export default function ChatClient() {
   return (
     <div>
       <h1>Chat Client</h1>
-      <div>
+      <div className="messageBox">
         <ul>
           {messages && messages.map((msg, index) => (
             <li key={ index }>
