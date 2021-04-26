@@ -1,43 +1,31 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { TopMenu } from '../components';
+import MessageBox from '../components/MessageBox';
+import MessageForm from '../components/MessageForm';
 import TrybeerContext from '../context/TrybeerContext';
-import { verifyToken } from '../utils/verifications';
-import { post } from '../api/fetchFunctions';
+import socket from '../utils/socketClient';
+import { get } from '../api/fetchFunctions';
 
-// import socket from '../utils/socketClient';
+function Chat() {
+  const [allMessages, setAllMessages] = useState([]);
+  const { user: contextUser } = useContext(TrybeerContext);
 
-const dateFormat = require('dateformat');
-
-function Chat({ history }) {
-  const [currentMessage, setCurrentMessage] = useState('');
-  const { user } = useContext(TrybeerContext);
-  const [messageHistory, setMessageHistory] = useState([]);
-
-  const fetchMessages = async () => {
-    const allMessages = await verifyToken('chat', user, history);
-    setMessageHistory(allMessages);
-  };
-
-  const onChangeMessage = ({ target: { value } }) => {
-    setCurrentMessage(value);
-  };
-
-  const handleSubmit = async () => {
-    // const date = new Date();
-    await post('chat', { email: user.email, message: currentMessage });
-    if (messageHistory.length) {
-      setMessageHistory([...messageHistory, { message: currentMessage, user }]);
-    } else {
-      setMessageHistory([{ message: currentMessage, user }]);
-    }
-    setCurrentMessage('');
-    // fetchMessages();
+  const fetchStoredMessages = async () => {
+    const resp = await get('chat', contextUser.token);
+    setAllMessages(resp);
   };
 
   useEffect(() => {
-    fetchMessages();
-  }, [setCurrentMessage]);
+    fetchStoredMessages();
+  }, []);
+
+  useEffect(() => {
+    socket.on('chat.receiveMessage', (response) => {
+      setAllMessages([...allMessages, response]);
+    });
+  }, [allMessages]);
+
   return (
     <div>
       <TopMenu />
@@ -45,37 +33,18 @@ function Chat({ history }) {
       <br />
       <h1>CHAT</h1>
       <ul>
-        {messageHistory.length && messageHistory.map(({ message, date }, index) => (
-          <li key={ index }>
-            <div
-              data-testid="nickname"
-            >
-              {user.email}
-              -
-              <span data-testid="message-time">
-                {dateFormat(date, 'HH:MM')}
-              </span>
-            </div>
-            <div data-testid="text-message">{message}</div>
-          </li>
-        ))}
+        {(!allMessages.length) ? <div /> : allMessages.length && allMessages
+          .map(({ nickname, date, message, isMine }, index) => (
+            <MessageBox
+              key={ index }
+              nickname={ nickname }
+              date={ date }
+              message={ message }
+              isMine={ (contextUser.email === nickname) || !isMine }
+            />
+          ))}
       </ul>
-      <input
-        data-testid="message-input"
-        type="text"
-        name="message"
-        placeholder="Digite aqui"
-        id="message"
-        onChange={ onChangeMessage }
-        value={ currentMessage }
-      />
-      <button
-        data-testid="send-message"
-        type="submit"
-        onClick={ handleSubmit }
-      >
-        Enviar
-      </button>
+      <MessageForm />
     </div>
   );
 }

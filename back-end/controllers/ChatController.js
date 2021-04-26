@@ -8,8 +8,9 @@ ChatController.get('/', isUserLoggedIn, async (req, res, next) => {
   try {
     const { user: { email } } = req;
     const userMessages = await messages.getByNickname(email);
-    const { messages: currentMessages } = userMessages;
-    return res.status(200).json(currentMessages);
+
+    if (!userMessages) return res.status(404).json([]);
+    return res.status(200).json(userMessages.messages);
   } catch (err) {
     next(err);
   }
@@ -19,8 +20,7 @@ ChatController.post('/', async (req, res, next) => {
   try {
     const { email, message } = req.body;
     await messages.saveMessage(email, message);
-    const chats = await messages.getAll();
-    return res.status(200).json(chats);
+    return res.status(200).json({ ok: true });
   } catch (err) {
     next(err);
   }
