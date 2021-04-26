@@ -27,11 +27,11 @@ const getAllMessages = async () => {
 const getListAdminChat = async () => {
   const list = await connection()
     .then((db) => db.collection(collectionName).aggregate([
-      { $group: { _id: "$emailUser", timestamp: { $max: '$timestamp' } } },
-      { $project: { _id: 0, email: '$_id', timestamp: '$timestamp' } }
+      { $group: { _id: '$emailUser', timestamp: { $max: '$timestamp' } } },
+      { $project: { _id: 0, email: '$_id', timestamp: '$timestamp' } },
    ]).toArray());
   return list;
-}
+};
 
 // const deleteById = async (id) => {
 

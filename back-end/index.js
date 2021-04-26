@@ -22,8 +22,11 @@ const orderController = require('./src/controllers/orderController');
 
 const PORT = process.env.PORT || 3001;
 
-const { createMessage, getMessageByNickname, getListAdminChat } = require('./src/modelsMongo/MessagesMongo');
-const { createUser, getAllUsers  } = require('./src/modelsMongo/UsersMongo.js');
+const { createMessage,
+  getMessageByNickname,
+  getListAdminChat,
+} = require('./src/modelsMongo/MessagesMongo');
+// const { createUser, getAllUsers } = require('./src/modelsMongo/UsersMongo.js');
 
 // Para entregar arquivos estáticos como imagens, arquivos CSS, e arquivos JavaScript
 app.use(express.static(path.join(__dirname, 'public')));
@@ -64,8 +67,8 @@ app.get('/chat/admin', async (req, res) => {
   const arrayListAdmin = listAdmin.map((element) => {
     const hour = element.timestamp.getHours();
     const minute = element.timestamp.getMinutes();
-    return {user: element.email, lastMessage:`${hour}:${minute}`  }
-  })
+    return { user: element.email, lastMessage: `${hour}:${minute}` };
+  });
 
   return res.status(200).json(arrayListAdmin);
 });
@@ -96,7 +99,7 @@ io.on('connection', (socket) => {
     // }
     const timestamp = getCurrentHour();
     await createMessage(message, emailUser, timestamp);
-    const data = { data: message, sendAt: getCurrentHour(), };
+    const data = { data: message, sendAt: getCurrentHour() };
     io.emit('receiveMessage', data);
   });
 });
