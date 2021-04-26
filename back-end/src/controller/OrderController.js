@@ -24,7 +24,6 @@ const updateStatusOrder = rescue(async (req, res) => {
 
 const getAllOrders = rescue(async (_req, res) => {
   const orders = await OrderService.getAllOrders();
-
   return res
     .status(200)
     .json(orders);

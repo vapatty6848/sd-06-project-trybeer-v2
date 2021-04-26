@@ -4,6 +4,16 @@ const cors = require('cors');
 require('dotenv/config');
 const path = require('path');
 
+const app = express();
+const httpServer = require('http').createServer(app);
+const io = require('socket.io')(httpServer, {
+  cors: {
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST'],
+    credentials: true,  
+  },
+});
+
 const { 
   UserRoute,
   LoginRoute,
@@ -11,10 +21,21 @@ const {
   SalesRoute,
   OrderRoute,
 } = require('./routes');
-
 const { error } = require('./middleware');
+const { chatUtils } = require('./utils');
 
-const app = express();
+io.on('connection', (socket) => {
+console.log(socket.id);
+
+  socket.on('login', (userName) => {
+    io.emit('socketNick', userName);
+  });
+
+  socket.on('message', ((message) => {
+    const bodyMessage = { message, hour: chatUtils.getTime() };
+    io.emit('sendMessage', bodyMessage);
+    }));
+});
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -27,4 +48,4 @@ app.use('/sales', SalesRoute);
 app.use('/images', express.static(path.join(__dirname, '/images')));
 app.use(error);
 
-module.exports = app;
+module.exports = httpServer;

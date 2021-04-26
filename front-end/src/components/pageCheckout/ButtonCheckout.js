@@ -31,8 +31,6 @@ function ButtonCheckout() {
     console.log('result', result);
     localStorage.cart = JSON.stringify([]);
     if (result.response.id) {
-      setMessage(true);
-      setError(false);
       products.forEach((element) => {
         const objtProd = {
           idSale: result.response.id,
@@ -41,6 +39,8 @@ function ButtonCheckout() {
         };
         api.regSalesProducts(objtProd);
       });
+      setMessage(true);
+      setError(false);
     } else { setError(true); }
   };
 

@@ -2,7 +2,7 @@
     background-color: black;
     color: white;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     height: 5vh;
 }
@@ -14,17 +14,10 @@
 .menuSideBar {
     background-color: black;
     color: white;
-     margin-top: 50px;    
-    margin-left: -80px;
-}
-
-.menuSideBaraAd {
-    background-color: black;
-    color: white;
-     margin-top: 50px;    
-   
+    margin-bottom: 5%;
+    margin-top: 5%;
 }
 
 .menuSideBar button:hover {
-background-color: rgb(70, 196, 45);
+    background-color: rgb(70, 196, 45);
 }

@@ -19,7 +19,7 @@ const OrdersDetails = ({ match }) => {
       console.log('response', response);
       setOrderDetails(response[0]);
     });
-  }, [id]);
+  }, [history, id]);
 
   return (
     <div>

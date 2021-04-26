@@ -12,7 +12,7 @@ function MenuSideBarAdm() {
   };
 
   return (
-    <div className="admin-side-bar-container menuSideBaraAd">
+    <div className="admin-side-bar-container menuSideBar">
       {/* <span
         data-testid="top-hamburguer"
         className="menuIcon"
@@ -27,7 +27,7 @@ function MenuSideBarAdm() {
         onClick={ handlePage }
         name="orders"
       >
-        Meus Pedidos
+        Pedidos
       </button>
       <button
         type="button"
@@ -36,7 +36,16 @@ function MenuSideBarAdm() {
         onClick={ handlePage }
         name="profile"
       >
-        Meu Perfil
+        Perfil
+      </button>
+      <button
+        type="button"
+        className="btnSideBar"
+        data-testid="side-menu-item-chat"
+        onClick={ handlePage }
+        name="chats"
+      >
+        Conversas
       </button>
       <button
         type="button"
