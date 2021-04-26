@@ -26,4 +26,6 @@
   text-decoration: none;
 }
 
-.buttonOrder:hover { background-color: #451311 };
+.buttonOrder:hover {
+  background-color: #451311;
+}
