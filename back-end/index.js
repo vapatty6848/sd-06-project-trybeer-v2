@@ -23,12 +23,12 @@ const port = 3001;
 const portSocket = 4001;
 
 io.on('connection', (socket) => {
-  socket.on('message', async ({ userBack, time, msg, Loja }) => {
-    console.log(userBack, time, msg, Loja);
-    if (userBack !== undefined) {
-      await createMessages(userBack, time, msg, Loja);
+  socket.on('message', async ({ user, time, message, Loja }) => {
+    // console.log(userBack, time, msg, Loja);
+    if (user !== undefined) {
+      await createMessages(user, time, message, Loja);
     }
-    io.emit('messages', { userBack, time, msg, Loja });
+    io.emit('messages', { user, time, message, Loja });
   });
 
   // socket.on('adminMsg', async () => {

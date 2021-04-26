@@ -20,10 +20,10 @@ export default function ChatClient() {
   //   setAtt(att + 1);
   // });
 
-  // socket.on('messages', async ({ userBack, time, msg, Loja }) => {
-  //   console.log(userBack, time, msg, Loja);
-  //   setMessages([...messages, { userBack, time, msg, Loja }]);
-  // });
+  socket.on('messages', async ({ user, time, message, Loja }) => {
+    // console.log(userBack, time, msg, Loja);
+    setMessages([...messages, { user, time, message, Loja }]);
+  });
 
   const history = useHistory();
   const getAllMessages = async (email) => {
@@ -43,9 +43,9 @@ export default function ChatClient() {
     const time = `${hora[0]}:${hora[1]}`;
     console.log(time, emailUser, inputValue);
     socket.emit('message', ({
-      userBack: emailUser,
+      user: emailUser,
       time,
-      msg: inputValue,
+      message: inputValue,
       Loja: 'Loja',
     }));
   };
@@ -54,7 +54,7 @@ export default function ChatClient() {
     e.preventDefault();
     newMessage();
     setInputValue('');
-    getAllMessages(emailUser);
+    // getAllMessages(emailUser);
     // setAtt(att + 12);
     // socket.emit('clientMsg');
   };
