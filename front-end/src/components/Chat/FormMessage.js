@@ -10,7 +10,7 @@ function FormMessage() {
     const from = user.email;
     console.log(from);
     socket.emit('chat.sendMessage', { message, from });
-  };
+  }
 
   return (
     <form onSubmit={ handleSend }>
