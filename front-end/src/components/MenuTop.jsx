@@ -49,6 +49,13 @@ export default function MenuTop(props) {
                 </Link>
                 <Link
                   className="nav-link btn btn-danger"
+                  to="/chat"
+                  data-testid="side-menu-chat"
+                >
+                  Conversar com a loja
+                </Link>
+                <Link
+                  className="nav-link btn btn-danger"
                   to="/profile"
                   data-testid="side-menu-item-my-profile"
                 >

@@ -8,6 +8,8 @@ export default function OrderDetails() {
   const { id } = useParams();
   const [products, setProducts] = useState([]);
   const [productsOfSale, setProductsOfSale] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [formatedDate, setFormatedDate] = useState('');
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -16,31 +18,34 @@ export default function OrderDetails() {
     api.fetchSaleProduct(id).then((response) => {
       setProductsOfSale(response);
       setProducts(response.products);
+
+      response.products.reduce((acc, product) => {
+        let total = 0;
+        total = acc + product.salesProducts.quantity * product.price;
+        setTotalPrice(total);
+        console.log(total);
+        return total;
+      }, 0);
+
+      const seventeen = -17; const five = 5; const eigth = 8; const fourteen = -14;
+      const date = response.saleDate;
+      const month = date.slice(five, seventeen);
+      const day = date.slice(eigth, fourteen);
+      const formatDate = `${day}/${month}`;
+      setFormatedDate(formatDate);
     });
   }, [id]);
 
-  // const seventeen = -17;
-  // const five = 5;
-  // const eigth = 8;
-  // const fourteen = -14;
-  // const formatDate = (date) => {
-  //   const month = date.slice(five, seventeen);
-  //   const day = date.slice(eigth, fourteen);
-  //   return `${day}/${month}`;
-  // };
-
-  // const sumOfCart = (sum, prod) => sum + prod.salesProducts.quantity * prod.price;
-
-  return !productsOfSale ? <p>Loading...</p> : (
+  return !productsOfSale ? <p>Carregando...</p> : (
     <div>
       <div>
         <MenuTop title="Detalhes de Pedido" />
       </div>
       <div className="en-title">
         <h2 data-testid="order-number">{ `Pedido ${id}` }</h2>
-        {/* <h2 data-testid="order-date">
-          {productsOfSale.length !== 0 && formatDate(productsOfSale.saleDate)}
-        </h2> */}
+        <h2 data-testid="order-date">
+          {productsOfSale.length !== 0 && formatedDate}
+        </h2>
         <h2>{productsOfSale.status}</h2>
       </div>
       <div className="main-container">
@@ -60,11 +65,9 @@ export default function OrderDetails() {
           </div>
         ))}
       </div>
-      {/* <h2 data-testid="order-total-value" className="total-price">
-        {products
-          .reduce(sumOfCart, 0)
-          .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-      </h2> */}
+      <h2 data-testid="order-total-value" className="total-price">
+        { totalPrice.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }
+      </h2>
     </div>
   );
 }

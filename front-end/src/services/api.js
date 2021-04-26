@@ -112,6 +112,29 @@ const fetchChangeStatus = async (idModified, status) => {
   }).then((response) => response.json());
 };
 
+const fetchChat = async (email) => {
+  const result = await fetch('http://localhost:3001/getchat', {
+    method: 'POST',
+    // mode: 'no-cors',
+    headers: {
+      'Content-Type': 'application/json',
+      // 'Access-Control-Allow-Origin' : '*',
+      // 'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+    },
+    body: JSON.stringify({ email }),
+  }).then((res) => res.json());
+  return result;
+};
+
+const fetchAllChat = async () => {
+  const result = await fetch('http://localhost:3001/getallchat', {
+    method: 'GET',
+    headers: contentType,
+    body: JSON.stringify(),
+  }).then((res) => res.json());
+  return result;
+};
+
 module.exports = {
   fetchLogin,
   fetchRegister,
@@ -123,4 +146,6 @@ module.exports = {
   fetchAllOrders,
   fetchSaleProduct,
   fetchChangeStatus,
+  fetchChat,
+  fetchAllChat,
 };
