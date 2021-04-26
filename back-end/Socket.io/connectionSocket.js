@@ -62,7 +62,7 @@ module.exports = (httpServer) => {
   io.on('connection', async (socket) => {
     console.log('1 connection foi feita no back');
     statusUpdate(socket);
-    messageProcess(socket, io);
+    messageProcess(socket);
     onDisconnect(socket);
     rootRoom(socket);
     onCloseRoom(socket);

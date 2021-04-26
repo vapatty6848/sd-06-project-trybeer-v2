@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import BeersAppContext from '../context/BeersAppContext';
-
+import { AdminSideBarComponent } from '../components';
+// import { AdminChatCardsComponent } from '../components';
 import socket from '../Socket.io/socket';
 
 function AdminWebChat() {
   const { user: { token } } = useContext(BeersAppContext);
-  // const history = useHistory();
+  const history = useHistory();
 
   const { email } = useParams();
-  // console.log('email', email)
 
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
@@ -24,13 +24,13 @@ function AdminWebChat() {
       },
     }).then((response) => response.json())
       .then((historyMessages) => {
-        console.log('entrou no then')
+        console.log('entrou no then');
         if (historyMessages.err) return;
-        console.log('entrou no then e passou do err')
+        console.log('entrou no then e passou do err');
         setMessages(historyMessages);
       })
       .catch(() => console.log('entrou no catch'));
-    
+
     return () => socket.emit('closeRoom', email);
   }, []);
 
@@ -42,8 +42,8 @@ function AdminWebChat() {
         {
           ...messageParam,
           cli: true,
-        }
-      ]
+        },
+      ];
       setMessages(ola);
     });
   }, [messages]);
@@ -55,15 +55,15 @@ function AdminWebChat() {
   const submeterMessage = () => {
     const cli = false;
     socket.emit('message', { email, message: input, cli });
-    console.log('entrou botão')
+    console.log('entrou botão');
     const ola = [
       ...messages,
       {
         message: input,
         date: new Date(),
         cli,
-      }
-    ]
+      },
+    ];
     setMessages(ola);
     setInput('');
   };
@@ -72,18 +72,19 @@ function AdminWebChat() {
 
   return (
     <div>
-      {/* <button
+      <AdminSideBarComponent />
+      <button
         type="button"
         data-testid="back-button"
         onClick={ () => history.push('/admin/chats') }
       >
         Voltar
-      </button>*/}
+      </button>
       <h1>{ `Conversando com ${email}` }</h1>
       {
         messages.sort((a, b) => a.date - b.date)
           .map(({ message, date, cli }, index) => {
-            const dateFormat = new Date(date)
+            const dateFormat = new Date(date);
             return (
               <div key={ index }>
                 <p>
@@ -101,8 +102,7 @@ function AdminWebChat() {
               </div>
             )
           })
-      }
-
+      };
       <input
         data-testid="message-input"
         type="text"

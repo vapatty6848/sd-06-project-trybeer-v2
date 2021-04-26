@@ -14,7 +14,7 @@ import {
   AdminProfilePage,
   AdminOrdersPage,
   AdminOrdersDetailsPage,
-  AdminIntermediatePage,
+  AdminChatList,
 } from './pages';
 
 function App() {
@@ -43,7 +43,7 @@ function App() {
             <Route
               exact
               path="/admin/chats"
-              component={ AdminIntermediatePage }
+              component={ AdminChatList }
             />
             <Route
               exact

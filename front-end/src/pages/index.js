@@ -10,5 +10,5 @@ export { default as AdminProfilePage } from './AdminProfilePage';
 export { default as CostumerOrdersDetailsPage } from './CostumerOrdersDetailsPage';
 export { default as AdminOrdersDetailsPage } from './AdminOrdersDetailsPage';
 export { default as AdminWebChat } from './AdminWebChat';
-export { default as AdminIntermediatePage } from './AdminIntermediatePage';
+export { default as AdminChatList } from './AdminChatList';
 

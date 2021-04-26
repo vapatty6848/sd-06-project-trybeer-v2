@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import socket from '../Socket.io/socket';
 import BeersAppContext from '../context/BeersAppContext';
+import HeaderComponent from '../components/HeaderComponent';
 
 function CostumerWebChat() {
   const { user: { token, email } } = useContext(BeersAppContext);
@@ -18,7 +19,7 @@ function CostumerWebChat() {
       },
     }).then((response) => response.json())
       .then((historyMessages) => {
-        console.log('entrou no then')
+        console.log('entrou no then');
         if (historyMessages.err) return;
         setMessages(historyMessages);
       })
@@ -34,8 +35,8 @@ function CostumerWebChat() {
         {
           ...messageParam,
           cli: false,
-        }
-      ]
+        },
+      ];
       setMessages(ola);
     });
   }, [messages]);
@@ -52,8 +53,8 @@ function CostumerWebChat() {
         message: input,
         date: new Date(),
         cli: true,
-      }
-    ]
+      },
+    ];
     setMessages(ola);
     setInput('');
   };
@@ -62,12 +63,11 @@ function CostumerWebChat() {
 
   return (
     <div>
-      <h1>Costumer Chat</h1>
-      {console.log('messages', messages)}
+      <HeaderComponent text="Trybeer"/>
       {
         messages.sort((a, b) => a.date - b.date)
           .map(({ message, date, cli }, index) => {
-            const dateFormat = new Date(date)
+            const dateFormat = new Date(date);
             return (
               <div key={ index }>
                 <p>
@@ -85,7 +85,7 @@ function CostumerWebChat() {
               </div>
             )
           })
-      }
+      };
 
       <input
         data-testid="message-input"

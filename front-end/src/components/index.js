@@ -11,3 +11,4 @@ export {
 export {
   default as CostumerOrdersDetailsCardsComponent } from
   './CostumerOrdersDetailsCardsComponent';
+export { default as AdminChatCardsComponent } from './AdminChatCardsComponent';
