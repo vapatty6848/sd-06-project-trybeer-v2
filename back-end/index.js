@@ -22,10 +22,28 @@ const { createMessages } = require('./chat/models/mongoModel');
 const port = 3001;
 const portSocket = 4001;
 
+// const hora = () => {
+//   const allTime = new Date().toLocaleTimeString().split(':');
+//   const time = `${allTime[0]}:${allTime[1]}`;
+//   return time;
+// };
+
 const hora = () => {
-  const allTime = new Date().toLocaleTimeString().split(':');
-  const time = `${allTime[0]}:${allTime[1]}`;
-  return time;
+  const dNow = new Date();
+  const min = () => {
+    if (dNow.getMinutes() < 10) {
+      return `0${dNow.getMinutes()}`;
+    }
+    return dNow.getMinutes();
+  };
+  const hr = () => {
+    if (dNow.getHours() < 10) {
+      return `0${dNow.getHours()}`;
+    }
+    return dNow.getHours();
+  };
+  const localdate = `${hr()}:${min()}`;
+  return localdate;
 };
 
 io.on('connection', (socket) => {
