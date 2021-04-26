@@ -20,7 +20,6 @@ const saveCart = (cartList, history) => {
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [isDisabled, setIsDisabled] = useState(true);
-
   const {
     stateSumPrice,
     stateSideBar,

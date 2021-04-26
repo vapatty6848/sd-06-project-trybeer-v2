@@ -11,6 +11,7 @@ const saveLocalStorage = (res) => {
 };
 
 const handleSubmit = async ([event, email, password, history]) => {
+  console.log(email);
   event.preventDefault();
   const user = await loginUser(email, password);
   saveLocalStorage(user);

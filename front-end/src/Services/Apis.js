@@ -19,6 +19,7 @@ export const loginUser = async (email, password) => {
 };
 
 export const registerNewUser = async (name, email, password, role) => {
+  console.log(name, email, password, role);
   const response = await axios({
     method: 'post',
     url: 'http://localhost:3001/register',
@@ -107,6 +108,7 @@ export const getOrderDetails = async (id) => {
       saleDate: res.data.saleDate,
       valueTotal: res.data.totalPrice,
       products: productsArray,
+      status: res.data.status,
     };
     return finalResponse;
   })

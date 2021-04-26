@@ -26,7 +26,6 @@ const MyOrders = () => {
       fetchMyOrders();
     }
   }, [userState]);
-
   useEffect(() => {
     const userStorage = JSON.parse(localStorage.getItem('user'));
     if (!userStorage) history.push('/login');
@@ -58,6 +57,12 @@ const MyOrders = () => {
                     data-testid={ `${index}-order-number` }
                   >
                     { `Pedido ${order.id}` }
+                  </span>
+                  <span
+                    className="order-number"
+                    data-testid={ `${index}-order-status` }
+                  >
+                    { `Pedido ${order.status}` }
                   </span>
                   <span data-testid={ `${index}-order-date` }>
                     { moment(order.saleDate).format('DD/MM/YYYY') }
