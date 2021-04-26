@@ -13,8 +13,8 @@
 .idea/**/dictionaries
 .idea/**/shelf
 
-./back-end/config/config.js
-./back-end/mongodb/connection.js
+# ./back-end/config/config.js
+# ./back-end/mongodb/connection.js
 
 # Generated files
 .idea/**/contentModel.xml
