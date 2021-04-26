@@ -64,7 +64,7 @@ const CardAdminStatus = ({
             {status}
           </span>
         ) : (
-          <span>
+          <span data-testid={ `${index}-order-status` }>
             Entregue
           </span>
         )}
