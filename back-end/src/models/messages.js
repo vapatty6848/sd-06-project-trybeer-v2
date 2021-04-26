@@ -1,6 +1,6 @@
 const connection = require('../../models/connection');
 
-const getAllMessages = async (email) => {
+const getMessagesByEmail = async (email) => {
   const messages = await connection()
     .then((db) => db.collection('messages')
     .find({ email })
@@ -15,6 +15,6 @@ const createMessage = async (email, message, date) => {
 };
 
 module.exports = {
-  getAllMessages,
+  getMessagesByEmail,
   createMessage,
 };

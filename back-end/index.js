@@ -25,6 +25,7 @@ const ProductsController = require('./src/controllers/ProductsController');
 const ProfileController = require('./src/controllers/ProfileController');
 const SalesController = require('./src/controllers/SalesController');
 const MessageController = require('./src/controllers/MessageController');
+const MessagesAdminController = require('./src/controllers/MessagesAdminController');
 require('dotenv').config();
 
 const port = process.env.PORT || 3001;
@@ -46,5 +47,7 @@ app.use('/profile', ProfileController);
 app.use('/sales', SalesController);
 
 app.use('/chat', MessageController);
+
+app.use('/admin/chats', MessagesAdminController);
 
 httpServer.listen(port, () => console.log(`Running at ${port}`));
