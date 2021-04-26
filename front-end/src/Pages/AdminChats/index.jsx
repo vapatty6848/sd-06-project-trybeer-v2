@@ -8,7 +8,7 @@ import S from '../AdminOrderDetails/styles';
 
 export default function AdminChats() {
   const { stateSideBarAdmin } = useContext(GlobalContext);
-  
+
   return (
     <S.Container>
 

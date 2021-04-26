@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const Container = styled.div`${({ theme, pending, stateSideBarAdmin }) => css`
+const Container = styled.div`${({ theme, pending, stateSideBarAdmin }) => css`
   font-weight: 550;
   padding: 15px 20px 15px 40px;
   width: 70%;
@@ -47,3 +47,5 @@ export const Container = styled.div`${({ theme, pending, stateSideBarAdmin }) =>
   }
   `}
 `;
+
+export default Container;
