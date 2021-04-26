@@ -12,6 +12,7 @@ const io = require('socket.io')(httpServer, {
     methods: ['GET', 'POST'],
   },
 });
+const getCurrentHour = require('./utils/currentHour');
 
 const RegisterController = require('./controllers/RegistersController');
 const ProductsController = require('./controllers/ProductsController');
@@ -21,12 +22,17 @@ const handleError = require('./middlewares/handleError');
 const OrdersController = require('./controllers/OrdersController');
 const AdminController = require('./controllers/AdminController');
 const ChatController = require('./controllers/ChatController');
+// const { isObject } = require('util');
 
 io.on('connection', (socket) => {
   console.log('Novo usuário conectado', socket.id);
 
   socket.on('emit', (email) => {
     console.log('Email SOCKET emit', email);
+  });
+  socket.on('chat.sendMessage', (data) => {
+    const dataWithTime = { ...data, date: getCurrentHour() };
+    io.emit('chat.receiveMessage', dataWithTime);
   });
 });
 

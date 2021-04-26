@@ -1,4 +1,5 @@
 const connection = require('./connection');
+const getCurrentHour = require('../utils/currentHour');
 
 const COLLECTION_NAME = 'messages';
 
@@ -19,10 +20,10 @@ const getByNickname = async (nickname) => {
 };
 
 const saveMessage = async (nickname, message) => {
-  const date = new Date();
+  const date = getCurrentHour();
   const newMessage = await connection()
     .then((db) => db.collection(COLLECTION_NAME)
-      .update(
+      .updateOne(
         { nickname },
         { $push: { messages: { message, date, nickname } } },
         { upsert: true },
