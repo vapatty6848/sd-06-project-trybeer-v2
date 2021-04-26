@@ -92,6 +92,23 @@ const registerSales = async (params) => axios
   .then((res) => ({ response: res.data, result: true }))
   .catch((err) => ({ response: err.response, result: false }));
 
+const registerMessage = async (params) => axios
+  .post(`${baseUrl}/messages`, {
+    params,
+  })
+  .then((res) => ({ response: res.data, result: true }))
+  .catch((err) => ({ response: err.response.data, result: false }));
+
+const findMessagesGroup = async () => axios
+  .get(`${baseUrl}/messages`)
+  .then((res) => res.data)
+  .catch((err) => err.response.data);
+
+const findMessagesById = async (id) => axios
+  .get(`${baseUrl}/messages/${id}`)
+  .then((res) => res.data)
+  .catch((err) => err.response.data);
+
 module.exports = {
   getAllOrdersByUser,
   updateStatusOrder,
@@ -103,4 +120,7 @@ module.exports = {
   getOrdersById,
   registerUser,
   getAllOrders,
+  registerMessage,
+  findMessagesGroup,
+  findMessagesById,
 };

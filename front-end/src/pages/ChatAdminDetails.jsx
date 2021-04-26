@@ -1,33 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import MenuTop from '../components/menuClient/MenuTop';
+import { useParams } from 'react-router-dom';
 import socket from '../services/socketClient';
 import BodyChat from '../components/chatClient/BodyChat';
 import FormChat from '../components/chatClient/FormChat';
 import api from '../services/api';
+import MenuSideBarAdm from '../components/menuAdmin/MenuSideBarAdm';
 
-function ChatClient() {
+const ChatAdminDetails = () => {
   const { email } = JSON.parse(localStorage.user);
   const [message, setMessage] = useState('');
   const [chatMessages, setChatMessages] = useState([]);
-  const [buttonDisable, setButtonDisable] = useState(true);
-  const [user, setUser] = useState(email);
+  const [user] = useState(email);
   const [chatMessagesBD, setChatMessagesBD] = useState([]);
 
-  const history = useHistory();
+  const [buttonDisable, setButtonDisable] = useState(true);
+  // const [user, setUser] = useState(email);
 
+  // const history = useHistory();
+
+  const { id } = useParams();
   useEffect(() => {
-    const { email: userEmail, role } = JSON.parse(localStorage.user);
-    console.log(userEmail);
-    if (!email || role !== 'client')history.push('/login');
-    socket.emit('login', user);
-    socket.on('socketNick', (userNick) => {
-      setUser(userNick);
-    });
-    const from = userEmail;
-    const dest = 'admin';
-    const key = [from, dest].sort().join('-');
-    api.findMessagesById(key).then((response) => {
+    api.findMessagesById(id).then((response) => {
       setChatMessagesBD(response);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -39,8 +32,7 @@ function ChatClient() {
   }, [message]);
 
   useEffect(() => {
-    const { email: userEmail } = JSON.parse(localStorage.user);
-    const from = userEmail;
+    const from = 'admin';
     const dest = 'admin';
     const key = [from, dest].sort().join('-');
     socket.emit('connectRoom', key);
@@ -70,7 +62,7 @@ function ChatClient() {
   return (
     <div>
       <div>
-        <MenuTop name="Trybeer Chat" />
+        <MenuSideBarAdm />
       </div>
       <div className="chat">
         <BodyChat data={ chatMessages } dataBD={ chatMessagesBD } user={ user } />
@@ -82,6 +74,6 @@ function ChatClient() {
       />
     </div>
   );
-}
+};
 
-export default ChatClient;
+export default ChatAdminDetails;
