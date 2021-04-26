@@ -8,6 +8,7 @@ export default function AdminOrdersDetails() {
   const { id } = useParams();
   const [productsOfSale, setProductsOfSale] = useState([]);
   const [status, setStatus] = useState('Pendente');
+  const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -15,6 +16,13 @@ export default function AdminOrdersDetails() {
 
     api.fetchSaleProduct(id).then((response) => {
       setProductsOfSale(response);
+
+      response.products.reduce((acc, product) => {
+        let total = 0;
+        total = acc + product.salesProducts.quantity * product.price;
+        setTotalPrice(total);
+        return total;
+      }, 0);
     });
   }, [id]);
 
@@ -29,10 +37,7 @@ export default function AdminOrdersDetails() {
     if (statusOrder === 'Preparando') setStatus('Preparando');
   }, [productsOfSale]);
 
-  // const sumOfCart = (sum, prod) => sum + prod.salesProducts.quantity * prod.price;
-  // o reducer não funciona por fora e nem dentro do html.
-
-  return !productsOfSale ? <p>Loading...</p> : (
+  return !productsOfSale ? <p>Carregando...</p> : (
     <div className="main-container-adm">
       <div className="menu-top-adm">
         <MenuTopAdmin />
@@ -73,11 +78,9 @@ export default function AdminOrdersDetails() {
               </div>
             ))}
           </div>
-          {/* <h2 data-testid="order-total-value" className="total-price">
-            {productsOfSale
-              .reduce(sumOfCart, 0)
-              .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-          </h2> */}
+          <h2 data-testid="order-total-value" className="total-price">
+            { totalPrice.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }
+          </h2>
           <div className="button-register">
             <button
               className="btn btn-danger"

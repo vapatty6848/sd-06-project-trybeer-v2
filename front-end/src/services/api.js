@@ -119,12 +119,12 @@ const fetchChat = async (email) => {
     headers: {
       'Content-Type': 'application/json',
       // 'Access-Control-Allow-Origin' : '*',
-      // 'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',  
+      // 'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
     },
     body: JSON.stringify({ email }),
   }).then((res) => res.json());
   return result;
-}
+};
 
 module.exports = {
   fetchLogin,
