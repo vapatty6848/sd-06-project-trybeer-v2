@@ -52,7 +52,16 @@ app.get('/chat', async (req, res) => {
   const { emailuser } = req.headers;
   const emailUser = emailuser;
   const arrayMessages = await getMessageByNickname(emailUser);
-  res.status(200).json(arrayMessages);
+  const convertArray = arrayMessages.map((element) => {
+    const hour = element.timestamp.getHours();
+    const minute = element.timestamp.getMinutes();
+    return {
+      emailUser: element.emailUser,
+      timestamp: `${hour}:${minute}`,
+      message: element.message,
+    };
+  });
+  res.status(200).json(convertArray);
 });
 
 app.get('/chat/admin', async (req, res) => {
@@ -89,6 +98,11 @@ const getCurrentHour = () => {
   return now;
 };
 
+const getCurrentHourAndMinute = () => {
+  const now = new Date();
+  return `${now.getHours()}:${now.getMinutes()}`;
+};
+
 io.on('connection', (socket) => {
   console.log('Novo usuario conectado');
 
@@ -99,7 +113,7 @@ io.on('connection', (socket) => {
     // }
     const timestamp = getCurrentHour();
     await createMessage(message, emailUser, timestamp);
-    const data = { data: message, sendAt: getCurrentHour() };
+    const data = { data: message, sendAt: getCurrentHourAndMinute() };
     io.emit('receiveMessage', data);
   });
 });
