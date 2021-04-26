@@ -26,7 +26,7 @@ io.on('connection', (socket) => {
   socket.on('message', async ({ user, time, message, Loja }) => {
     // console.log(userBack, time, msg, Loja);
     if (user !== undefined) {
-      await createMessages(user, time, message, Loja);
+      createMessages(user, time, message, Loja);
     }
     io.emit('messages', { user, time, message, Loja });
   });
