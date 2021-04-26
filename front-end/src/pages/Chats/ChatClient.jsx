@@ -10,11 +10,11 @@ export default function ChatClient() {
   const [messages, setMessages] = useState([]);
   const [att, setAtt] = useState(0);
   const [emailUser, setEmail] = useState('');
-  // socket.emit('message', 'minha mensagem incrivel!');
+  socket.emit('message', 'minha mensagem incrivel!');
   // recebe msg do back
-  // socket.on('mensagem', (msg) => {
-  //   console.log(msg, 'msg');
-  // });
+  socket.on('mensagem', (msg) => {
+    console.log(msg, 'msg');
+  });
 
   socket.on('Mensagem do admin pro cliente', () => {
     setAtt(att + 1);

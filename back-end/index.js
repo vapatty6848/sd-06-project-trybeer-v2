@@ -37,8 +37,8 @@ socket.on('clientMsg', async () => {
   io.emit('Mensagem do cliente pro admin');
 });
 
-// socket.emit('mensagem', 'minha mensagem incrivel!');
-// });
+socket.emit('mensagem', 'minha mensagem incrivel!');
+});
 
 app.use(cors());
 app.use(bodyParser.json());
