@@ -12,10 +12,10 @@ const Orders = ({ history }) => {
   useEffect(() => {
     async function fetchOrders() {
       const user = JSON.parse(localStorage.user);
-      const response = await api.getAllOrdersByUser(user.token);
-      if (response.message) return history.push('/login');
-      setOrders(response);
-      console.log(response);
+      api.getAllOrdersByUser(user.token).then((response) => {
+        if (response.message) return history.push('/login');
+        setOrders(response);
+      });
     }
     fetchOrders();
   }, [history]);

@@ -19,12 +19,12 @@ const OrdersCard = ({ orders }) => {
       <div className="movie-card-orders">
         <Link data-testid={ `${index}-orders-details-link` } to={ `/orders/${order.id}` }>
           <div className="top-details">
-            <div
+            <p
               className="space-entry"
               data-testid={ `${index}-order-number` }
             >
               { `Pedido ${order.id}` }
-            </div>
+            </p>
             <div
               data-testid={ `${index}-order-date` }
             >
@@ -36,6 +36,9 @@ const OrdersCard = ({ orders }) => {
           >
             { `R$ ${order.totalPrice.replace('.', ',')} ` }
           </div>
+          <p data-testid={ `${index}-order-status` }>
+            {order.status}
+          </p>
         </Link>
       </div>
     </div>
