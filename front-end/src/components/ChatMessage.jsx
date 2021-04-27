@@ -1,7 +1,6 @@
 import jwtDecode from 'jwt-decode';
 import moment from 'moment';
 import React, { useState } from 'react';
-import useInput from '../hooks/useInput';
 import socket from '../utils/socketClient';
 import fetches from '../services/fetches';
 
@@ -29,7 +28,7 @@ export default function ChatMessage() {
             placeholder="Mensagem"
             data-testid="message-input"
             value={ message }
-            onChange={ event => setMessage(event.target.value) }
+            onChange={ (event) => setMessage(event.target.value) }
             id="message-input"
           />
           <button

@@ -1,7 +1,6 @@
-module.exports = (io, socket) => {
-  const createMessage = () => {
-    console.log('teste');
-    io.emit('Está funcionando');
-  };
-  socket.on('chat:sendMessage', createMessage);
-};
+// module.exports = ({ email, sentAt, message, socket }) => {
+//   const createMessage = () => {
+//     console.log(email);
+//   };
+//   socket.on('chat:sendMessage', createMessage);
+// };

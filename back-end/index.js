@@ -21,13 +21,22 @@ const productsController = require('./controller/productsController');
 const ordersController = require('./controller/ordersController');
 const messageController = require('./controller/messageController');
 const unexpectedError = require('./middlewares/unexpectedError');
-const { messagesHandler } = require('./socketHandler');
+// const { messagesHandler } = require('./socketHandler');
 
-const onConnection = (socket) => {
-  messagesHandler(io, socket);
+// const onConnection = ({ email, sentAt, message, socket }) => {
+//   socket
+//   .messagesHandler({ email, sentAt, message, socket });
+// };
+
+const sendMessage = ({ email, sentAt, message, socket }) => {
+  const newMessage = { email, sentAt, message };
+  socket.emit('chat:sendMessage', newMessage);
 };
 
-io.on('connection', onConnection);
+io.on('connection', async (socket) => {
+  socket.on('chat:sendMessage', ({ email, sentAt, message }) => 
+    sendMessage({ email, sentAt, message, socket }));
+});
 
 app.use('/images', express.static(`${__dirname}/images`));
 
