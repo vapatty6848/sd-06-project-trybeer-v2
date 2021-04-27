@@ -14,6 +14,7 @@ import OrderDetails from './pages/OrderDetails';
 import ProductAdminInsert from './pages/ProductAdminInsert';
 import UserChat from './pages/UserChat';
 import AdminChats from './pages/AdminChats';
+import AdminChat from './pages/AdminChat';
 import './App.css';
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
           <Route exact path="/admin/products" component={ ProductAdminInsert } />
           <Route exact path="/chat" component={ UserChat } />
           <Route exact path="/admin/chats" component={ AdminChats } />
+          <Route exact path="/admin/chat" component={ AdminChat } />
         </Switch>
       </BrowserRouter>
     </LoginProvider>
