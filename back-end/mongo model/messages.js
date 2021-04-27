@@ -17,12 +17,15 @@ const saveMessage = async (email, nickname, message, timestamp) => {
   ));
 };
 
+const getCustomersChat = async () => (
+  connection().then((db) => db.collection('messages')
+    .find()
+    .project({ _id: 0 })
+    .toArray())
+);
+
 module.exports = {
   getAllByUser,
   saveMessage,
+  getCustomersChat,
 };
-
-// [
-//   { email: useremail@MediaList.com, messages: [{ nickname, chatmessage, timestamp}] },
-//   { email: useremail@MediaList.com, messages: [{ nickname, chatmessage, timestamp}] },
-// ]

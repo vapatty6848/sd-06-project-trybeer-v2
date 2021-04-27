@@ -16,7 +16,7 @@ const { usersRouter } = require('./controllers/users');
 const { productsRouter } = require('./controllers/products');
 const ordersRouter = require('./controllers/orders');
 const adminRouter = require('./controllers/admin');
-const userChatController = require('./controllers/chatUser');
+const chatController = require('./controllers/chatUser');
 
 app.use(json());
 app.use(cors());
@@ -31,10 +31,12 @@ app.use('/admin', adminRouter);
 io.on('connection', (socket) => {
   console.log('connection do back-end');
 
-  socket.on('getMessages', ({ email }) => userChatController.getAllMessages({ email, io }));
+  socket.on('getMessages', ({ email }) => chatController.getAllMessages({ email, io }));
+
+  socket.on('getCustomersChat', () => chatController.getCustomersChat({ io }));
 
   socket.on('message', ({ nickname, message, email }) => (
-    userChatController.saveMessage({ nickname, message, email, io })
+    chatController.saveMessage({ nickname, message, email, io })
   ));
 
   socket.on('disconnect', () => console.log('user disconnected'));
