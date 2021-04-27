@@ -7,19 +7,16 @@ import api from '../services/api';
 import MenuSideBarAdm from '../components/menuAdmin/MenuSideBarAdm';
 
 const ChatAdminDetails = () => {
-  const { email } = JSON.parse(localStorage.user);
   const [message, setMessage] = useState('');
   const [chatMessages, setChatMessages] = useState([]);
-  const [user] = useState(email);
   const [chatMessagesBD, setChatMessagesBD] = useState([]);
-
+  const [user] = useState('Loja');
   const [buttonDisable, setButtonDisable] = useState(true);
-  // const [user, setUser] = useState(email);
-
-  // const history = useHistory();
 
   const { id } = useParams();
+
   useEffect(() => {
+    socket.emit('connectRoom', id);
     api.findMessagesById(id).then((response) => {
       setChatMessagesBD(response);
     });
@@ -32,10 +29,6 @@ const ChatAdminDetails = () => {
   }, [message]);
 
   useEffect(() => {
-    const from = 'admin';
-    const dest = 'admin';
-    const key = [from, dest].sort().join('-');
-    socket.emit('connectRoom', key);
     socket.on('sendMessage', (mess) => {
       setChatMessages([...chatMessages, mess]);
     });
@@ -46,15 +39,13 @@ const ChatAdminDetails = () => {
   };
 
   const handleClick = (e) => {
-    const { email: userEmail } = JSON.parse(localStorage.user);
-    const from = userEmail;
-    const dest = 'admin';
-    const key = [from, dest].sort().join('-');
     e.preventDefault();
+    const dest = id.split('-').filter((nick) => nick !== user)[0];
+    const key = [user, dest].sort().join('-');
     const inputMessage = document.querySelector('#message');
     inputMessage.value = '';
     setMessage('');
-    const dataMessage = { message, from, dest, key };
+    const dataMessage = { message, from: user, dest, key };
     socket.emit('message', dataMessage);
     api.registerMessage(dataMessage);
   };

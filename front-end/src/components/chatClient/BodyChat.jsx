@@ -1,9 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 
 function BodyChat({ data, dataBD, user }) {
+  const history = useHistory();
   return (
     <div id="chat">
+      <div>
+        <button
+          type="button"
+          data-testid="back-button"
+          onClick={ () => history.push('/admin/chats') }
+        >
+          Voltar
+        </button>
+      </div>
       {dataBD.length > 0 && dataBD.map((dataHistoric, index) => (
         <div key={ index }>
           <p data-testid="nickname">{dataHistoric.nickname}</p>

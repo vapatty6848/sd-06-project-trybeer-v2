@@ -7,26 +7,25 @@ import FormChat from '../components/chatClient/FormChat';
 import api from '../services/api';
 
 function ChatClient() {
-  const { email } = JSON.parse(localStorage.user);
+  const { email: userEmail, role } = JSON.parse(localStorage.user);
   const [message, setMessage] = useState('');
   const [chatMessages, setChatMessages] = useState([]);
   const [buttonDisable, setButtonDisable] = useState(true);
-  const [user, setUser] = useState(email);
+  const [user, setUser] = useState(userEmail);
   const [chatMessagesBD, setChatMessagesBD] = useState([]);
 
   const history = useHistory();
+  const dest = 'Loja';
+  const from = userEmail;
+  const key = [from, dest].sort().join('-');
 
   useEffect(() => {
-    const { email: userEmail, role } = JSON.parse(localStorage.user);
-    console.log(userEmail);
-    if (!email || role !== 'client')history.push('/login');
+    if (!userEmail || role !== 'client')history.push('/login');
+    socket.emit('connectRoom', key);
     socket.emit('login', user);
     socket.on('socketNick', (userNick) => {
       setUser(userNick);
     });
-    const from = userEmail;
-    const dest = 'admin';
-    const key = [from, dest].sort().join('-');
     api.findMessagesById(key).then((response) => {
       setChatMessagesBD(response);
     });
@@ -39,25 +38,16 @@ function ChatClient() {
   }, [message]);
 
   useEffect(() => {
-    const { email: userEmail } = JSON.parse(localStorage.user);
-    const from = userEmail;
-    const dest = 'admin';
-    const key = [from, dest].sort().join('-');
-    socket.emit('connectRoom', key);
     socket.on('sendMessage', (mess) => {
       setChatMessages([...chatMessages, mess]);
     });
-  }, [chatMessages]);
+  }, [chatMessages, from, key, userEmail]);
 
   const handleChange = ({ target }) => {
     setMessage(target.value);
   };
 
   const handleClick = (e) => {
-    const { email: userEmail } = JSON.parse(localStorage.user);
-    const from = userEmail;
-    const dest = 'admin';
-    const key = [from, dest].sort().join('-');
     e.preventDefault();
     const inputMessage = document.querySelector('#message');
     inputMessage.value = '';
