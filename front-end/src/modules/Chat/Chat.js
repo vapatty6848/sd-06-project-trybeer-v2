@@ -3,8 +3,10 @@ import React, { useState, useEffect } from 'react';
 import Loader from '../../design-components/Loader';
 import TopBar from '../../design-components/TopBar';
 import api from '../../axios/api';
+import runtimeEnv from '@mars/heroku-js-runtime-env' ; 
+const env = runtimeEnv(); 
 
-const socket = io('http://localhost:3001');
+const socket = io(env.REACT_APP_BASE_URL);
 
 function Chat() {
   const [loading, setLoading] = useState(true);
