@@ -10,7 +10,7 @@ import socket from '../../utils/socketClient';
 import { saveMessage, getMessages } from '../../Services/Apis';
 import MessagesBox from '../../Components/MessagesBox';
 
-function AdminChatTalks({ location: { pathname } }) {
+function AdminChatTalks({ location: { pathname, state } }) {
   const { stateSideBarAdmin } = useContext(GlobalContext);
   const [isLoading, setIsLoading] = useState(true);
   const [message, setMessage] = useState('');
@@ -56,7 +56,7 @@ function AdminChatTalks({ location: { pathname } }) {
   useEffect(() => {
     const dataStorage = localStorage.getItem('user');
     const { email: localStorageEmail, role: localStorageRole } = JSON.parse(dataStorage);
-    setEmail(localStorageEmail);
+    setEmail(!state ? localStorageEmail : state);
     setRole(localStorageRole);
   }, []);
 

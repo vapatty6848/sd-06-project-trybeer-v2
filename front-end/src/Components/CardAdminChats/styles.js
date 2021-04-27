@@ -1,11 +1,9 @@
 import styled, { css } from 'styled-components';
 
-const Container = styled.div`${({ theme, pending, stateSideBarAdmin }) => css`
+const Container = styled.div`${({ theme, pending }) => css`
   font-weight: 550;
   padding: 15px 20px 15px 40px;
-  width: 70%;
 
-  /* opacity: ${stateSideBarAdmin && '0.2'}; */
   position: relative;
 
   border-bottom: 10px solid ${theme.colors.borderInput};
@@ -13,6 +11,7 @@ const Container = styled.div`${({ theme, pending, stateSideBarAdmin }) => css`
   box-shadow: 0 0 5px black;
 
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
 
   color: ${theme.colors.text};
@@ -31,6 +30,7 @@ const Container = styled.div`${({ theme, pending, stateSideBarAdmin }) => css`
   transition: background 0.3s;
 
   &:hover {
+    cursor: pointer;
     .content-left {
       margin-left: ${pending && '200px'};
 
