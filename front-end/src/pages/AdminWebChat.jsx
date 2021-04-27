@@ -88,7 +88,7 @@ function AdminWebChat() {
       </button>
       <h1>{ `Conversando com ${email}` }</h1>
       {
-        messages.sort((a, b) => a.date - b.date)
+        messages
           .map(({ message, date, cli }, index) => (
             <div key={ index }>
               <p>

@@ -74,7 +74,7 @@ function CostumerWebChat() {
     <div>
       <HeaderComponent text="Trybeer" />
       {
-        messages.sort((a, b) => a.date - b.date)
+        messages
           .map(({ message, date, cli }, index) => (
             <div key={ index }>
               <p>
