@@ -1,12 +1,12 @@
 .detail-order-adm {
   display: flex;
   flex-direction: column;
-  margin-top: 100px;
-  margin-left: 250px;
-  width: 30%;
-  min-width: 400px;
-  font-weight: bold;
   font-size: 30px;
+  font-weight: 500;
+  margin-left: 250px;
+  margin-top: 100px;
+  min-width: 400px;
+  width: 30%;
 }
 
 .order-status-adm {
@@ -15,34 +15,34 @@
 }
 
 .order-items-adm {
+  border: 1px solid black;
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
-  font-weight: bold;
   font-size: large;
+  font-weight: 500;
   width: 100%;
 }
 
 .order-items-adm ul {
   list-style-type: none;
-  padding: 0px 5px;
   margin-left: 5px;
+  padding: 0 5px;
 }
 
 .price-order {
   font-size: 30px;
-  text-align: right;
   margin-right: 10px;
+  text-align: right;
 }
 
 .delivered-button {
-  color: white;
+  align-self: flex-end;
   background-color: green;
   border: none;
   border-radius: 5px;
+  color: white;
   font-size: large;
-  font-weight: bold;
-  padding: 5px 10px;
+  font-weight: 500;
   margin-top: 10px;
-  align-self: flex-end;
+  padding: 5px 10px;
 }
