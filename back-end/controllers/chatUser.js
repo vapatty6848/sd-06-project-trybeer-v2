@@ -1,26 +1,21 @@
-const { Router } = require('express');
 const moment = require('moment');
 const services = require('../services/chatUser');
-const validateToken = require('../auth/validateToken');
 
-const chatUserRouter = new Router();
+const getAllMessages = async ({ email, io }) => {
+  const [{ messages }] = await services.getAllByUser(email);
+  io.emit('message', messages);
+};
 
-chatUserRouter.get('/', validateToken, async (req, res) => {
-  const { email } = req.user;
-  const allMessages = await services.getAllByUser(email);
-
-  return res.status(200).json(allMessages);
-});
-
-chatUserRouter.post('/', validateToken, async (req, res) => {
-  const { email, role } = req.user;
-  const { message } = req.body;
-  const timestamp = moment().format('hh:mm');
-  const nickname = role === 'admin' ? 'Loja' : email;
-
+const saveMessage = async ({ nickname, message, email, io }) => {
+  const timestamp = moment().format('HH:mm');
+  
   await services.saveMessage(email, nickname, message, timestamp);
 
-  return res.status(200).json();
-});
+  const [{ messages }] = await services.getAllByUser(email);
 
-module.exports = chatUserRouter;
+  console.log('allMessages', messages);
+
+  io.emit('message', messages);
+};
+
+module.exports = { saveMessage, getAllMessages };
