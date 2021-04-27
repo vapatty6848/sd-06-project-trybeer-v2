@@ -14,13 +14,12 @@ function Message({ msg, user }) {
   const { from, date, message } = msg;
   const formattedDate = timeFormat(date);
   const isMine = user === from;
-  console.log('is it mine? ', isMine);
   return (
     <div
-      className={ `flex flex-col w-1/2 rounded-t-md
+      className={ `flex flex-col w-1/2 rounded-t-xl
       ${isMine
-      ? 'rounded-bl-md bg-green-200 self-end'
-      : 'rounded-br-md bg-gray-200 self-start'}
+      ? 'rounded-bl-xl bg-green-200 self-end'
+      : 'rounded-br-xl bg-gray-200 self-start'}
       my-4 p-4` }
     >
       <div>

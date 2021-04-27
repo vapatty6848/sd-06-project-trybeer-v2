@@ -4,6 +4,7 @@ import TopBar from '../../design-components/TopBar';
 import api from '../../axios/api';
 import socket from '../../utils/socketClient';
 import Message from '../../design-components/Message';
+import ChatInput from '../../design-components/ChatInput';
 
 function Chat() {
   const [loading, setLoading] = useState(true);
@@ -44,33 +45,24 @@ function Chat() {
 
   return (
     loading ? <Loader /> : (
-      <div className="rounded-md shadow-sm space-y-4">
+      <div className="flex flex-col items-center rounded-md shadow-sm space-y-4">
         <TopBar
           title="Chat"
           data-testid="top-title"
         />
-        <div className="flex flex-col">
-          {
-            messages.length !== 0 && messages.map((msg, i) => (
-              <Message msg={ msg } key={ `message-${i}` } user={ user } />
-            ))
-          }
-        </div>
-        <div className="text-center justify-content-center">
-          <input
-            className="bg-gray-200 m-2"
-            type="text"
-            data-testid="message-input"
-            value={ message }
-            onChange={ (e) => setMessage(e.target.value) }
-          />
-          <button
-            type="button"
-            data-testid="send-message"
-            onClick={ () => handleClick() }
-          >
-            Enviar
-          </button>
+        <div className="flex w-full justify-center max-w-6xl">
+          <div className="flex flex-col w-full self-stretch">
+            {
+              messages.length !== 0 && messages.map((msg, i) => (
+                <Message msg={ msg } key={ `message-${i}` } user={ user } />
+              ))
+            }
+            <ChatInput
+              message={ message }
+              setMessage={ setMessage }
+              handleClick={ handleClick }
+            />
+          </div>
         </div>
       </div>
     )

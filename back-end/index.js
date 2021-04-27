@@ -13,20 +13,13 @@ const io = require('socket.io')(httpServer, {
 const { createMessage } = require('./src/models/messages');
 
 io.on('connection', (socket) => {
-  console.log(`${socket.id} connected`);
-  socket.on('disconnect', () => {
-    console.log(`${socket.id} disconnected`);
-  });
-
   socket.on('privateRoom', (key) => {
-    console.log('connected with ', key);
     socket.join(key);
   });
 
   socket.on('chatMessage', (data) => {
     const { from, to, message, date } = data;
     const key = [from, to].sort().join('-');
-    console.log(`key from ${from}: `, key);
     io.to(key).emit('serverMessage', data);
     createMessage(from, to, message, date);
   });
