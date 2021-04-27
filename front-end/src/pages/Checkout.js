@@ -100,7 +100,7 @@ function Checkout() {
 
   async function handleCallApi() {
     const userStorage = JSON.parse(localStorage.user);
-    const TIMEOUT = 5000;
+    const TIMEOUT = 3000;
     const { id } = userStorage;
     const value = totalPrice.toFixed(2);
     const userID = JSON.stringify(id);

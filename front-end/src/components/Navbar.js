@@ -15,7 +15,7 @@ const Navbar = () => {
 
   return (
     <DivNavContainer
-      style={ sidebar ? { width: '25%' } : { width: '0%' } }
+      style={ sidebar ? { width: '100%' } : { width: '0%' } }
     >
       <DivNavContent className="side-menu-container">
         {
