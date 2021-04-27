@@ -14,7 +14,7 @@ export default function ListaDeConversas() {
       })
     }
     callAllMessages();
-    console.log(users)
+    console.log(users, 'oi')
   },[])
   
   return (
