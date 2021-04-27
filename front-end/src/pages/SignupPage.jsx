@@ -13,12 +13,10 @@ function SignupPage() {
   const history = useHistory();
   const {
     setUser,
-    setProductQuantity,
-    setAmount,
-    user,
+    // user,
   } = useContext(BeersAppContext);
 
-  if (user.token) history.push('/products');
+  // if (user.token) history.push('/products');
 
   const [checked, setChecked] = useState(false);
   const [valid, setValid] = useState(true);
@@ -64,8 +62,6 @@ function SignupPage() {
       return;
     }
     setUser(returnSignup);
-    setProductQuantity([]);
-    setAmount(0.00);
     if (returnSignup.role === 'administrator') {
       history.push('/admin/orders');
     } else if (returnSignup.role === 'client') {

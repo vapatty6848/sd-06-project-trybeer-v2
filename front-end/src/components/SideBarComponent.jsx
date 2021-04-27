@@ -7,6 +7,8 @@ function SideBarComponent() {
   const history = useHistory();
   const {
     setUser,
+    setProductQuantity,
+    setAmount,
   } = useContext(BeersAppContext);
 
   return (
@@ -45,6 +47,8 @@ function SideBarComponent() {
         className="side-menu-container-logout"
         onClick={ () => {
           setUser({});
+          setProductQuantity([]);
+          setAmount(0.00);
           history.push('/login');
         } }
       >

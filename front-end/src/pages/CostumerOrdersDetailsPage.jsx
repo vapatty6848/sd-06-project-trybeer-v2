@@ -4,6 +4,7 @@ import { HeaderComponent, CostumerOrdersDetailsCardsComponent } from '../compone
 import BeersAppContext from '../context/BeersAppContext';
 import formatPrice from '../service/formatPrice';
 import statusConvert from '../service/statusConvert';
+import statusConvertCss from '../service/statusConvertCss';
 import socket from '../Socket.io/socket';
 import '../style/CostumerOrderDetails.css';
 
@@ -68,7 +69,12 @@ function CostumerOrdersDetailsPage() {
           <h1 data-testid="order-number">{`Pedido ${id}`}</h1>
           <h1 data-testid="order-date">{ date() }</h1>
         </div>
-        {orders.length !== 0 && (<p>{statusConvert(orders[0].status)}</p>)}
+        {orders.length !== 0 && (
+          <p
+            className={ statusConvertCss(statusConvert(orders[0].status)) }
+          >
+            {statusConvert(orders[0].status)}
+          </p>)}
         <div className="order-list-list">
           {orders.map((element, index) => (
             <div key={ index }>

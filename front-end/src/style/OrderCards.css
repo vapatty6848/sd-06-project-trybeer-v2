@@ -56,3 +56,18 @@ a:visited {
   font-weight: 900;
   text-decoration: none;
 }
+
+.greenStatus {
+  background-color: none !important;
+  color: #21a809 !important;
+}
+
+.yellowStatus {
+  background-color: none !important;
+  color: #eed91f !important;
+}
+
+.redStatus {
+  background-color: none !important;
+  color: #eb0e0e !important;
+}

@@ -79,6 +79,11 @@ a:visited {
   color: #ffffff !important;
 }
 
+.yellowStatus {
+  background-color: #eed91f!important;
+  color: #ffffff !important;
+}
+
 .redStatusComponent {
   background-color: #eb0e0e !important;
   color: #ffffff !important;
