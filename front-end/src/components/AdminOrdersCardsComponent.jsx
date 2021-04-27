@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import formatPrice from '../service/formatPrice';
 import statusConvert from '../service/statusConvert';
+import statusConvertCss from '../service/statusConvertCss';
 // import '../style/OrderCardsAdmin.css';
 
 function AdminOrdersCardsComponent({ element, index }) {
@@ -29,11 +30,7 @@ function AdminOrdersCardsComponent({ element, index }) {
         </h4>
         <h3
           data-testid={ `${index}-order-status` }
-          className={
-            (statusConvert(status) === 'Entregue')
-              ? 'greenStatusComponent'
-              : 'redStatusComponent'
-          }
+          className={ statusConvertCss(statusConvert(status)) }
         >
           { `${statusConvert(status)}` }
         </h3>

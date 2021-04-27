@@ -10,6 +10,7 @@ import fetchApiJsonBody from '../service/fetchApi';
 import statusConvert from '../service/statusConvert';
 import formatPrice from '../service/formatPrice';
 import socket from '../Socket.io/socket';
+import statusConvertCss from '../service/statusConvertCss';
 
 function AdminOrdersDetailsPage() {
   const { id } = useParams();
@@ -80,11 +81,7 @@ function AdminOrdersDetailsPage() {
         <h1 data-testid="order-number">{ `Pedido ${id}` }</h1>
         <h1
           data-testid="order-status"
-          className={
-            (statusOrder() === 'Entregue')
-              ? 'greenStatus'
-              : 'redStatus'
-          }
+          className={ statusConvertCss(statusOrder()) }
         >
           { statusOrder() }
         </h1>

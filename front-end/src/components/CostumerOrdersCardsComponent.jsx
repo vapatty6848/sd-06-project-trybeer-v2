@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import formatPrice from '../service/formatPrice';
 import statusConvert from '../service/statusConvert';
 import '../style/OrderCards.css';
+import statusConvertCss from '../service/statusConvertCss';
 
 function CostumerOrdersCardsComponent({ element, index }) {
   const { id, totalPrice, saleDate, status } = element;
@@ -29,7 +30,11 @@ function CostumerOrdersCardsComponent({ element, index }) {
         <h4 data-testid={ `${index}-order-total-value` }>
           { `R$ ${formatPrice(totalPrice)}` }
         </h4>
-        <p>{ statusConvert(status) }</p>
+        <p
+          className={ statusConvertCss(statusConvert(status)) }
+        >
+          { statusConvert(status) }
+        </p>
       </div>
     </div>
   );

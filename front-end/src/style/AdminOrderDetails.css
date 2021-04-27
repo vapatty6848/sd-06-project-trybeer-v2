@@ -26,6 +26,11 @@ admin_orders_details {
   color: #21a809;
 }
 
+.yellowStatus {
+  background-color: none !important;
+  color: #eed91f;
+}
+
 .redStatus {
   background-color: none !important;
   color: #eb0e0e;
