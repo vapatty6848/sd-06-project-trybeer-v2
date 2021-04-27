@@ -19,10 +19,12 @@ export default function ListaDeConversas() {
   return (
     <div>
       <Header title="TryBeer" user="admin" />
-      {users.length === 0 ? 
+      {users.length === 0
+      ?
         <h3 data-testid="text-for-no-conversation">
           Nenhuma conversa por aqui
-        </h3> : 
+        </h3> 
+        :
         <div>
           {users && users.map((element, index) => (
             <div data-testid="containerChat" key={ index }>
