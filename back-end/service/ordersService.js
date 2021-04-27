@@ -9,7 +9,7 @@ const createOrders = async (userId, sale) => {
       deliveryNumber: sale.number,
       saleDate: sale.date,
       status: sale.orderStatus,
-     });
+    });
   } catch (error) {
     console.log(error.message);
   }
