@@ -41,7 +41,6 @@ console.log('Usuario Entrou');
     const bodyMessage = { message: data.message, hour: chatUtils.getTime() };
     const { from, dest } = data;
     const key = [from, dest].sort().join('-');
-    console.log(key);
     io.to(key).emit('sendMessage', bodyMessage);
     }));
 });

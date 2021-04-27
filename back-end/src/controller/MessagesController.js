@@ -13,9 +13,7 @@ talkId: params.key,
 message: params.message,
 nickname: params.from,
 hour };
-console.log(newBody);
   const create = await MessagesService.create(newBody);
-console.log(create);
   return res
     .status(200)
     .json(create);
@@ -23,7 +21,6 @@ console.log(create);
 
 const findMessagesGroup = rescue(async (req, res) => {
 const messages = await MessagesService.findByGroup();
-console.log(messages);
   return res
     .status(200)
     .json(messages);
@@ -32,7 +29,6 @@ console.log(messages);
 const findMessagesById = rescue(async (req, res) => {
 const { id } = req.params;
 const messagesById = await MessagesService.findById(id);
-console.log(messagesById);
   return res
     .status(200)
     .json(messagesById);
