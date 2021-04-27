@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import ChatMessage from '../components/ChatMessage';
 import TopBar from '../components/TopBar';
 import socket from '../utils/socketClient';
+import { IoArrowForwardCircleOutline } from "react-icons/io5";
+import '../styles/chat.css';
 
 function Chat() {
   const [message, setMessage] = useState('');
@@ -35,30 +37,37 @@ function Chat() {
   return (
     <div>
       <TopBar name="TryBeer" />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <ul>
-        {chatMessages.map((chatMessage, index) => (
-          <ChatMessage
-            key={ index }
-            nickname={ chatMessage.nickname }
-            message={ chatMessage.message }
-            timestamp={ chatMessage.timestamp }
-          />
-        ))}
-      </ul>
-      <input data-testid="message-input" value={ message } onChange={ handleChange } />
-      <button
-        type="button"
-        data-testid="send-message"
-        onClick={ handleSubmit }
-      >
-        Send
-      </button>
+      <div className="chatmaincontainer">
+        <div className="margintop"> 
+          <div className="chatmessage">
+            <ul>
+              {chatMessages.map((chatMessage, index) => (
+                <ChatMessage
+                  key={ index }
+                  nickname={ chatMessage.nickname }
+                  message={ chatMessage.message }
+                  timestamp={ chatMessage.timestamp }
+                />
+              ))}
+            </ul>
+          </div>
+          <div className="submitmessage">
+            <input 
+              data-testid="message-input" 
+              value={ message } 
+              onChange={ handleChange } 
+              className="inputmenssage"
+              placeholder="Digite sua menssagem ..."
+            />
+            < IoArrowForwardCircleOutline
+              data-testid="send-message"
+              onClick={ handleSubmit } 
+              size= { 40 }
+              color="#e9925c"
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

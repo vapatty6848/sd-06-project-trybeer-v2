@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../styles/chat.css';
 
 function ChatMessage({ nickname, message, timestamp }) {
   return (
-    <li>
-      <span data-testid="nickname">{ `${nickname} - ` }</span>
-      <span data-testid="message-time">
-        { `${timestamp}` }
-        <br />
-      </span>
-      <span data-testid="text-message">
+    <li className="listmessage">
+      <div className="user">
+        <span data-testid="nickname">{ `${nickname} - ` }</span>
+        <span data-testid="message-time">
+          { `${timestamp}` }
+        </span>
+      </div>
+      <span data-testid="text-message" className="textmessage">
         { `${message}` }
-        <br />
-        <br />
       </span>
     </li>
   );
