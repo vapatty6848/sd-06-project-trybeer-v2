@@ -27,7 +27,6 @@ function ClientChat() {
     socket.emit('privateRoom', key);
 
     api.get(`/admin/chats/search?q=${email}`).then((response) => {
-      console.log(response.data);
       setMessages(response.data);
       setLoading(false);
     });
@@ -36,7 +35,6 @@ function ClientChat() {
   useEffect(() => {
     socket.on('serverMessage', (data) => {
       setMessages([...messages, data]);
-      console.log('message received: ', data);
     });
   }, [messages]);
 
@@ -47,11 +45,8 @@ function ClientChat() {
       message,
       date: new Date(),
     };
-    // api.post('/chat', messageObj);
     setMessage('');
-    // setMessages([...messages, messageObj]);
     socket.emit('chatMessage', messageObj);
-    console.log('message sent: ', messageObj);
   };
 
   return (

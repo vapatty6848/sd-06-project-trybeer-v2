@@ -24,7 +24,7 @@ const getLastMessageByEmail = async () => {
 const getMessagesByEmail = async (email) => {
   const messages = await connection()
     .then((db) => db.collection('messages')
-    .find({ $or: [{ from: email }, {to: email }] })
+    .find({ $or: [{ from: email }, { to: email }] })
     .toArray());
   return messages;
 };

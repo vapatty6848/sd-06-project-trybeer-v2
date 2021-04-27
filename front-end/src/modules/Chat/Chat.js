@@ -28,7 +28,6 @@ function Chat() {
   useEffect(() => {
     socket.on('serverMessage', (data) => {
       setMessages([...messages, data]);
-      console.log(data);
     });
   }, [messages]);
 
@@ -40,12 +39,8 @@ function Chat() {
       date: new Date(),
     };
     setMessage('');
-    // setMessages([...messages, messageObj]);
     socket.emit('chatMessage', messageObj);
-    console.log('message sent: ', messageObj);
   };
-
-  console.log(messages);
 
   return (
     loading ? <Loader /> : (
