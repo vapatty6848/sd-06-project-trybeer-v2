@@ -16,7 +16,7 @@ const messageProcess = (socket) => {
     socket.to(email).emit('message', response);
 
     connection()
-      .then((db) => db.collection('chats').updateOne({ email }, {
+      .then((db) => db.collection('messages').updateOne({ email }, {
         $push: {
           messages: {
             $each: [{ ...response, cli }],

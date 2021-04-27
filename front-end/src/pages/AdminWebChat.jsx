@@ -24,6 +24,7 @@ function AdminWebChat() {
       },
     }).then((response) => response.json())
       .then((historyMessages) => {
+        console.log('historyMessages', historyMessages);
         if (historyMessages.err) return;
         setMessages(historyMessages);
       })
@@ -34,14 +35,14 @@ function AdminWebChat() {
 
   useEffect(() => {
     socket.on('message', (messageParam) => {
-      const ola = [
+      const messageShape = [
         ...messages,
         {
           ...messageParam,
           cli: true,
         },
       ];
-      setMessages(ola);
+      setMessages(messageShape);
     });
   }, [messages]);
 
@@ -67,9 +68,9 @@ function AdminWebChat() {
 
   const dateFormat = (date) => {
     const ten = 10;
-    const datef = new Date(date);
-    const hours = datef.getHours();
-    const minutes = datef.getMinutes();
+    const dateObj = new Date(date);
+    const hours = dateObj.getHours();
+    const minutes = dateObj.getMinutes();
     if (minutes < ten) {
       return `${hours}:0${minutes}`;
     }

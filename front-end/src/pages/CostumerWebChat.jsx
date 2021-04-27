@@ -28,14 +28,14 @@ function CostumerWebChat() {
 
   useEffect(() => {
     socket.on('message', (messageParam) => {
-      const ola = [
+      const messageShape = [
         ...messages,
         {
           ...messageParam,
           cli: false,
         },
       ];
-      setMessages(ola);
+      setMessages(messageShape);
     });
   }, [messages]);
 
@@ -47,7 +47,7 @@ function CostumerWebChat() {
     const cli = true;
     const date = new Date();
     socket.emit('message', { email, message: input, cli, date });
-    const ola = [
+    const messageShape = [
       ...messages,
       {
         message: input,
@@ -55,15 +55,15 @@ function CostumerWebChat() {
         cli: true,
       },
     ];
-    setMessages(ola);
+    setMessages(messageShape);
     setInput('');
   };
 
   const dateFormat = (date) => {
     const ten = 10;
-    const datef = new Date(date);
-    const hours = datef.getHours();
-    const minutes = datef.getMinutes();
+    const dateObj = new Date(date);
+    const hours = dateObj.getHours();
+    const minutes = dateObj.getMinutes();
     if (minutes < ten) {
       return `${hours}:0${minutes}`;
     }
