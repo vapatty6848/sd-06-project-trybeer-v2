@@ -10,3 +10,4 @@ export { default as OrdersAdm } from './OrdersAdm';
 export { default as ProfileAdm } from './ProfileAdm';
 export { default as Chat } from './Chat';
 export { default as ChatAdmin } from './ChatAdmin';
+export { default as ChatAdminUser } from './ChatAdminUser';

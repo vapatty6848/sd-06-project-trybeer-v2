@@ -7,3 +7,4 @@ export { default as RegisterForm } from './RegisterForm';
 export { default as OrderCard } from './OrderCard';
 export { default as OrderCardAdm } from './OrderCardAdm';
 export { default as SideBarAdm } from './SideBarAdm';
+export { default as ChatCard } from './ChatCard';
