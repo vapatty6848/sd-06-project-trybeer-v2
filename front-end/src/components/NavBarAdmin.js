@@ -10,7 +10,10 @@ const NavbarAdmin = () => {
   const [data, setData] = useState([]);
   const showSidebar = () => setSidebar(!sidebar);
 
-  const logout = () => localStorage.clear();
+  const logout = () => {
+    setSidebar(false);
+    localStorage.clear();
+  };
 
   useEffect(() => {
     const user = JSON.parse(localStorage.user);
@@ -23,7 +26,7 @@ const NavbarAdmin = () => {
   return (
     <DivNavContainer
       isAdmin
-      // style={ sidebar ? { width: '100%' } : { width: '0%' } }
+      // style={ sidebar ? { width: '25%' } : { width: '0%' } }
     >
       <DivNavContent
         className="admin-side-bar-container"

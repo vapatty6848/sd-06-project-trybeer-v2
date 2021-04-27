@@ -8,11 +8,15 @@ const Navbar = () => {
   const { sidebar, setSidebar } = useContext(UserContext);
   const showSidebar = () => setSidebar(!sidebar);
 
-  const logout = () => localStorage.removeItem('user');
+  const logout = () => {
+    setSidebar(false);
+    localStorage.removeItem('user');
+  };
 
   return (
-    <DivNavContainer>
-      {/* // style={ sidebar ? { width: '100%' } : { width: '0%' } } */}
+    <DivNavContainer
+      style={ sidebar ? { width: '100%' } : { width: '0%' } }
+    >
       <DivNavContent className="side-menu-container">
         {
           SidebarData.map((link, index) => (

@@ -17,10 +17,11 @@ function AdminOrders(orders) {
         <div className="content-order">
           {
             !orders.loading && orders.data.map((order, index) => (
-              <div key={ order.id } className="card card-order">
+              <div key={ order.id } className="card card-order-adm">
                 <ul>
                   <Link to={ `/admin/orders/${index + 1}` }>
                     <button
+                      className="buttonOrderAdm"
                       type="button"
                       data-testid={ `${index}-order-number` }
                     >
