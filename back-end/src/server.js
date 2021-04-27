@@ -22,7 +22,7 @@ const {
   OrderRoute,
   MessagesRoute,
 } = require('./routes');
-// const { error } = require('./middleware');
+const { error } = require('./middleware');
 const { chatUtils } = require('./utils');
 
 io.on('connection', (socket) => {
@@ -56,6 +56,6 @@ app.use('/sales', SalesRoute);
 app.use('/images', express.static(path.join(__dirname, '/images')));
 app.use('/messages', MessagesRoute);
 
-// app.use(error);
+app.use(error);
 
 module.exports = httpServer;
