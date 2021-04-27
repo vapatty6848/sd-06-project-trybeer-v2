@@ -20,10 +20,12 @@ export default function ListaDeConversas() {
     <div>
       <Header title="TryBeer" user="admin" />
       {users.length === 0
-        ? <h3 data-testid="text-for-no-conversation">
+        ? 
+        <h3 data-testid="text-for-no-conversation">
           Nenhuma conversa por aqui
         </h3>
-        : <div>
+        : 
+        <div>
           {users && users.map((element, index) => (
             <div data-testid="containerChat" key={ index }>
               <Link className="link" to={ `/admin/chats/${element.user}` }>
