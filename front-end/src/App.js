@@ -14,7 +14,7 @@ import {
   OrderDetails,
   ClientProfile,
   ClientOrders,
-  ChatAdmin,
+  ListaDeConversas,
   ChatClient,
 } from './pages';
 
@@ -33,7 +33,7 @@ function App() {
         <Route exact path="/admin/orders/:id" component={ AdminOrdersDetail } />
         <Route exact path="/admin/orders" component={ AdminOrders } />
         <Route exact path="/chat" component={ ChatClient } />
-        <Route exact path="/admin/chats" component={ ChatAdmin } />
+        <Route exact path="/admin/chats" component={ ListaDeConversas } />
         <Route exact path="/" component={ Login } />
       </Switch>
     </BrowserRouter>
