@@ -12,7 +12,7 @@ ChatController.get('/', async (req, res) => {
   const { email } = payload;  
 
   const resRequired = await connection()
-    .then((db) => db.collection('Chat').findOne({ email }));
+    .then((db) => db.collection('chats').findOne({ email }));
 
   if (!resRequired) return res.status(NOT_FOUND).json({ err: 'NOT_FOUND' });
 
@@ -27,7 +27,7 @@ ChatController.get('/admin/get', async (req, res) => {
   if (role !== 'administrator') return res.status(UNAUTHORIZED).json({ err: 'UNAUTHORIZED' });
   
   const resRequired = await connection()
-    .then((db) => db.collection('Chat').aggregate([
+    .then((db) => db.collection('chats').aggregate([
       { $project: { _id: 0, email: 1, lastMessage: { $slice: ['$messages', -1] } } },
       { $unwind: '$lastMessage' },
       { $project: { email: 1, date: '$lastMessage.date' } },

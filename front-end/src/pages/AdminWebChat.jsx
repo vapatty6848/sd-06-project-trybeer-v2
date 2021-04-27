@@ -51,12 +51,13 @@ function AdminWebChat() {
 
   const submitMessage = () => {
     const cli = false;
-    socket.emit('message', { email, message: input, cli });
+    const date = new Date();
+    socket.emit('message', { email, message: input, cli, date });
     const messageShape = [
       ...messages,
       {
         message: input,
-        date: new Date(),
+        date,
         cli,
       },
     ];

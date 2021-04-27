@@ -45,12 +45,14 @@ function CostumerWebChat() {
   };
 
   const submeterMessage = () => {
-    socket.emit('message', { email, message: input, cli: true });
+    const cli = true;
+    const date = new Date();
+    socket.emit('message', { email, message: input, cli, date });
     const ola = [
       ...messages,
       {
         message: input,
-        date: new Date(),
+        date,
         cli: true,
       },
     ];

@@ -10,23 +10,20 @@ const statusUpdate = (socket) => {
 };
 
 const messageProcess = (socket) => {
-  socket.on('message', ({ message, email, cli }) => {
-    if (typeof message === 'string' && typeof email === 'string' && typeof cli === 'boolean') {
-      const date = new Date();
-      const response = { message, date };
+  socket.on('message', ({ message, email, cli, date }) => {
+    const response = { message, date };
 
-      socket.to(email).emit('message', response);
+    socket.to(email).emit('message', response);
 
-      connection()
-        .then((db) => db.collection('Chat').updateOne({ email }, {
-          $push: {
-            messages: {
-              $each: [{ ...response, cli }],
-              $sort: { date: 1 },
-            },
+    connection()
+      .then((db) => db.collection('chats').updateOne({ email }, {
+        $push: {
+          messages: {
+            $each: [{ ...response, cli }],
+            $sort: { date: 1 },
           },
-        }, { upsert: true }));
-    }
+        },
+      }, { upsert: true }));
   });
 };
 
