@@ -4,18 +4,19 @@ import React, { useState } from 'react';
 import socket from '../utils/socketClient';
 import fetches from '../services/fetches';
 
+const dateFormat = require('dateformat');
+
 export default function ChatMessage() {
   const tokenFromLocalStorage = localStorage.getItem('token');
   const { email } = jwtDecode(tokenFromLocalStorage);
   const [message, setMessage] = useState('');
   // const dateNow = new Date().getTime();
   // const sentAt = moment(dateNow).format('H:MM');
-  const dateFormat = require('dateformat');
-  const sentAt = dateFormat(new Date(), 'H:MM'); 
+  const sentAt = dateFormat(new Date(), 'H:MM');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('meu horário', sentAt)
+    console.log('meu horário', sentAt);
     socket.emit('chat:sendMessage', { email, sentAt, message });
     fetches.createMessage(tokenFromLocalStorage, email, sentAt, message)
       .then((response) => console.log(response));
