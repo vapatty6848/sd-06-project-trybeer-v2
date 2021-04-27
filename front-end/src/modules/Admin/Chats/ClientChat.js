@@ -23,16 +23,22 @@ function ClientChat() {
   };
 
   useEffect(() => {
-    socket.on('serverMessage', (data) => {
-      setMessages([...messages, data]);
-      console.log('message received: ', data);
-    });
+    const key = [email, 'Loja'].sort().join('-');
+    socket.emit('privateRoom', key);
+
     api.get(`/admin/chats/search?q=${email}`).then((response) => {
       console.log(response.data);
       setMessages(response.data);
       setLoading(false);
     });
   }, [admin, email]);
+
+  useEffect(() => {
+    socket.on('serverMessage', (data) => {
+      setMessages([...messages, data]);
+      console.log('message received: ', data);
+    });
+  }, [messages]);
 
   const handleClick = () => {
     const messageObj = {
@@ -41,10 +47,11 @@ function ClientChat() {
       message,
       date: new Date(),
     };
-    api.post('/chat', messageObj);
+    // api.post('/chat', messageObj);
     setMessage('');
-    setMessages([...messages, messageObj]);
+    // setMessages([...messages, messageObj]);
     socket.emit('chatMessage', messageObj);
+    console.log('message sent: ', messageObj);
   };
 
   return (
@@ -60,14 +67,14 @@ function ClientChat() {
               {`Conversando com ${messages[0].email}`}
             </h3>
           </div>
-          {messages.length !== 0 && messages.map((el, i) => (
-            <div key={ i }>
+          {messages.length !== 0 && messages.map((msg, i) => (
+            <div key={ `message-${i}` }>
               <div>
-                <span data-testid="nickname" className="text-green-600">{el.email}</span>
+                <span data-testid="nickname" className="text-green-600">{msg.from}</span>
                 {' - '}
-                <span data-testid="message-time">{timeFormated(el.date)}</span>
+                <span data-testid="message-time">{timeFormated(msg.date)}</span>
               </div>
-              <p data-testid="text-message">{el.message}</p>
+              <p data-testid="text-message">{msg.message}</p>
             </div>
           ))}
         </div>
@@ -82,7 +89,7 @@ function ClientChat() {
           <button
             type="button"
             data-testid="send-message"
-            onClick={ () => handleClick() }
+            onClick={ handleClick }
           >
             Enviar
           </button>

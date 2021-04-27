@@ -478,6 +478,11 @@ img {
   background-color: rgba(252, 211, 77, var(--tw-bg-opacity));
 }
 
+.bg-green-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgba(167, 243, 208, var(--tw-bg-opacity));
+}
+
 .bg-green-300 {
   --tw-bg-opacity: 1;
   background-color: rgba(110, 231, 183, var(--tw-bg-opacity));
@@ -538,6 +543,19 @@ img {
   border-radius: 9999px;
 }
 
+.rounded-t-md {
+  border-top-left-radius: 0.375rem;
+  border-top-right-radius: 0.375rem;
+}
+
+.rounded-br-md {
+  border-bottom-right-radius: 0.375rem;
+}
+
+.rounded-bl-md {
+  border-bottom-left-radius: 0.375rem;
+}
+
 .border-2 {
   border-width: 2px;
 }
@@ -576,6 +594,14 @@ img {
 
 .content-center {
   align-content: center;
+}
+
+.self-start {
+  align-self: flex-start;
+}
+
+.self-end {
+  align-self: flex-end;
 }
 
 .justify-start {
@@ -706,6 +732,11 @@ img {
 .my-1 {
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
+}
+
+.my-4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .my-10 {
@@ -984,6 +1015,10 @@ img {
 
 .w-auto {
   width: auto;
+}
+
+.w-1\/2 {
+  width: 50%;
 }
 
 .w-1\/5 {

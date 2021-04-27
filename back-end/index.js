@@ -4,13 +4,13 @@ const path = require('path');
 
 const app = express();
 const httpServer = require('http').createServer(app);
-
 const io = require('socket.io')(httpServer, {
   cors: {
     origin: 'http://localhost:3000',
     methods: ['GET', 'POST'],
   },
 });
+const { createMessage } = require('./src/models/messages');
 
 io.on('connection', (socket) => {
   console.log(`${socket.id} connected`);
@@ -19,13 +19,16 @@ io.on('connection', (socket) => {
   });
 
   socket.on('privateRoom', (key) => {
+    console.log('connected with ', key);
     socket.join(key);
   });
 
   socket.on('chatMessage', (data) => {
-    const { from, to } = data;
+    const { from, to, message, date } = data;
     const key = [from, to].sort().join('-');
+    console.log(`key from ${from}: `, key);
     io.to(key).emit('serverMessage', data);
+    createMessage(from, to, message, date);
   });
 });
 

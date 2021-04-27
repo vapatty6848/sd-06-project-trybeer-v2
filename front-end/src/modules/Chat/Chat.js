@@ -3,27 +3,18 @@ import Loader from '../../design-components/Loader';
 import TopBar from '../../design-components/TopBar';
 import api from '../../axios/api';
 import socket from '../../utils/socketClient';
+import Message from '../../design-components/Message';
 
 function Chat() {
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
   const user = JSON.parse(localStorage.getItem('user')).email;
-  const timeFormated = (time) => {
-    const maxtime = 9;
-    const date = new Date(time);
-    const hour = date.getHours();
-    const hours = hour > maxtime ? hour : `0${hour}`;
-    const minute = date.getMinutes();
-    const minutes = minute > maxtime ? minute : `0${minute}`;
-    return `${hours}:${minutes}`;
-  };
 
   useEffect(() => {
-    socket.on('serverMessage', (data) => {
-      setMessages([...messages, data]);
-      console.log(data);
-    });
+    const key = [user, 'Loja'].sort().join('-');
+    socket.emit('privateRoom', key);
+
     api.get('/chat', {
       headers: {
         email: user,
@@ -34,6 +25,13 @@ function Chat() {
     });
   }, [user]);
 
+  useEffect(() => {
+    socket.on('serverMessage', (data) => {
+      setMessages([...messages, data]);
+      console.log(data);
+    });
+  }, [messages]);
+
   const handleClick = () => {
     const messageObj = {
       from: user,
@@ -41,11 +39,13 @@ function Chat() {
       message,
       date: new Date(),
     };
-    api.post('/chat', messageObj);
     setMessage('');
-    setMessages([...messages, messageObj]);
+    // setMessages([...messages, messageObj]);
     socket.emit('chatMessage', messageObj);
+    console.log('message sent: ', messageObj);
   };
+
+  console.log(messages);
 
   return (
     loading ? <Loader /> : (
@@ -54,17 +54,12 @@ function Chat() {
           title="Chat"
           data-testid="top-title"
         />
-        <div className="text-center justify-content-center">
-          {messages.length !== 0 && messages.map((el, i) => (
-            <div key={ i }>
-              <div>
-                <span data-testid="nickname" className="text-green-600">{el.email}</span>
-                {' - '}
-                <span data-testid="message-time">{timeFormated(el.date)}</span>
-              </div>
-              <p data-testid="text-message">{el.message}</p>
-            </div>
-          ))}
+        <div className="flex flex-col">
+          {
+            messages.length !== 0 && messages.map((msg, i) => (
+              <Message msg={ msg } key={ `message-${i}` } user={ user } />
+            ))
+          }
         </div>
         <div className="text-center justify-content-center">
           <input
