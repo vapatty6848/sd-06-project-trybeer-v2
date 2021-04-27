@@ -19,7 +19,6 @@ function AdminChats() {
 
   useEffect(() => {
     api.get('/admin/chats/').then((response) => {
-      console.log(response.data);
       setChats(response.data);
       setLoading(false);
     });

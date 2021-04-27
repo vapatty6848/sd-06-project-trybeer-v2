@@ -478,6 +478,11 @@ img {
   background-color: rgba(252, 211, 77, var(--tw-bg-opacity));
 }
 
+.bg-green-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgba(167, 243, 208, var(--tw-bg-opacity));
+}
+
 .bg-green-300 {
   --tw-bg-opacity: 1;
   background-color: rgba(110, 231, 183, var(--tw-bg-opacity));
@@ -538,6 +543,29 @@ img {
   border-radius: 9999px;
 }
 
+.rounded-r-lg {
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.rounded-l-lg {
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
+
+.rounded-t-xl {
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+}
+
+.rounded-br-xl {
+  border-bottom-right-radius: 0.75rem;
+}
+
+.rounded-bl-xl {
+  border-bottom-left-radius: 0.75rem;
+}
+
 .border-2 {
   border-width: 2px;
 }
@@ -576,6 +604,18 @@ img {
 
 .content-center {
   align-content: center;
+}
+
+.self-start {
+  align-self: flex-start;
+}
+
+.self-end {
+  align-self: flex-end;
+}
+
+.self-stretch {
+  align-self: stretch;
 }
 
 .justify-start {
@@ -624,6 +664,10 @@ img {
 
 .h-8 {
   height: 2rem;
+}
+
+.h-10 {
+  height: 2.5rem;
 }
 
 .h-12 {
@@ -708,6 +752,16 @@ img {
   margin-bottom: 0.25rem;
 }
 
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.my-4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
 .my-10 {
   margin-top: 2.5rem;
   margin-bottom: 2.5rem;
@@ -761,6 +815,10 @@ img {
 
 .max-w-md {
   max-width: 28rem;
+}
+
+.max-w-6xl {
+  max-width: 72rem;
 }
 
 .min-h-screen {
@@ -984,6 +1042,10 @@ img {
 
 .w-auto {
   width: auto;
+}
+
+.w-1\/2 {
+  width: 50%;
 }
 
 .w-1\/5 {
