@@ -23,10 +23,10 @@ function ChatAdmin() {
     <div>
       <Header isAdmin />
       <NavbarAdmin />
-      <div className="msger">
+      <div className="msgerAdm">
         {chatList.map((element, index) => (
           <Link to="/admin/chat" key={ `link-${index} ` }>
-            <div key={ index } data-testid="containerChat" className="msger-chat">
+            <div key={ index } data-testid="containerChat" className="msgerAdm-chat">
               <h2 data-testid="profile-name">{element.user}</h2>
               <h3 data-testid="last-message">
                 Última mensagem às
