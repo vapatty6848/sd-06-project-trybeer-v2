@@ -1,32 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import MenuTop from '../components/menuClient/MenuTop';
+import { useParams } from 'react-router-dom';
 import socket from '../services/socketClient';
 import BodyChat from '../components/chatClient/BodyChat';
 import FormChat from '../components/chatClient/FormChat';
 import api from '../services/api';
+import MenuSideBarAdm from '../components/menuAdmin/MenuSideBarAdm';
 
-function ChatClient() {
-  const { email: userEmail, role } = JSON.parse(localStorage.user);
+const ChatAdminDetails = () => {
   const [message, setMessage] = useState('');
   const [chatMessages, setChatMessages] = useState([]);
-  const [buttonDisable, setButtonDisable] = useState(true);
-  const [user, setUser] = useState(userEmail);
   const [chatMessagesBD, setChatMessagesBD] = useState([]);
+  const [user] = useState('Loja');
+  const [buttonDisable, setButtonDisable] = useState(true);
 
-  const history = useHistory();
-  const dest = 'Loja';
-  const from = userEmail;
-  const key = [from, dest].sort().join('-');
+  const { id } = useParams();
 
   useEffect(() => {
-    if (!userEmail || role !== 'client')history.push('/login');
-    socket.emit('connectRoom', key);
-    socket.emit('login', user);
-    socket.on('socketNick', (userNick) => {
-      setUser(userNick);
-    });
-    api.findMessagesById(key).then((response) => {
+    socket.emit('connectRoom', id);
+    api.findMessagesById(id).then((response) => {
       setChatMessagesBD(response);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -41,7 +32,7 @@ function ChatClient() {
     socket.on('sendMessage', (mess) => {
       setChatMessages([...chatMessages, mess]);
     });
-  }, [chatMessages, from, key, userEmail]);
+  }, [chatMessages]);
 
   const handleChange = ({ target }) => {
     setMessage(target.value);
@@ -49,10 +40,12 @@ function ChatClient() {
 
   const handleClick = (e) => {
     e.preventDefault();
+    const dest = id.split('-').filter((nick) => nick !== user)[0];
+    const key = [user, dest].sort().join('-');
     const inputMessage = document.querySelector('#message');
     inputMessage.value = '';
     setMessage('');
-    const dataMessage = { message, from, dest, key };
+    const dataMessage = { message, from: user, dest, key };
     socket.emit('message', dataMessage);
     api.registerMessage(dataMessage);
   };
@@ -60,7 +53,7 @@ function ChatClient() {
   return (
     <div>
       <div>
-        <MenuTop name="Trybeer Chat" />
+        <MenuSideBarAdm />
       </div>
       <div className="chat">
         <BodyChat data={ chatMessages } dataBD={ chatMessagesBD } user={ user } />
@@ -72,6 +65,6 @@ function ChatClient() {
       />
     </div>
   );
-}
+};
 
-export default ChatClient;
+export default ChatAdminDetails;

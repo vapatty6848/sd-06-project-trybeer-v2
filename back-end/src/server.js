@@ -20,20 +20,28 @@ const {
   ProductsRoute,
   SalesRoute,
   OrderRoute,
+  MessagesRoute,
 } = require('./routes');
-const { error } = require('./middleware');
+// const { error } = require('./middleware');
 const { chatUtils } = require('./utils');
 
 io.on('connection', (socket) => {
-console.log(socket.id);
+console.log('Usuario Entrou');
+
+ socket.on('connectRoom', (room) => {
+    socket.join(room);
+    console.log(room);
+  });
 
   socket.on('login', (userName) => {
     io.emit('socketNick', userName);
   });
 
-  socket.on('message', ((message) => {
-    const bodyMessage = { message, hour: chatUtils.getTime() };
-    io.emit('sendMessage', bodyMessage);
+  socket.on('message', ((data) => {
+    const bodyMessage = { message: data.message, hour: chatUtils.getTime() };
+    const { from, dest } = data;
+    const key = [from, dest].sort().join('-');
+    io.to(key).emit('sendMessage', bodyMessage);
     }));
 });
 
@@ -46,6 +54,8 @@ app.use('/products', ProductsRoute);
 app.use('/orders', OrderRoute);
 app.use('/sales', SalesRoute);
 app.use('/images', express.static(path.join(__dirname, '/images')));
-app.use(error);
+app.use('/messages', MessagesRoute);
+
+// app.use(error);
 
 module.exports = httpServer;
