@@ -71,6 +71,19 @@ const updateSale = async (token, adminPathName, status) => {
   }
 };
 
+const createMessage = async (token, email, sentAt, message) => {
+  const newMessage = await axios.post(`${path}/messages`,
+  { email, sentAt, message },
+  config(token));
+  return newMessage.data;
+};
+
+const getAllMessagesByEmail = async (token) => {
+  const allMessages = await axios.get(`${path}/messages`,
+  config(token));
+  return allMessages;
+}
+
 export default {
   fetchUserByEmail,
   updateUserName,
@@ -81,4 +94,6 @@ export default {
   getSaleById,
   getAllSales,
   updateSale,
+  createMessage,
+  getAllMessagesByEmail,
 };

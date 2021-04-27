@@ -1,21 +1,25 @@
 import jwtDecode from 'jwt-decode';
 import moment from 'moment';
-import React from 'react';
+import React, { useState } from 'react';
 import useInput from '../hooks/useInput';
 import socket from '../utils/socketClient';
+import fetches from '../services/fetches';
 
 export default function ChatMessage() {
   const tokenFromLocalStorage = localStorage.getItem('token');
   const { email } = jwtDecode(tokenFromLocalStorage);
-  const [message, setMessage] = useInput('');
+  const [message, setMessage] = useState('');
   const dateNow = new Date().getTime();
   const sentAt = moment(dateNow).format('H:MM');
 
-  // console.log('email l14', email, message, sentAt);
   const handleSubmit = (e) => {
     e.preventDefault();
     socket.emit('chat:sendMessage', { email, sentAt, message });
+    fetches.createMessage(tokenFromLocalStorage, email, sentAt, message)
+      .then((response) => console.log(response));
+    setMessage('');
   };
+
   return (
     <div>
       <form onSubmit={ handleSubmit }>
@@ -25,7 +29,8 @@ export default function ChatMessage() {
             placeholder="Mensagem"
             data-testid="message-input"
             value={ message }
-            onChange={ setMessage }
+            onChange={ event => setMessage(event.target.value) }
+            id="message-input"
           />
           <button
             type="submit"
