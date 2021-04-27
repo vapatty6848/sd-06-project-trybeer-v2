@@ -4,18 +4,15 @@ import socket from '../utils/socketClient';
 
 function ChatAdmin() {
   const [chatMessages, setChatMessages] = useState([]);
-  const { email, role } = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
-    socket.emit('getMessages', { email });
+    socket.emit('getCustomersChat', {});
+    socket.on('customersList', (data) => {
+      setChatMessages(data);
+      console.log('chat messages admin', data);
+    });
   }, []);
 
-  useEffect(() => {
-    socket.on('message', (data) => {
-      setChatMessages([...data]);
-      console.log('chat message admin', chatMessages);
-    });
-  }, [chatMessages]);
   return (
     <div>
       <SideBarAdm />
@@ -25,10 +22,19 @@ function ChatAdmin() {
       <br />
       <br />
       <br />
-      <h1> oi</h1>
+      <ul style={ { marginLeft: 200 } }>
+        {!chatMessages.length
+          ? <span>Nenhuma conversa por aqui</span>
+          : chatMessages.map((message, index) => (
+            <li data-testid="containerChat" key={ index }>
+              <span data-testid="profile-name">{message.email}</span>
+              <br />
+              <span data-testid="last-message">{message.lastTimestamp}</span>
+            </li>
+          ))}
+      </ul>
     </div>
   );
-
-};
+}
 
 export default ChatAdmin;
