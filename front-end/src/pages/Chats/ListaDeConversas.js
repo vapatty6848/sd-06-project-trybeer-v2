@@ -19,11 +19,11 @@ export default function ListaDeConversas() {
   return (
     <div>
       <Header title="TryBeer" user="admin" />
-      {users.length === 0 
-      ? (<h3 data-testid="text-for-no-conversation">
+      {users.length === 0 ? 
+        <h3 data-testid="text-for-no-conversation">
           Nenhuma conversa por aqui
-        </h3>)
-      : (<div>
+        </h3> : 
+        <div>
           {users && users.map((element, index) => (
             <div data-testid="containerChat" key={ index }>
               <Link className="link" to={ `/admin/chats/${element.user}` }>
@@ -32,7 +32,7 @@ export default function ListaDeConversas() {
               <p data-testid="last-message">{element.lastMessage}</p>
             </div>
           ))}
-        </div>)}
+        </div>}
     </div>
   );
 }
