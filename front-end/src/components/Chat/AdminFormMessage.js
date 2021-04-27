@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { FaTelegramPlane } from 'react-icons/fa';
 import socket from '../../utils/socketClient';
 
-function FormMessage() {
+function AdminFormMessage(props) {
   const [message, setMessage] = useState('');
 
   const handleSend = (event) => {
     event.preventDefault();
-    const user = JSON.parse(localStorage.getItem('user'));
-    const nickname = user.email;
-    console.log(`${nickname} enviou ${message}`);
-    socket.emit('chat.sendMessage', { message, nickname });
+    const chatRoom = props.roomName;
+    console.log('Props roomname', props.roomName);
+    const nickname = 'Loja';
+    socket.emit('chat.sendMessage', { chatRoom, message, nickname });
     setMessage('');
   };
 
@@ -36,4 +37,8 @@ function FormMessage() {
   );
 }
 
-export default FormMessage;
+AdminFormMessage.propTypes = {
+  roomName: PropTypes.string.isRequired,
+};
+
+export default AdminFormMessage;

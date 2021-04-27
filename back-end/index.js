@@ -40,10 +40,13 @@ io.on('connection', (socket) => {
   });
 
   socket.on('chat.sendMessage', async (data) => {
+    console.log('Data que chega no back', data);
     const sentAt = moment().format('HH:mm');
     const newData = { ...data, sentAt };
+    console.log('Newdata.chatRoom', newData.chatRoom);
     await Messages.create(newData);
-    io.to(newData.nickname).emit('chat.receiveMessage', newData);
+    io.to(newData.chatRoom || newData.nickname)
+      .emit('chat.receiveMessage', newData);
   });
 });
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import ChatCard from '../components/Chat/ChatCard';
 import SideBarAdmin from '../components/SideBarAdmin/SideBarAdmin';
 import { getAllChats } from '../services/api';
@@ -17,11 +18,16 @@ function AdminChats() {
         {
           messagesList.length !== 0
             ? messagesList.map(({ chatRoom, messages }, index) => (
-              <ChatCard
+              <Link
                 key={ index }
-                chatRoom={ chatRoom }
-                messages={ messages }
-              />
+                to={ { pathname: '/admin/chat', state: chatRoom } }
+              >
+                <ChatCard
+                  key={ index }
+                  chatRoom={ chatRoom }
+                  messages={ messages }
+                />
+              </Link>
             ))
             : <div data-testid="text-for-no-conversation">Nenhuma conversa por aqui</div>
         }

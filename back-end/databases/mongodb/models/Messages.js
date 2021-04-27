@@ -1,12 +1,12 @@
 const connection = require('./connection');
 
 async function create(data) {
-  const { message, nickname, sentAt } = data;
+  const { chatRoom, message, nickname, sentAt } = data;
   const db = await connection();
   const newMessage = await db
     .collection('messages')
     .updateOne(
-      { chatRoom: nickname },
+      { chatRoom: chatRoom || nickname },
       {
         $push: { messages: { message, nickname, sentAt } },
       },
