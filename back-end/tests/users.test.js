@@ -1,82 +1,111 @@
-const frisby = require('frisby');
+const request = require('supertest');
+const app = require('../app');
 const { StatusCodes } = require('http-status-codes');
+const models = require('../src/models/sql/models');
+// const frisby = require('frisby');
+
 const url = 'http://localhost:3001';
 
+const newUser = {
+  name: 'Gabi Dal Silv',
+  email: 'gabi.dalsilv@gmail.com',
+  password: '123456',
+};
+
 describe('Tests the login endpoint', () => {
-  it('Should not be able to sign in without an email', async () => {
-    await frisby
-      .post(`${url}/login`,
-        {
+  afterAll((done) => {
+    models.sequelize.close()
+      .then(() => done());
+  });
+
+  it('Should not be able to sign in without an email', (done) => {
+    return request(app)
+      .post('/login')
+      .send({ password: 'test123' })
+      .expect(StatusCodes.BAD_REQUEST)
+      .expect('Content-Type', /json/)
+      .then((res) => {
+        expect(res.body.message).toContain('Email field is required.');
+        done();
+      });
+  });
+
+  it('Should not be able to sign in with an invalid email', (done) => {
+    return request(app)
+      .post('/login')
+      .send({
+          email: '@tests',
           password: 'test123',
         })
-      .expect('status', StatusCodes.BAD_REQUEST)
-      .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        expect(result.message).toBe('Email field is required.');
-      })
-      .catch((error) => { error })
+      .expect(StatusCodes.BAD_REQUEST)
+      .expect('Content-Type', /json/)
+      .then((res) => {
+        expect(res.body.message).toContain('Email must be at a valid format.');
+        done();
+      });
   });
 
-  it('Should not be able to sign in without an password', async () => {
-    await frisby
-      .post(`${url}/login`,
-        {
-          email: 'trybeer@gmail.com',
-        })
-      .expect('status', StatusCodes.BAD_REQUEST)
-      .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        expect(result.message).toBe('Password field is required.');
-      })
-      .catch((error) => { error })
+  it('Should not be able to sign in without an password', (done) => {
+    return request(app)
+      .post('/login')
+      .send({ email: 'trybeer@gmail.com' })
+      .expect(StatusCodes.BAD_REQUEST)
+      .expect('Content-Type', /json/)
+      .then((res) => {
+        expect(res.body.message).toContain('Password field is required.');
+        done();
+      });
   });
 
-  it('Should not be able to sign in with an invalid email', async () => {
-    await frisby
-      .post(`${url}/login`,
-        {
-          email: 'test@test.com',
+  it('Should not be able to sign in with a valid email that is not registered', (done) => {
+    return request(app)
+      .post('/login')
+      .send({
+          email: 'testButIamSureThisEmailIsNotThere@test.com',
           password: 'test123',
         })
-      .expect('status', StatusCodes.NOT_FOUND)
-      .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        expect(result.message).toBe('Login failed. User not found.');
-      })
-      .catch((error) => { error })
+      .expect(StatusCodes.NOT_FOUND)
+      .expect('Content-Type', /json/)
+      .then((res) => {
+        expect(res.body.message).toContain('Login failed. User not found.');
+        done();
+      });
   });
 
-  it('Should not be able to sign in with an invalid password', async () => {
-    await frisby
-      .post(`${url}/login`,
-        {
-          email: 'user@test.com',
-          password: '123456',
+  it('Should not be able to sign in with incorrect password', async (done) => {
+    await request(app)
+      .post('/user/register')
+      .send(newUser);
+
+    return request(app)
+      .post('/login')
+      .send({
+          email: newUser.email,
+          password: '123',
         })
-      .expect('status', StatusCodes.UNAUTHORIZED)
-      .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        expect(result.message).toBe('Login failed. Invalid credentials.');
-      })
-      .catch((error) => { error })
+      .expect(StatusCodes.UNAUTHORIZED)
+      .expect('Content-Type', /json/)
+      .then((res) => {
+        expect(res.body.message).toContain('Login failed. Invalid credentials.');
+        models.users.destroy({ where: { email: 'gabi.dalsilv@gmail.com' } })
+          .then(() => done());
+      });
   });
 
-  it('Should be able to login successfully', async () => {
-    await frisby
-      .post(`${url}/login`,
-        {
-          email: 'user@test.com',
-          password: 'test123',
-        })
-      .expect('status', StatusCodes.OK)
-      .then((responseLogin) => {
-        const { json } = responseLogin;
-        expect(json.token).not.toBeNull();
-      })
-      .catch((error) => { error })
+  it('Should be able to login successfully', async (done) => {
+    await request(app)
+      .post('/user/register')
+      .send(newUser);
+
+    return request(app)
+      .post('/login')
+      .send(newUser)
+      .expect(StatusCodes.OK)
+      .expect('Content-Type', /json/)
+      .then((res) => {
+        expect(typeof res.body.token).toBe('string');
+        models.users.destroy({ where: { email: 'gabi.dalsilv@gmail.com' } })
+          .then(() => done());
+      });
   });
 });

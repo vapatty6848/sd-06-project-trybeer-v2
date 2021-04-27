@@ -5,7 +5,7 @@ const noToken = 'C_ERR_NO_TOKEN';
 const tokenError = {
   statusCode: 401,
   customCode: 'C_ERROR_TOKEN',
-  customMessage: 'Athentication error. Please, contact support or try again later.',
+  customMessage: 'Authentication error. Please, contact support or try again later.',
 };
 
 module.exports = (req, _res, next) => {

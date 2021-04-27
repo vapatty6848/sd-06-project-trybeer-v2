@@ -1,170 +1,139 @@
-const frisby = require('frisby');
-const connection = require('../src/models/connection');
+const request = require('supertest');
+const app = require('../app');
 const { StatusCodes } = require('http-status-codes');
+const models = require('../src/models/sql/models');
+// const frisby = require('frisby');
+
 const url = 'http://localhost:3001';
 
+const newUser = {
+  name: 'Gabi Dal Silv',
+  email: 'gabi.dalsilv@gmail.com',
+  password: '123456',
+};
+
 describe('Test the register endpoint', () => {
-  afterAll(async () => {
-    await connection.execute(
-      'DELETE FROM Trybeer.users;',
-    );
-    await connection.execute(
-      `INSERT INTO Trybeer.users (id, name, email, password, role)
-        VALUES
-          ('1', 'Tryber Admin', 'tryber@trybe.com.br', '123456', 'administrator'),
-          ('2', 'testuser', 'user@test.com', 'test123', 'client');`
-    );
-    await connection.end();
+  afterAll((done) => {
+    models.sequelize.close()
+      .then(() => done());
   });
 
-  it('Should not be able to sign in without an name', async () => {
+  it('Should not be able to register without a name', (done) => {
     // expect.assertions(2);
-    await frisby
-      .post(`${url}/user/register`,
-        {
-          email: 'gabi.dalsilv@gmail.com',
-          password: 'test123',
-        })
-      .expect('status', StatusCodes.BAD_REQUEST)
-      .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        expect(result.message).toBe('Name field is required.');
+    return request(app)
+      .post('/user/register')
+      .send({
+        email: newUser.email,
+        password: newUser.password,
       })
-      .catch((error) => { error })
+      .expect(StatusCodes.BAD_REQUEST)
+      .expect('Content-Type', /json/)
+      .then((res) => {
+        expect(res.body.message).toContain('Name field is required.');
+        done();
+      });
   });
 
-  it('Should not be able to sign in without an email', async () => {
+  it('Should not be able to register without an email', (done) => {
     // expect.assertions(2);
-    await frisby
-      .post(`${url}/user/register`,
-        {
-          name: 'Gabi Dal Silv',
-          password: 'test123',
-        })
-      .expect('status', StatusCodes.BAD_REQUEST)
-      .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        expect(result.message).toBe('Email field is required.');
+    return request(app)
+      .post('/user/register')
+      .send({
+        name: newUser.name,
+        password: newUser.password,
       })
-      .catch((error) => { error })
+      .expect(StatusCodes.BAD_REQUEST)
+      .expect('Content-Type', /json/)
+      .then((res) => {
+        expect(res.body.message).toContain('Email field is required.');
+        done();
+      });
   });
 
-  it('Should not be able to sign in with an invalid email', async () => {
+  it('Should not be able to register with invalid email', (done) => {
     // expect.assertions(2);
-    await frisby
-      .post(`${url}/user/register`,
-        {
-          name: 'Gabi Dal Silv',
-          email: 'gabi.dalsilv.com',
-          password: 'test123',
-        })
-      .expect('status', StatusCodes.BAD_REQUEST)
-      .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        expect(result.message).toBe('Email must be at a valid format. Example: your@email.com');
+    return request(app)
+      .post('/user/register')
+      .send({
+        name: newUser.name,
+        email: 'invalid.email',
+        password: newUser.password,
       })
-      .catch((error) => { error })
+      .expect(StatusCodes.BAD_REQUEST)
+      .expect('Content-Type', /json/)
+      .then((res) => {
+        expect(res.body.message).toContain('Email must be at a valid format.');
+        done();
+      });
   });
 
-  it('Should not be able to sign in without an password', async () => {
+  it('Should not be able to register without a password', (done) => {
     // expect.assertions(2);
-    await frisby
-      .post(`${url}/user/register`,
-        {
-          name: 'Gabi Dal Silv',
-          email: 'gabi.dalsilv@gmail.com',
-        })
-      .expect('status', StatusCodes.BAD_REQUEST)
-      .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        expect(result.message).toBe('Password field is required.');
+    return request(app)
+      .post('/user/register')
+      .send({
+        name: newUser.name,
+        email: newUser.email,
       })
-      .catch((error) => { error })
+      .expect(StatusCodes.BAD_REQUEST)
+      .expect('Content-Type', /json/)
+      .then((res) => {
+        expect(res.body.message).toContain('Password field is required.');
+        done();
+      });
   });
 
-  it('Should be able to sign in successfully', async () => {
+  it('Should be able to register successfully', (done) => {
     // expect.assertions(2);
-    await frisby
-      .post(`${url}/user/register`,
-        {
-          name: 'Gabi Dal Silv',
-          email: 'gabi.dalsilv@gmail.com',
-          password: 'test123',
-        })
-      .expect('status', StatusCodes.CREATED)
-      .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        expect(result.email).toBe('gabi.dalsilv@gmail.com');
-      })
-      .catch((error) => { error })
+    return request(app)
+      .post('/user/register')
+      .send(newUser)
+      .expect(StatusCodes.CREATED)
+      .then((res) => {
+        expect(res.body.email).toEqual(newUser.email);
+        done();
+      });
     });
 
-  it('Should not be able to sign in with an email already registered', async () => {
+  it('Should not be able to register with an email already registered', (done) => {
     // expect.assertions(3);
-    await frisby
-      .post(`${url}/user/register`,
-        {
-          name: 'Gabi Dal Silv',
-          email: 'gabi.dalsilv@gmail.com',
-          password: 'test123',
-        });
-
-    await frisby
-      .post(`${url}/user/register`,
-        {
-          name: 'Gabi Dal Silv',
-          email: 'gabi.dalsilv@gmail.com',
-          password: 'test123',
-        })
-      .expect('status', StatusCodes.BAD_REQUEST)
-      .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        expect(result.message).toBe('This email is already in use.');
-      })
-      .catch((error) => { error })
+    return request(app)
+      .post('/user/register')
+      .send(newUser)
+      .expect(StatusCodes.BAD_REQUEST)
+      .expect('Content-Type', /json/)
+      .then((res) => {
+        expect(res.body.message).toContain('This email is already in use.');
+        models.users.destroy({ where: { email: 'gabi.dalsilv@gmail.com' } })
+          .then(() => done());
+      });
   });
 
-  it('Should be client when sign in successfully', async () => {
+  it('Client created should have role "client"', (done) => {
     // expect.assertions(2);
-    await frisby
-      .post(`${url}/user/register`,
-        {
-          name: 'Gabi Dal Silv',
-          email: 'gabi.dalsilv@gmail.com',
-          password: 'test123',
-          isVendor: false,
-        })
-      .expect('status', StatusCodes.CREATED)
-      .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        expect(result.role).toBe('client');
-      })
-      .catch((error) => { error })
+    return request(app)
+      .post('/user/register')
+      .send({ ...newUser, isVendor: false })
+      .expect(StatusCodes.CREATED)
+      .expect('Content-Type', /json/)
+      .then((res) => {
+        expect(res.body.role).toEqual('client');
+        models.users.destroy({ where: { email: 'gabi.dalsilv@gmail.com' } })
+          .then(() => done());
+      });
   });
 
-  it('Should be administrator when sign in successfully', async () => {
+  it('Should be administrator when sign in successfully', (done) => {
     // expect.assertions(2);
-    await frisby
-      .post(`${url}/user/register`,
-        {
-          name: 'Gabi Dal Silv',
-          email: 'gabi.dalsilv@gmail.com',
-          password: 'test123',
-          isVendor: true,
-        })
-      .expect('status', StatusCodes.CREATED)
-      .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        expect(result.role).toBe('administrator');
-      })
-      .catch((error) => { error })
+    return request(app)
+      .post('/user/register')
+      .send({ ...newUser, isVendor: true })
+      .expect(StatusCodes.CREATED)
+      .expect('Content-Type', /json/)
+      .then((res) => {
+        expect(res.body.role).toEqual('administrator');
+        models.users.destroy({ where: { email: 'gabi.dalsilv@gmail.com' } })
+          .then(() => done());
+      });
   });
 });

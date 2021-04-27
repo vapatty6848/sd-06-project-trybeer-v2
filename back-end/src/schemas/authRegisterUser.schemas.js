@@ -18,9 +18,9 @@ const verifyEmailAvaibility = (object) => {
 };
 
 module.exports = ({ name, email, password, isVendor = false }, isEmailAvaible) => {
-  verifyEmailAvaibility(isEmailAvaible);
   validateUserName(name);
   validateEmailField(email);
   validatePasswordField(password);
   validateIsVendor(isVendor);
+  verifyEmailAvaibility(isEmailAvaible);
 };

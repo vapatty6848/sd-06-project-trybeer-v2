@@ -1,83 +1,70 @@
-const frisby = require('frisby');
-const connection = require('../src/models/connection');
+const request = require('supertest');
+const app = require('../app');
 const { StatusCodes } = require('http-status-codes');
-const { generateToken } = require('../src/security');
+const models = require('../src/models/sql/models');
+// const frisby = require('frisby');
+
 const url = 'http://localhost:3001';
 
-const adminUser = {
-  email: 'tryber@trybe.com.br',
+const newUser = {
+  name: 'Gabi Dal Silv',
+  email: 'gabi.dalsilv@gmail.com',
   password: '123456',
-  userId: 1,
 };
 
 describe('Tests the profile endpoint', () => {
-  beforeEach(() => {
-    frisby.globalSetup({
-      request: {
-        headers: {
-          'Authorization': generateToken(adminUser.userId),
-          'Content-Type': 'application/json',
-        }
-      }
-    });
-    connection.end();
+  let session = null;
+  beforeAll((done) => {
+    return request(app)
+      .post('/user/register')
+      .send(newUser)
+      .end((err, res) => {
+        if (err) return done(err);
+        session = res.body.token;
+        return done();
+      });
   });
 
-  afterAll(async () => {
-    await connection.execute(
-      'DELETE FROM Trybeer.users;',
-    );
-    await connection.execute(
-      `INSERT INTO Trybeer.users (id, name, email, password, role)
-        VALUES
-          ('1', 'Tryber Admin', 'tryber@trybe.com.br', '123456', 'administrator'),
-          ('2', 'testuser', 'user@test.com', 'test123', 'client');`
-    );
-    await connection.end();
+  afterAll((done) => {
+    models.users.destroy({ where: { email: 'gabi.dalsilv@gmail.com' } })
+      .then(() => models.sequelize.close())
+      .then(() => done());
   });
 
-  it('Should not be able to update without an name', async () => {
-    await frisby
-      .put(`${url}/user/edit`,
-        {
-          name: ''
-        })
-      .expect('status', StatusCodes.BAD_REQUEST)
-      .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        expect(result.message).toBe('Name field is required.')
-      })
-      .catch((error) => { error })
+  it('Should not be able to update without a valid name', (done) => {
+    return request(app)
+      .put('/user/edit')
+      .set({ authorization: session })
+      .send({ })
+      .expect(StatusCodes.BAD_REQUEST)
+      .expect('Content-Type', /json/)
+      .then((res) => {
+        expect(res.body.message).toEqual('Name field is required.');
+        done();
+      });
   });
 
-  it('Should not be able to update without an name in valid format', async () => {
-    await frisby
-      .put(`${url}/user/edit`,
-        {
-          name: 'Adalberto'
-        })
-      .expect('status', StatusCodes.BAD_REQUEST)
-      .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        expect(result.message).toBe('Name must be at least 12 characters in a valid format. Example: Gabi Dal Silv')
-      })
-      .catch((error) => { error })
+  it('Should not be able to update when name is an invalid format', (done) => {
+    return request(app)
+      .put('/user/edit')
+      .set({ authorization: session })
+      .send({  name: 'Adal' })
+      .expect(StatusCodes.BAD_REQUEST)
+      .then((res) => {
+        expect(res.body.message).toContain('Name must be at least 12 characters');
+        done();
+      });
   });
 
-  it('Should be able to update name successfully', async () => {
-    await frisby
-      .put(`${url}/user/edit`,
-        {
-          name: 'Erisberto Da Silva',
-        })
-      .expect('status', StatusCodes.OK)
-      .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        expect(result.message).toBe('Name updated successfully.')
-      })
-      .catch((error) => { error })
+  it('Should be able to update name successfully', (done) => {
+    return request(app)
+      .put('/user/edit')
+      .set({ authorization: session })
+      .send({  name: 'Erisberto Da Silva' })
+      .expect(StatusCodes.OK)
+      .then((res) => {
+        expect(res.body.message).toEqual('Name updated successfully.');
+        done();
+      });
   });
 });

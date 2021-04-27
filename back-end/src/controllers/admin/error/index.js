@@ -1,9 +1,9 @@
-const salesError = {
+const adminError = {
   statusCode: 500,
-  customCode: 'ERROR_SALES',
-  customMessage: 'Could not get sales. Please, contact support or try again later.',
+  customCode: 'ERROR_ADMIN',
+  customMessage: 'Got an admin error. Please, contact support or try again later.',
 };
 
 module.exports = {
-  salesError,
+  adminError,
 };

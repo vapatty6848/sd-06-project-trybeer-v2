@@ -13,6 +13,7 @@ const generateToken = (id, role) => {
 };
 
 const verifyToken = (token) => {
+  // console.log('verify token: ', token);
   try {
     return jwt.verify(token, securityConfig.jwt.secret);
   } catch (err) {
