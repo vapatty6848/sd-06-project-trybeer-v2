@@ -38,7 +38,7 @@ function SideBarAdm() {
         Conversas
       </button>
       <button
-        className="buttonside"
+        className="buttonside4"
         s
         type="button"
         data-testid="side-menu-item-logout"
