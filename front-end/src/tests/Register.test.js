@@ -21,7 +21,7 @@ api.generateToken.mockImplementation(() => Promise.resolve(resultResolved));
 api.getAllOrders.mockImplementation(() => Promise.resolve([
   {
     id: 1, status: 'Pendente',
-    total_price: '2.20',
+    totalPrice: '2.20',
     delivery_address: 'rua Trybe',
     delivery_number: '40'
   }]));

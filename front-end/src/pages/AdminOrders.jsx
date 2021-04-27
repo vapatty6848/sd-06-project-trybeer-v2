@@ -33,8 +33,12 @@ const AdminOrders = () => {
         <div>
           <MenuSideBarAdm />
           {orders.map((order, index) => (
-            <div className="movie-card" key={ index }>
+            <div
+              className="movie-card"
+              key={ index }
+            >
               <Link
+                data-testid={ `${index}-card-order` }
                 to={ `/admin/orders/${order.id}` }
               >
                 <p data-testid={ `${index}-order-number` }>

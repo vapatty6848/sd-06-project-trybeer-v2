@@ -14,12 +14,14 @@ const userApi = {
 }
 
 const orders = [{
-  productName: "Skol Lata 250ml",
-  productPrice: "2.20",
-  productQuantity: "1",
-  productStatus: "Entregue",
-  saleDate: "2021-03-29T20:56:08.000Z",
   saleId: 1,
+  products:[{
+  name: "Skol Lata 250ml",
+  price: "2.20",
+  salesProducts:{ quantity: "1"}
+  }], 
+  status: "Entregue",
+  saleDate: "2021-03-29T20:56:08.000Z",
   totalPrice: '2.20',
 }];
 
@@ -33,10 +35,12 @@ api.generateToken.mockImplementation(() => Promise.resolve(resultResolved));
 api.getOrdersById.mockImplementation(() => Promise.resolve(resultOrderByUser));
 api.getAllOrders.mockImplementation(() => Promise.resolve([
   {
-    id: 1, status: 'Pendente',
-    total_price: '2.20',
-    delivery_address: 'rua Trybe',
-    delivery_number: '40'
+    id: 1,
+    name:"Skol Lata 250ml",
+    status: 'Pendente',
+    totalPrice: '2.20',
+    deliveryAddress: 'rua Trybe',
+    deliveryNumber: '40'
   }]));
 
 
@@ -61,14 +65,17 @@ describe('Testa a página de Admin Orders', () => {
     expect(await screen.findByTestId('side-menu-item-orders'));
     expect(await screen.findByTestId('side-menu-item-profile'));
     expect(await screen.findByTestId('side-menu-item-logout'));
-    expect(await (await screen.findAllByRole('button'))[3].textContent).toBe('Pedido 1rua Trybe, 40R$ 2,20Pendente')
-    fireEvent.click(await (await screen.findAllByRole('button'))[3]);
+    const cardOrder = await screen.findByTestId('0-card-order');
+    expect(await (await screen.findByTestId('0-order-status')).textContent).toBe('Pendente');
+    fireEvent.click(cardOrder);
     expect(await screen.findByText('Skol Lata 250ml')).toBeInTheDocument();
+    userEvent.click(await screen.findByTestId('mark-as-prepared-btn'));
+    expect(await screen.findByText('Preparando')).toBeInTheDocument();
     userEvent.click(await screen.findByTestId('mark-as-delivered-btn'));
     expect(await screen.findByText('Entregue')).toBeInTheDocument();
-    userEvent.click(await screen.findByText('Meu Perfil'));
-    expect(await screen.findByText('Perfil')).toBeInTheDocument();
-    userEvent.click(await screen.findByText('Meus Pedidos'));
+    const buttonPerfil = await screen.findByText('Perfil');
+    userEvent.click(buttonPerfil);
+    userEvent.click(await screen.findByText('Pedidos'));
     expect(await screen.findByText('Pedido 1')).toBeInTheDocument();
     userEvent.click(await screen.findByText('Sair'));
     expect(await screen.findByText('Entrar')).toBeInTheDocument();

@@ -28,11 +28,10 @@ const CheckoutCart = () => {
               { `Ver Carrinho R$ ${handleTotalPrice}` }
             </button>
           </div>
-          <div>
-            <span
-              data-testid="checkout-bottom-btn-value"
-            />
-          </div>
+          <span
+            data-testid="checkout-bottom-btn-value"
+          />
+          <div />
         </div>
       </div>
     </footer>

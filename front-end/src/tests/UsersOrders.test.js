@@ -22,15 +22,18 @@ const productsApi = [
 ];
 
 api.getAllProducts.mockImplementation(() => Promise.resolve(productsApi));
-api.getAllOrdersByUser = jest.fn().mockResolvedValue([{ id: 1, sale_date: "2021-03-29 15:21:36", total_price: "4,40" }]);
+api.getAllOrdersByUser = jest.fn().mockResolvedValue([{ id: 1, saleDate: "2021-03-29 15:21:36", totalPrice: "4,40" }]);
 api.getOrdersById = jest.fn().mockResolvedValue([
   {
     id: 1,
     saleDate: "2021-03-29 15:21:36",
-    productName: 'Skol Lata 250ml',
     totalPrice: "4.40",
-    productQuantity: 2,
-    productPrice: 2.20,
+    products:[{
+      name: 'Skol Lata 250ml',
+      price: 2.20,
+      salesProducts:{quantity: 2}
+    }], 
+    
   }]);
 
 const renderWithRouter = (component) => {
@@ -69,7 +72,7 @@ const history = createMemoryHistory();
     expect(await (await screen.findByTestId('order-date')).textContent).toBe('29/03');
     expect(await (await screen.findByTestId('0-product-qtd')).textContent).toBe('2');
     expect(await (await screen.findByTestId('0-product-name')).textContent).toBe('Skol Lata 250ml');
-    expect(await (await screen.findByTestId('0-product-total-value')).textContent).toBe('R$ 4,40 ');
+    expect(await (await screen.findByTestId('0-product-total-value')).textContent).toBe('R$  4,40');
     fireEvent.click(getByTestId('top-hamburguer'));
     fireEvent.click(getByText('Sair'));   
   });

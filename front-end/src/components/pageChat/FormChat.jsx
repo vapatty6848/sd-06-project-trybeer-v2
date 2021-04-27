@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function FormChat({ handleChange, buttonDisable, handleClick }) {
+function FormChat({
+  handleChange,
+  buttonDisable,
+  handleClick,
+  inputHandle }) {
   return (
     <div id="chat">
-      <form>
+      <form onSubmit={ (e) => inputHandle(e) }>
         <label htmlFor="message">
           <input
             type="text"
@@ -27,6 +31,7 @@ function FormChat({ handleChange, buttonDisable, handleClick }) {
 
 FormChat.propTypes = {
   handleChange: PropTypes.func.isRequired,
+  inputHandle: PropTypes.func.isRequired,
   buttonDisable: PropTypes.bool.isRequired,
   handleClick: PropTypes.func.isRequired,
 };

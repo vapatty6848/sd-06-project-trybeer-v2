@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import MenuTop from '../components/menuClient/MenuTop';
 import socket from '../services/socketClient';
-import BodyChat from '../components/chatClient/BodyChat';
-import FormChat from '../components/chatClient/FormChat';
+import BodyChat from '../components/pageChat/BodyChat';
+import FormChat from '../components/pageChat/FormChat';
 import api from '../services/api';
 
 function ChatClient() {
@@ -11,21 +11,18 @@ function ChatClient() {
   const [message, setMessage] = useState('');
   const [chatMessages, setChatMessages] = useState([]);
   const [buttonDisable, setButtonDisable] = useState(true);
-  const [user, setUser] = useState(userEmail);
+  const [user] = useState(userEmail);
   const [chatMessagesBD, setChatMessagesBD] = useState([]);
 
   const history = useHistory();
   const dest = 'Loja';
   const from = userEmail;
   const key = [from, dest].sort().join('-');
+  const inputMessage = document.querySelector('#message');
 
   useEffect(() => {
     if (!userEmail || role !== 'client')history.push('/login');
     socket.emit('connectRoom', key);
-    socket.emit('login', user);
-    socket.on('socketNick', (userNick) => {
-      setUser(userNick);
-    });
     api.findMessagesById(key).then((response) => {
       setChatMessagesBD(response);
     });
@@ -41,7 +38,7 @@ function ChatClient() {
     socket.on('sendMessage', (mess) => {
       setChatMessages([...chatMessages, mess]);
     });
-  }, [chatMessages, from, key, userEmail]);
+  }, [chatMessages]);
 
   const handleChange = ({ target }) => {
     setMessage(target.value);
@@ -49,10 +46,18 @@ function ChatClient() {
 
   const handleClick = (e) => {
     e.preventDefault();
-    const inputMessage = document.querySelector('#message');
     inputMessage.value = '';
     setMessage('');
     const dataMessage = { message, from, dest, key };
+    socket.emit('message', dataMessage);
+    api.registerMessage(dataMessage);
+  };
+
+  const inputHandleKeyup = (e) => {
+    e.preventDefault();
+    inputMessage.value = '';
+    setMessage('');
+    const dataMessage = { message, from: user, dest, key };
     socket.emit('message', dataMessage);
     api.registerMessage(dataMessage);
   };
@@ -63,11 +68,16 @@ function ChatClient() {
         <MenuTop name="Trybeer Chat" />
       </div>
       <div className="chat">
-        <BodyChat data={ chatMessages } dataBD={ chatMessagesBD } user={ user } />
+        <BodyChat
+          data={ chatMessages }
+          dataBD={ chatMessagesBD }
+          user={ user }
+        />
       </div>
       <FormChat
         handleChange={ handleChange }
         handleClick={ handleClick }
+        inputHandle={ inputHandleKeyup }
         buttonDisable={ buttonDisable }
       />
     </div>

@@ -49,7 +49,7 @@ describe('Testa a página de Checkout', () => {
     const btnViewCart = getByTestId('checkout-bottom-btn');
     fireEvent.click(buttonPlus);
     fireEvent.click(buttonPlus);
-    expect(await getByTestId('checkout-bottom-btn-value').textContent).toBe('R$ 4,40');
+    expect(await btnViewCart.textContent).toBe('Ver Carrinho R$ 4,40');
     fireEvent.click(btnViewCart);
     expect(await (await screen.findByTestId('top-title')).textContent).toBe('Finalizar Pedido');
   });
@@ -59,7 +59,7 @@ describe('Testa a página de Checkout', () => {
     cleanup();
   });
 
-  it('Verifica se possue os elementos descritos no protótipo com um produto inserido no carrinho', async () => {
+  it('Verifica se possue os elementos descritos no protótipo com produtos inseridos no carrinho', async () => {
     api.registerSales.mockImplementation(() => Promise.resolve({ response: { id: 1 } }));
     expect(await screen.findByText('Produtos')).toBeInTheDocument();
     expect(await (await screen.findByTestId('0-product-qtd-input')).textContent).toBe('2');
@@ -74,11 +74,13 @@ describe('Testa a página de Checkout', () => {
     userEvent.type(inputRua, 'rua nova');
     userEvent.type(inputNumero, '15');
     fireEvent.click(await screen.findByTestId('checkout-finish-btn'));
+    expect(await screen.findByText('Compra realizada com sucesso!')).toBeInTheDocument();
+    fireEvent.click(await screen.findByTestId('top-hamburguer'));
+    fireEvent.click(await screen.findByTestId('side-menu-item-products'));
     const buttonPlus = await screen.findByTestId('0-product-plus');
-    const btnViewCart = await screen.findByTestId('checkout-bottom-btn');
+    const btnViewCart = await screen.findByTestId('checkout-bottom-btn');    
     fireEvent.click(buttonPlus);
     fireEvent.click(btnViewCart);
-    // expect(await screen.findByText('Compra Realizad com Sucesso')).toBeInTheDocument();
     const btnItem = await screen.findByTestId('0-removal-button');
     fireEvent.click(btnItem);
     expect(await screen.findByText('Não há produtos no carrinho')).toBeInTheDocument();
