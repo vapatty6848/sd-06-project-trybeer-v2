@@ -1,13 +1,25 @@
-const mongoose = require('mongoose');
+const mongoClient = require('mongodb').MongoClient;
+require('dotenv').config();
 
-mongoose.connect(process.env.DB_URL, {
-  dbName: process.env.DB_NAME,
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-  .then(() => {
-    console.log('MongoDB conectado');
+let schema = null;
+
+const connection = async () => {
+  if (schema) return Promise.resolve(schema);
+
+  return mongoClient
+  .connect(process.env.DB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then((conn) => conn.db(process.env.DB_NAME))
+  .then((dbSchema) => {
+    schema = dbSchema;
+    return schema;
   })
   .catch((err) => {
-    console.log(`MongoDB deu merda na connect ${err}`);
+    console.error(err);
+    process.exit(1);
   });
+};
+
+module.exports = connection;

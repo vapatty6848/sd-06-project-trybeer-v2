@@ -1,6 +1,7 @@
 const SocketIo = require('socket.io');
 
-const Chat = require('../mongoDB/SchemaMongoose');
+// const Chat = require('../mongoDB/SchemaMongoose');
+const connection = require('../database/connectionMongo');
 
 const statusUpdate = (socket) => {
   socket.on('statusUpdate', (status) => {
@@ -10,23 +11,21 @@ const statusUpdate = (socket) => {
 
 const messageProcess = (socket) => {
   socket.on('message', ({ message, email, cli }) => {
-    console.log(message, ' ', email, ' ', cli);
     if (typeof message === 'string' && typeof email === 'string' && typeof cli === 'boolean') {
-      console.log('entrou message');
       const date = new Date();
       const response = { message, date };
 
       socket.to(email).emit('message', response);
 
-      Chat.updateOne({ email }, {
-        $push: {
-          messages: {
-            $each: [{ ...response, cli }],
-            $sort: { date: 1 },
+      connection()
+        .then((db) => db.collection('Chat').updateOne({ email }, {
+          $push: {
+            messages: {
+              $each: [{ ...response, cli }],
+              $sort: { date: 1 },
+            },
           },
-        },
-      }, { upsert: true })
-        .then((oiii) => console.log('oiii', oiii));
+        }, { upsert: true }));
     }
   });
 };

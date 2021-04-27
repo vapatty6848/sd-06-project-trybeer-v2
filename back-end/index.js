@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-require('./database/connectionMongo');
+// require('./database/connectionMongo');
 
 const app = express();
 
