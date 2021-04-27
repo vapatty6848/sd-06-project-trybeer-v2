@@ -67,14 +67,14 @@ function AdminWebChat() {
 
   const dateFormat = (date) => {
     const ten = 10;
-    const date = new Date();
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
+    const datef = new Date(date);
+    const hours = datef.getHours();
+    const minutes = datef.getMinutes();
     if (minutes < ten) {
       return `${hours}:0${minutes}`;
     }
     return `${hours}:${minutes}`;
-  }
+  };
 
   return (
     <div>
@@ -89,24 +89,22 @@ function AdminWebChat() {
       <h1>{ `Conversando com ${email}` }</h1>
       {
         messages.sort((a, b) => a.date - b.date)
-          .map(({ message, date, cli }, index) => {
-            return (
-              <div key={ index }>
-                <p>
-                  <span data-testid="nickname">
-                    {cli ? email : 'Loja'}
-                  </span>
-                  {' '}
-                  -
-                  {' '}
-                  <span data-testid="message-time">
-                    {dateFormat(date)}
-                  </span>
-                </p>
-                <p data-testid="text-message">{message}</p>
-              </div>
-            );
-          })
+          .map(({ message, date, cli }, index) => (
+            <div key={ index }>
+              <p>
+                <span data-testid="nickname">
+                  {cli ? email : 'Loja'}
+                </span>
+                {' '}
+                -
+                {' '}
+                <span data-testid="message-time">
+                  {dateFormat(date)}
+                </span>
+              </p>
+              <p data-testid="text-message">{message}</p>
+            </div>
+          ))
       }
       <input
         data-testid="message-input"
