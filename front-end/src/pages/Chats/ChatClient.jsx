@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import socket from './socketClient';
 import { verifyUser } from '../../store/LocalStorage/actions';
+import Header from '../../components/Header/Header';
 // import { sendMessage } from './Requests';
 import './styleChat.css';
 
@@ -50,6 +51,7 @@ export default function ChatClient() {
 
   return (
     <div className="boxContainer">
+      <Header title="Chat Client" user="client" />
       <h1>Chat Client</h1>
       <form>
         <input

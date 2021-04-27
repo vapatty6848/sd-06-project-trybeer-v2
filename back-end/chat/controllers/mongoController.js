@@ -1,5 +1,10 @@
 const { Router } = require('express');
-const { createMessages, getAllMessages, getUserMessages } = require('../models/mongoModel');
+const {
+  createMessages,
+  getAllMessages,
+  getUserMessages,
+  getMsgUsers,
+} = require('../models/mongoModel');
 // const {
 //   getAllUsersService,
 //   createUserService,
@@ -21,6 +26,12 @@ routerMessage.post('/', async (req, res) => {
 routerMessage.get('/', async (req, res) => {
   const allMessages = await getAllMessages();
   return res.status(SUCCESS).json(allMessages);
+});
+
+routerMessage.get('/messages', async (req, res) => {
+  const usersMessages = await getMsgUsers();
+  console.log(usersMessages);
+  return res.status(SUCCESS).json(usersMessages);
 });
 
 routerMessage.get('/userMessages/:email', async (req, res) => {

@@ -19,8 +19,14 @@ const getUserMessages = async (email) => connection()
   .then((database) => database.collection('messages')
   .find({ $or: [{ user: email }, { user: 'Loja', to: email }] }).toArray());
 
+const getMsgUsers = async () => connection()
+  .then((db) => db.collection('messages').aggregate(
+    [{ $group: { user: '$user', lastMessage: { $max: '$time' } } }, { $sort: { lastMessage: -1 } }],
+  ).toArray());
+
 module.exports = {
   createMessages,
   getAllMessages,
   getUserMessages,
+  getMsgUsers,
 };
