@@ -28,6 +28,12 @@ function SideBarClient() {
         </button>
       </Link>
 
+      <Link to="/chat">
+        <button className="botao" data-testid="side-menu-chat" type="button">
+          Conversar com a loja
+        </button>
+      </Link>
+
       <Link to="/">
         <button
           className="botao"
