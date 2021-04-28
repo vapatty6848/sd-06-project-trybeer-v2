@@ -11,9 +11,9 @@ export default function Chat() {
   const [message, setMessage] = useState('');
   const [messageList, setMessageList] = useState([]);
 
-  const ENDPOINT = 'http://localhost:4001';
+  const ENDPOINT = process.env.REACT_APP_ENDPOINT || 'http://localhost:4001';
   const options = useMemo(() => ({ auth: { token } }), [token]);
-  const socket = useMemo(() => api.chat(ENDPOINT, options), [options]);
+  const socket = useMemo(() => api.chat(ENDPOINT, options), [options, ENDPOINT]);
 
   const sendMessage = useCallback((e) => {
     e.preventDefault();
@@ -32,7 +32,7 @@ export default function Chat() {
     setMessageList([...messageList, msg]);
   });
 
-  api.chat.on('server:storedMessages', (msgs) => {
+  socket.on('server:storedMessages', (msgs) => {
     setMessageList(msgs);
   });
 
