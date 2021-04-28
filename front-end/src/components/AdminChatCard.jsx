@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import fetches from '../services/fetches';
+import formatDate from '../utils/format';
 
 export default function AdminChatCard() {
   const tokenFromLocalStorage = localStorage.getItem('token');
@@ -24,19 +25,7 @@ export default function AdminChatCard() {
     );
     return noMessageSpan;
   };
-
-  /*   const getUniqueEmail = () => {
-    return allMessages.indexOf()
-  } */
-
-  const filteredMessages = () => {
-    console.log('l33', allMessages);
-    const getFilteredEmails = allMessages
-      .filter((message, index, array) => array.indexOf(message) === index);
-    console.log(getFilteredEmails);
-    return getFilteredEmails;
-  };
-  console.log('l37', filteredMessages());
+  // console.log('l28', [allMessages].sentAt);
 
   return (
     <div>
@@ -51,7 +40,7 @@ export default function AdminChatCard() {
               </div>
               <div>
                 <div data-testid="last-message">
-                  {`Última mensagem às ${message.sentAt}`}
+                  {`Última mensagem às ${formatDate(message.sentAt)}`}
                 </div>
               </div>
             </div>

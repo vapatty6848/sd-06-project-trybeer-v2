@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import fetches from '../services/fetches';
 import socket from '../utils/socketClient';
+import formatDate from '../utils/format';
 
 export default function MessageBox() {
   const tokenFromLocalStorage = localStorage.getItem('token');
@@ -26,7 +27,7 @@ export default function MessageBox() {
         <div key={ index }>
           <div>
             <div data-testid="nickname">{message.email}</div>
-            <div data-testid="message-time">{message.sentAt}</div>
+            <div data-testid="message-time">{formatDate(message.sentAt)}</div>
           </div>
           <div data-testid="text-message">
             {message.message}

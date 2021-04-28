@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import socket from '../utils/socketClient';
 import fetches from '../services/fetches';
 
-const dateFormat = require('dateformat');
+// const dateFormat = require('dateformat');
 
 export default function ChatMessage() {
   const tokenFromLocalStorage = localStorage.getItem('token');
@@ -12,7 +12,8 @@ export default function ChatMessage() {
   const [message, setMessage] = useState('');
   // const dateNow = new Date().getTime();
   // const sentAt = moment(dateNow).format('H:MM');
-  const sentAt = dateFormat(new Date(), 'H:MM');
+  const sentAt = new Date();
+  // const sentAt = dateFormat(new Date(), 'H:MM');
 
   const handleSubmit = (e) => {
     e.preventDefault();

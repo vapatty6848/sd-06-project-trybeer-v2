@@ -16,8 +16,15 @@ const getAllMessagesAdmin = () => connection().then((db) => db.collection('messa
           _id: '$email',
           maxTime: { $max: '$sentAt' },
         },
+  }, 
+  {
+    $project: {
+      _id: 0,
+      email: '$_id',
+      sentAt: '$maxTime',
+    },
   },
-]));
+]).toArray());
 
 // db.messages.aggregate( [ { $group : { _id : "$email", maxTime: { $max: "sentAt" }  }] )
 /* db.messages.aggregate(
