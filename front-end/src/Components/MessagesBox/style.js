@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 const ListUl = styled.ul`
   ${({ theme }) => css`
@@ -51,9 +51,9 @@ const ListUl = styled.ul`
       }
     }
   `}
-`
+`;
 
-const adminInfo = styled.div`
+const AdminInfo = styled.div`
   ${({ theme }) => css`
     width: 100%;
     height: 25px;
@@ -76,9 +76,9 @@ const adminInfo = styled.div`
       font-weight: bold;
     }
   `}
-`
+`;
 
 export default {
   ListUl,
-  adminInfo,
-}
+  AdminInfo,
+};

@@ -19,26 +19,20 @@ const CardAdminChats = () => {
   const handleClick = (email) => {
     history.push({ pathname: '/admin/chat/talks', state: email });
   };
-  return (
-    <>
-      {
-        message.length > 0
-          ? message.map((el, index) => (
-            <S.Container
-              data-testid="containerChat"
-              onClick={ () => handleClick(el.email) }
-              key={ index }
-            >
-              <h2 data-testid="profile-name">{el.email}</h2>
-              <h4 data-testid="last-message">
-                {`Última mensagem às ${el.lastMessage}`}
-              </h4>
-            </S.Container>
-          ))
-          : <p data-testid="text-for-no-conversation">Nenhuma conversa por aqui</p>
-      }
-    </>
-  );
+  return message.length > 0
+    ? message.map((el, index) => (
+      <S.Container
+        data-testid="containerChat"
+        onClick={ () => handleClick(el.email) }
+        key={ index }
+      >
+        <h2 data-testid="profile-name">{el.email}</h2>
+        <h4 data-testid="last-message">
+          {`Última mensagem às ${el.lastMessage}`}
+        </h4>
+      </S.Container>
+    ))
+    : (<p data-testid="text-for-no-conversation">Nenhuma conversa por aqui</p>);
 };
 
 export default CardAdminChats;

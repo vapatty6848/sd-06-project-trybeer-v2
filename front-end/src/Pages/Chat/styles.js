@@ -59,15 +59,15 @@ const ChatContainer = styled.div`
     border-radius: 5px;
     box-shadow: 0 0 10px ${theme.colors.shadowCards};
   `}
-`
-  
+`;
+
 const ContainerMessages = styled.div`
-  ${({ theme }) => css`
+  ${() => css`
     width: 85%;
     text-align: center;
     margin: 25px auto;
   `}
-`
+`;
 
 export default {
   Container,

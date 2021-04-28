@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
+import { BiChat } from 'react-icons/bi';
 import MenuTop from '../../Components/MenuTop';
 import SideBar from '../../Components/SideBar';
 import Button from '../../Components/Button';
 import Input from '../../Components/Input';
 import MessagesBox from '../../Components/MessagesBox';
-import { BiChat } from 'react-icons/bi';
 
 import socket from '../../utils/socketClient';
 import { saveMessage, getMessages } from '../../Services/Apis';
