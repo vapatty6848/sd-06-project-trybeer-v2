@@ -26,9 +26,9 @@ export default function Header({ title, user }) {
         { title }
       </h1>
       {
-        (isSidebarOpen || user === 'admin') && (
+        // (isSidebarOpen ) && (
           <SideBar user={ user } />
-        )
+        // )
       }
     </div>
   );
