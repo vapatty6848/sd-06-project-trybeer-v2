@@ -33,7 +33,7 @@ const AppProvider = ({ children }) => {
       const productsArray = await api.getProducts(token).catch((error) => error);
       setProducts(productsArray);
     };
-    if (products.length < 1) fetchProducts();
+    if (token && products.length < 1) fetchProducts();
   }, [setProducts, products, token]);
 
   return (
