@@ -45,7 +45,7 @@ function CostumerOrdersPage() {
       <HeaderComponent text="Meus Pedidos" />
       <div className="costumer_orders">
         <h1 data-testid="top-title">Meus Pedidos</h1>
-        <div className="order-list">
+        <div className="order-list-client">
           {orders.map((element, index) => (
             <div key={ element.id }>
               <Link to={ `/orders/${element.id}` }>

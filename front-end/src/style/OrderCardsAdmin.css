@@ -74,17 +74,20 @@ a:visited {
   text-decoration: none;
 }
 
-.greenStatusComponent {
+.greenStatus {
   background-color: #21a809 !important;
   color: #ffffff !important;
+  padding: 10px;
 }
 
 .yellowStatus {
   background-color: #eed91f!important;
   color: #ffffff !important;
+  padding: 10px;
 }
 
-.redStatusComponent {
+.redStatus {
   background-color: #eb0e0e !important;
   color: #ffffff !important;
+  padding: 10px;
 }

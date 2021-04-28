@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router';
 import AdminSideBarComponent from '../components/AdminSideBarComponent';
 import BeersAppContext from '../context/BeersAppContext';
-// import '../style/AdminProfile.css';
+import '../style/AdminProfile.css';
 
 function AdminProfilePage() {
   const history = useHistory();

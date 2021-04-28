@@ -6,8 +6,8 @@
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
-  margin: auto;
-  width: 100%;
+  /* margin: auto; */
+  /* width: 100%; */
 }
 
 .costumer_orders h1 {
@@ -16,11 +16,12 @@
   font-weight: 900;
 }
 
-.order-list {
+.order-list-client {
   align-items: center;
   align-content: center;
   display: flex;
   flex-flow: row wrap !important;
   justify-content: center;
+  margin: 0 !important;
   width: 100%;
 }
