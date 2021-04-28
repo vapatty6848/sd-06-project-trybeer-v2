@@ -23,7 +23,7 @@ export default function Chat() {
   }, [message, socket, token]);
 
   useEffect(() => {
-    socket.emit('user:login', token.token);
+    socket.emit('user:login', token);
   }, [socket, token]);
 
   const getMessage = useCallback(({ target }) => setMessage(target.value), []);

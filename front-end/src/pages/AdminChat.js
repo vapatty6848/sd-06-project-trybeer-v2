@@ -28,9 +28,10 @@ export default function AdminChat({ location }) {
   }, [message, socket, token, currentClient, params.roomId]);
 
   useEffect(() => {
-    socket.emit('admin:joinRoom', currentClient);
-    socket.emit('admin:getRoomMessages',
-      { client: currentClient, userId: params.roomId });
+    socket.emit('admin:getRoomMessages', {
+      client: currentClient,
+      userId: params.roomId,
+    });
   }, [socket, currentClient, params.roomId]);
 
   const getMessage = useCallback(({ target }) => setMessage(target.value), []);

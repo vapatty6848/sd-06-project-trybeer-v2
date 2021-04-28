@@ -54,9 +54,9 @@ module.exports = {
     customCode: 'C_ERR_ISVENDOR_INVALID',
     customMessage: 'isValid field must be a boolean.',
   },
-  C_ERR_EMAIL_UNAVAIBLE: {
+  C_ERR_EMAIL_UNAVAILABLE: {
     statusCode: 400,
-    customCode: 'C_ERR_EMAIL_UNAVAIBLE',
+    customCode: 'C_ERR_EMAIL_UNAVAILABLE',
     customMessage: 'This email is already in use.',
   },
   C_ERR_NO_TOKEN: {

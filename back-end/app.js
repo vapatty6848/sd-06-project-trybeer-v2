@@ -30,8 +30,15 @@ app.use(express.json());
 app.use(routes);
 
 io.on('connection', (socket) => {
-  controllers.chat(io, socket);
-  controllers.user(io, socket);
+  const { token } = socket.handshake.auth;
+  if (token && token.role === 'client') {
+    token.roomKey = `${token.email}-room`;
+    socket.join(token.roomKey);
+  }
+
+  controllers.chat(io, socket, token);
+  controllers.user(io, socket, token);
+  controllers.admin(io, socket, token);
 });
 
 module.exports = { app, http, io };

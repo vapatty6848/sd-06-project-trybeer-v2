@@ -1,12 +1,10 @@
-const { verifyToken } = require('../../security');
 const { chat } = require('../../services');
 
-module.exports = (ioServer, socket) => {
-  console.log('backend -> usuário entrou');
-  const getUserMessages = async (token) => {
-    const { sub: userId } = verifyToken(token);
-    const getStoredMessages = await chat.getMessagesByUserId(userId);
-    const storedMessages = (getStoredMessages) ? getStoredMessages.messages : [];
+module.exports = (ioServer, socket, token) => {
+  const getUserMessages = async () => {
+    console.log('backend chat > usuário logou');
+    const getMessages = await chat.getMessagesByUserId(token);
+    const storedMessages = getMessages.messages || [];
     socket.emit('server:storedMessages', storedMessages);
   };
 
