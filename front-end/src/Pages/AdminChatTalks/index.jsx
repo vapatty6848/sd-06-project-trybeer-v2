@@ -5,10 +5,15 @@ import { GlobalContext } from '../../Contexts/GlobalContext';
 
 import MenuTopAdmin from '../../Components/MenuTopAdmin';
 import SideBarAdmin from '../../Components/SideBarAdmin';
-import S from '../AdminOrderDetails/styles';
-import socket from '../../utils/socketClient';
-import { saveMessage, getMessages } from '../../Services/Apis';
 import MessagesBox from '../../Components/MessagesBox';
+
+import { saveMessage, getMessages } from '../../Services/Apis';
+import socket from '../../utils/socketClient';
+import { BiChat } from 'react-icons/bi';
+
+import S from './styles';
+import Input from '../../Components/Input';
+import Button from '../../Components/Button';
 
 function AdminChatTalks({ location: { pathname, state } }) {
   const { stateSideBarAdmin } = useContext(GlobalContext);
@@ -94,27 +99,37 @@ function AdminChatTalks({ location: { pathname, state } }) {
         <SideBarAdmin />
 
         <S.ContainerCard stateSideBarAdmin={ stateSideBarAdmin }>
-          { isLoading ? <p>Carregando mensagens</p> : (
-            <MessagesBox
-              messages={ messages }
-              pathname={ pathname }
-              clientEmail={ email }
-            />
-          ) }
-          <form onSubmit={ handleSendMessage }>
-            <input
-              type="text"
-              value={ message }
-              onChange={ ({ target: { value } }) => setMessage(value) }
-              data-testid="message-input"
-            />
-            <button
-              type="submit"
-              data-testid="send-message"
-            >
-              Enviar
-            </button>
-          </form>
+          <S.ChatContainer>
+            <S.ContainerMessages>
+              { isLoading ? <p>Carregando mensagens</p> : (
+                <MessagesBox
+                  messages={ messages }
+                  pathname={ pathname }
+                  clientEmail={ email }
+                />
+              ) }
+            </S.ContainerMessages>
+            <form onSubmit={ handleSendMessage }>
+              <Input
+                id="input-message"
+                label=""
+                type="text"
+                value={ message }
+                onChange={ ({ target: { value } }) => setMessage(value) }
+                dataTestid="message-input"
+                icon={ BiChat }
+              />
+              <Button
+                type="submit"
+                heigth="40px"
+                color="green"
+                fontSize="20px"
+                dataTestid="send-message"
+              >
+                Enviar
+              </Button>
+            </form>
+          </S.ChatContainer>
         </S.ContainerCard>
 
       </S.Context>
