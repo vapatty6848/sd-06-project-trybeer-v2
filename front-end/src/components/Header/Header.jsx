@@ -25,11 +25,9 @@ export default function Header({ title, user }) {
       <h1 className="title" data-testid="top-title">
         { title }
       </h1>
-      {
         // (isSidebarOpen ) && (
-          <SideBar user={ user } />
+        <SideBar user={ user } />
         // )
-      }
     </div>
   );
 }
