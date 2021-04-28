@@ -8,6 +8,11 @@ export default function ListaDeConversas() {
   const callAllMessages = async () => {
     const allMessages = await fetch('http://localhost:4001/chat/messages');
     const allMsg = await allMessages.json();
+    
+    allMsg.map((obj) => {
+      obj['_id'] = obj['user']
+    })
+    
     const teste = allMsg.filter((el) => el.user !== 'Loja');
     setUsers(teste);
   };
@@ -25,7 +30,7 @@ export default function ListaDeConversas() {
           </h3>
         )
         : (
-          <div>
+          <div class="containerBox">
             {users && users.map((element, index) => (
               <div data-testid="containerChat" key={ index }>
                 <Link className="link" to={ `/admin/chats/${element.user}` }>
