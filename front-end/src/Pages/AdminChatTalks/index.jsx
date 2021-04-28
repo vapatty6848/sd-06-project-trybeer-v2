@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 
+import { BiChat } from 'react-icons/bi';
 import { GlobalContext } from '../../Contexts/GlobalContext';
 
 import MenuTopAdmin from '../../Components/MenuTopAdmin';
@@ -9,7 +10,6 @@ import MessagesBox from '../../Components/MessagesBox';
 
 import { saveMessage, getMessages } from '../../Services/Apis';
 import socket from '../../utils/socketClient';
-import { BiChat } from 'react-icons/bi';
 
 import S from './styles';
 import Input from '../../Components/Input';
@@ -109,7 +109,7 @@ function AdminChatTalks({ location: { pathname, state } }) {
                 />
               ) }
             </S.ContainerMessages>
-            <form onSubmit={ handleSendMessage }>
+            <form>
               <Input
                 id="input-message"
                 label=""
@@ -120,7 +120,8 @@ function AdminChatTalks({ location: { pathname, state } }) {
                 icon={ BiChat }
               />
               <Button
-                type="submit"
+                type="button"
+                onClick={ handleSendMessage }
                 heigth="40px"
                 color="green"
                 fontSize="20px"
