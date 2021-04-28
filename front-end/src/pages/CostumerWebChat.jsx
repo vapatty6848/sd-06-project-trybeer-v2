@@ -3,6 +3,8 @@ import socket from '../Socket.io/socket';
 import BeersAppContext from '../context/BeersAppContext';
 import HeaderComponent from '../components/HeaderComponent';
 
+import '../style/WebChat.css';
+
 function CostumerWebChat() {
   const { user: { token, email } } = useContext(BeersAppContext);
 
@@ -76,7 +78,10 @@ function CostumerWebChat() {
       {
         messages
           .map(({ message, date, cli }, index) => (
-            <div key={ index }>
+            <div
+              key={ index }
+              className={ cli ? 'messageCli' : 'message' }
+            >
               <p>
                 <span data-testid="nickname">
                   {cli ? email : 'Loja'}
@@ -92,21 +97,22 @@ function CostumerWebChat() {
             </div>
           ))
       }
-
-      <input
-        data-testid="message-input"
-        type="text"
-        placeholder="Digite..."
-        onChange={ handleChange }
-        value={ input }
-      />
-      <button
-        type="button"
-        data-testid="send-message"
-        onClick={ submeterMessage }
-      >
-        Enviar
-      </button>
+      <div className="message-send">
+        <input
+          data-testid="message-input"
+          type="text"
+          placeholder="Digite..."
+          onChange={ handleChange }
+          value={ input }
+        />
+        <button
+          type="button"
+          data-testid="send-message"
+          onClick={ submeterMessage }
+        >
+          Enviar
+        </button>
+      </div>
     </div>
   );
 }

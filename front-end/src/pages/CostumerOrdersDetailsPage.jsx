@@ -64,7 +64,7 @@ function CostumerOrdersDetailsPage() {
   return (
     <div>
       <HeaderComponent text="Detalhes de Pedido" id="top-title" />
-      <div className="order-list">
+      <div className="order-list-details">
         <div className="order-list-title">
           <h1 data-testid="order-number">{`Pedido ${id}`}</h1>
           <h1 data-testid="order-date">{ date() }</h1>

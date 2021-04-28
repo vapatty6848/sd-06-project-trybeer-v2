@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import formatPrice from '../service/formatPrice';
-// import '../style/OrdersDetailsAdmin.css';
+import '../style/OrdersDetailsAdmin.css';
 
 function AdminDetailsOrdersCardsComponent({ element, index }) {
   const { productPrice, quantity, name, price } = element;

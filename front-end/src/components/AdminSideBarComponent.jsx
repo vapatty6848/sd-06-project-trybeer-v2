@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import BeersAppContext from '../context/BeersAppContext';
-// import '../style/SideBarAdmin.css';
+import '../style/SideBarAdmin.css';
 
 function AdminSideBarComponent() {
   const history = useHistory();
@@ -30,7 +30,7 @@ function AdminSideBarComponent() {
         type="button"
         data-testid="side-menu-item-chat"
         onClick={ () => history.push('/admin/chats') }
-        className="bttn_sidebar_admin_bottom"
+        // className="bttn_sidebar_admin_bottom"
       >
         Conversas
       </button>

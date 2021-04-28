@@ -2,8 +2,8 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import BeersAppContext from '../context/BeersAppContext';
 import { AdminSideBarComponent } from '../components';
-// import { AdminChatCardsComponent } from '../components';
 import socket from '../Socket.io/socket';
+import '../style/WebChat.css';
 
 function AdminWebChat() {
   const { user: { token } } = useContext(BeersAppContext);
@@ -80,47 +80,56 @@ function AdminWebChat() {
   return (
     <div>
       <AdminSideBarComponent />
-      <button
-        type="button"
-        data-testid="back-button"
-        onClick={ () => history.push('/admin/chats') }
-      >
-        Voltar
-      </button>
-      <h1>{ `Conversando com ${email}` }</h1>
-      {
-        messages
-          .map(({ message, date, cli }, index) => (
-            <div key={ index }>
-              <p>
-                <span data-testid="nickname">
-                  {cli ? email : 'Loja'}
-                </span>
-                {' '}
-                -
-                {' '}
-                <span data-testid="message-time">
-                  {dateFormat(date)}
-                </span>
-              </p>
-              <p data-testid="text-message">{message}</p>
-            </div>
-          ))
-      }
-      <input
-        data-testid="message-input"
-        type="text"
-        placeholder="Digite..."
-        onChange={ handleChange }
-        value={ input }
-      />
-      <button
-        type="button"
-        data-testid="send-message"
-        onClick={ submitMessage }
-      >
-        Enviar
-      </button>
+      <div className="constaine-adimin-chat">
+        <div className="titleChatAdm">
+          <button
+            type="button"
+            data-testid="back-button"
+            onClick={ () => history.push('/admin/chats') }
+          >
+            Voltar
+          </button>
+          <h1>{ `Conversando com ${email}` }</h1>
+        </div>
+        {
+          messages
+            .map(({ message, date, cli }, index) => (
+              <div
+                key={ index }
+                className={ cli ? 'messageCli' : 'message' }
+              >
+                <p>
+                  <span data-testid="nickname">
+                    {cli ? email : 'Loja'}
+                  </span>
+                  {' '}
+                  -
+                  {' '}
+                  <span data-testid="message-time">
+                    {dateFormat(date)}
+                  </span>
+                </p>
+                <p data-testid="text-message">{message}</p>
+              </div>
+            ))
+        }
+        <div className="message-send-adm">
+          <input
+            data-testid="message-input"
+            type="text"
+            placeholder="Digite..."
+            onChange={ handleChange }
+            value={ input }
+          />
+          <button
+            type="button"
+            data-testid="send-message"
+            onClick={ submitMessage }
+          >
+            Enviar
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

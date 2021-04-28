@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AdminChatCardsComponent, AdminSideBarComponent } from '../components';
 import BeersAppContext from '../context/BeersAppContext';
+import '../style/ChatList.css';
 
 function AdminChatList() {
   const {
@@ -25,23 +26,27 @@ function AdminChatList() {
   return (
     <div>
       <AdminSideBarComponent />
-      {
-        (chats.length === 0)
-          ? <p data-testid="text-for-no-conversation">Nenhuma conversa por aqui</p>
-          : (
-            <div data-testid="containerChat">
-              {
-                chats.map((element) => (
-                  <div key={ element.email }>
-                    <AdminChatCardsComponent
-                      cliente={ element }
-                    />
-                  </div>
-                ))
-              }
-            </div>
-          )
-      }
+      <div className="chat-list-margin">
+        <div>
+          {
+            (chats.length === 0)
+              ? <p data-testid="text-for-no-conversation">Nenhuma conversa por aqui</p>
+              : (
+                <div data-testid="containerChat">
+                  {
+                    chats.map((element) => (
+                      <div key={ element.email } className="chat-list">
+                        <AdminChatCardsComponent
+                          cliente={ element }
+                        />
+                      </div>
+                    ))
+                  }
+                </div>
+              )
+          }
+        </div>
+      </div>
     </div>
   );
 }
