@@ -24,7 +24,7 @@ const getMsgUsers = async () => connection()
     [
       { $group: { _id: '$user', lastMessage: { $max: '$time' } } }, 
       { $sort: { lastMessage: -1 } },
-      { $project: { user: '_id', lastMessage: 1 } },
+      { $project: { user: '$_id', lastMessage: 1 } },
     ],
   ).toArray());
 
