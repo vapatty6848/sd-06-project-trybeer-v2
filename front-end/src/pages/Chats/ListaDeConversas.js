@@ -36,7 +36,7 @@ export default function ListaDeConversas() {
             ))}
           </div>
         )}
-        <Header title="TryBeer" user="admin" />
+      <Header title="TryBeer" user="admin" />
     </div>
   );
 }
