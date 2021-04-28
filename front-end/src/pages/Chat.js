@@ -32,11 +32,7 @@ export default function Chat() {
     setMessageList([...messageList, msg]);
   });
 
-<<<<<<< HEAD
   api.chat.on('server:storedMessages', (msgs) => {
-=======
-  socket.on('user:storedMessages', (msgs) => {
->>>>>>> 6d1445ee553f20ab587eeaa21ddb73ada415aacd
     setMessageList(msgs);
   });
 
