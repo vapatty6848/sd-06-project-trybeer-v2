@@ -3,8 +3,6 @@ const { app } = require('../app');
 const { StatusCodes } = require('http-status-codes');
 const models = require('../src/models/sql/models');
 
-const url = 'http://localhost:3001';
-
 const newAdmin = {
   name: 'Gabi Dal Silv',
   email: 'gabi.dalsilv@gmail.com',

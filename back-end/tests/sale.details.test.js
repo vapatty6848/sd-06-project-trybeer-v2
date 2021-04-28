@@ -76,8 +76,6 @@ describe('Testing sale details endpoint', () => {
   });
 
   it('Client should not be able to access a sale of another user', async (done) => {
-    let secondUserSession;
-
     // connect as newUser and create sale
     await request(app)
       .post('/sales/create')

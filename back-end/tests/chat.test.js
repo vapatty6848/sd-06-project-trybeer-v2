@@ -39,8 +39,8 @@ describe('Tests client chat features', () => {
   });
 
   it('Should be able to get stored messages at login', (done) => {
-    clientSocket.on('server:storedMessages', (arg) => {
-      expect(arg).toStrictEqual([]);
+    clientSocket.on('server:storedMessages', (storedMessages) => {
+      expect(storedMessages).toStrictEqual([]);
       return done();
     });
     clientSocket.emit('user:login', session);
@@ -52,7 +52,7 @@ describe('Tests client chat features', () => {
       expect(msg.nickname).toBe(session.email);
       return done();
     });
-    const newMessage = { nickname: session.email, message: 'olah teste!', timestamp: new Date() }
+    const newMessage = { nickname: session.email, message: 'olah teste!', timestamp: new Date() };
     clientSocket.emit('chat:clientMessage', { msg: newMessage, token: session });
   });
 });

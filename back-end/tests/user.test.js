@@ -3,8 +3,6 @@ const { app } = require('../app');
 const { StatusCodes } = require('http-status-codes');
 const models = require('../src/models/sql/models');
 
-const url = 'http://localhost:3001';
-
 const newUser = {
   name: 'Gabi Dal Silv',
   email: 'gabi.dalsilv@gmail.com',
@@ -24,7 +22,7 @@ describe('Tests the login endpoint', () => {
       .expect(StatusCodes.BAD_REQUEST)
       .expect('Content-Type', /json/)
       .then((res) => {
-        expect(res.body.message).toContain('Email field is required.');
+        expect(res.body.message).toContain('Email field is required');
         done();
       });
   });
@@ -39,7 +37,7 @@ describe('Tests the login endpoint', () => {
       .expect(StatusCodes.BAD_REQUEST)
       .expect('Content-Type', /json/)
       .then((res) => {
-        expect(res.body.message).toContain('Email must be at a valid format.');
+        expect(res.body.message).toContain('Email must be at a valid format');
         done();
       });
   });
@@ -51,7 +49,7 @@ describe('Tests the login endpoint', () => {
       .expect(StatusCodes.BAD_REQUEST)
       .expect('Content-Type', /json/)
       .then((res) => {
-        expect(res.body.message).toContain('Password field is required.');
+        expect(res.body.message).toContain('Password field is required');
         done();
       });
   });
@@ -66,7 +64,7 @@ describe('Tests the login endpoint', () => {
       .expect(StatusCodes.NOT_FOUND)
       .expect('Content-Type', /json/)
       .then((res) => {
-        expect(res.body.message).toContain('Login failed. User not found.');
+        expect(res.body.message).toContain('Login failed. User not found');
         done();
       });
   });
