@@ -1,0 +1,36 @@
+body {
+  background-color: lightslategray;
+}
+
+.admin-chats-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  margin: auto;
+  padding: 10px auto;
+  width: 90%;
+}
+
+.chat-card {
+  align-items: left;
+  background-color: snow;
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  flex-flow: column nowrap;
+  height: 80px;
+  justify-content: space-around;
+  margin: 10px 5px;
+  min-width: 200px;
+  padding: 11px 15px 10px;
+}
+
+.chat-card section {
+  background-color: lightblue;
+  border-radius: 11px;
+  padding: 4px 12px;
+}
+
+.chat-card .nickname {
+  font-weight: 600;
+}

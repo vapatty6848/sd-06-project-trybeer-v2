@@ -1,5 +1,5 @@
-const { chat } = require('../../services');
 const { verifyToken } = require('../../security');
+const { chat } = require('../../services');
 
 module.exports = (ioServer, socket) => {
   console.log('backend -> usuário entrou');

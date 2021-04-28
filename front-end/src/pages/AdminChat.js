@@ -1,12 +1,16 @@
 import React, { useState, useEffect, useContext, useCallback, useMemo } from 'react';
-
+import { Link, useParams } from 'react-router-dom';
+import { PropTypes } from 'prop-types';
 import AppContext from '../context/app.context';
 import api from '../services';
 
-import { Topbar, MessageInput, ChatMessage } from '../components';
+import { Topbar, AdminMessageInput, ChatMessage } from '../components';
 
-export default function Chat() {
+export default function AdminChat({ location }) {
   const { tokenContext: { token } } = useContext(AppContext);
+  const params = useParams();
+
+  const currentClient = location.state.user;
 
   const [message, setMessage] = useState('');
   const [messageList, setMessageList] = useState([]);
@@ -18,13 +22,16 @@ export default function Chat() {
   const sendMessage = useCallback((e) => {
     e.preventDefault();
     const newMessage = { nickname: token.email, message, timestamp: new Date() };
-    socket.emit('chat:clientMessage', { msg: newMessage, token });
+    socket.emit('admin:sendMessage',
+      { msg: newMessage, client: currentClient, userId: params.roomId });
     setMessage('');
-  }, [message, socket, token]);
+  }, [message, socket, token, currentClient, params.roomId]);
 
   useEffect(() => {
-    socket.emit('user:login', token.token);
-  }, [socket, token]);
+    socket.emit('admin:joinRoom', currentClient);
+    socket.emit('admin:getRoomMessages',
+      { client: currentClient, userId: params.roomId });
+  }, [socket, currentClient, params.roomId]);
 
   const getMessage = useCallback(({ target }) => setMessage(target.value), []);
 
@@ -32,11 +39,7 @@ export default function Chat() {
     setMessageList([...messageList, msg]);
   });
 
-<<<<<<< HEAD
-  api.chat.on('server:storedMessages', (msgs) => {
-=======
-  socket.on('user:storedMessages', (msgs) => {
->>>>>>> 6d1445ee553f20ab587eeaa21ddb73ada415aacd
+  socket.on('admin:storedRoomMessages', (msgs) => {
     setMessageList(msgs);
   });
 
@@ -45,14 +48,29 @@ export default function Chat() {
   return (
     <div>
       <Topbar title={ title } />
-      <MessageInput
+      <Link to="/admin/chats" data-testid="back-button">
+        Voltar
+      </Link>
+      <h3>
+        <span>Conversando com </span>
+        { currentClient }
+      </h3>
+      <AdminMessageInput
         callback={ getMessage }
         sendMessage={ sendMessage }
         value={ message }
       />
       { messageList.map((msg, i) => (
-        <ChatMessage msg={ msg } key={ i } client={ token.email } />
+        <ChatMessage msg={ msg } key={ i } client={ currentClient } />
       )) }
     </div>
   );
 }
+
+AdminChat.propTypes = {
+  location: PropTypes.objectOf(PropTypes.any),
+};
+
+AdminChat.defaultProps = {
+  location: {},
+};
