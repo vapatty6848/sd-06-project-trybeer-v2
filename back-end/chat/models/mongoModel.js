@@ -20,9 +20,12 @@ const getUserMessages = async (email) => connection()
   .find({ $or: [{ user: email }, { user: 'Loja', to: email }] }).toArray());
 
 const getMsgUsers = async () => connection()
-  .then((db) => db.collection('messages').aggregate(
-    [{ $group: { user: '$user', lastMessage: { $max: '$time' } } }, { $sort: { lastMessage: -1 } }],
-  ).toArray());
+.then((db) => db.collection('messages').aggregate([
+  { $group: { _id: '$user', lastMessage: { $max: '$time' } } },
+  { $project: { _id: 0, user: '$_id', lastMessage: '$lastMessage' } },
+  { $sort: { lastMessage: -1 } },
+]).toArray());
+  // .then({ $project: { _id: 0, email: '$_id', lastMessage:  } })
 
 module.exports = {
   createMessages,

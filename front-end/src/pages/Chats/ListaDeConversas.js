@@ -8,6 +8,7 @@ export default function ListaDeConversas() {
   const callAllMessages = async () => {
     const allMessages = await fetch('http://localhost:4001/chat/messages');
     const allMsg = await allMessages.json();
+    console.log(allMsg);
     const teste = allMsg.filter((el) => el.user !== 'Loja');
     setUsers(teste);
   };

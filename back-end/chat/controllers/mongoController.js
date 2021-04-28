@@ -6,6 +6,9 @@ const {
   getMsgUsers,
 } = require('../models/mongoModel');
 // const {
+//   teste,
+// } = require('../service');
+// const {
 //   getAllUsersService,
 //   createUserService,
 //   createAdminService,
@@ -37,7 +40,7 @@ routerMessage.get('/messages', async (req, res) => {
 routerMessage.get('/userMessages/:email', async (req, res) => {
   const { email } = req.params;
   const messages = await getUserMessages(email);
-  
+  console.log(messages);
   return res.status(SUCCESS).json(messages);
 });
 
