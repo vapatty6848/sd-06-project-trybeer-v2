@@ -29,7 +29,6 @@ export default function AdminChatCard() {
 
   return (
     <div>
-      <h2>Conversas</h2>
       {allMessages.length === 0
         ? noMessage()
         : allMessages.map((message, index) => (
