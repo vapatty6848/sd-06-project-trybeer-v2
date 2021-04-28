@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../../components/Header/Header';
+// import Header from '../../components/Header/Header';
 
 export default function ListaDeConversas() {
   const [users, setUsers] = useState([]);
@@ -36,7 +36,6 @@ export default function ListaDeConversas() {
             ))}
           </div>
         )}
-      <Header title="TryBeer" user="admin" />
     </div>
-  );
+  )
 }
