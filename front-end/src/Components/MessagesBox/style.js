@@ -53,6 +53,32 @@ const ListUl = styled.ul`
   `}
 `
 
+const adminInfo = styled.div`
+  ${({ theme }) => css`
+    width: 100%;
+    height: 25px;
+    display: flex;
+    justify-content: space-between;
+
+    svg {
+      align-self: flex-start;
+      width: 2em;
+      height: 2em;
+    }
+
+    a {
+    text-decoration: none;
+    color: ${theme.colors.text};
+    }
+
+    p {
+      font-family: 'PT sans', sans-serif;
+      font-weight: bold;
+    }
+  `}
+`
+
 export default {
   ListUl,
+  adminInfo,
 }

@@ -9,10 +9,12 @@ function MessagesBox({ messages, pathname, clientEmail }) {
   return (
     <S.ListUl>
       { pathname.includes('admin') && (
-        <Link to="/admin/chats" data-testid="back-button">
-          <TiArrowBack />
+        <S.adminInfo>
+          <Link to="/admin/chats" data-testid="back-button">
+            <TiArrowBack />
+          </Link>
           <p>{ `Conversando com ${clientEmail}` }</p>
-        </Link>
+        </S.adminInfo>
       ) }
       { messages.length === 0
         ? <p data-testid="text-for-no-conversation">Nenhuma conversa por aqui</p>
