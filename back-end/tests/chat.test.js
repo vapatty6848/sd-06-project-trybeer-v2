@@ -23,7 +23,8 @@ describe('Tests client chat features', () => {
       .catch((err) => done(err));
 
     const CHAT_PORT = process.env.CHAT_PORT || 4001;
-    clientSocket = new Client(`http://localhost:${CHAT_PORT}`);
+
+    clientSocket = new Client(`http://localhost:${CHAT_PORT}`, { auth: { token: session } });
     clientSocket.on('connect', () => {
       return done();
     });
@@ -42,7 +43,7 @@ describe('Tests client chat features', () => {
       expect(arg).toStrictEqual([]);
       return done();
     });
-    clientSocket.emit('user:login', session.token);
+    clientSocket.emit('user:login', session);
   });
 
   it('Should be able to send messages and get them back', (done) => {
@@ -52,6 +53,6 @@ describe('Tests client chat features', () => {
       return done();
     });
     const newMessage = { nickname: session.email, message: 'olah teste!', timestamp: new Date() }
-    clientSocket.emit('chat:clientMessage', { msg: newMessage, token: session.token });
+    clientSocket.emit('chat:clientMessage', { msg: newMessage, token: session });
   });
 });

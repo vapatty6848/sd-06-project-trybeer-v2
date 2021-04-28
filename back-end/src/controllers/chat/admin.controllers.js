@@ -10,7 +10,7 @@ const getRoomMessages = async (socket, { client, userId }) => {
   const roomKey = `${client}-room`;
   socket.join(roomKey);
   const getMessages = await chatAdmin.getMessagesByUserId(userId);
-  const storedMessages = getMessages.messages || [];
+  const storedMessages = (getMessages) ? getMessages.messages : [];
   socket.emit('admin:storedRoomMessages', storedMessages);
 };
 
