@@ -37,5 +37,5 @@ export default function ListaDeConversas() {
           </div>
         )}
     </div>
-  )
+  );
 }
