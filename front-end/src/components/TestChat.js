@@ -1,52 +1,72 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import MessageBoxAdm from '../components/MessageBoxAdm';
 import MessageFormAdmin from '../components/MessageFormAdmin';
 import TrybeerContext from '../context/TrybeerContext';
 import { verifyToken } from '../utils/verifications';
 import socket from '../utils/socketClient';
-import { get } from '../api/fetchFunctions';
 
-function Chat({ nickname, history }) {
+function Chat({ dest }) {
   const [allMessages, setAllMessages] = useState([]);
-  const { user } = useContext(TrybeerContext);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const { user, setActiveChat } = useContext(TrybeerContext);
+  const history = useHistory();
+  const from = user.email;
+  const room = [from, dest].sort().join('-');
 
   const fetchStoredMessages = async () => {
-    const response = await verifyToken(`admin/chats/${nickname}`, user, history);
+    const response = await verifyToken(`chat/${room}`, user, history);
     setAllMessages(response.messages);
+    setIsLoaded(true);
   };
 
   useEffect(() => {
-    fetchStoredMessages();
+    socket.emit('connectRoom', room);
   }, []);
 
-  console.log(allMessages);
+  useEffect(() => {
+    fetchStoredMessages();
+  }, [isLoaded]);
+
   useEffect(() => {
     socket.on('chat.receiveMessage', (response) => {
+      if (!allMessages[0]) {
+        setAllMessages([response]);
+        return setIsLoaded(!isLoaded);
+      };
       setAllMessages([...allMessages, response]);
+      setIsLoaded(!isLoaded);
     });
-  }, [allMessages]);
+  }, [isLoaded]);
+
   return (
     <div>
+      <h3>De: {user.email} Para: {dest}</h3>
       <ul>
-        {(!allMessages.length) ? <div /> : allMessages.length && allMessages
-          .map(({ nickname, date, message, isMine }, index) => (
+        {(allMessages !== undefined) && allMessages
+          .map(({ message, from, date }, index) => (
             <MessageBoxAdm
-              key={ index }
-              nickname={ nickname }
-              date={ date }
               message={ message }
-              isMine={ (user.email === nickname) || !isMine }
+              nickname={ from }
+              date={ date }
+              key={ index }
+              isMine={ (user.email === from) }
             />
           ))}
       </ul>
-      <MessageFormAdmin sender={user.role} nickname={nickname} />
+      <MessageFormAdmin />
+      <button
+        onClick={ () => setActiveChat('') }
+      >
+        Voltar
+      </button>
     </div>
   );
 }
 
 Chat.propTypes = {
-  history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
+  dest: PropTypes.string.isRequired,
 };
 
 export default Chat;

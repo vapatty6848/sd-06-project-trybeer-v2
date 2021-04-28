@@ -1,5 +1,4 @@
 const connection = require('./connection');
-const getCurrentHour = require('../utils/currentHour');
 
 const COLLECTION_NAME = 'messages';
 
@@ -11,34 +10,22 @@ const getAll = async () => {
   return allMessages;
 };
 
-const getByNickname = async (nickname) => {
+const getByRoom = async (room) => {
   const allMessages = await connection()
     .then((db) => db.collection(COLLECTION_NAME)
-      .findOne({ nickname }));
+      .findOne({ room }));
 
   return allMessages;
 };
 
-const date = getCurrentHour();
+const date = new Date();
 
-const saveMessage = async (nickname, message) => {
+const saveMessage = async (message, from, dest, room) => {
   const newMessage = await connection()
     .then((db) => db.collection(COLLECTION_NAME)
       .updateOne(
-        { nickname },
-        { $push: { messages: { message, date, nickname } } },
-        { upsert: true },
-      ));
-
-  return newMessage;
-};
-
-const saveMessageAdmin = async (nickname, sender, message) => {
-  const newMessage = await connection()
-    .then((db) => db.collection(COLLECTION_NAME)
-      .updateOne(
-        { nickname },
-        { $push: { messages: { message, date, sender } } },
+        { room },
+        { $push: { messages: { message, from, dest, date } } },
         { upsert: true },
       ));
 
@@ -47,7 +34,6 @@ const saveMessageAdmin = async (nickname, sender, message) => {
 
 module.exports = {
   getAll,
-  getByNickname,
+  getByRoom,
   saveMessage,
-  saveMessageAdmin,
 };

@@ -3,14 +3,18 @@ import socket from '../utils/socketClient';
 import TrybeerContext from '../context/TrybeerContext';
 import { post } from '../api/fetchFunctions';
 
-function MessageForm({ sender, nickname }) {
-  const { user } = useContext(TrybeerContext);
+function MessageForm() {
+  const { user, activeChat } = useContext(TrybeerContext);
   const [message, setMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    socket.emit('chat.sendMessage', { message, nickname: user.email });
-    await post('chats/admin/', { nickname, sender, message });
+    const from = user.email;
+    const dest = activeChat;
+    const room = [from, dest].sort().join('-');
+    socket.emit('chat.sendMessage', { message, from, dest });
+    await post('chat', { message, from, dest, room });
+    setMessage('');
   };
 
   return (
@@ -22,6 +26,7 @@ function MessageForm({ sender, nickname }) {
           placeholder="Digite sua mensagem..."
           onChange={ (e) => setMessage(e.target.value) }
           data-testid="message-input"
+          value={ message }
         />
         <button
           type="submit"
@@ -33,6 +38,6 @@ function MessageForm({ sender, nickname }) {
       </div>
     </form>
   );
-}
+};
 
 export default MessageForm;

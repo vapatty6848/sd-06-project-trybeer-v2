@@ -9,6 +9,7 @@ const getFromLocalStorage = (key) => {
 
 function TrybeerProvider({ children }) {
   const [isVisible, setIsVisible] = useState(false);
+  const [activeChat, setActiveChat] = useState('');
 
   const setVisibility = () => setIsVisible(!isVisible);
   const [cart, setCart] = useState(() => {
@@ -80,6 +81,8 @@ function TrybeerProvider({ children }) {
     isVisible,
     setVisibility,
     removeItemFromLocalStorage,
+    activeChat,
+    setActiveChat,
   };
 
   return (

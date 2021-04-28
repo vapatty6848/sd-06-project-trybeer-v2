@@ -12,7 +12,8 @@ const io = require('socket.io')(httpServer, {
     methods: ['GET', 'POST'],
   },
 });
-const getCurrentHour = require('./utils/currentHour');
+// const getCurrentHour = require('./utils/currentHour');
+const socketHandler = require('./utils/socketHandler');
 
 const RegisterController = require('./controllers/RegistersController');
 const ProductsController = require('./controllers/ProductsController');
@@ -23,17 +24,7 @@ const OrdersController = require('./controllers/OrdersController');
 const AdminController = require('./controllers/AdminController');
 const ChatController = require('./controllers/ChatController');
 
-io.on('connection', (socket) => {
-  console.log('Novo usuário conectado', socket.id);
-
-  socket.on('emit', (email) => {
-    console.log('Email SOCKET emit', email);
-  });
-  socket.on('chat.sendMessage', (data) => {
-    const dataWithTime = { ...data, date: new Date() };
-    io.emit('chat.receiveMessage', dataWithTime);
-  });
-});
+io.on('connection', socketHandler(io));
 
 app.use(cors());
 app.use(express.json());
