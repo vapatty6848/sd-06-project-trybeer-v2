@@ -9,7 +9,8 @@ function AdminChat() {
   const [chats, setChats] = useState([]);
   const history = useHistory();
 
-  const returnDests = (arrChat) => arrChat.map((chat) => chat.messages[chat.messages.length - 1]);
+  const returnDests = (arrChat) => arrChat
+    .map((chat) => chat.messages[chat.messages.length - 1]);
 
   const fetchChats = () => {
     verifyToken('chat', user, history)
@@ -24,16 +25,9 @@ function AdminChat() {
     <div>
       <TopMenu />
       <h1>Chat</h1>
-        { !activeChat ? 
-          <ChatList
-            chats={chats}
-          /> :
-          <TestChat
-            dest={activeChat}
-          />
-        }
+      { !activeChat ? <ChatList chats={ chats } /> : <TestChat dest={ activeChat } /> }
     </div>
   );
-};
+}
 
 export default AdminChat;

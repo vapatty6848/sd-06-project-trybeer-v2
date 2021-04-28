@@ -5,7 +5,6 @@ import { TestChat, TopMenu } from '../components';
 function Chat() {
   const { setActiveChat } = useContext(TrybeerContext);
 
-
   useEffect(() => {
     setActiveChat('tryber@trybe.com.br');
   }, []);
@@ -16,10 +15,10 @@ function Chat() {
       <br />
       <br />
       <TestChat
-        dest='tryber@trybe.com.br'
+        dest="tryber@trybe.com.br"
       />
     </>
-  )
+  );
 }
 
 export default Chat;

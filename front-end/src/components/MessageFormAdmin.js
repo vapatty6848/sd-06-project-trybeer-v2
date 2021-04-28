@@ -38,6 +38,6 @@ function MessageForm() {
       </div>
     </form>
   );
-};
+}
 
 export default MessageForm;

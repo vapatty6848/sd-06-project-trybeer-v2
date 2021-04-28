@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import MessageBoxAdm from '../components/MessageBoxAdm';
-import MessageFormAdmin from '../components/MessageFormAdmin';
+import MessageBoxAdm from './MessageBoxAdm';
+import MessageFormAdmin from './MessageFormAdmin';
 import TrybeerContext from '../context/TrybeerContext';
 import { verifyToken } from '../utils/verifications';
 import socket from '../utils/socketClient';
@@ -12,8 +12,8 @@ function Chat({ dest }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const { user, setActiveChat } = useContext(TrybeerContext);
   const history = useHistory();
-  const from = user.email;
-  const room = [from, dest].sort().join('-');
+  const origin = user.email;
+  const room = [origin, dest].sort().join('-');
 
   const fetchStoredMessages = async () => {
     const response = await verifyToken(`chat/${room}`, user, history);
@@ -34,7 +34,7 @@ function Chat({ dest }) {
       if (!allMessages[0]) {
         setAllMessages([response]);
         return setIsLoaded(!isLoaded);
-      };
+      }
       setAllMessages([...allMessages, response]);
       setIsLoaded(!isLoaded);
     });
@@ -42,7 +42,7 @@ function Chat({ dest }) {
 
   return (
     <div>
-      <h3>De: {user.email} Para: {dest}</h3>
+      <h3>{`De: ${user.email} Para: ${dest}`}</h3>
       <ul>
         {(allMessages !== undefined) && allMessages
           .map(({ message, from, date }, index) => (
@@ -58,6 +58,7 @@ function Chat({ dest }) {
       <MessageFormAdmin />
       <button
         onClick={ () => setActiveChat('') }
+        type="button"
       >
         Voltar
       </button>

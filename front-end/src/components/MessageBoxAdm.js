@@ -9,7 +9,9 @@ function MessageBox({ message, nickname, date, isMine }) {
       <div className="msg-bubble">
         <div className="msg-info">
           <div className="msg-info-name" data-testid="nickname">{ nickname }</div>
-          <div className="msg-info-time" data-testid="message-time">{ dateFormat(date, 'HH:MM') }</div>
+          <div className="msg-info-time" data-testid="message-time">
+            { dateFormat(date, 'HH:MM') }
+          </div>
         </div>
 
         <div className="msg-text" data-testid="text-message">

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import dateFormat from 'dateformat';
 import TrybeerContext from '../context/TrybeerContext';
-const dateFormat = require('dateformat');
 
 function ChatList({ chats }) {
   const { setActiveChat } = useContext(TrybeerContext);
@@ -12,8 +12,8 @@ function ChatList({ chats }) {
         <div
           data-testid="containerChat"
           key={ index }
-          onClick={() => setActiveChat(from === 'tryber@trybe.com.br' ? dest : from )}
-          >
+          onClick={ () => setActiveChat(from === 'tryber@trybe.com.br' ? dest : from) }
+        >
           <p data-testid="profile-name">{from}</p>
           <p data-testid="last-message">
             Última mensagem às
@@ -28,7 +28,7 @@ function ChatList({ chats }) {
       )}
     </div>
   );
-};
+}
 
 ChatList.propTypes = {
   chats: PropTypes.shape(PropTypes.array).isRequired,
