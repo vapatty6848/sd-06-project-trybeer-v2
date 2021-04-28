@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header/Header';
+import './styleChat.css';
 
 export default function ListaDeConversas() {
   const [users, setUsers] = useState([]);
@@ -28,12 +29,12 @@ export default function ListaDeConversas() {
         : (
           <div>
             {users && users.map((element, index) => (
-              <div data-testid="containerChat" key={ index }>
-                <Link className="link" to={ `/admin/chats/${element.user}` }>
+              <Link className="link" to={ `/admin/chats/${element.user}` } key={ index }>
+                <div className="conversas" data-testid="containerChat">
                   <p data-testid="profile-name">{element.user}</p>
-                </Link>
-                <p data-testid="last-message">{element.lastMessage}</p>
-              </div>
+                  <p data-testid="last-message">{element.lastMessage}</p>
+                </div>
+              </Link>
             ))}
           </div>
         )}
