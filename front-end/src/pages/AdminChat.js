@@ -32,6 +32,8 @@ export default function AdminChat({ location }) {
       client: currentClient,
       userId: params.roomId,
     });
+
+    return () => socket.disconnect();
   }, [socket, currentClient, params.roomId]);
 
   const getMessage = useCallback(({ target }) => setMessage(target.value), []);

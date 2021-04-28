@@ -24,6 +24,8 @@ export default function Chat() {
 
   useEffect(() => {
     socket.emit('user:login', token);
+
+    return () => socket.disconnect();
   }, [socket, token]);
 
   const getMessage = useCallback(({ target }) => setMessage(target.value), []);
