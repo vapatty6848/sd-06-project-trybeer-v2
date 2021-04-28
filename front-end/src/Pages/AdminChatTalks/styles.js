@@ -1,17 +1,24 @@
 import styled, { css } from 'styled-components';
 
 const Container = styled.div`
-  ${({ theme }) => css`
-    background: ${theme.colors.secundary};
+  ${() => css`
   `}
 `;
 
+const Context = styled.div`
+  ${() => css`
+    width: 100%;
+    height: 100vh;
+    display: flex;
+  `}
+
+`;
 const ContainerCard = styled.div`
-  ${({ theme }) => css`
-    opacity: '0.2';
+  ${({ theme, stateSideBarAdmin }) => css`
+    opacity: ${!stateSideBarAdmin && '0.2'};
     width: 100%;
     height: 100%;
-    padding: 70px 0;
+    padding-top: 70px;
 
     display: flex;
     flex-direction: column;
@@ -51,7 +58,7 @@ const ContainerCard = styled.div`
 const ChatContainer = styled.div`
   ${({ theme }) => css`
     width: 60%;
-    height: 100%;
+    height: 95%;
     margin-left: 70px;
 
     background: ${theme.colors.primary};
@@ -71,7 +78,8 @@ const ContainerMessages = styled.div`
 
 export default {
   Container,
+  Context,
   ContainerCard,
-  ContainerMessages,
   ChatContainer,
+  ContainerMessages,
 };

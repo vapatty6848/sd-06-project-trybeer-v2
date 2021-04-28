@@ -9,6 +9,7 @@ const Input = ({
   dataTestid,
   label,
   id,
+  type,
   value,
   width,
   themeStorage,
@@ -37,6 +38,7 @@ const Input = ({
 
           <S.Input
             id={ id }
+            type={ type }
             isIcon={ trueOrFalse }
             value={ value }
             data-testid={ dataTestid }
@@ -49,6 +51,7 @@ const Input = ({
       ) : (
         <S.Input
           id={ id }
+          type={ type }
           isIcon={ trueOrFalse }
           value={ value }
           data-testid={ dataTestid }
@@ -77,6 +80,7 @@ Input.propTypes = {
   dataTestid: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
   readOnly: PropTypes.bool,
   value: PropTypes.string,
   themeStorage: PropTypes.string,

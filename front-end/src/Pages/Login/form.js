@@ -30,6 +30,7 @@ export default function form(params) {
       <h1>Login</h1>
       <Input
         id="email"
+        type="text"
         label="Email"
         dataTestid="email-input"
         onChange={ ({ target }) => setEmail(target.value) }
@@ -38,6 +39,7 @@ export default function form(params) {
       />
       <Input
         id="senha"
+        type="password"
         label="Senha"
         width="400px"
         dataTestid="password-input"
