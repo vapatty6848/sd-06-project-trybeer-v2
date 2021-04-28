@@ -50,7 +50,7 @@ app.use('/', productsController);
 
 app.use('/', ordersController);
 
-app.use('/messages', messageController);
+app.use('/', messageController);
 
 app.use(unexpectedError);
 

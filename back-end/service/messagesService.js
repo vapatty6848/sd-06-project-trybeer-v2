@@ -5,7 +5,10 @@ const createMessage = async (email, sentAt, message) => Messages
 
 const getAll = async (userEmail) => Messages.getAll(userEmail);
 
+const getAllMessagesAdmin = async (userEmail) => Messages.getAllMessagesAdmin(userEmail);
+
 module.exports = {
   createMessage,
   getAll,
+  getAllMessagesAdmin,
 };
