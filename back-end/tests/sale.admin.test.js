@@ -5,22 +5,23 @@ const models = require('../src/models/sql/models');
 
 const url = 'http://localhost:3001';
 
-const newUser = {
+const newAdmin = {
   name: 'Gabi Dal Silv',
   email: 'gabi.dalsilv@gmail.com',
   password: '123456',
+  isVendor: true,
 };
 
-describe('Testing products endpoint', () => {
+describe('Testing admin sales endpoint', () => {
   let session = null;
-  beforeEach((done) => {
+  beforeAll((done) => {
     return request(app)
       .post('/user/register')
-      .send(newUser)
+      .send(newAdmin)
       .end((err, res) => {
         if (err) return done(err);
         session = res.body.token;
-        done();
+        return done();
       });
   });
 
@@ -30,14 +31,15 @@ describe('Testing products endpoint', () => {
       .then(() => done());
   });
 
-  it('Should be able to get a list of all products', (done) => {
+  it('Should be able to see all sales', async (done) => {
+    const { adminSales } = require('./schemas');
     return request(app)
-      .get('/products')
+      .get('/admin/sales')
       .set({ authorization: session })
       .expect(StatusCodes.OK)
+      .expect('Content-Type', /json/)
       .then((res) => {
-        const { products } = require('./schemas')
-        const { error } = products.validate(res.body);
+        const { error } = adminSales.validate(res.body);
         if (error) return done(error);
         return done();
       })

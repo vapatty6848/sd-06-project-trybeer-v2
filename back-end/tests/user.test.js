@@ -1,8 +1,7 @@
 const request = require('supertest');
-const app = require('../app');
+const { app } = require('../app');
 const { StatusCodes } = require('http-status-codes');
 const models = require('../src/models/sql/models');
-// const frisby = require('frisby');
 
 const url = 'http://localhost:3001';
 

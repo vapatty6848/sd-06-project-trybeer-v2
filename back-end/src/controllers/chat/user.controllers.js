@@ -5,8 +5,9 @@ module.exports = (ioServer, socket) => {
   console.log('backend -> usuário entrou');
   const getUserMessages = async (token) => {
     const { sub: userId } = verifyToken(token);
-    const storedMessages = await chat.getMessagesById(userId);
-    socket.emit('user:storedMessages', storedMessages.messages);
+    const getStoredMessages = await chat.getMessagesById(userId);
+    const storedMessages = (getStoredMessages) ? getStoredMessages.messages : [];
+    socket.emit('server:storedMessages', storedMessages);
   };
 
   socket.on('user:login', getUserMessages);

@@ -18,15 +18,24 @@ export default function Products() {
 
   const disabled = useMemo(() => (Object.keys(cart).length === 0), [cart]);
 
+  if (!products) {
+    return (
+      <>
+        <Topbar />
+        <Loading />
+      </>
+    );
+  }
+
   return (
     <section>
       <Topbar />
-      { (!products)
+      { (products.length < 1)
         ? <Loading />
         : (
           <>
             <section className="products-container">
-              { (products.length === 0)
+              { (products.length < 1)
                 ? 'Não há produtos no banco de dados.'
                 : products.map((product, index) => (
                   <ProductCard

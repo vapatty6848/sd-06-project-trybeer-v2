@@ -28,7 +28,7 @@ export default function Chat() {
     setMessageList([...messageList, msg]);
   });
 
-  api.chat.on('user:storedMessages', (msgs) => {
+  api.chat.on('server:storedMessages', (msgs) => {
     setMessageList(msgs);
   });
 

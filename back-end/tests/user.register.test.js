@@ -1,8 +1,7 @@
 const request = require('supertest');
-const app = require('../app');
+const { app } = require('../app');
 const { StatusCodes } = require('http-status-codes');
 const models = require('../src/models/sql/models');
-// const frisby = require('frisby');
 
 const url = 'http://localhost:3001';
 
@@ -103,9 +102,11 @@ describe('Test the register endpoint', () => {
       .expect(StatusCodes.BAD_REQUEST)
       .expect('Content-Type', /json/)
       .then((res) => {
-        expect(res.body.message).toContain('This email is already in use.');
         models.users.destroy({ where: { email: 'gabi.dalsilv@gmail.com' } })
-          .then(() => done());
+          .then(() => {
+            expect(res.body.message).toContain('This email is already in use.');
+            return done();
+          })
       });
   });
 
@@ -117,9 +118,11 @@ describe('Test the register endpoint', () => {
       .expect(StatusCodes.CREATED)
       .expect('Content-Type', /json/)
       .then((res) => {
-        expect(res.body.role).toEqual('client');
         models.users.destroy({ where: { email: 'gabi.dalsilv@gmail.com' } })
-          .then(() => done());
+          .then(() => {
+            expect(res.body.role).toEqual('client');
+            return done();
+          });
       });
   });
 
@@ -131,9 +134,11 @@ describe('Test the register endpoint', () => {
       .expect(StatusCodes.CREATED)
       .expect('Content-Type', /json/)
       .then((res) => {
-        expect(res.body.role).toEqual('administrator');
         models.users.destroy({ where: { email: 'gabi.dalsilv@gmail.com' } })
-          .then(() => done());
+          .then(() => {
+            expect(res.body.role).toEqual('administrator');
+            return done();
+          });
       });
   });
 });

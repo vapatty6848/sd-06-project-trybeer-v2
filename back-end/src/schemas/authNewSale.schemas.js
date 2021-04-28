@@ -25,8 +25,8 @@ const validateDelivery = ({ address, number }) => {
   switch (true) {
     case isBlank(address): throw new Error(error.invalidDeliveryInput);
     case isBlank(number): throw new Error(error.invalidDeliveryInput);
-    case isNotEqual(typeof address, 'string'): throw new Error(error.invalidProdInput);
-    case isNotEqual(typeof number, 'string'): throw new Error(error.invalidProdInput);
+    case isNotEqual(typeof address, 'string'): throw new Error(error.invalidDeliveryInput);
+    case isNotEqual(typeof number, 'string'): throw new Error(error.invalidDeliveryInput);
     default: return null;
   }
 };
@@ -34,7 +34,7 @@ const validateDelivery = ({ address, number }) => {
 module.exports = ({ sale = [], delivery = {} }, userId) => {
   switch (true) {
     case isNotEqual(typeof sale, 'object'): throw new Error(error.invalidProdInput);
-    case isNotEqual(typeof delivery, 'object'): throw new Error(error.invalidProdInput);
+    case isNotEqual(typeof delivery, 'object'): throw new Error(error.invalidDeliveryInput);
     case isNotEqual(typeof userId, 'number'): throw new Error(error.noUserId);
     default: break;
   }

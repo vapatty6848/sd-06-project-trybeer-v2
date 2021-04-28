@@ -7,7 +7,7 @@ const app = express();
 const http = server.createServer(app);
 const io = require('socket.io')(http, {
   cors: {
-    origin: 'http://localhost:3000',
+    origin: process.env.ORIGIN || 'http://localhost:3000',
     methods: ['GET', 'POST'],
   },
 });
@@ -34,4 +34,4 @@ io.on('connection', (socket) => {
   controllers.user(io, socket);
 });
 
-module.exports = http;
+module.exports = { app, http, io };

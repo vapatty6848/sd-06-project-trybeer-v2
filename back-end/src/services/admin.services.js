@@ -3,6 +3,7 @@ const { authUpdateSale, authDetailsSale } = require('../schemas');
 
 const errors = {
   C_ERR_ACC_DND: 'C_ERR_ACC_DND',
+  C_ERR_SALE_NOT_FOUND: 'C_ERR_SALE_NOT_FOUND',
 };
 
 const getAll = async () => sales.findAll();
@@ -34,6 +35,8 @@ const updateSaleStatus = async (saleId, status) => {
     { status },
     { where: { id: saleId } },
   );
+  console.log('update empty sale id', result);
+  if (result[0] < 1) throw new Error(errors.C_ERR_SALE_NOT_FOUND);
   return result;
 };
 

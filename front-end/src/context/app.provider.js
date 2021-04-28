@@ -8,7 +8,7 @@ import productsApi from '../services/api.products';
 const AppProvider = ({ children }) => {
   const [token, setToken] = useState(JSON.parse(localStorage.getItem('login')));
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || {});
-  const [products, setProducts] = useState();
+  const [products, setProducts] = useState([]);
   const updateLogin = useStorage('login');
   const updateCart = useStorage('cart');
 
@@ -33,7 +33,7 @@ const AppProvider = ({ children }) => {
       const productsArray = await productsApi(token).catch((error) => error);
       setProducts(productsArray);
     };
-    if (!products) fetchProducts();
+    if (products.length < 1) fetchProducts();
   }, [setProducts, products, token]);
 
   return (

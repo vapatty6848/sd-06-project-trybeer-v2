@@ -1,10 +1,7 @@
 const request = require('supertest');
-const app = require('../app');
-const Joi = require('joi');
+const { app } = require('../app');
 const { StatusCodes } = require('http-status-codes');
 const models = require('../src/models/sql/models');
-// const frisby = require('frisby');
-// const { Joi } = frisby;
 
 const newUser = {
   name: 'Gabi Dal Silv',
@@ -80,25 +77,8 @@ describe('Testing sale details endpoint', () => {
   });
 
   it('Client should be able to access a sale they created', async (done) => {
-    const schema = Joi.object({
-      'id': Joi.number().required(),
-      'userId': Joi.number().required(),
-      'totalPrice': Joi.string().required(),
-      'status': Joi.string().required(),
-      'deliveryNumber': Joi.number().required(),
-      'deliveryAddress': Joi.string().required(),
-      'createdAt': Joi.date().required(),
-      'updatedAt': Joi.date().required(),
-      'products': Joi.array().items(Joi.object({
-        'id': Joi.number().required(),
-        'urlImage': Joi.string(),
-        'name': Joi.string().required(),
-        'price': Joi.string().required(),
-        'sale': Joi.object({
-          'quantity': Joi.number().required(),
-        }).required(),
-      })).required(),
-    });
+    const { clientSaleDetail } = require('./schemas');
+    let saleId;
 
     await request(app)
       .post('/sales/create')
@@ -116,50 +96,28 @@ describe('Testing sale details endpoint', () => {
       })
       .catch((err) => done(err));
 
-    return request(app)
+    await request(app)
       .get('/sales/')
       .set({ authorization: session })
       .then((res) => {
-        const saleId = res.body[0].id;
+        saleId = res.body[0].id;
+      })
+      .catch((err) => done(err));
 
-        return request(app)
-          .get(`/sales/${saleId}`)
-          .set({ authorization: session })
-          .expect(StatusCodes.OK)
-          .then((res) => {
-            const { error, value } = schema.validate(res.body);
-            if (error) throw new Error(error);
-            return value;
-          })
-          .then(() => done())
-          .catch((err) => done(err));
+    return request(app)
+      .get(`/sales/${saleId}`)
+      .set({ authorization: session })
+      .expect(StatusCodes.OK)
+      .then((res) => {
+        const { error } = clientSaleDetail.validate(res.body);
+        if (error) return done(err);
+        return done();
       })
       .catch((err) => done(err));
   });
 
   it('Admin should be able to see details of any sale', async (done) => {
-    const schema = Joi.object({
-      'id': Joi.number().required(),
-      'userId': Joi.number().required(),
-      'totalPrice': Joi.string().required(),
-      'status': Joi.string().required(),
-      'deliveryNumber': Joi.number().required(),
-      'deliveryAddress': Joi.string().required(),
-      'createdAt': Joi.date().required(),
-      'updatedAt': Joi.date().required(),
-      'user': Joi.object({
-         'name': Joi.string().required(),
-        }).required(),
-      'products': Joi.array().items(Joi.object({
-        'id': Joi.number().required(),
-        'urlImage': Joi.string(),
-        'name': Joi.string().required(),
-        'price': Joi.string().required(),
-        'sale': Joi.object({
-          'quantity': Joi.number().required(),
-        }).required(),
-      })).required(),
-    });
+    const { adminSaleDetail } = require('./schemas');
 
     const newAdmin = {
       name: 'Admin Gabi Da Silva',
@@ -179,11 +137,10 @@ describe('Testing sale details endpoint', () => {
       .get('/admin/sales/1')
       .set({ authorization: session })
       .then((res) => {
-        const { error, value } = schema.validate(res.body);
-        if (error) throw new Error(error);
-        return value;
+        const { error, value } = adminSaleDetail.validate(res.body);
+        if (error) return done(err);
+        return done();
       })
-      .then(() => done())
       .catch((err) => done(err));
   });
 
