@@ -36,6 +36,7 @@ export default function form(params) {
             <h1>Endereço</h1>
             <Input
               id="Rua"
+              type="text"
               label="Rua"
               width="100%"
               dataTestid="checkout-street-input"
@@ -46,6 +47,7 @@ export default function form(params) {
             />
             <Input
               id="Número da casa"
+              type="number"
               label="Número da casa"
               width="100%"
               dataTestid="checkout-house-number-input"

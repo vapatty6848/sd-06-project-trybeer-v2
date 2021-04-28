@@ -3,10 +3,15 @@ import PropTypes from 'prop-types';
 
 import MenuTop from '../../Components/MenuTop';
 import SideBar from '../../Components/SideBar';
-import S from './styles';
+import Button from '../../Components/Button';
+import Input from '../../Components/Input';
+import MessagesBox from '../../Components/MessagesBox';
+import { BiChat } from 'react-icons/bi';
+
 import socket from '../../utils/socketClient';
 import { saveMessage, getMessages } from '../../Services/Apis';
-import MessagesBox from '../../Components/MessagesBox';
+
+import S from './styles';
 
 function Chat({ location: { pathname } }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -89,27 +94,37 @@ function Chat({ location: { pathname } }) {
       <SideBar />
 
       <S.ContainerCard>
-        { isLoading ? <p>Carregando mensagens</p> : (
-          <MessagesBox
-            messages={ messages }
-            pathname={ pathname }
-            clientEmail={ email }
-          />
-        ) }
-        <form onSubmit={ handleSendMessage }>
-          <input
-            type="text"
-            value={ message }
-            onChange={ ({ target: { value } }) => setMessage(value) }
-            data-testid="message-input"
-          />
-          <button
-            type="submit"
-            data-testid="send-message"
-          >
-            Enviar
-          </button>
-        </form>
+        <S.ChatContainer>
+          <S.ContainerMessages>
+            { isLoading ? <p>Carregando mensagens</p> : (
+              <MessagesBox
+                messages={ messages }
+                pathname={ pathname }
+                clientEmail={ email }
+              />
+            ) }
+          </S.ContainerMessages>
+          <form onSubmit={ handleSendMessage }>
+            <Input
+              id="input-message"
+              label=""
+              type="text"
+              value={ message }
+              onChange={ ({ target: { value } }) => setMessage(value) }
+              dataTestid="message-input"
+              icon={ BiChat }
+            />
+            <Button
+              type="submit"
+              heigth="40px"
+              color="green"
+              fontSize="20px"
+              dataTestid="send-message"
+            >
+              Enviar
+            </Button>
+          </form>
+        </S.ChatContainer>
       </S.ContainerCard>
     </S.Container>
   );
