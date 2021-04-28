@@ -35,7 +35,7 @@ const updateSaleStatus = async (saleId, status) => {
     { status },
     { where: { id: saleId } },
   );
-  console.log('update empty sale id', result);
+
   if (result[0] < 1) throw new Error(errors.C_ERR_SALE_NOT_FOUND);
   return result;
 };

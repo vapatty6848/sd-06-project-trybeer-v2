@@ -9,22 +9,56 @@ const newUser = {
   password: '123456',
 };
 
+const secondUser = {
+  name: 'Gabi Dal Silv Test Two',
+  email: 'gabi.dalsilv.second.test@gmail.com',
+  password: '123456',
+};
+
+const newAdmin = {
+  name: 'Admin Gabi Da Silva',
+  email: 'admin.gabi.dasilva@gmail.com',
+  password: '123456',
+  isVendor: true,
+};
+
 describe('Testing sale details endpoint', () => {
-  let session = null;
-  beforeAll((done) => {
-    return request(app)
+  let session;
+  let secondSession;
+  let adminSession;
+  let saleId;
+
+  beforeAll(async (done) => {
+    await request(app)
       .post('/user/register')
       .send(newUser)
-      .end((err, res) => {
-        if (err) return done(err);
+      .then((res) => {
         session = res.body.token;
+      })
+      .catch((err) => done(err));
+
+    await request(app)
+      .post('/user/register')
+      .send(secondUser)
+      .then((res) => {
+        secondSession = res.body.token;
+      })
+      .catch((err) => done(err));
+
+    return request(app)
+      .post('/user/register')
+      .send(newAdmin)
+      .then((res) => {
+        adminSession = res.body.token;
         return done();
-      });
+      })
+      .catch((err) => done(err));
   });
 
   afterAll((done) => {
     models.users.destroy({ where: { email: 'gabi.dalsilv@gmail.com' } })
       .then(() => models.users.destroy({ where: { email: 'admin.gabi.dasilva@gmail.com' } }))
+      .then(() => models.users.destroy({ where: { email: 'gabi.dalsilv.second.test@gmail.com' } }))
       .then(() => models.sequelize.close())
       .then(() => done());
   });
@@ -41,10 +75,39 @@ describe('Testing sale details endpoint', () => {
       });
   });
 
-  it('Client should not be able to access a sale of another user', (done) => {
-    return request(app)
-      .get('/sales/1')
+  it('Client should not be able to access a sale of another user', async (done) => {
+    let secondUserSession;
+
+    // connect as newUser and create sale
+    await request(app)
+      .post('/sales/create')
       .set({ authorization: session })
+      .send({
+        sale: [
+          { productId: 2, quantity: 2 },
+          { productId: 3, quantity: 5 }
+        ],
+        delivery: {
+          address: 'Rua das Pamonhas',
+          number: '315',
+        },
+        salePrice: 27.45
+      })
+      .catch((err) => done(err));
+
+    // get sale id
+    await request(app)
+      .get('/sales/')
+      .set({ authorization: session })
+      .then((res) => {
+        saleId = res.body[0].id;
+      })
+      .catch((err) => done(err));
+
+    // connect as second user and try to get sale details
+    return request(app)
+      .get(`/sales/${saleId}`)
+      .set({ authorization: secondSession })
       .expect(StatusCodes.FORBIDDEN)
       .expect('Content-Type', /json/)
       .then((res) => {
@@ -66,7 +129,7 @@ describe('Testing sale details endpoint', () => {
 
   it('Client should not be able to access a sale as admin', (done) => {
     return request(app)
-      .get('/admin/sales/2')
+      .get(`/admin/sales/${saleId}`)
       .set({ authorization: session })
       .expect(StatusCodes.FORBIDDEN)
       .expect('Content-Type', /json/)
@@ -78,23 +141,6 @@ describe('Testing sale details endpoint', () => {
 
   it('Client should be able to access a sale they created', async (done) => {
     const { clientSaleDetail } = require('./schemas');
-    let saleId;
-
-    await request(app)
-      .post('/sales/create')
-      .set({ authorization: session })
-      .send({
-        sale: [
-          { productId: 2, quantity: 2 },
-          { productId: 3, quantity: 5 }
-        ],
-        delivery: {
-          address: "Rua das Pamonhas",
-          number: "315"
-        },
-        salePrice: 27.45
-      })
-      .catch((err) => done(err));
 
     await request(app)
       .get('/sales/')
@@ -110,7 +156,7 @@ describe('Testing sale details endpoint', () => {
       .expect(StatusCodes.OK)
       .then((res) => {
         const { error } = clientSaleDetail.validate(res.body);
-        if (error) return done(err);
+        if (error) return done(error);
         return done();
       })
       .catch((err) => done(err));
@@ -119,26 +165,12 @@ describe('Testing sale details endpoint', () => {
   it('Admin should be able to see details of any sale', async (done) => {
     const { adminSaleDetail } = require('./schemas');
 
-    const newAdmin = {
-      name: 'Admin Gabi Da Silva',
-      email: 'admin.gabi.dasilva@gmail.com',
-      password: '123456',
-      isVendor: true,
-    };
-
-    await request(app)
-      .post('/user/register')
-      .send(newAdmin)
-      .then((res) => {
-        session = res.body.token;
-      });
-
     return request(app)
-      .get('/admin/sales/1')
-      .set({ authorization: session })
+      .get(`/admin/sales/${saleId}`)
+      .set({ authorization: adminSession })
       .then((res) => {
-        const { error, value } = adminSaleDetail.validate(res.body);
-        if (error) return done(err);
+        const { error } = adminSaleDetail.validate(res.body);
+        if (error) return done(error);
         return done();
       })
       .catch((err) => done(err));
@@ -147,7 +179,7 @@ describe('Testing sale details endpoint', () => {
   it('Admin should not be able to see details of an invalid sale param', () => {
     return request(app)
       .get('/admin/sales/string')
-      .set({ authorization: session })
+      .set({ authorization: adminSession })
       .expect(StatusCodes.NOT_FOUND);
   });
 });
