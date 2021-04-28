@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import '../styles/chat.css';
 
 function ChatMessage({ nickname, message, timestamp }) {
+  const [title, setitle] = useState('user');
+  const [messagebox, setmessagebox] = useState('listmessage');
+
+  useEffect(() => {
+    if (nickname === 'Loja') {
+      setmessagebox('listmessageloja');
+      setitle('userloja');
+    }
+  }, [messagebox, nickname, title]);
+
   return (
-    <li className="listmessage">
-      <div className="user">
+    <li className={ messagebox }>
+      <div className={ title }>
         <span data-testid="nickname">{ `${nickname} - ` }</span>
         <span data-testid="message-time">
           { `${timestamp}` }

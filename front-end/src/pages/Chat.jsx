@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { IoArrowForwardCircleOutline } from 'react-icons/io5';
 import ChatMessage from '../components/ChatMessage';
 import TopBar from '../components/TopBar';
 import socket from '../utils/socketClient';
-import { IoArrowForwardCircleOutline } from "react-icons/io5";
 import '../styles/chat.css';
 
 function Chat() {
@@ -12,7 +12,7 @@ function Chat() {
 
   useEffect(() => {
     socket.emit('getMessages', { email });
-  }, []);
+  }, [email]);
 
   useEffect(() => {
     socket.on('message', (data) => {
@@ -38,9 +38,9 @@ function Chat() {
     <div>
       <TopBar name="TryBeer" />
       <div className="chatmaincontainer">
-        <div className="margintop"> 
+        <div className="margintop">
           <div className="chatmessage">
-            <ul>
+            <ul className="ullist">
               {chatMessages.map((chatMessage, index) => (
                 <ChatMessage
                   key={ index }
@@ -52,17 +52,17 @@ function Chat() {
             </ul>
           </div>
           <div className="submitmessage">
-            <input 
-              data-testid="message-input" 
-              value={ message } 
-              onChange={ handleChange } 
+            <input
+              data-testid="message-input"
+              value={ message }
+              onChange={ handleChange }
               className="inputmenssage"
               placeholder="Digite sua menssagem ..."
             />
-            < IoArrowForwardCircleOutline
+            <IoArrowForwardCircleOutline
               data-testid="send-message"
-              onClick={ handleSubmit } 
-              size= { 40 }
+              onClick={ handleSubmit }
+              size={ 40 }
               color="#e9925c"
             />
           </div>

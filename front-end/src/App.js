@@ -13,6 +13,7 @@ import {
   OrdersAdm,
   Chat,
   ChatAdmin,
+  ChatAdminUser,
 } from './pages/index';
 import Provider from './hooks/Provider';
 import './App.css';
@@ -33,6 +34,7 @@ function App() {
           <Route exact path="/admin/orders" component={ OrdersAdm } />
           <Route path="/admin/profile" component={ ProfileAdm } />
           <Route path="/chat" component={ Chat } />
+          <Route path="/admin/chats/:nickname" component={ ChatAdminUser } />
           <Route path="/admin/chats" component={ ChatAdmin } />
           <Redirect from="/" to="/login" />
         </Switch>
