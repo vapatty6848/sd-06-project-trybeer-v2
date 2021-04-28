@@ -6,6 +6,7 @@ import { IconContext } from 'react-icons';
 import TrybeerContext from '../context/TrybeerContext';
 import SidebarMenu from './SideBarMenu';
 import SidebarMenuAdmin from './SideBarMenuAdmin';
+import './TopMenu.scss';
 
 const TopMenu = ({ titleMenu }) => {
   const { user, isVisible, setVisibility } = useContext(TrybeerContext);
@@ -18,7 +19,6 @@ const TopMenu = ({ titleMenu }) => {
 
   return (
     <div>
-      { isVisible && user.role === 'client' && <SidebarMenu /> }
       <header>
         <button
           type="button"
@@ -35,6 +35,7 @@ const TopMenu = ({ titleMenu }) => {
           <IoBeerOutline />
         </IconContext.Provider>
       </header>
+      { isVisible && user.role === 'client' && <SidebarMenu /> }
     </div>
   );
 };

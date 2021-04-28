@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import './AddressForm.scss';
 
 const AddressForm = (props) => {
   const {
@@ -12,6 +13,8 @@ const AddressForm = (props) => {
   useEffect(() => {
     if (street && number) {
       setIsFormFilled(true);
+    } else {
+      setIsFormFilled(false);
     }
   }, [street, number, setIsFormFilled]);
 
@@ -28,7 +31,7 @@ const AddressForm = (props) => {
         />
       </label>
       <label htmlFor="street">
-        Número da casa:
+        Número:
         <input
           data-testid="checkout-house-number-input"
           type="text"

@@ -1,0 +1,30 @@
+form {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  // flex-direction: column;
+  label {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-style: italic;
+    margin: 0 12px;
+    flex-wrap:nowrap;
+    justify-content: space-between;   
+    @media only screen and (max-width: 545px) {
+      & {
+        min-width: 265px;
+      }
+    }
+    input {
+      height: 25px;
+      margin: 12px 12px;
+      width: 35vh;
+      @media only screen and (max-width: 700px) {
+        & {
+          width: 25vh;
+        }
+      }
+    }
+  }
+}

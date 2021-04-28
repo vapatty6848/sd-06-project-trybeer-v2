@@ -1,0 +1,66 @@
+$primary-color: rgba(252,239,99, 0.95);
+$secondary-color:#fcc049a9;
+
+
+.login-form {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  h1 {
+    color: $primary-color;
+  }
+
+  form {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    input {
+      width: 45%;
+      margin: 4px;
+      padding: 10px 0;
+      &::placeholder{
+        color: black;
+        font-size: 15px;
+        padding-left: 5px;
+        padding-top: 5px;
+      }
+      @media only screen and (max-width: 700px) {
+        & {
+          width: 90%;
+        }
+      }
+    }
+
+    .login-btn {
+      margin-top: 4px;
+      padding: 10px 98px;
+      background-color: $primary-color;
+      color: black;
+      transition: all 0.5s;
+      &:hover {
+        background-color: rgba(252,239,99,1);
+        transform: translateY(-1.2px);
+        box-shadow: 0px 3px 20px 0px rgba(252,239,99,0.4);
+      }
+    }
+  }
+}
+
+.register-new-account-btn {
+  margin-top: 8px;
+  padding: 13px 50px;
+  background-color: $primary-color;
+  color: black;
+  transition: all 0.5s;
+  &:hover {
+    background-color: rgba(252,239,99,1);
+    transform: translateY(-1.2px);
+    box-shadow: 0px 3px 20px 0px rgba(252,239,99,0.4);
+  }
+}

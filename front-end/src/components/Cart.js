@@ -2,6 +2,8 @@ import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import TrybeerContext from '../context/TrybeerContext';
 import formatedPrice from '../utils/formatedPrice';
+import { TiShoppingCart } from 'react-icons/ti';
+import './Cart.scss';
 
 const Cart = () => {
   const { cart, getTotalPriceCart } = useContext(TrybeerContext);
@@ -16,15 +18,18 @@ const Cart = () => {
   return (
     <div className="cart-container">
       <p data-testid="checkout-bottom-btn-value">
+        TOTAL
+        <br />
         { formatedPrice(getTotalPriceCart()) }
       </p>
       <button
+        className="cart-btn"
         data-testid="checkout-bottom-btn"
         type="button"
         onClick={ () => history.push('/checkout') }
         disabled={ disabledButton }
       >
-        Ver Carrinho
+        Ver Carrinho <TiShoppingCart />
       </button>
     </div>
   );

@@ -4,6 +4,8 @@ import { useHistory } from 'react-router-dom';
 import { verifyEmailAndPassword } from '../utils/verifications';
 import fetchFunctions from '../api/fetchFunctions';
 import TrybeerContext from '../context/TrybeerContext';
+import BeerParty from '../components/BeerParty';
+import './Login.scss';
 
 function Login() {
   const history = useHistory();
@@ -36,9 +38,9 @@ function Login() {
 
   return (
     <div className="login-form">
+      <BeerParty />
       <h1>TryBeer</h1>
       <form onSubmit={ handleSignUp }>
-        <p>Email</p>
         <input
           type="text"
           placeholder="email"
@@ -47,7 +49,6 @@ function Login() {
           data-testid="email-input"
           onChange={ (e) => setEmail(e.target.value) }
         />
-        <p>Senha</p>
         <input
           type="password"
           placeholder="senha"
@@ -57,6 +58,7 @@ function Login() {
           onChange={ (e) => setPassword(e.target.value) }
         />
         <button
+          className="login-btn"
           data-testid="signin-btn"
           type="submit"
           disabled={ isDisabled }
@@ -65,6 +67,7 @@ function Login() {
         </button>
       </form>
       <button
+        className="register-new-account-btn"
         data-testid="no-account-btn"
         type="button"
         onClick={ handleRegister }

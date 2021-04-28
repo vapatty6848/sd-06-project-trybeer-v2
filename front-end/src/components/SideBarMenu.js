@@ -1,7 +1,12 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { FaWeixin } from 'react-icons/fa';
+import { GiBeerBottle } from 'react-icons/gi';
+import { MdBorderColor } from 'react-icons/md';
+import { BsFillPersonFill } from 'react-icons/bs';
+import { IconContext } from 'react-icons';
 import TrybeerContext from '../context/TrybeerContext';
-
+import './SideBarMenu.scss';
 const SidebarMenu = () => {
   const { eraseLocalStorage, isVisible, setVisibility } = useContext(TrybeerContext);
 
@@ -9,59 +14,66 @@ const SidebarMenu = () => {
     <div>
       {
         isVisible && (
-          <div className="side-menu-container">
-            <div className="side-menu-main-options">
-              <Link to="/products">
-                <button
-                  data-testid="side-menu-item-products"
-                  type="button"
-                  onClick={ setVisibility }
-                >
-                  Produtos
-                </button>
-              </Link>
-              <Link to="/orders">
-                <button
-                  data-testid="side-menu-item-my-orders"
-                  type="button"
-                  onClick={ setVisibility }
-                >
-                  Meus Pedidos
-                </button>
-              </Link>
-              <Link to="/profile">
-                <button
-                  data-testid="side-menu-item-my-profile"
-                  type="button"
-                  onClick={ setVisibility }
-                >
-                  Meu Perfil
-                </button>
-              </Link>
-              <Link to="/chat">
-                <button
-                  data-testid="side-menu-chat"
-                  type="button"
-                  onClick={ setVisibility }
-                >
-                  Conversar com a loja
-                </button>
-              </Link>
+          <IconContext.Provider value={{size: "2em", className: "icons"}}>
+            <div className="side-menu-container">
+              <div className="side-menu-main-options">
+                <Link to="/products">
+                  <button
+                    data-testid="side-menu-item-products"
+                    type="button"
+                    onClick={ setVisibility }
+                  >
+                    Produtos
+                    <GiBeerBottle />
+                  </button>
+                </Link>
+                <Link to="/orders">
+                  <button
+                    data-testid="side-menu-item-my-orders"
+                    type="button"
+                    onClick={ setVisibility }
+                  >
+                    Meus Pedidos
+                    <MdBorderColor />
+                  </button>
+                </Link>
+                <Link to="/profile">
+                  <button
+                    data-testid="side-menu-item-my-profile"
+                    type="button"
+                    onClick={ setVisibility }
+                  >
+                    Meu Perfil
+                    <BsFillPersonFill />
+                  </button>
+                </Link>
+                <Link to="/chat">
+                  <button
+                    data-testid="side-menu-chat"
+                    type="button"
+                    onClick={ setVisibility }
+                  >
+                    Conversar com a loja
+                    <FaWeixin />
+                  </button>
+                </Link>
+              </div>
+              <div>
+                <Link to="/login">
+                  <button
+                    data-testid="side-menu-item-logout"
+                    type="button"
+                    onClick={ () => {
+                      setVisibility();
+                      eraseLocalStorage();
+                    } }
+                  >
+                    Sair
+                  </button>
+                </Link>
+              </div>
             </div>
-            <Link to="/login" className="justify-at-the-end">
-              <button
-                className="justify-at-the-end"
-                data-testid="side-menu-item-logout"
-                type="button"
-                onClick={ () => {
-                  setVisibility();
-                  eraseLocalStorage();
-                } }
-              >
-                Sair
-              </button>
-            </Link>
-          </div>)
+          </IconContext.Provider>)
       }
     </div>
   );

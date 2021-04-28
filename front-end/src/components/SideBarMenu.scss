@@ -1,0 +1,35 @@
+$primary-color: rgba(252,239,99, 0.95);
+
+.side-menu-container {
+  display: flex;
+  margin-top: 50px;
+  background-color: black;
+  height: 50vh;
+  width: 20vw;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  justify-content: space-between;
+  background-color: $primary-color;
+  z-index: 9;
+  button {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 5px;
+    background-color: black;
+    color: white;
+  }
+}
+
+.side-menu-main-options {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 40vh;
+}
+
+.icons {
+  fill: $primary-color;
+}
