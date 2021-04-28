@@ -63,6 +63,7 @@ function AdminChatTalks({ location: { pathname, state } }) {
     const { email: localStorageEmail, role: localStorageRole } = JSON.parse(dataStorage);
     setEmail(!state ? localStorageEmail : state);
     setRole(localStorageRole);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -109,7 +110,7 @@ function AdminChatTalks({ location: { pathname, state } }) {
                 />
               ) }
             </S.ContainerMessages>
-            <form>
+            <form onSubmit={ handleSendMessage }>
               <Input
                 id="input-message"
                 label=""
@@ -120,8 +121,7 @@ function AdminChatTalks({ location: { pathname, state } }) {
                 icon={ BiChat }
               />
               <Button
-                type="button"
-                onClick={ handleSendMessage }
+                type="submit"
                 heigth="40px"
                 color="green"
                 fontSize="20px"
