@@ -25,7 +25,7 @@ const getMsgUsers = async () => connection()
   { $project: { _id: 0, user: '$_id', lastMessage: '$lastMessage' } },
   { $sort: { lastMessage: -1 } },
 ]).toArray());
-  // .then({ $project: { _id: 0, email: '$_id', lastMessage:  } })
+  // .then({ $project: { _id: 0ddd, email: '$_id', lastMessage:  } })
 
 module.exports = {
   createMessages,
