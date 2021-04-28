@@ -20,6 +20,7 @@ export default function ListaDeConversas() {
 
   return (
     <div>
+      <Header title="TryBeer" user="admin" />
       {users.length === 0
         ? (
           <h3 data-testid="text-for-no-conversation">
@@ -38,7 +39,6 @@ export default function ListaDeConversas() {
             ))}
           </div>
         )}
-      <Header title="TryBeer" user="admin" />
     </div>
   );
 }
