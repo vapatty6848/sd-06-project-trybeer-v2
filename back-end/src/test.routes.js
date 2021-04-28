@@ -1,7 +1,7 @@
 require('dotenv/config');
 const express = require('express');
 const path = require('path');
-const { log, handleError } = require('./middlewares');
+const { handleErrorTestMode } = require('./middlewares');
 
 const {
   adminRouter,
@@ -22,7 +22,8 @@ routes.use('/admin', adminRouter);
 routes.use('/images', express.static(path.join(__dirname, './images')));
 routes.use('*', notFound);
 
-routes.use(log);
-routes.use(handleError);
+routes.use(handleErrorTestMode);
+
+console.log('rodando em test mode');
 
 module.exports = routes;

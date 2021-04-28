@@ -16,7 +16,9 @@ const swaggerUI = require('swagger-ui-express');
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerOptions = require('./src/openAPI/swaggerOptions');
 
-const routes = require('./src/main.routes');
+const routes = (process.env.NODE_ENV !== 'test')
+  ? require('./src/main.routes')
+  : require('./src/test.routes');
 const controllers = require('./src/controllers/chat');
 
 const specs = swaggerJsDoc(swaggerOptions);
