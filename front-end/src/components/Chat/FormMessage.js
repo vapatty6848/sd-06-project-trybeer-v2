@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { FaTelegramPlane } from 'react-icons/fa';
 import socket from '../../utils/socketClient';
 
+import './InputMessage.css';
+
 function FormMessage() {
   const [message, setMessage] = useState('');
 
@@ -18,6 +20,7 @@ function FormMessage() {
     <form onSubmit={ handleSend }>
       <div>
         <input
+          className="inputMessage"
           type="text"
           id="message-input"
           data-testid="message-input"
@@ -26,6 +29,7 @@ function FormMessage() {
           value={ message }
         />
         <button
+          className="buttonSendMessage"
           type="submit"
           data-testid="send-message"
         >

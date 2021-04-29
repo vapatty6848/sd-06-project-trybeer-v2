@@ -6,6 +6,17 @@
 .productCard {
   height: inherit;
   position: relative;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+}
+
+.nomePreco {
+  position: absolute;
+  margin-top: 50px;
 }
 
 .imageCard {
@@ -18,8 +29,9 @@
 
 .divBotoesMaisMenos {
   position: absolute;
-  bottom: 0;
-  margin-left: 20px;
+  width: 45vw;
+  text-align: center;
+  bottom: 1px;
   margin-bottom: 10px;
 }
 
@@ -32,9 +44,11 @@
 }
 
 .texto {
+  display: inline;
   font-size: 18px;
-  margin: 0px;
+  margin: 1px;
   text-align: center;
+  position: sticky;
 }
 
 .textoMaisMenos {

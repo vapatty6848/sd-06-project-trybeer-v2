@@ -1,0 +1,32 @@
+.div-main {
+  display: flex;
+  flex-direction: row;
+}
+
+.div-filha {
+  flex-direction: column;
+  margin-left: 15px;
+  width: 80%;
+}
+
+.title {
+  margin-left: 10px;
+}
+
+.divDetails {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.orderDetails {
+  margin-top: 15px;
+  margin-left: 15px;
+}
+
+.totalPrice {
+  font-size: 20px;
+  margin: auto;
+  margin-top: 15px;
+  text-align: end;
+  width: 60vw;
+}

@@ -49,6 +49,7 @@ function UserRegister() {
           type="checkbox"
           callback={ () => validateNewUser(newUser, setNewUser, setEnableButton) }
         />
+        <br />
         <button
           className="buttonRegisterUser"
           disabled={ enableButton }

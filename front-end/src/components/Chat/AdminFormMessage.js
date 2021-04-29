@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { FaTelegramPlane } from 'react-icons/fa';
 import socket from '../../utils/socketClient';
 
+import './InputMessage.css';
+
 function AdminFormMessage(props) {
   const [message, setMessage] = useState('');
 
@@ -16,9 +18,10 @@ function AdminFormMessage(props) {
   };
 
   return (
-    <form onSubmit={ handleSend }>
-      <div>
+    <div className="divMessage">
+      <form onSubmit={ handleSend }>
         <input
+          className="inputMessage"
           type="text"
           id="message-input"
           data-testid="message-input"
@@ -27,13 +30,14 @@ function AdminFormMessage(props) {
           value={ message }
         />
         <button
+          className="buttonSendMessage"
           type="submit"
           data-testid="send-message"
         >
           <FaTelegramPlane size={ 20 } />
         </button>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 }
 

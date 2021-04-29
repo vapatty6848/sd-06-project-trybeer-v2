@@ -81,15 +81,17 @@ function Checkout() {
               {`Total: R$ ${totalCart.toFixed(2).replace('.', ',')}`}
             </p>
             <Address />
-            <button
-              className="buttonCheckout"
-              type="button"
-              disabled={ !enable }
-              data-testid="checkout-finish-btn"
-              onClick={ () => checkoutOrder(history, setCart, sale) }
-            >
-              Finalizar Pedido
-            </button>
+            <div className="divButtonCheckout">
+              <button
+                className="buttonCheckout"
+                type="button"
+                disabled={ !enable }
+                data-testid="checkout-finish-btn"
+                onClick={ () => checkoutOrder(history, setCart, sale) }
+              >
+                Finalizar Pedido
+              </button>
+            </div>
           </div>
         </div>
       )

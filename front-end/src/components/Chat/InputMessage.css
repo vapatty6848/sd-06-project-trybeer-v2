@@ -1,0 +1,19 @@
+
+.inputMessage {
+  border: rgb(196, 150, 33);
+  border-radius: 5px;
+  box-shadow: 1px 1px rgb(196, 150, 33);
+  height: 5vh;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 20px;
+  width: 86%;
+}
+
+.buttonSendMessage {
+  background-color: rgb(246, 202, 90);
+  border: 1px solid rgb(196, 150, 33);
+  border-radius: 5px;
+  height: 5vh;
+  padding-bottom: 5px;
+}

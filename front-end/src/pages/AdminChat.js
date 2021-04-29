@@ -31,11 +31,14 @@ function AdminChat(props) {
     });
   }, [messages]);
 
+  const user = JSON.parse(localStorage.getItem('user')).email;
+
   return (
     <div className="div-main">
       <SideBarAdmin />
-      <div className="div-filha">
+      <div>
         <button
+          className="buttonSendMessage"
           type="button"
           data-testid="back-button"
           onClick={ () => history.push('/admin/chats') }
@@ -53,6 +56,7 @@ function AdminChat(props) {
                   message={ message }
                   nickname={ nickname }
                   sentAt={ sentAt }
+                  isMine={ nickname !== user }
                 />
               ))
             )

@@ -10,7 +10,7 @@ function Input({ title, id, type, callback }) {
       { title }
       <br />
       <input
-        className="inputRegister"
+        className={ type !== 'checkbox' ? 'inputRegister' : 'checkRegister' }
         id={ id }
         type={ type }
         data-testid={ id }

@@ -7,39 +7,43 @@
   flex-direction: column;
   margin-left: 15px;
   align-items: space-around;
+  margin: 20px;
 }
 
 .title {
   margin-left: 10px;
 }
 
-.botoes {
-  width: 100px;
-  background-color: rgb(246, 202, 90);
+.productInsert {
   border: rgb(196, 150, 33);
   border-radius: 5px;
-  font-family: 'Syne Mono';
-}
-
-.logout {
-  width: 100px;
-  margin-top: 200px;
+  box-shadow: 3px 3px rgb(196, 150, 33);
   margin-bottom: 10px;
-  background-color: rgb(246, 202, 90);
-  border: rgb(196, 150, 33);
-  border-radius: 5px;
-  font-family: 'Syne Mono';
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  padding: 10px;
+  width: 70vw;
 }
 
-.divBotao {
+.buttonInsert {
+  background-color: rgb(196, 150, 33);
   border: rgb(196, 150, 33);
   border-radius: 5px;
-  width: 100%;
+  box-shadow: 3px 3px rgb(175, 133, 27);
   font-family: 'Syne Mono';
+  font-size: 18px;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  padding: 10px;
+  width: 90%;
 }
 
-input {
-  display: block;
-  margin-bottom: 15px;
-  margin-top: 15px;
+.inputFile {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  padding: 10px;
 }

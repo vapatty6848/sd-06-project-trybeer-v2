@@ -1,0 +1,7 @@
+.chats {
+  background-color: rgb(255, 228, 163);
+  border-radius: 5px;
+  box-shadow: 3px 3px rgb(196, 150, 33);
+  font-family: 'Syne Mono';
+  width: 70vw;
+}

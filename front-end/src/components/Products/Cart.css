@@ -1,12 +1,16 @@
 .buttonCart {
-  bottom: 0;
-  font-size: 15px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  background-color: rgb(246, 202, 90);
+  border: 1px solid rgb(196, 150, 33);
+  border-radius: 5px;
+  bottom: 1px;
+  font-family: 'Syne Mono';
+  font-size: 18px;
+  padding-bottom: 8px;
+  padding-top: 8px;
   position: fixed;
   width: 100%;
-  font-family: 'Syne Mono';
-  border-radius: 5px;
-  border: 1px solid rgb(196, 150, 33);
-  background-color: rgb(246, 202, 90);
+}
+
+.text {
+  font-size: 40px;
 }

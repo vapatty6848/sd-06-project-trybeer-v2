@@ -29,6 +29,8 @@ function UserChat() {
     });
   }, [messages]);
 
+  const user = JSON.parse(localStorage.getItem('user')).email;
+
   return (
     <div>
       <TopBar title="TryBeer" />
@@ -43,6 +45,7 @@ function UserChat() {
                 message={ message }
                 nickname={ nickname }
                 sentAt={ sentAt }
+                isMine={ nickname === user }
               />
             ))
           )

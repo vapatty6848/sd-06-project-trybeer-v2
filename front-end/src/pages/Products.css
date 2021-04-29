@@ -11,12 +11,12 @@
 }
 
 .divCards {
-  margin: auto;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  flex-direction: row;
-  width: 45%;
   background-color: white;
   border-radius: 15px;
-  border: 1px solid rgb(255, 200, 50);
+  box-shadow: 3px 3px rgb(196, 150, 33);
+  flex-direction: row;
+  margin: auto;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  width: 180px;
 }

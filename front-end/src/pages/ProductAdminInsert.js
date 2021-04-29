@@ -29,10 +29,12 @@ function ProductAdminInsert() {
     <div className="div-main">
       <SideBarAdmin />
       <div className="div-filha">
-        <h1 className="title">Cadastra Produto</h1>
+        <h1 className="title">Cadastrar Produto</h1>
         <label htmlFor="product-name">
           Nome do produto
+          <br />
           <input
+            className="productInsert"
             id="product-name"
             type="text"
             value={ product.name }
@@ -43,7 +45,9 @@ function ProductAdminInsert() {
         </label>
         <label htmlFor="product-name">
           Preço
+          <br />
           <input
+            className="productInsert"
             id="product-price"
             type="number"
             name="price"
@@ -52,15 +56,19 @@ function ProductAdminInsert() {
             onChange={ (event) => handleChange(event) }
           />
         </label>
+        <br />
         <label htmlFor="product-image">
           Imagem do produto
+          <br />
           <input
+            className="inputFile"
             id="product-image"
             type="file"
             name="image"
           />
         </label>
         <button
+          className="buttonInsert"
           type="submit"
           onClick={ hanldeRegisterProduct }
         >

@@ -37,20 +37,22 @@ function ProductCard({ name, price, urlImage, index }) {
   return (
     <div className="mainDivProductCard">
       <div className="productCard">
-        <p
-          className="texto"
-          id={ `${index}-product-name` }
-          data-testid={ `${index}-product-name` }
-        >
-          { name }
-        </p>
-        <p
-          className="texto"
-          id={ `${index}-product-price` }
-          data-testid={ `${index}-product-price` }
-        >
-          { `R$ ${price.replace('.', ',')}` }
-        </p>
+        <div className="nomePreco">
+          <p
+            className="texto"
+            id={ `${index}-product-name` }
+            data-testid={ `${index}-product-name` }
+          >
+            { name }
+          </p>
+          <p
+            className="texto"
+            id={ `${index}-product-price` }
+            data-testid={ `${index}-product-price` }
+          >
+            { `R$ ${price.replace('.', ',')}` }
+          </p>
+        </div>
         <img
           className="imageCard"
           data-testid={ `${index}-product-img` }

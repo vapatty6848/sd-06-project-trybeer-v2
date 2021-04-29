@@ -15,7 +15,7 @@ function Login() {
   localStorage.clear();
 
   return (
-    <form>
+    <form className="formLogin">
       <div className="divLogin">
         <label htmlFor="email-input">
           Email
@@ -43,7 +43,7 @@ function Login() {
           />
         </label>
       </div>
-      <div>
+      <div className="divBotoes">
         <button
           className="buttonLogin"
           disabled={ enableButton }

@@ -43,6 +43,7 @@ function ClientProfile() {
               Email
               <br />
               <input
+                className="inputProfile"
                 type="email"
                 data-testid="profile-email-input"
                 value={ emailLocal }

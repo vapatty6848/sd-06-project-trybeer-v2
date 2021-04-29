@@ -13,18 +13,19 @@ function CheckoutItem({ name, price, quantity, index }) {
   return (
     <div className="divMain">
       <div className="divCartItem">
-        <p data-testid={ `${index}-product-qtd-input` }>
-          {`${quantity}`}
-        </p>
-        <div data-testid={ `${index}-product-name` }>
+        <span data-testid={ `${index}-product-qtd-input` }>
+          {`${quantity} `}
+        </span>
+        <span data-testid={ `${index}-product-name` }>
           { name }
-        </div>
-        <div data-testid={ `${index}-product-total-value` }>
-          {`R$ ${totalPrice.toFixed(2).replace('.', ',')}`}
-        </div>
-        <div data-testid={ `${index}-product-unit-price` }>
-          { `(R$ ${price.replace('.', ',')} un)` }
-        </div>
+        </span>
+        <br />
+        <span data-testid={ `${index}-product-total-value` }>
+          {` R$ ${totalPrice.toFixed(2).replace('.', ',')}`}
+        </span>
+        <span data-testid={ `${index}-product-unit-price` }>
+          { ` (R$ ${price.replace('.', ',')} un)` }
+        </span>
         <button
           className="buttonRemoveItem"
           type="button"

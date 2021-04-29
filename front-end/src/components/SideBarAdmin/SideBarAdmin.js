@@ -42,7 +42,7 @@ function SideBarAdmin() {
         <button
           type="button"
           data-testid="side-menu-item-logout"
-          className="logout"
+          className="botoes"
           onClick={ clearLocalStorage }
         >
           Sair

@@ -7,10 +7,10 @@ import './Address.css';
 function Address() {
   const { address, setAddress } = useContext(TrybeerContext);
   return (
-    <form>
-      <fieldset>
-        <legend>Endereço</legend>
-        <label htmlFor="checkout-street-input">
+    <form className="formAddress">
+      <fieldset className="field">
+        <legend className="legend">Endereço</legend>
+        <label className="label" htmlFor="checkout-street-input">
           Rua
           <br />
           <input
@@ -22,7 +22,7 @@ function Address() {
           />
         </label>
         <br />
-        <label htmlFor="checkout-house-number-input">
+        <label className="label" htmlFor="checkout-house-number-input">
           Número da casa
           <br />
           <input

@@ -31,7 +31,7 @@ function AdminOrders() {
           <div className="div-filha">
             <h1 className="title">Admin Orders</h1>
             {sales.map((sale, index) => (
-              <div key={ index }>
+              <div className="ordersContainer" key={ index }>
                 <button
                   className="buttonPedidos"
                   type="button"

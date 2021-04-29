@@ -1,14 +1,21 @@
 .totalPrice {
-  margin-left: 200px;
+  font-size: 20px;
+  margin: auto;
+  text-align: end;
+  width: 80vw;
+}
+
+.divButtonCheckout {
+  width: 60%;
+  margin: auto;
 }
 
 .buttonCheckout {
-  margin-top: 10px;
-  padding: 15px;
-  width: 100%;
-  font-family: 'Syne Mono';
-  font-size: 18px;
+  background-color: rgb(196, 150, 33);
   border: none;
   border-radius: 5px;
-  background-color: rgb(196, 150, 33);
+  font-family: 'Syne Mono';
+  font-size: 18px;
+  margin-left: auto;
+  width: 100%;
 }

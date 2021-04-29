@@ -3,6 +3,7 @@
 .header {
   display: flex;
   flex-direction: row;
+  height: 63px;
 }
 
 .title {
@@ -16,4 +17,5 @@
   color: rgb(219, 180, 81);
   background-color: rgb(196, 150, 33);
   box-shadow: 3px 3px rgb(175, 133, 27);
+  height: 60px;
 }
