@@ -20,6 +20,7 @@ const getAllMessagesAdmin = () => connection().then((db) => db.collection('messa
   {
     $project: {
       _id: 0,
+      id: '$_id',
       email: '$_id',
       sentAt: '$maxTime',
     },

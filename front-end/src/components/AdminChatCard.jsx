@@ -25,14 +25,14 @@ export default function AdminChatCard() {
     );
     return noMessageSpan;
   };
-  // console.log('l28', [allMessages].sentAt);
+  console.log('l28', allMessages);
 
   return (
     <div>
       {allMessages.length === 0
         ? noMessage()
         : allMessages.map((message, index) => (
-          <Link key={ index } to="/chat">
+          <Link key={ index } to={ `/admin/chats/${message.email}` }>
             <div data-testid="containerChat">
               <div>
                 <div data-testid="profile-name">{message.email}</div>

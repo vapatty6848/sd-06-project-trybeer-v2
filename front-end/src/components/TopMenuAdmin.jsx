@@ -28,7 +28,7 @@ export default function TopMenuAdmin({ pageTitle }) {
   return (
     <header className="nav-main">
       <div className="title-burguer-div">
-      <button
+        <button
           type="button"
           data-testid="top-hamburguer"
           className="btn-toggle-nav"
@@ -49,7 +49,7 @@ export default function TopMenuAdmin({ pageTitle }) {
             </button>
           </div>
           <div className="side-menu-container">
-             <button
+            <button
               type="button"
               data-testid="side-menu-item-profile"
               value="Perfil"
@@ -58,7 +58,7 @@ export default function TopMenuAdmin({ pageTitle }) {
               Perfil
             </button>
           </div>
-      
+
           <div className="side-menu-container">
             <button
               type="button"
@@ -75,14 +75,14 @@ export default function TopMenuAdmin({ pageTitle }) {
               data-testid="side-menu-item-logout"
               value="Sair"
               onClick={ handleClick }
-           >
+            >
               Sair
-          </button>
-        </div> 
-    </aside>
+            </button>
+          </div>
+        </aside>
       </div>
     </header>
-    
+
   );
 }
 
