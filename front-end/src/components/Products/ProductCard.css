@@ -28,7 +28,6 @@
 }
 
 .divBotoesMaisMenos {
-  position: absolute;
   width: 45vw;
   text-align: center;
   bottom: 1px;
@@ -36,11 +35,11 @@
 }
 
 .botoesMainMenos {
+  background-color: rgb(196, 150, 33);
   border-radius: 5px;
+  font-size: 20px;
   margin: 10px;
   padding: 5pxpx;
-  font-size: 20px;
-  background-color: rgb(196, 150, 33);
 }
 
 .texto {

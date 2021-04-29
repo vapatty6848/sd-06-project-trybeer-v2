@@ -50,7 +50,7 @@ function ProductCard({ name, price, urlImage, index }) {
             id={ `${index}-product-price` }
             data-testid={ `${index}-product-price` }
           >
-            { `R$ ${price.replace('.', ',')}` }
+            { ` R$ ${price.replace('.', ',')}` }
           </p>
         </div>
         <img
@@ -59,7 +59,7 @@ function ProductCard({ name, price, urlImage, index }) {
           src={ urlImage }
           alt="product"
         />
-        <div className="divBotoesMaisMenos">
+        <container className="divBotoesMaisMenos">
           <button
             className="botoesMainMenos"
             type="button"
@@ -81,7 +81,7 @@ function ProductCard({ name, price, urlImage, index }) {
           >
             +
           </button>
-        </div>
+        </container>
       </div>
     </div>
   );
