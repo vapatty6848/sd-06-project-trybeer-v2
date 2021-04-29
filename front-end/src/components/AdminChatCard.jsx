@@ -32,7 +32,7 @@ export default function AdminChatCard() {
       {allMessages.length === 0
         ? noMessage()
         : allMessages.map((message, index) => (
-          <Link key={ index } to={ `/admin/chats/${message.email}` }>
+          <Link key={ index } to="/chat">
             <div data-testid="containerChat">
               <div>
                 <div data-testid="profile-name">{message.email}</div>
