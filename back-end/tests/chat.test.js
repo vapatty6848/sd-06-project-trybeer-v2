@@ -1,7 +1,16 @@
 const request = require('supertest');
 const Client = require('socket.io-client');
-const { io: chatServer, app } = require('../app');
+const server = require('http');
+const { app } = require('../app');
+const controllers = require('../src/controllers/chat');
 const models = require('../src/models/sql/models');
+const { Server } = require('socket.io');
+
+const http = server.createServer(app);
+const io = new Server(http);
+
+let clientSocket;
+let session;
 
 const newClient = {
   name: 'Gabi Dal Silv',
@@ -9,35 +18,48 @@ const newClient = {
   password: '123456',
 };
 
-describe('Tests client chat features', () => {
-  let clientSocket;
-  let session;
+beforeAll(async (done) => {
+  http.listen(() => {
+    const port = http.address().port;
+    clientSocket = new Client(`http://localhost:${port}`);
+    io.on('connection', (socket) => {
+      const { token } = socket.handshake.auth;
+      if (token && token.role === 'client') {
+        token.roomKey = `${token.email}-room`;
+        socket.join(token.roomKey);
+      }
 
-  beforeAll(async (done) => {
-    await request(app)
-      .post('/user/register')
-      .send(newClient)
-      .then((res) => {
-        session = res.body;
-      })
-      .catch((err) => done(err));
-
-    const CHAT_PORT = process.env.CHAT_PORT || 4001;
-
-    clientSocket = new Client(`http://localhost:${CHAT_PORT}`, { auth: { token: session } });
-    clientSocket.on('connect', () => {
-      return done();
+      controllers.chat(io, socket, token);
+      controllers.user(io, socket, token);
+      controllers.admin(io, socket, token);
     });
   });
 
-  afterAll((done) => {
-    chatServer.close();
-    clientSocket.close();
-    models.users.destroy({ where: { email: 'gabi.dalsilv@gmail.com' } })
-      .then(() => models.sequelize.close())
-      .then(() => done());
-  });
+  await request(app)
+    .post('/user/register')
+    .send(newClient)
+    .then((res) => {
+      session = res.body;
+    })
+    .catch((err) => done(err));
 
+  const CHAT_PORT = process.env.CHAT_PORT || 4001;
+
+  clientSocket = new Client(`http://localhost:${CHAT_PORT}`, { auth: { token: session } });
+  clientSocket.on('connect', () => {
+    return done();
+  });
+});
+
+afterAll((done) => {
+  io.close();
+  clientSocket.close();
+  models.users.destroy({ where: { email: 'gabi.dalsilv@gmail.com' } })
+    .then(() => models.sequelize.close())
+    .then(() => done());
+});
+
+describe('Tests client chat features', () => {
   it('Should be able to get stored messages at login', (done) => {
     clientSocket.on('server:storedMessages', (storedMessages) => {
       expect(storedMessages).toStrictEqual([]);
