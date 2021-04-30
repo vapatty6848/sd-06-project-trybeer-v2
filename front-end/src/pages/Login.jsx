@@ -17,7 +17,7 @@ function Login() {
   return (
     <div className="login-page">
       <div className="login-container">
-        <img src={ logo } alt="logo" className="logo" />
+        <img src={ logo } alt="logo" className="login logo" />
         <div className="form-container">
           <h3 className="login-title">PROJECT - TRYBEER</h3>
           <span>Email</span>
