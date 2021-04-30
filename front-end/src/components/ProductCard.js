@@ -36,18 +36,15 @@ const ProductCard = ({ index, id, name, price, url_image: urlImage }) => {
 
   return (
     <div className="product-card">
+      <div className="price-title">
+        <p data-testid={ `${index}-product-name` }>{name}</p>
+      </div>
       <img
         data-testid={ `${index}-product-img` }
         className="product-card-image"
         alt={ name }
         src={ urlImage }
       />
-      <div className="price">
-        <IconContext.Provider value={{size: "2em", className: "icon"}}>
-          <GiBeerBottle />
-        </IconContext.Provider>
-        <p data-testid={ `${index}-product-name` }>{name}</p>
-      </div>
       <div className="price">
         <IconContext.Provider value={{size: "2em", className: "icon"}}>
           <MdAttachMoney />
