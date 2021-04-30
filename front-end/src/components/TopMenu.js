@@ -11,12 +11,6 @@ import './TopMenu.scss';
 const TopMenu = ({ titleMenu }) => {
   const { user, isVisible, setVisibility } = useContext(TrybeerContext);
 
-  if (user.role === 'administrator') {
-    return (
-      <SidebarMenuAdmin />
-    );
-  }
-
   return (
     <div>
       <header>
@@ -36,6 +30,7 @@ const TopMenu = ({ titleMenu }) => {
         </IconContext.Provider>
       </header>
       { isVisible && user.role === 'client' && <SidebarMenu /> }
+      { isVisible && user.role === 'administrator' && <SidebarMenuAdmin /> }
     </div>
   );
 };

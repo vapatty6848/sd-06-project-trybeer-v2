@@ -23,7 +23,7 @@ function AdminOrders({ history }) {
     <div>
       <TopMenu />
       {
-        orders.map(({
+        orders && orders.map(({
           id,
           deliveryAddress,
           deliveryNumber,
