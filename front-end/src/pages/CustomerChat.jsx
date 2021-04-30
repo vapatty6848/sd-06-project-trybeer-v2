@@ -67,7 +67,6 @@ function CustomerChat() {
   return (
     <div>
       <ControllerHeader />
-      <h1>TELA DE CHAT</h1>
       <div class="customer-side-chat">
         {
           messages && messages.map((data, index) => (
@@ -78,11 +77,12 @@ function CustomerChat() {
             </div>))
         }
       </div>
-      <form>
+      <form class="send-customer-message">
         <input
           id="message-input"
           data-testid="message-input"
           autoComplete="off"
+          placeholder="Digite a sua mensagem aqui"
           onChange={ ({ target }) => setTypedMessage(target.value) }
         />
         <button

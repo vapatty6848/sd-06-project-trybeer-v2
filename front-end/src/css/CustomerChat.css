@@ -4,7 +4,6 @@
 }
 
 .customer-message {
-    /* border: 1px solid blue; */
     display: flex;
     justify-content: center;
     margin: auto auto 30px auto;
@@ -15,14 +14,44 @@
     box-shadow: 10px 10px 16px #046868, -1px -1px 1px #048282;
 }
 
+.customer-message:first-of-type {
+    margin-top: 40px;
+}
+
 .customer-message span:first-of-type {
     color: #004370;
 }
 
 .customer-message span:last-of-type {
     color: #004370;
+    margin-right: 10px;
 }
 
 .customer-message div {
     color: #046868;
 }
+
+.send-customer-message {
+    display: flex;
+    margin-left: 500px;
+}
+
+.send-customer-message input {
+    width: 300px;
+}
+
+.send-customer-message button {
+    border: 0.8px solid rgb(149, 148, 148);
+    border-radius: 3px;
+    font-size: 20px;
+    font-weight: 500;
+    height: 40px;
+    color: white;
+    background-color: rgb(0, 117, 117);
+    padding: 10px;
+    margin-left: 10px;
+}
+
+
+
+    
