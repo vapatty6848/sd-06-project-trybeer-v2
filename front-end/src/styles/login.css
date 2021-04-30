@@ -73,3 +73,20 @@
   background-color: white;
   color: black;
 }
+
+
+.logoimageOpen {
+  animation: go-back 2s;
+  width: 350px;
+}
+
+@keyframes go-back {
+
+  from {
+    transform: translateY(200px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}

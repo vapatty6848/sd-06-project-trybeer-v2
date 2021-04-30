@@ -15,7 +15,7 @@
   height: 70vh;
   max-width: 90vw;
   overflow-y: auto;
-  width: 850px;
+  width: 1000px;
 }
 
 .submitmessage {
@@ -25,7 +25,7 @@
   justify-content: center;
   margin-top: 15px;
   max-width: 90vw;
-  width: 850px;
+  width: 1000px;
 }
 
 .inputmenssage {
@@ -46,7 +46,6 @@
   list-style: none;
   margin: 9px 0;
   padding: 5px;
-  width: 275px;
 }
 
 .listmessageloja {
@@ -59,7 +58,6 @@
   margin: 9px 0;
   padding: 5px;
   text-align: end;
-  width: 275px;
 }
 
 .user {
@@ -78,9 +76,18 @@
   text-transform: uppercase;
 }
 
-
 .textmessage {
   word-break: break-all;
+}
+
+.divL, .divU {
+  display: flex;
+  width: 350px;
+}
+
+.divL {
+  display: flex;
+  justify-content: flex-end;
 }
 
 @media screen and ( min-width : 700px ) {
@@ -105,5 +112,30 @@
     width: 1200px;
   }
 
+  .divU, .divL {
+    width: 425px;
+  }
+
+  .listmessage {
+    float: left;
+  }
+
+  .divU {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+
+  }
+
+  .divL {
+    display: flex;
+    justify-content: flex-end;
+    margin-left: 500px;
+    width: 450px;
+  }
+
+  .listmessageloja {
+    float: right;
+  }
 }
 

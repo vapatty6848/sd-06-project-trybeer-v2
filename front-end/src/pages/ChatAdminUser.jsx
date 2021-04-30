@@ -51,7 +51,7 @@ function ChatAdminUser({ match }) {
             className="buttonback"
             onClick={ () => history.push('/admin/chats') }
           >
-            Voltar
+            Voltar para todas as conver
           </button>
         </div>
         <div className="chatmessage chatmessageadm">

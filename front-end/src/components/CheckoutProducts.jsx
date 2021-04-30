@@ -41,11 +41,11 @@ function CheckoutProducts() {
 
   return (
     <div className="checkoutproducts">
-      <h1>Produtos</h1>
-      <ul>
+      <h1 className="adress">Produtos</h1>
+      <div>
         {(checkoutProducts.length > 0)
           ? checkoutProducts.map(({ productQuantity, price, name }, index) => (
-            <li key={ index }>
+            <div key={ index }>
               <div className="productcart">
                 <span
                   data-testid={ `${index}-product-qtd-input` }
@@ -76,10 +76,10 @@ function CheckoutProducts() {
                   X
                 </button>
               </div>
-            </li>
+            </div>
           ))
-          : <spam> Não há produtos no carrinho </spam>}
-      </ul>
+          : <spam className="msgcart"> Não há produtos no carrinho </spam>}
+      </div>
       <h1 data-testid="order-total-value">{`Total: ${ParseCurrency(total)} ` }</h1>
     </div>
   );

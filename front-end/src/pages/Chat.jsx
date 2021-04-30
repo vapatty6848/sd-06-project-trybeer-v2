@@ -40,7 +40,7 @@ function Chat() {
       <div className="chatmaincontainer">
         <div className="margintop">
           <div className="chatmessage">
-            <ul className="ullist">
+            <div className="ullist">
               {chatMessages.map((chatMessage, index) => (
                 <ChatMessage
                   key={ index }
@@ -49,7 +49,7 @@ function Chat() {
                   timestamp={ chatMessage.timestamp }
                 />
               ))}
-            </ul>
+            </div>
           </div>
           <div className="submitmessage">
             <input

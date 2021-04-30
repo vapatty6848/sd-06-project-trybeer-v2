@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import ParseCurrency from '../utils/parseCurrencyToBRL';
+import '../styles/ordersadmdetails.css';
 
 function OrderCardAdm({ orderInfo, index }) {
   const {

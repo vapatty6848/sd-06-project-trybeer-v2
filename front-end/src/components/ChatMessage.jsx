@@ -5,26 +5,30 @@ import '../styles/chat.css';
 function ChatMessage({ nickname, message, timestamp }) {
   const [title, setitle] = useState('user');
   const [messagebox, setmessagebox] = useState('listmessage');
+  const [ divM, setDivM] = useState('divU')
 
   useEffect(() => {
     if (nickname === 'Loja') {
       setmessagebox('listmessageloja');
       setitle('userloja');
+      setDivM('divL')
     }
-  }, [messagebox, nickname, title]);
+  }, [messagebox, nickname, title,divM]);
 
   return (
-    <li className={ messagebox }>
-      <div className={ title }>
-        <span data-testid="nickname">{ `${nickname} - ` }</span>
-        <span data-testid="message-time">
-          { `${timestamp}` }
-        </span>
-      </div>
-      <span data-testid="text-message" className="textmessage">
-        { `${message}` }
+    <div className={divM}>
+      <li className={ messagebox }>
+        <div className={ title }>
+          <span data-testid="nickname">{ `${nickname} - ` }</span>
+          <span data-testid="message-time">
+            { `${timestamp}` }
+          </span>
+        </div>
+        <span data-testid="text-message" className="textmessage">
+          { `${message}` }
       </span>
-    </li>
+      </li>
+    </div>
   );
 }
 
