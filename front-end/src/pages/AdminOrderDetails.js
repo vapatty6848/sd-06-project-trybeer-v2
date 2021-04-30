@@ -125,12 +125,14 @@ function AdminOrderDetails(props) {
             <button
               type="button"
               data-testid="mark-as-delivered-btn"
+              className="btn"
               onClick={ () => markAsDone('Entregue') }
             >
               Marcar como entregue
             </button>
             <button
               type="button"
+              className="btn"
               data-testid="mark-as-prepared-btn"
               onClick={ () => markAsPreparing('Preparando') }
             >
