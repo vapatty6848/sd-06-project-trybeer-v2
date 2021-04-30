@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import fetchFunctions from '../api/fetchFunctions';
 import TrybeerContext from '../context/TrybeerContext';
+import './RegisterForm.scss';
 
 const RegisterForm = (props) => {
   const { setUserLogged } = useContext(TrybeerContext);
@@ -34,7 +35,7 @@ const RegisterForm = (props) => {
 
   return (
     <form action="">
-      <fieldset>
+      <div className="register-form">
         <label htmlFor="name">
           Nome:
           <input
@@ -72,6 +73,7 @@ const RegisterForm = (props) => {
           <input
             data-testid="signup-seller"
             type="checkbox"
+            className="checkbox"
             name="role"
             id="checkbox"
             onChange={ onCheck }
@@ -80,18 +82,17 @@ const RegisterForm = (props) => {
         </label>
         <button
           data-testid="signup-btn"
+          className="signup-btn"
           type="button"
           disabled={ disabled }
           onClick={ onHandleClick }
         >
           Cadastrar
         </button>
-      </fieldset>
-      <fieldset>
-        <span>
-          { spam ? 'E-mail already in database.' : '' }
-        </span>
-      </fieldset>
+      </div>
+      <span>
+        { spam ? 'E-mail already in database.' : '' }
+      </span>
     </form>
   );
 };

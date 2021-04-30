@@ -1,0 +1,40 @@
+.content-panel-detail {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  .order-description {
+    font-size: 35px;
+    margin-bottom: 10px;
+  }
+  .order-card-container-detail {
+    display:flex;
+    font-size: 20px;
+    flex-direction: column;
+    min-width: 40vw;
+    margin: 20px;
+    border-top: inset rgb(237,115,50);
+    border-left: inset rgb(237,115,50);
+    padding:20px;
+    background-color: rgba(237,115,50,0.05);
+
+    .card-total {
+      margin-top:20px;
+      align-self: flex-end;
+      font-size: 25px;
+      font-style:oblique;
+      border: solid 1px rgb(237,115,50);
+      padding: 2px;
+      background-color:transparent;
+    }
+  }
+  .order-total-value {
+    font-size: 35px;
+    font-weight: bold;
+    align-self: flex-end;
+    margin-right: 5vw;
+    margin-bottom: 2vh;
+  }
+}

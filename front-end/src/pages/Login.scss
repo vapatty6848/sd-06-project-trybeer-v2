@@ -11,7 +11,7 @@ $secondary-color:#fcc049a9;
   flex-direction: column;
 
   h1 {
-    color: $primary-color;
+    color: rgb(237,115,50);
   }
 
   form {
@@ -40,13 +40,13 @@ $secondary-color:#fcc049a9;
     .login-btn {
       margin-top: 4px;
       padding: 10px 98px;
-      background-color: $primary-color;
+      background-color: rgb(237,115,50);
       color: black;
       transition: all 0.5s;
       &:hover {
-        background-color: rgba(252,239,99,1);
+        background-color: rgb(237,115,50);
         transform: translateY(-1.2px);
-        box-shadow: 0px 3px 20px 0px rgba(252,239,99,0.4);
+        box-shadow: 0px 3px 20px 0px rgba(237,115,50,0.5);
       }
     }
   }
@@ -55,12 +55,12 @@ $secondary-color:#fcc049a9;
 .register-new-account-btn {
   margin-top: 8px;
   padding: 13px 50px;
-  background-color: $primary-color;
+  background-color: rgb(237,115,50);
   color: black;
   transition: all 0.5s;
   &:hover {
-    background-color: rgba(252,239,99,1);
+    background-color: rgb(237,115,50);
     transform: translateY(-1.2px);
-    box-shadow: 0px 3px 20px 0px rgba(252,239,99,0.4);
+    box-shadow: 0px 3px 20px 0px rgba(237,115,50,0.5);
   }
 }

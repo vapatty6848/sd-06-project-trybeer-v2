@@ -10,7 +10,7 @@ $primary-color: rgba(252,239,99, 0.95);
   position: fixed;
   top: 0;
   justify-content: space-between;
-  background-color: $primary-color;
+  background-color: rgb(237,115,50);
   z-index: 9;
   button {
     width: 100%;
@@ -28,8 +28,4 @@ $primary-color: rgba(252,239,99, 0.95);
   flex-direction: column;
   justify-content: space-around;
   height: 40vh;
-}
-
-.icons {
-  fill: $primary-color;
 }

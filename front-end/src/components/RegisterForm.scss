@@ -1,0 +1,25 @@
+.register-form {
+  width: 100vw;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .checkbox {
+    width:100%;
+  }
+
+  .signup-btn {
+    margin-top: 8px;
+    padding: 13px 50px;
+    background-color: rgb(237,115,50);
+    color: black;
+    transition: all 0.5s;
+    justify-self:center;
+    &:hover {
+      background-color: rgb(237,115,50);
+      transform: translateY(-1.2px);
+      box-shadow: 0px 3px 20px 0px rgba(237,115,50,0.5);
+    }
+  }
+}

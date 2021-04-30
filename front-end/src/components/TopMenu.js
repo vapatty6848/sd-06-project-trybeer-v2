@@ -30,7 +30,7 @@ const TopMenu = ({ titleMenu }) => {
             <GiHamburgerMenu />
           </IconContext.Provider>
         </button>
-        <p data-testid="top-title">{ titleMenu }</p>
+        <p data-testid="top-title" className="top-title">{ titleMenu }</p>
         <IconContext.Provider value={ { size: '3em' } }>
           <IoBeerOutline />
         </IconContext.Provider>

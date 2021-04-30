@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { TopMenu } from '../components';
 import fetchFunctions from '../api/fetchFunctions';
 import TrybeerContext from '../context/TrybeerContext';
+import './Profile.scss';
 
 function Profile(props) {
   const { user, eraseLocalStorage } = useContext(TrybeerContext);
@@ -72,6 +73,7 @@ function Profile(props) {
           <button
             data-testid="profile-save-btn"
             type="submit"
+            className="save-btn"
             disabled={ disabled }
             onClick={ handleSubmit }
           >

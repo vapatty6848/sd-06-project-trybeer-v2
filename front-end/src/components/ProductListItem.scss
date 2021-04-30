@@ -1,12 +1,13 @@
 .product-item {
-  border-bottom: solid 2px rgba(252,239,99, 0.95);
+  border-bottom: solid 2px rgb(237,115,50);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
   margin: 0 20%;
+  background-color: rgba(237,115,50,0.05);
   &:first-child {
-    border-top: solid 2px rgba(252,239,99, 0.95);
+    border-top: solid 2px rgb(237,115,50);
   }
   .column {
     padding: 0 40px;

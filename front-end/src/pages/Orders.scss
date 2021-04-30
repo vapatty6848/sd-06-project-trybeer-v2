@@ -12,8 +12,9 @@
     cursor: pointer;
     margin: 10px;
     align-items: center;
-    border-bottom: inset rgba(252,239,99, 0.95);;
-    border-right: inset rgba(252,239,99, 0.95);;
+    border-bottom: inset rgb(237,115,50);
+    border-right: inset rgb(237,115,50);
+    background-color: rgba(237,115,50,0.05);
   }
 
   .card-id-date {

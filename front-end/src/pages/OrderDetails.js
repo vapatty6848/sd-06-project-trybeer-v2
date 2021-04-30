@@ -5,6 +5,7 @@ import { verifyToken } from '../utils/verifications';
 import TrybeerContext from '../context/TrybeerContext';
 import formatedDate from '../utils/formatedDate';
 import formatedPrice from '../utils/formatedPrice';
+import './OrderDetails.scss';
 
 function OrderDetails(props) {
   const { user } = useContext(TrybeerContext);
@@ -38,33 +39,29 @@ function OrderDetails(props) {
         hasState && (
           <div>
             <TopMenu titleMenu="Detalhes de Pedido" />
-            <div className="content-panel">
-              <div data-testid="order-number">
-                { state && `Pedido ${state.id} - ${state.status}` }
-              </div>
-              <div data-testid="order-date">
-                { state && formatedDate(state.saleDate) }
-              </div>
-              <div data-testid="order-total-value">
-                { state && formatedPrice(state.totalPrice) }
+            <div className="content-panel-detail">
+              <div
+                data-testid="order-number"
+                className="order-description"
+              >
+                  { state && `Pedido ${state.id} - ${state.status} - ${formatedDate(state.saleDate)}` }
               </div>
               <div>
                 {
                   orderCart.map(({ quantity, name, price }, index) => (
                     <div
                       key={ index }
-                      className="order-card-container"
+                      className="order-card-container-detail"
                       data-testid={ `${index}-order-card-container` }
                     >
 
                       <div data-testid={ `${index}-product-name` }>
-                        {`Nome: ${name}` }
+                        {`${name}` }
                       </div>
                       <div data-testid={ `${index}-product-qtd` }>
-                        {`Quantidade: ${quantity}` }
+                        {`Qtd: ${quantity}` }
                       </div>
                       <div
-                        className="card-total"
                         data-testid={ `${index}-order-total-value` }
                       >
                         {`Valor Unitário: ${formatedPrice(price)}` }
@@ -73,11 +70,14 @@ function OrderDetails(props) {
                         className="card-total"
                         data-testid={ `${index}-product-total-value` }
                       >
-                        {`Valor Total: ${formatedPrice((price * quantity).toFixed(2))}` }
+                        {`Valor: ${formatedPrice((price * quantity).toFixed(2))}` }
                       </div>
                     </div>
                   ))
                 }
+              </div>
+              <div data-testid="order-total-value" className="order-total-value">
+                TOTAL: { state && formatedPrice(state.totalPrice) }
               </div>
             </div>
           </div>
