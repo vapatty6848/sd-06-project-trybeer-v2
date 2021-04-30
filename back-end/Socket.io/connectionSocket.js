@@ -1,7 +1,6 @@
 const SocketIo = require('socket.io');
 
-// const Chat = require('../mongoDB/SchemaMongoose');
-const connection = require('../database/connectionMongo');
+const Chat = require('../mongoDB/SchemaMongoose');
 
 const statusUpdate = (socket) => {
   socket.on('statusUpdate', (status) => {
@@ -15,15 +14,15 @@ const messageProcess = (socket) => {
 
     socket.to(email).emit('message', response);
 
-    connection()
-      .then((db) => db.collection('messages').updateOne({ email }, {
-        $push: {
-          messages: {
-            $each: [{ ...response, cli }],
-            $sort: { date: 1 },
-          },
+    Chat.updateOne({ email }, {
+      $push: {
+        messages: {
+          $each: [{ ...response, cli }],
+          $sort: { date: 1 },
         },
-      }, { upsert: true }));
+      },
+    }, { upsert: true })
+      .then((oiii) => console.log('oiii', oiii));
   });
 };
 
@@ -50,7 +49,7 @@ const onCloseRoom = (socket) => {
 module.exports = (httpServer) => {
   const io = SocketIo(httpServer, {
     cors: {
-      origin: 'http://localhost:3000', // url aceita pelo cors
+      origin: 'https://main-group-6-front.herokuapp.com', // url aceita pelo cors
       methods: ['GET', 'POST'], // Métodos aceitos pela url
     },
   });

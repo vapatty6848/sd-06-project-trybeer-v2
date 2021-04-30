@@ -17,7 +17,7 @@ function AdminWebChat() {
   useEffect(() => {
     socket.emit('openRoom', email);
 
-    fetch(`http://localhost:3001/chat/admin/${email}`, {
+    fetch(`https://main-group-6-back.herokuapp.com/chat/admin/${email}`, {
       headers: {
         'Content-Type': 'application/json',
         authorization: token,

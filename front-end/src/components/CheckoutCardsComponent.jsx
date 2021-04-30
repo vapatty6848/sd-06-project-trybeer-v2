@@ -20,7 +20,7 @@ function CheckoutCardsComponent({ element, index }) {
   useEffect(() => {
     const url = `/products/${id}`;
     fetch(
-      `http://localhost:3001${url}`, {
+      `https://main-group-6-back.herokuapp.com${url}`, {
         headers: {
           'Content-Type': 'application/json',
           authorization: token,

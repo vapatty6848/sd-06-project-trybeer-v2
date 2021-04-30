@@ -31,7 +31,7 @@ function CostumerOrdersPage() {
   }, [orders]);
 
   useEffect(() => {
-    fetch('http://localhost:3001/orders', {
+    fetch('https://main-group-6-back.herokuapp.com/orders', {
       headers: {
         'Content-Type': 'application/json',
         authorization: user.token,

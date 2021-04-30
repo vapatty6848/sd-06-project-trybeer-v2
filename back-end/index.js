@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-// require('./database/connectionMongo');
+require('./database/connectionMongo');
 
 const app = express();
 
@@ -21,7 +21,7 @@ const OrdersController = require('./controllers/OrdersController');
 const AdminOrdersController = require('./controllers/AdminOrdersController');
 const ChatController = require('./controllers/ChatController');
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 app.use(cors());
 

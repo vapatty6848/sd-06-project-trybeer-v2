@@ -4,7 +4,7 @@ module.exports = {
   development: {
     username: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
-    database: 'Trybeer',
+    database: 'heroku_c40925885168e9e',
     host: process.env.HOSTNAME,
     dialect: 'mysql',
   },

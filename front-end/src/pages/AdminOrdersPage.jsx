@@ -28,7 +28,7 @@ function AdminOrdersPage() {
   }, [orders]);
 
   useEffect(() => {
-    fetch('http://localhost:3001/admin/orders', {
+    fetch('https://main-group-6-back.herokuapp.com/admin/orders', {
       headers: {
         'Content-Type': 'application/json',
         authorization: user.token,

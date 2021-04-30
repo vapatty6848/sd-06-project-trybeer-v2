@@ -21,7 +21,7 @@ function CostumerProductsPage() {
   useEffect(() => {
     const url = '/products';
     fetch(
-      `http://localhost:3001${url}`, {
+      `https://main-group-6-back.herokuapp.com${url}`, {
         headers: {
           'Content-Type': 'application/json',
           authorization: token,

@@ -1,8 +1,7 @@
 const { Router } = require('express');
-// const Chat = require('../mongoDB/SchemaMongoose');
+const Chat = require('../mongoDB/SchemaMongoose');
 const tokenValidation = require('../utils/tokenValidation');
 const { UNAUTHORIZED, OK, NOT_FOUND } = require('../utils/allStatusCode');
-const connection = require('../database/connectionMongo');
 
 const ChatController = new Router();
 
@@ -11,8 +10,7 @@ ChatController.get('/', async (req, res) => {
   const payload = tokenValidation(token);
   const { email } = payload;  
 
-  const resRequired = await connection()
-    .then((db) => db.collection('messages').findOne({ email }));
+  const resRequired = await Chat.findOne({ email });
 
   if (!resRequired) return res.status(NOT_FOUND).json({ err: 'NOT_FOUND' });
 
@@ -26,12 +24,12 @@ ChatController.get('/admin/get', async (req, res) => {
 
   if (role !== 'administrator') return res.status(UNAUTHORIZED).json({ err: 'UNAUTHORIZED' });
   
-  const resRequired = await connection()
-    .then((db) => db.collection('messages').aggregate([
-      { $project: { _id: 0, email: 1, lastMessage: { $slice: ['$messages', -1] } } },
-      { $unwind: '$lastMessage' },
-      { $project: { email: 1, date: '$lastMessage.date' } },
-    ]).toArray());
+  const resRequired = await Chat.aggregate([
+    { $project: { _id: 0, email: 1, lastMessage: { $slice: ['$messages', -1] } } },
+    { $unwind: '$lastMessage' },
+    { $project: { email: 1, date: '$lastMessage.date' } },
+  ]);
+  console.log('resRequired', resRequired)
 
   res.status(OK).json(resRequired);
 });
@@ -44,8 +42,7 @@ ChatController.get('/admin/:email', async (req, res) => {
 
   if (role !== 'administrator') return res.status(UNAUTHORIZED).json({ err: 'UNAUTHORIZED' });
   
-  const resRequired = await connection()
-    .then((db) => db.collection('messages').findOne({ email }));
+  const resRequired = await Chat.findOne({ email });
 
   if (!resRequired) return res.status(NOT_FOUND).json({ err: 'NO_CONTENT' });
 

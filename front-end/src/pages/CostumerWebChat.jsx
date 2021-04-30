@@ -14,7 +14,7 @@ function CostumerWebChat() {
   useEffect(() => {
     socket.emit('openRoom', email);
 
-    fetch('http://localhost:3001/chat/', {
+    fetch('https://main-group-6-back.herokuapp.com/chat/', {
       headers: {
         'Content-Type': 'application/json',
         authorization: token,
