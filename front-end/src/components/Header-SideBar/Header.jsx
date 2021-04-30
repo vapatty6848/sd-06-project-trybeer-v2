@@ -25,6 +25,9 @@ function Header() {
     case '/chat':
       setTitle('Conversar com a Loja');
       break;
+    case '/admin/chats':
+      setTitle('Lista de conversas da Loja');
+      break;
     default:
       setTitle('Detalhes de Pedido');
       break;

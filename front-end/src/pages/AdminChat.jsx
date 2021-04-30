@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 // import { Link, useHistory } from 'react-router-dom';
 import { getConversations } from '../api/index';
+import ControllerHeader from '../components/Header-SideBar/ControllerHeader';
+import '../css/AdminChat.css';
 
 function AdminChat() {
 //   const [activeBtn, setActiveBtn] = useState(false);
@@ -24,22 +26,19 @@ function AdminChat() {
   };
 
   useEffect(() => {
-  // fetchMessages();
     fetchConversations();
   }, []);
 
   return (
     <div>
-      <h1>Lista de chats</h1>
+      <ControllerHeader />
       {
         conversations && conversations.length > 0
-        // ? console.log('conversations', conversations)
           ? conversations.map((message, i) => (
-            <div key={ i } data-testid="containerChat">
+            <div class="admin-chats" key={ i } data-testid="containerChat">
               <p data-testid="profile-name">{message.user}</p>
               <p data-testid="last-message">
-                Última mensagem às
-                {message.timestamp}
+                {`Última mensagem às ${message.timestamp}`}
               </p>
             </div>))
           : <p data-testid="text-for-no-conversation">Nenhuma conversa por aqui</p>
