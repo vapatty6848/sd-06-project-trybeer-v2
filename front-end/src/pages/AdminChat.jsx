@@ -9,8 +9,8 @@ export default function AdminChat({ match }) {
   const sentAt = new Date();
   // const tokenFromLocalStorage = localStorage.getItem('token');
   const [message, setMessage] = useState('');
-  const { messages, sendMessage} = useChat(email);
-  
+  const { messages, sendMessage } = useChat(email);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('meu horário', sentAt);
@@ -18,8 +18,7 @@ export default function AdminChat({ match }) {
     // fetches.createMessage(tokenFromLocalStorage, email, sentAt, message)
     //   .then((response) => console.log(response));
     // setMessage('');
-    sendMessage(messages)
-
+    sendMessage(messages);
   };
 
   return (
@@ -44,7 +43,7 @@ export default function AdminChat({ match }) {
         </div>
       </form>
     </div>
-    );
+  );
 }
 
 AdminChat.propTypes = {
