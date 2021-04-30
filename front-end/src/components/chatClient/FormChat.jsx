@@ -6,15 +6,15 @@ function FormChat({ handleChange, buttonDisable, handleClick }) {
   return (
     <div id="chat">
       <form className="form-chat-container">
-        <label htmlFor="message">
-          <input
-            type="text"
-            className="form-control"
-            onChange={ handleChange }
-            id="message"
-            data-testid="message-input"
-          />
-        </label>
+
+        <input
+          type="text"
+          className="form-control"
+          onChange={ handleChange }
+          id="message"
+          data-testid="message-input"
+        />
+
         <button
           type="button"
           className="btn btn-success input-button"

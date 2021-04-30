@@ -59,6 +59,7 @@ form.form-chat-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
+
 }
 
 div.message-adm .message-element p {
@@ -92,6 +93,6 @@ div.chat a {
   width: 150px;
 }
 
-.form-control {
-  width: stretch;
+input#message.form-control {
+  flex-grow: 1;
 }

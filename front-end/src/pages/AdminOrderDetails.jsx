@@ -70,6 +70,7 @@ function AdminOrderDetails({ match }) {
             type="button"
             hidden={ prepar }
             onClick={ handlePrepar }
+            className="btn btn-outline-secondary"
             data-testid="mark-as-prepared-btn"
           >
             Preparar pedido
@@ -78,6 +79,7 @@ function AdminOrderDetails({ match }) {
             type="button"
             hidden={ change }
             onClick={ handleClick }
+            className="btn btn-outline-secondary"
             data-testid="mark-as-delivered-btn"
           >
             Marcar como entregue

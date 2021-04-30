@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import MenuSideBarAdm from '../components/menuAdmin/MenuSideBarAdm';
 
 import api from '../services/api';
+import '../css/chat.css';
 // import { valueTotal } from '../utils/checkoutUtils';
 
 const AdminOrders = () => {
@@ -33,7 +34,7 @@ const AdminOrders = () => {
         <div>
           <MenuSideBarAdm />
           {orders.map((order, index) => (
-            <div className="movie-card" key={ index }>
+            <div className="movie-card chat" key={ index }>
               <Link
                 to={ `/admin/orders/${order.id}` }
               >
