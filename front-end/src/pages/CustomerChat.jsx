@@ -8,6 +8,12 @@ function CustomerChat() {
   const [typedMessage, setTypedMessage] = useState('');
   const [user, setUser] = useState('');
 
+  const addLeftZero = (number) => {
+    const param = number.toString();
+    if (param.length < 2) { return `0${number}`; }
+    return number;
+  };
+
   const fetchMessages = async () => {
     try {
       await getMessages(setMessages);
@@ -23,13 +29,14 @@ function CustomerChat() {
   };
 
   const calcTimestamp = () => {
-    const ten = 10;
+    // const ten = 10;
     const date = new Date();
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    if (minutes < ten) {
-      return `${hours}:0${minutes}`;
-    }
+    const hours = addLeftZero(date.getHours());
+    const minutes = addLeftZero(date.getMinutes());
+
+    // if (minutes < ten) {
+    //   return `${hours}:0${minutes}`;
+    // }
     return `${hours}:${minutes}`;
   };
 
