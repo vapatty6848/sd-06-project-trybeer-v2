@@ -15,6 +15,7 @@ import Orders from './pages/Orders';
 import ClientDetailsOrder from './pages/ClientDetailsOrder';
 import AdminDetailsOrder from './pages/AdminDetailsOrder';
 import CustomerChat from './pages/CustomerChat';
+import AdminChat from './pages/AdminChat';
 
 import './App.css';
 
@@ -29,6 +30,7 @@ function App() {
           <Route exact path="/products"><Products /></Route>
           <Route exact path="/profile"><ProfileClient /></Route>
           <Route exact path="/chat"><CustomerChat /></Route>
+          <Route exact path="/admin/chats"><AdminChat /></Route>
           <Route exact path="/admin/orders"><AdminOrders /></Route>
           <Route exact path="/admin/profile"><AdminProfile /></Route>
           <Route exact path="/checkout"><Checkout /></Route>

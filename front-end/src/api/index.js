@@ -107,6 +107,11 @@ async function getMessages(setMessages) {
   await axios.get('/chat').then(({ data }) => setMessages(data));
 }
 
+async function getConversations(setConversations) {
+  const axios = buildAxiosHandler();
+  await axios.get('/chat/users').then(({ data }) => setConversations(data));
+}
+
 export {
   checkout,
   getProducts,
@@ -117,6 +122,7 @@ export {
   getOrders,
   getproductsBySaleId,
   getSalesProductsBySaleId,
+  getConversations,
   changeStatus,
   getMessages,
 };

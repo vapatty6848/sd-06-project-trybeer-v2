@@ -12,13 +12,14 @@ const io = require('socket.io')(http, {
     methods: ['GET', 'POST'],
   },
 });
-const chat = require('./chat/Chat');
 const log = require('./middlewares/log');
 const { NOT_FOUND } = require('./schema/statusSchema');
+const chat = require('./chat/Chat');
 const UserController = require('./controller/UserController');
 const LoginController = require('./controller/LoginController');
 const ProductsController = require('./controller/ProductsController');
 const SalesController = require('./controller/SalesController');
+const ChatController = require('./controller/ChatController');
 
 app.use(express.json());
 app.use('/images', express.static(`${__dirname}/images`));
@@ -33,7 +34,7 @@ const timestamp = () => {
 io.on('connection', (socket) => {
   console.log('Usuario Conectado');
   socket.on('message', async (data) => {
-    console.log(data);
+    console.log('data', data);
     await chat.postMessages(data.message, data.user, timestamp());
     io.emit('message', `${data.user} - ${timestamp()}: ${data.message}`);
   });
@@ -43,12 +44,8 @@ app.use('/user', UserController);
 app.use('/login', LoginController);
 app.use('/products', ProductsController);
 app.use('/sales', SalesController);
-app.get('/chat', async (req, res) => {
-  const messages = await chat.getAll();
-  res.json(messages);
-});
+app.use('/chat', ChatController);
 
 app.all('*', (_req, res) => res.status(NOT_FOUND).json({ message: 'Route not found' }));
 
 http.listen(PORT);
-// app.listen(PORT, () => console.log(`App listening on port ${PORT}!`));
