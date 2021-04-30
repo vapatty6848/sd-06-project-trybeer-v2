@@ -56,17 +56,12 @@ function AdminOrderDetails(props) {
         hasState && (
           <div>
             <TopMenu titleMenu="Detalhes de Pedido" />
-            <div className="content-panel">
+            <div className="content-panel-detail">
               <div>
                 {
                   orderCart[0] && (
                     <div className="order-description">
-                      <div data-testid="order-status">
-                        {`Status: ${orderCart[0].status}` }
-                      </div>
-                      <div data-testid="order-number">
-                        {`Pedido ${orderCart[0].saleId}` }
-                      </div>
+                        {`Pedido ${orderCart[0].saleId} - ${orderCart[0].status}` }
                       <div
                         className="order-total"
                         data-testid="order-total-value"
@@ -85,17 +80,16 @@ function AdminOrderDetails(props) {
                   }, index) => (
                     <div
                       key={ id }
-                      className="order-card-container"
+                      className="order-card-container-detail"
                       data-testid={ `${index}-order-card-container` }
                     >
                       <div data-testid={ `${index}-product-name` }>
-                        {`Nome: ${name}` }
+                        {`${name}` }
                       </div>
                       <div data-testid={ `${index}-product-qtd` }>
-                        {`Quantidade: ${quantity}` }
+                        {`Qtd: ${quantity}` }
                       </div>
                       <div
-                        className="card-total"
                         data-testid={ `${index}-order-unit-price` }
                       >
                         {`Valor Unitário: (${formatedPrice(price)})` }
@@ -110,12 +104,17 @@ function AdminOrderDetails(props) {
                   ))
                 }
               </div>
-              <div data-testid="order-status">
-                {/* { status } */}
-              </div>
-              <div data-testid="order-total-value">
-                {/* { formatedPrice(totalPrice) } */}
-              </div>
+              {
+                  orderCart[0] && (
+                    <div
+                      className="order-total-value"
+                      data-testid="order-total-value"
+                    >
+                      { `TOTAL: ${formatedPrice(orderCart[0].totalPrice)}` }
+                    </div>
+                  )
+                }
+              
             </div>
           </div>
         )
