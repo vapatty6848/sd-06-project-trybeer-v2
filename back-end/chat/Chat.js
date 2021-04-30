@@ -14,8 +14,6 @@ const getMostRecentMessageFromUser = async (user) => {
       .limit(1)
       .toArray());
 
-    // console.log('messages', ...messages)
-
   return messages[0];
 };
 
@@ -34,10 +32,6 @@ const getAllUniqueUsers = async () => {
     return filteredUsers;
 };
 
-// usage example:
-// var a = ['a', 1, 'a', 2, '1'];
-// var unique = a.filter(onlyUnique);
-
 const postMessages = async (message, user, timestamp) => {
   const messages = await conn()
     .then((db) => db.collection('messages').insertOne({ user, message, timestamp }));
@@ -50,5 +44,3 @@ module.exports = {
   getMostRecentMessageFromUser,
   postMessages,
 };
-
-// find message with the most recent timestamp from user x

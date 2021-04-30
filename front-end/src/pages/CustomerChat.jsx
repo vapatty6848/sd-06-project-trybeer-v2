@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getMessages, profile } from '../api/index';
 import socket from '../services/socket';
 import ControllerHeader from '../components/Header-SideBar/ControllerHeader';
+import '../css/CustomerChat.css';
 
 function CustomerChat() {
   const [messages, setMessages] = useState('');
@@ -67,12 +68,12 @@ function CustomerChat() {
     <div>
       <ControllerHeader />
       <h1>TELA DE CHAT</h1>
-      <div>
+      <div class="customer-side-chat">
         {
           messages && messages.map((data, index) => (
-            <div key={ index }>
+            <div class="customer-message" key={ index }>
               <span data-testid="nickname">{`${data.user} - `}</span>
-              <span data-testid="message-time">{`${data.timestamp}`}</span>
+              <span data-testid="message-time">{`${data.timestamp}:`}</span>
               <div data-testid="text-message">{`${data.message}`}</div>
             </div>))
         }

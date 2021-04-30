@@ -1,0 +1,28 @@
+.customer-side-chat {
+    display: flex;
+    flex-flow: column;
+}
+
+.customer-message {
+    /* border: 1px solid blue; */
+    display: flex;
+    justify-content: center;
+    margin: auto auto 30px auto;
+    padding: 20px;
+    width: 50%;
+    border: 2px solid #047575;
+    border-radius: 50px;
+    box-shadow: 10px 10px 16px #046868, -1px -1px 1px #048282;
+}
+
+.customer-message span:first-of-type {
+    color: #004370;
+}
+
+.customer-message span:last-of-type {
+    color: #004370;
+}
+
+.customer-message div {
+    color: #046868;
+}
