@@ -24,11 +24,13 @@ const RegisterValidation = (body) => {
 
 const emailIsExists = async (email) => {
   const retorno = await users.findOne({ where: { email } });
+  console.log('retorno email', retorno)
   if (retorno) return objErr('E-mail already in database.', BAD_REQUEST);
   return null;
 };
 
 const RegisterServices = async (req, res) => {
+  console.log('entrou no service register')
   const { body } = req;
   
   const error = RegisterValidation(body);
@@ -37,7 +39,10 @@ const RegisterServices = async (req, res) => {
   const error2 = await emailIsExists(body.email);
   if (error2) return res.status(error2.status).json({ err: error2.err });
 
-  const { dataValues: user } = await users.create(body);
+  const retornoCreate = await users.create(body);
+  console.log('retorno Create', retornoCreate)
+
+  const { dataValues: user } = retornoCreate;
 
   const { password, name, ...userWithoutPasswordAndName } = user;
   const { id, password: _password, ...userWithoutPassword } = user;

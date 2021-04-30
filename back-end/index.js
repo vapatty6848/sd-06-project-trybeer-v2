@@ -23,7 +23,10 @@ const ChatController = require('./controllers/ChatController');
 
 const PORT = process.env.PORT || 3001;
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://main-group-6-front.herokuapp.com', // url aceita pelo cors
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos aceitos pela url
+}));
 
 // app.use((req, _res, next) => {
 //   console.log({
