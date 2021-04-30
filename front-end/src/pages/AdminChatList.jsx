@@ -11,7 +11,7 @@ function AdminChatList() {
   const [chats, setChats] = useState([]);
 
   useEffect(() => {
-    fetch('https://main-group-6-back.herokuapp.com', {
+    fetch('https://main-group-6-back.herokuapp.com/chat/admin/get', {
       headers: {
         'Content-Type': 'application/json',
         authorization: token,

@@ -21,6 +21,7 @@
   "dependencies": {
     "body-parser": "1.19.0",
     "cors": "2.8.5",
+    "cors-anywhere": "^0.4.4",
     "dotenv": "8.2.0",
     "eslint-config-trybe-backend": "1.0.3",
     "express": "4.17.1",
