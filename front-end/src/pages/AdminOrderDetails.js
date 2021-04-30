@@ -5,6 +5,7 @@ import { verifyToken } from '../utils/verifications';
 import TrybeerContext from '../context/TrybeerContext';
 import formatedPrice from '../utils/formatedPrice';
 import { put } from '../api/fetchFunctions';
+import './OrderDetails.scss';
 
 function AdminOrderDetails(props) {
   const { user } = useContext(TrybeerContext);
@@ -54,11 +55,12 @@ function AdminOrderDetails(props) {
       {
         hasState && (
           <div>
+            <TopMenu titleMenu="Detalhes de Pedido" />
             <div className="content-panel">
               <div>
                 {
                   orderCart[0] && (
-                    <div>
+                    <div className="order-description">
                       <div data-testid="order-status">
                         {`Status: ${orderCart[0].status}` }
                       </div>
