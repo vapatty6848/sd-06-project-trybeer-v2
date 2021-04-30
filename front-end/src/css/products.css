@@ -31,16 +31,21 @@
 .movie-card-orders {
   background-color: rgba(231, 231, 231, 0.171);
   border: 1.5px solid rgba(202, 202, 202, 0.315);
-  font-size: 15px;
+  font-size: 14px;
   border-radius: 5px;
   display: flex;
-  align-items: center;
+  justify-content: center;
   flex-direction: row;
-  margin: 5px;
+  margin: 0 20px;
   overflow: hidden;
-  padding-top: 5px;
-  width: 120px;
+  padding: 20px 0px;
+  width: 250px;
   height: auto;
+}
+
+div.movie-card-orders a {
+  color: black;
+  
 }
 
 .movie-list {
@@ -135,6 +140,7 @@
 
 .space-entry {
   margin-right: 5px;
+  color: black;
 }
 
 .top-details {
@@ -146,7 +152,7 @@
 .top-data {
   border: 0.6px solid rgb(16, 17, 16);
   display: flex;
-  color: brown;
+  color: rgb(0, 143, 7);
   flex-direction: row;
   justify-content: space-between;
   border: 1.5px solid rgba(124, 124, 124, 0.315);

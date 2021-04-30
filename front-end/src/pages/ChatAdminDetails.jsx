@@ -5,6 +5,7 @@ import BodyChat from '../components/chatClient/BodyChat';
 import FormChat from '../components/chatClient/FormChat';
 import api from '../services/api';
 import MenuSideBarAdm from '../components/menuAdmin/MenuSideBarAdm';
+import '../css/chat.css';
 
 const ChatAdminDetails = () => {
   const [message, setMessage] = useState('');

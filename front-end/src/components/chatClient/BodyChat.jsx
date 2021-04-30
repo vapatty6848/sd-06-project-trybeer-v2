@@ -1,34 +1,66 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
+import '../../css/chat.css';
 
 function BodyChat({ data, dataBD, user }) {
   const history = useHistory();
   return (
-    <div id="chat">
+    <div id="chat" className="chat-container">
       <div>
         <button
           type="button"
+          className="btn btn-secondary chat-button"
           data-testid="back-button"
           onClick={ () => history.push('/admin/chats') }
         >
           Voltar
         </button>
       </div>
-      {dataBD.length > 0 && dataBD.map((dataHistoric, index) => (
-        <div key={ index }>
-          <p data-testid="nickname">{dataHistoric.nickname}</p>
-          <p data-testid="message-time">{dataHistoric.hour}</p>
-          <p data-testid="text-message">{dataHistoric.message}</p>
-        </div>
-      ))}
-      {data.length > 0 && data.map((dataMsg, index) => (
-        <div key={ index }>
-          <p data-testid="nickname">{user}</p>
-          <p data-testid="message-time">{dataMsg.hour}</p>
-          <p data-testid="text-message">{dataMsg.message}</p>
-        </div>
-      ))}
+      <div className="chat-message">
+        {dataBD.length > 0 && dataBD.map((dataHistoric, index) => (
+          <div
+            key={ index }
+            className={ dataHistoric.nickname.match(/^Loja$/)
+              ? 'message-adm rounded-pill right'
+              : 'message-client rounded-pill' }
+          >
+            <div className="direct-chat-info clearfix">
+              <div>
+                <p
+                  data-testid="nickname"
+                  className="nick-date all-nick message-element"
+                >
+                  {dataHistoric.nickname}
+                </p>
+              </div>
+              <div>
+                <p
+                  data-testid="message-time"
+                  className="nick-date all-date message-element"
+                >
+                  {dataHistoric.hour}
+                </p>
+              </div>
+            </div>
+            <div>
+              <p
+                data-testid="text-message"
+                className="message-element"
+              >
+                {dataHistoric.message}
+              </p>
+            </div>
+          </div>
+        ))}
+        {data.length > 0 && data.map((dataMsg, index) => (
+          <div key={ index }>
+            <p data-testid="nickname">{user}</p>
+            <p data-testid="message-time">{dataMsg.hour}</p>
+            <p data-testid="text-message">{dataMsg.message}</p>
+          </div>
+        ))}
+      </div>
     </div>);
 }
 

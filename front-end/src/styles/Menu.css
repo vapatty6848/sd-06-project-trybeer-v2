@@ -1,9 +1,7 @@
 .menuTop {
     background-color: black;
     color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: flex; 
     height: 5vh;
 }
 

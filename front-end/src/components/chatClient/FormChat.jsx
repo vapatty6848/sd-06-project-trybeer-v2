@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../../css/chat.css';
 
 function FormChat({ handleChange, buttonDisable, handleClick }) {
   return (
     <div id="chat">
-      <form>
+      <form className="form-chat-container">
         <label htmlFor="message">
           <input
             type="text"
+            className="form-control"
             onChange={ handleChange }
             id="message"
             data-testid="message-input"
@@ -15,6 +17,7 @@ function FormChat({ handleChange, buttonDisable, handleClick }) {
         </label>
         <button
           type="button"
+          className="btn btn-success chat-button"
           disabled={ buttonDisable }
           onClick={ handleClick }
           data-testid="send-message"

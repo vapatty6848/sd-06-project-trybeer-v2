@@ -1,0 +1,79 @@
+
+.chat-button {
+  display: flex;
+  align-self: flex-start;
+}
+
+.chat-message{
+background-color: #f7f7f7;
+padding: 20px;
+}
+
+.message-card{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.direct-chat-info {
+  display: flex;
+  margin-bottom: 2px;
+  font-size: 12px;
+  width: 100%;
+  justify-content: space-between;
+}
+
+div.message-adm {
+  flex-direction: row;
+  justify-content: flex-end;
+  background-color: #ccc;
+ }
+
+div.right{
+  text-align: right;
+  justify-content: flex-end;
+}
+
+ div.message-client  {
+  background-color: rgb(70, 196, 45, 0.5);
+  flex-direction: row;
+  align-self: flex-start;
+}
+
+.nick-date {
+  font-size: 12px;
+  padding: 2px 1px 0 2px;
+}
+
+.form-chat-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+div.message-adm .message-element p {
+  text-align: left;
+  padding: 0 0 0 20px;
+}
+
+div.message-client .message-element p {
+  text-align: right;
+}
+
+div.message-adm .direct-chat-info {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  
+}
+
+div.message-client .direct-chat-info {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  
+}
+
+div.chat a {
+  color: black;
+}

@@ -5,6 +5,7 @@ import socket from '../services/socketClient';
 import BodyChat from '../components/chatClient/BodyChat';
 import FormChat from '../components/chatClient/FormChat';
 import api from '../services/api';
+import '../css/chat.css';
 
 function ChatClient() {
   const { email: userEmail, role } = JSON.parse(localStorage.user);
