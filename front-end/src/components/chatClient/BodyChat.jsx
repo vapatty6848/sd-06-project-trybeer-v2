@@ -7,7 +7,7 @@ function BodyChat({ data, dataBD, user }) {
   const history = useHistory();
   return (
     <div id="chat" className="chat-container">
-      <div>
+      <div className="chat-button-container">
         <button
           type="button"
           className="btn btn-secondary chat-button"
@@ -22,8 +22,8 @@ function BodyChat({ data, dataBD, user }) {
           <div
             key={ index }
             className={ dataHistoric.nickname.match(/^Loja$/)
-              ? 'message-adm rounded-pill right'
-              : 'message-client rounded-pill' }
+              ? 'message-adm right'
+              : 'message-client' }
           >
             <div className="direct-chat-info clearfix">
               <div>

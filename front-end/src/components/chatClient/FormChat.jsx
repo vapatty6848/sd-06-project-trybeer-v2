@@ -17,7 +17,7 @@ function FormChat({ handleChange, buttonDisable, handleClick }) {
         </label>
         <button
           type="button"
-          className="btn btn-success chat-button"
+          className="btn btn-success input-button"
           disabled={ buttonDisable }
           onClick={ handleClick }
           data-testid="send-message"

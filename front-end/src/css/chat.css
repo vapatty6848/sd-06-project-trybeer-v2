@@ -2,6 +2,10 @@
 .chat-button {
   display: flex;
   align-self: flex-start;
+
+}
+.chat-button-container {
+  padding-bottom: 30px;
 }
 
 .chat-message{
@@ -27,6 +31,9 @@ div.message-adm {
   flex-direction: row;
   justify-content: flex-end;
   background-color: #ccc;
+  padding-right: 30px;
+  border-radius: 10px;
+  margin-bottom:5px;
  }
 
 div.right{
@@ -38,6 +45,9 @@ div.right{
   background-color: rgb(70, 196, 45, 0.5);
   flex-direction: row;
   align-self: flex-start;
+  padding-left: 30px;
+  border-radius: 10px;
+  margin-bottom:5px;
 }
 
 .nick-date {
@@ -45,7 +55,7 @@ div.right{
   padding: 2px 1px 0 2px;
 }
 
-.form-chat-container {
+form.form-chat-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -76,4 +86,12 @@ div.message-client .direct-chat-info {
 
 div.chat a {
   color: black;
+}
+
+.input-button{
+  width: 150px;
+}
+
+.form-control {
+  width: stretch;
 }
