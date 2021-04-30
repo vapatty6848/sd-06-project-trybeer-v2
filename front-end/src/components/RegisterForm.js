@@ -35,6 +35,7 @@ const RegisterForm = (props) => {
 
   return (
     <form action="">
+      <h1> Registro </h1>
       <div className="register-form">
         <label htmlFor="name">
           Nome:
