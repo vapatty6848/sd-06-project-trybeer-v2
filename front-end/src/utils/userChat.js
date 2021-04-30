@@ -27,4 +27,4 @@ const useChat = (email) => {
   return { messages, sendMessage };
 };
 export default useChat;
-// retona as msg e a função para coocar as novas
+// retorna as msg e a função para colocar as novas

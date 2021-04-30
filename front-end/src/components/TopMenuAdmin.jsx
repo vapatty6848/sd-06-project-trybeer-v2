@@ -11,8 +11,8 @@ export default function TopMenuAdmin({ pageTitle }) {
   const handleOnClickHamburguerButton = () => {
     const asideOn = 'aside-menu-on';
     const asideOff = 'aside-menu-off';
-    if (asideClass === asideOn) setasideClass(asideOff);
-    if (asideClass === asideOff) setasideClass(asideOn);
+    if (asideClass === asideOn) setasideClass(asideOff)
+    else setasideClass(asideOn);
   };
 
   const handleClick = (e) => {

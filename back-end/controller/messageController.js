@@ -17,7 +17,6 @@ router.get('/messages', validateToken, rescue(async (req, res) => {
   const userEmail = req.user.dataValues.email;
   // console.log('user email', userEmail);
   const messages = await messagesService.getAll(userEmail);
-  console.log('l20', messages);
   res.status(OK).json(messages);
 }));
 

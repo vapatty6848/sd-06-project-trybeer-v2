@@ -34,9 +34,13 @@ const sendMessage = ({ email, sentAt, message, socket }) => {
 };
 
 io.on('connection', async (socket) => {
-  socket.on('chat:sendMessage', ({ email, sentAt, message }) => 
-    sendMessage({ email, sentAt, message, socket }));
+  const Idemail  = socket.handshake.query;
+  socket.join(Idemail);
+  socket.on('chat:sendMessage', (message) => {
+    io.in(Idemail).emit('chat:sendMessage', message)
+  }) 
 });
+// sendMessage({ email, sentAt, message, socket }));
 
 app.use('/images', express.static(`${__dirname}/images`));
 
