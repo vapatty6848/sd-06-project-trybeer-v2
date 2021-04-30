@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import socket from '../utils/socketClient';
-import fetches from '../services/fetches';
+// import socket from '../utils/socketClient';
+// import fetches from '../services/fetches';
 import PropTypes from 'prop-types';
 import useChat from '../utils/userChat';
 
 export default function AdminChat({ match }) {
   const { email } = match.params;
   const sentAt = new Date();
-  const tokenFromLocalStorage = localStorage.getItem('token');
+  // const tokenFromLocalStorage = localStorage.getItem('token');
   const [message, setMessage] = useState('');
   const { messages, sendMessage} = useChat(email);
   
@@ -18,7 +18,7 @@ export default function AdminChat({ match }) {
     // fetches.createMessage(tokenFromLocalStorage, email, sentAt, message)
     //   .then((response) => console.log(response));
     // setMessage('');
-    sendMessage(message)
+    sendMessage(messages)
 
   };
 
