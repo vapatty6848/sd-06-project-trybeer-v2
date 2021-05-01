@@ -48,7 +48,20 @@
 .order-card .status {
   background-color: var(--secondary-att);
   border-radius: 12px;
+  color: var(--bg-color);
   font-size: 0.9em;
   font-style: italic;
   padding: 5px 20px 7px;
+}
+
+.order-card .status.alert {
+  background-color: var(--alert);
+}
+
+.order-card .status.warning {
+  background-color: var(--warning);
+}
+
+.order-card .status.success {
+  background-color: var(--success);
 }
