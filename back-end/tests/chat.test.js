@@ -53,9 +53,7 @@ beforeAll(async (done) => {
   const CHAT_PORT = process.env.CHAT_PORT || 4001;
 
   clientSocket = new Client(`http://localhost:${CHAT_PORT}`, { auth: { token: clientSession } });
-  clientSocket.on('connect', () => {
-    return done();
-  });
+  clientSocket.on('connect', done);
 });
 
 describe('Tests client chat features', () => {
@@ -81,7 +79,7 @@ describe('Tests client chat features', () => {
     const newMessage = { nickname: clientSession.email, message: 'segundo teste! olah de novo!', timestamp: new Date() };
     const result = await chat.saveMessage(newMessage, clientSession);
     expect(result.status).toBe('SAVED');
-    done();
+    return done();
   });
 
   it('Should be able to use chat services for client to get messages from DB', async (done) => {
@@ -102,7 +100,7 @@ describe('Tests admin chat features', () => {
   };
 
   beforeAll(async (done) => {
-    clientSocket.close();
+    await clientSocket.close();
 
     await request(app)
       .post('/user/register')
@@ -133,6 +131,10 @@ describe('Tests admin chat features', () => {
   it('Should be able to enter a client room, send messages and get them back', (done) => {
     adminSocket.on('admin:storedRoomMessages', (msgs) => {
       expect(typeof msgs).toBe('object');
+      adminSocket.emit('admin:sendMessage', {
+        msg: newMessage,
+        client: clientSession.email,
+        userId: clientId });
     });
 
     adminSocket.on('chat:serverMessage', (msg) => {
@@ -143,10 +145,6 @@ describe('Tests admin chat features', () => {
 
     const newMessage = { nickname: adminSession.email, message: 'admin aqui! olah!', timestamp: new Date() };
     adminSocket.emit('admin:getRoomMessages', { client: clientSession.email, userId: clientId });
-    adminSocket.emit('admin:sendMessage', {
-      msg: newMessage,
-      client: clientSession.email,
-      userId: clientId });
   });
 
   it('Should be able to get all stored messages from services as admin ', async (done) => {
@@ -170,14 +168,13 @@ describe('Tests admin chat features', () => {
 });
 
 afterAll((done) => {
-  io.close();
-  clientSocket.close();
-  adminSocket.close();
   models.users.destroy({ where: { email: 'admin.gabi.dalsilv@gmail.com' } })
     .then(() => models.users.destroy({ where: { email: 'gabi.dalsilv@gmail.com' } }))
+    .then(() => models.sequelize.close())
     .then(() => chatAdmin.removeMessagesByUserId(clientId))
     .then(() => chatAdmin.removeMessagesByUserId(adminId))
-    .then(() => models.sequelize.close())
+    .then(() => io.close())
+    .then(() => adminSocket.close())
     .then(() => http.close())
     .then(() => done());
 });
