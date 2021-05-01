@@ -50,7 +50,8 @@ export default function Topbar(props) {
             <FontAwesomeIcon icon={ faBars } className="icon" />
           </button>
         ) }
-        <h1 data-testid="top-title" className="title">{ title }</h1>
+        <h1 className="title">Trybeer</h1>
+        <h3 data-testid="top-title" className="subtitle">{ title }</h3>
       </section>
       { (token.role && token.role === 'administrator')
         ? <AdminMenu { ...menuProps } />

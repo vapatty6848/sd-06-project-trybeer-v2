@@ -5,6 +5,8 @@ import api from '../services';
 
 import { Topbar, MessageInput, ChatMessage } from '../components';
 
+import '../styles/Chat.css';
+
 export default function Chat() {
   const { tokenContext: { token } } = useContext(AppContext);
 
@@ -47,10 +49,13 @@ export default function Chat() {
         callback={ getMessage }
         sendMessage={ sendMessage }
         value={ message }
+        className="client-msg-input"
       />
-      { messageList.map((msg, i) => (
-        <ChatMessage msg={ msg } key={ i } client={ token.email } />
-      )) }
+      <section className="chat-wrapper">
+        { messageList.map((msg, i) => (
+          <ChatMessage msg={ msg } key={ i } client={ token.email } />
+        )) }
+      </section>
     </div>
   );
 }

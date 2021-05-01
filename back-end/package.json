@@ -11,7 +11,7 @@
     "test": "NODE_ENV=test jest --watchAll --runInBand",
     "test-band": "NODE_ENV=test jest --watchAll --runInBand --detectOpenHandles",
     "test-coverage": "NODE_ENV=test jest --runInBand --coverage",
-    "debug": "NODE_ENV=test nodemon server.js",
+    "debug": "nodemon server.js",
     "start:watch": "nodemon server.js",
     "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json ."
   },
@@ -28,6 +28,8 @@
     "jsonwebtoken": "8.5.1",
     "mongodb": "3.6.2",
     "mysql2": "2.1.0",
+    "pg": "^8.6.0",
+    "pg-hstore": "^2.3.3",
     "sequelize": "6.3.4",
     "socket.io": "3.0.4",
     "swagger-jsdoc": "6.0.0",

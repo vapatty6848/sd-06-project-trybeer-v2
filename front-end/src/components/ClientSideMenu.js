@@ -17,7 +17,12 @@ export default function ClientMenu({ className, callback }) {
       <Link to="/chat" data-testid="side-menu-chat">
         Conversar com a loja
       </Link>
-      <button type="button" onClick={ callback } data-testid="side-menu-item-logout">
+      <button
+        type="button"
+        onClick={ callback }
+        data-testid="side-menu-item-logout"
+        className="sidebar-logout-btn"
+      >
         Sair
       </button>
     </section>

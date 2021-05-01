@@ -1,7 +1,3 @@
-body {
-  background-color: lightslategray;
-}
-
 .products-container {
   display: flex;
   flex-flow: row wrap;
@@ -12,23 +8,90 @@ body {
 }
 
 .product-card {
-  align-items: center;
-  background-color: snow;
-  border-radius: 20px;
+  background-color: var(--wrapper-bg-color);
+  box-shadow: 0px 10px 17px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 0 20px;
   display: flex;
   flex-flow: column nowrap;
-  height: 200px;
-  justify-content: space-around;
-  margin: 6px;
-  padding: 4px 8px;
+  justify-content: space-between;
+  min-height: 150px;
+  max-height: 200px;
+  margin: 8px 11px;
   width: 120px;
+  padding: 0;
+  text-align: center;
+  -webkit-box-shadow: 0px 10px 17px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 10px 17px 0px rgba(0, 0, 0, 0.25);
+}
+
+
+.product-card-img {
+  background-color: var(--tertiary-text-color);
+  border-radius: 0 20px 0 0;
+  clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
+  margin: 0;
 }
 
 .product-card img {
   align-self: center;
+  background-color: var(--tertiary-text-color);
   height: 80px;
+  margin: 0;
+  padding: 0;
 }
 
 .product-card .name {
-  text-align: center;
+  background-color: transparent;
+  box-shadow: 0px -10px 17px -6px rgba(0,0,0,0.75);
+  font-size: 0.8em;
+  margin-top: -10px;
+  margin-bottom: -10px;
+  min-height: 34px;
+  padding: 12px 4px;
+}
+
+.price {
+  color: var(--tertiary-text-color);
+  font-style: italic;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.quantity {
+  background-color: var(--bright-element-bg-color);
+  border-radius: 0 20px;
+}
+
+.quantity-value {
+  display: inline-block;
+  font-size: 1.2em;
+  font-weight: 700;
+}
+
+.quantity-icon {
+  --height: 26px;
+  background-color: transparent;
+  border-radius: 50%;
+  color: var(--primary-att);
+  cursor: pointer;
+  font-size: 1.2em;
+  height: var(--height);
+  padding: 0;
+  width: var(--height);
+}
+
+.quantity-icon:hover {
+  background-color: transparent;
+  color: var(--tertiary-text-color);
+}
+
+.checkout-btn {
+  box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.5);
+  color: var(--bg-color);
+  position: absolute;
+  position: sticky;
+  bottom: 2px;
+  right: 0;
+  -webkit-box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.5);
 }

@@ -14,7 +14,12 @@ export default function AdminMenu({ className, callback }) {
       <Link to="/admin/chats" data-testid="side-menu-item-chat">
         Conversas
       </Link>
-      <button type="button" onClick={ callback } data-testid="side-menu-item-logout">
+      <button
+        type="button"
+        onClick={ callback }
+        data-testid="side-menu-item-logout"
+        className="sidebar-logout-btn"
+      >
         Sair
       </button>
     </section>

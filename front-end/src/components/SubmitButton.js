@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const SubmitButton = (props) => {
-  const { type, disabled } = props;
+  const { type, disabled, className } = props;
 
   let dataTestId;
   let label;
@@ -25,7 +25,7 @@ const SubmitButton = (props) => {
   return (
     <button
       type="submit"
-      className="green"
+      className={ className }
       data-testid={ dataTestId }
       disabled={ disabled }
     >
@@ -37,6 +37,11 @@ const SubmitButton = (props) => {
 SubmitButton.propTypes = {
   type: PropTypes.string.isRequired,
   disabled: PropTypes.bool.isRequired,
+  className: PropTypes.string,
+};
+
+SubmitButton.defaultProps = {
+  className: '',
 };
 
 export default SubmitButton;

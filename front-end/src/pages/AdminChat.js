@@ -6,6 +6,8 @@ import api from '../services';
 
 import { Topbar, AdminMessageInput, ChatMessage } from '../components';
 
+import '../styles/Chat.css';
+
 export default function AdminChat({ location }) {
   const { tokenContext: { token } } = useContext(AppContext);
   const params = useParams();
@@ -51,21 +53,26 @@ export default function AdminChat({ location }) {
   return (
     <div>
       <Topbar title={ title } />
-      <Link to="/admin/chats" data-testid="back-button">
-        Voltar
-      </Link>
-      <h3>
-        <span>Conversando com </span>
-        { currentClient }
-      </h3>
+      <section className="admin-chat-header">
+        <Link to="/admin/chats" data-testid="back-button">
+          Voltar
+        </Link>
+        <h3>
+          <span>Conversando com </span>
+          { currentClient }
+        </h3>
+      </section>
       <AdminMessageInput
         callback={ getMessage }
         sendMessage={ sendMessage }
         value={ message }
+        className="admin-msg-input"
       />
-      { messageList.map((msg, i) => (
-        <ChatMessage msg={ msg } key={ i } client={ currentClient } />
-      )) }
+      <section className="chat-wrapper">
+        { messageList.map((msg, i) => (
+          <ChatMessage msg={ msg } key={ i } client={ currentClient } admin />
+        )) }
+      </section>
     </div>
   );
 }

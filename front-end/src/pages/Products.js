@@ -52,6 +52,7 @@ export default function Products() {
               id="cart"
               callback={ goCheckout }
               disabled={ disabled }
+              className="checkout-btn"
             />
           </>
         ) }

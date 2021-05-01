@@ -43,7 +43,7 @@ export default function OrderCard({ order, index }) {
         <br />
         { convertDate(date)[1] }
       </section>
-      <span data-testid={ `${index}-order-status` }>{status}</span>
+      <span data-testid={ `${index}-order-status` } className="status">{status}</span>
     </section>
   );
 }
