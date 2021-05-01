@@ -10,7 +10,7 @@
     "start": "node server.js",
     "test": "NODE_ENV=test jest --detectOpenHandles",
     "test-band": "NODE_ENV=test jest --watchAll --runInBand --detectOpenHandles",
-    "test-coverage": "NODE_ENV=test jest --runInBand --coverage",
+    "test-coverage": "NODE_ENV=test jest --runInBand --coverage --forceExit",
     "debug": "nodemon server.js",
     "start:watch": "nodemon server.js",
     "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json ."
