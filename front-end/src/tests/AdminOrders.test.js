@@ -2,8 +2,8 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
-import App from '../front-end/src/App';
-import api from '../front-end/src/services/api'
+import App from '../App';
+import api from '../services/api'
 import { fireEvent, render, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 jest.mock('../services/api');

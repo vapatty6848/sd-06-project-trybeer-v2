@@ -2,11 +2,11 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
-import App from './App';
-import api from './services/api'
+import App from '../App';
+import api from '../services/api'
 import { fireEvent, render, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
-jest.mock('./services/api');
+jest.mock('../services/api');
 
 const userApi = {
   id: 2, name: "testuser", email: "user@test.com", role: "client",

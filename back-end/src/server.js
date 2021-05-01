@@ -38,7 +38,11 @@ console.log('Usuario Entrou');
   });
 
   socket.on('message', ((data) => {
-    const bodyMessage = { message: data.message, hour: chatUtils.getTime() };
+    const bodyMessage = {
+      nickname: data.from, 
+      message: data.message,
+      hour: chatUtils.getTime(), 
+    };
     const { from, dest } = data;
     const key = [from, dest].sort().join('-');
     io.to(key).emit('sendMessage', bodyMessage);

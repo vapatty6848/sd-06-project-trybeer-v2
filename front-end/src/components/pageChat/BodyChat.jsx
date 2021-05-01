@@ -6,16 +6,44 @@ function BodyChat({ data, dataBD, user }) {
     <div id="chat">
       {dataBD.length > 0 && dataBD.map((dataHistoric, index) => (
         <div key={ index }>
-          <p data-testid="nickname">{dataHistoric.nickname}</p>
-          <p data-testid="message-time">{dataHistoric.hour}</p>
-          <p data-testid="text-message">{dataHistoric.message}</p>
+          {dataHistoric.nickname === user ? (
+            <div className="right">
+              <p
+                className="super-name-rigth"
+                data-testid="nickname"
+              >
+                {dataHistoric.nickname}
+              </p>
+              <p data-testid="message-time">{dataHistoric.hour}</p>
+              <p data-testid="text-message">{dataHistoric.message}</p>
+            </div>)
+            : (
+              <div lassName="left">
+                <p
+                  className="super-name-left"
+                  data-testid="nickname"
+                >
+                  {dataHistoric.nickname}
+                </p>
+                <p data-testid="message-time">{dataHistoric.hour}</p>
+                <p data-testid="text-message">{dataHistoric.message}</p>
+              </div>) }
         </div>
       ))}
       {data.length > 0 && data.map((dataMsg, index) => (
         <div key={ index }>
-          <p data-testid="nickname">{user}</p>
-          <p data-testid="message-time">{dataMsg.hour}</p>
-          <p data-testid="text-message">{dataMsg.message}</p>
+          {dataMsg.nickname === user ? (
+            <div className="right">
+              <p className="super-name-rigth" data-testid="nickname">{user}</p>
+              <p data-testid="message-time">{dataMsg.hour}</p>
+              <p data-testid="text-message">{dataMsg.message}</p>
+            </div>)
+            : (
+              <div lassName="left">
+                <p className="super-name-left" data-testid="nickname">{user}</p>
+                <p data-testid="message-time">{dataMsg.hour}</p>
+                <p data-testid="text-message">{dataMsg.message}</p>
+              </div>) }
         </div>
       ))}
     </div>);

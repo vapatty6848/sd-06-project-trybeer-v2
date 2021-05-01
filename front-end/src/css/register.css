@@ -27,3 +27,18 @@
 .chat {
   margin-top: 5%;
 }
+
+.right {
+  color: rgb(0, 0, 0);
+  margin-left: 180px;
+}
+
+.super-name-rigth {
+  font-size: 20px;
+  color: green;
+}
+
+.super-name-left {
+  font-size: 20px;
+  color: rgb(180, 76, 6);
+}
