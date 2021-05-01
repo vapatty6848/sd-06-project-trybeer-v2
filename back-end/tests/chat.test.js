@@ -4,7 +4,6 @@ const { Server: ioServer } = require('socket.io');
 const server = require('http');
 const { app } = require('../app');
 const models = require('../src/models/sql/models');
-const admin = require('../src/models/chat/admin.models');
 const { chatAdmin, chat } = require('../src/services');
 const { verifyToken } = require('../src/security');
 const controllers = require('../src/controllers/chat');
@@ -13,8 +12,10 @@ const http = server.createServer(app);
 const io = new ioServer(http);
 
 let clientSocket;
-let session;
+let adminSocket;
+let clientSession;
 let clientId;
+let adminId;
 
 const newClient = {
   name: 'Gabi Dal Silv',
@@ -43,15 +44,15 @@ beforeAll(async (done) => {
     .post('/user/register')
     .send(newClient)
     .then((res) => {
-      session = res.body;
-      const { sub } = verifyToken(session.token);
+      clientSession = res.body;
+      const { sub } = verifyToken(clientSession.token);
       clientId = sub;
     })
     .catch((err) => done(err));
 
   const CHAT_PORT = process.env.CHAT_PORT || 4001;
 
-  clientSocket = new Client(`http://localhost:${CHAT_PORT}`, { auth: { token: session } });
+  clientSocket = new Client(`http://localhost:${CHAT_PORT}`, { auth: { token: clientSession } });
   clientSocket.on('connect', () => {
     return done();
   });
@@ -69,40 +70,29 @@ describe('Tests client chat features', () => {
   it('Should be able to send messages and get them back', (done) => {
     clientSocket.on('chat:serverMessage', (msg) => {
       expect(msg.message).toBe('olah teste!');
-      expect(msg.nickname).toBe(session.email);
+      expect(msg.nickname).toBe(clientSession.email);
       return done();
     });
-    const newMessage = { nickname: session.email, message: 'olah teste!', timestamp: new Date() };
-    clientSocket.emit('chat:clientMessage', { msg: newMessage, token: session });
+    const newMessage = { nickname: clientSession.email, message: 'olah teste!', timestamp: new Date() };
+    clientSocket.emit('chat:clientMessage', { msg: newMessage, token: clientSession });
   });
 
   it('Should be able to use chat services for client to save message in DB', async (done) => {
-    const newMessage = { nickname: session.email, message: 'segundo teste! olah de novo!', timestamp: new Date() };
-    try {
-      const result = await chat.saveMessage(newMessage, session);
-      expect(result.status).toBe('SAVED');
-      return done();
-    } catch (e) {
-      return done(e);
-    }
+    const newMessage = { nickname: clientSession.email, message: 'segundo teste! olah de novo!', timestamp: new Date() };
+    const result = await chat.saveMessage(newMessage, clientSession);
+    expect(result.status).toBe('SAVED');
+    done();
   });
 
   it('Should be able to use chat services for client to get messages from DB', async (done) => {
-    try {
-      const result = await chat.getMessagesByUserId(session);
-      expect(result.userId).toBe(clientId);
-      return done();
-    } catch (e) {
-      return done(e);
-    }
+    const result = await chat.getMessagesByUserId(clientSession);
+    expect(result.userId).toBe(clientId);
+    return done();
   });
 });
 
 describe('Tests admin chat features', () => {
-  let adminSocket;
-  const clientSession = { ...session };
   let adminSession;
-  let adminId;
 
   const newAdmin = {
     name: 'Gabi Dal Silv',
@@ -119,7 +109,7 @@ describe('Tests admin chat features', () => {
       .send(newAdmin)
       .then((res) => {
         adminSession = res.body;
-        const { sub } = verifyToken(session.token);
+        const { sub } = verifyToken(adminSession.token);
         adminId = sub;
       })
       .catch((err) => done(err));
@@ -132,24 +122,12 @@ describe('Tests admin chat features', () => {
     });
   });
 
-  afterAll((done) => {
-    io.close();
-    adminSocket.close();
-    models.users.destroy({ where: { email: 'admin.gabi.dalsilv@gmail.com' } })
-      .then(() => models.users.destroy({ where: { email: 'gabi.dalsilv@gmail.com' } }))
-      .then(() => admin.removeMessagesByUserId(clientId))
-      .then(() => admin.removeMessagesByUserId(adminId))
-      .then(() => models.sequelize.close())
-      .then(() => http.close())
-      .then(() => done());
-  });
-
   it('Should be able to get all stored messages at admin login', (done) => {
     adminSocket.on('admin:storedChats', (storedMessages) => {
       expect(typeof storedMessages).toBe('object');
       return done();
     });
-    adminSocket.emit('admin:login', session);
+    adminSocket.emit('admin:login');
   });
 
   it('Should be able to enter a client room, send messages and get them back', (done) => {
@@ -172,33 +150,34 @@ describe('Tests admin chat features', () => {
   });
 
   it('Should be able to get all stored messages from services as admin ', async (done) => {
-    try {
-      const storedChats = await chatAdmin.getChats(adminSession);
-      expect(typeof storedChats).toBe('object');
-      return done();
-    } catch (e) {
-      return done(e);
-    }
+    const storedChats = await chatAdmin.getChats(adminSession);
+    expect(typeof storedChats).toBe('object');
+    return done();
   });
 
   it('Should be able to use chat services for admin to save message in DB', async (done) => {
     const newMessage = { nickname: adminSession.email, message: 'admin aqui! olah!', timestamp: new Date() };
-    try {
-      const result = await chatAdmin.saveAdminMessage(newMessage, clientId);
-      expect(result.status).toBe('SAVED');
-      return done();
-    } catch (e) {
-      return done(e);
-    }
+    const result = await chatAdmin.saveAdminMessage(newMessage, clientId);
+    expect(result.status).toBe('SAVED');
+    return done();
   });
 
   it('Should be able to use services for admin to get messages in DB', async (done) => {
-    try {
-      const getMessages = await chatAdmin.getMessagesByUserId(adminId);
-      expect(getMessages.userId).toBe(clientId);
-      return done();
-    } catch (e) {
-      return done(e);
-    }
+    const getMessages = await chatAdmin.getMessagesByUserId(clientId);
+    expect(getMessages.userId).toBe(clientId);
+    return done();
   });
+});
+
+afterAll((done) => {
+  io.close();
+  clientSocket.close();
+  adminSocket.close();
+  models.users.destroy({ where: { email: 'admin.gabi.dalsilv@gmail.com' } })
+    .then(() => models.users.destroy({ where: { email: 'gabi.dalsilv@gmail.com' } }))
+    .then(() => chatAdmin.removeMessagesByUserId(clientId))
+    .then(() => chatAdmin.removeMessagesByUserId(adminId))
+    .then(() => models.sequelize.close())
+    .then(() => http.close())
+    .then(() => done());
 });

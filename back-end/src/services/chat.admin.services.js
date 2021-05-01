@@ -23,8 +23,15 @@ const getMessagesByUserId = async (userId) => {
   return admin.getMessagesByUserId(userInteger);
 };
 
+const removeMessagesByUserId = async (userId) => {
+  console.log('deleting messages...');
+  const userInteger = parseInt(userId, 10);
+  return admin.removeMessagesByUserId(userInteger);
+};
+
 module.exports = {
   saveAdminMessage,
   getMessagesByUserId,
   getChats,
+  removeMessagesByUserId,
 };
