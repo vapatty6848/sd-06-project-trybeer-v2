@@ -1,21 +1,26 @@
 const admin = require('../models/chat/admin.models');
 
-// const { authRegisterUser, utils: { validateUserName } } = require('../schemas');
+const errors = {
+  C_ERR_ACC_DND: 'C_ERR_ACC_DND',
+};
 
 const saveAdminMessage = async (message, userId) => {
-  await admin.saveAdminMessage(message, userId);
+  const userInteger = parseInt(userId, 10);
+  await admin.saveAdminMessage(message, userInteger);
 
   return { saved: message, status: 'SAVED' };
 };
 
-const getChats = async () => {
+const getChats = async (token) => {
+  if (token.role !== 'administrator') throw new Error(errors.C_ERR_ACC_DND);
   console.log('getting messages for Admin...');
   return admin.getChats();
 };
 
 const getMessagesByUserId = async (userId) => {
   console.log('getting messages...');
-  return admin.getMessagesByUserId(userId);
+  const userInteger = parseInt(userId, 10);
+  return admin.getMessagesByUserId(userInteger);
 };
 
 module.exports = {

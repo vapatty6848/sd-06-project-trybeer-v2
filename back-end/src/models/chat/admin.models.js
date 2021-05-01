@@ -1,10 +1,9 @@
 const connection = require('./connection');
 
 const saveAdminMessage = async (message, userId) => {
-  const integer = parseInt(userId, 10);
   await connection()
     .then((db) => db.collection('messages').updateOne(
-      { userId: integer },
+      { userId },
       { $push: { messages: message } },
       { upsert: true },
     ))
@@ -21,15 +20,22 @@ const getChats = async () => {
 };
 
 const getMessagesByUserId = async (userId) => {
-  const string = parseInt(userId, 10);
   const result = await connection()
-    .then((db) => db.collection('messages').findOne({ userId: string }));
+    .then((db) => db.collection('messages').findOne({ userId }));
 
   return result;
+};
+
+const removeMessagesByUserId = async (userId) => {
+  const result = await connection()
+  .then((db) => db.collection('messages').deleteOne({ userId }));
+
+return result;
 };
 
 module.exports = {
   getMessagesByUserId,
   getChats,
   saveAdminMessage,
+  removeMessagesByUserId,
 };

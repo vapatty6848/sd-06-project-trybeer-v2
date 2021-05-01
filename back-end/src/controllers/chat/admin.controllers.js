@@ -1,7 +1,7 @@
 const { chatAdmin } = require('../../services');
 
 const getAdminMessages = async (socket, token) => {
-  console.log('backend chat > admin logou');
+  console.log('backend chat > admin logou', token);
   try {
     const storedChats = await chatAdmin.getChats(token);
     socket.emit('admin:storedChats', storedChats);
