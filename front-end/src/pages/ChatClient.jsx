@@ -21,7 +21,7 @@ function ChatClient() {
   const inputMessage = document.querySelector('#message');
 
   useEffect(() => {
-    if (!userEmail || role !== 'client')history.push('/login');
+    if (!userEmail || role !== 'client') history.push('/login');
     socket.emit('connectRoom', key);
     api.findMessagesById(key).then((response) => {
       setChatMessagesBD(response);
@@ -30,7 +30,7 @@ function ChatClient() {
   }, []);
 
   useEffect(() => {
-    if (message.length > 0)setButtonDisable(false);
+    if (message.length > 0) setButtonDisable(false);
     else setButtonDisable(true);
   }, [message]);
 
@@ -69,16 +69,15 @@ function ChatClient() {
       </div>
       <div className="chat">
         <BodyChat
-          data={ chatMessages }
-          dataBD={ chatMessagesBD }
-          user={ user }
+          data={chatMessages}
+          dataBD={chatMessagesBD}
+          user={user}
         />
       </div>
       <FormChat
-        handleChange={ handleChange }
-        handleClick={ handleClick }
-        inputHandle={ inputHandleKeyup }
-        buttonDisable={ buttonDisable }
+        handleClick={handleClick}
+        inputHandle={inputHandleKeyup}
+        buttonDisable={buttonDisable}
       />
     </div>
   );
