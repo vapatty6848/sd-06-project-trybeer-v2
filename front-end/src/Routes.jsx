@@ -31,8 +31,8 @@ export default function Routes() {
       <Route path="/checkout" component={ Checkout } />
       <Route path="/admin/profile" component={ AdminProfile } />
       <Route path="/chat" component={ CostumerChat } />
-      <Route exact path="/admin/chats" component={ CostumerChatAdmin } />
       <Route path="/admin/chats/:email" component={ AdminChat } />
+      <Route exact path="/admin/chats" component={ CostumerChatAdmin } />
     </Switch>
   );
 }

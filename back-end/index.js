@@ -28,16 +28,19 @@ const unexpectedError = require('./middlewares/unexpectedError');
 //   .messagesHandler({ email, sentAt, message, socket });
 // };
 
-const sendMessage = ({ email, sentAt, message, socket }) => {
-  const newMessage = { email, sentAt, message };
-  socket.emit('chat:sendMessage', newMessage);
-};
+// const sendMessage = ({ email, sentAt, message, socket }) => {
+//   const newMessage = { email, sentAt, message };
+//   socket.emit('chat:sendMessage', newMessage);
+// };
 
 io.on('connection', async (socket) => {
-  const Idemail  = socket.handshake.query;
+  const { Idemail }  = socket.handshake.query;
+  console.log('message index l 37', Idemail);
   socket.join(Idemail);
   socket.on('chat:sendMessage', (message) => {
-    io.in(Idemail).emit('chat:sendMessage', message)
+    console.log('message index l 41', io.sockets);
+    // salvar no banco aqui
+    io.in(Idemail).emit(Idemail, message)
   }) 
 });
 // sendMessage({ email, sentAt, message, socket }));

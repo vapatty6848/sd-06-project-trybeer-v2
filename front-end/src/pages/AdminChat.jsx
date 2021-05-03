@@ -9,23 +9,26 @@ export default function AdminChat({ match }) {
   const sentAt = new Date();
   // const tokenFromLocalStorage = localStorage.getItem('token');
   const [message, setMessage] = useState('');
-  const { messages, sendMessage} = useChat(email);
+  const { messages, sendMessage } = useChat(email);
   
   const handleSubmit = (e) => {
     e.preventDefault();
+    if(!message) return null;
     console.log('meu horário', sentAt);
     // socket.emit('chat:sendMessage', { email, sentAt, message });
     // fetches.createMessage(tokenFromLocalStorage, email, sentAt, message)
     //   .then((response) => console.log(response));
     // setMessage('');
-    sendMessage(messages)
+    sendMessage(message)
+    console.log('linha 23', messages);
+    setMessage('');
 
   };
 
   return (
     <div>
       <div>{`Conversas com o cliente ${email}`}</div>
-      <form onSubmit={ handleSubmit }>
+      <form >
         <div>
           <input
             type="text"
@@ -37,12 +40,14 @@ export default function AdminChat({ match }) {
           />
           <button
             type="submit"
+            onClick={ handleSubmit }
             data-testid="send-message"
           >
             Enviar
           </button>
         </div>
       </form>
+      {messages.map((element) => <p>{element.message}</p>)}
     </div>
     );
 }
