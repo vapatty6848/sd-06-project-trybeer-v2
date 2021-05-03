@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import socketClient from 'socket.io-client';
 
 const useChat = (email) => {
+  // guarda msg e altera msgs
+  const [messages, setMessages] = useState([]);
   const socketRef = useRef();
-  const [messages, setMessages] = useState([]); //guarda msg e altera msgs
 
   // socket de referencia só muda se eu quiser
   useEffect(() => {

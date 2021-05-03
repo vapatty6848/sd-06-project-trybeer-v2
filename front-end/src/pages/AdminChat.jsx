@@ -49,7 +49,7 @@ export default function AdminChat({ match }) {
       </form>
       {messages.map((element) => <p>{element.message}</p>)}
     </div>
-    );
+  );
 }
 
 AdminChat.propTypes = {
