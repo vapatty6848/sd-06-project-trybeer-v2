@@ -17,6 +17,7 @@ app.use(express.json());
 app.use(cors());
 
 const userController = require('./controller/userController');
+const messageService = require('./service/messagesService');
 const productsController = require('./controller/productsController');
 const ordersController = require('./controller/ordersController');
 const messageController = require('./controller/messageController');
@@ -34,14 +35,13 @@ const unexpectedError = require('./middlewares/unexpectedError');
 // };
 
 io.on('connection', async (socket) => {
-  const { Idemail }  = socket.handshake.query;
-  console.log('message index l 37', Idemail);
+  const { Idemail } = socket.handshake.query;
   socket.join(Idemail);
-  socket.on('chat:sendMessage', (message) => {
-    console.log('message index l 41', io.sockets);
-    // salvar no banco aqui
-    io.in(Idemail).emit(Idemail, message)
-  }) 
+  socket.on('chat:sendMessage', async (message) => {
+    const { email, sentAt, message: msg, isAdmin } = message;
+    await messageService.createMessage(email, sentAt, msg, isAdmin);
+    io.in(Idemail).emit(Idemail, message);
+  }); 
 });
 // sendMessage({ email, sentAt, message, socket }));
 

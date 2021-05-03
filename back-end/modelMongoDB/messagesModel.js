@@ -1,8 +1,8 @@
 const connection = require('./connection');
 
-const createMessage = (email, sentAt, message) => connection().then((db) => 
+const createMessage = (email, sentAt, message, isAdmin) => connection().then((db) => 
   db.collection('messages').insertOne(
-    { email, sentAt, message },
+    { email, sentAt, message, isAdmin },
   ));
 
 const getAll = (userEmail) => connection().then((db) => db.collection('messages').find(

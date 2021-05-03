@@ -20,6 +20,13 @@ router.get('/messages', validateToken, rescue(async (req, res) => {
   res.status(OK).json(messages);
 }));
 
+router.post('/messages/admin/private', validateToken, rescue(async (req, res) => {
+  const userEmail = req.body.email;
+  // console.log('user email', userEmail);
+  const messages = await messagesService.getAll(userEmail);
+  res.status(OK).json(messages);
+}));
+
 router.get('/messages/admin', validateToken, rescue(async (req, res) => {
   const messages = await messagesService.getAllMessagesAdmin();
   // let formattedDate = '';
@@ -33,9 +40,9 @@ router.get('/messages/admin', validateToken, rescue(async (req, res) => {
 }));
 
 router.post('/messages', validateToken, rescue(async (req, res) => {
-  const { email, sentAt, message } = req.body;
-  await messagesService.createMessage(email, sentAt, message);
-  res.status(CREATED).json({ email, sentAt, message });
+  const { email, sentAt, message, isAdmin } = req.body;
+  await messagesService.createMessage(email, sentAt, message, isAdmin);
+  res.status(CREATED).json({ email, sentAt, message, isAdmin });
 }));
 
 module.exports = router;

@@ -33,7 +33,7 @@
   background-color: grey;
   height: 60%;
   margin-top: 40px;
-  position: absolute;
+/*   position: absolute; */
   width: 40%;
   z-index: 1000;
 }

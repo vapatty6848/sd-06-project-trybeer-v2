@@ -1,20 +1,25 @@
 import jwtDecode from 'jwt-decode';
-// import moment from 'moment';
-import React, { useState } from 'react';
-// import socket from '../utils/socketClient';
-// import fetches from '../services/fetches';
+import React, { useState, useEffect } from 'react';
 import useChat from '../utils/userChat';
-// const dateFormat = require('dateformat');
+// import socket from '../utils/socketClient';
+import fetches from '../services/fetches';
+
+const dateFormat = require('dateformat');
 
 export default function ChatMessage() {
   const tokenFromLocalStorage = localStorage.getItem('token');
   const { email } = jwtDecode(tokenFromLocalStorage);
   const [message, setMessage] = useState('');
-  const { messages, sendMessage } = useChat(email);
-  // const dateNow = new Date().getTime();
-  // const sentAt = moment(dateNow).format('H:MM');
-  // const sentAt = new Date();
-  const sentAt = dateFormat(new Date(), 'H:MM');
+  const { messages, setMessages, sendMessage } = useChat(email);
+  const sentAt = dateFormat(new Date(), 'HH:MM');
+
+  useEffect(() => {
+    fetches.getAllMessagesByEmail(tokenFromLocalStorage)
+      .then((response) => {
+        setMessages(response.data);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,11 +48,29 @@ export default function ChatMessage() {
           </button>
         </div>
       </form>
-      {messages.map((element) => (
-        <p>
-          {element.email} : {element.message} - {element.sentAt}
-        </p>
-      ))}
+      { messages.length && messages.map((element, index) => {
+        const origin = element.isAdmin ? 'Loja' : element.email;
+        return (
+          <div key={ index }>
+            <div>
+              <div data-testid="nickname">{`${origin}`}</div>
+              <div data-testid="message-time">{dateFormat(element.sentAt, 'HH:MM')}</div>
+            </div>
+            <div data-testid="text-message">
+              {element.message}
+            </div>
+          </div>);
+      })}
+      {/* {messages.map((element) => {
+        const { sentAt: date, message: msg, isAdmin, email: userEmail } = element;
+        const origin = isAdmin ? 'Loja' : userEmail;
+        const msgOut = `${origin} : ${dateFormat(date, 'HH:MM')} - ${msg}`;
+        return (
+          <p key={ date + msg }>
+            { msgOut }
+          </p>
+        );
+      })} */}
     </div>
   );
 }

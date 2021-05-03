@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 export default function TopMenuAdmin({ pageTitle }) {
   const history = useHistory();
 
-  const [asideClass, setasideClass] = useState('aside-menu-off');
+  const [asideClass, setasideClass] = useState('aside-menu-on');
 
   const handleOnClickHamburguerButton = () => {
     const asideOn = 'aside-menu-on';
@@ -39,20 +39,20 @@ export default function TopMenuAdmin({ pageTitle }) {
           type="button"
           data-testid="top-hamburguer"
           className="btn-toggle-nav"
-          onClick={handleOnClickHamburguerButton}
+          onClick={ handleOnClickHamburguerButton }
         >
           &nbsp;
         </button>
         <h1 data-testid="top-menu" className="page-title">
           {pageTitle}
         </h1>
-        <aside id="aside" className={asideClass}>
+        <aside id="aside" className={ asideClass }>
           <div className="side-menu-container">
             <button
               type="button"
               data-testid="side-menu-item-orders"
               value="Pedidos"
-              onClick={handleClick}
+              onClick={ handleClick }
             >
               Pedidos
             </button>
@@ -62,7 +62,7 @@ export default function TopMenuAdmin({ pageTitle }) {
               type="button"
               data-testid="side-menu-item-profile"
               value="Perfil"
-              onClick={handleClick}
+              onClick={ handleClick }
             >
               Perfil
             </button>
@@ -72,7 +72,7 @@ export default function TopMenuAdmin({ pageTitle }) {
             <button
               type="button"
               data-testid="side-menu-item-chat"
-              onClick={handleClick}
+              onClick={ handleClick }
               value="Conversas"
             >
               Conversas
@@ -83,7 +83,7 @@ export default function TopMenuAdmin({ pageTitle }) {
               type="button"
               data-testid="side-menu-item-logout"
               value="Sair"
-              onClick={handleClick}
+              onClick={ handleClick }
             >
               Sair
             </button>
