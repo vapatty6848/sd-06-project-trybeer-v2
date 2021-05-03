@@ -12,7 +12,7 @@ export default function TopMenu({ pageTitle }) {
     const asideOn = 'aside-menu-on';
     const asideOff = 'aside-menu-off';
     if (asideClass === asideOn) setasideClass(asideOff);
-    if (asideClass === asideOff) setasideClass(asideOn);
+    else setasideClass(asideOn);
   };
 
   const handleOnClickAsideButton = (e) => {

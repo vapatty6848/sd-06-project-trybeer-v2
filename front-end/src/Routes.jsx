@@ -12,6 +12,7 @@ import AdminOrders from './pages/AdminOrders';
 import AdminSaleDetail from './pages/AdminSaleDetail';
 import CostumerChat from './pages/CostumerChat';
 import CostumerChatAdmin from './pages/CustomerChatAdmin';
+import AdminChat from './pages/AdminChat';
 
 export default function Routes() {
   return (
@@ -30,7 +31,8 @@ export default function Routes() {
       <Route path="/checkout" component={ Checkout } />
       <Route path="/admin/profile" component={ AdminProfile } />
       <Route path="/chat" component={ CostumerChat } />
-      <Route path="/admin/chats" component={ CostumerChatAdmin } />
+      <Route path="/admin/chats/:email" component={ AdminChat } />
+      <Route exact path="/admin/chats" component={ CostumerChatAdmin } />
     </Switch>
   );
 }

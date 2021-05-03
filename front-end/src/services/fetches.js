@@ -84,6 +84,19 @@ const getAllMessagesByEmail = async (token) => {
   return allMessages;
 };
 
+const getAllPrivateMessagesByEmail = async (token, email) => {
+  const allMessages = await axios.post(`${path}/messages/admin/private`,
+    { email },
+    config(token));
+  return allMessages;
+};
+
+const getAllMessages = async (token) => {
+  const allMessagesAdmin = await axios.get(`${path}/messages/admin`,
+    config(token));
+  return allMessagesAdmin;
+};
+
 export default {
   fetchUserByEmail,
   updateUserName,
@@ -96,4 +109,6 @@ export default {
   updateSale,
   createMessage,
   getAllMessagesByEmail,
+  getAllMessages,
+  getAllPrivateMessagesByEmail,
 };
