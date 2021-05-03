@@ -17,9 +17,7 @@ function ProductCard({ product }) {
             {`nome do produto: ${e.name}`}
           </p>
           <p data-testid={ `${i}-product-total-value` }>
-            subtotal:
-            {' '}
-            {currencyFormat(Number(e.totalPrice))}
+            subtotal: {' '} {currencyFormat(Number(e.totalPrice))}
           </p>
           <hr />
         </div>

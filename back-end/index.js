@@ -24,6 +24,7 @@ io.on('connection', (socket) => {
   
   socket.on('chat.sendMessage', async (data) => {
     const dataWithDate = { ...data, sentTime: currentDate() };
+    console.log(dataWithDate)
     io.emit('chat.receiveMessage', dataWithDate);
     await Messages.create(dataWithDate);
   });

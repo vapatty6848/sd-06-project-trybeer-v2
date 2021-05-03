@@ -4,17 +4,21 @@ import OrderCard from './OrderCard';
 
 function OrdersList({ orders }) {
   return (
-    <div className="ordersList">
-      {
-        orders
-          .map((order, index) => (
-            <OrderCard
-              order={ order }
-              orderIndex={ index }
-              key={ order.id }
-            />))
-      }
-    </div>
+    <section>
+      <h1>Meus Pedidos</h1>
+      <div style={{ marginTop: 0 }} className="cards-container">
+
+        {
+          orders
+            .map((order, index) => (
+              <OrderCard
+                order={order}
+                orderIndex={index}
+                key={order.id}
+              />))
+        }
+      </div>
+    </section>
   );
 }
 

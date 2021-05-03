@@ -4,40 +4,44 @@ import { useHistory } from 'react-router-dom';
 import convertData from '../utils/convertData';
 import currencyFormat from '../utils/currencyFormat';
 
+// Material-ui 
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+
 export default function OrderCard({ order, orderIndex }) {
   const history = useHistory();
   return (
-    <div>
-
-      <button
-        data-testid={ `${orderIndex}-order-card-container` }
-        key={ `${orderIndex}` }
-        type="button"
-        onClick={ () => history.push(`/orders/${orderIndex + 1}`) }
-      >
-        <p data-testid={ `${orderIndex}-order-number` }>
+    <Card
+      className="card-content"
+      data-testid={`${orderIndex}-order-card-container`}
+      key={`${orderIndex}`}
+      type="button"
+      onClick={() => history.push(`/orders/${orderIndex + 1}`)}
+    >
+      <CardContent>
+        <Typography data-testid={`${orderIndex}-order-number`} color="textSecondary" gutterBottom>
           Pedido
           {' '}
           {orderIndex + 1}
-        </p>
-        <p data-testid={ `${orderIndex}-order-date` }>
-          Data:
+        </Typography>
+        <Typography data-testid={`${orderIndex}-order-status`} variant="h5" component="h2">
+        Status:
           {' '}
-          {convertData(order.saleDate)}
-        </p>
-        <p data-testid={ `${orderIndex}-order-total-value` }>
+        {order.status}
+        </Typography>
+        <Typography data-testid={`${orderIndex}-order-total-value`} color="textSecondary">
           Valor total:
           {' '}
           {currencyFormat(Number(order.totalPrice))}
-        </p>
-        <p data-testid={ `${orderIndex}-order-status` }>
-          Status:
+        </Typography>
+        <Typography data-testid={`${orderIndex}-order-date`} variant="body2" component="p">
+          Data:
           {' '}
-          {order.status}
-        </p>
-        <hr />
-      </button>
-    </div>
+          {convertData(order.saleDate)}
+        </Typography>
+      </CardContent>
+    </Card>
   );
 }
 

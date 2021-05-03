@@ -23,19 +23,11 @@ function MenuTop({ title }) {
             <h1 className="title" data-testid="top-title">
               { title }
             </h1>
+            
+            <MenuSide title="Trybeer" />
 
-            <button
-              type="button"
-              onClick={ () => setOpen(!open) }
-              className="top-btn"
-            >
-              {/* <i data-testid="top-hamburguer" className="top-hamburguer"> */}
-              <GiHamburgerMenu />
-              {/* </i> */}
-            </button>
 
           </div>
-          { open && <MenuSide title="Trybeer" /> }
         </Toolbar>
       </AppBar>
     );

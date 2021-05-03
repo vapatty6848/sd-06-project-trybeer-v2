@@ -1,3 +1,4 @@
+
 const mongoClient = require('mongodb').MongoClient;
 require('dotenv').config();
 
@@ -7,11 +8,11 @@ const connection = async () => {
   if (schema) return Promise.resolve(schema);
 
   return mongoClient
-  .connect(process.env.DB_URL, {
+  .connect('mongodb://localhost:27017', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then((conn) => conn.db(process.env.DB_NAME))
+  .then((conn) => conn.db('Trybeer'))
   .then((dbSchema) => {
     schema = dbSchema;
     return schema;

@@ -89,4 +89,12 @@ h4 {
   [ class = 'card-content' ] {
     width: 100%;
   }
+
+  .MuiPaper-root {
+    width: 100%;
+  }
+
+  h1 {
+    text-align: center;
+  }
 }

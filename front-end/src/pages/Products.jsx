@@ -5,9 +5,10 @@ import fetchProducts from '../methods/products';
 import renderCards from '../components/RenderCards';
 import isLogged from '../components/isLogged';
 import MenuTop from '../components/MenuTop';
-// import buttomFloatChat from '../components/ButtonFloatChat';
 import currencyFormat from '../utils/currencyFormat';
 import './Products.css';
+
+import { FaShoppingCart } from 'react-icons/fa';
 
 const itemQty = (prod) => {
   const items = JSON.parse(localStorage.getItem('items'));
@@ -71,7 +72,7 @@ function Products() {
               data-testid="checkout-bottom-btn"
               onClick={ () => route.push('/checkout') }
             >
-              Ver Carrinho
+             <FaShoppingCart/> Ver Carrinho
             </button>
           </section>
         </AppBar>

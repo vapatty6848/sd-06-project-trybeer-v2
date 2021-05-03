@@ -13,8 +13,6 @@ function Orders() {
       const user = JSON.parse(localStorage.getItem('user'));
       if (user) {
         const response = await clientOrders.getAll(user.token);
-        console.log(response);
-        console.log(orders);
         setOrders(response.orders);
       } else { history.push('/login'); }
     };
