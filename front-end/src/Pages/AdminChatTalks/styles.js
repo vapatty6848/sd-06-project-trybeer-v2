@@ -58,7 +58,6 @@ const ContainerCard = styled.div`
 const ChatContainer = styled.div`
   ${({ theme }) => css`
     width: 60%;
-    height: 95%;
     margin-left: 70px;
 
     background: ${theme.colors.primary};
