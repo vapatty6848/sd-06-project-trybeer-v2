@@ -1,39 +1,44 @@
-const frisby = require('frisby');
+const request = require('supertest');
+const { app } = require('../app');
 const { StatusCodes } = require('http-status-codes');
+const models = require('../src/models/sql/models');
 
-const connection = require('../src/models/connection');
-const { generateToken } = require('../src/security');
-const url = 'http://localhost:3001';
-
-const clientUser = {
-  email: 'user@test.com',
-  password: 'test123',
-  userId: 2,
-  isVendor: true,
+const newUser = {
+  name: 'Gabi Dal Silv',
+  email: 'gabi.dalsilv@gmail.com',
+  password: '123456',
 };
 
 describe('Testing products endpoint', () => {
-  beforeAll(() => {
-    frisby.globalSetup({
-      request: {
-        headers: {
-          Authorization: generateToken(clientUser.userId, clientUser.isVendor),
-          'Content-Type': 'application/json',
-        },
-      },
-    });
-    connection.end();
+  let session = null;
+  beforeEach((done) => {
+    return request(app)
+      .post('/user/register')
+      .send(newUser)
+      .end((err, res) => {
+        if (err) return done(err);
+        session = res.body.token;
+        done();
+      });
   });
 
-  it('Should be able to get a list of all products', async () => {
-    await frisby
-        .get(`${url}/products`)
-      .expect('status', StatusCodes.OK)
-      .then((response) => {
-        const { body } = response;
-        const result = JSON.parse(body);
-        const arrayResult = result.map((elem) => elem.name);
-        expect(arrayResult.length).toBeGreaterThanOrEqual(1);
-      });
+  afterAll((done) => {
+    models.users.destroy({ where: { email: 'gabi.dalsilv@gmail.com' } })
+      .then(() => models.sequelize.close())
+      .then(() => done());
+  });
+
+  it('Should be able to get a list of all products', (done) => {
+    return request(app)
+      .get('/products')
+      .set({ authorization: session })
+      .expect(StatusCodes.OK)
+      .then((res) => {
+        const { products } = require('./schemas')
+        const { error } = products.validate(res.body);
+        if (error) return done(error);
+        return done();
+      })
+      .catch((err) => done(err));
   });
 });

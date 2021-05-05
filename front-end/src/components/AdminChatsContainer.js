@@ -18,6 +18,7 @@ export default function AdminChatContainer({ chats }) {
               state: { user: chat.nickname },
             } }
             key={ chat.userId }
+            style={ { textDecoration: 'none' } }
           >
             <AdminChatCard chat={ chat } />
           </Link>

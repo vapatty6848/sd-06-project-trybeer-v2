@@ -9,7 +9,9 @@ const create = async (body) => {
     password: body.password,
     isVendor: body.isVendor };
 
-  const isEmailAvailable = await users.findOne({ where: { email: data.email } });
+  const isEmailAvailable = (data.email)
+    ? await users.findOne({ where: { email: data.email } })
+    : null;
   authRegisterUser(data, isEmailAvailable);
 
   data.role = (data.isVendor) ? 'administrator' : 'client';

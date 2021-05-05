@@ -12,6 +12,10 @@ export default function OrderCard({ order, index }) {
 
   const history = useHistory();
 
+  let statusCss = 'status success';
+  if (status === 'Pendente') statusCss = 'status alert';
+  if (status === 'Preparando') statusCss = 'status warning';
+
   const getOrderDetails = () => {
     if (token.role === 'administrator') return history.push(`/admin/orders/${id}`);
     history.push(`/orders/${id}`);
@@ -43,7 +47,12 @@ export default function OrderCard({ order, index }) {
         <br />
         { convertDate(date)[1] }
       </section>
-      <span data-testid={ `${index}-order-status` }>{status}</span>
+      <span
+        data-testid={ `${index}-order-status` }
+        className={ statusCss }
+      >
+        {status}
+      </span>
     </section>
   );
 }

@@ -125,11 +125,11 @@ export default function Checkout() {
                 ))
               ) }
 
-            <section data-testid="order-total-value">
+            <section data-testid="order-total-value" className="checkout-total">
               { `Total: R$ ${cartTotal.replace('.', ',')}` }
             </section>
             <form>
-              <fieldset>
+              <fieldset className="checkout-form">
                 <legend>Endereço de entrega</legend>
                 <TextInput
                   name="street"
@@ -150,6 +150,7 @@ export default function Checkout() {
               id="checkout"
               disabled={ disabled }
               callback={ checkout }
+              className="checkout-finish-btn"
             />
           </section>
         ) }

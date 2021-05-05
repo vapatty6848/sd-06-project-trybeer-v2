@@ -49,15 +49,15 @@ export default function OrderDetails() {
   return (
     <section className="order-detail-wrapper">
       <h3 data-testid="order-number">{ `Pedido ${order.id}` }</h3>
-      <p data-testid="order-date">{ convertDate(order.createdAt)[0] }</p>
+      <p data-testid="order-date" className="date">{ convertDate(order.createdAt)[0] }</p>
       <section>
         <p>{ `Cliente: ${order.user.name}` }</p>
-        <p data-testid="order-status">{ order.status }</p>
+        <p data-testid="order-status" className="status">{ order.status }</p>
       </section>
       { order.products.map((curr, index) => (
         <OrderProduct index={ index } product={ curr } key={ index } />
       )) }
-      <p data-testid="order-total-value">
+      <p data-testid="order-total-value" className="order-total">
         { `Total: R$ ${order.totalPrice.replace('.', ',')}` }
       </p>
       { (order.status !== 'Entregue') && (

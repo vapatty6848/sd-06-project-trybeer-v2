@@ -6,7 +6,7 @@ const {
 
 const error = {
   invalidFieldIsVendor: 'C_ERR_ISVENDOR_INVALID',
-  unavaibleEmail: 'C_ERR_EMAIL_UNAVAIBLE',
+  unavailableEmail: 'C_ERR_EMAIL_UNAVAILABLE',
 };
 
 const validateIsVendor = (bool) => {
@@ -14,13 +14,13 @@ const validateIsVendor = (bool) => {
 };
 
 const verifyEmailAvaibility = (object) => {
-  if (object) throw new Error(error.unavaibleEmail);
+  if (object) throw new Error(error.unavailableEmail);
 };
 
 module.exports = ({ name, email, password, isVendor = false }, isEmailAvaible) => {
-  verifyEmailAvaibility(isEmailAvaible);
   validateUserName(name);
   validateEmailField(email);
   validatePasswordField(password);
   validateIsVendor(isVendor);
+  verifyEmailAvaibility(isEmailAvaible);
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Button = ({ cart, disabled, id, callback }) => {
+const Button = ({ cart, disabled, id, callback, className }) => {
   const cartTotal = Object.keys(cart).reduce(
     (sum, curr) => (
       sum + (cart[curr].price * cart[curr].quantity)
@@ -33,12 +33,13 @@ const Button = ({ cart, disabled, id, callback }) => {
       onClick={ callback }
       disabled={ disabled }
       data-testid={ testId }
+      className={ className }
     >
       <span>
         { label }
       </span>
       { (id !== 'updateDeliver') && (
-        <span data-testid="checkout-bottom-btn-value">
+        <span data-testid="checkout-bottom-btn-value" className="btn-total-value">
           { `R$ ${cartTotal}` }
         </span>
       ) }
@@ -49,15 +50,17 @@ const Button = ({ cart, disabled, id, callback }) => {
 export default Button;
 
 Button.propTypes = {
+  callback: PropTypes.func,
   cart: PropTypes.objectOf(PropTypes.any),
+  className: PropTypes.string,
   disabled: PropTypes.bool,
   id: PropTypes.string,
-  callback: PropTypes.func,
 };
 
 Button.defaultProps = {
-  cart: {},
   callback: () => {},
+  cart: {},
+  className: '',
   disabled: false,
   id: '',
 };

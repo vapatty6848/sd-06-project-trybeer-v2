@@ -4,6 +4,11 @@ module.exports = {
     customCode: 'C_ERR_USER_NOT_FOUND',
     customMessage: 'Login failed. User not found.',
   },
+  C_ERR_SALE_NOT_FOUND: {
+    statusCode: 404,
+    customCode: 'C_ERR_SALE_NOT_FOUND',
+    customMessage: 'Sorry. Sale not found.',
+  },
   C_ERR_INVALID_CRED: {
     statusCode: 401,
     customCode: 'C_ERR_INVALID_CRED',
@@ -49,9 +54,9 @@ module.exports = {
     customCode: 'C_ERR_ISVENDOR_INVALID',
     customMessage: 'isValid field must be a boolean.',
   },
-  C_ERR_EMAIL_UNAVAIBLE: {
+  C_ERR_EMAIL_UNAVAILABLE: {
     statusCode: 400,
-    customCode: 'C_ERR_EMAIL_UNAVAIBLE',
+    customCode: 'C_ERR_EMAIL_UNAVAILABLE',
     customMessage: 'This email is already in use.',
   },
   C_ERR_NO_TOKEN: {
@@ -82,7 +87,7 @@ module.exports = {
   C_ERR_INVALID_DELV: {
     statusCode: 400,
     customCode: 'C_ERR_INVALID_DELV',
-    customMessage: 'Invalid delivery adress or number',
+    customMessage: 'Invalid delivery address or number',
   },
   C_ERR_NO_USER_TOKEN: {
     statusCode: 500,
@@ -92,7 +97,7 @@ module.exports = {
   C_ERR_PRICE: {
     statusCode: 400,
     customCode: 'C_ERR_PRICE',
-    customMessage: 'price inconsistency',
+    customMessage: 'Error. Price inconsistency',
   },
   C_ERR_INVALID_STATUS: {
     statusCode: 400,

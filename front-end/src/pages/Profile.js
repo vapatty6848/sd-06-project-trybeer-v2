@@ -4,6 +4,7 @@ import { yupSchemas, handleSaveUser } from '../utils';
 
 import AppContext from '../context/app.context';
 import { Topbar, TextInput, SubmitButton } from '../components';
+import '../styles/Profile.css';
 
 export default function Profile() {
   const { tokenContext: { token, setToken } } = useContext(AppContext);
@@ -38,7 +39,7 @@ export default function Profile() {
   return (
     <section>
       <Topbar title="Meu perfil" />
-      <form onSubmit={ submit }>
+      <form onSubmit={ submit } className="profile-form">
         <fieldset>
           <legend>Registro</legend>
           <TextInput
@@ -53,8 +54,8 @@ export default function Profile() {
             value={ token.email }
             readonly
           />
+          <SubmitButton type="profile" disabled={ disableBtn } />
         </fieldset>
-        <SubmitButton type="profile" disabled={ disableBtn } />
       </form>
       { (success) ? <p>Atualização concluída com sucesso.</p> : null }
     </section>

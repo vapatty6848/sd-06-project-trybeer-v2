@@ -3,7 +3,9 @@ const { generateToken } = require('../security');
 const { authLogin } = require('../schemas');
 
 const login = async ({ email, password }) => {
-  const user = await users.findOne({ where: { email } });
+  const user = (email)
+    ? await users.findOne({ where: { email } })
+    : null;
   authLogin(email, password, user);
   const { dataValues } = user;
   const token = generateToken(dataValues.id, dataValues.role);

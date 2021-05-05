@@ -5,15 +5,17 @@ import api from '../services';
 
 import { Topbar, MessageInput, ChatMessage } from '../components';
 
+import '../styles/Chat.css';
+
 export default function Chat() {
   const { tokenContext: { token } } = useContext(AppContext);
 
   const [message, setMessage] = useState('');
   const [messageList, setMessageList] = useState([]);
 
-  const ENDPOINT = 'http://localhost:4001';
+  const ENDPOINT = process.env.REACT_APP_ENDPOINT || 'http://localhost:4001';
   const options = useMemo(() => ({ auth: { token } }), [token]);
-  const socket = useMemo(() => api.chat(ENDPOINT, options), [options]);
+  const socket = useMemo(() => api.chat(ENDPOINT, options), [options, ENDPOINT]);
 
   const sendMessage = useCallback((e) => {
     e.preventDefault();
@@ -23,7 +25,9 @@ export default function Chat() {
   }, [message, socket, token]);
 
   useEffect(() => {
-    socket.emit('user:login', token.token);
+    socket.emit('user:login', token);
+
+    return () => socket.disconnect();
   }, [socket, token]);
 
   const getMessage = useCallback(({ target }) => setMessage(target.value), []);
@@ -32,7 +36,7 @@ export default function Chat() {
     setMessageList([...messageList, msg]);
   });
 
-  socket.on('user:storedMessages', (msgs) => {
+  socket.on('server:storedMessages', (msgs) => {
     setMessageList(msgs);
   });
 
@@ -45,10 +49,13 @@ export default function Chat() {
         callback={ getMessage }
         sendMessage={ sendMessage }
         value={ message }
+        className="client-msg-input"
       />
-      { messageList.map((msg, i) => (
-        <ChatMessage msg={ msg } key={ i } client={ token.email } />
-      )) }
+      <section className="chat-wrapper">
+        { messageList.map((msg, i) => (
+          <ChatMessage msg={ msg } key={ i } client={ token.email } />
+        )) }
+      </section>
     </div>
   );
 }

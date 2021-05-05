@@ -13,7 +13,8 @@ const saveMessage = async (message, token) => {
 const getMessagesByUserId = async (token) => {
   const { sub: userId } = verifyToken(token.token);
   console.log('getting messages...');
-  return chat.getMessagesByUserId(userId);
+  const storedMessages = await chat.getMessagesByUserId(userId);
+  return storedMessages;
 };
 
 module.exports = {

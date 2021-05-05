@@ -6,6 +6,8 @@ import api from '../services';
 
 import { Topbar, AdminMessageInput, ChatMessage } from '../components';
 
+import '../styles/Chat.css';
+
 export default function AdminChat({ location }) {
   const { tokenContext: { token } } = useContext(AppContext);
   const params = useParams();
@@ -15,9 +17,9 @@ export default function AdminChat({ location }) {
   const [message, setMessage] = useState('');
   const [messageList, setMessageList] = useState([]);
 
-  const ENDPOINT = 'http://localhost:4001';
+  const ENDPOINT = process.env.REACT_APP_ENDPOINT || 'http://localhost:4001';
   const options = useMemo(() => ({ auth: { token } }), [token]);
-  const socket = useMemo(() => api.chat(ENDPOINT, options), [options]);
+  const socket = useMemo(() => api.chat(ENDPOINT, options), [options, ENDPOINT]);
 
   const sendMessage = useCallback((e) => {
     e.preventDefault();
@@ -28,9 +30,12 @@ export default function AdminChat({ location }) {
   }, [message, socket, token, currentClient, params.roomId]);
 
   useEffect(() => {
-    socket.emit('admin:joinRoom', currentClient);
-    socket.emit('admin:getRoomMessages',
-      { client: currentClient, userId: params.roomId });
+    socket.emit('admin:getRoomMessages', {
+      client: currentClient,
+      userId: params.roomId,
+    });
+
+    return () => socket.disconnect();
   }, [socket, currentClient, params.roomId]);
 
   const getMessage = useCallback(({ target }) => setMessage(target.value), []);
@@ -48,21 +53,26 @@ export default function AdminChat({ location }) {
   return (
     <div>
       <Topbar title={ title } />
-      <Link to="/admin/chats" data-testid="back-button">
-        Voltar
-      </Link>
-      <h3>
-        <span>Conversando com </span>
-        { currentClient }
-      </h3>
+      <section className="admin-chat-header">
+        <Link to="/admin/chats" data-testid="back-button">
+          Voltar
+        </Link>
+        <h3>
+          <span>Conversando com </span>
+          { currentClient }
+        </h3>
+      </section>
       <AdminMessageInput
         callback={ getMessage }
         sendMessage={ sendMessage }
         value={ message }
+        className="admin-msg-input"
       />
-      { messageList.map((msg, i) => (
-        <ChatMessage msg={ msg } key={ i } client={ currentClient } />
-      )) }
+      <section className="chat-wrapper">
+        { messageList.map((msg, i) => (
+          <ChatMessage msg={ msg } key={ i } client={ currentClient } admin />
+        )) }
+      </section>
     </div>
   );
 }

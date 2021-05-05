@@ -6,6 +6,7 @@ import { TextInput, SubmitButton } from '../components';
 import { yupSchemas, handleSubmit } from '../utils';
 
 import '../styles/Forms.css';
+import logo from '../resources/imgs/logo-light.png';
 
 export default function Login() {
   const { tokenContext: { setToken } } = useContext(AppContext);
@@ -37,9 +38,13 @@ export default function Login() {
   }, [login, disableBtn]);
 
   return (
-    <div>
+    <div className="login-wrapper">
+      <section className="logo-wrapper">
+        <img src={ logo } alt="Logo" className="login-logo" />
+        <h1>Trybeer</h1>
+      </section>
       <form onSubmit={ submit }>
-        <fieldset>
+        <fieldset className="login-form">
           <legend>Login</legend>
           <TextInput
             name="email"
@@ -53,9 +58,9 @@ export default function Login() {
             value={ login.password }
             callback={ updateLogin }
           />
-          <SubmitButton type="signin" disabled={ disableBtn } />
+          <SubmitButton type="signin" disabled={ disableBtn } className="success" />
           <Link to="/register">
-            <button type="button" data-testid="no-account-btn">
+            <button type="button" data-testid="no-account-btn" className="attention">
               Ainda não tenho conta
             </button>
           </Link>

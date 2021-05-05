@@ -1,7 +1,3 @@
-body {
-  background-color: lightslategray;
-}
-
 .admin-chats-container {
   display: flex;
   flex-flow: row wrap;
@@ -13,8 +9,11 @@ body {
 
 .chat-card {
   align-items: left;
-  background-color: snow;
+  background-color: var(--element-bg-color);
   border-radius: 20px;
+  box-shadow: 0 4px 17px 0 rgba(0, 0, 0, .25);
+  -webkit-box-shadow: 0 4px 17px 0 rgba(0, 0, 0, .25);
+  -moz-box-shadow: 0 4px 17px 0 rgba(0, 0, 0, .25);
   cursor: pointer;
   display: flex;
   flex-flow: column nowrap;
@@ -25,12 +24,20 @@ body {
   padding: 11px 15px 10px;
 }
 
+.chat-card > * {
+  text-decoration: none;
+}
+
 .chat-card section {
-  background-color: lightblue;
   border-radius: 11px;
+  color: var(--tertiary-text-color);
+  font-style: italic;
   padding: 4px 12px;
 }
 
 .chat-card .nickname {
+  background-color: var(--bright-element-bg-color);
+  font-style: normal;
   font-weight: 600;
+  text-align: center;
 }

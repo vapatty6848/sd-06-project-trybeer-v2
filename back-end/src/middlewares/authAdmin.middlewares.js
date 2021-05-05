@@ -1,21 +1,19 @@
 const { verifyToken } = require('../security');
 
-const noToken = 'C_ERR_NO_TOKEN';
+const errors = {
+  C_ERR_NO_TOKEN: 'C_ERR_NO_TOKEN',
+  C_ERR_ACC_DND: 'C_ERR_ACC_DND',
 
-const tokenError = {
-  statusCode: 401,
-  customCode: 'C_ERROR_TOKEN',
-  customMessage: 'Athentication error. Please, contact support or try again later.',
 };
 
 module.exports = (req, _res, next) => {
   try {
     const { authorization: token } = req.headers;
-    if (!token) throw new Error(noToken);
+    if (!token) throw new Error(errors.C_ERR_NO_TOKEN);
     const { role } = verifyToken(token);
-    if (role !== 'administrator') throw new Error(tokenError.customCode);
+    if (role !== 'administrator') throw new Error(errors.C_ERR_ACC_DND);
     return next();
   } catch (err) {
-    next({ ...tokenError, err });
+    next({ err });
   }
 };

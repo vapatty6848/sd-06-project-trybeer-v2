@@ -1,23 +1,36 @@
 const { chatAdmin } = require('../../services');
 
 const getAdminMessages = async (socket, token) => {
-  const storedChats = await chatAdmin.getChats(token);
-  socket.emit('admin:storedChats', storedChats);
+  console.log('backend chat > admin logou');
+  try {
+    const storedChats = await chatAdmin.getChats(token);
+    socket.emit('admin:storedChats', storedChats);
+  } catch (e) {
+    throw new Error(e);
+  }
 };
 
 const getRoomMessages = async (socket, { client, userId }) => {
-  const roomKey = `${client}-room`;
-  socket.join(roomKey);
-  const getMessages = await chatAdmin.getMessagesByUserId(userId);
-  const storedMessages = getMessages.messages || [];
-  socket.emit('admin:storedRoomMessages', storedMessages);
+  try {
+    const roomKey = `${client}-room`;
+    socket.join(roomKey);
+    const getMessages = await chatAdmin.getMessagesByUserId(userId);
+    const storedMessages = (getMessages) ? getMessages.messages : [];
+    socket.emit('admin:storedRoomMessages', storedMessages);
+  } catch (e) {
+    throw new Error(e);
+  }
 };
 
 const msgClientRoom = async (ioServer, socket, { msg, client, userId }) => {
-  await chatAdmin.saveAdminMessage(msg, userId);
-  const roomKey = `${client}-room`;
-  socket.join(roomKey);
-  ioServer.to(roomKey).emit('chat:serverMessage', msg);
+  try {
+    await chatAdmin.saveAdminMessage(msg, userId);
+    const roomKey = `${client}-room`;
+    socket.join(roomKey);
+    ioServer.to(roomKey).emit('chat:serverMessage', msg);
+  } catch (e) {
+    throw new Error(e);
+  }
 };
 
 module.exports = (ioServer, socket, token) => {

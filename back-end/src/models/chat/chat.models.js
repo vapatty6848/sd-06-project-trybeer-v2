@@ -17,10 +17,10 @@ const saveMessage = async (message, userId, email) => {
 };
 
 const getMessagesByUserId = async (userId) => {
-    const result = await connection()
-      .then((db) => db.collection('messages').findOne({ userId }));
+  const result = await connection()
+    .then((db) => db.collection('messages').findOne({ userId }));
 
-    return result;
+  return result;
 };
 
 module.exports = {

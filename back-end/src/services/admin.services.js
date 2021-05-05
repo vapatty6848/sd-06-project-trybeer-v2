@@ -1,9 +1,15 @@
 const { sales, products, users } = require('../models/sql/models');
 const { authUpdateSale, authDetailsSale } = require('../schemas');
 
+const errors = {
+  C_ERR_ACC_DND: 'C_ERR_ACC_DND',
+  C_ERR_SALE_NOT_FOUND: 'C_ERR_SALE_NOT_FOUND',
+};
+
 const getAll = async () => sales.findAll();
 
 const getSaleById = async (saleId, userRole) => {
+  if (userRole !== 'administrator') throw new Error(errors.C_ERR_ACC_DND);
   const result = await sales.findOne({
     where: { id: saleId },
     include: [
@@ -29,6 +35,8 @@ const updateSaleStatus = async (saleId, status) => {
     { status },
     { where: { id: saleId } },
   );
+
+  if (result[0] < 1) throw new Error(errors.C_ERR_SALE_NOT_FOUND);
   return result;
 };
 
