@@ -1,0 +1,22 @@
+@import '../../assets/scss/variables.scss';
+@import '../../assets/scss/mixins.scss';
+
+.header {
+  @include flexBox(row, center, center);
+  width: 100vw;
+  background-color: black;
+  color: white;
+  padding: 0.5rem;
+}
+
+.menu-btn {
+  background-color: red;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  transform: translate3d(-100vw, 0, 0);
+}
+
+.title {
+  margin: auto;
+}

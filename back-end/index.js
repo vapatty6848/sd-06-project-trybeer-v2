@@ -41,12 +41,13 @@ const hora = () => {
 };
 
 io.on('connection', (socket) => {
-  socket.on('message', async ({ user, message, Loja }) => {
-    const time = hora();
-    if (user !== undefined) {
-      createMessages(user, time, message, Loja);
+  console.log('Usuario conectado');
+  socket.on('message', async ({ from, to, message }) => {
+    const time = new Date();
+    if (from !== undefined) {
+      createMessages(from, to, message, time);
+      io.emit('messages', { from, to, message, time }); 
     }
-    io.emit('messages', { user, time, message, Loja });
   });
 });
 

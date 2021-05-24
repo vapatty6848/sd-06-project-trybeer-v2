@@ -35,7 +35,7 @@ function App() {
         <Route exact path="/admin/orders" component={ AdminOrders } />
         <Route exact path="/chat" component={ ChatClient } />
         <Route exact path="/admin/chats" component={ ListaDeConversas } />
-        <Route exact path="/admin/chats/:user" component={ DetailChat } />
+        <Route exact path="/admin/chats/:client" component={ DetailChat } />
         <Route exact path="/" component={ Login } />
       </Switch>
     </BrowserRouter>

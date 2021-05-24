@@ -1,5 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
 .sale-details {
-  border: 1px solid black;
-  height: 60vh;
-  width: 80vw;
+  width: 79%;
+  margin-left: 20%;
+  padding-left: 3%;
+  font-family: 'Montserrat', sans-serif;
+  font-size: calc(13px + 1.7vw);
+  color: #255923;
+}
+
+.detalhes-admin {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border: 5px ridge #F2BA52;
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+  font-size: calc(8px + 1.5vw);
+  box-shadow: 4px 4px 4px rgb(204, 204, 204);
+}
+
+.title-div-admin {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  justify-content: space-around;
+  padding-left: 4%;
+}
+
+.itemStatus.itemPending-admin {
+  color: #F2BA52;
+}
+
+.itemStatus.itemDelivered-admin {
+  color: #338b2f;
+}
+
+.price-admin {
+  display: flex;
+  flex-direction: row;
+  padding-left: 60%;
+}
+
+.total-price-admin {
+  width: 20%;
+  height: 35%;
+  padding-top: 8%;
+  padding-right: 2%;
+}
+
+.quantity-admin{
+  width: 5%;
+}
+
+.total-admin{
+  width: 20%;
+}
+
+.name-admin{
+  width: 45%;
+}
+
+.unit-admin{
+  width: 20%;
 }

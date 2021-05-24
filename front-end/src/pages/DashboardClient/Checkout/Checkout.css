@@ -1,0 +1,61 @@
+.checkout-general {
+  color: #193D17;
+}
+
+.checkout-container {
+  padding: 15px;
+  margin: 10px;
+}
+
+.span-total {
+  font-size: 1.25rem;
+  font-weight: bolder;
+}
+
+.products-title {
+  font-size: 2.5rem;
+}
+
+.address-input {
+  padding: 3px;
+  font-size: 16px;
+  border-width: 2px;
+  border-color: transparent;
+  border-bottom-color: #255923;
+  background-color: #ffffff;
+  color:#F2BA52;
+  font-weight: bolder;
+  border-style: solid;
+  border-radius: 0px;
+  caret-color:#193D17;
+}
+
+.address-input:focus {
+  outline:none;
+}
+
+.address-title  {
+  font-size: 2rem;
+}
+
+.fa-1x {
+  font-size: 1.25rem;
+}
+
+button {
+  margin: 20px;
+  border: none;
+  border-radius: 3px;
+  background: #255923;
+  transition: 0.2s;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  background:#193D1744;
+}
+
+h4 {
+  font-size: 1.25rem;
+  margin-bottom: 3px;
+}

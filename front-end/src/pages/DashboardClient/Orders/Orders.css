@@ -1,24 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
 .orders {
-  background-color: transparent;
-  border: 1px solid black;
-  border-radius: 2px;
-  box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.05);
-  color: black;
-  display: inline-block;
-  margin: 10px;
-  padding: 15px 20px;
-  text-decoration: none;
-  width: 90%;
+    margin-top: 15%;
+    margin-left: 5%;
+    width: 80%;
+    padding: 5%;
+    font-family: 'Montserrat', sans-serif;
+    font-size: calc(12px + 1.7vw);
 }
 
 .orders:hover {
-  box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.1);
   transform: scale(1.02);
-  transition: 0.2s;
+  transition: .2s;
+  -webkit-box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.1); 
+  box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.1);
+} 
+
+.date-orders {
+  margin-top: 3%;
+  margin-bottom: 3%;
+  padding-top: 0;
 }
 
-.date-order {
-  margin-bottom: 3%;
-  margin-top: -1%;
-  padding-top: 0;
+.pedido {
+  padding-top: 5%;
+  font-weight: bolder;
+  color: #193D17;
+  padding-left: 4%;
+}
+
+.textos-pedidos {
+  padding-left: 4%;
+  color: #193D17;
+}
+
+.div-pedidos {
+  width: 100%;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.calendario {
+  width: 10%;
+}
+
+.div-date {
+  display: flex;
+  flex-direction: row;
+  padding-left: 4%;
+}
+
+.price {
+  width: 10%;
+  height: 80%;
+  padding-top: 3%;
+  padding-left: 4%;
+}
+
+.div-price {
+  display: flex;
+  flex-direction: row;
+}
+
+.prancheta {
+  width: 25%;
+  padding-left: 37%;
+  margin-bottom: -5%;
+  padding-bottom: -5%;
+}
+
+.text-content {
+  box-shadow: 4px 4px 4px rgb(204, 204, 204);
+  padding-top: 2%;
+  border: 1px solid rgb(204, 204, 204);
+  border-radius: 6%;
 }

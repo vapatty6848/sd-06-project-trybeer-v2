@@ -1,55 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
 .geral {
   margin: 1.5rem;
+  color: #255923;
+  font-family: 'Montserrat', sans-serif;
+  font-size: calc(15px + 1.7vw);
 }
-
-.title {
-  background: rgb(164, 204, 138);
-  border-radius: 0.5rem;
+.title-div {
   display: flex;
   flex-direction: row;
+  width: 95%;
   justify-content: space-between;
-  padding: 0.5rem 2rem;
-}
-
-.pedido {
-  display: flex;
-  flex-direction: row;
-  justify-content: left;
-}
-
-.data {
-  display: flex;
-  flex-direction: row;
-  justify-content: right;
+  padding-left: 4%;
 }
 
 .detalhes {
-  border: 5px ridge gray;
-  border-radius: 0.5rem;
   display: flex;
   justify-content: space-around;
+  border: 5px ridge #F2BA52;
   margin: 1rem 0;
+  border-radius: 0.5rem;
+  font-size: calc(10px + 1.7vw);
+  box-shadow: 4px 4px 4px rgb(204, 204, 204);
 }
 
-.quantidade {
-  font-size: 22px;
-  text-align: left;
-  width: 30vh;
+.div-date-details {
+  display: flex;
+  flex-direction: row;
+  width: 35%;
 }
 
-.nome {
-  font-size: 22px;
-  text-align: start;
-  width: 60vh;
+.calendario-details {
+  width: 30%;
+  height: 55%;
+  padding-top: 13%;
+  padding-right: 2%;
 }
 
-.preço {
-  font-size: 22px;
-  width: 15vh;
+.resumo {
+  color: #255923;
+  display: flex;
+  flex-direction: row;
+  width: 35%;
+  padding-left: 60%;
+  font-family: 'Montserrat', sans-serif;
 }
 
-.subtotal {
-  font-size: 22px;
-  text-align: left;
-  width: 20vh;
+.total-price {
+  width: 30%;
+  height: 60%;
+  padding-top: 8%;
+  padding-right: 2%;
+}
+
+.value-price {
+  padding-top: 3%;
 }
